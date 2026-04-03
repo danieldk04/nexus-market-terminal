@@ -1,5 +1,5 @@
 """
-NEXUS MARKET TERMINAL - Tier 2 Analyser (V2 Robust Version with Telegram)
+NEXUS MARKET TERMINAL - Tier 2 Analyser (V2.1 - Sentiment & Telegram Fix)
 """
 
 import json
@@ -25,14 +25,12 @@ log = logging.getLogger("tier2_analyser")
 # ── Paths ─────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
 DATA_PATH = ROOT / "data.json"
-MEMORY_PATH = ROOT / "memory.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
 MODEL = "claude-sonnet-4-6" 
 SLEEP_BETWEEN_CALLS = 3.0
 
 # ── Telegram Config ───────────────────────────────────────────────────────────
-# Tip: Gebruik GitHub Secrets voor deze waarden in productie!
 TELEGRAM_TOKEN = "8561838956:AAE6Xw_nl9acbtY7bmea--ovgNaLnh9Hvzk"
 TELEGRAM_CHAT_ID = "7995706133"
 
@@ -68,10 +66,16 @@ def build_system_prompt() -> str:
         
         STRICT RULES:
         1. Respond ONLY with a valid JSON object.
-        2. Do NOT use markdown code blocks (no ```json).
-        3. Do NOT include any introductory or concluding text.
-        4. Ensure all strings are properly escaped.
-        5. Conviction scale: 1-10.
+        2. Format: {
+            "analysis": "text", 
+            "conviction_score": 1-10, 
+            "sentiment_score": 1-10,
+            "recommended_action": "buy/hold/sell"
+        }
+        3. 'sentiment_score' must reflect the tone of the news items provided (1=panic, 10=hype).
+        4. 'analysis' should be a concise analyst note.
+        5. Do NOT use markdown code blocks.
+        6. Do NOT include any introductory or concluding text.
     """).strip()
 
 def build_user_prompt(candidate: dict, macro: dict) -> str:
@@ -80,35 +84,26 @@ def build_user_prompt(candidate: dict, macro: dict) -> str:
     if not news_items:
         news_block = "No recent news found in feed."
     else:
-        for i, n in enumerate(news_items[:5]):
-            news_block += f"[{i+1}] {n.get('date', 'Recent')} | {n.get('title', 'No Title')}\n"
+        for i, n in enumerate(news_items, 1):
+            news_block += f"{i}. {n.get('title')} ({n.get('source')})\n"
 
     return dedent(f"""
-        Analalyse candidate: {candidate.get('ticker')} ({candidate.get('name')})
-        Sector: {candidate.get('sector')}
-        Div Yield: {candidate.get('dividend_yield')}% | P/E: {candidate.get('pe_ratio')} | EPS Growth: {candidate.get('eps_growth_3yr')}%
+        Ticker: {candidate.get('ticker')}
+        Scan Score: {candidate.get('score')}
+        Dividend Yield: {candidate.get('dividend_yield')}%
+        PE Ratio: {candidate.get('pe_ratio')}
         
-        Macro Context: VIX {macro.get('vix')}, 10Y Yield {macro.get('treasury_10y')}%
+        Macro Context: VIX={macro.get('vix')}, RSI={macro.get('rsi')}
         
         Recent News:
         {news_block}
-
-        Return this JSON structure:
-        {{
-          "sentiment": "bullish" | "neutral" | "bearish",
-          "conviction": 1-10,
-          "key_positives": ["...", "..."],
-          "key_risks": ["...", "..."],
-          "macro_alignment": "tailwind" | "neutral" | "headwind",
-          "analyst_note": "Short summary",
-          "recommended_action": "buy" | "watch" | "avoid"
-        }}
         
-        Final reminder: Respond ONLY with JSON.
+        Analyze the news sentiment vs the fundamentals and provide your JSON response.
     """).strip()
 
 def extract_json(text: str) -> dict | None:
     try:
+        # Zoek naar alles tussen { }
         match = re.search(r'(\{.*\})', text, re.DOTALL)
         if match:
             return json.loads(match.group(1))
@@ -157,23 +152,25 @@ def run_analysis() -> None:
             analysis = extract_json(raw_text)
 
             if analysis:
+                # Opslaan in data.json
                 candidate["tier2"] = {**analysis, "analysed_at": datetime.now(timezone.utc).isoformat()}
                 
                 # ── Telegram Notificatie Logica ────────────────────────────────
                 action = analysis.get("recommended_action", "").lower()
-                conviction = analysis.get("conviction", 0)
+                conviction = analysis.get("conviction_score", 0)
+                sentiment = analysis.get("sentiment_score", 0)
                 
+                # Alleen berichten sturen bij sterke signalen
                 if action == "buy" and conviction >= 7:
                     msg = dedent(f"""
-                        🚀 <b>NEXUS BUY SIGNAL</b>
+                        🚀 <b>NEXUS BUY SIGNAL: {ticker}</b>
                         
-                        <b>Ticker:</b> ${ticker} ({candidate.get('name')})
                         <b>Conviction:</b> {conviction}/10
-                        <b>Sentiment:</b> {analysis.get('sentiment').upper()}
+                        <b>Sentiment:</b> {sentiment}/10
                         
-                        <b>Note:</b> {analysis.get('analyst_note')}
+                        <b>Analysis:</b> {analysis.get('analysis')}
                         
-                        <pre>Check terminal voor volledige details.</pre>
+                        <i>Checked at: {datetime.now().strftime('%H:%M:%S')}</i>
                     """).strip()
                     send_telegram_msg(msg)
                 # ──────────────────────────────────────────────────────────────
@@ -185,6 +182,7 @@ def run_analysis() -> None:
             log.error("Claude call failed for %s: %s", ticker, exc)
             candidate["tier2"] = {"error": "api_call_failed"}
         
+        # Voorkom Rate Limits
         time.sleep(SLEEP_BETWEEN_CALLS)
 
     save_json(DATA_PATH, data)
