@@ -1038,39 +1038,36 @@
                 .slice(0, 12);
         }
 
-        // ── Agent Network statussen ────────────────────────────────────────────
-        function renderAgents(data) {
-            const tier1Done = !!data.generated_at;
-            const tier2Done = !!data.tier2_completed_at;
+// Zoek deze plek onderaan in je bestand tussen de <script> tags
+function renderAgents(data) {
+    const tier1Done = !!data.generated_at;
+    const tier2Done = !!data.tier2_completed_at;
 
-            setAgentStatus('agent-tier1', tier1Done
-                ? 'ACTIEF • Laatste scan: ' + fmtDateTime(data.generated_at)
-                : 'WACHT • Nog niet gestart');
+    setAgentStatus('agent-tier1', tier1Done
+        ? 'ACTIEF • Laatste scan: ' + fmtDateTime(data.generated_at)
+        : 'WACHT • Nog niet gestart');
 
-            setAgentStatus('agent-tier2', tier2Done
-                ? 'ACTIEF • Analyse gereed: ' + fmtDateTime(data.tier2_completed_at)
-                : tier1Done ? 'WACHT • Draai tier2_analyser.py' : 'WACHT • Wacht op Tier 1');
+    setAgentStatus('agent-tier2', tier2Done
+        ? 'ACTIEF • Analyse gereed: ' + fmtDateTime(data.tier2_completed_at)
+        : tier1Done ? 'WACHT • Draai tier2_analyser.py' : 'WACHT • Wacht op Tier 1');
 
-            const candidates = data.top_candidates || [];
-            const macro = data.macro || {};
+    const candidates = data.top_candidates || [];
+    const macro = data.macro || {};
 
-            if (macro.vix != null) {
-                setAgentStatus('agent-macro',
-                    'ACTIEF • VIX ' + macro.vix + ' · 10Y ' + ((macro.treasury_10y || 0) * 100).toFixed(2) + '%');
-            }
+    if (macro.vix != null) {
+        // HIER WORDT DE REKENFOUT HERSTELD:
+        let t10_correct = macro.treasury_10y > 20 ? (macro.treasury_10y / 100) : macro.treasury_10y;
+        
+        setAgentStatus('agent-macro',
+            'ACTIEF • VIX ' + macro.vix + ' · 10Y ' + t10_correct.toFixed(2) + '%');
+    }
 
-            const avgConv = avgConviction(candidates);
-            if (avgConv != null) {
-                const riskLevel = avgConv >= 7 ? 'LAAG' : avgConv >= 4 ? 'MEDIUM' : 'HOOG';
-                setAgentStatus('agent-risk', 'ACTIEF • Risico: ' + riskLevel + ' (avg conviction ' + avgConv.toFixed(1) + ')');
-            }
-        }
-
-        function setAgentStatus(id, text) {
-            const el = document.getElementById(id);
-            if (el) el.textContent = text;
-        }
-
+    const avgConv = avgConviction(candidates);
+    if (avgConv != null) {
+        const riskLevel = avgConv >= 7 ? 'LAAG' : avgConv >= 4 ? 'MEDIUM' : 'HOOG';
+        setAgentStatus('agent-risk', 'ACTIEF • Risico: ' + riskLevel + ' (avg conviction ' + avgConv.toFixed(1) + ')');
+    }
+}
         // ── Risk panel ─────────────────────────────────────────────────────────
         function renderRisk(candidates) {
             const withT2 = candidates.filter(function(c) { return c.tier2 && !c.tier2.error; });
