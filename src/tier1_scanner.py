@@ -3,6 +3,7 @@ import os
 import time
 import logging
 import urllib.parse
+import re  # Belangrijk voor de nieuwe fetch_news
 from datetime import datetime, timezone
 from pathlib import Path
 import yfinance as yf
@@ -17,21 +18,30 @@ log = logging.getLogger("tier1_scanner")
 OUTPUT_PATH = Path(__file__).parent.parent / "data.json"
 
 def fetch_news(query: str) -> list:
-    """Scoort de laatste 3 nieuwskoppen via Google News (Gratis)."""
+    """Scoort de laatste 3 nieuwskoppen via Google News met robuuste Regex."""
     news_items = []
     try:
-        encoded_query = urllib.parse.quote(query)
-        url = f"https://news.google.com/rss/search?q={encoded_query}&hl=nl&gl=NL&ceid=NL:nl"
+        # Schoon de query op voor betere resultaten
+        clean_query = query.split(',')[0].split(' N.V.')[0] + " stock news"
+        encoded_query = urllib.parse.quote(clean_query)
+        url = f"https://news.google.com/rss/search?q={encoded_query}&hl=en&gl=US&ceid=US:en"
+        
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
-        soup = BeautifulSoup(response.content, 'html.parser')
         
-        items = soup.find_all('item')
-        for item in items[:3]: # Pak de top 3
+        # We gebruiken Regex om titels en links te vinden. Dit is parser-onafhankelijk.
+        # Zoekt alles tussen <title>...</title> en <link>...</link>
+        titles = re.findall(r'<title>(.*?)</title>', response.text)
+        links = re.findall(r'<link>(.*?)</link>', response.text)
+        
+        # De eerste titel/link is van de RSS feed zelf, dus we beginnen bij index 1
+        for i in range(1, min(len(titles), 4)):
+            # CDATA tags verwijderen indien aanwezig
+            clean_title = titles[i].replace('<![CDATA[', '').replace(']]>', '')
             news_items.append({
-                "title": item.title.text,
-                "link": item.link.text,
-                "date": item.pubDate.text
+                "title": clean_title,
+                "link": links[i],
+                "date": "Recent"
             })
     except Exception as e:
         log.warning(f"Nieuws fetch mislukt voor {query}: {e}")
@@ -83,7 +93,7 @@ def analyse_ticker(ticker: str) -> dict | None:
             "dividend_yield": round(div_yield * 100, 2),
             "pe_ratio": round(float(pe), 2),
             "eps_growth_3yr": round(min(float(info.get("earningsQuarterlyGrowth", 0.15)), 1.0) * 100, 2),
-            "news": news, # Hier zit de winst!
+            "news": news,
             "score": round(10 - (pe/10) + (div_yield * 20), 1),
             "scanned_at": datetime.now(timezone.utc).isoformat()
         }
