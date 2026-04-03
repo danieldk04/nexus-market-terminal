@@ -819,10 +819,13 @@
         // ── Macro header ───────────────────────────────────────────────────────
         function renderMacro(macro, fg) {
             const vix = macro.vix;
-            const treasury = macro.treasury_10y;
             const rsi = macro.sp500_rsi;
-            const fgScore = fg.score;
-            const fgRating = fg.rating || '';
+            
+            // 1. Fix voor de 10Y Treasury (Zorgt dat 431 weer 4.31 wordt)
+            let treasury = macro.treasury_10y;
+            if (treasury > 20) { 
+                treasury = (treasury / 100); 
+            }
 
             const vixEl = document.getElementById('stat-vix');
             if (vixEl) {
@@ -831,7 +834,9 @@
             }
 
             const tEl = document.getElementById('stat-treasury');
-            if (tEl) tEl.textContent = treasury != null ? (treasury * 100).toFixed(2) + '%' : '—';
+            if (tEl) {
+                tEl.textContent = treasury != null ? treasury.toFixed(2) + '%' : '—';
+            }
 
             const rsiEl = document.getElementById('stat-rsi');
             if (rsiEl) {
@@ -839,10 +844,14 @@
                 rsiEl.className = 'stat-value' + (rsi > 70 ? ' danger' : rsi < 30 ? ' positive' : '');
             }
 
+            // 2. Fix voor Fear & Greed (Default naar 50 als data ontbreekt)
             const fgEl = document.getElementById('stat-fg');
             if (fgEl) {
-                fgEl.textContent = fgScore != null ? Math.round(fgScore) + ' — ' + fgRating : '—';
+                const fgScore = (fg && fg.score) ? fg.score : 50;
+                const fgRating = (fg && fg.rating) ? fg.rating : 'NEUTRAAL';
+                fgEl.textContent = Math.round(fgScore) + ' — ' + fgRating;
                 fgEl.className = 'stat-value' + (fgScore < 25 ? ' danger' : fgScore > 65 ? ' positive' : '');
+                if (!fg || !fg.score) fgEl.style.opacity = "0.6";
             }
         }
 
