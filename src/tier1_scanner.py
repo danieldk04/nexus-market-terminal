@@ -30,16 +30,14 @@ def fetch_global_universe() -> list[str]:
     # 2. Nasdaq 100
     try:
         res = requests.get("https://en.wikipedia.org/wiki/Nasdaq-100", headers=headers, timeout=10)
-        # Meestal tabel 4 op Wikipedia voor de Nasdaq-100 componenten
         tickers.extend(pd.read_html(StringIO(res.text))[4]["Ticker"].tolist())
         log.info("Nasdaq 100 geladen.")
     except Exception as e: log.warning(f"Nasdaq 100 skip: {e}")
 
-    # 3. AEX (Nederlandse Selectie) - Handmatig is stabieler voor yfinance (.AS suffix)
+    # 3. AEX (Nederlandse Selectie)
     aex_tickers = ["ASML.AS", "ADYEN.AS", "UNA.AS", "HEIA.AS", "INGA.AS", "REN.AS", "ASM.AS", "AKZA.AS", "SHELL.AS"]
     tickers.extend(aex_tickers)
     
-    # Dubbelen verwijderen
     final_list = list(set(tickers))
     log.info(f"Totaal universum: {len(final_list)} tickers.")
     return final_list
@@ -48,14 +46,15 @@ def fetch_macro_indicators() -> dict:
     indicators = {}
     try:
         vix = yf.Ticker("^VIX").fast_info["lastPrice"]
-        indicators["vix"] = float(vix)
+        indicators["vix"] = round(float(vix), 2)
     except: indicators["vix"] = 0.0
     try:
         tnx = yf.Ticker("^TNX").fast_info["lastPrice"]
-        # Correctie voor yfinance 10Y yield schaling
-        indicators["treasury_10y"] = float(tnx / 10) if tnx > 10 else float(tnx)
+        # Correctie: yfinance ^TNX is vaak 10x de echte waarde (bijv 43.1 ipv 4.31)
+        val = float(tnx)
+        indicators["treasury_10y"] = round(val / 10 if val > 15 else val, 2)
     except: indicators["treasury_10y"] = 0.0
-    indicators["sp500_rsi"] = 47.3 # Vastgezet voor stabiliteit
+    indicators["sp500_rsi"] = 47.3
     return indicators
 
 def analyse_ticker(ticker: str) -> dict | None:
@@ -63,14 +62,24 @@ def analyse_ticker(ticker: str) -> dict | None:
         t = yf.Ticker(ticker)
         info = t.info
         
-        # Basis filters
+        # --- DATA GUARD: DIVIDEND CORRECTION ---
         raw_div = info.get("dividendYield") or 0
         div_yield = float(raw_div)
+        
+        # Als yfinance een percentage als 4.7 doorgeeft ipv 0.047
+        if div_yield > 0.20: 
+            div_yield = div_yield / 100
+            
         pe = info.get("trailingPE")
         
-        # NEXUS Filter: Moet dividend uitkeren en een P/E ratio hebben
-        if not pe or div_yield < 0.005: 
+        # Filters: Dividend moet tussen 0.5% en 15% liggen (voorkomt data errors)
+        if not pe or div_yield < 0.005 or div_yield > 0.15: 
             return None 
+
+        # --- DATA GUARD: EPS GROWTH CORRECTION ---
+        raw_growth = info.get("earningsQuarterlyGrowth") or 0.15
+        # Cap groei op 100% om bizarre uitschieters in data feeds te negeren
+        eps_growth = min(float(raw_growth), 1.0) 
 
         return {
             "ticker": ticker,
@@ -79,9 +88,9 @@ def analyse_ticker(ticker: str) -> dict | None:
             "price": float(info.get("currentPrice", 0)),
             "dividend_yield": round(div_yield * 100, 2),
             "pe_ratio": round(float(pe), 2),
-            "sector_pe_median": 28.0, # Vergelijkingswaarde
-            "eps_growth_3yr": round(float(info.get("earningsQuarterlyGrowth", 0.15) * 100), 2),
-            "score": 7.0 if pe < 20 else 5.0, # Simpele scoring
+            "sector_pe_median": 28.0,
+            "eps_growth_3yr": round(eps_growth * 100, 2),
+            "score": round(10 - (pe/10) + (div_yield * 20), 1), # Dynamische score
             "scanned_at": datetime.now(timezone.utc).isoformat()
         }
     except: return None
@@ -92,29 +101,26 @@ def main():
     universe = fetch_global_universe()
     
     candidates = []
-    # We scannen nu het hele universum, maar we stoppen als we 15 sterke kandidaten hebben
-    # Dit bespaart tijd en Claude kosten
     for ticker in universe:
         res = analyse_ticker(ticker)
         if res:
             candidates.append(res)
-            log.info(f"PASS {ticker} (Div: {res['dividend_yield']}%)")
+            log.info(f"PASS {ticker} (Div: {res['dividend_yield']}%, P/E: {res['pe_ratio']})")
         
-        if len(candidates) >= 15: # Stop bij 15 goede matches
+        if len(candidates) >= 15: 
             break
-            
-        time.sleep(0.05) # Iets sneller dan voorheen
+        time.sleep(0.05)
     
-    # Sorteer op dividend (hoog naar laag) voor de top selectie
-    candidates.sort(key=lambda x: x['dividend_yield'], reverse=True)
+    # Sorteer op score (hoogste eerst)
+    candidates.sort(key=lambda x: x['score'], reverse=True)
 
     with open(OUTPUT_PATH, "w") as f:
         json.dump({
             "generated_at": datetime.now(timezone.utc).isoformat(), 
             "macro": macro, 
-            "top_candidates": candidates[:5] # Stuur de beste 5 naar Claude (Tier 2)
+            "top_candidates": candidates[:5]
         }, f, indent=2)
-    log.info(f"=== Done! {len(candidates)} candidates found. Top 5 saved. ===")
+    log.info(f"=== Done! Top 5 saved. ===")
 
 if __name__ == "__main__":
     main()
