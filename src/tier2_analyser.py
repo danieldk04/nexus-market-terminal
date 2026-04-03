@@ -1,5 +1,5 @@
 """
-NEXUS MARKET TERMINAL - Tier 2 Analyser (V2 Robust Version)
+NEXUS MARKET TERMINAL - Tier 2 Analyser (V2 Robust Version with Telegram)
 """
 
 import json
@@ -7,6 +7,7 @@ import logging
 import os
 import time
 import re
+import requests
 from datetime import datetime, timezone
 from pathlib import Path
 from textwrap import dedent
@@ -27,10 +28,30 @@ DATA_PATH = ROOT / "data.json"
 MEMORY_PATH = ROOT / "memory.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
-MODEL = "claude-sonnet-4-6" # Gebruik de stabiele alias
+MODEL = "claude-3-5-sonnet-20241022" 
 SLEEP_BETWEEN_CALLS = 3.0
 
+# ── Telegram Config ───────────────────────────────────────────────────────────
+# Tip: Gebruik GitHub Secrets voor deze waarden in productie!
+TELEGRAM_TOKEN = "8561838956:AAE6Xw_nl9acbtY7bmea--ovgNaLnh9Hvzk"
+TELEGRAM_CHAT_ID = "7995706133"
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
+
+def send_telegram_msg(message):
+    """Verstuurt een notificatie naar Telegram."""
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message,
+        "parse_mode": "HTML"
+    }
+    try:
+        res = requests.post(url, json=payload, timeout=10)
+        res.raise_for_status()
+        log.info("Telegram notification sent successfully.")
+    except Exception as e:
+        log.error(f"Telegram error: {e}")
 
 def load_json(path: Path) -> dict:
     with open(path) as f:
@@ -54,7 +75,6 @@ def build_system_prompt() -> str:
     """).strip()
 
 def build_user_prompt(candidate: dict, macro: dict) -> str:
-    # We halen het nieuws nu uit de candidate data die Tier 1 al heeft gevonden
     news_items = candidate.get('news', [])
     news_block = ""
     if not news_items:
@@ -88,9 +108,7 @@ def build_user_prompt(candidate: dict, macro: dict) -> str:
     """).strip()
 
 def extract_json(text: str) -> dict | None:
-    """Extraheert JSON uit de tekst, zelfs als Claude markdown gebruikt."""
     try:
-        # Zoek naar de eerste { en de laatste }
         match = re.search(r'(\{.*\})', text, re.DOTALL)
         if match:
             return json.loads(match.group(1))
@@ -119,7 +137,7 @@ def run_analysis() -> None:
         return
 
     system_prompt = build_system_prompt()
-    log.info("Analysing %d candidates with News Hunter data...", len(candidates))
+    log.info("Analysing %d candidates...", len(candidates))
 
     for candidate in candidates:
         ticker = candidate["ticker"]
@@ -140,6 +158,26 @@ def run_analysis() -> None:
 
             if analysis:
                 candidate["tier2"] = {**analysis, "analysed_at": datetime.now(timezone.utc).isoformat()}
+                
+                # ── Telegram Notificatie Logica ────────────────────────────────
+                action = analysis.get("recommended_action", "").lower()
+                conviction = analysis.get("conviction", 0)
+                
+                if action == "buy" and conviction >= 7:
+                    msg = dedent(f"""
+                        🚀 <b>NEXUS BUY SIGNAL</b>
+                        
+                        <b>Ticker:</b> ${ticker} ({candidate.get('name')})
+                        <b>Conviction:</b> {conviction}/10
+                        <b>Sentiment:</b> {analysis.get('sentiment').upper()}
+                        
+                        <b>Note:</b> {analysis.get('analyst_note')}
+                        
+                        <pre>Check terminal voor volledige details.</pre>
+                    """).strip()
+                    send_telegram_msg(msg)
+                # ──────────────────────────────────────────────────────────────
+                
             else:
                 candidate["tier2"] = {"error": "json_parsing_failed"}
                 
