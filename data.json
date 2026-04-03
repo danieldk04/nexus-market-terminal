@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T15:36:26.869241+00:00",
+  "generated_at": "2026-04-03T16:05:07.584924+00:00",
   "macro": {
     "vix": 23.87,
     "treasury_10y": 0.431,
@@ -11,19 +11,6 @@
   },
   "top_candidates": [
     {
-      "ticker": "SONY",
-      "name": "Sony Group Corporation",
-      "sector": "Technology",
-      "price": 21.14,
-      "dividend_yield": 71.0,
-      "pe_ratio": 16.26,
-      "sector_pe_median": 28.0,
-      "eps_growth_3yr": 21.32,
-      "market_cap": 124873129984,
-      "score": 8.228,
-      "scanned_at": "2026-04-03T15:36:24.615641+00:00"
-    },
-    {
       "ticker": "MSFT",
       "name": "Microsoft Corporation",
       "sector": "Technology",
@@ -34,12 +21,68 @@
       "eps_growth_3yr": 14.25,
       "market_cap": 2775695753216,
       "score": 6.252,
-      "scanned_at": "2026-04-03T15:36:11.575731+00:00"
+      "scanned_at": "2026-04-03T16:04:55.315805+00:00",
+      "tier2": {
+        "sentiment": "neutral",
+        "conviction": 4,
+        "key_positives": [
+          "Trailing P/E of 23.37 is well below the sector median of 28.0, suggesting relative value within tech",
+          "Solid 3-year EPS CAGR of 14.25% indicates consistent earnings growth driven by Azure and AI momentum",
+          "Microsoft's diversified revenue streams (cloud, enterprise, gaming, productivity) provide defensive resilience"
+        ],
+        "key_risks": [
+          "CRITICAL DATA QUALITY ISSUE: Dividend yield reported at 97.0% is clearly erroneous \u2014 MSFT actual yield is ~0.7-0.8%. Tier 1 score likely inflated by this bad input",
+          "All 8 news items have null timestamps (1970-01-01) and no content \u2014 zero usable sentiment signal, cannot assess narrative risk",
+          "10Y Treasury at 43.10% is obviously a data error (actual ~4.3%), but even the corrected figure represents a headwind for growth/tech multiples",
+          "VIX at 23.87 signals elevated volatility and risk-off positioning, unfavorable for adding equity exposure",
+          "S&P 500 RSI-14 at 47.3 is neutral-to-weak, no momentum tailwind"
+        ],
+        "macro_alignment": "headwind",
+        "analyst_note": "MSFT is fundamentally a high-quality compounder, but this evaluation is severely compromised by data integrity failures: the 97% dividend yield, 43.10% treasury yield, and entirely empty news feed render the Tier 1 score and qualitative assessment unreliable. The macro backdrop (elevated VIX, high rates even corrected) is a modest headwind for tech multiples. I cannot assign meaningful conviction until clean data is available \u2014 recommend holding in watchlist pending data remediation.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T16:05:33.968761+00:00",
+        "news_count": 8
+      }
+    },
+    {
+      "ticker": "SONY",
+      "name": "Sony Group Corporation",
+      "sector": "Technology",
+      "price": 21.14,
+      "dividend_yield": 71.0,
+      "pe_ratio": 16.26,
+      "sector_pe_median": 28.0,
+      "eps_growth_3yr": 21.32,
+      "market_cap": 124873129984,
+      "score": 8.228,
+      "scanned_at": "2026-04-03T16:05:05.857705+00:00",
+      "tier2": {
+        "sentiment": "neutral",
+        "conviction": 3,
+        "key_positives": [
+          "Trailing P/E of 16.26 is significantly below the sector median of 28.0, suggesting deep value relative to tech peers",
+          "Strong EPS CAGR of 21.32% over 3 years indicates robust earnings momentum",
+          "Diversified business across gaming (PlayStation), entertainment, semiconductors (image sensors), and financial services provides resilience"
+        ],
+        "key_risks": [
+          "Dividend yield of 71.0% is nonsensical and almost certainly a data error \u2014 likely an ADR artifact, stock split adjustment issue, or bad data feed. This invalidates the Tier 1 score and requires manual verification before any action",
+          "Price at $21.14 appears anomalous for Sony Group (typically trades ~$80-90 USD for ADR); possible data integrity issue across multiple fields",
+          "All 8 news items have null timestamps (1970-01-01) and no content \u2014 zero usable sentiment signal, making qualitative assessment impossible",
+          "VIX at 23.87 signals elevated uncertainty; 10Y Treasury yield data appears corrupted (43.10% is impossible)",
+          "Yen depreciation risk and Japan macro headwinds could pressure USD-denominated returns"
+        ],
+        "macro_alignment": "headwind",
+        "analyst_note": "This candidate is flagged as UNRELIABLE due to pervasive data integrity failures: the dividend yield (71%), price ($21.14), 10Y Treasury (43.1%), and all news items are clearly corrupted or malformed. No qualitative assessment can be meaningfully conducted without valid inputs. Recommend halting evaluation until data pipeline is verified and corrected.",
+        "recommended_action": "avoid",
+        "analysed_at": "2026-04-03T16:05:20.609267+00:00",
+        "news_count": 8
+      }
     }
   ],
   "filters_used": {
     "min_dividend_yield_pct": 3.0,
     "max_pe_vs_sector": 1.0,
     "min_eps_growth_3yr_pct": 10.0
-  }
+  },
+  "tier2_completed_at": "2026-04-03T16:05:34.969990+00:00"
 }

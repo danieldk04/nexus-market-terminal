@@ -25,6 +25,36 @@
       },
       "confidence": null,
       "actuals": null
+    },
+    {
+      "date": "2026-04-03",
+      "candidates": [
+        {
+          "ticker": "SONY",
+          "price": 21.14,
+          "score": 8.228,
+          "conviction": 3,
+          "recommended_action": "avoid"
+        },
+        {
+          "ticker": "MSFT",
+          "price": 373.46,
+          "score": 6.252,
+          "conviction": 4,
+          "recommended_action": "watch"
+        }
+      ],
+      "macro_snapshot": {
+        "vix": 23.87,
+        "treasury_10y": 0.431,
+        "sp500_rsi": 47.3
+      },
+      "fear_greed_snapshot": {
+        "score": null,
+        "rating": "unavailable"
+      },
+      "confidence": 3.5,
+      "actuals": null
     }
   ],
   "evaluations": [],
