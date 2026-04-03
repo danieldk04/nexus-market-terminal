@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install yfinance pandas requests anthropic
+          pip install yfinance pandas requests anthropic lxml
 
       - name: Run Tier 1 Scanner
         run: python src/tier1_scanner.py
