@@ -1,0 +1,112 @@
+{
+  "api_keys": {
+    "polymarket": "YOUR_POLYMARKET_API_KEY",
+    "manifold": "YOUR_MANIFOLD_API_KEY",
+    "kalshi": "YOUR_KALSHI_API_KEY",
+    "twitter": "YOUR_TWITTER_BEARER_TOKEN",
+    "reddit_client_id": "YOUR_REDDIT_CLIENT_ID",
+    "reddit_client_secret": "YOUR_REDDIT_CLIENT_SECRET",
+    "newsapi": "YOUR_NEWS_API_KEY"
+  },
+  "trading": {
+    "min_liquidity": 100000,
+    "max_position_size": 5000,
+    "min_confidence": 0.70,
+    "stop_loss": -0.15,
+    "max_exposure": 0.50,
+    "max_positions": 10,
+    "platforms": ["polymarket", "manifold", "kalshi"]
+  },
+  "scraping": {
+    "twitter_keywords": [
+      "bitcoin",
+      "crypto",
+      "ethereum",
+      "elections",
+      "AI",
+      "markets",
+      "economy",
+      "fed",
+      "rates"
+    ],
+    "twitter_max_tweets": 500,
+    "reddit_subreddits": [
+      "wallstreetbets",
+      "cryptocurrency",
+      "politicalbetting",
+      "stocks",
+      "Bitcoin",
+      "ethereum"
+    ],
+    "reddit_max_posts": 100,
+    "news_sources": [
+      "bloomberg",
+      "reuters",
+      "coindesk",
+      "cnbc",
+      "financial-times",
+      "the-wall-street-journal"
+    ],
+    "scrape_interval": 300
+  },
+  "risk": {
+    "max_daily_loss": 0.20,
+    "max_correlated_positions": 3,
+    "position_sizing": "kelly_criterion",
+    "rebalance_interval": 3600,
+    "max_drawdown": 0.25,
+    "risk_free_rate": 0.05
+  },
+  "intervals": {
+    "market_scan": 60,
+    "signal_check": 30,
+    "risk_check": 10,
+    "scrape_cycle": 300,
+    "position_update": 60
+  },
+  "signal_weights": {
+    "twitter_sentiment": 0.30,
+    "reddit_sentiment": 0.20,
+    "news_sentiment": 0.25,
+    "market_liquidity": 0.15,
+    "historical_accuracy": 0.10
+  },
+  "categories": {
+    "crypto": {
+      "keywords": ["bitcoin", "btc", "ethereum", "eth", "crypto", "defi"],
+      "weight_boost": 1.2
+    },
+    "politics": {
+      "keywords": ["election", "democrat", "republican", "congress", "president"],
+      "weight_boost": 1.1
+    },
+    "economics": {
+      "keywords": ["fed", "rate", "inflation", "gdp", "unemployment"],
+      "weight_boost": 1.0
+    },
+    "tech": {
+      "keywords": ["ai", "tech", "ipo", "earnings", "meta", "google"],
+      "weight_boost": 1.0
+    }
+  },
+  "notifications": {
+    "enabled": true,
+    "discord_webhook": "",
+    "slack_webhook": "",
+    "telegram_bot_token": "",
+    "telegram_chat_id": ""
+  },
+  "backtesting": {
+    "enabled": false,
+    "start_date": "2024-01-01",
+    "end_date": "2024-12-31",
+    "initial_capital": 10000
+  },
+  "features": {
+    "auto_trade": true,
+    "paper_trading": false,
+    "use_ml_models": false,
+    "enable_shorting": false,
+    "compound_profits": true
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "predictions": [
+    {
+      "date": "2026-04-03",
+      "candidates": [
+        {
+          "ticker": "SONY",
+          "price": 21.14,
+          "score": 8.228
+        },
+        {
+          "ticker": "MSFT",
+          "price": 373.46,
+          "score": 6.252
+        }
+      ],
+      "macro_snapshot": {
+        "vix": 23.87,
+        "treasury_10y": 0.431,
+        "sp500_rsi": 47.3
+      },
+      "fear_greed_snapshot": {
+        "score": null,
+        "rating": "unavailable"
+      },
+      "confidence": null,
+      "actuals": null
+    }
+  ],
+  "evaluations": [],
+  "prompt_adjustments": []
+}

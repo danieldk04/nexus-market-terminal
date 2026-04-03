@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-04-03T15:36:26.869241+00:00",
+  "macro": {
+    "vix": 23.87,
+    "treasury_10y": 0.431,
+    "sp500_rsi": 47.3
+  },
+  "fear_and_greed": {
+    "score": null,
+    "rating": "unavailable"
+  },
+  "top_candidates": [
+    {
+      "ticker": "SONY",
+      "name": "Sony Group Corporation",
+      "sector": "Technology",
+      "price": 21.14,
+      "dividend_yield": 71.0,
+      "pe_ratio": 16.26,
+      "sector_pe_median": 28.0,
+      "eps_growth_3yr": 21.32,
+      "market_cap": 124873129984,
+      "score": 8.228,
+      "scanned_at": "2026-04-03T15:36:24.615641+00:00"
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "sector": "Technology",
+      "price": 373.46,
+      "dividend_yield": 97.0,
+      "pe_ratio": 23.37,
+      "sector_pe_median": 28.0,
+      "eps_growth_3yr": 14.25,
+      "market_cap": 2775695753216,
+      "score": 6.252,
+      "scanned_at": "2026-04-03T15:36:11.575731+00:00"
+    }
+  ],
+  "filters_used": {
+    "min_dividend_yield_pct": 3.0,
+    "max_pe_vs_sector": 1.0,
+    "min_eps_growth_3yr_pct": 10.0
+  }
+}
