@@ -28,7 +28,7 @@ DATA_PATH = ROOT / "data.json"
 MEMORY_PATH = ROOT / "memory.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
-MODEL = "claude-3-5-sonnet-latest" 
+MODEL = "claude-sonnet-4-6" 
 SLEEP_BETWEEN_CALLS = 3.0
 
 # ── Telegram Config ───────────────────────────────────────────────────────────
