@@ -28,7 +28,7 @@ MEMORY_PATH = ROOT / "memory.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
 # GEBRUIK SONNET 3.5 VOOR DE BESTE BALANS TUSSEN SNELHEID EN INTELLIGENTIE
-MODEL = "claude-3-7-sonnet-20250219" 
+MODEL = "claude-sonnet-4-6" 
 MAX_NEWS_ITEMS = 8
 SLEEP_BETWEEN_CALLS = 1.0
 
