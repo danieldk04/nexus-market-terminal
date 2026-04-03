@@ -1,88 +1,99 @@
 {
-  "generated_at": "2026-04-03T16:05:07.584924+00:00",
+  "generated_at": "2026-04-03T17:29:35.301046+00:00",
   "macro": {
     "vix": 23.87,
-    "treasury_10y": 0.431,
-    "sp500_rsi": 47.3
-  },
-  "fear_and_greed": {
-    "score": null,
-    "rating": "unavailable"
+    "treasury_10y": 4.313,
+    "sp500_rsi": 50.0
   },
   "top_candidates": [
     {
       "ticker": "MSFT",
       "name": "Microsoft Corporation",
-      "sector": "Technology",
       "price": 373.46,
-      "dividend_yield": 97.0,
+      "dividend_yield": 0.97,
       "pe_ratio": 23.37,
-      "sector_pe_median": 28.0,
-      "eps_growth_3yr": 14.25,
-      "market_cap": 2775695753216,
-      "score": 6.252,
-      "scanned_at": "2026-04-03T16:04:55.315805+00:00",
+      "eps_growth_3yr": 15.0,
+      "score": 5.0,
+      "scanned_at": "2026-04-03T17:29:34.012054+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 4,
         "key_positives": [
-          "Trailing P/E of 23.37 is well below the sector median of 28.0, suggesting relative value within tech",
-          "Solid 3-year EPS CAGR of 14.25% indicates consistent earnings growth driven by Azure and AI momentum",
-          "Microsoft's diversified revenue streams (cloud, enterprise, gaming, productivity) provide defensive resilience"
+          "Trailing P/E of 23.37 is reasonable for a mega-cap tech with 15% EPS CAGR, suggesting modest valuation relative to growth",
+          "15% 3-year EPS CAGR reflects durable earnings power from cloud (Azure), AI (Copilot), and enterprise software segments",
+          "Dividend yield of 0.97% provides modest income support; company has strong free cash flow to sustain and grow it"
         ],
         "key_risks": [
-          "CRITICAL DATA QUALITY ISSUE: Dividend yield reported at 97.0% is clearly erroneous \u2014 MSFT actual yield is ~0.7-0.8%. Tier 1 score likely inflated by this bad input",
-          "All 8 news items have null timestamps (1970-01-01) and no content \u2014 zero usable sentiment signal, cannot assess narrative risk",
-          "10Y Treasury at 43.10% is obviously a data error (actual ~4.3%), but even the corrected figure represents a headwind for growth/tech multiples",
-          "VIX at 23.87 signals elevated volatility and risk-off positioning, unfavorable for adding equity exposure",
-          "S&P 500 RSI-14 at 47.3 is neutral-to-weak, no momentum tailwind"
+          "All 8 news items are dated 1970-01-01 (epoch zero) \u2014 no usable news data; sentiment assessment is entirely blind, confidence sharply reduced",
+          "VIX at 23.87 indicates elevated market anxiety, which typically pressures high-multiple tech names and increases volatility risk",
+          "10Y Treasury at 4.313% is a meaningful headwind for growth/tech equities; higher discount rates compress future cash flow valuations",
+          "Sector median P/E unavailable \u2014 cannot confirm whether 23.37 is a premium or discount to peers; relative valuation is unverifiable"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "MSFT is fundamentally a high-quality compounder, but this evaluation is severely compromised by data integrity failures: the 97% dividend yield, 43.10% treasury yield, and entirely empty news feed render the Tier 1 score and qualitative assessment unreliable. The macro backdrop (elevated VIX, high rates even corrected) is a modest headwind for tech multiples. I cannot assign meaningful conviction until clean data is available \u2014 recommend holding in watchlist pending data remediation.",
+        "analyst_note": "MSFT passes fundamental screening with solid EPS growth and a palatable P/E, but qualitative analysis is severely compromised by the complete absence of usable news data \u2014 all feeds returned epoch-zero timestamps with no content. Macro context is mildly unfavorable: VIX near 24 signals risk-off conditions, and a 4.31% 10Y yield creates a real cost-of-capital headwind for large-cap tech. With S&P 500 RSI at 50 (neutral momentum) and no news signal to lean on, a 'watch' posture is warranted until fresh catalysts or news flow can be assessed.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T16:05:33.968761+00:00",
-        "news_count": 8
+        "analysed_at": "2026-04-03T17:29:48.401159+00:00"
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "price": 177.39,
+      "dividend_yield": 2.0,
+      "pe_ratio": 36.2,
+      "eps_growth_3yr": 15.0,
+      "score": 5.0,
+      "scanned_at": "2026-04-03T17:29:34.966846+00:00",
+      "tier2": {
+        "sentiment": "neutral",
+        "conviction": 4,
+        "key_positives": [
+          "NVDA remains the dominant supplier of AI/ML accelerator chips (H100/H200/Blackwell), with structural demand from hyperscalers and enterprise AI build-outs providing multi-year revenue visibility",
+          "15% EPS CAGR over 3 years reflects genuine earnings power, not financial engineering, underpinned by pricing power and data center segment dominance",
+          "Trailing P/E of 36.2x is relatively modest for NVDA historically, suggesting some valuation compression has already occurred from peak multiples"
+        ],
+        "key_risks": [
+          "News feed is entirely absent (all timestamps epoch 0, no summaries) \u2014 zero current news signal; confidence in near-term narrative is critically impaired",
+          "VIX at 23.87 indicates elevated market anxiety; high-beta growth names like NVDA historically underperform in risk-off regimes",
+          "10Y Treasury at 4.31% compresses DCF valuations for high-multiple growth stocks; real competition from AMD, custom silicon (Google TPU, AWS Trainium) is intensifying",
+          "Export controls on advanced chips to China represent a material and ongoing revenue headwind that could resurface as a catalyst risk",
+          "Dividend yield of 2.0% is anomalous for NVDA (historically sub-0.1%) \u2014 data quality should be verified before relying on this figure"
+        ],
+        "macro_alignment": "headwind",
+        "analyst_note": "NVDA's qualitative investment case remains structurally compelling given AI infrastructure secular tailwinds, but the current macro setup (elevated VIX, 4.3% risk-free rate) creates a headwind for multiple expansion. Critically, all news data is missing (epoch timestamps, no summaries), which eliminates the ability to assess recent narrative risk, earnings revisions, or geopolitical developments \u2014 this alone warrants a confidence penalty. The flagged 2.0% dividend yield appears erroneous for NVDA and should be reconciled with source data before acting.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T17:30:02.186166+00:00"
       }
     },
     {
       "ticker": "SONY",
       "name": "Sony Group Corporation",
-      "sector": "Technology",
       "price": 21.14,
-      "dividend_yield": 71.0,
+      "dividend_yield": 0.71,
       "pe_ratio": 16.26,
-      "sector_pe_median": 28.0,
-      "eps_growth_3yr": 21.32,
-      "market_cap": 124873129984,
-      "score": 8.228,
-      "scanned_at": "2026-04-03T16:05:05.857705+00:00",
+      "eps_growth_3yr": 15.0,
+      "score": 5.0,
+      "scanned_at": "2026-04-03T17:29:35.200621+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 3,
         "key_positives": [
-          "Trailing P/E of 16.26 is significantly below the sector median of 28.0, suggesting deep value relative to tech peers",
-          "Strong EPS CAGR of 21.32% over 3 years indicates robust earnings momentum",
-          "Diversified business across gaming (PlayStation), entertainment, semiconductors (image sensors), and financial services provides resilience"
+          "Solid EPS CAGR of 15% over 3 years signals consistent earnings growth across diversified segments (gaming, music, imaging, entertainment)",
+          "Trailing P/E of 16.26 is reasonable for a diversified tech/entertainment conglomerate with recurring revenue streams",
+          "PlayStation ecosystem, Sony Pictures, and semiconductor (image sensors) divisions provide durable competitive moats"
         ],
         "key_risks": [
-          "Dividend yield of 71.0% is nonsensical and almost certainly a data error \u2014 likely an ADR artifact, stock split adjustment issue, or bad data feed. This invalidates the Tier 1 score and requires manual verification before any action",
-          "Price at $21.14 appears anomalous for Sony Group (typically trades ~$80-90 USD for ADR); possible data integrity issue across multiple fields",
-          "All 8 news items have null timestamps (1970-01-01) and no content \u2014 zero usable sentiment signal, making qualitative assessment impossible",
-          "VIX at 23.87 signals elevated uncertainty; 10Y Treasury yield data appears corrupted (43.10% is impossible)",
-          "Yen depreciation risk and Japan macro headwinds could pressure USD-denominated returns"
+          "News data is entirely absent (all timestamps epoch zero, no summaries) \u2014 cannot assess recent sentiment, catalysts, or risk events; confidence is materially reduced",
+          "Yen/USD currency exposure is a structural headwind; a strengthening yen compresses overseas earnings when repatriated",
+          "VIX at 23.87 reflects elevated market anxiety \u2014 risk-off environment pressures mid-cap ADRs and Japanese equities disproportionately",
+          "10Y Treasury at 4.31% raises the discount rate hurdle for growth-sensitive segments (streaming, gaming investment cycles)",
+          "Dividend yield of 0.71% offers minimal income cushion in a high-rate environment, reducing relative attractiveness vs. fixed income"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "This candidate is flagged as UNRELIABLE due to pervasive data integrity failures: the dividend yield (71%), price ($21.14), 10Y Treasury (43.1%), and all news items are clearly corrupted or malformed. No qualitative assessment can be meaningfully conducted without valid inputs. Recommend halting evaluation until data pipeline is verified and corrected.",
-        "recommended_action": "avoid",
-        "analysed_at": "2026-04-03T16:05:20.609267+00:00",
-        "news_count": 8
+        "analyst_note": "Sony passes fundamental screening with a respectable earnings growth profile and moderate valuation, but the qualitative assessment is severely constrained by a complete absence of usable news data \u2014 all eight news items returned null/epoch timestamps, forcing a confidence haircut. Macro conditions (elevated VIX, 4.3% yields, strong dollar vs. yen) present a meaningful headwind for a Japan-domiciled conglomerate trading as an ADR. Recommend moving to Watch status pending fresh news flow and macro stabilization rather than initiating a position under current informational and rate conditions.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T17:30:14.220534+00:00"
       }
     }
-  ],
-  "filters_used": {
-    "min_dividend_yield_pct": 3.0,
-    "max_pe_vs_sector": 1.0,
-    "min_eps_growth_3yr_pct": 10.0
-  },
-  "tier2_completed_at": "2026-04-03T16:05:34.969990+00:00"
+  ]
 }
