@@ -61,21 +61,16 @@ def save_json(path: Path, data: dict) -> None:
 
 def build_system_prompt() -> str:
     return dedent("""
-        You are a senior equity analyst for the NEXUS Market Terminal.
-        Assess the stock based on fundamentals and news provided.
-        
-        STRICT RULES:
-        1. Respond ONLY with a valid JSON object.
+        ... (bestaande regels) ...
         2. Format: {
             "analysis": "text", 
             "conviction_score": 1-10, 
             "sentiment_score": 1-10,
-            "recommended_action": "buy/hold/sell"
+            "recommended_action": "buy/hold/sell",
+            "target_price": "verwachte prijs over 30 dagen",
+            "upside_percentage": "verwacht rendement in %"
         }
-        3. 'sentiment_score' must reflect the tone of the news items provided (1=panic, 10=hype).
-        4. 'analysis' should be a concise analyst note.
-        5. Do NOT use markdown code blocks.
-        6. Do NOT include any introductory or concluding text.
+        7. Be conservative with price targets. Base them on the volatility and news provided.
     """).strip()
 
 def build_user_prompt(candidate: dict, macro: dict) -> str:
