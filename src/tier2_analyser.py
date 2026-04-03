@@ -28,7 +28,7 @@ MEMORY_PATH = ROOT / "memory.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
 MODEL = "claude-sonnet-4-6" # Gebruik de stabiele alias
-SLEEP_BETWEEN_CALLS = 1.2
+SLEEP_BETWEEN_CALLS = 3.0
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
