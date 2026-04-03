@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T17:55:30.983659+00:00",
+  "generated_at": "2026-04-03T18:01:46.835944+00:00",
   "macro": {
     "vix": 23.87,
     "treasury_10y": 4.31,
@@ -16,9 +16,29 @@
       "eps_growth_3yr": 100.0,
       "news": [],
       "score": 9.9,
-      "scanned_at": "2026-04-03T17:55:30.883052+00:00",
+      "scanned_at": "2026-04-03T18:01:42.209030+00:00",
       "tier2": {
-        "error": "api_call_failed"
+        "sentiment": "bullish",
+        "conviction": 7,
+        "key_positives": [
+          "Attractive dividend yield of 4.73% providing strong income support",
+          "Low P/E of 10.82 suggests significant valuation discount relative to earnings power",
+          "EPS growth of 100% indicates substantial earnings recovery or expansion momentum",
+          "European banks benefit from elevated rate environment sustaining net interest margins",
+          "ING's diversified pan-European retail and wholesale banking model provides revenue resilience"
+        ],
+        "key_risks": [
+          "Elevated VIX at 23.87 signals broader market uncertainty and risk-off sentiment that could pressure financials",
+          "European economic slowdown or recession risk could increase non-performing loans",
+          "ECB rate cut cycle, if accelerated, would compress net interest margins",
+          "No recent news flow limits visibility into near-term catalysts or potential negative developments",
+          "Regulatory capital requirements and Basel IV implementation could constrain capital returns",
+          "EPS growth of 100% may reflect one-time items or low base effects, making sustainability uncertain"
+        ],
+        "macro_alignment": "neutral",
+        "analyst_note": "ING Groep presents a compelling value case with a sub-11x P/E, near-5% dividend yield, and strong reported EPS growth. The elevated rate environment has been a tailwind for European banks, though the ECB's easing trajectory introduces margin pressure risk going forward. VIX at ~24 reflects macro uncertainty which historically weighs on financial sector multiples. The 100% EPS growth figure warrants scrutiny for sustainability. Absence of recent news flow limits near-term catalyst visibility. Overall, the risk/reward skews moderately positive for a patient, income-oriented investor.",
+        "recommended_action": "buy",
+        "analysed_at": "2026-04-03T18:01:57.315005+00:00"
       }
     },
     {
@@ -31,7 +51,7 @@
       "eps_growth_3yr": 100.0,
       "news": [],
       "score": 9.5,
-      "scanned_at": "2026-04-03T17:55:25.288296+00:00",
+      "scanned_at": "2026-04-03T18:01:45.587383+00:00",
       "tier2": {
         "error": "api_call_failed"
       }
@@ -46,9 +66,27 @@
       "eps_growth_3yr": 100.0,
       "news": [],
       "score": 9.1,
-      "scanned_at": "2026-04-03T17:55:27.481064+00:00",
+      "scanned_at": "2026-04-03T18:01:42.960915+00:00",
       "tier2": {
-        "error": "api_call_failed"
+        "sentiment": "neutral",
+        "conviction": 5,
+        "key_positives": [
+          "Attractive dividend yield of 3.19% provides income support in a high-rate environment",
+          "Reported EPS growth of 100% suggests a strong earnings recovery or base effect improvement",
+          "Moderate P/E of 15.68 indicates reasonable valuation relative to energy sector peers",
+          "Shell's diversified energy portfolio including LNG, renewables, and traditional hydrocarbons provides resilience"
+        ],
+        "key_risks": [
+          "No recent news flow makes it difficult to assess near-term catalysts or headwinds",
+          "Elevated VIX at 23.87 signals broader market uncertainty which could pressure cyclical energy stocks",
+          "EPS growth of 100% likely reflects a low base effect and may not be sustainable going forward",
+          "Energy sector faces structural headwinds from energy transition policies and volatile commodity prices",
+          "10Y yield at 4.31% compresses relative attractiveness of 3.19% dividend yield"
+        ],
+        "macro_alignment": "headwind",
+        "analyst_note": "Shell presents a mixed picture. While the P/E is reasonable and the EPS recovery is impressive, the elevated VIX and high 10Y yield create a challenging macro backdrop for energy equities. The dividend yield is attractive in absolute terms but is undercut by risk-free rates. Absence of recent news limits near-term catalyst visibility. The 100% EPS growth likely reflects base effects rather than sustainable expansion. A cautious watch stance is appropriate pending clearer macro stabilization and commodity price direction.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T18:02:18.853069+00:00"
       }
     },
     {
@@ -61,9 +99,26 @@
       "eps_growth_3yr": 15.0,
       "news": [],
       "score": 9.0,
-      "scanned_at": "2026-04-03T17:55:29.527065+00:00",
+      "scanned_at": "2026-04-03T18:01:46.453780+00:00",
       "tier2": {
-        "error": "api_call_failed"
+        "sentiment": "neutral",
+        "conviction": 6,
+        "key_positives": [
+          "Attractive dividend yield of 4.15% provides income support and downside cushion in volatile markets",
+          "Strong EPS growth of 15.0% is exceptional for a Consumer Defensive name, suggesting pricing power or operational efficiency gains",
+          "P/E of 18.55 is reasonable for a defensive blue-chip with global brand diversification",
+          "Consumer Defensive sector tends to outperform during elevated volatility environments (VIX ~24)"
+        ],
+        "key_risks": [
+          "No recent news flow limits visibility into near-term catalysts or management guidance updates",
+          "10Y yield at 4.31% makes dividend yield of 4.15% less competitive on a risk-adjusted basis versus risk-free assets",
+          "Currency headwinds remain a persistent risk given Unilever's heavy emerging market exposure",
+          "Elevated VIX at 23.87 signals broader market uncertainty which could suppress multiple expansion"
+        ],
+        "macro_alignment": "neutral",
+        "analyst_note": "Unilever presents a balanced profile for defensive positioning. The 15% EPS growth is a standout metric that may reflect ongoing restructuring benefits or volume recovery. However, with the 10Y yield near 4.31%, the dividend yield offers limited spread over risk-free alternatives, reducing the traditional income appeal of the stock. The Consumer Defensive sector provides relative safety in a high-VIX environment, but without fresh news catalysts, near-term upside is likely capped. Suitable as a defensive core holding rather than an active growth play.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T18:02:29.196939+00:00"
       }
     },
     {
@@ -76,9 +131,28 @@
       "eps_growth_3yr": 6.3,
       "news": [],
       "score": 8.6,
-      "scanned_at": "2026-04-03T17:55:28.680009+00:00",
+      "scanned_at": "2026-04-03T18:01:43.796001+00:00",
       "tier2": {
-        "error": "api_call_failed"
+        "sentiment": "neutral",
+        "conviction": 5,
+        "key_positives": [
+          "Defensive sector positioning provides resilience in volatile market environments (VIX 23.87)",
+          "Reasonable P/E of 20.01 for a global consumer staples brand with strong pricing power",
+          "Solid EPS growth of 6.3% demonstrates continued earnings expansion",
+          "Dividend yield of 2.81% offers income support, competitive against 10Y yield backdrop",
+          "Heineken's global diversification and premium brand portfolio provide long-term stability"
+        ],
+        "key_risks": [
+          "Elevated 10Y yield at 4.31% compresses valuation multiples and makes dividend yield less attractive relative to risk-free rate",
+          "No recent news flow limits ability to assess near-term catalysts or headwinds",
+          "Consumer staples face margin pressure from input cost inflation and FX headwinds across emerging markets",
+          "Slowing beer volume growth in mature Western European markets",
+          "Higher debt servicing costs in rising rate environment could pressure free cash flow"
+        ],
+        "macro_alignment": "headwind",
+        "analyst_note": "Heineken presents as a quality defensive holding but faces a challenging macro backdrop. The 10Y yield at 4.31% creates a valuation headwind for dividend-paying consumer staples, while the elevated VIX signals broader market uncertainty. The 2.81% dividend yield offers limited spread over risk-free rates. EPS growth of 6.3% is respectable but not compelling enough to warrant aggressive accumulation at current levels. With no recent news catalysts and macro headwinds from rates, a watchful stance is prudent pending a better entry point or confirmation of earnings momentum.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T18:02:48.191540+00:00"
       }
     }
   ]
