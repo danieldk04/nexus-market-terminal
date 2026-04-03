@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T18:20:07.245067+00:00",
+  "generated_at": "2026-04-03T18:50:50.395359+00:00",
   "macro": {
     "vix": 23.87,
     "treasury_10y": 4.31,
@@ -21,7 +21,7 @@
           "date": "Recent"
         },
         {
-          "title": "Randstad (OTCMKTS:RANJY) Shares Gap Down - Should You Sell? - marketbeat.com",
+          "title": "Randstad (OTCMKTS:RANJY) Shares Gap Down - Should You Sell? - MarketBeat",
           "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPcUtfSHVyYlR0c0FMWDJOSFlBd1JsdGEwTnRmT25YN0ZzcnNuZlEwS1pPdlMtWU5YSWNKeXBzQUJDNWRrajRaS1BFZERWanN3OWxTLTMtMUhhbFdxQ3ZIU2JYRnhTSTZSQVNrZjRzWl9pLXg1UnZUSUtWN05OMFFTVkNoY3N3ZUx0NGFlUklhdFlWX29SbEpIdk9vNkExYVpMWlE5TERqSGdoWXc?oc=5",
           "date": "Recent"
         },
@@ -32,27 +32,77 @@
         }
       ],
       "score": 10.1,
-      "scanned_at": "2026-04-03T18:20:04.552711+00:00",
+      "scanned_at": "2026-04-03T18:50:44.284790+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 5,
         "key_positives": [
-          "Attractive dividend yield of 7.23% offers strong income support and signals management confidence in cash generation",
-          "Low P/E of 13.51 suggests the stock may be undervalued relative to earnings, presenting a potential value opportunity",
-          "EPS growth of 15.0% indicates solid earnings momentum for a mature industrial/staffing company",
-          "Yahoo Finance analysis flagging a potential opportunity suggests institutional interest at current price levels"
+          "Attractive dividend yield of 7.23% provides strong income support and signals confidence in cash generation",
+          "Reasonable P/E of 13.51 suggests the stock is not overvalued relative to earnings",
+          "EPS growth of 15.0% indicates solid earnings momentum for a staffing/industrials company",
+          "Potential value opportunity flagged by analyst coverage suggesting possible oversold conditions"
         ],
         "key_risks": [
-          "Shares gapping down is a concerning technical signal, suggesting negative price momentum and possible institutional selling",
-          "Staffing and workforce solutions companies are highly cyclical and vulnerable to labor market deterioration in a slowing macro environment",
-          "Elevated VIX at 23.87 signals market uncertainty, which could compress valuations further for cyclical industrials",
-          "10Y yield at 4.31% makes the 7.23% dividend yield less exceptional on a risk-adjusted basis compared to a lower rate environment",
-          "News flow appears sparse and mixed, lacking strong positive catalysts to drive near-term re-rating"
+          "Recent share gap down signals negative near-term price momentum and possible deteriorating fundamentals",
+          "Staffing sector highly cyclical and sensitive to labor market slowdowns; macro headwinds could compress margins",
+          "Elevated VIX at 23.87 reflects broader market uncertainty, increasing risk-off sentiment that pressures mid-cap industrials",
+          "High dividend yield may partly reflect share price weakness rather than pure income strength, raising sustainability questions",
+          "10Y yield at 4.31% makes income alternatives more competitive, reducing yield premium attractiveness"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "Randstad presents a mixed fundamental picture with an attractive valuation and strong dividend yield offset by negative price action and a challenging macro backdrop. The staffing sector is sensitive to economic slowdowns, and elevated volatility alongside high bond yields reduce the relative appeal of cyclical dividend plays. The 15% EPS growth is encouraging but needs to be validated against forward guidance. The gap-down in shares warrants caution before initiating a position. Best approach is to monitor for stabilization.",
+        "analyst_note": "Randstad N.V. presents a mixed picture: the valuation is modest and dividend yield is generous, but the recent gap-down in shares and elevated macro volatility (VIX ~24) suggest near-term pressure. The staffing sector faces cyclical risk if global labor markets weaken, and rising bond yields reduce the relative appeal of equity income. The 15% EPS growth is encouraging but needs confirmation in upcoming earnings. Best approached with caution pending clearer directional signals.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T18:20:18.476105+00:00"
+        "analysed_at": "2026-04-03T18:51:00.513152+00:00"
+      }
+    },
+    {
+      "ticker": "INGA.AS",
+      "name": "ING GROEP N.V.",
+      "sector": "Financial Services",
+      "price": 22.945,
+      "dividend_yield": 4.73,
+      "pe_ratio": 10.82,
+      "eps_growth_3yr": 100.0,
+      "news": [
+        {
+          "title": "Google News",
+          "link": "https://news.google.com/",
+          "date": "Recent"
+        },
+        {
+          "title": "Is It Too Late To Consider ING Groep (ENXTAM:INGA) After Its Strong Multi Year Rally? - Yahoo Finance",
+          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNTThwSGJiTzJlSlNNczlXX3daLW5haG1OQ012VTRhYjRZVWEwUjdSVUM2aFdTdHJRbmVmNG9UNUxRMjlFYy1MNG5Vd2NiM0x1d0syWmI4a01qUkhBQTlxMEQ5bkVYYVBIQmtnSHdETktJY3ctWmdweFhQcVdXdnNfTTdXVk1YTHhIZjV4UmJuRHg1M210c0Q1SXNn?oc=5",
+          "date": "Recent"
+        },
+        {
+          "title": "ING Groep N.V. stock: 5.5% yield amid bank shifts \u2013 buy now? - AD HOC NEWS",
+          "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPWndKZENuSmNHcm5fRFgtbGpUTW8tbGh3MmE4aFY0cVhPaXQtVVpMZ0FHOThPTXVQRGJ1Ym1fUDdvb3Bsc245LUZVcU9HcEhGZF9DMW9jRG42aHgtbXNzSzlVcWJIY0ZQTlp4RS1sVnpaQjZiWWhXOWFWM2k3R1FUZWxkQkhjdXF6V2pmSjFNWVBxMDJuMUwyd0wxQlI3QWZ4bHFyeGlxdW5za2tmU05fRmhDTWZmaGlQd01pcjR3?oc=5",
+          "date": "Recent"
+        }
+      ],
+      "score": 9.9,
+      "scanned_at": "2026-04-03T18:50:40.439179+00:00",
+      "tier2": {
+        "sentiment": "bullish",
+        "conviction": 7,
+        "key_positives": [
+          "Attractive dividend yield of 4.73%-5.5% providing strong income appeal",
+          "Low P/E of 10.82 suggests valuation remains reasonable despite multi-year rally",
+          "EPS growth of 100% indicates significant earnings momentum and profitability recovery",
+          "European banks benefiting from sustained higher interest rate environment boosting net interest margins",
+          "ING has a diversified pan-European retail and wholesale banking franchise with strong digital capabilities"
+        ],
+        "key_risks": [
+          "Multi-year rally raises valuation concern - potential limited near-term upside as per news sentiment",
+          "Elevated VIX at 23.87 signals broader market uncertainty that could pressure financial sector valuations",
+          "European economic slowdown risk could increase loan loss provisions and compress margins",
+          "Interest rate cut cycle from ECB may reduce net interest income going forward",
+          "Regulatory and capital requirement pressures in European banking sector remain a structural overhang"
+        ],
+        "macro_alignment": "neutral",
+        "analyst_note": "ING Groep presents a compelling income and value proposition with a sub-11x P/E and ~5% dividend yield. The 100% EPS growth reflects a strong earnings base recovery. However, the multi-year rally prompts caution on timing, and the ECB rate trajectory introduces margin pressure risk. With VIX elevated at 23.87, broader risk-off sentiment could weigh on financials short-term, but the fundamental case for patient investors remains solid.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T18:51:12.119581+00:00"
       }
     },
     {
@@ -81,77 +131,26 @@
         }
       ],
       "score": 9.7,
-      "scanned_at": "2026-04-03T18:19:56.749179+00:00",
+      "scanned_at": "2026-04-03T18:50:44.897836+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 5,
         "key_positives": [
-          "Attractive dividend yield of 4.44% with recent \u20ac0.70 dividend announcement signals capital return commitment",
-          "Share repurchase program initiated, indicating management confidence in valuation and excess capital",
-          "Reasonable P/E of 11.4x suggests stock is not overvalued relative to European banking peers",
-          "Positive EPS growth of 3.0% demonstrates underlying earnings stability"
+          "Attractive dividend yield of 4.44% with recently announced \u20ac0.70 dividend providing income support",
+          "Share repurchase program signals management confidence in capital adequacy and valuation",
+          "Modest P/E of 11.4 suggests the stock is not richly valued relative to earnings",
+          "Positive EPS growth of 3.0% indicates stable underlying profitability"
         ],
         "key_risks": [
-          "Elevated VIX at 23.87 signals broader market uncertainty which historically pressures financial sector multiples",
-          "10Y yield at 4.31% may compress NIM if rate cuts materialize faster than expected in Europe, squeezing bank profitability",
-          "Dutch banking sector faces regulatory capital pressures and potential mortgage market softness",
-          "Low EPS growth of 3.0% limits re-rating potential; market may view the stock as a value trap rather than a growth opportunity",
-          "Geopolitical and macro headwinds in Europe could elevate credit loss provisions"
+          "Elevated VIX at 23.87 signals broad market uncertainty, historically negative for European bank sentiment",
+          "10Y yield at 4.31% in the US context may compress NIM expectations if ECB rate trajectory diverges",
+          "European banking sector faces ongoing regulatory and macro headwinds including sluggish Eurozone growth",
+          "Low EPS growth rate of 3.0% limits upside re-rating catalyst; stock may remain a value trap"
         ],
-        "macro_alignment": "neutral",
-        "analyst_note": "ABN AMRO presents a classic European bank value proposition \u2014 modest growth, decent yield, and buybacks \u2014 but the macro environment is mixed. The ECB rate trajectory and potential credit cycle deterioration keep conviction moderate. The share repurchase is a mild positive catalyst, though the broader VIX spike and uncertain growth outlook in the Eurozone temper enthusiasm. Suitable for income-focused investors with a long-term horizon but not a high-conviction tactical buy.",
+        "macro_alignment": "headwind",
+        "analyst_note": "ABN AMRO presents a classic value-income profile with a sub-12x P/E and above-4% yield, supported by an active buyback and dividend announcement. However, the macro backdrop is cautious \u2014 elevated VIX reflects risk-off sentiment that typically pressures European financials, and Eurozone growth concerns limit aggressive upside. The share repurchase is a mild positive catalyst but unlikely to drive meaningful re-rating alone. Best suited for income-focused investors with a medium-term horizon; risk/reward is balanced rather than compelling at this juncture.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T18:20:34.771328+00:00"
-      }
-    },
-    {
-      "ticker": "WKL.AS",
-      "name": "WOLTERS KLUWER",
-      "sector": "Industrials",
-      "price": 65.32,
-      "dividend_yield": 3.86,
-      "pe_ratio": 11.58,
-      "eps_growth_3yr": 32.5,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Wolters Kluwer: The Good And The Bad (OTCMKTS:WOLTF) - Seeking Alpha",
-          "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNdUl3QXlpUU41TXhRZndHa0NpY3JySUFlQ1lZWldHSjBKRXVuazc1ZG9YTTFKZnJtVjN6dWJ0OWRDQnlaU213YUNqNHpTQ0x5Q1ZqNVpUVk1TYzE4YlpsUmEzYktvRDh4WTNSVzRBTXc0QldDZlRsQ0hhQVMzTzNacXZn?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Wolters Kluwer Leans On Expert AI Strength As Shares Screen Undervalued - Yahoo Finance",
-          "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNZTNsc0FSVzJ1WUlYNUlOajlweVR1bW9LQ0pRNUMyVUVlRHpNTjA1ZXdnUEc5OUt3NS10TFlKMkc3RnlydDRtNUY4REpjM3duMmN1WGl0WTdjN1B2LThTbUNvbkJCZ0c4dWhaOTVaWVdPYTEwcmZXSjNvU2J1RHZkcm4wcE5HWC1EVWFmUjRZUmtkNEIzVGNzX3gxYw?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 9.6,
-      "scanned_at": "2026-04-03T18:20:05.368239+00:00",
-      "tier2": {
-        "sentiment": "bullish",
-        "conviction": 7,
-        "key_positives": [
-          "Strong EPS growth of 32.5% signals robust earnings momentum and operational leverage",
-          "Expert AI integration across legal, tax, and compliance platforms reinforces competitive moat and pricing power",
-          "Shares flagged as undervalued by analysts, suggesting margin of safety at current levels",
-          "Attractive dividend yield of 3.86% provides income support in a higher-rate environment",
-          "Defensive business model with recurring subscription revenues across mission-critical professional sectors"
-        ],
-        "key_risks": [
-          "P/E of 11.58 appears low but may reflect sector reclassification concerns or slower organic growth expectations",
-          "Mixed Seeking Alpha coverage ('The Good And The Bad') suggests some fundamental headwinds worth monitoring",
-          "Elevated VIX at 23.87 indicates broader market uncertainty that could pressure valuation multiples",
-          "Currency risk given EUR-denominated stock with global operations",
-          "AI competition from broader tech incumbents could commoditize some product lines over the medium term"
-        ],
-        "macro_alignment": "neutral",
-        "analyst_note": "Wolters Kluwer presents a compelling risk-reward profile underpinned by exceptional EPS growth and a defensible AI-enhanced product suite in legal, tax, and compliance verticals. The stock screens undervalued relative to peers, and its dividend yield adds cushion in the current elevated rate environment. However, moderate market volatility (VIX ~24) and mixed sentiment in analyst coverage warrant measured positioning. The stock is well-suited for investors seeking quality compounders with downside protection.",
-        "recommended_action": "buy",
-        "analysed_at": "2026-04-03T18:20:48.498202+00:00"
+        "analysed_at": "2026-04-03T18:51:23.869912+00:00"
       }
     },
     {
@@ -180,37 +179,87 @@
         }
       ],
       "score": 9.5,
-      "scanned_at": "2026-04-03T18:19:58.411071+00:00",
+      "scanned_at": "2026-04-03T18:50:49.608622+00:00",
       "tier2": {
         "sentiment": "bullish",
         "conviction": 7,
         "key_positives": [
           "Exceptionally low P/E of 7.83 suggests significant undervaluation relative to earnings power",
-          "EPS growth of 100% signals a dramatic earnings inflection and operational momentum",
-          "Longtail FPSO win in Guyana extends contracted backlog and reinforces long-term revenue visibility",
-          "Active \u20ac227M share buyback program demonstrates strong capital allocation discipline and management confidence",
-          "Guyana offshore expansion provides sustained project pipeline with a tier-1 energy major as counterparty"
+          "EPS growth of 100% signals strong earnings momentum and operational leverage",
+          "Longtail FPSO win in Guyana extends long-term revenue visibility and backlog growth",
+          "Active share buyback program (\u20ac227M) with continued weekly execution signals management confidence and shareholder-friendly capital allocation",
+          "Guyana offshore exposure provides access to one of the world's fastest-growing oil provinces"
         ],
         "key_risks": [
-          "Elevated VIX at 23.87 reflects broader market uncertainty which can suppress sentiment for small/mid-cap energy names",
-          "FPSO sector is capital-intensive with execution risk; cost overruns or delays on new builds could compress margins",
-          "Dividend yield of 1.38% is relatively modest, limiting income-oriented investor appeal",
-          "Exposure to offshore oil prices; sustained crude weakness could reduce client capex and delay new contracts",
-          "Geopolitical and regulatory risks in Guyana as the region scales production rapidly"
+          "Elevated VIX at 23.87 reflects broader market uncertainty, which can weigh on cyclical energy names",
+          "Oil price sensitivity: FPSO contracts tied to energy sector health; prolonged oil weakness could impair project economics",
+          "High capital intensity of FPSO construction and operation creates execution and cost overrun risk",
+          "Low dividend yield of 1.38% may not attract income-focused investors relative to sector peers",
+          "Geopolitical concentration risk in Guyana/offshore EM jurisdictions"
         ],
         "macro_alignment": "neutral",
-        "analyst_note": "SBM Offshore presents a compelling value case with a sub-8x P/E and 100% EPS growth, backed by a growing contracted backlog in Guyana and an aggressive buyback program. The Longtail FPSO award strengthens the long-term revenue narrative. However, elevated macro volatility (VIX ~24) and moderately high real yields (4.31% 10Y) create headwinds for risk assets, warranting a measured entry rather than aggressive positioning. The stock's fundamentals look attractive for patient investors with a 12-24 month horizon.",
+        "analyst_note": "SBM Offshore presents a compelling deep-value case with a sub-8x P/E and 100% EPS growth, supported by a growing Guyana FPSO franchise and an aggressive buyback. The Longtail contract win meaningfully extends revenue backlog and reinforces the Guyana growth narrative. However, moderately elevated volatility (VIX ~24) and a 4.31% risk-free rate compress risk appetite for offshore energy equities. The fundamental setup is strong for medium-term holders willing to absorb near-term macro noise.",
         "recommended_action": "buy",
-        "analysed_at": "2026-04-03T18:21:02.933631+00:00"
+        "analysed_at": "2026-04-03T18:51:36.331168+00:00"
       }
     },
     {
-      "ticker": "AKZA.AS",
-      "name": "AKZO NOBEL",
-      "sector": "Basic Materials",
-      "price": 49.06,
-      "dividend_yield": 4.04,
-      "pe_ratio": 13.26,
+      "ticker": "PRX.AS",
+      "name": "PROSUS",
+      "sector": "Consumer Cyclical",
+      "price": 40.02,
+      "dividend_yield": 0.5,
+      "pe_ratio": 8.04,
+      "eps_growth_3yr": 22.8,
+      "news": [
+        {
+          "title": "Google News",
+          "link": "https://news.google.com/",
+          "date": "Recent"
+        },
+        {
+          "title": "Prosus spends \u20ac106 million on latest tranche of open-ended share buyback - TipRanks",
+          "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQaTFfZnZGdHROMzlRUFZXYmdWeGNlRklvR29pdkNlQ0ZyMGpVOXA5aV9VUGtIR0xsNVE1RUFwYzlYaWdfcHM5LVYyV3p6LUVZNURaQW1pdzhTSmNZajZ6UXNYTVZHRFNrYzBDbWhzaVEtRVEteWgzdWpSelAyMFU5ckNKR2lTNnRKU2xtSjh0YzYxS0pTd3hPY0hVU1kxRk1TN0hPeVB0MWVTRTk2enJSTnltb3F2Z0V1UGRnd3V5WklIUQ?oc=5",
+          "date": "Recent"
+        },
+        {
+          "title": "Prosus (ENXTAM:PRX) Valuation Check After Tencent-Led Share Price Rebound On Iran De\u2011Escalation Hopes - simplywall.st",
+          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNaUVobnY0MUxISVFwTk4wZURQNy1mR2JKLU5ZVWpXT2lOWktKUXR6ZmlmanFTVGpldktkaEtvaUk5WTU1eDVIV3UtN1J6WTdwWTJ0Mm0yNDN0SmhrSmFoVnZxdVdhZFZxNFFKNS12SVV5Tm9udFhTcDJ5cGkwWDdFdjE2WmY0OGFfb0ppcFdGby1EQnJUUndrbEFRVFVfUG1pUlNVV3JoYU56YzZqWVQ2aEQzNjdWV3dULXZDOHluQWxZSlJQ0gHKAUFVX3lxTE5icEJpVGZEcGpGWkJFNFgwaEVkNkVweklBamM5WXlmOTNmbGhwNU5uVWtBbGNOV19XYkRfOFhoTUNLSy1uZTlrRjJ6akUyV2JKbm80Y0U3ZEFYczdvM2dfV0lValFDSC1nZzZiblVuVHgyVVhkdTBUZExjMkNXaFlSOGRfRG5OMGJMa21NOUduR3Q5Mk9WOU9sYUtjd2I0MzBoOVpIbEJodmJJaDhmT1pNN0FsbG1aQTd2QjN1c3kzdFh1eGdEV1NNb1E?oc=5",
+          "date": "Recent"
+        }
+      ],
+      "score": 9.3,
+      "scanned_at": "2026-04-03T18:50:47.142339+00:00",
+      "tier2": {
+        "sentiment": "bullish",
+        "conviction": 7,
+        "key_positives": [
+          "Attractive valuation with P/E of 8.04, suggesting significant discount to intrinsic value",
+          "Strong EPS growth of 22.8% indicates robust underlying business momentum",
+          "Active share buyback program (\u20ac106M recent tranche) signals management confidence and provides price support",
+          "Tencent-driven rebound adds upside optionality given Prosus's large Tencent stake",
+          "Low P/E relative to growth rate implies a compelling PEG ratio well below 1"
+        ],
+        "key_risks": [
+          "Heavy dependency on Tencent valuation creates concentrated geopolitical risk (China exposure)",
+          "Geopolitical headline risk around Iran de-escalation hopes suggests sentiment-driven volatility",
+          "Consumer Cyclical sector faces pressure in higher-for-longer rate environment (10Y at 4.31%)",
+          "Elevated VIX at 23.87 signals broader market uncertainty which could weigh on high-beta tech holdings",
+          "NAV discount persistence is a structural concern; buybacks alone may not close the gap"
+        ],
+        "macro_alignment": "neutral",
+        "analyst_note": "Prosus presents a compelling deep-value opportunity with a sub-9 P/E and strong earnings growth, underpinned by an ongoing buyback program that signals shareholder-friendly capital allocation. The core risk remains its Tencent exposure, which ties performance to China regulatory and geopolitical dynamics. With VIX near 24 and rates elevated, near-term volatility is likely, but the fundamental discount to NAV offers a meaningful margin of safety for patient investors.",
+        "recommended_action": "buy",
+        "analysed_at": "2026-04-03T18:51:48.023649+00:00"
+      }
+    },
+    {
+      "ticker": "SHELL.AS",
+      "name": "SHELL PLC",
+      "sector": "Energy",
+      "price": 40.605,
+      "dividend_yield": 3.19,
+      "pe_ratio": 15.68,
       "eps_growth_3yr": 100.0,
       "news": [
         {
@@ -219,147 +268,48 @@
           "date": "Recent"
         },
         {
-          "title": "Goldman Sachs cuts Akzo Nobel to \u201cneutral,\u201d slashes PT on input cost shock - Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPZDVpMTZEVk9yX25sbWQzTkxYMTNka3JQOHhxR0I3MzZjcU5ETHlZcmoxWTBqanMzSTE4cGhhakdFX1BiWUsxdDB0WTNsekstSDFPekhWVkdwY2VjbXJvOXNQQ3c4VjNDbzdIdjNLVEpCU2htTDRfZmEwSkdKRjNCMGhSa014amhNdFJWaXVtbXN1bkRPeXpnNkdFWmZxdFc0VDMxcXlLY0VuVVVIVTZ1TWtMeEVJV2l2WW1mT3pLTGRLdTU1NXNJ?oc=5",
+          "title": "Shell repurchases stock in London and Amsterdam under buyback plan - Stock Titan",
+          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBGdGcyNU5HbG9TeUM3Sm1tdlA3U2V4MktKb3E0QmZtWUJRY2dyZDM4eXdLVWhvN3N0LWtCSl9IUDBRZE9BUk55R1FWX0JVUlZLVzU3WEdxc053RlhYNlBwYVBCdFk3S3FGVk9HN0IxQURGYWt1VWtCX3N0cGVLUQ?oc=5",
           "date": "Recent"
         },
         {
-          "title": "AKZO NOBEL NV : Gets a Neutral rating from Barclays - MarketScreener",
-          "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPRW41LWp6RnItS3ZBSTlUamZOYjk5TXltN2xGWF9vdlZUcmNxNTZzMVZJUTdhdnY5UWpWU2E3eDVzQzhORF9mRGFoVVA1WXk5a0lyOXJ6alROeFREOG4xNDJ4UG0yazZXaGItSUh5UWNfWDdCVTFxOGw3YUNCeFpXdVVjeUh0Z2pRRHJpdjBhR3BaQUdtOFVEWElmRE1rMUtnVC1UZHlnOXRiMjR2aHNCdUhWUE1MR253Z18zeXJjbG5xODhna0d1eFlyUQ?oc=5",
+          "title": "Shell (SHEL) Stock Falls Amid Market Uptick: What Investors Need to Know - Yahoo Finance",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPR1phaUloMGdCb3NSM0E2Znl3TmlVVkU3YU5JYXJaazZjN1I1TzNDNFB0VXNLM3RfMVloUDZZZ2tzWFdUcGQwVDI3a1RpQ1I5eGRidFBSeFhUVjlYVG4ycTVKdUx1T1kyYnZJNG1sSkI0Q0hiZ25vckQwdUdwRXVQbS1Qend2bWtoNmhaUVVDQV9qZ3ZsNDBZ?oc=5",
           "date": "Recent"
         }
       ],
-      "score": 9.5,
-      "scanned_at": "2026-04-03T18:20:07.244563+00:00",
-      "tier2": {
-        "sentiment": "neutral",
-        "conviction": 4,
-        "key_positives": [
-          "Attractive dividend yield of 4.04% provides income support in uncertain market",
-          "Low P/E of 13.26 suggests modest valuation relative to earnings",
-          "EPS growth of 100% signals strong earnings recovery from a low base"
-        ],
-        "key_risks": [
-          "Goldman Sachs downgrade to neutral with price target cut signals input cost headwinds",
-          "Barclays also assigns neutral rating, indicating broad analyst caution",
-          "Input cost shock could compress margins and erode recent earnings gains",
-          "Elevated VIX at 23.87 reflects risk-off environment unfavorable for cyclical basic materials stocks",
-          "Higher 10Y yield at 4.31% increases discount rate pressure on dividend-paying equities"
-        ],
-        "macro_alignment": "headwind",
-        "analyst_note": "AKZO NOBEL trades at an undemanding valuation with a solid dividend yield and impressive EPS rebound, but converging analyst downgrades from Goldman Sachs and Barclays citing input cost shocks raise near-term margin concerns. The elevated VIX and sticky bond yields create a challenging macro backdrop for basic materials. The risk/reward is balanced but skewed to the downside in the short term pending clarity on cost pass-through ability.",
-        "recommended_action": "watch",
-        "analysed_at": "2026-04-03T18:21:14.428213+00:00"
-      }
-    },
-    {
-      "ticker": "NN.AS",
-      "name": "NN GROUP",
-      "sector": "Financial Services",
-      "price": 69.6,
-      "dividend_yield": 5.57,
-      "pe_ratio": 16.69,
-      "eps_growth_3yr": -14.8,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "All You Need to Know About NN Group (NNGRY) Rating Upgrade to Strong Buy - Yahoo Finance",
-          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5ZeWdBVDd1RzlYTzRISGdJRlNielBFUngwZ05FZ0J2d21kcjBINWdOM0JLS0FUZU9JTUllUmcyWWtHdWVNUEZ1Q3hMSURaejVtc2tPem95ZW51V0RFMnh0Y2xiaHhSdWU1dFhxQWxBZ3BWZ1dWSktRZU80b2w?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "NN Group shares rise on strong dividend and solvency ratio - Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOeENIODc0NGZ4dFpfRXlqVVB4OGUzWXNfSWZTQ3VFdlB6X0RvaGJtemdtd0F2ZmtuekxWd25qYmFvU1VYekRpcE9JYUdwT3NTMzc1bWFBZDIySTBDNHVpcTBxb0ZuaHFPOU54dlVUTW1MdERNQ1RBX2paN1dvajlaVDB6X1EtdkFidzgwZm9ZQkxlaDVpdUZFb2RwcE82Yy01RHN1QVhUTjNhSm1WT25oT1g3S1NWWFFRV3J6NQ?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 9.4,
-      "scanned_at": "2026-04-03T18:19:59.173105+00:00",
-      "tier2": {
-        "sentiment": "bullish",
-        "conviction": 7,
-        "key_positives": [
-          "Strong dividend yield of 5.57% attractive in current rate environment",
-          "Rating upgrade to Strong Buy signals growing analyst confidence",
-          "Strong solvency ratio supports financial stability and dividend sustainability",
-          "P/E of 16.69 represents reasonable valuation for a European insurer",
-          "Positive price momentum following dividend and solvency news"
-        ],
-        "key_risks": [
-          "EPS growth of -14.8% indicates near-term earnings deterioration",
-          "Elevated VIX at 23.87 signals broader market uncertainty affecting financials",
-          "10Y yield at 4.31% creates competition for dividend-seeking capital",
-          "European financial sector exposed to macroeconomic slowdown risks",
-          "Currency risk for non-EUR based investors in NNGRY ADR"
-        ],
-        "macro_alignment": "neutral",
-        "analyst_note": "NN Group presents a compelling income case with a 5.57% dividend yield backed by a strong solvency ratio, recently earning a Strong Buy upgrade. However, the negative EPS growth of -14.8% is a material concern suggesting underlying earnings pressure. The elevated VIX environment adds short-term volatility risk, while the 10Y yield at 4.31% mildly competes with the dividend appeal but does not negate it. The stock suits income-oriented investors willing to tolerate near-term earnings headwinds in exchange for yield and potential valuation rerating.",
-        "recommended_action": "watch",
-        "analysed_at": "2026-04-03T18:21:27.102897+00:00"
-      }
-    },
-    {
-      "ticker": "UNA.AS",
-      "name": "UNILEVER PLC",
-      "sector": "Consumer Defensive",
-      "price": 48.04,
-      "dividend_yield": 4.15,
-      "pe_ratio": 18.55,
-      "eps_growth_3yr": 15.0,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Unilever combines Unilever Foods with McCormick - Unilever",
-          "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQNXNXQk5OMlJ4cVJpTkM0U2RwTWxVTVZOWUN2bHpiOS1UZXF3NkZTZ1RFTkJTS2dNdnFDblFtR0M4dnZCaDcwcU4wUkpnZTA0dW56bGZWTDlSWGNNeDhtTlNSSTFlYzNfb2FKYWRZUkZBZ0Z2UDl3LTc5bE1xYUQzQ1VOUktVQW1OZWRDeF9HbVIybHFtM3hBdXZYaEJfaUlrdlNQT1pNQXplX25Pbk1fT2w5bjFoaDgwa2dMTDZMcnZaNlZkYV91MmRiSS1iR0U?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Eldred Rock Partners LLC Has $9.56 Million Stake in Unilever PLC $UL - marketbeat.com",
-          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOWWRKbHdFdkc2YXVSUU50ZWxlMk1yQW5GNnktek5oX3VjV0ttRVR6ODZvVjVKTndiU1dReEZNTVhTTjk5b1UyOGFvZzRMQWdzQzVxQlRvV1lvSndEYnYtQmk2M1hUYktidHdVVGRpdDZqVXhfOHFkRmV2Zzl3SkkzMHFnWXlWblkxV1R5NVpkdXdrOHI5bzE2Yzl1VTRfUHdYQmJvX3NxcnZrRUpua21HMnRHR0xTQlZSV0N3X3FTQm1BVFJF?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 9.0,
-      "scanned_at": "2026-04-03T18:19:55.120910+00:00",
+      "score": 9.1,
+      "scanned_at": "2026-04-03T18:50:46.432005+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 5,
         "key_positives": [
-          "Attractive dividend yield of 4.15% provides income support in a higher-rate environment",
-          "Solid EPS growth of 15.0% signals improving operational efficiency and margin recovery",
-          "Strategic portfolio reshaping via Foods division combination with McCormick could unlock value and streamline operations",
-          "Consumer Defensive sector provides relative stability during elevated market volatility (VIX 23.87)",
-          "Reasonable P/E of 18.55 is not excessively stretched for a global consumer staples leader"
+          "Active share buyback program signals management confidence and supports share price floor",
+          "Reasonable P/E of 15.68 suggests fair valuation relative to energy sector peers",
+          "Strong EPS growth of 100% YoY indicates significant earnings recovery or operational improvement",
+          "Dividend yield of 3.19% provides income buffer in uncertain market conditions"
         ],
         "key_risks": [
-          "10Y yield at 4.31% compresses relative attractiveness of the 4.15% dividend yield, reducing income appeal vs risk-free assets",
-          "McCormick-Foods combination introduces integration risk and potential near-term earnings disruption",
-          "Elevated VIX at 23.87 reflects broader market uncertainty which could pressure consumer spending and sentiment",
-          "Limited news flow and institutional activity suggest muted near-term catalyst pipeline",
-          "Currency headwinds remain a persistent risk for a globally exposed consumer staples company"
+          "Stock falling amid broader market uptick is a bearish divergence signal worth monitoring",
+          "Elevated VIX at 23.87 reflects market uncertainty, which typically pressures cyclical energy names",
+          "10Y yield at 4.31% increases opportunity cost versus dividend yield, reducing income appeal",
+          "Oil price volatility and energy transition pressures remain structural headwinds for integrated majors",
+          "EPS growth of 100% may reflect a low base effect rather than sustainable earnings trajectory"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "Unilever presents a classic defensive profile with improving fundamentals, but the macro backdrop is mildly unfavorable. The 10-year yield marginally exceeds the dividend yield, eroding the income premium that typically anchors consumer staples valuations. The McCormick Foods combination is strategically sensible but introduces execution risk. EPS growth of 15% is a genuine positive, suggesting the restructuring efforts under current management are bearing fruit. Best suited for long-term defensive allocators rather than near-term tactical positioning.",
+        "analyst_note": "Shell presents a mixed picture. The buyback program and strong EPS growth are positives, but the stock underperforming on an up-market day is a red flag suggesting sector-specific or company-level selling pressure. With VIX elevated and real yields competitive against the dividend, macro conditions are not particularly supportive. The valuation is fair but not compelling enough to justify aggressive entry given current uncertainty. A watchful stance is appropriate pending clearer oil price direction and macro stabilization.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T18:21:45.704302+00:00"
+        "analysed_at": "2026-04-03T18:51:59.803414+00:00"
       }
     },
     {
-      "ticker": "MT.AS",
-      "name": "ARCELORMITTAL SA",
-      "sector": "Basic Materials",
-      "price": 45.66,
-      "dividend_yield": 1.11,
-      "pe_ratio": 12.86,
-      "eps_growth_3yr": 15.0,
+      "ticker": "HEIA.AS",
+      "name": "HEINEKEN",
+      "sector": "Consumer Defensive",
+      "price": 67.64,
+      "dividend_yield": 2.81,
+      "pe_ratio": 20.01,
+      "eps_growth_3yr": 6.3,
       "news": [
         {
           "title": "Google News",
@@ -367,88 +317,39 @@
           "date": "Recent"
         },
         {
-          "title": "ArcelorMittal SA (MT) Stock Price Up 3.94% on Mar 31 - GuruFocus",
-          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQUF83dWZKS2R1RWUyd1NwUWh0RVpKRGRFQmo4eDB4NWc2c0Fjd2xtbW8xOWV4S3BMbVliNHgzMUpQNXoySW5NUUJWQURLT3FoRFluRnB3bWowNmVRNjJLUE9lbHBicHdfakp2Mm5GaDZ4elhERXc5RXp0eWFJamZ0RGkzcUJaVmVoRUY4X2R5cFRNTVZ0Vk8xc29FQVJ6ZDBY?oc=5",
+          "title": "Heineken has now repurchased 1.02 million shares in buyback plan - Stock Titan",
+          "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxORm9RbUFCMWlhT2c1ejhxRDkxZFppUGh1ME5kR1Q0bnZwUUMxOEl4ZE52OWZwbjhGVU5PdVF2Tk1OSi1HY294M25FR2xXTXVHdHNfMlFYM2ZTRUd4UTI2TFlYVmFLV0piVHMxdlB3Vzc1cEgyN2U2Y01DLU9oakVZeURzaEF2RDI2UXFLQXdORHJnc0czQlFxalFPa01DRExUUHRrN1JoSFJpNUxvcE8ySmtodElHeE1ER0RRTVo4YlE?oc=5",
           "date": "Recent"
         },
         {
-          "title": "ArcelorMittal Shares Drop 3.15% Amid Geopolitical Tensions - ideal-investisseur.fr",
-          "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPOW9UeWdiYmxEalR1VDBURmxDQ2VuQlAwUC1XZm5JanQ1TjQ3eDAzazA3ckxNODdnelNUdFlubmNYOTNxcDAxMHpfYTBDUk5sU2dWVTRYOGxudkNqU193N3N2QThnb014a3F0TGdWQ1FGV3dHZm1OUzl4M3pnYlk4N1BKc0g3dVZNX0pGcl80SUVPWkJKcmg4ZC1lelhmdFVWbV96cEJ6eENzUzB0ZjFQM1R2aE5RQQ?oc=5",
+          "title": "Heineken (ENXTAM:HEIA) Valuation Check After Recent Share Price Pullback - simplywall.st",
+          "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPNHBJZ1VwZXNIMWtXMjJfTzB0dTNrNFg2MlZ0LWxtaFlhb3diUzAyNjhPZU9sRnVQOGFITDBrSGxHakFxWlp0TnlwSmo1VktsZllvV0tKM2ZtUDgxVUxZbk5IMG55YXpxblZtcGZyMEFnVDF5NFNTeGpRVU43TFMtNDZCUXFHVXVIZnR0Q1B2Wk15NC0tYUFtUk9JS3ZBdmhHVkZ1bG9CVjR6QVo1RFJydzRzVDIwbkx2aFdpQjdlc1ZCbkZUT3dlc2xrNmgyVFZZbEFzcDR3cFdWSEww0gHiAUFVX3lxTFB5Q09BM2pqS3VIMG93d2g5Tk9hazViS0wzTDRpbUZjVEl3d05hSlR2ZlliSGtqdVpmZ184NzJSNTRJN3J1SVJWOFh1MmQ0QjdodnEtTmxSRlpLWWN5TUE3d204N0hQMVUwVVN4YWxVLVp5QzA4aTQ5Z29TM0NPQ1FkYWtkTGpUYUdsQ1lQZmNHTVNpZzV0M1B3a1Rzc0RaczVLN0NhUTVSWFZOS09OcDZvS25UTkhIZVE4dEpCTExUb05zVkx5a1BYcko2enhZRjBxZVhMMWFUWlZUZURXTEpneHc?oc=5",
           "date": "Recent"
         }
       ],
-      "score": 8.9,
-      "scanned_at": "2026-04-03T18:20:00.166652+00:00",
+      "score": 8.6,
+      "scanned_at": "2026-04-03T18:50:41.907846+00:00",
       "tier2": {
         "sentiment": "neutral",
-        "conviction": 4,
+        "conviction": 5,
         "key_positives": [
-          "Reasonable P/E of 12.86 suggests the stock is not overvalued relative to earnings",
-          "EPS growth of 15.0% indicates solid earnings momentum",
-          "Recent single-day price gain of 3.94% suggests some positive market interest",
-          "Dividend yield of 1.11% provides modest income support"
+          "Active share buyback program (1.02M shares repurchased) signals management confidence and supports EPS accretion",
+          "Defensive consumer staples positioning provides relative stability in elevated VIX environment (23.87)",
+          "Modest but positive EPS growth of 6.3% demonstrates operational resilience",
+          "Dividend yield of 2.81% offers income cushion for investors in uncertain markets",
+          "Recent share price pullback may present a valuation entry opportunity per SimplyWallSt analysis"
         ],
         "key_risks": [
-          "Geopolitical tensions directly weighing on share price with a recent 3.15% drop",
-          "Elevated VIX at 23.87 signals broad market uncertainty, unfavorable for cyclical basic materials stocks",
-          "Steel sector highly sensitive to global trade policies, tariffs, and demand slowdowns",
-          "Rising 10Y yield at 4.31% increases cost of capital and pressures capital-intensive industrials",
-          "Mixed recent price action reflects lack of clear directional momentum"
+          "P/E of 20.01 is not cheap for a slow-growth consumer defensive, leaving limited margin of safety",
+          "10Y yield at 4.31% compresses the attractiveness of a 2.81% dividend yield relative to risk-free alternatives",
+          "Exposure to emerging markets (Africa, Asia) introduces FX headwinds and geopolitical risk",
+          "Rising input costs (barley, aluminum, energy) could pressure margins in 2024-2025",
+          "Elevated macro uncertainty (VIX ~24) may dampen consumer discretionary spending on premium beer"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "ArcelorMittal presents a mixed picture. While its valuation is modest and EPS growth is encouraging, the macro environment poses significant headwinds. Elevated volatility (VIX ~24), geopolitical tensions impacting steel demand and trade flows, and high bond yields are all negative for a cyclical, capital-heavy steel producer. The stock's recent volatility \u2014 up 3.94% one day, down 3.15% another \u2014 reflects uncertainty. Investors should wait for macro clarity before committing.",
+        "analyst_note": "Heineken presents a mixed picture. The buyback program and defensive sector positioning are supportive, but the 4.31% risk-free rate makes the 2.81% dividend yield unattractive on a relative basis. At P/E 20x with only 6.3% EPS growth, the valuation demands near-perfect execution. The recent pullback warrants monitoring, but macro headwinds from high rates and a strong USD create pressure on international earnings. Initiating a watch stance pending a more attractive entry point or improved macro clarity.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T18:21:56.609347+00:00"
-      }
-    },
-    {
-      "ticker": "JDEP.AS",
-      "name": "JDE PEET'S",
-      "sector": "Consumer Defensive",
-      "price": 31.8,
-      "dividend_yield": 2.26,
-      "pe_ratio": 19.75,
-      "eps_growth_3yr": 89.4,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Keurig Dr Pepper Declares Offer for JDE Peet's Unconditional - PR Newswire",
-          "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxObDV5VmhGOFkxLXl2UzVXZXQ0ZlBLQjRlb1g0QzVlVHlLVlh6TmszSk9iVWtScUhkUWR6c3VGVzZJMlBHMHhxYldIdGdEMHU4Tk1uUnZBSldjbGpybFNabkJCWDZaVGN2X05vM21fUnpaYXVuOU4tN09jQkdkMFNZVHVtMklmLXAwUTBPU09LU01oVDZWaXBLYjlqbWRxY0ZnWFlmay1MSUkwZk5YUVlUV1k1cHJOZw?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "JDE Peet\u2019s transfers shares to participants under its employee incentive plans - Yahoo Finance UK",
-          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQdUh0cENvc3FHdUNuUTFCYy1FYnVPUEVXc3F0bER6R0FkTVJUVjNFa1JkY1dUTldMNzN5RXFVVGdXR2NYU0ZNdWtib0RyNDhlYlphTkFUWV9jUDBaUWVHcGhtYUNCQmdrN19VOGxFZlQ4NW5yNFltdk10VHAzeHZ4Y0M3NW1EczhLOFdYckRHTEw?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 8.5,
-      "scanned_at": "2026-04-03T18:20:02.928642+00:00",
-      "tier2": {
-        "sentiment": "bullish",
-        "conviction": 8,
-        "key_positives": [
-          "Keurig Dr Pepper acquisition offer declared unconditional, providing strong price support and exit liquidity for shareholders",
-          "Exceptional EPS growth of 89.4% signals strong underlying earnings momentum",
-          "Consumer Defensive sector provides stability in volatile macro environment (VIX 23.87)",
-          "Dividend yield of 2.26% offers income support while deal closes",
-          "P/E of 19.75 is reasonable for a defensive consumer staples company with this growth profile"
-        ],
-        "key_risks": [
-          "Acquisition deal risk: regulatory hurdles or deal collapse could sharply reprice the stock downward",
-          "Post-acquisition upside limited as KDP offer likely caps near-term price appreciation",
-          "Elevated 10Y yield at 4.31% increases discount rate pressure on consumer staples valuations",
-          "Integration uncertainty post-takeover may affect operational continuity",
-          "Limited organic growth catalysts once deal arbitrage is the primary price driver"
-        ],
-        "macro_alignment": "neutral",
-        "analyst_note": "JDE Peet's is currently a M&A-driven trade following Keurig Dr Pepper's unconditional offer, which significantly de-risks the downside. The stock's strong EPS growth and defensive sector positioning are positives, but near-term price action will be dominated by deal arbitrage dynamics rather than fundamentals. Elevated VIX and bond yields create mild headwinds for the broader sector, but the KDP offer provides a floor. Suitable for risk-tolerant investors seeking deal-arb exposure with defensive characteristics.",
-        "recommended_action": "buy",
-        "analysed_at": "2026-04-03T18:22:09.667456+00:00"
+        "analysed_at": "2026-04-03T18:52:12.864172+00:00"
       }
     },
     {
@@ -477,28 +378,126 @@
         }
       ],
       "score": 8.5,
-      "scanned_at": "2026-04-03T18:20:03.772655+00:00",
+      "scanned_at": "2026-04-03T18:50:43.688427+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 5,
         "key_positives": [
-          "\u20ac500 million share buyback program signals management confidence and supports shareholder value",
-          "Dividend yield of 3.04% provides income support in a higher-rate environment",
-          "Valuation has become more attractive with a P/E of ~20.61, reasonable for a dominant music IP owner",
-          "Fundamentals reportedly improving per recent analyst coverage, suggesting operational momentum",
-          "UMG holds a near-oligopolistic position in global recorded music and music publishing"
+          "\u20ac500M share buyback program signals management confidence and provides price floor support",
+          "Seeking Alpha analysis suggests valuation has become more attractive while fundamentals have improved",
+          "3.04% dividend yield offers income support in a higher-rate environment",
+          "UMG benefits from structural tailwinds in streaming royalties and music IP monetization",
+          "P/E of 20.61 appears reasonable for a dominant music rights business with pricing power"
         ],
         "key_risks": [
-          "EPS growth of -91.4% is deeply alarming and signals significant near-term earnings deterioration",
-          "Elevated VIX at 23.87 reflects broader market uncertainty, weighing on non-defensive equities",
-          "10Y yield at 4.31% creates competition for capital against dividend-yielding stocks",
-          "Streaming platform royalty rate disputes and AI content licensing uncertainties pose structural risks",
-          "European listing (Amsterdam) exposed to EUR/USD currency risk and EU regulatory headwinds"
+          "EPS growth of -91.4% is a major red flag indicating significant earnings deterioration",
+          "Elevated VIX at 23.87 signals broader market uncertainty, weighing on discretionary/media names",
+          "10Y yield at 4.31% increases discount rate pressure on growth-oriented media valuations",
+          "Artist contract renegotiations and royalty disputes could compress margins further",
+          "Competitive pressure from AI-generated music and platform fee disputes with streaming services"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "UMG presents a mixed picture: the \u20ac500M buyback and improving fundamentals narrative are constructive, but the dramatic EPS contraction of -91.4% is a serious red flag that warrants scrutiny before commitment. The macro backdrop of elevated rates and elevated volatility (VIX ~24) adds pressure on valuation multiples for growth-dependent names. The stock may be bottoming out as a long-term compounder, but near-term catalysts are uncertain. Suitable for patient investors willing to wait for earnings normalization.",
+        "analyst_note": "UMG presents a mixed picture. The buyback program and improving fundamentals per recent analysis are constructive signals, but the severe EPS contraction of -91.4% raises serious near-term concerns. Elevated VIX and high bond yields create a challenging macro backdrop for media/entertainment valuations. The stock appears range-bound until earnings trajectory clearly reverses. Best suited for patient investors with a 12-18 month horizon.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T18:22:23.224886+00:00"
+        "analysed_at": "2026-04-03T18:52:25.990629+00:00"
+      }
+    },
+    {
+      "ticker": "JDEP.AS",
+      "name": "JDE PEET'S",
+      "sector": "Consumer Defensive",
+      "price": 31.8,
+      "dividend_yield": 2.26,
+      "pe_ratio": 19.75,
+      "eps_growth_3yr": 89.4,
+      "news": [
+        {
+          "title": "Google News",
+          "link": "https://news.google.com/",
+          "date": "Recent"
+        },
+        {
+          "title": "Keurig Dr Pepper Declares Offer for JDE Peet's Unconditional - PR Newswire",
+          "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxObDV5VmhGOFkxLXl2UzVXZXQ0ZlBLQjRlb1g0QzVlVHlLVlh6TmszSk9iVWtScUhkUWR6c3VGVzZJMlBHMHhxYldIdGdEMHU4Tk1uUnZBSldjbGpybFNabkJCWDZaVGN2X05vM21fUnpaYXVuOU4tN09jQkdkMFNZVHVtMklmLXAwUTBPU09LU01oVDZWaXBLYjlqbWRxY0ZnWFlmay1MSUkwZk5YUVlUV1k1cHJOZw?oc=5",
+          "date": "Recent"
+        },
+        {
+          "title": "JDE Peet\u2019s transfers shares to participants under its employee incentive plans - Yahoo Finance UK",
+          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQdUh0cENvc3FHdUNuUTFCYy1FYnVPUEVXc3F0bER6R0FkTVJUVjNFa1JkY1dUTldMNzN5RXFVVGdXR2NYU0ZNdWtib0RyNDhlYlphTkFUWV9jUDBaUWVHcGhtYUNCQmdrN19VOGxFZlQ4NW5yNFltdk10VHAzeHZ4Y0M3NW1EczhLOFdYckRHTEw?oc=5",
+          "date": "Recent"
+        }
+      ],
+      "score": 8.5,
+      "scanned_at": "2026-04-03T18:50:47.897789+00:00",
+      "tier2": {
+        "sentiment": "bullish",
+        "conviction": 8,
+        "key_positives": [
+          "Keurig Dr Pepper acquisition offer declared unconditional, providing strong near-term price support and takeout premium",
+          "Exceptional EPS growth of 89.4% signals significant earnings acceleration and operational improvement",
+          "Consumer Defensive sector provides resilience in elevated VIX environment (23.87)",
+          "Reasonable P/E of 19.75 relative to growth profile suggests attractive valuation, especially with M&A catalyst",
+          "Dividend yield of 2.26% offers income support while deal closes"
+        ],
+        "key_risks": [
+          "Deal completion risk: regulatory hurdles or financing conditions could delay or derail the KDP acquisition",
+          "Post-acquisition integration uncertainty may create volatility if deal terms are renegotiated",
+          "Elevated 10Y yield at 4.31% increases cost of capital for acquirer and may pressure deal economics",
+          "Limited upside beyond deal price once offer is declared unconditional, capping further appreciation",
+          "Employee share transfers under incentive plans may create minor dilution or selling pressure"
+        ],
+        "macro_alignment": "neutral",
+        "analyst_note": "JDEP.AS is a compelling near-term opportunity driven primarily by the KDP acquisition offer being declared unconditional, effectively de-risking the deal. The extraordinary EPS growth of 89.4% and defensive sector positioning add fundamental support. However, upside is likely capped near the offer price, making this more of an arbitrage play than a growth investment. Elevated VIX and bond yields are manageable headwinds given the defensive nature of the business. Investors should assess the spread between current price and offer price to determine risk-adjusted attractiveness.",
+        "recommended_action": "buy",
+        "analysed_at": "2026-04-03T18:52:38.536344+00:00"
+      }
+    },
+    {
+      "ticker": "ASRNL.AS",
+      "name": "ASR NEDERLAND",
+      "sector": "Financial Services",
+      "price": 60.92,
+      "dividend_yield": 5.6,
+      "pe_ratio": 28.2,
+      "eps_growth_3yr": -59.3,
+      "news": [
+        {
+          "title": "Google News",
+          "link": "https://news.google.com/",
+          "date": "Recent"
+        },
+        {
+          "title": "WBO:ASRN PB Ratio: 1.37 \u2014 49% Above Median - GuruFocus",
+          "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOZHRqTEdlNmdoTzRRMXJVYXZTdnBMRXRvUzBVX2phTmhmVEtLTjdOc3hQUTZoUjlLZmJFbUVlMjBfN0hwX0NXZHpWa2VXbEtLWmlGeVQybElDQ0w5YkFhdEozNU1Ha3JSa2RUeThGeVNMYjY4bzlHWmpzYkx2NXpMa3l0M1Q2T1ZSNFFuMnEzRnFkRWFHUEU4UW5TSE5LbmtQQ21GSFJ2RHBmS1ZseTMzQmZ6dEo4VHR3UnhMVURDTjY?oc=5",
+          "date": "Recent"
+        },
+        {
+          "title": "ASR financials added in Aegon (NYSE: AEG) amended 2025 annual report - Stock Titan",
+          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQeGpjbnFIdGZrMmJWUmpZeGU0VU5hZ0lhRkZ3WTMzRzM0SW1ldGVhSXZPN2JVM2JjTHotNTBpMFFRR190eDhZZzRBY3dHS252ZU5rZUcwNC1uUzYxNW04a2RTaXdBVnpESm0zbk92eTU4NDM5VzlZZ0wzQ0pCVXV5djdkMjVqelAxU1NSTGlIVy0wd212a1I4UzJVallPUjZ3eTA2anNub2xVaHd4S1k4YlU1Yw?oc=5",
+          "date": "Recent"
+        }
+      ],
+      "score": 8.3,
+      "scanned_at": "2026-04-03T18:50:41.089118+00:00",
+      "tier2": {
+        "sentiment": "neutral",
+        "conviction": 4,
+        "key_positives": [
+          "Attractive dividend yield of 5.6% provides income support in a higher-rate environment",
+          "Dutch insurance sector benefits from stable regulatory framework and pricing power",
+          "Integration with Aegon financial reporting suggests ongoing strategic relevance in European insurance consolidation"
+        ],
+        "key_risks": [
+          "EPS growth of -59.3% is deeply alarming and signals significant earnings deterioration",
+          "P/E of 28.2 is elevated for a financial services company with collapsing earnings, suggesting overvaluation",
+          "P/B ratio of 1.37 is 49% above median, limiting margin of safety for value investors",
+          "Elevated VIX at 23.87 indicates market stress which could pressure insurance investment portfolios",
+          "10Y yield at 4.31% increases discount rate pressure on long-duration insurance liabilities"
+        ],
+        "macro_alignment": "headwind",
+        "analyst_note": "ASR Nederland presents a mixed picture dominated by a severe EPS contraction of nearly 60%, which fundamentally undermines the investment case despite an attractive 5.6% dividend yield. The elevated P/E of 28.2 alongside collapsing earnings raises sustainability concerns for the dividend. The P/B premium over median suggests limited value cushion. Macro conditions with elevated VIX and sticky 10Y yields create additional headwinds for European insurers. Until earnings stabilization is evident, caution is warranted.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T18:52:50.164837+00:00"
       }
     }
   ]
