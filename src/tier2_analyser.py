@@ -1,5 +1,5 @@
 """
-NEXUS MARKET TERMINAL - Tier 2 Analyser (V2.1 - Sentiment & Telegram Fix)
+NEXUS MARKET TERMINAL - Tier 2 Analyser (V2.2 - Price Targets & Telegram)
 """
 
 import json
@@ -61,16 +61,23 @@ def save_json(path: Path, data: dict) -> None:
 
 def build_system_prompt() -> str:
     return dedent("""
-        ... (bestaande regels) ...
+        You are a senior equity analyst for the NEXUS Market Terminal.
+        Assess the stock based on fundamentals and news provided.
+        
+        STRICT RULES:
+        1. Respond ONLY with a valid JSON object.
         2. Format: {
-            "analysis": "text", 
+            "analysis": "concise note", 
             "conviction_score": 1-10, 
             "sentiment_score": 1-10,
             "recommended_action": "buy/hold/sell",
-            "target_price": "verwachte prijs over 30 dagen",
-            "upside_percentage": "verwacht rendement in %"
+            "target_price": "estimated price in 30 days",
+            "upside_percentage": "expected return in %"
         }
-        7. Be conservative with price targets. Base them on the volatility and news provided.
+        3. 'sentiment_score' must reflect the tone of news (1=bearish, 10=bullish).
+        4. Be conservative with 'target_price' based on provided volatility.
+        5. Do NOT use markdown code blocks.
+        6. Do NOT include any introductory or concluding text.
     """).strip()
 
 def build_user_prompt(candidate: dict, macro: dict) -> str:
@@ -93,12 +100,11 @@ def build_user_prompt(candidate: dict, macro: dict) -> str:
         Recent News:
         {news_block}
         
-        Analyze the news sentiment vs the fundamentals and provide your JSON response.
+        Analyze news sentiment vs fundamentals and provide the JSON response.
     """).strip()
 
 def extract_json(text: str) -> dict | None:
     try:
-        # Zoek naar alles tussen { }
         match = re.search(r'(\{.*\})', text, re.DOTALL)
         if match:
             return json.loads(match.group(1))
@@ -147,25 +153,28 @@ def run_analysis() -> None:
             analysis = extract_json(raw_text)
 
             if analysis:
-                # Opslaan in data.json
                 candidate["tier2"] = {**analysis, "analysed_at": datetime.now(timezone.utc).isoformat()}
                 
                 # ── Telegram Notificatie Logica ────────────────────────────────
                 action = analysis.get("recommended_action", "").lower()
                 conviction = analysis.get("conviction_score", 0)
                 sentiment = analysis.get("sentiment_score", 0)
+                target = analysis.get("target_price", "N/A")
+                upside = analysis.get("upside_percentage", "0")
                 
-                # Alleen berichten sturen bij sterke signalen
                 if action == "buy" and conviction >= 7:
                     msg = dedent(f"""
                         🚀 <b>NEXUS BUY SIGNAL: {ticker}</b>
                         
-                        <b>Conviction:</b> {conviction}/10
-                        <b>Sentiment:</b> {sentiment}/10
+                        🎯 <b>Target (30d):</b> €{target}
+                        📈 <b>Potentieel:</b> +{upside}%
                         
-                        <b>Analysis:</b> {analysis.get('analysis')}
+                        📊 <b>Conviction:</b> {conviction}/10
+                        🎭 <b>Sentiment:</b> {sentiment}/10
                         
-                        <i>Checked at: {datetime.now().strftime('%H:%M:%S')}</i>
+                        <b>Analyse:</b> {analysis.get('analysis')}
+                        
+                        <i>Gegenereerd om: {datetime.now().strftime('%H:%M:%S')}</i>
                     """).strip()
                     send_telegram_msg(msg)
                 # ──────────────────────────────────────────────────────────────
@@ -177,7 +186,6 @@ def run_analysis() -> None:
             log.error("Claude call failed for %s: %s", ticker, exc)
             candidate["tier2"] = {"error": "api_call_failed"}
         
-        # Voorkom Rate Limits
         time.sleep(SLEEP_BETWEEN_CALLS)
 
     save_json(DATA_PATH, data)
