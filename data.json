@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T17:46:30.664345+00:00",
+  "generated_at": "2026-04-03T17:51:07.282172+00:00",
   "macro": {
     "vix": 23.87,
     "treasury_10y": 4.31,
@@ -16,27 +16,27 @@
       "eps_growth_3yr": 100.0,
       "news": [],
       "score": 9.9,
-      "scanned_at": "2026-04-03T17:46:25.762864+00:00",
+      "scanned_at": "2026-04-03T17:51:04.343150+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 5,
         "key_positives": [
-          "Strong dividend yield of 4.73% offers attractive income in a high-rate environment",
-          "Low trailing P/E of 10.82 suggests potential undervaluation relative to earnings power",
-          "Exceptional 3-year EPS CAGR of 100% reflects robust earnings recovery and operational leverage",
-          "Tier 1 fundamental score of 9.9 indicates strong balance sheet and dividend sustainability metrics"
+          "Strong dividend yield of 4.73% provides income support and signals management confidence in cash flow generation",
+          "Low trailing P/E of 10.82 suggests valuation remains compressed relative to earnings power, offering margin of safety",
+          "Exceptional 3yr EPS CAGR of 100% (note: likely reflects post-COVID base effect recovery, but still indicative of earnings normalization strength)",
+          "ING is a well-capitalized pan-European universal bank with diversified retail and wholesale banking operations"
         ],
         "key_risks": [
-          "News feed is entirely absent (all timestamps epoch zero) \u2014 zero visibility into recent catalysts, regulatory actions, or earnings guidance; confidence heavily penalized",
-          "VIX at 23.87 signals elevated market anxiety, historically a headwind for European financials with broad risk-off sentiment",
-          "10Y Treasury at 4.31% increases USD funding costs and compresses relative yield attractiveness for EUR-denominated bank stocks for US investors",
-          "100% EPS CAGR likely reflects recovery from a depressed base \u2014 sustainability of this growth rate is questionable and warrants scrutiny",
-          "European banking sector faces structural headwinds: ECB rate trajectory uncertainty, sluggish Eurozone growth, and geopolitical exposure (Russia/Ukraine residual)"
+          "News feed is entirely absent (all entries dated 1970-01-01) \u2014 zero qualitative signal available; confidence is materially reduced",
+          "VIX at 23.87 signals elevated market anxiety, which historically pressures European financial stocks disproportionately",
+          "10Y Treasury at 4.31% keeps USD funding costs elevated; EUR/USD rate dynamics and ECB policy trajectory add uncertainty for a eurozone-domiciled bank",
+          "EPS CAGR of 100% almost certainly reflects a low base from prior write-downs or provisioning \u2014 sustainability of this growth rate is highly questionable",
+          "European banking sector faces structural headwinds: slowing loan growth, potential rate cuts compressing NIM, and sovereign credit risk exposure"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "ING Groep presents a fundamentally compelling profile \u2014 cheap valuation, strong yield, and impressive earnings recovery \u2014 but the complete absence of usable news data severely limits qualitative assessment and forces a confidence discount. The macro backdrop (elevated VIX, sticky US yields, neutral S&P RSI) is modestly unfavorable for European bank equities, particularly for USD-based investors facing currency and risk-off headwinds. Recommend moving to 'watch' status pending fresh news flow and confirmation that EPS growth is sustainable rather than base-effect driven.",
+        "analyst_note": "INGA.AS screens well on pure fundamentals \u2014 cheap valuation, solid yield, and strong reported EPS trajectory \u2014 but the qualitative layer is effectively blind due to a completely broken news feed (all timestamps at Unix epoch 0). With VIX near 24 and macro uncertainty elevated, European banks are a risk-on trade that requires clear narrative support. Without any news signal, conviction cannot be raised above moderate despite the strong Tier 1 score.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T17:46:43.699698+00:00"
+        "analysed_at": "2026-04-03T17:51:19.338615+00:00"
       }
     },
     {
@@ -49,25 +49,27 @@
       "eps_growth_3yr": 100.0,
       "news": [],
       "score": 9.5,
-      "scanned_at": "2026-04-03T17:46:26.440705+00:00",
+      "scanned_at": "2026-04-03T17:51:06.469176+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 4,
         "key_positives": [
-          "Strong dividend yield of 4.04% provides income cushion in uncertain markets",
-          "Low trailing P/E of 13.26 suggests modest valuation relative to earnings",
-          "Exceptional reported 3yr EPS CAGR of 100% passed Tier 1 screening \u2014 indicates meaningful earnings recovery or restructuring success"
+          "Strong dividend yield of 4.04% provides income support and suggests valuation discipline",
+          "Low trailing P/E of 13.26 implies potential undervaluation relative to earnings power",
+          "Exceptional 3yr EPS CAGR of 100% (likely reflects recovery from trough) signals operational turnaround momentum",
+          "Tier 1 fundamental score of 9.5 indicates robust screening across dividend, valuation, and growth metrics"
         ],
         "key_risks": [
-          "All news items are undated (epoch timestamp 1970-01-01) \u2014 zero usable news signal; qualitative assessment is severely compromised",
-          "Basic Materials sector is cyclically sensitive; slowing European/global growth poses demand headwinds for paints and coatings",
-          "100% EPS CAGR likely reflects base-effect recovery rather than structural acceleration \u2014 sustainability is unverified without current data",
-          "AkzoNobel has significant European exposure; EUR-denominated revenues face FX and macro pressure amid ECB policy uncertainty"
+          "News feed is entirely empty (all entries dated 1970-01-01), making qualitative sentiment assessment impossible \u2014 confidence severely impaired",
+          "Basic Materials sector is cyclically sensitive; VIX at 23.87 signals elevated market anxiety, historically pressuring industrial/materials names",
+          "10Y Treasury at 4.31% raises hurdle rate and compresses valuation multiples for yield-oriented equities like AKZO",
+          "100% EPS CAGR likely reflects a low-base recovery effect rather than structural growth \u2014 sustainability is unverified without news context",
+          "EUR-denominated Amsterdam listing (AKZA.AS) introduces FX risk for non-EUR investors, compounded by macro uncertainty"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "AKZO Nobel presents a superficially attractive fundamental profile \u2014 low P/E, solid yield, strong EPS recovery \u2014 but the qualitative layer is effectively blind due to completely absent news data. Macro context is unfavorable: VIX at 23.87 signals elevated risk aversion, 10Y yields at 4.31% compress the relative appeal of a 4% dividend yield, and an S&P RSI of 47.3 reflects weak market momentum. Without verifiable recent news or sentiment data, conviction cannot be extended beyond baseline fundamentals alone.",
+        "analyst_note": "AKZO Nobel passes fundamental screens convincingly, but the complete absence of usable news data eliminates any qualitative edge and forces a confidence reduction. Macro context is net negative: elevated VIX, sticky yields above 4.3%, and a neutral-to-weak S&P RSI (47.3) collectively pressure cyclical materials names. The stock warrants monitoring once news flow is restored and macro conditions stabilize \u2014 particularly watching European construction/renovation demand as a primary revenue driver.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T17:46:54.836531+00:00"
+        "analysed_at": "2026-04-03T17:51:31.628453+00:00"
       }
     },
     {
@@ -80,26 +82,9 @@
       "eps_growth_3yr": 100.0,
       "news": [],
       "score": 9.1,
-      "scanned_at": "2026-04-03T17:46:27.376609+00:00",
+      "scanned_at": "2026-04-03T17:51:02.752613+00:00",
       "tier2": {
-        "sentiment": "neutral",
-        "conviction": 4,
-        "key_positives": [
-          "Strong Tier 1 fundamental score of 9.1 \u2014 dividend yield of 3.19% and trailing P/E of 15.68 suggest reasonable valuation for an integrated major",
-          "EPS CAGR of 100% over 3 years reflects sharp post-pandemic earnings recovery and energy price tailwinds",
-          "Shell's diversified LNG, upstream, and transition energy portfolio provides revenue resilience relative to pure-play E&Ps"
-        ],
-        "key_risks": [
-          "News feed is entirely empty (all timestamps epoch 0) \u2014 zero qualitative news signal available, forcing heavy confidence reduction per protocol",
-          "VIX at 23.87 signals elevated market anxiety; energy equities historically see amplified volatility in risk-off regimes",
-          "10Y Treasury at 4.31% creates opportunity cost headwind for dividend-yield plays; 3.19% yield is not compelling vs. risk-free rate",
-          "S&P 500 RSI at 47.3 suggests mild bearish momentum \u2014 not yet oversold enough to signal clear contrarian entry",
-          "Energy sector faces structural headwinds: ESG capital constraints, energy transition policy risk (EU carbon pricing), and oil price sensitivity to slowing global demand"
-        ],
-        "macro_alignment": "headwind",
-        "analyst_note": "Shell's fundamentals are genuinely strong \u2014 the Tier 1 score reflects real earnings power and a credible capital return program. However, the complete absence of usable news data eliminates any qualitative edge and mandates a significant confidence haircut. The macro setup is unfavorable: risk-free yields compress the dividend appeal, VIX elevation suggests near-term volatility risk, and energy sector sentiment is fragile amid demand uncertainty. Hold for watchlist pending news confirmation.",
-        "recommended_action": "watch",
-        "analysed_at": "2026-04-03T17:47:06.073769+00:00"
+        "error": "analysis_failed"
       }
     },
     {
@@ -112,9 +97,27 @@
       "eps_growth_3yr": 15.0,
       "news": [],
       "score": 9.0,
-      "scanned_at": "2026-04-03T17:46:30.563767+00:00",
+      "scanned_at": "2026-04-03T17:51:03.683109+00:00",
       "tier2": {
-        "error": "analysis_failed"
+        "sentiment": "neutral",
+        "conviction": 5,
+        "key_positives": [
+          "Strong Tier 1 fundamentals: 4.15% dividend yield provides income cushion above typical defensive sector peers",
+          "Impressive 15.0% EPS CAGR over 3 years signals operational improvement and pricing power recovery",
+          "Trailing P/E of 18.55 appears reasonable for a Consumer Defensive compounder with this earnings trajectory",
+          "Consumer Defensive sector offers relative resilience during elevated VIX / risk-off environments"
+        ],
+        "key_risks": [
+          "All 8 news items are datestamped 1970-01-01 (epoch zero) \u2014 news feed is entirely non-functional; qualitative picture is completely blind",
+          "No recent sentiment data, no catalyst visibility, no event risk assessment possible due to news failure",
+          "10Y Treasury at 4.31% compresses the attractiveness of a 4.15% dividend yield \u2014 negative real yield spread vs. risk-free rate",
+          "VIX at 23.87 indicates elevated market anxiety; while defensives benefit relatively, broad de-risking can pressure even staples names",
+          "EUR/USD and European macro exposure (Amsterdam listing) adds FX and geopolitical risk not captured in fundamentals screen"
+        ],
+        "macro_alignment": "headwind",
+        "analyst_note": "Unilever's fundamental profile is genuinely attractive \u2014 a 15% EPS CAGR with a near-4% yield at a sub-19x P/E is a credible defensive compounder. However, the dividend yield is now marginally below the 10Y Treasury, eliminating the traditional yield premium that anchors defensive valuations, and the news feed has completely failed (epoch timestamps), leaving zero visibility into recent catalysts, management guidance, or narrative risks. Conviction is held to 5 pending restoration of news data and confirmation that the yield gap headwind is priced in.",
+        "recommended_action": "watch",
+        "analysed_at": "2026-04-03T17:51:57.874277+00:00"
       }
     },
     {
@@ -127,27 +130,27 @@
       "eps_growth_3yr": 6.3,
       "news": [],
       "score": 8.6,
-      "scanned_at": "2026-04-03T17:46:28.799729+00:00",
+      "scanned_at": "2026-04-03T17:51:04.950046+00:00",
       "tier2": {
         "sentiment": "neutral",
         "conviction": 4,
         "key_positives": [
-          "Strong Tier 1 fundamentals: 8.6 score with 2.81% dividend yield and 6.3% EPS CAGR \u2014 solid for a Consumer Defensive name",
-          "Heineken's global brand portfolio and geographic diversification (Africa, Asia, Europe) provides revenue resilience",
-          "P/E of 20.01 is reasonable for a defensive compounder with consistent earnings growth",
-          "Consumer Defensive sector typically holds up in risk-off environments signaled by elevated VIX"
+          "Strong Tier 1 fundamentals score (8.6) with solid EPS CAGR of 6.3% over 3 years",
+          "Consumer Defensive sector provides relative resilience during market volatility",
+          "Dividend yield of 2.81% offers modest income support in a high-rate environment",
+          "Heineken is a globally diversified brewer with pricing power and emerging market exposure"
         ],
         "key_risks": [
-          "News feed is entirely empty (all timestamps epoch 0) \u2014 zero qualitative signal available; confidence severely impaired",
-          "VIX at 23.87 indicates elevated market anxiety; while defensive, HEIA.AS is EUR-denominated adding FX drag for USD-based investors",
-          "10Y Treasury at 4.31% creates yield competition \u2014 a 2.81% dividend yield offers negative real premium vs risk-free rate",
-          "Macro headwinds: European consumer spending under pressure from persistent inflation and ECB policy tightening cycle",
-          "Beer volume softness in key markets (China recovery sluggish, European on-trade weakness) is a known sector headwind"
+          "All news items are undated (epoch 0) \u2014 no usable news signal; qualitative assessment is severely data-limited",
+          "VIX at 23.87 indicates elevated market anxiety, typically a headwind for European mid-cap consumer names",
+          "10Y Treasury at 4.31% compresses the relative attractiveness of a 2.81% dividend yield",
+          "EUR/USD currency risk for USD-denominated investors; Amsterdam-listed stock subject to European macro pressures (energy costs, consumer spending weakness)",
+          "P/E of 20x is not cheap for a slow-growth beverage company in a risk-off environment"
         ],
         "macro_alignment": "headwind",
-        "analyst_note": "HEIA.AS passes fundamental screens cleanly but the qualitative assessment is critically hampered by a complete absence of usable news data \u2014 all eight feed entries are null/epoch-dated, making sentiment analysis impossible. Macro context is unfavorable: the risk-free rate (4.31%) exceeds the dividend yield (2.81%), removing the income premium argument, while VIX at 23.87 and a neutral S&P RSI suggest risk-off conditions that could pressure European consumer names. Recommend moving to 'watch' pending valid news feed data and confirmation of Q-series volume trends.",
+        "analyst_note": "HEIA.AS passes fundamental screening with a credible earnings growth profile and defensive sector positioning, but the qualitative layer is effectively blind \u2014 all 8 news items are null/undated, forcing a confidence penalty. Macro context is unfavorable: elevated VIX, a 4.31% risk-free rate that undercuts the dividend case, and an S&P RSI near 47 suggesting indecisive market momentum. Without actionable news flow or sentiment data, initiating a position here carries unquantified narrative risk; a watch stance is warranted until news clarity improves.",
         "recommended_action": "watch",
-        "analysed_at": "2026-04-03T17:47:34.162461+00:00"
+        "analysed_at": "2026-04-03T17:52:10.302607+00:00"
       }
     }
   ]
