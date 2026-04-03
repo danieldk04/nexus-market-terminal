@@ -24,7 +24,7 @@ def fetch_news(query: str) -> list:
         url = f"https://news.google.com/rss/search?q={encoded_query}&hl=nl&gl=NL&ceid=NL:nl"
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
-        soup = BeautifulSoup(response.content, 'xml')
+        soup = BeautifulSoup(response.content, 'html.parser')
         
         items = soup.find_all('item')
         for item in items[:3]: # Pak de top 3

@@ -1,17 +1,17 @@
 """
-NEXUS MARKET TERMINAL - Tier 2 Analyser
+NEXUS MARKET TERMINAL - Tier 2 Analyser (V2 Robust Version)
 """
 
 import json
 import logging
 import os
 import time
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from textwrap import dedent
 
 import anthropic
-import yfinance as yf
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -27,10 +27,8 @@ DATA_PATH = ROOT / "data.json"
 MEMORY_PATH = ROOT / "memory.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
-# GEBRUIK SONNET 3.5 VOOR DE BESTE BALANS TUSSEN SNELHEID EN INTELLIGENTIE
-MODEL = "claude-sonnet-4-6" 
-MAX_NEWS_ITEMS = 8
-SLEEP_BETWEEN_CALLS = 1.0
+MODEL = "claude-3-5-sonnet-20240620" # Gebruik de stabiele alias
+SLEEP_BETWEEN_CALLS = 1.2
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -42,119 +40,63 @@ def save_json(path: Path, data: dict) -> None:
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
 
-def fetch_news(ticker: str) -> list[dict]:
-    try:
-        t = yf.Ticker(ticker)
-        raw = t.news or []
-        items = []
-        for article in raw[:MAX_NEWS_ITEMS]:
-            items.append({
-                "title": article.get("title", ""),
-                "publisher": article.get("publisher", ""),
-                "published_at": datetime.fromtimestamp(
-                    article.get("providerPublishTime", 0), tz=timezone.utc
-                ).strftime("%Y-%m-%d %H:%M UTC"),
-                "summary": article.get("summary", ""),
-            })
-        return items
-    except Exception as exc:
-        log.warning("News fetch failed for %s: %s", ticker, exc)
-        return []
-
-def load_prompt_adjustments(memory: dict) -> str:
-    adjustments = memory.get("prompt_adjustments", [])
-    if not adjustments:
-        return ""
-    recent = adjustments[-5:]
-    lines = "\n".join(f"- {a['rule']}" for a in recent)
-    return f"\n\n## Self-Learned Adjustments (applied automatically)\n{lines}"
-
-def build_system_prompt(adjustments: str) -> str:
-    base = dedent("""
+def build_system_prompt() -> str:
+    return dedent("""
         You are a senior equity analyst for the NEXUS Market Terminal.
-        Your task is to evaluate a stock candidate that has already passed
-        fundamental screening (dividend, P/E, EPS growth).
-
-        Your job: assess the QUALITATIVE picture — news sentiment, narrative
-        risk, macro tailwinds/headwinds — and produce a structured verdict.
-
-        Rules:
-        - Be concise and data-driven. No padding.
-        - Separate facts from opinions clearly.
-        - If news is sparse or old (>14 days), say so and reduce confidence.
-        - Always flag if the macro context (VIX, yield, RSI) is a headwind.
-        - Conviction scale: 1 (avoid) to 10 (high conviction buy).
+        Assess the stock based on fundamentals and news provided.
+        
+        STRICT RULES:
+        1. Respond ONLY with a valid JSON object.
+        2. Do NOT use markdown code blocks (no ```json).
+        3. Do NOT include any introductory or concluding text.
+        4. Ensure all strings are properly escaped.
+        5. Conviction scale: 1-10.
     """).strip()
-    return base + adjustments
 
-def build_user_prompt(candidate: dict, news: list[dict], macro: dict, fear_greed: dict) -> str:
-    # VEILIGE EXTRACTIE
-    ticker = candidate.get('ticker', 'Unknown')
-    name = candidate.get('name', 'Unknown')
-    sector = candidate.get('sector', 'N/A')
-    price = candidate.get('price', 'N/A')
-    div = candidate.get('dividend_yield', 'N/A')
-    pe = candidate.get('pe_ratio', 'N/A')
-    pe_median = candidate.get('sector_pe_median', 'N/A')
-    growth = candidate.get('eps_growth_3yr', 'N/A')
-    t1_score = candidate.get('score', 'N/A')
-
-    news_block = "\n".join(
-        f"  [{i+1}] {n['published_at']} | {n['publisher']}\n"
-        f"      {n['title']}\n"
-        f"      {n['summary'][:200] if n['summary'] else '(no summary)'}"
-        for i, n in enumerate(news)
-    ) or "  No recent news found."
+def build_user_prompt(candidate: dict, macro: dict) -> str:
+    # We halen het nieuws nu uit de candidate data die Tier 1 al heeft gevonden
+    news_items = candidate.get('news', [])
+    news_block = ""
+    if not news_items:
+        news_block = "No recent news found in feed."
+    else:
+        for i, n in enumerate(news_items[:5]):
+            news_block += f"[{i+1}] {n.get('date', 'Recent')} | {n.get('title', 'No Title')}\n"
 
     return dedent(f"""
-        ## Candidate: {ticker} — {name}
-
-        ### Fundamentals (Tier 1 output)
-        - Sector: {sector}
-        - Price: ${price}
-        - Dividend yield: {div}%
-        - Trailing P/E: {pe} (sector median: {pe_median})
-        - EPS CAGR 3yr: {growth}%
-        - Tier 1 score: {t1_score}
-
-        ### Macro Context
-        - VIX: {macro.get('vix', 'N/A')}
-        - 10Y Treasury: {macro.get('treasury_10y', 'N/A')}%
-        - S&P 500 RSI-14: {macro.get('sp500_rsi', 'N/A')}
-        - Fear & Greed: {fear_greed.get('rating', 'N/A')} ({fear_greed.get('score', 'N/A')}/100)
-
-        ### Recent News
+        Analalyse candidate: {candidate.get('ticker')} ({candidate.get('name')})
+        Sector: {candidate.get('sector')}
+        Div Yield: {candidate.get('dividend_yield')}% | P/E: {candidate.get('pe_ratio')} | EPS Growth: {candidate.get('eps_growth_3yr')}%
+        
+        Macro Context: VIX {macro.get('vix')}, 10Y Yield {macro.get('treasury_10y')}%
+        
+        Recent News:
         {news_block}
 
-        ---
-        Respond in this exact JSON format (no markdown fences, just JSON):
+        Return this JSON structure:
         {{
           "sentiment": "bullish" | "neutral" | "bearish",
-          "conviction": <1-10>,
+          "conviction": 1-10,
           "key_positives": ["...", "..."],
           "key_risks": ["...", "..."],
           "macro_alignment": "tailwind" | "neutral" | "headwind",
-          "analyst_note": "<2-3 sentence synthesis>",
+          "analyst_note": "Short summary",
           "recommended_action": "buy" | "watch" | "avoid"
         }}
+        
+        Final reminder: Respond ONLY with JSON.
     """).strip()
 
-def call_claude(client: anthropic.Anthropic, system: str, user: str) -> dict | None:
+def extract_json(text: str) -> dict | None:
+    """Extraheert JSON uit de tekst, zelfs als Claude markdown gebruikt."""
     try:
-        message = client.messages.create(
-            model=MODEL,
-            max_tokens=512,
-            system=system,
-            messages=[{"role": "user", "content": user}],
-        )
-        raw = message.content[0].text.strip()
-        if raw.startswith("```"):
-            raw = raw.split("```")[1]
-            if raw.startswith("json"):
-                raw = raw[4:]
-        return json.loads(raw)
-    except Exception as exc:
-        log.error("Claude call failed: %s", exc)
+        # Zoek naar de eerste { en de laatste }
+        match = re.search(r'(\{.*\})', text, re.DOTALL)
+        if match:
+            return json.loads(match.group(1))
+        return json.loads(text)
+    except Exception as e:
+        log.error(f"JSON Parsing failed: {e}")
         return None
 
 def run_analysis() -> None:
@@ -164,37 +106,49 @@ def run_analysis() -> None:
         return
 
     client = anthropic.Anthropic(api_key=api_key)
+    if not DATA_PATH.exists():
+        log.error("data.json not found")
+        return
+        
     data = load_json(DATA_PATH)
-    memory = load_json(MEMORY_PATH) if MEMORY_PATH.exists() else {"predictions": []}
-
     candidates = data.get("top_candidates", [])
     macro = data.get("macro", {})
-    fear_greed = data.get("fear_and_greed", {})
 
     if not candidates:
-        log.error("No candidates in data.json")
+        log.info("No candidates to analyse.")
         return
 
-    system_prompt = build_system_prompt(load_prompt_adjustments(memory))
-    log.info("Analysing %d candidates...", len(candidates))
+    system_prompt = build_system_prompt()
+    log.info("Analysing %d candidates with News Hunter data...", len(candidates))
 
-    enriched = []
     for candidate in candidates:
         ticker = candidate["ticker"]
-        log.info("  → %s", ticker)
-        news = fetch_news(ticker)
-        user_prompt = build_user_prompt(candidate, news, macro, fear_greed)
-        analysis = call_claude(client, system_prompt, user_prompt)
-
-        if analysis:
-            candidate["tier2"] = {**analysis, "analysed_at": datetime.now(timezone.utc).isoformat()}
-        else:
-            candidate["tier2"] = {"error": "analysis_failed"}
+        log.info("  → Processing %s", ticker)
         
-        enriched.append(candidate)
+        user_prompt = build_user_prompt(candidate, macro)
+        
+        try:
+            message = client.messages.create(
+                model=MODEL,
+                max_tokens=1000,
+                system=system_prompt,
+                messages=[{"role": "user", "content": user_prompt}],
+            )
+            
+            raw_text = message.content[0].text
+            analysis = extract_json(raw_text)
+
+            if analysis:
+                candidate["tier2"] = {**analysis, "analysed_at": datetime.now(timezone.utc).isoformat()}
+            else:
+                candidate["tier2"] = {"error": "json_parsing_failed"}
+                
+        except Exception as exc:
+            log.error("Claude call failed for %s: %s", ticker, exc)
+            candidate["tier2"] = {"error": "api_call_failed"}
+        
         time.sleep(SLEEP_BETWEEN_CALLS)
 
-    data["top_candidates"] = enriched
     save_json(DATA_PATH, data)
     log.info("Analysis complete and data.json updated.")
 
