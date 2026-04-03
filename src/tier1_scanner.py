@@ -3,14 +3,13 @@ import os
 import time
 import logging
 import urllib.parse
-import re  # Belangrijk voor de nieuwe fetch_news
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 import yfinance as yf
 import pandas as pd
 import requests
 from io import StringIO
-from bs4 import BeautifulSoup
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger("tier1_scanner")
@@ -21,22 +20,16 @@ def fetch_news(query: str) -> list:
     """Scoort de laatste 3 nieuwskoppen via Google News met robuuste Regex."""
     news_items = []
     try:
-        # Schoon de query op voor betere resultaten
         clean_query = query.split(',')[0].split(' N.V.')[0] + " stock news"
         encoded_query = urllib.parse.quote(clean_query)
         url = f"https://news.google.com/rss/search?q={encoded_query}&hl=en&gl=US&ceid=US:en"
-        
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
         
-        # We gebruiken Regex om titels en links te vinden. Dit is parser-onafhankelijk.
-        # Zoekt alles tussen <title>...</title> en <link>...</link>
         titles = re.findall(r'<title>(.*?)</title>', response.text)
         links = re.findall(r'<link>(.*?)</link>', response.text)
         
-        # De eerste titel/link is van de RSS feed zelf, dus we beginnen bij index 1
         for i in range(1, min(len(titles), 4)):
-            # CDATA tags verwijderen indien aanwezig
             clean_title = titles[i].replace('<![CDATA[', '').replace(']]>', '')
             news_items.append({
                 "title": clean_title,
@@ -48,15 +41,38 @@ def fetch_news(query: str) -> list:
     return news_items
 
 def fetch_global_universe() -> list[str]:
+    """Combineert S&P 500, Nasdaq 100 en de volledige Nederlandse markt."""
     tickers = []
     headers = {'User-Agent': 'Mozilla/5.0'}
+    
     # 1. S&P 500
     try:
         res = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=headers, timeout=10)
         tickers.extend(pd.read_html(StringIO(res.text))[0]["Symbol"].str.replace(".", "-", regex=False).tolist())
+        log.info("S&P 500 tickers toegevoegd.")
+    except Exception as e: log.error(f"S&P 500 fetch error: {e}")
+
+    # 2. Nasdaq 100
+    try:
+        res = requests.get("https://en.wikipedia.org/wiki/Nasdaq-100", headers=headers, timeout=10)
+        # Wikipedia heeft vaak meerdere tabellen, tabel 4 is meestal de Nasdaq 100 lijst
+        nasdaq_df = pd.read_html(StringIO(res.text))[4]
+        tickers.extend(nasdaq_df["Ticker"].tolist())
+        log.info("Nasdaq 100 tickers toegevoegd.")
     except: pass
-    # 2. AEX selectie
-    tickers.extend(["ASML.AS", "ADYEN.AS", "UNA.AS", "HEIA.AS", "INGA.AS", "REN.AS", "ASM.AS", "AKZA.AS", "SHELL.AS"])
+
+    # 3. Nederlandse Markt (AEX + AMX + Selectie)
+    dutch_market = [
+        # AEX
+        "ASML.AS", "ADYEN.AS", "UNA.AS", "HEIA.AS", "INGA.AS", "REN.AS", "ASM.AS", "AKZA.AS", "SHELL.AS",
+        "AD.AS", "ABN.AS", "ASRNL.AS", "BEP0.AS", "BESI.AS", "DSFIR.AS", "IMCD.AS", "KPN.AS", "MT.AS",
+        "NN.AS", "PHIA.AS", "PRX.AS", "RAND.AS", "UMG.AS", "URW.AS", "WKL.AS",
+        # AMX & Midcaps
+        "AALB.AS", "AIRF.AS", "AMG.AS", "APAM.AS", "ARDS.AS", "BAMN.AS", "BFIT.AS", "CORB.AS", "CTP.AS", 
+        "FLOW.AS", "FUGR.AS", "GLPG.AS", "JDEP.AS", "LIGHT.AS", "SBMO.AS", "VOPA.AS"
+    ]
+    tickers.extend(dutch_market)
+    
     return list(set(tickers))
 
 def fetch_macro_indicators() -> dict:
@@ -79,10 +95,10 @@ def analyse_ticker(ticker: str) -> dict | None:
         div_yield = float(raw_div / 100 if raw_div > 0.20 else raw_div)
         pe = info.get("trailingPE")
         
+        # Strenge filter: Alleen winstgevende dividend-uitkerende aandelen
         if not pe or div_yield < 0.005 or div_yield > 0.15: return None 
 
         name = str(info.get("shortName", ticker))
-        # Haal nieuws op voor dit specifieke aandeel
         news = fetch_news(name)
 
         return {
@@ -100,27 +116,31 @@ def analyse_ticker(ticker: str) -> dict | None:
     except: return None
 
 def main():
-    log.info("=== NEXUS Tier 1 News Hunter starting ===")
+    log.info("=== NEXUS Tier 1 GLOBAL HUNTER starting ===")
     macro = fetch_macro_indicators()
     universe = fetch_global_universe()
+    log.info(f"Scanning universe of {len(universe)} tickers...")
+    
     candidates = []
     
     for ticker in universe:
         res = analyse_ticker(ticker)
         if res:
             candidates.append(res)
-            log.info(f"PASS {ticker} met nieuws-update.")
-        if len(candidates) >= 10: break
-        time.sleep(0.1)
+            log.info(f"PASS {ticker} (Score: {res['score']})")
+        
+        # We scannen door tot we 15 sterke kandidaten hebben (iets meer voor Claude om uit te kiezen)
+        if len(candidates) >= 15: break
+        time.sleep(0.05) # Iets sneller scannen
     
     candidates.sort(key=lambda x: x['score'], reverse=True)
     with open(OUTPUT_PATH, "w") as f:
         json.dump({
             "generated_at": datetime.now(timezone.utc).isoformat(), 
             "macro": macro, 
-            "top_candidates": candidates[:5]
+            "top_candidates": candidates[:10] # De beste 10 gaan naar data.json
         }, f, indent=2)
-    log.info("=== Done! Dashboard verrijkt met nieuws. ===")
+    log.info(f"=== Done! {len(candidates)} candidates found. ===")
 
 if __name__ == "__main__":
     main()
