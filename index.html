@@ -867,42 +867,58 @@
 
             list.innerHTML = candidates.map(function(c) {
                 const t2 = c.tier2 || {};
-                const action = t2.recommended_action || 'watch';
-                const conviction = t2.conviction != null ? t2.conviction : null;
-                const sentiment = t2.sentiment || '';
-                const activeBars = conviction != null ? Math.round(conviction / 2) : 0;
-
-                const actionColor = action === 'buy' ? 'var(--success-green)'
-                                  : action === 'avoid' ? 'var(--danger-red)'
+                
+                // --- DATA EXTRACTIE (met fallbacks voor 2026 AI formaten) ---
+                const action = (t2.recommended_action || 'watch').toUpperCase();
+                const conviction = t2.conviction_score || t2.conviction || 0;
+                const sentiment = t2.sentiment_score || t2.sentiment || 0;
+                const targetPrice = t2.target_price || "—";
+                const upside = t2.upside_percentage || 0;
+                
+                // Kleur logica
+                const actionColor = action === 'BUY' ? 'var(--success-green)' 
+                                  : action === 'AVOID' ? 'var(--danger-red)' 
                                   : 'var(--neon-cyan)';
+                const upsideColor = upside >= 0 ? '#00ff88' : '#ff4444';
 
-                const sentimentIcon = sentiment === 'bullish' ? '📈'
-                                    : sentiment === 'bearish' ? '📉' : '➡️';
+                return `
+                    <div class="market-item" style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 4px solid ${actionColor};">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h4 style="margin: 0; color: #fff;">${c.ticker} — ${c.name}</h4>
+                            <span class="action-badge" style="background:${actionColor}; color: #000; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem;">
+                                ${action}
+                            </span>
+                        </div>
 
-                const bars = [0,1,2,3,4].map(function(i) {
-                    return '<div class="signal-bar ' + (i < activeBars ? 'active' : '') + '"></div>';
-                }).join('');
+                        <div style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">
+                            ${c.sector || 'N/A'} &nbsp;|&nbsp; Div: ${c.dividend_yield}% &nbsp;|&nbsp; P/E: ${c.pe_ratio}
+                        </div>
 
-                const convictionLabel = conviction != null ? conviction + '/10' : '—';
+                        <div class="price-target-box" style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 6px; margin: 12px 0; display: flex; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1);">
+                            <div>
+                                <small style="color: #888; display: block; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.5px;">Target Price (30d)</small>
+                                <b style="font-size: 1.25rem; color: var(--neon-cyan);">€${targetPrice}</b>
+                            </div>
+                            <div style="text-align: right;">
+                                <small style="color: #888; display: block; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.5px;">Potentieel</small>
+                                <b style="font-size: 1.25rem; color: ${upsideColor};">
+                                    ${upside > 0 ? '+' : ''}${upside}%
+                                </b>
+                            </div>
+                        </div>
 
-                return '<div class="market-item">' +
-                    '<div class="market-info">' +
-                        '<h4>' + esc(c.ticker) + ' — ' + esc(c.name) + '</h4>' +
-                        '<div class="market-meta">' +
-                            esc(c.sector) + ' &nbsp;|&nbsp; Div: ' + c.dividend_yield + '% &nbsp;|&nbsp; P/E: ' + c.pe_ratio +
-                            ' &nbsp;|&nbsp; EPS-groei: ' + c.eps_growth_3yr + '%' +
-                        '</div>' +
-                        '<div class="signal-strength">' + bars + '</div>' +
-                    '</div>' +
-                    '<div class="market-stats">' +
-                        '<div class="probability" style="font-size:1.1em;color:' + actionColor + '">' +
-                            sentimentIcon + ' ' + action.toUpperCase() +
-                        '</div>' +
-                        '<div class="liquidity">Conviction: ' + convictionLabel + ' &nbsp; ' + formatCap(c.market_cap) + '</div>' +
-                    '</div>' +
-                '</div>';
+                        <div style="display: flex; gap: 20px; font-size: 0.85rem; margin-bottom: 10px; color: #ccc;">
+                            <span>🎯 Conviction: <b>${conviction}/10</b></span>
+                            <span>🎭 Sentiment: <b>${sentiment}/10</b></span>
+                            <span>📊 Scan: <b>${c.score}</b></span>
+                        </div>
+
+                        <div class="analysis-text" style="font-size: 0.9rem; line-height: 1.5; color: #aaa; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; font-style: italic;">
+                            "${t2.analysis || "De NEXUS AI analyseert momenteel de macro-impact..."}"
+                        </div>
+                    </div>
+                `;
             }).join('');
-        }
 
         // ── Trading Signals ────────────────────────────────────────────────────
         function renderSignals(candidates) {
