@@ -65,7 +65,7 @@
         .source-link:hover { opacity: 1; background: rgba(0, 255, 249, 0.1); }
         
         /* Interactive Chart Area */
-        .chart-drop-area { display: none; height: 400px; margin-top: 15px; border: 1px solid var(--neon-cyan); background: #000; border-radius: 4px; overflow: hidden; }
+        .chart-drop-area { display: none; height: 500px; margin-top: 15px; border: 1px solid var(--neon-cyan); background: #000; border-radius: 4px; overflow: hidden; }
         .chart-active { display: block !important; }
 
         .risk-bar { height: 8px; background: #222; border-radius: 4px; margin-top: 8px; overflow: hidden; }
@@ -143,22 +143,24 @@
             } catch (e) { return null; }
         }
 
-        // TradingView Widget Toggle Functie
+        // TradingView Widget Toggle Functie met Ticker Translator
         function toggleStockChart(ticker) {
-            const containerId = `chart-container-${ticker.replace('.', '-')}`;
+            const safeId = ticker.replace('.', '-');
+            const containerId = `chart-container-${safeId}`;
             const container = document.getElementById(containerId);
             
-            // Toggle zichtbaarheid
             container.classList.toggle('chart-active');
 
-            // Als de grafiek nog leeg is, laad de TradingView widget
             if (container.innerHTML === "") {
-                // Formatteer ticker voor TradingView (bv ASML.AS naar EURONEXT:ASML)
-                let symbol = ticker;
+                let symbol = "";
+                // Ticker Vertaling (Yahoo naar TradingView format)
                 if (ticker.includes('.AS')) {
                     symbol = `EURONEXT:${ticker.split('.')[0]}`;
+                } else if (ticker.includes('.BR')) {
+                    symbol = `EURONEXT:${ticker.split('.')[0]}`;
                 } else {
-                    symbol = `NASDAQ:${ticker}`;
+                    // Voor US aandelen (zoals AAPL, TSLA) is direct de ticker meestal voldoende
+                    symbol = ticker;
                 }
 
                 new TradingView.widget({
@@ -171,7 +173,6 @@
                     "locale": "en",
                     "toolbar_bg": "#f1f3f6",
                     "enable_publishing": false,
-                    "hide_side_toolbar": false,
                     "allow_symbol_change": true,
                     "container_id": containerId
                 });
@@ -181,7 +182,7 @@
         function render(data) {
             if (!data) return;
 
-            // 1. Risk Overlay Logic
+            // 1. Risk Overlay
             const vix = parseFloat(data.macro?.vix || 0);
             const header = document.querySelector('.header');
             const banner = document.getElementById('market-status-banner');
@@ -209,7 +210,7 @@
             document.getElementById('stat-rsi').innerText = data.macro?.rsi || '—';
             document.getElementById('stat-fg').innerText = data.fear_and_greed?.score || '50';
 
-            // 3. Equity Chart
+            // 3. Equity Curve
             const hist = data.equity_history || [];
             if (equityChart) equityChart.destroy();
             equityChart = new Chart(document.getElementById('equityChart'), {
@@ -235,16 +236,16 @@
             const trades = data.active_trades || [];
             document.getElementById('trade-list').innerHTML = trades.length ? trades.map(t => `<tr><td style="color:var(--neon-cyan)">${t.ticker}</td><td>€${t.entry_price}</td><td>€${t.current_price}</td><td style="text-align:right" class="${t.pl_percent >= 0 ? 'pl-positive' : 'pl-negative'}">${t.pl_percent}%</td></tr>`).join('') : '<tr><td colspan="4">No active trades.</td></tr>';
 
-            // 6. Candidates met Interactive Charts
+            // 6. Analysis Cards
             document.getElementById('candidates-list').innerHTML = cand.map(c => {
                 const t2 = c.tier2 || {}, action = (t2.recommended_action || 'HOLD').toUpperCase();
                 const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
                 
-                const sources = (c.news && Array.isArray(c.news)) 
+                const sources = (c.news && Array.isArray(c.news)) 
                     ? c.news.slice(0, 2).map((n, i) => {
                         const link = n.url || n.link;
                         return link ? `<a href="${link}" target="_blank" class="source-link">[Source ${i+1}]</a>` : '';
-                    }).join('') 
+                    }).join('') 
                     : '';
 
                 return `<div class="market-item">
@@ -258,14 +259,11 @@
                         <div style="text-align:right"><div class="stat-label">Upside</div><div style="color:${color}">${t2.upside_percentage || 0}%</div></div>
                     </div>
                     <div class="analysis-text">${t2.analysis || ''}</div>
-                    
                     <div class="source-box">
                         ${sources}
                         <span class="source-link" onclick="toggleStockChart('${c.ticker}')" style="border-color: var(--neon-magenta); color: var(--neon-magenta);">📊 LIVE CHART</span>
                     </div>
-
                     <div id="chart-container-${c.ticker.replace('.', '-')}" class="chart-drop-area"></div>
-
                     <div style="font-size:0.75em; opacity:0.5; font-family:'Share Tech Mono'; margin-top:10px;">CONVICTION: ${t2.conviction_score || 0}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%</div>
                 </div>`;
             }).join('');
