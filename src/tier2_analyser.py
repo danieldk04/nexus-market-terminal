@@ -28,7 +28,7 @@ DATA_PATH = ROOT / "data.json"
 TRADES_PATH = ROOT / "trades.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
-MODEL = "claude-3-5-sonnet-latest" # Gebruik de actuele stabiele identifier
+MODEL = "claude-sonnet-4-6" # Gebruik de actuele stabiele identifier
 SLEEP_BETWEEN_CALLS = 3.0
 
 # ── Telegram Config ───────────────────────────────────────────────────────────
