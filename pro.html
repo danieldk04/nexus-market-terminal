@@ -3,320 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS PRO | Market Intelligence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>NEXUS PRO | Financial Intelligence Unit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
         :root {
-            --bg-body: #f8fafc;
-            --bg-panel: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --accent-blue: #2563eb;
-            --border-color: #e2e8f0;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
+            --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+            --slate-700: #334155; --slate-800: #1e293b; --slate-900: #0f172a;
+            --blue-600: #2563eb; --blue-700: #1d4ed8;
+            --green-600: #16a34a; --red-600: #dc2626;
+            --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--slate-50); color: var(--slate-900); }
+
+        /* Header / Navigation */
+        header {
+            background: var(--slate-900); color: white;
+            padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo-box h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.5px; }
+        .status-pill { background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-family: 'Roboto Mono'; }
+
+        /* Top Bar Stats */
+        .market-bar {
+            background: white; border-bottom: 1px solid var(--slate-200);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            padding: 0.5rem 2rem; gap: 1rem;
+        }
+        .market-stat { border-right: 1px solid var(--slate-200); padding: 5px 0; }
+        .market-stat:last-child { border: none; }
+        .label { font-size: 0.65rem; color: var(--slate-700); text-transform: uppercase; font-weight: 600; display: block; }
+        .value { font-family: 'Roboto Mono', monospace; font-weight: 600; font-size: 0.95rem; }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid; grid-template-columns: 320px 1fr 380px;
+            gap: 1.5rem; padding: 1.5rem; max-width: 1900px; margin: 0 auto;
+        }
+
+        /* Common Panel Style */
+        .panel { background: white; border: 1px solid var(--slate-200); border-radius: 6px; box-shadow: var(--panel-shadow); overflow: hidden; display: flex; flex-direction: column; }
+        .panel-header { padding: 12px 16px; background: var(--slate-100); border-bottom: 1px solid var(--slate-200); display: flex; justify-content: space-between; align-items: center; }
+        .panel-header h3 { font-size: 0.85rem; font-weight: 700; color: var(--slate-800); text-transform: uppercase; }
+
+        /* Candidate Cards */
+        .candidate-scroll { flex: 1; overflow-y: auto; padding: 1rem; max-height: 80vh; }
+        .stock-card { border: 1px solid var(--slate-200); border-radius: 6px; margin-bottom: 1rem; transition: 0.2s; cursor: pointer; }
+        .stock-card:hover { border-color: var(--blue-600); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .stock-card-top { padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--slate-100); }
+        .stock-info h4 { font-size: 1.1rem; color: var(--blue-600); }
+        .stock-info span { font-size: 0.75rem; color: var(--slate-700); }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+        .action-tag { padding: 3px 8px; border-radius: 3px; font-size: 0.7rem; font-weight: 700; }
+        .tag-buy { background: #dcfce7; color: #166534; }
+        .tag-hold { background: #fef9c3; color: #854d0e; }
 
-        .navbar {
-            background: #fff;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        .analysis-preview { padding: 12px; font-size: 0.85rem; color: var(--slate-700); line-height: 1.4; border-bottom: 1px solid var(--slate-100); }
+        .mini-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 8px 12px; background: var(--slate-50); font-size: 0.75rem; }
 
-        .brand { font-weight: 700; font-size: 1.2rem; color: var(--accent-blue); letter-spacing: -0.5px; }
-        
-        .macro-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            padding: 2rem;
-        }
+        /* Main Viewport (Charts) */
+        .main-view { display: flex; flex-direction: column; gap: 1.5rem; }
+        .chart-box { min-height: 500px; background: white; border: 1px solid var(--slate-200); border-radius: 6px; position: relative; }
+        #tv-container { height: 100%; width: 100%; }
 
-        .macro-card {
-            background: var(--bg-panel);
-            padding: 1.25rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
+        /* Sidebar Tables */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        .data-table th { text-align: left; padding: 8px 16px; color: var(--slate-700); font-weight: 600; border-bottom: 2px solid var(--slate-200); }
+        .data-table td { padding: 10px 16px; border-bottom: 1px solid var(--slate-100); }
+        .pos-num { color: var(--green-600); font-weight: 600; }
+        .neg-num { color: var(--red-600); font-weight: 600; }
 
-        .macro-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-        .macro-value { font-size: 1.5rem; font-weight: 700; margin-top: 0.25rem; }
-
-        .main-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            padding: 0 2rem 2rem 2rem;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card {
-            background: var(--bg-panel);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Stock Analysis Cards */
-        .analysis-card {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .analysis-card:last-child { border: 0; margin-bottom: 0; padding-bottom: 0; }
-
-        .stock-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .stock-title h2 { font-size: 1.25rem; font-weight: 700; }
-        .stock-title p { font-size: 0.875rem; color: var(--text-muted); }
-
-        .badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .badge-buy { background: #dcfce7; color: #166534; }
-        .badge-hold { background: #fef9c3; color: #854d0e; }
-        .badge-avoid { background: #fee2e2; color: #991b1b; }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            background: #f1f5f9;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-        .metric-item span { display: block; font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
-        .metric-item b { font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
-
-        .analysis-body { font-size: 0.95rem; color: #334155; margin-bottom: 1rem; text-align: justify; }
-
-        .btn-chart {
-            background: #f1f5f9;
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-chart:hover { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
-
-        .chart-wrapper {
-            display: none;
-            height: 450px;
-            margin-top: 1rem;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-        .chart-wrapper.active { display: block; }
-
-        /* Sidebar table */
-        .pro-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .pro-table th { text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--border-color); color: var(--text-muted); }
-        .pro-table td { padding: 0.75rem; border-bottom: 1px solid var(--border-color); }
-        
-        .status-indicator {
-            display: inline-block;
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            margin-right: 0.5rem;
-        }
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--slate-100); }
+        ::-webkit-scrollbar-thumb { background: var(--slate-200); border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="brand">NEXUS PRO <span id="sync-time" style="font-size: 0.7rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;"></span></div>
-        <div id="market-status" class="badge">Checking Market...</div>
-    </nav>
+<header>
+    <div class="logo-box">
+        <h1>NEXUS INTELLIGENCE</h1>
+        <div class="status-pill">SYSTEM: OPTIMIZED</div>
+    </div>
+    <div style="font-size: 0.75rem; color: #94a3b8;" id="last-update">Syncing...</div>
+</header>
 
-    <div class="macro-grid">
-        <div class="macro-card">
-            <div class="macro-label">Volatility (VIX)</div>
-            <div class="macro-value" id="vix-val">—</div>
+<div class="market-bar">
+    <div class="market-stat"><span class="label">Volatility Index</span><span class="value" id="vix-val">--</span></div>
+    <div class="market-stat"><span class="label">US 10Y Yield</span><span class="value" id="yield-val">--</span></div>
+    <div class="market-stat"><span class="label">Fear & Greed Index</span><span class="value" id="fg-val">--</span></div>
+    <div class="market-stat"><span class="label">Sector Strength</span><span class="value">FINANCIALS</span></div>
+    <div class="market-stat"><span class="label">Portfolio Return</span><span class="value" id="port-ret">--</span></div>
+</div>
+
+<div class="dashboard">
+    <div class="panel">
+        <div class="panel-header">
+            <h3>Top Candidates</h3>
+            <span style="font-size:0.7rem; color:var(--blue-600)">ROE > 15%</span>
         </div>
-        <div class="macro-card">
-            <div class="macro-label">US 10Y Yield</div>
-            <div class="macro-value" id="yield-val">—</div>
+        <div class="candidate-scroll" id="candidates-list">
+            </div>
+    </div>
+
+    <div class="main-view">
+        <div class="panel" style="flex:1">
+            <div class="panel-header">
+                <h3 id="active-ticker-title">Select a ticker for technical view</h3>
+                <div id="active-tags"></div>
+            </div>
+            <div class="chart-box">
+                <div id="tv-container"></div>
+            </div>
         </div>
-        <div class="macro-card">
-            <div class="macro-label">Fear & Greed</div>
-            <div class="macro-value" id="fg-val">—</div>
-        </div>
-        <div class="macro-card">
-            <div class="macro-label">Conviction Avg</div>
-            <div class="macro-value" id="conv-avg">—</div>
+        
+        <div class="panel">
+            <div class="panel-header"><h3>Equity Curve (Historical)</h3></div>
+            <div style="padding:15px; height: 180px;"><canvas id="equityChart"></canvas></div>
         </div>
     </div>
 
-    <div class="main-container">
-        <div class="content-area">
-            <div class="card">
-                <h3 class="section-title">🎯 Investment Candidates</h3>
-                <div id="analysis-list">
-                    </div>
-            </div>
+    <div class="main-view">
+        <div class="panel">
+            <div class="panel-header"><h3>Active Positions</h3></div>
+            <table class="data-table">
+                <thead><tr><th>Asset</th><th>Current</th><th>P/L %</th></tr></thead>
+                <tbody id="trades-list"></tbody>
+            </table>
         </div>
 
-        <div class="sidebar">
-            <div class="card">
-                <h3 class="section-title">📈 Equity Curve</h3>
-                <canvas id="equityChart" height="200"></canvas>
-            </div>
-
-            <div class="card">
-                <h3 class="section-title">💼 Active Positions</h3>
-                <table class="pro-table">
-                    <thead>
-                        <tr><th>Ticker</th><th>Price</th><th>Return</th></tr>
-                    </thead>
-                    <tbody id="position-list"></tbody>
-                </table>
-            </div>
-
-            <div class="card">
-                <h3 class="section-title">⚙️ System Health</h3>
-                <p style="font-size: 0.8rem; margin-bottom: 0.5rem;"><span class="status-indicator" style="background:var(--success)"></span> Scanner: Online</p>
-                <p style="font-size: 0.8rem; margin-bottom: 0.5rem;"><span class="status-indicator" style="background:var(--success)"></span> Analysis: Claude 4.6</p>
-                <p style="font-size: 0.8rem;"><span class="status-indicator" style="background:var(--accent-blue)"></span> Logic: Business First (ROE)</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        async function fetchData() {
-            const res = await fetch('data.json?v=' + Date.now());
-            const data = await res.json();
-            render(data);
-        }
-
-        function toggleChart(ticker) {
-            const id = `chart-${ticker.replace('.', '-')}`;
-            const el = document.getElementById(id);
-            el.classList.toggle('active');
-
-            if (el.innerHTML === "") {
-                const symbol = ticker.includes('.AS') ? `EURONEXT:${ticker.split('.')[0]}` : ticker;
-                new TradingView.widget({
-                    "autosize": true,
-                    "symbol": symbol,
-                    "interval": "D",
-                    "theme": "light",
-                    "style": "1",
-                    "locale": "en",
-                    "container_id": id
-                });
-            }
-        }
-
-        function render(data) {
-            // Macro updates
-            document.getElementById('vix-val').innerText = data.macro.vix;
-            document.getElementById('yield-val').innerText = data.macro.treasury_10y + '%';
-            document.getElementById('fg-val').innerText = data.fear_and_greed?.score || '50';
-            document.getElementById('sync-time').innerText = 'Last sync: ' + new Date(data.generated_at).toLocaleTimeString();
-
-            // Status Banner
-            const status = document.getElementById('market-status');
-            if(data.macro.vix > 22) {
-                status.innerText = "Risk-Off: High Volatility";
-                status.className = "badge badge-avoid";
-            } else {
-                status.innerText = "Risk-On: Stable";
-                status.className = "badge badge-buy";
-            }
-
-            // Candidates
-            const list = document.getElementById('analysis-list');
-            list.innerHTML = data.top_candidates.map(c => {
-                const t2 = c.tier2 || {};
-                const badgeClass = t2.recommended_action === 'BUY' ? 'badge-buy' : (t2.recommended_action === 'AVOID' ? 'badge-avoid' : 'badge-hold');
-                
-                return `
-                <div class="analysis-card">
-                    <div class="stock-header">
-                        <div class="stock-title">
-                            <h2>${c.ticker}</h2>
-                            <p>${c.name} | ${c.sector}</p>
-                        </div>
-                        <span class="badge ${badgeClass}">${t2.recommended_action || 'HOLD'}</span>
-                    </div>
-                    
-                    <div class="analysis-body">${t2.analysis || 'Analysis pending...'}</div>
-
-                    <div class="metrics-grid">
-                        <div class="metric-item"><span>Target</span><b>€${t2.target_price || '—'}</b></div>
-                        <div class="metric-item"><span>Conviction</span><b>${t2.conviction_score}/10</b></div>
-                        <div class="metric-item"><span>P/E Ratio</span><b>${c.pe_ratio}</b></div>
-                        <div class="metric-item"><span>Div Yield</span><b>${c.dividend_yield}%</b></div>
-                    </div>
-
-                    <button class="btn-chart" onclick="toggleChart('${c.ticker}')">📊 View Technical Chart</button>
-                    <div id="chart-${c.ticker.replace('.', '-')}" class="chart-wrapper"></div>
+        <div class="panel">
+            <div class="panel-header"><h3>AI Intelligence Loop</h3></div>
+            <div style="padding: 16px;">
+                <p style="font-size: 0.85rem; color: var(--slate-700); margin-bottom: 10px;">
+                    <b>Model:</b> Claude 4.6 Sonnet (Business-First Mode)<br>
+                    <b>Strategy:</b> Buffett Quality Compounders
+                </p>
+                <div style="background: var(--slate-100); padding: 12px; border-radius: 4px; font-size: 0.75rem;">
+                    "Looking for strong moats and consistent capital allocation. Current VIX environment suggests caution on highly leveraged cyclicals."
                 </div>
-                `;
-            }).join('');
+            </div>
+        </div>
+    </div>
+</div>
 
-            // Positions
-            const posList = document.getElementById('position-list');
-            posList.innerHTML = data.active_trades.map(t => `
-                <tr>
-                    <td style="font-weight:600">${t.ticker}</td>
-                    <td>€${t.current_price}</td>
-                    <td style="color:${t.pl_percent >= 0 ? 'var(--success)' : 'var(--danger)'}; font-weight:700">
-                        ${t.pl_percent >= 0 ? '+' : ''}${t.pl_percent}%
-                    </td>
-                </tr>
-            `).join('');
+<script>
+    let equityChart = null;
 
-            // Conviction Avg
-            const scores = data.top_candidates.map(c => c.tier2?.conviction_score || 0);
-            const avg = (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1);
-            document.getElementById('conv-avg').innerText = avg + '/10';
+    async function loadData() {
+        const res = await fetch('data.json?v=' + Date.now());
+        const data = await res.json();
+        updateMarketStats(data);
+        renderCandidates(data);
+        renderTrades(data);
+        renderEquityChart(data);
+        
+        // Load first ticker by default
+        if (data.top_candidates.length > 0) {
+            selectStock(data.top_candidates[0]);
         }
+    }
 
-        fetchData();
-        setInterval(fetchData, 60000);
-    </script>
+    function updateMarketStats(data) {
+        document.getElementById('vix-val').innerText = data.macro.vix;
+        document.getElementById('vix-val').style.color = data.macro.vix > 22 ? 'var(--red-600)' : 'var(--green-600)';
+        document.getElementById('yield-val').innerText = data.macro.treasury_10y + '%';
+        document.getElementById('fg-val').innerText = data.fear_and_greed?.score || '50';
+        document.getElementById('last-update').innerText = 'Last Refresh: ' + new Date(data.generated_at).toLocaleTimeString();
+    }
+
+    function renderCandidates(data) {
+        const container = document.getElementById('candidates-list');
+        container.innerHTML = data.top_candidates.map(c => `
+            <div class="stock-card" onclick='selectStock(${JSON.stringify(c)})'>
+                <div class="stock-card-top">
+                    <div class="stock-info">
+                        <h4>${c.ticker}</h4>
+                        <span>${c.sector}</span>
+                    </div>
+                    <span class="action-tag ${c.tier2?.recommended_action === 'BUY' ? 'tag-buy' : 'tag-hold'}">
+                        ${c.tier2?.recommended_action || 'HOLD'}
+                    </span>
+                </div>
+                <div class="analysis-preview">${c.tier2?.analysis ? c.tier2.analysis.substring(0, 85) + '...' : 'No analysis yet.'}</div>
+                <div class="mini-metrics">
+                    <div><b>PE:</b> ${c.pe_ratio}</div>
+                    <div><b>Conv:</b> ${c.tier2?.conviction_score}/10</div>
+                    <div><b>Target:</b> €${c.tier2?.target_price}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function selectStock(c) {
+        document.getElementById('active-ticker-title').innerText = `${c.ticker} - ${c.name}`;
+        
+        // Load TradingView
+        let symbol = c.ticker;
+        if (symbol.includes('.AS')) symbol = `EURONEXT:${symbol.split('.')[0]}`;
+        
+        new TradingView.widget({
+            "autosize": true,
+            "symbol": symbol,
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "light",
+            "style": "1",
+            "locale": "en",
+            "enable_publishing": false,
+            "hide_top_toolbar": false,
+            "container_id": "tv-container"
+        });
+    }
+
+    function renderTrades(data) {
+        const list = document.getElementById('trades-list');
+        list.innerHTML = data.active_trades.map(t => `
+            <tr>
+                <td><b>${t.ticker}</b></td>
+                <td>€${t.current_price}</td>
+                <td class="${t.pl_percent >= 0 ? 'pos-num' : 'neg-num'}">${t.pl_percent}%</td>
+            </tr>
+        `).join('');
+        
+        // Calculate total port return
+        const totalPL = (data.active_trades.reduce((a, b) => a + parseFloat(b.pl_percent), 0) / (data.active_trades.length || 1)).toFixed(2);
+        document.getElementById('port-ret').innerText = (totalPL >= 0 ? '+' : '') + totalPL + '%';
+        document.getElementById('port-ret').style.color = totalPL >= 0 ? 'var(--green-600)' : 'var(--red-600)';
+    }
+
+    function renderEquityChart(data) {
+        const hist = data.equity_history || [];
+        if (equityChart) equityChart.destroy();
+        equityChart = new Chart(document.getElementById('equityChart'), {
+            type: 'line',
+            data: {
+                labels: hist.map(h => h.date),
+                datasets: [{ 
+                    data: hist.map(h => h.value), 
+                    borderColor: '#2563eb', 
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)', 
+                    fill: true, 
+                    tension: 0.3,
+                    pointRadius: 0
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { position: 'right', grid: { color: '#f1f5f9' } } }
+            }
+        });
+    }
+
+    loadData();
+    setInterval(loadData, 60000);
+</script>
+
 </body>
 </html>
