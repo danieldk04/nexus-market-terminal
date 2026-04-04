@@ -2,8 +2,8 @@ name: NEXUS AUTONOMOUS TRADING ENGINE
 
 on:
   schedule:
-    - cron: "0 7 * * *" # Elke dag om 09:00 NL tijd
-  workflow_dispatch:      # Handmatige knop
+    - cron: "0 7 * * *"
+  workflow_dispatch:
 
 jobs:
   scan_and_analyze:
@@ -36,7 +36,6 @@ jobs:
         run: |
           git config --global user.name "NEXUS-Bot"
           git config --global user.email "bot@nexus.terminal"
-          # We voegen hier memory.json toe zodat de bot zijn geheugen onthoudt
           git add data.json memory.json
           git commit -m "Auto-update: Autonomous Scan & Learning $(date +'%Y-%m-%d')" || exit 0
           git push
