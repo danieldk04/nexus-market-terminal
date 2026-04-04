@@ -1,9 +1,9 @@
-name: NEXUS Daily Scan
+name: NEXUS AUTONOMOUS TRADING ENGINE
 
 on:
   schedule:
-    - cron: "0 7 * * *" # Dit scant nu ELKE dag om 09:00 NL tijd
-  workflow_dispatch:      # Houdt de handmatige knop beschikbaar
+    - cron: "0 7 * * *" # Elke dag om 09:00 NL tijd
+  workflow_dispatch:      # Handmatige knop
 
 jobs:
   scan_and_analyze:
@@ -21,18 +21,22 @@ jobs:
         run: |
           pip install yfinance pandas requests anthropic lxml
 
-      - name: Run Tier 1 Scanner
+      - name: Step 1: Run Tier 1 Scanner
         run: python src/tier1_scanner.py
 
-      - name: Run Tier 2 Analyser
+      - name: Step 2: Run Tier 2 Analyser
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python src/tier2_analyser.py
 
-      - name: Commit and Push results
+      - name: Step 3: Evolution & Learning Logic
+        run: python src/evolution_engine.py
+
+      - name: Step 4: Commit and Push results
         run: |
           git config --global user.name "NEXUS-Bot"
           git config --global user.email "bot@nexus.terminal"
+          # We voegen hier memory.json toe zodat de bot zijn geheugen onthoudt
           git add data.json memory.json
-          git commit -m "Auto-update: Scan & Analysis $(date +'%Y-%m-%d')" || exit 0
+          git commit -m "Auto-update: Autonomous Scan & Learning $(date +'%Y-%m-%d')" || exit 0
           git push
