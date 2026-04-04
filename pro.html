@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS PRO | Market Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-panel: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-blue: #2563eb;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: #fff;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand { font-weight: 700; font-size: 1.2rem; color: var(--accent-blue); letter-spacing: -0.5px; }
+        
+        .macro-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .macro-card {
+            background: var(--bg-panel);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .macro-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+        .macro-value { font-size: 1.5rem; font-weight: 700; margin-top: 0.25rem; }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stock Analysis Cards */
+        .analysis-card {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .analysis-card:last-child { border: 0; margin-bottom: 0; padding-bottom: 0; }
+
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .stock-title h2 { font-size: 1.25rem; font-weight: 700; }
+        .stock-title p { font-size: 0.875rem; color: var(--text-muted); }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-buy { background: #dcfce7; color: #166534; }
+        .badge-hold { background: #fef9c3; color: #854d0e; }
+        .badge-avoid { background: #fee2e2; color: #991b1b; }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .metric-item span { display: block; font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        .metric-item b { font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
+
+        .analysis-body { font-size: 0.95rem; color: #334155; margin-bottom: 1rem; text-align: justify; }
+
+        .btn-chart {
+            background: #f1f5f9;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-chart:hover { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+        .chart-wrapper {
+            display: none;
+            height: 450px;
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .chart-wrapper.active { display: block; }
+
+        /* Sidebar table */
+        .pro-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .pro-table th { text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--border-color); color: var(--text-muted); }
+        .pro-table td { padding: 0.75rem; border-bottom: 1px solid var(--border-color); }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">NEXUS PRO <span id="sync-time" style="font-size: 0.7rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;"></span></div>
+        <div id="market-status" class="badge">Checking Market...</div>
+    </nav>
+
+    <div class="macro-grid">
+        <div class="macro-card">
+            <div class="macro-label">Volatility (VIX)</div>
+            <div class="macro-value" id="vix-val">—</div>
+        </div>
+        <div class="macro-card">
+            <div class="macro-label">US 10Y Yield</div>
+            <div class="macro-value" id="yield-val">—</div>
+        </div>
+        <div class="macro-card">
+            <div class="macro-label">Fear & Greed</div>
+            <div class="macro-value" id="fg-val">—</div>
+        </div>
+        <div class="macro-card">
+            <div class="macro-label">Conviction Avg</div>
+            <div class="macro-value" id="conv-avg">—</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="content-area">
+            <div class="card">
+                <h3 class="section-title">🎯 Investment Candidates</h3>
+                <div id="analysis-list">
+                    </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="card">
+                <h3 class="section-title">📈 Equity Curve</h3>
+                <canvas id="equityChart" height="200"></canvas>
+            </div>
+
+            <div class="card">
+                <h3 class="section-title">💼 Active Positions</h3>
+                <table class="pro-table">
+                    <thead>
+                        <tr><th>Ticker</th><th>Price</th><th>Return</th></tr>
+                    </thead>
+                    <tbody id="position-list"></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3 class="section-title">⚙️ System Health</h3>
+                <p style="font-size: 0.8rem; margin-bottom: 0.5rem;"><span class="status-indicator" style="background:var(--success)"></span> Scanner: Online</p>
+                <p style="font-size: 0.8rem; margin-bottom: 0.5rem;"><span class="status-indicator" style="background:var(--success)"></span> Analysis: Claude 4.6</p>
+                <p style="font-size: 0.8rem;"><span class="status-indicator" style="background:var(--accent-blue)"></span> Logic: Business First (ROE)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const res = await fetch('data.json?v=' + Date.now());
+            const data = await res.json();
+            render(data);
+        }
+
+        function toggleChart(ticker) {
+            const id = `chart-${ticker.replace('.', '-')}`;
+            const el = document.getElementById(id);
+            el.classList.toggle('active');
+
+            if (el.innerHTML === "") {
+                const symbol = ticker.includes('.AS') ? `EURONEXT:${ticker.split('.')[0]}` : ticker;
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": symbol,
+                    "interval": "D",
+                    "theme": "light",
+                    "style": "1",
+                    "locale": "en",
+                    "container_id": id
+                });
+            }
+        }
+
+        function render(data) {
+            // Macro updates
+            document.getElementById('vix-val').innerText = data.macro.vix;
+            document.getElementById('yield-val').innerText = data.macro.treasury_10y + '%';
+            document.getElementById('fg-val').innerText = data.fear_and_greed?.score || '50';
+            document.getElementById('sync-time').innerText = 'Last sync: ' + new Date(data.generated_at).toLocaleTimeString();
+
+            // Status Banner
+            const status = document.getElementById('market-status');
+            if(data.macro.vix > 22) {
+                status.innerText = "Risk-Off: High Volatility";
+                status.className = "badge badge-avoid";
+            } else {
+                status.innerText = "Risk-On: Stable";
+                status.className = "badge badge-buy";
+            }
+
+            // Candidates
+            const list = document.getElementById('analysis-list');
+            list.innerHTML = data.top_candidates.map(c => {
+                const t2 = c.tier2 || {};
+                const badgeClass = t2.recommended_action === 'BUY' ? 'badge-buy' : (t2.recommended_action === 'AVOID' ? 'badge-avoid' : 'badge-hold');
+                
+                return `
+                <div class="analysis-card">
+                    <div class="stock-header">
+                        <div class="stock-title">
+                            <h2>${c.ticker}</h2>
+                            <p>${c.name} | ${c.sector}</p>
+                        </div>
+                        <span class="badge ${badgeClass}">${t2.recommended_action || 'HOLD'}</span>
+                    </div>
+                    
+                    <div class="analysis-body">${t2.analysis || 'Analysis pending...'}</div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-item"><span>Target</span><b>€${t2.target_price || '—'}</b></div>
+                        <div class="metric-item"><span>Conviction</span><b>${t2.conviction_score}/10</b></div>
+                        <div class="metric-item"><span>P/E Ratio</span><b>${c.pe_ratio}</b></div>
+                        <div class="metric-item"><span>Div Yield</span><b>${c.dividend_yield}%</b></div>
+                    </div>
+
+                    <button class="btn-chart" onclick="toggleChart('${c.ticker}')">📊 View Technical Chart</button>
+                    <div id="chart-${c.ticker.replace('.', '-')}" class="chart-wrapper"></div>
+                </div>
+                `;
+            }).join('');
+
+            // Positions
+            const posList = document.getElementById('position-list');
+            posList.innerHTML = data.active_trades.map(t => `
+                <tr>
+                    <td style="font-weight:600">${t.ticker}</td>
+                    <td>€${t.current_price}</td>
+                    <td style="color:${t.pl_percent >= 0 ? 'var(--success)' : 'var(--danger)'}; font-weight:700">
+                        ${t.pl_percent >= 0 ? '+' : ''}${t.pl_percent}%
+                    </td>
+                </tr>
+            `).join('');
+
+            // Conviction Avg
+            const scores = data.top_candidates.map(c => c.tier2?.conviction_score || 0);
+            const avg = (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1);
+            document.getElementById('conv-avg').innerText = avg + '/10';
+        }
+
+        fetchData();
+        setInterval(fetchData, 60000);
+    </script>
+</body>
+</html>
