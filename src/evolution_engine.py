@@ -37,45 +37,73 @@ def run_evolution():
     candidates = data.get("top_candidates", [])
     active_trades = data.get("active_trades", [])
     
-    # 2. Check huidige performance van actieve trades
+    ENTRY_THRESHOLD  = 8.0   # Lagere drempel: mathematisch haalbaar met huidige scoringformule
+    STOP_LOSS_PCT    = -5.0  # Sluit positie bij >= 5% verlies
+    TAKE_PROFIT_PCT  = 15.0  # Sluit positie bij >= 15% winst
+
+    # 2. Check huidige performance van actieve trades + exit-logica
     updated_trades = []
-    daily_performance = 0
-    
+    total_pl_pct = 0.0
+    closed_count = 0
+
     for trade in active_trades:
         try:
             ticker = trade['ticker']
-            # Haal de allernieuwste prijs op
             t_info = yf.Ticker(ticker).info
             current_price = t_info.get("currentPrice", trade['buy_price'])
-            
-            # Bereken Winst/Verlies percentage
+
             pl_pct = round(((current_price - trade['buy_price']) / trade['buy_price']) * 100, 2)
-            
-            # Zelfreflectie: Als we verlies maken, sla de les op
+
+            # Exit-logica: stop-loss of take-profit
+            if pl_pct <= STOP_LOSS_PCT:
+                lesson = {
+                    "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                    "ticker": ticker,
+                    "sector": trade.get("industry_group", "Unknown"),
+                    "insight": f"Stop-loss geraakt op {ticker} ({pl_pct:.1f}%). Sector sentiment mogelijk zwak.",
+                    "type": "NEGATIVE_LEARNING"
+                }
+                if not any(l['ticker'] == ticker and l['date'] == lesson['date'] for l in memory['lessons']):
+                    memory['lessons'].append(lesson)
+                print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}%")
+                closed_count += 1
+                continue  # Positie niet toevoegen aan updated_trades = sluiten
+
+            if pl_pct >= TAKE_PROFIT_PCT:
+                print(f"TAKE-PROFIT: {ticker} gesloten op {pl_pct:.1f}%")
+                closed_count += 1
+                continue
+
+            # Zelfreflectie bij aanhoudend verlies (maar nog geen stop-loss)
             if pl_pct < -3.0:
                 lesson = {
                     "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
                     "ticker": ticker,
                     "sector": trade.get("industry_group", "Unknown"),
-                    "insight": f"Verlies op {ticker}. Sector sentiment mogelijk zwak.",
+                    "insight": f"Verlies op {ticker} ({pl_pct:.1f}%). Sector sentiment mogelijk zwak.",
                     "type": "NEGATIVE_LEARNING"
                 }
-                # Voorkom dubbele lessen voor hetzelfde aandeel op dezelfde dag
                 if not any(l['ticker'] == ticker and l['date'] == lesson['date'] for l in memory['lessons']):
                     memory['lessons'].append(lesson)
-            
+
             trade['current_price'] = current_price
             trade['pl_percent'] = pl_pct
             updated_trades.append(trade)
-            daily_performance += pl_pct
+            total_pl_pct += pl_pct
         except Exception as e:
             print(f"Update fout voor {trade.get('ticker')}: {e}")
             updated_trades.append(trade)
 
-    # 3. Nieuwe trades aangaan (alleen bij topscore 9.0+)
+    if closed_count:
+        print(f"{closed_count} positie(s) gesloten via exit-logica.")
+
+    # Gemiddelde P&L over actieve trades (voorkomt inflatie bij veel posities)
+    avg_pl_pct = (total_pl_pct / len(updated_trades)) if updated_trades else 0.0
+
+    # 3. Nieuwe trades aangaan (drempel verlaagd naar 8.0 — mathematisch haalbaar)
     current_tickers = [t['ticker'] for t in updated_trades]
     for c in candidates:
-        if c.get('score', 0) >= 9.0 and c['ticker'] not in current_tickers and len(updated_trades) < 5:
+        if c.get('score', 0) >= ENTRY_THRESHOLD and c['ticker'] not in current_tickers and len(updated_trades) < 5:
             new_trade = {
                 "ticker": c['ticker'],
                 "buy_price": c['price'],
@@ -85,7 +113,7 @@ def run_evolution():
                 "pl_percent": 0.0
             }
             updated_trades.append(new_trade)
-            print(f"Nieuwe trade geopend: {c['ticker']}")
+            print(f"Nieuwe trade geopend: {c['ticker']} (score {c['score']})")
 
     # 4. Resultaten voorbereiden voor Dashboard
     data['active_trades'] = updated_trades
@@ -94,14 +122,19 @@ def run_evolution():
         "last_update": datetime.now(timezone.utc).isoformat()
     }
     
-    # Equity Curve punt toevoegen
+    # Equity Curve punt toevoegen — cumulatief op basis van vorig datapunt
+    if "equity_history" not in data:
+        data["equity_history"] = []
+    equity_history = data["equity_history"]
+    last_value = equity_history[-1]["value"] if equity_history else 10000.0
+    # Pas de gemiddelde P&L toe op het vorige equity-niveau (compound effect)
+    new_value = round(last_value * (1 + avg_pl_pct / 100), 2)
     history_point = {
         "date": datetime.now(timezone.utc).strftime("%m-%d %H:%M"),
-        "value": 10000 + (daily_performance * 10)
+        "value": new_value
     }
-    if "equity_history" not in data: data["equity_history"] = []
-    data["equity_history"].append(history_point)
-    data["equity_history"] = data["equity_history"][-20:]
+    equity_history.append(history_point)
+    data["equity_history"] = equity_history[-20:]
 
     # Alles opslaan
     save_json(DATA_PATH, data)

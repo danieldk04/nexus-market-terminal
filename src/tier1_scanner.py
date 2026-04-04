@@ -100,20 +100,31 @@ def analyse_ticker(ticker_symbol, memory):
         }
     except: return None
 
+MAX_SCAN = 300   # Maximaal te scannen tickers
+TOP_N    = 15    # Beste N kandidaten teruggeven
+
 def main():
     log.info("=== NEXUS INTELLIGENT SCAN STARTING ===")
     memory = load_memory()
     universe = fetch_global_universe()
-    
+    log.info(f"Universe: {len(universe)} tickers beschikbaar, max {MAX_SCAN} worden gescand.")
+
     candidates = []
+    scanned = 0
     for ticker in universe:
+        if scanned >= MAX_SCAN:
+            break
+        scanned += 1
         data = analyse_ticker(ticker, memory)
         if data:
             candidates.append(data)
             penalty_str = " [PENALTY APPLIED]" if data['penalty_applied'] else ""
             log.info(f"PASS: {ticker} Score: {data['score']}{penalty_str}")
-        if len(candidates) >= 15: break
         time.sleep(0.05)
+
+    # Sorteer ALLE gevonden kandidaten op score, neem dan de top N
+    candidates = sorted(candidates, key=lambda x: x['score'], reverse=True)[:TOP_N]
+    log.info(f"Beste {len(candidates)} kandidaten geselecteerd na full scan van {scanned} tickers.")
 
     # Inladen van bestaande data om trades niet te overschrijven
     if OUTPUT_PATH.exists():
@@ -124,7 +135,7 @@ def main():
 
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "top_candidates": sorted(candidates, key=lambda x: x['score'], reverse=True),
+        "top_candidates": candidates,  # Al gesorteerd en afgekapt in main()
         "active_trades": old_data.get("active_trades", []), # Behou de trades!
         "equity_history": old_data.get("equity_history", []),
         "macro": {"vix": 22.1, "treasury_10y": 4.3}

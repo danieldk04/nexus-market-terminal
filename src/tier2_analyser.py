@@ -45,11 +45,18 @@ def run_smart_analysis():
         
         if should_analyze:
             print(f"--- AI Analyse voor {ticker} wordt gestart ---")
-            prompt = f"Analyseer {ticker} als waardebelegger. ROE: {c['roe']}%, PE: {c['pe_ratio']}. Focus op Moat en Value Trap risico. Max 150 woorden."
-            
+            prompt = (
+                f"Analyseer {ticker} ({c.get('name', ticker)}) als waardebelegger. "
+                f"Sector: {c.get('industry_group', 'Onbekend')}. "
+                f"Score: {c.get('score', '?')}/10. "
+                f"ROE: {c['roe']}%, P/E: {c['pe_ratio']}, D/E: {c.get('debt_to_equity', '?')}. "
+                f"Focus op: (1) economische Moat, (2) Value Trap risico, (3) één concreet risicofactor. "
+                f"Max 150 woorden."
+            )
+
             try:
                 message = client.messages.create(
-                    model="claude-haiku-4-5-20251001", # De meest stabiele goedkope versie
+                    model="claude-haiku-4-5-20251001",
                     max_tokens=400,
                     messages=[{"role": "user", "content": prompt}]
                 )
