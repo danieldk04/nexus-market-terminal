@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXUS MARKET TERMINAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -32,11 +33,15 @@
         .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .panel { background: var(--panel-bg); border: 1px solid rgba(0, 255, 249, 0.2); padding: 20px; height: fit-content; margin-bottom: 20px; }
         .panel-title { font-family: 'Orbitron', sans-serif; font-size: 1em; margin-bottom: 15px; color: var(--neon-magenta); text-transform: uppercase; border-bottom: 1px solid rgba(255,0,255,0.2); padding-bottom: 5px;}
+        
+        /* Portfolio Table */
         .portfolio-table { width: 100%; border-collapse: collapse; font-family: 'Share Tech Mono'; font-size: 0.85em; margin-top: 10px; }
         .portfolio-table th { text-align: left; color: #666; padding: 8px; border-bottom: 1px solid #333; }
         .portfolio-table td { padding: 8px; border-bottom: 1px solid #1a1a1a; }
         .pl-positive { color: var(--success-green); }
         .pl-negative { color: var(--danger-red); }
+
+        /* Market Items */
         .market-item { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 4px; margin-bottom: 15px; border: 1px solid rgba(0, 255, 249, 0.1); transition: 0.3s; }
         .market-item:hover { border-color: var(--neon-cyan); background: rgba(0, 255, 249, 0.05); }
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
@@ -46,10 +51,15 @@
         .target-val { font-size: 1.3em; font-family: 'Share Tech Mono'; }
         .analysis-text { font-size: 0.95em; color: #ccc; line-height: 1.6; margin-top: 10px; text-align: justify; }
         .meta-line { font-size: 0.8em; color: #666; margin-top: 10px; font-family: 'Share Tech Mono'; }
+
+        /* Sidebar Elements */
         .agent-line { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.9em; }
         .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success-green); box-shadow: 0 0 5px var(--success-green); }
         .risk-bar { height: 10px; background: #222; border-radius: 5px; margin-top: 10px; overflow: hidden; }
         .risk-fill { height: 100%; background: var(--success-green); transition: 1s; }
+        
+        /* Chart Container */
+        .chart-container { height: 250px; width: 100%; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -66,8 +76,15 @@
 
         <div class="dashboard-grid">
             <div class="main-col">
+                <div class="panel" style="border-color: var(--neon-magenta);">
+                    <h3 class="panel-title" style="color: var(--neon-magenta);">📈 PORTFOLIO EQUITY CURVE</h3>
+                    <div class="chart-container">
+                        <canvas id="equityChart"></canvas>
+                    </div>
+                </div>
+
                 <div class="panel" style="border-color: var(--neon-cyan);">
-                    <h3 class="panel-title" style="color: var(--neon-cyan);">📈 Virtual Performance Tracker</h3>
+                    <h3 class="panel-title" style="color: var(--neon-cyan);">📊 Virtual Performance Tracker</h3>
                     <table class="portfolio-table">
                         <thead>
                             <tr>
@@ -116,6 +133,44 @@
             } catch (e) { return null; }
         }
 
+        let myChart = null;
+
+        function updateChart(history) {
+            const ctx = document.getElementById('equityChart').getContext('2d');
+            
+            const labels = history.length > 0 ? history.map(h => h.date) : [new Date().toISOString().split('T')[0]];
+            const values = history.length > 0 ? history.map(h => h.value) : [10000];
+
+            if (myChart) { myChart.destroy(); }
+
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Portfolio Value',
+                        data: values,
+                        borderColor: '#ff00ff',
+                        backgroundColor: 'rgba(255, 0, 255, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#00fff9',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(0, 255, 249, 0.05)' }, ticks: { color: '#666', font: { family: 'Share Tech Mono' } } },
+                        y: { grid: { color: 'rgba(0, 255, 249, 0.05)' }, ticks: { color: '#666', font: { family: 'Share Tech Mono' } } }
+                    }
+                }
+            });
+        }
+
         function render(data) {
             const m = data.macro || {};
             document.getElementById('stat-vix').innerText = m.vix || '—';
@@ -123,6 +178,9 @@
             document.getElementById('stat-treasury').innerText = (treasuryVal > 10 ? treasuryVal / 100 : treasuryVal).toFixed(2) + '%';
             document.getElementById('stat-rsi').innerText = m.rsi || m.sp500_rsi || '—';
             document.getElementById('stat-fg').innerText = data.fear_and_greed?.score || '50';
+
+            // Update Chart
+            updateChart(data.equity_history || []);
 
             const trades = data.active_trades || [];
             const tradeListEl = document.getElementById('trade-list');
@@ -133,7 +191,6 @@
                     const pl = t.pl_percent || 0;
                     const plClass = pl >= 0 ? 'pl-positive' : 'pl-negative';
                     const prefix = pl >= 0 ? '+' : '';
-                    // Verwijder extra euro tekens als ze in de data zitten
                     const cleanEntry = String(t.entry_price).replace('€', '');
                     const cleanCurr = String(t.current_price).replace('€', '');
                     return `
@@ -157,7 +214,6 @@
                     const action = (t2.recommended_action || 'HOLD').toUpperCase();
                     const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
                     const conviction = t2.conviction_score || t2.conviction || 0;
-                    // Verwijder eventuele dubbele euro tekens uit de AI output
                     const cleanTarget = String(t2.target_price || '—').replace('€', '');
                     const cleanUpside = String(t2.upside_percentage || 0).replace('%', '');
 
