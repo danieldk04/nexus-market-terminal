@@ -1,110 +1,83 @@
-import os
 import json
-import logging
-import re
-from anthropic import Anthropic
-from datetime import datetime
+import os
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+import anthropic
 
-# Setup logging - Correcte formatters
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s', datefmt='%H:%M:%S')
+# Paden instellen
+BASE_DIR = Path(__file__).parent.parent
+DATA_PATH = BASE_DIR / "data.json"
 
-def get_moat_analysis(ticker, name, sector, price, pe, div, news_summary):
-    client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+def run_smart_analysis():
+    print("--- NEXUS SMART ANALYSER STARTING (COST-SAVING MODE) ---")
     
-    prompt = f"""
-    You are a Senior Value Investor following the 'Business First' principle of Warren Buffett.
-    Analyze the following asset: {name} ({ticker}) in the {sector} sector.
-    Current Price: €{price}, P/E: {pe}, Dividend: {div}%.
-    
-    Recent News Summary:
-    {news_summary}
-    
-    Your task is to determine if this is a 'Great Business' or just a 'Cheap Stock'.
-    Address the following points:
-    1. THE MOAT: Does this company have a durable competitive advantage (Brand, Network Effect, Cost, Switching Costs)?
-    2. BUSINESS QUALITY: Is the business model resilient against macro headwinds and high VIX?
-    3. VALUE TRAP CHECK: Is the low valuation a gift or a warning of structural decline?
-    
-    Write a concise analysis (max 150 words). 
-    End with EXACTLY this format:
-    CONVICTION: [Score 1-10]
-    SENTIMENT: [Score 1-10]
-    RECOMMENDED ACTION: [BUY, HOLD, or AVOID]
-    TARGET_PRICE: [Estimate for 30 days]
-    """
-
-    # Gebruik het correcte Claude 4.6 model id
-    response = client.messages.create(
-        model="claude-sonnet-4-6", 
-        max_tokens=800,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return response.content[0].text
-
-def run_tier2():
-    logging.info("Analysing candidates with 'Business First' Moat-Logic...")
-    
-    try:
-        with open('data.json', 'r') as f:
-            data = json.load(f)
-    except Exception as e:
-        logging.error(f"Failed to load data.json: {e}")
+    if not DATA_PATH.exists():
+        print("Geen data.json gevonden.")
         return
         
-    candidates = data.get('top_candidates', [])
-    if not candidates:
-        logging.info("No candidates to analyse.")
+    with open(DATA_PATH, "r") as f:
+        data = json.load(f)
+    
+    # Initialiseer Claude
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("Geen API key gevonden in omgeving.")
         return
-
-    for c in candidates:
-        logging.info(f"Deep-dive into {c['ticker']} (Moat Check)")
         
-        news_text = ""
-        for n in c.get('news', []):
-            news_text += f"- {n.get('title')}\n"
+    client = anthropic.Anthropic(api_key=api_key)
+    candidates = data.get("top_candidates", [])
+    
+    updated = False
+    # Focus alleen op de TOP 3 om credits te besparen
+    for i, c in enumerate(candidates[:3]):
+        ticker = c['ticker']
+        
+        # Check of we al een recent rapport hebben (niet ouder dan 3 dagen)
+        existing_report = c.get("tier2", {}).get("analysis")
+        last_run_str = c.get("tier2", {}).get("last_run")
+        
+        should_analyze = True
+        if existing_report and last_run_str:
+            try:
+                last_run = datetime.fromisoformat(last_run_str)
+                # Als het rapport jonger is dan 3 dagen, hergebruiken we het
+                if datetime.now(timezone.utc) - last_run < timedelta(days=3):
+                    should_analyze = False
+                    print(f"Hergebruik bestaand rapport voor {ticker} (besparing).")
+            except:
+                pass
+        
+        if should_analyze:
+            print(f"Nieuwe AI Analyse aanvragen voor {ticker}...")
+            prompt = (f"Analyseer {ticker} als waardebelegger. "
+                     f"ROE: {c['roe']}%, PE: {c['pe_ratio']}. "
+                     f"Focus op Moat (concurrentievoordeel) en Value Trap risico. "
+                     f"Houd het kort en krachtig (max 120 woorden).")
             
-        try:
-            analysis_raw = get_moat_analysis(
-                c['ticker'], c.get('name'), c.get('sector'), 
-                c.get('price'), c.get('pe_ratio'), c.get('dividend_yield'),
-                news_text
-            )
-            
-            lines = analysis_raw.split('\n')
-            
-            # --- ROBUUSTE PARSING FUNCTIES ---
-            def extract_score(label, text_lines):
-                for line in text_lines:
-                    if label in line.upper():
-                        # Zoek naar het eerste getal in de regel (negeert sterretjes en tekst)
-                        nums = re.findall(r'\d+', line)
-                        if nums:
-                            return int(nums[0])
-                return 5 # Fallback
+            try:
+                message = client.messages.create(
+                    model="claude-3-haiku-20240307", # Goedkoopste en snelste model
+                    max_tokens=300,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                
+                # Sla het resultaat op in de kandidaat-data
+                c["tier2"] = {
+                    "analysis": message.content[0].text,
+                    "last_run": datetime.now(timezone.utc).isoformat()
+                }
+                updated = True
+                print(f"Succesvolle analyse voor {ticker}.")
+            except Exception as e:
+                print(f"Fout bij aanroepen Claude voor {ticker}: {e}")
 
-            def extract_value(label, text_lines):
-                for line in text_lines:
-                    if label in line.upper():
-                        # Pak alles na de dubbele punt en maak schoon
-                        val = line.split(':')[-1].strip()
-                        return val.replace('**', '').replace('[', '').replace(']', '')
-                return "N/A"
-
-            # Analyse opslaan in data object
-            c['tier2'] = {
-                "analysis": analysis_raw.split('CONVICTION:')[0].strip(),
-                "conviction_score": extract_score('CONVICTION', lines),
-                "recommended_action": extract_value('RECOMMENDED ACTION', lines),
-                "target_price": extract_value('TARGET_PRICE', lines)
-            }
-            logging.info(f"Successfully analysed {c['ticker']} with score {c['tier2']['conviction_score']}")
-
-        except Exception as e:
-            logging.error(f"Error analysing {c['ticker']}: {e}")
-
-    with open('data.json', 'w') as f:
-        json.dump(data, f, indent=4)
-    logging.info("Business-First analysis complete.")
+    # Alleen opslaan als er daadwerkelijk iets nieuws is toegevoegd
+    if updated:
+        with open(DATA_PATH, "w") as f:
+            json.dump(data, f, indent=4)
+        print("Data.json bijgewerkt met nieuwe AI rapporten.")
+    else:
+        print("Geen nieuwe analyses nodig. Credits bespaard.")
 
 if __name__ == "__main__":
-    run_tier2()
+    run_smart_analysis()
