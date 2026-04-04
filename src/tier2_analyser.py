@@ -1,10 +1,11 @@
 import os
 import json
 import logging
+import re
 from anthropic import Anthropic
 from datetime import datetime
 
-# Setup logging - FIXED the formatting error
+# Setup logging - Correcte formatters
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s', datefmt='%H:%M:%S')
 
 def get_moat_analysis(ticker, name, sector, price, pe, div, news_summary):
@@ -25,14 +26,14 @@ def get_moat_analysis(ticker, name, sector, price, pe, div, news_summary):
     3. VALUE TRAP CHECK: Is the low valuation a gift or a warning of structural decline?
     
     Write a concise analysis (max 150 words). 
-    End with:
+    End with EXACTLY this format:
     CONVICTION: [Score 1-10]
     SENTIMENT: [Score 1-10]
     RECOMMENDED ACTION: [BUY, HOLD, or AVOID]
     TARGET_PRICE: [Estimate for 30 days]
     """
 
-    # GEUPDATE modelnaam voor de 4.6 release
+    # Gebruik het correcte Claude 4.6 model id
     response = client.messages.create(
         model="claude-sonnet-4-6", 
         max_tokens=800,
@@ -71,17 +72,33 @@ def run_tier2():
             
             lines = analysis_raw.split('\n')
             
-            # Veiligheid ingebouwd voor het parsen van de AI scores
-            conv_line = [l for l in lines if 'CONVICTION:' in l]
-            action_line = [l for l in lines if 'RECOMMENDED ACTION:' in l]
-            target_line = [l for l in lines if 'TARGET_PRICE:' in l]
+            # --- ROBUUSTE PARSING FUNCTIES ---
+            def extract_score(label, text_lines):
+                for line in text_lines:
+                    if label in line.upper():
+                        # Zoek naar het eerste getal in de regel (negeert sterretjes en tekst)
+                        nums = re.findall(r'\d+', line)
+                        if nums:
+                            return int(nums[0])
+                return 5 # Fallback
 
+            def extract_value(label, text_lines):
+                for line in text_lines:
+                    if label in line.upper():
+                        # Pak alles na de dubbele punt en maak schoon
+                        val = line.split(':')[-1].strip()
+                        return val.replace('**', '').replace('[', '').replace(']', '')
+                return "N/A"
+
+            # Analyse opslaan in data object
             c['tier2'] = {
                 "analysis": analysis_raw.split('CONVICTION:')[0].strip(),
-                "conviction_score": int(conv_line[0].split(':')[1].strip().split('/')[0]) if conv_line else 5,
-                "recommended_action": action_line[0].split(':')[1].strip() if action_line else "HOLD",
-                "target_price": target_line[0].split(':')[1].strip() if target_line else "N/A"
+                "conviction_score": extract_score('CONVICTION', lines),
+                "recommended_action": extract_value('RECOMMENDED ACTION', lines),
+                "target_price": extract_value('TARGET_PRICE', lines)
             }
+            logging.info(f"Successfully analysed {c['ticker']} with score {c['tier2']['conviction_score']}")
+
         except Exception as e:
             logging.error(f"Error analysing {c['ticker']}: {e}")
 
