@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-04T07:31:52.447627+00:00",
+  "generated_at": "2026-04-04T07:46:35.323643+00:00",
   "macro": {
     "vix": 23.87,
     "treasury_10y": 4.31,
@@ -7,12 +7,68 @@
   },
   "top_candidates": [
     {
-      "ticker": "EIX",
-      "name": "Edison International",
+      "ticker": "T",
+      "name": "AT&T Inc.",
+      "sector": "Communication Services",
+      "price": 28.33,
+      "dividend_yield": 3.92,
+      "pe_ratio": 9.32,
+      "eps_growth_3yr": -7.2,
+      "news": [
+        {
+          "title": "Google News",
+          "link": "https://news.google.com/",
+          "date": "Recent"
+        },
+        {
+          "title": "AT&amp;T Inc. stock underperforms Wednesday when compared to competitors - MarketWatch",
+          "link": "https://news.google.com/rss/articles/CBMiywNBVV95cUxPOHhBMld5cm5VempaeEV5OHNGWUg5SmItWENqUGZ0YlQ5ZkwxTVBacUtETHUwLUNnTVpJbzZ6ZVM4UjEtb1dUTncwamRQbzI1Z1Ryb3hvcFFXV0xMR0xpc3lFTy0xY25raU5lZUdmMF9RZGhPcFgxY3g4elI1ZXd4SWFVNXhHZE1Xd0s5VWk4RDdxeWpBRW4zQi1NTVFwNE5nRVFPOUE3aWtNcUtNZWRuZ1RET0JYeTJWcVphRVFsVVdDU2lKS1BIaG4xUndkMkFxMFpJTjlPLTZyb0JMRnlqMENNVHllVW5zUEJlbS1ZUTYxbFdGSmt1RG1RaHF1Y1NSdTc5Rk14QV9oSUNUZnBvZTBfVzl3cVJjSzFaTEF0Tk5rd0l4XzRHQXR5M3JlcjhpdjIxcFpIT0RNX1JIX29wZWRnVTQwWFhDVG5nTDc3RzFhT0swUXhuSk4tWGNYWjljalVyUzBPSnJGOVBKVDZRNGtoWWd4X2VRbzdvdk51MDhQeVpfOG9jSXhNdXVQN2NVYVUzS1cxZm5RMzR3MjRSamVIYXdoMzdwNnl2cGdNTFpmVkhiX200SThIc1VjYllJQjhYUDlHZTdXQnc?oc=5",
+          "date": "Recent"
+        },
+        {
+          "title": "AT&amp;T (NYSE: T) SEVP gets 193.722 units, reports large trust stakes - Stock Titan",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNWmlOQnN6dTVJMHIyOHpQbTlSbExEdWZGQ0RuTGY5S2tLQmFSUnhhU1B6RDcya3Q2X0ZKTnlyNWwwbllnLURDN1pzV0t1bTZralFFZzVzdnp6aG1wLXhJV3l2WTdxQnFPNmFmMnR2WkRZUWxoUTAzYm9lYW9ZQzFBY0NUUzNiMnFvUTl4QjFhX2FQMnZwSmxlbGtJR093WFFw?oc=5",
+          "date": "Recent"
+        }
+      ],
+      "score": 9.9,
+      "scanned_at": "2026-04-04T07:46:28.594740+00:00"
+    },
+    {
+      "ticker": "PYPL",
+      "name": "PayPal Holdings, Inc.",
+      "sector": "Financial Services",
+      "price": 45.34,
+      "dividend_yield": 1.24,
+      "pe_ratio": 8.38,
+      "eps_growth_3yr": 28.2,
+      "news": [
+        {
+          "title": "Google News",
+          "link": "https://news.google.com/",
+          "date": "Recent"
+        },
+        {
+          "title": "A Look At PayPal Holdings (PYPL) Valuation As Board Changes And Lawsuits Draw Investor Attention - simplywall.st",
+          "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQb2RQWW85RVF0d2s5cUpUaHVadlVHVVF2MFBvVlJ4RlFHQURVRnpTVHdTMXllMEQ2TE5VOGtzLTFFTTBCUGhjbUV2SjAzVzF1VFMyTS1JdHBoRVMxcFM0dEF2WlhoQmJEMHJpaFQ5WEZTWDdjazlObGlUUW5BektzMXVjN1BEM2JFdTQxVEhHZVZtNldNZ2xFVHNycHB1SkRydFlJUmoxTERXeloxRlNhRWo2RV8xVHd1MnE5MFBEcHpkUmlmVW9ScTJFT1JKcU5OeExhTTVXWFF0Nng5em91X2Jn0gHnAUFVX3lxTE9PaDI2X3hnWkE0S1Vkb2NuRWZjYVc3ZnRmanZOWkxHOFRlUHNYaTVKS3FlemtvYy1IT1Vod2lUR2dWRzFyaC1ScHlFMkp5bkoxZ0h5M3l6RmFkSXhUNGZxaklhZFRZM18yR0JYZDBTQW01VlNGVXpQdFNsbGxTaVZXcG5XaFBOVW1PdkZCYkw1M0ZDQmctaEt2Tkg2cFdTdW90RXI0TzN1UGE5SlhpZXVEeXotSXoxTXRGWEpGcHlwSDJJRG5xRHNUUEZWTmY4VDI1bThwMjc5SFNlZEpQQVJfeHdzTG5Hdw?oc=5",
+          "date": "Recent"
+        },
+        {
+          "title": "PAYPAL HOLDINGS, INC. (PYPL) - MSN",
+          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4zdmFMTlBzZXM0cXZrZVh5N29KekZZVmQ0Z3hKbUZGV2F0SWhXRDFobVNGc1BEaDVveG9HQ1lfOWxRamJ0dHFuTFFRM040Zk1EQnpFLXZ0bDVfbl9tOFhobk1VQ0RMS0VqRldXY2RFRHpIb0ZxNWJR?oc=5",
+          "date": "Recent"
+        }
+      ],
+      "score": 9.4,
+      "scanned_at": "2026-04-04T07:46:30.427783+00:00"
+    },
+    {
+      "ticker": "ES",
+      "name": "Eversource Energy (D/B/A)",
       "sector": "Utilities",
-      "price": 73.46,
-      "dividend_yield": 4.78,
-      "pe_ratio": 6.36,
+      "price": 69.47,
+      "dividend_yield": 4.53,
+      "pe_ratio": 15.23,
       "eps_growth_3yr": 100.0,
       "news": [
         {
@@ -21,36 +77,27 @@
           "date": "Recent"
         },
         {
-          "title": "What Edison International (EIX)'s Upbeat 2026\u201327 Guidance and AI Grid Bet Means For Shareholders - simplywall.st",
-          "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPcEVVNnFmREIzYWtOQS1LVlU4U1VEbGhaaGx4VUY4Z2daRjFfR2JRUTkwZDBYbURDT0tPVVJXQW9mWFlyZE1vaGZCbGU5eV9xb2NOTDl5a1NtQmV5VlRtXy1TNy1xaThNMjREZHdNbVR5Rm81LVhVWWlxX3dNQzhSYUtERGMxNHVJMzdpVVhDaVV2WXQyMEpaYmlEbk9Wcnh5OGh1dkRZcWhTcE9XVzdfVDJIbUhpc25LeXkybnp3ZWw1VkNoTlNScXI5enFRcHdRS1Fv0gHYAUFVX3lxTE1mWmw2RUxyVWZZRjE2eTNPSElEczNTN1BqNldZZmY4NkR2Wnd0UWFfMUtTVFRPWTByblNpUWplV0JXeGk5RDFoVWlMbDVUREJaM2R2ZkxhV1k5VlJFTWVsWEt3eWVCVlZlVGhMS3BMc2N5NEUyQkc3dC1nY2xIVjNhTnI2MkU4WFVhYmpycHo1dUhpbmtSM1dXM2VtenhRTm56WTNQZFVFMWFBSC1WNXhSODdleTlPWU1JbHhjbGotYUZ2anAxOG5yZTZ5SWFheU12eEtjQjRGLQ?oc=5",
+          "title": "Avoiding Lag: Real-Time Signals in (ES) Movement - Stock Traders Daily",
+          "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQNm5HaUlsNFBLRGstZTRiN3dSWnV2bXBpTV9iWkwxeXU5WGRnN1ZDLW9QT29KY21IZ2ZLZE9CbFA4UW93OXBGVG5ZLXZTeVFBZVd3ZjlzT2NHbW56UkhhWkhYTE5BX0pienlGekNoRFhJUTl5MFBpa1U3cXc3elBtX2JWVzZfY09oYmJVZ0J2WGYtLWY4dDVqalJQcm0ydTRDTV9OUUtJdkhQMnFneVQ4Nk15N3V1Q0FoaHEyMzA4SnpOc2pGbGc?oc=5",
           "date": "Recent"
         },
         {
-          "title": "Edison international stock hits 52-week high at 63.21 USD - Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPNWE4aTlmVDFrckNRdlM3MjhnSWlUOG4wdm9UTEFqRXAxUmpFM2ZLWUlSSGR5LWxEbF9kOFFHZ2k4NDNCcG1nd0NLZDBud1lCYm14OFhmRVh0RmpNUTZrMUtIZWtCUTY0TmttOXZIZWlMZnI3TzJjblB0V3FQRzhVcHZrQTNjV3JQd0JSR3NtcC1LdXZnUU9CdVNxWGhQbFhkNkNneC1mS1JWSE52U2gzN2xB?oc=5",
+          "title": "Eversource Energy Stock: Stable Utility Leader with Strong Dividend Yield and Growth Outlook for Inv - AD HOC NEWS",
+          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQNWtUQVZvWmx4YnNlUlNRVVo3ekFXa3ZiM1FpNG4waC1XQTJ0UG9OdWhUSkFEdjY4UWJYUkszNVJMYzJRd1NHdUhxT2FHUmJtaGNqXzNQOWpqX2dvQk9OUkZzTHRKMGpvazl6Z0VaYzhzeVhFV1NRY2J5dzh5VWQyU1RNQk9FZU93TndaekxhdkotcFVkaGNpNl9mdkJjdU5kT09JZVo4Vlp3blBiUVB0OGNWSWRXenRFNTZaNFBTcDRLSHNa?oc=5",
           "date": "Recent"
         }
       ],
-      "score": 10.3,
-      "scanned_at": "2026-04-04T07:31:50.104449+00:00",
-      "tier2": {
-        "analysis": "EIX presents a compelling value case with a very low PE of 6.36 and a strong dividend yield of 4.78%, suggesting the stock is attractively priced relative to earnings. The stock hitting a 52-week high at $63.21 signals positive momentum and renewed investor confidence. Upbeat 2026-27 guidance combined with AI grid infrastructure investment thesis adds a meaningful growth catalyst, positioning EIX well for utility sector tailwinds driven by rising power demand. VIX at 23.87 indicates moderate market anxiety, which typically benefits defensive utility names. The scan score of 10.3 reinforces algorithmic bullishness. Key risks include wildfire liability exposure in California and regulatory headwinds, which partly explain the depressed PE multiple. Overall, fundamentals are undervalued, sentiment is constructive, and the AI/grid narrative provides a secular growth overlay.",
-        "conviction_score": 7,
-        "sentiment_score": 8,
-        "recommended_action": "buy",
-        "target_price": "66.50",
-        "upside_percentage": "5.2",
-        "analysed_at": "2026-04-04T07:31:59.347435+00:00"
-      }
+      "score": 9.4,
+      "scanned_at": "2026-04-04T07:46:32.483463+00:00"
     },
     {
-      "ticker": "VICI",
-      "name": "VICI Properties Inc.",
-      "sector": "Real Estate",
-      "price": 27.66,
-      "dividend_yield": 6.44,
-      "pe_ratio": 10.6,
-      "eps_growth_3yr": -1.6,
+      "ticker": "BAC",
+      "name": "Bank of America Corporation",
+      "sector": "Financial Services",
+      "price": 49.38,
+      "dividend_yield": 2.27,
+      "pe_ratio": 12.96,
+      "eps_growth_3yr": 15.7,
       "news": [
         {
           "title": "Google News",
@@ -58,36 +105,27 @@
           "date": "Recent"
         },
         {
-          "title": "VICI Properties Inc. (VICI) stock price, news, quote and history - Yahoo Finance UK",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9NSW5UaGZTaU52QmlLczVJWlRsbDYtSnM1Mnc5QjBIdWc1bVdkZFFGdl9peTZXcXpURVFvN2JXZUJQNlBIQUN1WlhYX2syUVJTaFE?oc=5",
+          "title": "Jefferies Touts Bank of America Corporation (BAC) Interest Income Outlook - Yahoo Finance",
+          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQb2duN1paU2l1U05ONkdhdHViSGtmZmd1Q3M4VHpUYU5CYVFfbTVYZzFjcWZTcEtra05pOFo4UHdET3pHMDFIRGhSR3J6WHlZUmpkMGIzeHRvRmladG0ycEZzcUhzWEdDT1R3SnVXZmpxMnpvNnRBU1pIVkpjT091SFNRWkZlUlQtMV81RWZwRUVHa3lCNTBFd3ExOTB2ZWRwZUhFamFjMks?oc=5",
           "date": "Recent"
         },
         {
-          "title": "Cantor Fitzgerald reiterates Overweight on VICI Properties stock - Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOMEkzb0UxdjRjaXVkM3pwT01VRXZXd3NNbWs3RU9ubEJlSW1tUUN2bjFEUjFPWGg4SEI1cnhKZXB6Q2JLa1drM2lrVHFZZmVOTi1acDd1U2Z5eVV0c0FOSGt2cTltd1BlZjZpTG1CeVd6TXJFdHNsYXlOWVY3WDg1LUFvWTh1Qmpvb2dlMHpzREVuOG0tM3JWZTc3NUVIODRCXzd2TGlSb1A4R3QydXhoZWV6Vm5BeVpyVE8zbHNmcTlxZw?oc=5",
+          "title": "Dorato Capital Management Acquires New Position in Bank of America Corporation $BAC - MarketBeat",
+          "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNSlgxdnpPZVUxTld4RkhYVno3YjU4Z09PM0NCZjFvaWwwRXZaMEpSTnBzcE84bF9TWUdCam9oQklMLU82NDN4Y1FmRE1MYzdxWHYxSms0ZGNWWHN5VTM4VXhhMnQ1Znc4WWJMNVRjMEYzUW9IbTE3anEtcjZlZExndWRHTzFIOVRvMkNMQzJlcThJWGVlTEJXdFhEMGdvMnF0MjRpUzhuLVplM1R4VUUtX2pKWTV6WUFiTFVFVWpwYXI2ZlI3ODIzaE1mWEhpVFVMMGdSdnR6MTZuc2c?oc=5",
           "date": "Recent"
         }
       ],
-      "score": 10.2,
-      "scanned_at": "2026-04-04T07:31:47.716997+00:00",
-      "tier2": {
-        "analysis": "VICI Properties presents a compelling value case with a 6.44% dividend yield and low PE of 10.6, suggesting undervaluation relative to its REIT peers. Cantor Fitzgerald's reiterated Overweight rating adds institutional conviction. The elevated VIX at 23.87 introduces macro uncertainty and broader market volatility risk, which may pressure REIT valuations short-term due to rate sensitivity. However, VICI's gaming and experiential real estate portfolio offers durable cash flows and long-term triple-net lease structures that support dividend sustainability. The scan score of 10.2 signals technical strength. Overall, fundamentals are solid with modest near-term headwinds from macro volatility.",
-        "conviction_score": 7,
-        "sentiment_score": 7,
-        "recommended_action": "buy",
-        "target_price": "32.50",
-        "upside_percentage": "5.2",
-        "analysed_at": "2026-04-04T07:32:08.110029+00:00"
-      }
+      "score": 9.2,
+      "scanned_at": "2026-04-04T07:46:31.783619+00:00"
     },
     {
-      "ticker": "PHM",
-      "name": "PulteGroup, Inc.",
-      "sector": "Consumer Cyclical",
-      "price": 117.29,
-      "dividend_yield": 0.89,
-      "pe_ratio": 10.55,
-      "eps_growth_3yr": -45.1,
+      "ticker": "LDOS",
+      "name": "Leidos Holdings, Inc.",
+      "sector": "Technology",
+      "price": 158.82,
+      "dividend_yield": 1.05,
+      "pe_ratio": 14.27,
+      "eps_growth_3yr": 15.1,
       "news": [
         {
           "title": "Google News",
@@ -95,147 +133,27 @@
           "date": "Recent"
         },
         {
-          "title": "How Investors Are Reacting To PulteGroup (PHM) Expanding Into Northwest Florida Amid Mixed Earnings Sentiment - simplywall.st",
-          "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNVC1nSXlDOTlaWFFvYTlsVGlNU1FsZGZteDFXc0tmWHJkTWVHU0syQm9jb0hMQnVuRVE4OHhyR0ZOS3REZkdLX3dSalBkdkQ1bUdUNHN2Wm5KV2JOQWFqMVhaVTZtVVgtSG5SOTFKcVpKSU8tZ19EWjZlZFZSUUNldk1uODEtVkN3Z3REaDZOeXd2S0VTV1NyOHRGaFFfSF9PalZpWHlwT1lqZGNydDZRSHBGbmJYc0p2VlRJMzdRRFp1MHpDdDltTlB0MDNmTTTSAdQBQVVfeXFMTVpDdlFvaXFBendZWFRyU0Q2ZWszMVBJRnVxSG9DMGdqM3lpOVIyM0dQSkRLSkZIUUI1T291V3hxd1haeEM0VmhZVjVkLUpOTlhfTFlVWjhNTG0wdnIzUTRGR2pUMmZRSGg5VUw1LVlaME5qdkVkVE1OQnUzX0k5ZEhpd3dNelRQM3JUQngzeTZOdWIxZ19zWUF3OHBXTHlPWmpqVnpYSXh0akoxRU11UzZKZDBIeHMxektudklGa2ZyRjdDSmhjVTFVdm0zUkdycFNkLU0?oc=5",
+          "title": "Leidos Holdings, Inc. (LDOS) stock price, news, quote and history - Yahoo Finance Singapore",
+          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBBOGdJdWlkMjdOQWZrQ2ZBZTdtT2NrbW1FVEU2NDNQaEV1eXlUT21CdVd6eWN2YjYyaFFtemp6N19HVDd1SjN5VFl0OUNkX01HYlE?oc=5",
           "date": "Recent"
         },
         {
-          "title": "PulteGroup Inc. stock: Why homebuilding strength matters now - AD HOC NEWS",
-          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQWFJWWWMzSmdQaHJ0TzhmWUd0ZWRNZ29KYl9zSWlKazBkalR6SnRMUjlfSjlqVnRpOEVsNG42eVlCam1XQ0VDcEF5Nkt2Zm9UeHJaMTEtOE54QXZrZHZqMGtDV0NwTkhKNnp2MGl0R2gzd2ZRYlBiemg1ZmNaVEdxTjRkRk5QRFd0TzFndVhQbEtUVDM4UFpRUlFXUFYxZ0lGWlVlckZkRFpwMEQ0Q3g1YTVB?oc=5",
+          "title": "Is Leidos Holdings (LDOS) Offering Value After Recent Share Price Pullback? - simplywall.st",
+          "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQd1IxamZtOXBuWjlFeFhvVjEzZmRJbXE3ZVR0MHJydG1vUUswNWYtUTJvaGlGMUpkcEFGZXZJTE9OYTFxbTlhSHp3VFVvd0VTTFZFMmtaZUF5WlZzVXV5MWFNRFZVckdqVEFyZmlDVjhrdnUxdnZNZ3FmaC1RNWJ0YlptTElQeHhUcXFJbk9xQXk4YVhHYkZYX3N5a3JmVUtvS0ZZVTRmbWxyZ2I3YUpJbENQY0toZThYdTFBRUJWWEFTZDJ2NEpLZkFGWXJXNnFIYW9nZHZTLXFtY3PSAeABQVVfeXFMUFFyS2lhdW9MZVVyRjBTamdCNWZJc1g4S1Jsb2ZuRFZ1SHlObmJMdTFkWHFVSXNyTFMxQ01IY0QtSUVWMUh3V19fVHR4Y1pKRktVUWI0ek9XRGtwUl9Zc3pPcEZBZmYzZElQVVFObkRmZDFPZGhRbkNFU3ZOaHRFazE1OFF2MHpiQ3JJUFJncERhWklyV3pyVC1WSWhUenpwUWJwNDM5WXNyZVIybzBBd0V2WWhkWG45Yk9fTXNDbEowZnhjRVdPbUlPdW5ZaTdVMkZaLTFCcDhoNlA4SW5waUw?oc=5",
           "date": "Recent"
         }
       ],
-      "score": 9.1,
-      "scanned_at": "2026-04-04T07:31:41.575292+00:00",
-      "tier2": {
-        "analysis": "PulteGroup (PHM) presents a compelling value case with a PE ratio of 10.55, well below the market average, suggesting the stock is undervalued relative to earnings. The 0.89% dividend yield adds modest income support. The scan score of 9.1 indicates strong technical momentum. News flow is mixed \u2014 expansion into Northwest Florida signals growth ambition, but 'mixed earnings sentiment' introduces near-term uncertainty. Homebuilding sector strength is a positive macro tailwind, though elevated VIX at 23.87 reflects broader market anxiety that could compress homebuilder multiples. Rising rates and affordability concerns remain structural headwinds for the sector. Overall, fundamentals support a bullish longer-term thesis, but macro volatility warrants caution in the 30-day window.",
-        "conviction_score": 7,
-        "sentiment_score": 6,
-        "recommended_action": "buy",
-        "target_price": "118.50",
-        "upside_percentage": "6.2",
-        "analysed_at": "2026-04-04T07:32:16.778297+00:00"
-      }
+      "score": 8.8,
+      "scanned_at": "2026-04-04T07:46:25.897855+00:00"
     },
     {
-      "ticker": "PEG",
-      "name": "Public Service Enterprise Group",
-      "sector": "Utilities",
-      "price": 81.82,
-      "dividend_yield": 3.28,
-      "pe_ratio": 19.39,
-      "eps_growth_3yr": 10.1,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Public Service Enterprise Group - The Upside Remains Uncompelling (NYSE:PEG) - Seeking Alpha",
-          "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQSnRxSUNZZ1VwNWNNQ016bjJsWFNqUmxPcXJaMDN5ZGpad3BSN19Zc0I1a1NrM2lNX0hIQmhtQkFMU0NXTWliaXQtZW95Z1p5TktIRjd6RDhkOTVOeThTREdJcmwwMVJvVXM4SGw2a09USUlfYW9lNkZvMjdGeFdqdzlZTXpxMkNvU3hHVnlLRzdrWWI4eDlqRVI3bkZfQ0I3WlE?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Ralph Larossa Sells 2,083 Shares of Public Service Enterprise Group (NYSE:PEG) Stock - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOSnBNN194VnhBNERja2lucFVaeW8xMm9tZE5tVmY3enR6U1Z1TWJfSEM4ZWVQRldmVXdqcUdNaFd5cDBZb0ZUNVFwdkJxZGl6Tm41MnZvX1g3emhQTURNYm0wUzF3MVdtY1hveV9ndVhEc0xYb3BHaDNpNWU1LXZqc2R2N3JnZzN5OHQ4ZkFYTTNYSWFaU3oyNkltRkc5LXhUbElSVk1aVXlZR1Z5VWY0X2VTYi1jb01QSmZuS0g4MjNQaDhIZlFndmJhUnU4YlE?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 8.7,
-      "scanned_at": "2026-04-04T07:31:46.857710+00:00",
-      "tier2": {
-        "analysis": "PEG shows reasonable utility fundamentals with a 3.28% dividend yield and PE of 19.39, broadly in line with sector peers. However, news sentiment is mixed-to-negative: a Seeking Alpha piece flags uncompelling upside, and insider selling (CEO/exec offloading 2,083 shares) raises mild caution flags. Elevated VIX at 23.87 suggests broader market uncertainty, which typically pressures utility valuations despite their defensive nature. The scan score of 8.7 is constructive but does not override the headwinds from insider activity and analyst skepticism. Utilities like PEG tend to be stable but offer limited near-term capital appreciation in a rising-rate or volatile macro environment.",
-        "conviction_score": 5,
-        "sentiment_score": 4,
-        "recommended_action": "hold",
-        "target_price": "88.50",
-        "upside_percentage": "2.1",
-        "analysed_at": "2026-04-04T07:32:25.372302+00:00"
-      }
-    },
-    {
-      "ticker": "HRL",
-      "name": "Hormel Foods Corporation",
-      "sector": "Consumer Defensive",
-      "price": 22.09,
-      "dividend_yield": 5.3,
-      "pe_ratio": 24.82,
-      "eps_growth_3yr": -5.1,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Assenagon Asset Management S.A. Has $415,000 Position in Hormel Foods Corporation $HRL - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQOVA2dy0tanhJTUt3QndnajBBcW9KYVpjR2hKcEtBUTRQYnJKVFlwZmxLUE9qVjBjcHQxQlRBMlhNaUhZM3JKN3A4X1FfZ2FOa3EtVnEtVjJFdm84VzE2U1FBQ1pOcmhjUTMzbHpiVl9rdU1BN2VJY1JkVVdjcGlyRW5rbl9FYWpQZFhkREFmVFJ5b1laUjFxTjAxWV8yTWxpdHk1UlYwemxaU3NPZGpNdHozam5ZaGlXdHJIXzBBOFVvZjVqaHpYQXBBcnRkTE1wVnlqYUFDaFBmZw?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Hormel Foods Corp. stock underperforms Tuesday when compared to competitors - MarketWatch",
-          "link": "https://news.google.com/rss/articles/CBMi1ANBVV95cUxPZDNNUjQyaGRON1B4SHNGQWFyMU1hZXFKNXlTaVlHVWNkVGFuZ2NlZV82b05TN1VMa3hGLXdVNGo1YnRVRmJwR05faENzajA2ck0yNTNXRXI3N3VkU0JqUVMwMlRRTnVOQkRCcnBLaEowV3FEWG1iaDZ6NGZocngwdDJKYlZiMFV1dUtoUk1KMi1wbjdES0ZjUGxJZGdYRGtLczh0MFlWb1ZpQnVldG1VODMtT0FzZUtPeUMzT0hGbzZhLXl2N3Y2NDY5al94YnZmdjFmRWd1YUZNbkpuaE9IU3ItLVFFSFNKN3J4enlnX0RjaEI1MGRMVVpPanZWWm1ZR2pseU1Ec0JyNklfQWpNcnA0a3o3XzdWS1g5Q3NSRktQZllmYnlFUi10eVQ5dU83UFFGZF9TSTJxZWVTaWUzaDJBYzNhZmdtblRYQXRzUV9aQ25Rb29SajlzTUg4WHVaaTVVSU1vNEtjdnhUdUg4bGowVTR6Sm1Cdzljelg5Nmx6YUY5dldzdFJpMXBramNERnhJbWZKTWdQM3hnMlg2WC0wcmZJQ2Z0bUhyYWVBa3lsWjBsNVE2S3EzRWpIU2FPTWpZNV9qZ0I4LUxtNC1pdFZTVUI?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 8.6,
-      "scanned_at": "2026-04-04T07:31:40.665152+00:00",
-      "tier2": {
-        "analysis": "Hormel Foods (HRL) presents a mixed picture. The 5.3% dividend yield is attractive and provides income support, but the 24.82x PE is elevated for a slow-growth consumer staples name facing margin pressures. News flow is sparse and mildly negative \u2014 stock underperformed peers on Tuesday, and the Assenagon position of only $415K signals minimal institutional conviction. VIX at 23.87 reflects elevated market anxiety, which typically benefits defensive staples but also signals broader risk-off pressure that could compress multiples. No strong catalysts visible. The scan score of 8.6 suggests technical momentum, but fundamentals and news tone do not strongly support near-term upside. Dividend support limits downside, making this a cautious hold rather than an aggressive buy.",
-        "conviction_score": 5,
-        "sentiment_score": 4,
-        "recommended_action": "hold",
-        "target_price": "29.50",
-        "upside_percentage": "2.8",
-        "analysed_at": "2026-04-04T07:32:33.993309+00:00"
-      }
-    },
-    {
-      "ticker": "HD",
-      "name": "Home Depot, Inc. (The)",
-      "sector": "Consumer Cyclical",
-      "price": 321.63,
-      "dividend_yield": 2.9,
-      "pe_ratio": 22.62,
-      "eps_growth_3yr": -14.2,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "\u201cCautious Attitude\u201d Among Consumers Prompts Drop in Home Depot Stock (NYSE:HD) - TipRanks",
-          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPWWJrUVNvdFNOT3JZclJQZWYyS2RJRW9adU5qYXM3SUZ2LVp0RUs0akhWemRMQzh2Z3l6X01RYTNvOUlMYjUwZWllNURPOUFlN2tQMnVlalg2SEM3cmxuMEpJSUVwZHFmbFJoSHRMUDFBcDZ0RjF5UFpvQXBnbUdhVm00UWJxTURGSmFyYzd6ZzFvSE1aU3J0Sy1RcnEtNlFFbmVmaXVn?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Home Depot stock hits 52-week low at $320.22 amid market pressures - Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNcDdWYy13WHprSWhDa2Q1NHdhaXUwWVRfRmxOWjhob1Fwc1p0ZmNQRmtIMDNrVldTTU16SkdxYmxTUkFDcW9QeWt1ODRHRFRqWkRhcWFGQkJLS3pQeDRWdHhBRVZaVVg0RUtaeWtXZnlvSmNWWXp5LVp3U3dneGsycHdfelhRNjhhMGdIbW5BbnVtQWFxZU41djhkQ0xtNzdmcVBzMUU4TVV5V0Q4SjB0Qkl6ZURMTnRnT2JncQ?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 8.3,
-      "scanned_at": "2026-04-04T07:31:45.910743+00:00",
-      "tier2": {
-        "analysis": "HD is trading at a 52-week low of $320.22, reflecting broad market pressure (VIX=23.87) and weakening consumer sentiment toward home improvement spending. The 'cautious consumer' narrative aligns with macro headwinds \u2014 elevated interest rates suppressing housing turnover and discretionary renovation activity. Fundamentals remain relatively solid with a 22.62x PE (reasonable for a blue-chip retailer) and a 2.9% dividend yield offering some downside cushion. The scan score of 8.3 suggests technical oversold conditions may present a value entry, but near-term catalysts are lacking. Conservative 30-day outlook anticipates modest recovery toward fair value, contingent on macro stabilization.",
-        "conviction_score": 6,
-        "sentiment_score": 3,
-        "recommended_action": "hold",
-        "target_price": "332.00",
-        "upside_percentage": "3.7%",
-        "analysed_at": "2026-04-04T07:32:42.712868+00:00"
-      }
-    },
-    {
-      "ticker": "NSC",
-      "name": "Norfolk Southern Corporation",
+      "ticker": "PNR",
+      "name": "Pentair plc.",
       "sector": "Industrials",
-      "price": 288.0,
-      "dividend_yield": 1.88,
-      "pe_ratio": 22.57,
-      "eps_growth_3yr": -12.1,
+      "price": 85.82,
+      "dividend_yield": 1.21,
+      "pe_ratio": 21.84,
+      "eps_growth_3yr": -0.2,
       "news": [
         {
           "title": "Google News",
@@ -243,36 +161,27 @@
           "date": "Recent"
         },
         {
-          "title": "Norfolk Southern Corporation (NYSE:NSC) Given Average Rating of \"Hold\" by Brokerages - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQVEFXZEo0QmRjUnJfZS1nTGQxbUlKUWhYRDhyTlVIQnVYaGwxNXl1WHRMb3d0X2FaRURIcE9kZ3hialpmb0xHT0FWb2kydlJvcHdndndvX2UxNWtBU1A4ZkMyR0JlSmFvN3lFMklJVnI5VzczaE9jVGpNcGxNR1Z0aTFWanp3ZktjRF9uZHV4Ni1LOFY1Zk5CcHhYNDZHWmIwb2NoTDc3M3VlTFpnX1lXX2JoajJ1M2dVdWNIb1JsQzJuMTU0cXZpZmxzY1hCUQ?oc=5",
+          "title": "Pentair PLC stock outperforms competitors on strong trading day - MarketWatch",
+          "link": "https://news.google.com/rss/articles/CBMixgNBVV95cUxQMER4clF2R0NJdGhnUWdBN0dtUjNMWmdpdFZ5YXh1WVFaSXdzd3VXcEpOUXhoaVpFaHJIcnlXZlkzNUtmRUo0d3hQRTU5am5MZW5OZUxTdHZpTldOSUc4N0l2bzVRa2VrNGdYOFVGaVJUM3k4ZXZYcVUwbGxsUER6d045VFJHa1dwWUstUzhYOTV5WXREMUhialNrY1pwVXNJZjVGeFMxRDB2MUJsNHZlWmdpRlEzMjdKbmlHOXJnTVlablgwS09IZHNFcG1JLUd4OUpxRkx4STIyVmlpUHdvQWdVcjN4dzk2Z2tZMThudUNKRk51ZjFWTXdjTm1sUzVtX09MTEtrZnhCaERSb2tYUWJoU1NPU2FudVZNTTlpLTFOdHZEMjNHWVJveU9lWXNibmFVQk5YZmlaSnluM2l4RWhLY0pzazdHWXhyOE5LeFd2YVRJME5EY3JqTzdYNkVHbkNFS0VWcDRwLVFvajV0M0JubE9kTEdmTE5oYnhlV3VWVUlJTHFBaWQ3OFVfQW1Cd2JWWUplQTZlUktVdjlwWWctOGF4aWpDeHZscW5PeVAzVHJYOGdxUlBEOTV6Y01jMjV1djV3?oc=5",
           "date": "Recent"
         },
         {
-          "title": "Norfolk Southern stock hits all-time high of 302.42 USD - Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYk4zY2UydF9QY2hNV2Z3dktmQzhtX201ZGUwdVI3X080dEY5UFNvbW02X0l4X1VCbC05RDVPdTdiRFlSRGZJbG9QLW5kTmxYb1BETHg5T28tVllmNzlscHBvOVhhSjZLRXZqeF9ia0swQkwxbGsxYlVCWjlYQjF0RHBiaHM1cnFyTHlqdGRwZEx4Q0FyeXU4bzFTUjZFR21aNUdnZ3p4OGpnWWZjUHpJ?oc=5",
+          "title": "Pentair Showcases Impact and Progress in 2025 Sustainability Report - Business Wire",
+          "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNMjVlZmRJcnBvS2V2dFc5NzFZNEpreENDZl9RSkZ2TjlUdngxNml0MFhOSTlaZTQ0UG1kTkdkLWRQUXN0UmpFMG5halhTZHhTQ2gwdWIzRHEza1FTdUo0M3Rnc3Rra19FSGk0Y3pmLWpfWkZzVnhlRGlKcER2M3NTYXBHYkpBVURIVWVxUDRzZXlXRkw4MlpMMml3U2RHcGJsTFhHb1RLRUI1ejNlbW52X1Qwcnl6Z2g5WEExdWg3cnQxQQ?oc=5",
           "date": "Recent"
         }
       ],
       "score": 8.1,
-      "scanned_at": "2026-04-04T07:31:38.513568+00:00",
-      "tier2": {
-        "analysis": "Norfolk Southern (NSC) presents a mixed but cautiously optimistic picture. The stock recently hit an all-time high of $302.42, signaling strong price momentum and bullish technical action. However, the average analyst rating of 'Hold' suggests the street believes much of the upside may already be priced in. Fundamentals are solid with a PE of 22.57, reasonable for a Class I railroad with durable earnings, and a 1.88% dividend yield adds modest income support. Elevated VIX at 23.87 introduces macro uncertainty and potential volatility headwinds. The all-time high breakout is a bullish signal but warrants caution given analyst consensus and broader market risk. Conviction is moderate \u2014 momentum traders may find opportunity but value-oriented investors should wait for a pullback.",
-        "conviction_score": 6,
-        "sentiment_score": 7,
-        "recommended_action": "hold",
-        "target_price": "308.00",
-        "upside_percentage": "1.8%",
-        "analysed_at": "2026-04-04T07:32:51.233214+00:00"
-      }
+      "scanned_at": "2026-04-04T07:46:29.156980+00:00"
     },
     {
-      "ticker": "NXPI",
-      "name": "NXP Semiconductors N.V.",
-      "sector": "Technology",
-      "price": 194.55,
-      "dividend_yield": 2.08,
-      "pe_ratio": 24.44,
-      "eps_growth_3yr": -8.1,
+      "ticker": "BDX",
+      "name": "Becton, Dickinson and Company",
+      "sector": "Healthcare",
+      "price": 154.51,
+      "dividend_yield": 2.72,
+      "pe_ratio": 25.25,
+      "eps_growth_3yr": 26.1,
       "news": [
         {
           "title": "Google News",
@@ -280,36 +189,27 @@
           "date": "Recent"
         },
         {
-          "title": "NXP Semiconductors N.V. (NXPI) stock price, news, quote and history - Yahoo Finance Singapore",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE83b3JTcUZla0ktOUJ5Z21md0tfR2dsZldJY3ZzMVU5TG9jWWF0M3dQNFcxY0dRMW55c3cwdUFmS2xtSWdTZDdTMkxvalloLXVLOVE?oc=5",
+          "title": "Becton, Dickinson and Company (BDX) stock price, news, quote and history - Yahoo Finance UK",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9hcHlXc2ZOeDVEWVBXdEU1ampHNkJ1LXpCMUpjZUt6bmV4UFZFUGY3d3pCZ2hoMnVLVWFJVjZLMDVPdXp1T1laRVhGUU9tWkpW?oc=5",
           "date": "Recent"
         },
         {
-          "title": "Here's What to Expect From NXP Semiconductors' Next Earnings Report - FinancialContent",
-          "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPME94aHBrLWUzazJITm16UVhEVGRtQW5FS0EyYkVKUmEtWnE1ZVhrd2pCOGo2Q3dlbWU3NjdLNjJfN1hGbWRGaVJGNEp3TmVVZV9YSU40X2ZOWmpCMWxEbjA5RlY0Wm95blc3VTdOVnJzZkxCZ3BicWZXR1VDRnhPWlR5RWdUeXFqdExGZlNqQVVDMHpFaktSMHRMZ0JKd2NFMXl0N1ZJaTMtNHBrVGZNY1VFT2U3RXJ2WlctOVo0TkRYamZYV1FCN3JMbnhodWRq?oc=5",
+          "title": "Becton Dickinson &amp; Co. stock underperforms Thursday when compared to competitors - MarketWatch",
+          "link": "https://news.google.com/rss/articles/CBMi2ANBVV95cUxPaWM4M3YtOWs4eHpzWWdIQlZIdlRpaUdPV3RlSnNkenMwR2hlbWNfQUEwNEFPQmdlTWg0OWZlN29sY0JJdjRRc0FZNFFzMmxTenM3Nk9WLUViaHB1YzV3VmVLd0hRSlhTNVg0a0JmcC0yTTlCR0Vmc0N0Ull4N0JySHFaVW93MFVtdEw3ajVrU0tkVklNem9qRGpqckVOd0Jna3dxdUJRU2FOR0hpYkNlcnlJalpXQ3BRbEVweTVpb19kRlJoRE1Wci0tTnRzOXpZNktFTllPWkd4VDNJSVR4VUhPRUVrVzFwNHFVcVlVVTZzUElCeDJJYk9MZmJjbk1vTWFXTXh5cDY2SG93aTFyd2NmWXJ0VDNHQ3pROFZ1WXc3Q2hWNmdJbUJ5MVM3b011UjY5eFI0d2FtQUNGODUzUzhGN0pqVkhmZU5haVdzb2E4UzN5LTRyZkN1aTV3enRTNGpWQ1liSjN2ZVpFR20zOEJBX0oxajVWemEwd2RBSUhNd0JRVU80TzhQSVB4VUx6U0pDRHVVRGlES2tTVnRTN3lXWWM2ek5TYXg0TXh0Nkx2SXZQeVY2aFdIOU4wUW9mbVRoeDYtdGpOYTJYRGpXQlpnNnh3STQz?oc=5",
           "date": "Recent"
         }
       ],
       "score": 8.0,
-      "scanned_at": "2026-04-04T07:31:37.544223+00:00",
-      "tier2": {
-        "analysis": "NXPI presents a balanced risk/reward profile at current levels. The PE of 24.44 is reasonable for a semiconductor company with exposure to automotive, IoT, and industrial end markets. Dividend yield of 2.08% provides income support. Elevated VIX at 23.87 signals broader market uncertainty, which typically pressures cyclical semiconductor names. News flow is limited and non-specific, preventing strong sentiment conviction. Scan score of 8.0 suggests positive technical momentum. Automotive semiconductor demand remains a structural tailwind, but macro headwinds and inventory normalization cycles in the semiconductor sector warrant caution. Conservative positioning recommended with a hold bias pending clearer earnings visibility.",
-        "conviction_score": 6,
-        "sentiment_score": 5,
-        "recommended_action": "hold",
-        "target_price": "218.50",
-        "upside_percentage": "3.5",
-        "analysed_at": "2026-04-04T07:32:59.451612+00:00"
-      }
+      "scanned_at": "2026-04-04T07:46:35.323130+00:00"
     },
     {
-      "ticker": "NUE",
-      "name": "Nucor Corporation",
-      "sector": "Basic Materials",
-      "price": 172.46,
-      "dividend_yield": 1.3,
-      "pe_ratio": 22.93,
-      "eps_growth_3yr": 31.7,
+      "ticker": "MCD",
+      "name": "McDonald's Corporation",
+      "sector": "Consumer Cyclical",
+      "price": 307.14,
+      "dividend_yield": 2.42,
+      "pe_ratio": 25.7,
+      "eps_growth_3yr": 7.3,
       "news": [
         {
           "title": "Google News",
@@ -317,36 +217,27 @@
           "date": "Recent"
         },
         {
-          "title": "Is Nucor Corporation (NUE) one of the best stocks to invest in for good returns? - MSN",
-          "link": "https://news.google.com/rss/articles/CBMi4gJBVV95cUxPQnNvOEY4c1QyUGpVemNibVFnckVweEMwb2xFNUh0VzFOQmFaaG9PNmNBNWwySTEyakdleklmNTNmd0dwWTI0TnNzc3MzUVdwcHFhenhxUmVfMkRxNUlMb3N4OXVQd1YxWUJBYmhhYURSYm9DbHB5TERNbk9tbEVWcmZ3dVNWcGZZYXBuLUNQZWZuaXV1V3Q5aWFUSUlCcW9hRzU2MllkRDZFLXF1SDdLYU9vdUo3M0tfS01tS0UyNXVyQnFMb3V0Q3d2aFFONHMxelotQWJIZ3NzRDZtaER6clJLeGxtOV80SzljZHJab2NJeGpfWmZIT2ppUklaX0ZmSHM3Y19WT3dKOXlYejRacThZQ0tJRTlxeTlQbTRSWEwyZ0xyUWQtemQ1bU52cGYxclJZc0NKdk54TDBRTGNmbDdncDBvQmRaTVlSbFNqUHdZM0VWOUY2SlhFaU12QW5KRHc?oc=5",
+          "title": "Bank Pictet &amp; Cie Europe AG Reduces Stock Holdings in McDonald's Corporation $MCD - MarketBeat",
+          "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQRXZpV3ZqaEs4RktDTUVwdzNGcFBSYmNySklZYnBZMl94T01wa0hWZHNDVVR3NC1zOGpVaEx3VDAxamRIXzNtRGo0T3hBSEdOdGpoYWJZakxtOGYxZlY1R2duTW5nNUttTWw2eE9UendBc1BoNDVtOGlLZFg0TjJObGl6aDByM1otN0VyOXo2Sml0ME9aNVVqbDVkeDVNcUtzS0Y2b2NDdjU5RGoyRTFlcVBDS3VjekxGTWtRODJCOXA5Q3V2Tll4aUhGQnBhUlBodHYxSg?oc=5",
           "date": "Recent"
         },
         {
-          "title": "Nucor Corp. stock outperforms competitors on strong trading day - MarketWatch",
-          "link": "https://news.google.com/rss/articles/CBMixANBVV95cUxNT1J0a2hQZmdOZXpqNDJ4NjQ5WXB5ZGlpVkd1elJZR1Z3bFNad3k3dllEekF3Xy1zVkJyTWVVdVk2akFwbUVadUxIWS03ekVfeFVnUUJNbklNQlpXUGlwWWNwRkRqZnhhTTdhVHdlTzc0WXpsUFVvLUZfV2JROUdUZzczdXEySnkzUUU2YW1yd1NDdmZsTllORy1wQW1ycnVfQS04OVNRZDdldkhXS1dwbjFjRm9MSHQ5Q2U2NVdEM2dGNmZaQWw2X1Mwd3VtaUtIdjktN1lSblhlWlc4aWRHb0JMUG9LSGxVR3hQQ2JjdXVZNm5TMXRqbEZmcFQwSHZvRjBfRU1uSjJob1d4a3M1MzBtYXRPWVlkQ1FJaFVXTEZzQzIwd20zWVU2RHNWbmJpYWNPSVViLUFDWU1fTjVuN3lNUkdOcEp6cWhUc29hSW1Kd1BQMGVJbEt0aFRwcFlfa3dqYmMyeW1WNFdqZnE1OHI5UmhzdUFlMHMyZnVMeWl5THVSeDZDU09iUjZ4REJqVXRZWURLbTluMkM5ZDRoREZvb1JGNmRBbmZvRUJLSENFdS1xbXVBR1VzNDZ0YWw2d2pxRw?oc=5",
+          "title": "Is McDonald\u2019s Corporation (MCD) A Good Stock To Buy Now? - Yahoo Finance",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOT0dYZ09TODVYeVE5YkJ4a2Fyb0lsQmlET0ItZjJaYnAwWVpYZlNjVTRsS0dBN1drR3lDcmlyYkxiSHhSY0oyTUp0cVdlMTQxaWlnNVlqWmlGTWVuRTFramVrdFpnbFJHZE9TbHdqU0NGV00yc3NVRWduWm0zalRKYXhnd0J2SzJN?oc=5",
           "date": "Recent"
         }
       ],
-      "score": 8.0,
-      "scanned_at": "2026-04-04T07:31:42.461019+00:00",
-      "tier2": {
-        "analysis": "Nucor (NUE) shows solid fundamentals with a scan score of 8.0 and modest dividend yield of 1.3%. PE ratio of 22.93 is reasonable for a steel sector leader. News flow is mildly positive with outperformance on trading day and analyst interest in return potential. However, elevated VIX at 23.87 signals broader market uncertainty, which could pressure cyclical industrial names like steel producers. Nucor's integrated mini-mill model and capital discipline provide downside support, but macro headwinds including tariff uncertainty and softening demand could cap near-term upside. Overall, a cautiously optimistic outlook with moderate conviction.",
-        "conviction_score": 6,
-        "sentiment_score": 6,
-        "recommended_action": "hold",
-        "target_price": "178.50",
-        "upside_percentage": "4.2",
-        "analysed_at": "2026-04-04T07:33:07.238781+00:00"
-      }
+      "score": 7.9,
+      "scanned_at": "2026-04-04T07:46:25.244176+00:00"
     },
     {
-      "ticker": "EXPD",
-      "name": "Expeditors International of Was",
-      "sector": "Industrials",
-      "price": 145.81,
-      "dividend_yield": 1.06,
-      "pe_ratio": 24.51,
-      "eps_growth_3yr": -14.9,
+      "ticker": "FE",
+      "name": "FirstEnergy Corp.",
+      "sector": "Utilities",
+      "price": 51.31,
+      "dividend_yield": 3.63,
+      "pe_ratio": 29.15,
+      "eps_growth_3yr": 15.0,
       "news": [
         {
           "title": "Google News",
@@ -354,27 +245,47 @@
           "date": "Recent"
         },
         {
-          "title": "Is Expeditors International of Washington (EXPD) Fairly Priced After Strong One Year Share Gains? - Yahoo Finance",
-          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNSUhncXNHOHhhRnN6S21mLXFCdEZNZmxDRTFqYmxxZTNnaVRVSkY0Ry1DMUlTWEpVbHRhUHhJNVM3NFFkYTg4c1lsOFhIUDdacWVYVFVtY3ZrOTVyNnZOMWxrY3VUVHc1RlJkUjRtOHI2aHFtSldaVTYzbmotazg0cHU0aS1MblVCcTdYQzZCRXAtSC1iVGFxRVlIMFgyelBCd3dyaV9JeFdZZmFUZ1lSemxn?oc=5",
+          "title": "FirstEnergy Corp. (FE) Stock Price, News, Quote &amp; History - Yahoo! Finance Canada",
+          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFAzWWVCOEd5Z09NUHl0TXNialNNYTc1d2QxWkEycXdZeHhLS1ZWeEJPdzlWNWlxRGhUei01ZVltZ2VYSW1xYUl2ejNoTjJ6Vnc?oc=5",
           "date": "Recent"
         },
         {
-          "title": "Nisa Investment Advisors LLC Sells 12,397 Shares of Expeditors International of Washington, Inc. $EXPD - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPOVhSak9XQkN2eURyODJZRW5Gcnd6UWcyczdFQi1LMzNRUU5oMVR1UEJPUFlEVGZvaFI4RC1ON09lby1sRkIybVdiTE5fLXRyUHhFSElvdFk2cW9kU0tUZzFiUDJKeEk2SlB1dnQzRjhZRGVfc1oyRmNsWmVkX3lOb043Tmtzd3BwNmthdWNEQ2gtTE9mT1gtQmwxdjZnOGJrQXU1SE5BSE0waVhBaG1uekUtcVdidktkSC1CS19lUm93RzBEYUFOU2NlZDR3LVpoRTRZZW5XMW9CTGNpOU5MVE85TjBYQkZJNk9MWUYycXE?oc=5",
+          "title": "FirstEnergy Corporation $FE Position Boosted by Aberdeen Group plc - MarketBeat",
+          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPaDhLYktrNWViX2pTSGRNM3VIYW5ERmNyQ1ZkRkRTd1VFd1dscEVNVjhPSlI3RWhzMDU4RU1VaUdFcjdvalF2VVNRd2lDcXRmbnJxNWNxY0RBZ09ac1FIVEJXQk9ESUVNVm1nMWRYZC1jWU16bHNHcUpfdldXWThWX00zRW9LMHE3SUJlYnUwY3lQUjdUMTdxMURlTVNDcGJGUkh3aVlvcDg2eTViZ2JhWWdXQTJ4bmRmX2dtXzRRXzlfdnRk?oc=5",
           "date": "Recent"
         }
       ],
       "score": 7.8,
-      "scanned_at": "2026-04-04T07:31:48.593768+00:00",
-      "tier2": {
-        "analysis": "EXPD presents a mixed picture. The stock trades at a PE of 24.51, reasonable for a logistics leader with consistent cash generation and a 1.06% dividend yield. Recent institutional selling by Nisa Investment Advisors and questions around fair valuation after strong one-year gains suggest the stock may be approaching near-term resistance. Elevated VIX at 23.87 signals broader market uncertainty, which historically pressures freight/logistics multiples. No strong bullish catalysts visible in current news flow. Fundamentals remain solid but upside appears limited in the 30-day window given valuation scrutiny and macro headwinds.",
-        "conviction_score": 5,
-        "sentiment_score": 4,
-        "recommended_action": "hold",
-        "target_price": "118.50",
-        "upside_percentage": "1.8",
-        "analysed_at": "2026-04-04T07:33:14.909984+00:00"
-      }
+      "scanned_at": "2026-04-04T07:46:34.066529+00:00"
+    },
+    {
+      "ticker": "ROP",
+      "name": "Roper Technologies, Inc.",
+      "sector": "Technology",
+      "price": 357.88,
+      "dividend_yield": 1.02,
+      "pe_ratio": 25.19,
+      "eps_growth_3yr": -7.3,
+      "news": [
+        {
+          "title": "Google News",
+          "link": "https://news.google.com/",
+          "date": "Recent"
+        },
+        {
+          "title": "Roper Technologies (NASDAQ:ROP) Could Be A Buy For Its Upcoming Dividend - simplywall.st",
+          "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQY09YUkd1UzNlQnZTWVhnTWVWRmJxVEc3d2dZNHVMV1A2SWtZTWlXVFRSa2RaNUI0UXRNNGZGMlppZWhUdWFCUEdBNGVzdnI2RUFidWlEckt2VHlqUHRtNUdnZGI1ZURGZEI0OE9McE1OS0xSR2dDWVN5OG80cEZXc0tvdFpBcGZkOEZneEZjdTJOVGh5UkQxVldQa2J0X0ZCaWFuUFVJb0tpSWlWczgyOUlIc3Uwc1pqcDU4VWtINm5vTlhvdUVfd1FnS2NZYzZSU3fSAdcBQVVfeXFMT1hBbV9pLUlfdnh3M3hYX3ZqVVZHR1dETXVaUTBib1BOaWpOYTdNM3NQTEtjcDJSMTY3eGpSREhDTmFJUmpRUG5rVGdTYjhsN3pJVVYxb1BPel82ckVGMV91Q1BRYklQNkJsS2F2NUtrRmtpU0JEMENibWFhSlpnRkpXRmNSUE9kOHVOalN4Xy1KRXdnbnZ3aTN1bERKYlJabHZjOG9KNWlHZ0o3N3hlMW1ycXM4aDFaQzI4Y0lubHd1WWU2RmxhSGxyN1FUTUFjUnJFdU80X2M?oc=5",
+          "date": "Recent"
+        },
+        {
+          "title": "12,144 Shares in Roper Technologies, Inc. $ROP Bought by Triad Investment Management - MarketBeat",
+          "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPX0dUZ0UyY2pxYWtwWjR1VURENUQxeGpCU2d2U0hHTjRsOHhOSUZObGpidnJmbmo3dFd3aVRKSF9GRHRISHNWZk9GVjNHd0RhTkc4c2V0X0lnU1F5YklOelFjQktrdDBNaTZJeF9LcVA5MF9kWFZlZVRwRkY0bGFEV240dS1scU9aUWhJc1B0U0RCYjhUR2JKMDJBUk9wQ3pUQUNfeGNWeUVGTThVRlpsNm1TYXE4cnd3T1A3bmlralR2bE85NTNDa0gzZm9WSkZIU0JHWjVMQzU?oc=5",
+          "date": "Recent"
+        }
+      ],
+      "score": 7.7,
+      "scanned_at": "2026-04-04T07:46:26.564137+00:00"
     }
-  ]
+  ],
+  "active_trades": []
 }
