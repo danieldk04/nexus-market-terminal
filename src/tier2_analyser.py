@@ -4,13 +4,12 @@ import logging
 from anthropic import Anthropic
 from datetime import datetime
 
-# Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(INFO)s] %(message)s', datefmt='%H:%M:%S')
+# Setup logging - FIXED the formatting error
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s', datefmt='%H:%M:%S')
 
 def get_moat_analysis(ticker, name, sector, price, pe, div, news_summary):
     client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
     
-    # De "Buffett-Style" Prompt
     prompt = f"""
     You are a Senior Value Investor following the 'Business First' principle of Warren Buffett.
     Analyze the following asset: {name} ({ticker}) in the {sector} sector.
@@ -33,9 +32,10 @@ def get_moat_analysis(ticker, name, sector, price, pe, div, news_summary):
     TARGET_PRICE: [Estimate for 30 days]
     """
 
+    # FIXED: Updated model name to 'latest' to avoid 404
     response = client.messages.create(
-        model="claude-3-5-sonnet-20240620", # Claude 4.6 Sonnet identifier
-        max_tokens=500,
+        model="claude-3-5-sonnet-latest", 
+        max_tokens=600,
         messages=[{"role": "user", "content": prompt}]
     )
     return response.content[0].text
@@ -43,8 +43,12 @@ def get_moat_analysis(ticker, name, sector, price, pe, div, news_summary):
 def run_tier2():
     logging.info("Analysing candidates with 'Business First' Moat-Logic...")
     
-    with open('data.json', 'r') as f:
-        data = json.load(f)
+    try:
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+    except Exception as e:
+        logging.error(f"Failed to load data.json: {e}")
+        return
         
     candidates = data.get('top_candidates', [])
     if not candidates:
@@ -52,27 +56,34 @@ def run_tier2():
         return
 
     for c in candidates:
-        logging.info(f"  → Deep-dive into {c['ticker']} (Moat Check)")
+        logging.info(f"Deep-dive into {c['ticker']} (Moat Check)")
         
-        # Verzamel nieuws voor Claude
         news_text = ""
         for n in c.get('news', []):
-            news_text += f"- {n.get('title')}: {n.get('description')}\n"
+            news_text += f"- {n.get('title')}\n"
             
-        analysis_raw = get_moat_analysis(
-            c['ticker'], c.get('name'), c.get('sector'), 
-            c.get('price'), c.get('pe_ratio'), c.get('dividend_yield'),
-            news_text
-        )
-        
-        # Parsen van de AI output (simpele versie voor demo)
-        lines = analysis_raw.split('\n')
-        c['tier2'] = {
-            "analysis": analysis_raw.split('CONVICTION:')[0].strip(),
-            "conviction_score": int([l for l in lines if 'CONVICTION:' in l][0].split(':')[1].strip().split('/')[0]),
-            "recommended_action": [l for l in lines if 'RECOMMENDED ACTION:' in l][0].split(':')[1].strip(),
-            "target_price": [l for l in lines if 'TARGET_PRICE:' in l][0].split(':')[1].strip()
-        }
+        try:
+            analysis_raw = get_moat_analysis(
+                c['ticker'], c.get('name'), c.get('sector'), 
+                c.get('price'), c.get('pe_ratio'), c.get('dividend_yield'),
+                news_text
+            )
+            
+            lines = analysis_raw.split('\n')
+            
+            # Veiligheid ingebouwd voor het parsen van de AI scores
+            conv_line = [l for l in lines if 'CONVICTION:' in l]
+            action_line = [l for l in lines if 'RECOMMENDED ACTION:' in l]
+            target_line = [l for l in lines if 'TARGET_PRICE:' in l]
+
+            c['tier2'] = {
+                "analysis": analysis_raw.split('CONVICTION:')[0].strip(),
+                "conviction_score": int(conv_line[0].split(':')[1].strip().split('/')[0]) if conv_line else 5,
+                "recommended_action": action_line[0].split(':')[1].strip() if action_line else "HOLD",
+                "target_price": target_line[0].split(':')[1].strip() if target_line else "N/A"
+            }
+        except Exception as e:
+            logging.error(f"Error analysing {c['ticker']}: {e}")
 
     with open('data.json', 'w') as f:
         json.dump(data, f, indent=4)
