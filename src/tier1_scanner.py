@@ -126,18 +126,30 @@ def main():
     candidates = sorted(candidates, key=lambda x: x['score'], reverse=True)[:TOP_N]
     log.info(f"Beste {len(candidates)} kandidaten geselecteerd na full scan van {scanned} tickers.")
 
-    # Inladen van bestaande data om trades niet te overschrijven
+    # Inladen van bestaande data om trades, equity en tier2-analyses niet te overschrijven
     if OUTPUT_PATH.exists():
         with open(OUTPUT_PATH, "r") as f:
             old_data = json.load(f)
     else:
         old_data = {}
 
+    # DATA-INTEGRITEIT: bewaar bestaande tier2-analyses voor tickers die nog in de top zitten
+    old_tier2_by_ticker = {
+        c["ticker"]: c["tier2"]
+        for c in old_data.get("top_candidates", [])
+        if c.get("tier2")
+    }
+    for c in candidates:
+        if c["ticker"] in old_tier2_by_ticker:
+            c["tier2"] = old_tier2_by_ticker[c["ticker"]]
+            log.info(f"Tier2 cache bewaard voor {c['ticker']}")
+
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "top_candidates": candidates,  # Al gesorteerd en afgekapt in main()
-        "active_trades": old_data.get("active_trades", []), # Behou de trades!
+        "top_candidates": candidates,
+        "active_trades": old_data.get("active_trades", []),
         "equity_history": old_data.get("equity_history", []),
+        "memory": old_data.get("memory", {}),
         "macro": {"vix": 22.1, "treasury_10y": 4.3}
     }
     
