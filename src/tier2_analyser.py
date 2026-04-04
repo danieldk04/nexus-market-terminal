@@ -24,8 +24,8 @@ def run_smart_analysis():
     candidates = data.get("top_candidates", [])
     
     updated = False
-    # We analyseren alleen de TOP 3 om kosten te besparen
-    for i, c in enumerate(candidates[:3]):
+    # Analyseer de TOP 5 — meer coverage zonder hoge kosten dankzij 3-daags cache
+    for i, c in enumerate(candidates[:5]):
         ticker = c['ticker']
         
         # Check of we al een recent rapport hebben (niet ouder dan 3 dagen)

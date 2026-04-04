@@ -37,54 +37,61 @@ def run_evolution():
     candidates = data.get("top_candidates", [])
     active_trades = data.get("active_trades", [])
     
-    ENTRY_THRESHOLD  = 8.0   # Lagere drempel: mathematisch haalbaar met huidige scoringformule
-    STOP_LOSS_PCT    = -5.0  # Sluit positie bij >= 5% verlies
-    TAKE_PROFIT_PCT  = 15.0  # Sluit positie bij >= 15% winst
+    ENTRY_THRESHOLD    = 8.0   # Mathematisch haalbaar met scoringformule (max ~8.6)
+    STOP_LOSS_PCT      = -5.0  # Sluit positie bij >= 5% verlies
+    TAKE_PROFIT_PCT    = 15.0  # Sluit positie bij >= 15% winst
+    MAX_TRADES         = 5     # Maximaal 5 gelijktijdige posities
+    MAX_PER_SECTOR     = 2     # Max 2 posities per sector (diversificatie)
 
     # 2. Check huidige performance van actieve trades + exit-logica
     updated_trades = []
     total_pl_pct = 0.0
     closed_count = 0
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    def add_lesson(ticker, sector, insight, lesson_type):
+        lesson = {
+            "date": today,
+            "ticker": ticker,
+            "sector": sector,
+            "insight": insight,
+            "type": lesson_type
+        }
+        if not any(l['ticker'] == ticker and l['date'] == today and l['type'] == lesson_type
+                   for l in memory['lessons']):
+            memory['lessons'].append(lesson)
 
     for trade in active_trades:
         try:
             ticker = trade['ticker']
             t_info = yf.Ticker(ticker).info
             current_price = t_info.get("currentPrice", trade['buy_price'])
-
             pl_pct = round(((current_price - trade['buy_price']) / trade['buy_price']) * 100, 2)
+            sector = trade.get("industry_group", "Unknown")
 
-            # Exit-logica: stop-loss of take-profit
+            # Exit: stop-loss
             if pl_pct <= STOP_LOSS_PCT:
-                lesson = {
-                    "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                    "ticker": ticker,
-                    "sector": trade.get("industry_group", "Unknown"),
-                    "insight": f"Stop-loss geraakt op {ticker} ({pl_pct:.1f}%). Sector sentiment mogelijk zwak.",
-                    "type": "NEGATIVE_LEARNING"
-                }
-                if not any(l['ticker'] == ticker and l['date'] == lesson['date'] for l in memory['lessons']):
-                    memory['lessons'].append(lesson)
+                add_lesson(ticker, sector,
+                           f"Stop-loss geraakt op {ticker} ({pl_pct:.1f}%). Vermijd {sector} bij zwak sentiment.",
+                           "NEGATIVE_LEARNING")
                 print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}%")
-                closed_count += 1
-                continue  # Positie niet toevoegen aan updated_trades = sluiten
-
-            if pl_pct >= TAKE_PROFIT_PCT:
-                print(f"TAKE-PROFIT: {ticker} gesloten op {pl_pct:.1f}%")
                 closed_count += 1
                 continue
 
-            # Zelfreflectie bij aanhoudend verlies (maar nog geen stop-loss)
+            # Exit: take-profit — sla ook positief les op
+            if pl_pct >= TAKE_PROFIT_PCT:
+                add_lesson(ticker, sector,
+                           f"Take-profit op {ticker} (+{pl_pct:.1f}%). {sector}-signalen werken goed.",
+                           "POSITIVE_LEARNING")
+                print(f"TAKE-PROFIT: {ticker} gesloten op +{pl_pct:.1f}%")
+                closed_count += 1
+                continue
+
+            # Vroegtijdige waarschuwing bij aanhoudend verlies
             if pl_pct < -3.0:
-                lesson = {
-                    "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                    "ticker": ticker,
-                    "sector": trade.get("industry_group", "Unknown"),
-                    "insight": f"Verlies op {ticker} ({pl_pct:.1f}%). Sector sentiment mogelijk zwak.",
-                    "type": "NEGATIVE_LEARNING"
-                }
-                if not any(l['ticker'] == ticker and l['date'] == lesson['date'] for l in memory['lessons']):
-                    memory['lessons'].append(lesson)
+                add_lesson(ticker, sector,
+                           f"Verlies op {ticker} ({pl_pct:.1f}%). Monitor {sector} nauwlettend.",
+                           "NEGATIVE_LEARNING")
 
             trade['current_price'] = current_price
             trade['pl_percent'] = pl_pct
@@ -97,28 +104,60 @@ def run_evolution():
     if closed_count:
         print(f"{closed_count} positie(s) gesloten via exit-logica.")
 
-    # Gemiddelde P&L over actieve trades (voorkomt inflatie bij veel posities)
+    # Gemiddelde P&L over actieve trades (correct gewogen)
     avg_pl_pct = (total_pl_pct / len(updated_trades)) if updated_trades else 0.0
 
-    # 3. Nieuwe trades aangaan (drempel verlaagd naar 8.0 — mathematisch haalbaar)
-    current_tickers = [t['ticker'] for t in updated_trades]
+    # 3. Nieuwe trades aangaan — met sectordiversificatie
+    current_tickers = {t['ticker'] for t in updated_trades}
+    sector_counts = {}
+    for t in updated_trades:
+        sg = t.get("industry_group", "Others")
+        sector_counts[sg] = sector_counts.get(sg, 0) + 1
+
+    # Bereken sectorbonus op basis van positieve lessen
+    positive_sectors = set(
+        l['sector'] for l in memory['lessons'] if l.get('type') == "POSITIVE_LEARNING"
+    )
+
     for c in candidates:
-        if c.get('score', 0) >= ENTRY_THRESHOLD and c['ticker'] not in current_tickers and len(updated_trades) < 5:
-            new_trade = {
-                "ticker": c['ticker'],
-                "buy_price": c['price'],
-                "current_price": c['price'],
-                "buy_date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                "industry_group": c.get("industry_group", "Others"),
-                "pl_percent": 0.0
-            }
-            updated_trades.append(new_trade)
-            print(f"Nieuwe trade geopend: {c['ticker']} (score {c['score']})")
+        if len(updated_trades) >= MAX_TRADES:
+            break
+        sector = c.get("industry_group", "Others")
+        score = c.get('score', 0)
+        ticker = c['ticker']
+
+        if ticker in current_tickers:
+            continue
+        if sector_counts.get(sector, 0) >= MAX_PER_SECTOR:
+            print(f"Overgeslagen: {ticker} — max {MAX_PER_SECTOR} posities in {sector} bereikt.")
+            continue
+        # Geef sectoren met bewezen positieve track-record een bonus
+        effective_threshold = ENTRY_THRESHOLD - (0.3 if sector in positive_sectors else 0)
+        if score < effective_threshold:
+            continue
+
+        new_trade = {
+            "ticker": ticker,
+            "buy_price": c['price'],
+            "current_price": c['price'],
+            "buy_date": today,
+            "industry_group": sector,
+            "sector": c.get("sector", sector),
+            "score_at_entry": score,
+            "pl_percent": 0.0
+        }
+        updated_trades.append(new_trade)
+        current_tickers.add(ticker)
+        sector_counts[sector] = sector_counts.get(sector, 0) + 1
+        print(f"Nieuwe trade: {ticker} | sector: {sector} | score: {score}")
 
     # 4. Resultaten voorbereiden voor Dashboard
     data['active_trades'] = updated_trades
+    # Toon laatste 8 lessen in data.json voor dashboard (gesorteerd: negatief eerst voor zichtbaarheid)
+    sorted_lessons = sorted(memory['lessons'][-20:], key=lambda l: l.get('type', ''), reverse=True)
     data['memory'] = {
-        "lessons": memory['lessons'][-5:], # Laatste 5 lessen tonen
+        "lessons": sorted_lessons[-8:],
+        "positive_sectors": list(positive_sectors),
         "last_update": datetime.now(timezone.utc).isoformat()
     }
     
