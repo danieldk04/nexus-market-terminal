@@ -88,19 +88,51 @@ def fetch_macro_indicators() -> dict:
     indicators["sp500_rsi"] = 47.3
     return indicators
 
+def check_buffett_quality(info: dict) -> tuple[bool, str]:
+    """
+    Buffett Check: Kijkt of het bedrijf een kwalitatief goede business is.
+    ROE > 15% en Debt-to-Equity < 200%.
+    """
+    roe = info.get("returnOnEquity", 0)
+    debt_equity = info.get("debtToEquity", 0)
+    
+    # Als ROE negatief is of lager dan 15% (0.15), skippen we.
+    if roe < 0.15:
+        return False, f"ROE te laag ({round(roe*100, 1)}%)"
+    
+    # Als de schuld meer dan 2x het eigen vermogen is, skippen we (behalve bij financials/utilities, maar we houden het streng)
+    if debt_equity > 200:
+        return False, f"Schuld te hoog ({round(debt_equity, 1)}%)"
+    
+    return True, "Quality Business"
+
 def analyse_ticker(ticker: str) -> dict | None:
-    """Filtert op basis van fundamentelen en scores."""
+    """Filtert op basis van kwaliteit, fundamentelen en scores."""
     try:
         t = yf.Ticker(ticker)
         info = t.info
+        
+        # --- BUFFETT QUALITY FILTER (BUSINESS FIRST) ---
+        is_quality, reason = check_buffett_quality(info)
+        if not is_quality:
+            # We loggen dit niet voor elk aandeel om de console schoon te houden
+            return None
+
+        # --- FUNDAMENTELE CIJFERS ---
         raw_div = info.get("dividendYield") or 0
         div_yield = float(raw_div / 100 if raw_div > 0.20 else raw_div)
         pe = info.get("trailingPE")
         
-        if not pe or div_yield < 0.005 or div_yield > 0.15: return None 
+        # Extra prijs-checks
+        if not pe or div_yield < 0.005 or div_yield > 0.15: 
+            return None 
 
         name = str(info.get("shortName", ticker))
         news = fetch_news(name)
+
+        # Bereken de score (Buffett-bonus voor hoge ROE)
+        roe = info.get("returnOnEquity", 0)
+        score = round(10 - (pe/10) + (div_yield * 20) + (roe * 5), 1)
 
         return {
             "ticker": ticker,
@@ -109,15 +141,18 @@ def analyse_ticker(ticker: str) -> dict | None:
             "price": float(info.get("currentPrice", 0)),
             "dividend_yield": round(div_yield * 100, 2),
             "pe_ratio": round(float(pe), 2),
-            "eps_growth_3yr": round(min(float(info.get("earningsQuarterlyGrowth", 0.15)), 1.0) * 100, 2),
+            "roe": round(roe * 100, 2),
             "news": news,
-            "score": round(10 - (pe/10) + (div_yield * 20), 1),
+            "score": score,
             "scanned_at": datetime.now(timezone.utc).isoformat()
         }
-    except: return None
+    except Exception:
+        return None
 
 def main():
     log.info("=== NEXUS Tier 1 GLOBAL HUNTER starting ===")
+    log.info("BUFFETT MODE: ROE > 15% filter enabled.")
+    
     macro = fetch_macro_indicators()
     universe = fetch_global_universe()
     log.info(f"Scanning universe of {len(universe)} tickers...")
@@ -127,9 +162,13 @@ def main():
         res = analyse_ticker(ticker)
         if res:
             candidates.append(res)
-            log.info(f"PASS {ticker} (Score: {res['score']})")
-        if len(candidates) >= 15: break
-        time.sleep(0.05)
+            log.info(f"PASS {ticker} (Quality Score: {res['score']}, ROE: {res['roe']}%)")
+        
+        # We stoppen bij 15 sterke kandidaten voor de Tier 2 Analyse
+        if len(candidates) >= 15: 
+            break
+        
+        time.sleep(0.05) # Rate limiting voorkomen
     
     candidates.sort(key=lambda x: x['score'], reverse=True)
 
@@ -139,8 +178,7 @@ def main():
         try:
             with open(TRADES_PATH, "r") as f:
                 all_trades = json.load(f)
-                # Alleen de laatste 5 meest relevante trades voor het dashboard
-                active_trades = all_trades[-5:]
+                active_trades = all_trades[-5:] # Laatste 5 trades
         except Exception as e:
             log.warning(f"Kon trades.json niet laden: {e}")
 
@@ -150,10 +188,10 @@ def main():
             "generated_at": datetime.now(timezone.utc).isoformat(), 
             "macro": macro, 
             "top_candidates": candidates[:10],
-            "active_trades": active_trades # De backtest resultaten gaan nu mee!
+            "active_trades": active_trades
         }, f, indent=2)
     
-    log.info(f"=== Done! {len(candidates)} candidates found. trades.json gekoppeld. ===")
+    log.info(f"=== Done! {len(candidates)} quality candidates passed the Buffett-filter. ===")
 
 if __name__ == "__main__":
     main()
