@@ -1,381 +1,291 @@
 {
-  "generated_at": "2026-04-04T08:09:29.211716+00:00",
-  "macro": {
-    "vix": 23.87,
-    "treasury_10y": 4.31,
-    "sp500_rsi": 47.3
-  },
-  "top_candidates": [
-    {
-      "ticker": "USB",
-      "name": "U.S. Bancorp",
-      "sector": "Financial Services",
-      "price": 52.95,
-      "dividend_yield": 3.89,
-      "pe_ratio": 11.46,
-      "eps_growth_3yr": 23.0,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Is It Time To Revisit U.S. Bancorp (USB) After Recent Share Price Weakness? - simplywall.st",
-          "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOXzFJOGlacnNhaWRLNnJNUG4ySWNfNWtqS2sxeGtmaEl6dzYzckpJVEV0UTFlM1BRU3JIdUI1MHJDSU0xN0FxdzQ4LWNnaHFpRDZXOFl3QXdETUx1TFNTS1NTUk5OR09uWTlhNnkxZm5jTHVaRHAxelNFWHhZdlZPU1VuYjlSMUY0c3BpMFNWUVZMLXJWeVZ4ZVRveFlVSWhuWnZQeEJjNVNabFRvVzBpM0gwT3RqSkNsbjlNMW9zaXrSAcYBQVVfeXFMTmZLWEo0TDJoaDczVkJ3Wms5MEZCU2FiakRWOXFZSEkyYjVxYm90TXVLbkJIam9EQ0lWNDhfVmc0SC00czNNX0M3NjVRaW41QVdLdmdHbzlXWktmZzdGQkk0UHFKVmo0cjkxRW1sc0hiNFpyNUV1TGRuNnJ0M2RaYnFOSHFsek45WHFRS2xma3R3LWR0bTdqWUx3ZWhsY2lpUjU4aWRnY0huTUU3S2UyNVZST1dBTHVhMjBIQ0ROZHpxYUhEMXVn?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "U.S. Bancorp posts Q1 results April 16, call starts at 7 a.m. CT - stocktitan.net",
-          "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNUmNITnE0NXU4UkFiLVhUa1BTN1gyQmpKX3RXdEJJaVVnUGhQWU1KME9JNmRnU3N6VHZFcl94eTRGanZJRUVheXNCMUJHcDU5SVZXSmlUdWdlc3J0ZURjWlZIOU1WdnJvaG1sWEdNRWtjZWlDZUowcEFoQWxpLXowWVpjTmNtSjZVc1poWEF1YlExcG44VlFCRHAwQWo4QXAtMnV5bGpqcURabHRzQVcydUJNTjA?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 9.6,
-      "scanned_at": "2026-04-04T08:09:28.414121+00:00",
-      "tier2": {
-        "analysis": "USB trading at modest valuation (P/E 11.46) with attractive dividend yield of 3.89%, suggesting value characteristics typical of large-cap banking sector. RSI at 47.3 indicates neutral momentum with slight downward bias, consistent with recent share price weakness noted in news. VIX at 23.87 signals elevated market uncertainty which historically pressures bank stocks due to credit risk concerns and net interest margin compression fears. Q1 results due April 16 represent a near-term catalyst \u2014 either a positive re-rating event or further downside risk. Regional/large banks face headwinds from potential credit deterioration and slower loan growth in uncertain macro environment. The SimplyWallSt article questioning whether to revisit USB after weakness suggests institutional attention but not yet conviction. Dividend support provides downside cushion. Moderate conviction given binary Q1 earnings risk and elevated VIX environment. Lean cautious but not bearish given valuation support.",
-        "conviction_score": 5,
-        "sentiment_score": 5,
-        "recommended_action": "hold",
-        "target_price": "54.20",
-        "upside_percentage": "2.36",
-        "analysed_at": "2026-04-04T08:09:36.714467+00:00"
-      }
+    "generated_at": "2026-04-04T09:11:56.008920+00:00",
+    "macro": {
+        "vix": 23.87,
+        "treasury_10y": 4.31,
+        "sp500_rsi": 47.3
     },
-    {
-      "ticker": "TRV",
-      "name": "The Travelers Companies, Inc.",
-      "sector": "Financial Services",
-      "price": 293.99,
-      "dividend_yield": 1.5,
-      "pe_ratio": 10.72,
-      "eps_growth_3yr": 19.9,
-      "news": [
+    "top_candidates": [
         {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
+            "ticker": "ABBV",
+            "name": "AbbVie Inc.",
+            "sector": "Healthcare",
+            "price": 208.84,
+            "dividend_yield": 3.31,
+            "pe_ratio": 88.49,
+            "roe": 6225.0,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "C2P Capital Advisory Group LLC d.b.a. Prosperity Capital Advisors Sells 8,610 Shares of AbbVie Inc. $ABBV - MarketBeat",
+                    "link": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPOTBrd3ZlYk9KdnFzUzB5UkdRS011cV9DWWtDMGVBX3RobnM5N0RUT1RHV01rWk9BUE9keVZJZnJ0NnlxaVJMcXN5X0w0cDdiNi1mVTNXTlIxcFdKVHFpbkRDVHNZdEtaZDRCNnUybkJ4ZnE0WGJJYmxDWW15czdySUY2SmRrUUkySWQ1dzcxZzd5LTZFRkF6dFVRS3JYUzAyQ1E0TlpfN2tVNklncV9reVJZOHhXQXVRelpFU20yYXlyRDVscTV2LVFSWlJXOHhNMTk5cWw3ckVxQUlobXpRYzF4b0Q0a3NDOFVFa05TQ1o1UQ?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "AbbVie stock price forecast: Downside risk builds as ABBV drops 3.07% to $208 - Traders Union",
+                    "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOTFl2eVJWVEVJWExKQXp5aHZYOGlTaDdta0ZOZUt6bDNHTnBJWTBNMEZ0YU9RaGJ1YjZjbHd4UWpGd012MEwzcTg0dURISUdnSGMyVzdhYllSTThwdldoOGVfd0h0N0VESnAxRXUtRWg4SjNyUDk5cTBBSDlRTThqeFp3TkhJM3U1NlhPMkVzbGNCemVGa1dmcg?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 313.1,
+            "scanned_at": "2026-04-04T09:11:24.859319+00:00"
         },
         {
-          "title": "The Travelers Companies, Inc. (TRV) stock price, news, quote and history - Yahoo Finance UK",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5YcW96RDJaY2plMjAtOFgzdzlCZ0RPV21vNmVNd2FUMk5BSnJLMmNubXJDQXdnMTNyNVhScEp3WDhRZTNtZVRwZV96TVNnZVdE?oc=5",
-          "date": "Recent"
+            "ticker": "INGA.AS",
+            "name": "ING GROEP N.V.",
+            "sector": "Financial Services",
+            "price": 22.945,
+            "dividend_yield": 4.73,
+            "pe_ratio": 10.82,
+            "roe": 15.77,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "ING Groep (ING) removes two 2027 note classes from NYSE listing - stocktitan.net",
+                    "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNM2QzdGFKeHRwaFdneFNud2NaUUZNdVJwYVplMmE2RTZMUEJ0S0MxOC0xLVdyQ0lubGVxMzZPMmhnT1Z1dXhwRHd4SlJnZEQyS05DSmNTbElJNy0tWnRXbUdOWnJVNjk4VzY3LUpWTWpZeE1sbTlwWUJrVklVdVZ0dE80MkRGYjZ2Tm9fSTZRdndYTW1JdWc?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "ING Groep N.V. stock: 5.5% yield amid bank shifts \u2013 buy now? - AD HOC NEWS",
+                    "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQa2stUS1BNUhpR255MXNtR1pGV3RNS1V3WFVHQy1XeUhIVzY0dDNUcXdyM0Y5a3VXamxZMXFoWnFWYXVHODZRWTVEY180UVJ4THNiZk1uRDQySndhV3hGbkJ0NnRVWVZBZjlGdVpaajBJOE5ZVXVtUERNdjdWZWxQWnpYMURGUUtrb1dKRGpyMU1XTVhEQ1ItVFFaSXl3cUUxRVF5Q2FQN3NERjljZDljbXdyV3FXckE?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.7,
+            "scanned_at": "2026-04-04T09:11:27.382851+00:00"
         },
         {
-          "title": "Aberdeen Group plc Has $56.59 Million Stock Position in The Travelers Companies, Inc. $TRV - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQY3YzVk5yVDNySklfZ2UyN0l4MDhlMG5QQVVsRWFaNnI2UVM5dk9UajZINkg4dWh6NmJIcDVTMnBjZm1CX2tJVE5lU0tCbURKQVR5cVB3VzZKU2k4dGNrTGZtenBTajRFOG0zbXR3MVRIZGw4MlJvUW9xMGRIY2xNWGkyU0VXbDF6Y2pnbkM3blNZUC1wN0hqSFAyZ0NPNnFVeFRpMUFHYXJkaC14a0xKbndlVFE3dmVOVG9xSFJCajdCV0lCQ00ya2ZOeFJGUEFCOV96Ny1KbTNyZ1pVdUpz?oc=5",
-          "date": "Recent"
+            "ticker": "DAL",
+            "name": "Delta Air Lines, Inc.",
+            "sector": "Industrials",
+            "price": 66.76,
+            "dividend_yield": 1.12,
+            "pe_ratio": 8.72,
+            "roe": 27.69,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Delta Air Lines (DAL) president receives 2,960 restricted shares in 2026 incentive grant - stocktitan.net",
+                    "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNM1pVTjRQTmRCZ2M1TFJndnQ3bXF6VFpDZTZBYkpDcGtXVTNhdk1Zd2VERGxWOVlkOWJQNTY4U1k5cGFhTnl5a2FhbGNGeWlheWhoRXhzVnBWZ1lMTjB1U3d3YTZveTBjSU9XbEZEOEpNWFk2dG5idjhEWUNkRkhWVC15MUprTUdpZHQ3NlA3aVVlRnkycUltT1kxalA5RzE1UXU3R3ktLVJqdFktMHdHUC13?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Ahead of Q1 Earnings, What Do Analysts Make of Delta Air Lines Stock? - TipRanks",
+                    "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPSWphNFBtaUd0NTBwNDdDcEIwQnJWZGVSZndYRUZISi1VT3IyMUh5d285MUhYVnFzNEZ0dGMzd3dMM050ZTZfNnFfTzBPWmNyUWJwTVY2U2E4U3YzWHg0N3FtWDQwREFXMk9hd0pxRjNQVTc0V0tKaUN3WjBkZ2dLbHhiay1JRzZoeEE5WmNlNF93aEFlYzVnOG5JRUhDQQ?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.7,
+            "scanned_at": "2026-04-04T09:11:37.138416+00:00"
+        },
+        {
+            "ticker": "KLAC",
+            "name": "KLA Corporation",
+            "sector": "Technology",
+            "price": 1516.84,
+            "dividend_yield": 0.5,
+            "pe_ratio": 44.25,
+            "roe": 100.73,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Why KLA Corporation (KLAC) Stock Is Trading Up Today - StockStory",
+                    "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQZTVVaF9aTUpoM3VPUUEwUGJWYTJhdGtuWXltbFozek55cE0zSUMwb2kzbzB0dGlMWGtqV0g4TjRSQzZJUXBzQXNaMlY3bTZfb2lmTlBKNFRoVTFTWWN1UkROaXBBQ1RGakQ1djhpOWJsUDJ2Y0w4cUpvdE5MQW03Qk1BYm9EZ2lnOFB2MDJLZ0pOdEJGQmFaZjJoWFF1WVR1bGJ1cl84enhMYUl0bnEzUFhR?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "KLA Corporation: A 7.1 Rating in the Semiconductor Equipment Arena - fool.com",
+                    "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNV0FkTTFQbGZrZEZnaENreGdDeVNZeWV6WWRqOXRmWUtoNlhxb2ZuTTc2ZDk4RVBFbVBFRURHSm82bFdQenZRYjJiandMUG5MNzFqT0V2TnViZGRZMjFsRHd0S1JiYmZVYi1oeFppRHdNNkJIcG9GSzM3LUtBQ0E3SVZYbEJHdzQxOEd2aE9KMlAzcks1M3lKag?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.7,
+            "scanned_at": "2026-04-04T09:11:50.282206+00:00"
+        },
+        {
+            "ticker": "AON",
+            "name": "Aon plc",
+            "sector": "Financial Services",
+            "price": 323.14,
+            "dividend_yield": 0.92,
+            "pe_ratio": 18.97,
+            "roe": 46.94,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "This is why TD Cowen is bullish on Aon plc (AON) despite pricing and AI disruption concerns - MSN",
+                    "link": "https://news.google.com/rss/articles/CBMi_gJBVV95cUxNMHZNSzZqY3cwYVhiR0hJeEhjeWdnM3RMcjg3SUFrZWFBZGFuNGZqX2R4eDdxZWNSNDZUZzI3MmtlNlg0OXZTUTZ1MHJfMmpyNHkwREFkZEpnenZLN1NmSy1JLWFQYkZqM1ZReEhuM2M4MDZqcEx2RVo3VVpFWGVPcktka3RzTF9CLXNDYTRXQTlJb1JnWXJBOHdWQ3JQb1JDVmJZOUdJRUlhTDEycTZFeVQ4RHByTWlhTm56MFJQbU9Zeld0a1NrRGQzOUJidG9vRnRwVHdwdWJOSHpab2R5bDlhRlNldHJpbEZiY2ZyaTU2QlNkWF9vMWFuY01fT3dwY2ctRFFpdUMweXFtYkluR0gwUUwzMUpROV8yYmhVTy1abGN3eDVFcWlXODFCSzgyMmI1UldkNDVrZXZHbktTRE9ZemthMzBZTG9lVGxMN1F6QmFjMklzUGt3NjJMakhNc2Z6eUFCMGhLbDNiYmR5aGRMaFBoQXJneFdlb053?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Assenagon Asset Management S.A. Has $2.43 Million Stock Holdings in Aon plc $AON - MarketBeat",
+                    "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPRml4emZ3Y19ndnVCRnhzb044QzUzenktNngyb19fcGNfY1ptdnRzWnhhbjdpNFpWN3YxRkYwRDlLRkdqVUJfUGVsN211YUwwQTRqNG9nT0wwdzAzcTFUaExvSlViTTBhTmttQkt4NnNlOTNjT1drdDViOXI4QXpEYXhLZk9jd05KTEdtTmRUMkozZWVmdjZJSHUzRGFQVWtRYk1BWDhrUGlhTVh4SktudGFsNzV6bDNEYVZPUjl6OU95dlFlbDZzc1lnZTJwaGFINlE?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.6,
+            "scanned_at": "2026-04-04T09:11:42.673234+00:00"
+        },
+        {
+            "ticker": "UNP",
+            "name": "Union Pacific Corporation",
+            "sector": "Industrials",
+            "price": 244.71,
+            "dividend_yield": 2.26,
+            "pe_ratio": 20.41,
+            "roe": 40.38,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Union Pacific Corporation (UNP) stock price, news, quote and history - Yahoo Finance Singapore",
+                    "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBVZFh3dzFMQW1aYnR4QnRtSGxBeU0xNkFTbXlzSS1sT0JXUTVqNzBINllrSU9yenBpNTZ5dXFaazJaLTM1RkZpTVVZZ2piWjVM?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "A rail merger promise: lifetime job protection for train dispatchers - stocktitan.net",
+                    "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOamVDRWRieTRMLURhOEJicE9SWFNnRlJheTVfbXVtLVhXZ25QX1F2ZUFDak1ZT1daN3djSTBJM3hMSklzbDY0eG9fTWNldFVzS3dPTGZ1ek12ZTBxMlhENUJMNXVzQjBjNEFReWduaV92SXBNUzRHbFhwTG1MZ0tGZm0zWFYxS2YzRnh1OTFsaGU1ZnI4YTNJMnBYLW53YWdKZldCWG9QeWRzYldqMTNmM1Vzbks?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.4,
+            "scanned_at": "2026-04-04T09:11:31.687456+00:00"
+        },
+        {
+            "ticker": "GL",
+            "name": "Globe Life Inc.",
+            "sector": "Financial Services",
+            "price": 142.6,
+            "dividend_yield": 0.93,
+            "pe_ratio": 10.14,
+            "roe": 20.59,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "7.5% Yield To Maturity From Globe Life Stock's Baby Bond (NYSE:GL) - Seeking Alpha",
+                    "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOZHQ4N1pqVTgtNVFPY2Ftb0NsT3l1YUw3S3hqS2oxRUlKWDBMaHNRYWx3LUJLUk1MYzZKVzJ2RmpnTFFpcjRrUDFpUWNVMGhyeW9FMU1nd19KRy1PYzAtLU0telNIanp0X2NZUTJEU1J3dTkzc0lLRDhZN2l6TTZSSTU4V01kWVNqaENFR1NMOGV0d3FkNXpTa01HMWhmQQ?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Globe Life EVP Zorn sells $1.2m in stock after option exercise - Investing.com",
+                    "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPdkRpbjBqR0VGRWtRTEFzNmxwRG85MmZFanRkZTJkY1Rhb0RuMlVoX3NzWWVUS1dBZDN5cUNPRVhfVVRwR3Q2SmFFZDlWM1JHd2FPNFpTWVdfMTJ6TDlhZnRzX2RzN0JQeHhscnBDdUNaMTFfeDRQREdvNkJHY3ZDN1JqQXU4VWYyR0Z6bGo5bkJFRXFmUHM0dFc3ZWVPZUlfRW5Rc2o5VFIxYVVDdjlBaFVKa0xKLXJuR0xwSUdMenJ0VUk?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.2,
+            "scanned_at": "2026-04-04T09:11:30.817019+00:00"
+        },
+        {
+            "ticker": "ALLE",
+            "name": "Allegion plc",
+            "sector": "Industrials",
+            "price": 141.06,
+            "dividend_yield": 1.47,
+            "pe_ratio": 18.99,
+            "roe": 36.08,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Allegion PLC stock underperforms Thursday when compared to competitors - MarketWatch",
+                    "link": "https://news.google.com/rss/articles/CBMizwNBVV95cUxQeUliMXhfaXFjV0Y2cXh3T0JWRmY0U20zMFpBdGFBVjZ5TlFhaVYya3MwVGpsUkVtNnNRdHNYZkFNV0xxanl3Uk5JSVpiQm1uWExaVWt0X2RFNGZfUm9JYUVUZ1duN3l3endsbURUZmE5UWxoczdnVzBpODE5b0NCWWZKV1NVV3h0TDhmZzhEUjkxWDYyNXZGblZ2STV5MHhqX1dyOTB3OUY5d2NWSHlxZm9IWUFCWkpmRDJfbDdReUVNYkdRMFU3TDE1OWZwdl9UMGtzY0VycnJfbDViRU9jaEg4Z19kMGlNOUw0UnR2cWhTSDlMcGNXeXRmN3hhcVR6cjJrVDZHZTZpOV9ld3pkYUZOMFN0LWMzSEpsUkFTNDBnaTlQRFNUVWMyZGRrVllNTXVIeXg1NDZwSmZ0Z0JNb3hJRlpxZG00b1ZkS2RXZFoxYS1hSzhtd3BPc2g5WnR4dnc4U0lEMDJLU01pbXdjYnVLZGg2LUV2aTFtcEx4bTFxZHhPYW1GSDY4QldvS1d0eWxTVzJPWjUwVVNOU0ZPS0d1cFlubUVObTVvazBoZXJ0UkdZaWM0TkUycy1qeXFFTVJRTnhNT1BFek1LODJj?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "ALLE SEC Filings - Allegion Plc 10-K, 10-Q, 8-K Forms - stocktitan.net",
+                    "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9jSmRldmZlQmN3aF95RkItVWhMNDZTemhHdnlpQTdTWmplWmhKaW5Vak9DMXBnT3FmdEZoR1FfeGRvMkE4NFo3Sms4Q3p2UkdhejNRUXlicTItUk80YV9aQkEwMm5oUQ?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.2,
+            "scanned_at": "2026-04-04T09:11:35.233776+00:00"
+        },
+        {
+            "ticker": "MCO",
+            "name": "Moody's Corporation",
+            "sector": "Financial Services",
+            "price": 440.79,
+            "dividend_yield": 0.93,
+            "pe_ratio": 32.27,
+            "roe": 62.08,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Fauber, Moody\u2019s CEO, sells $382,662 in MCO stock - Investing.com",
+                    "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMnh5bE5RRGM3R2ZCQ0NSN3M2cWlTRHJwU24zUnRTMkN3cmR4eEFGdG5QQXlWVTN3Z1BiNW01NHltS25oQ2lwV0dPV0doTDlCbmlqTkk3NmlCcEVPdjBnZFprSTRMWGxVTUFHdGlWQUdrRTNuQUNqa3hHb3B4R2RBZkhXbEhyRm5tb3BCUmFldktDVmhvdzROejYxNUNRYXptQXMzaGJPdXlOamVP?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "Moody\u2019s (MCO) SVP and General Counsel Steele sells 158 shares under 10b5-1 plan - stocktitan.net",
+                    "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQSEVhaVpacnRWQmRTZHd2NlJXS3pCb3FRU2tUaEpYc1owc0RkcFlQaFlPTjdlSDVpNEdNSVl4Rko3VmFNaDhERmh0cEU0Z2dWMlVlemNiZjdWc0JaR3gyRG5MTy1MLXl4dWVRNzNSWWtlSUV5UC1FdllPS3c1RXE0YWg4elc2VUtsZXhpR0dXdGJIWDRiekYyaWxjVHRCbVl3cDlVSXRsOWkwelE?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 10.1,
+            "scanned_at": "2026-04-04T09:11:46.876733+00:00"
+        },
+        {
+            "ticker": "TJX",
+            "name": "TJX Companies, Inc. (The)",
+            "sector": "Consumer Cyclical",
+            "price": 161.29,
+            "dividend_yield": 1.19,
+            "pe_ratio": 33.12,
+            "roe": 59.13,
+            "news": [
+                {
+                    "title": "Google News",
+                    "link": "https://news.google.com/",
+                    "date": "Recent"
+                },
+                {
+                    "title": "TJX SEC Filings - Tjx Companies Inc 10-K, 10-Q, 8-K Forms - stocktitan.net",
+                    "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5BYW9iOG1mYnFwSzFHQU5hUWlud1dVOVBCNjkzOUtZYm5zTUpfRU0tN041VmhVdHh2ckNHNTFEcWlQdWpwWDI4dlBoVVd5SVQzOVBhN3hNNmk4TDU4NWgzTkt1RGc?oc=5",
+                    "date": "Recent"
+                },
+                {
+                    "title": "The TJX Companies, Inc. (TJX) stock price, news, quote and history - Yahoo Finance Singapore",
+                    "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE45WWcxdDA4RUt2TkFvbE1GOVBTcEpiQUdIWkozUm5zeERLaUMtdFByWjV2MUZFdW54MmtCODZCNmRtMno5eVFhS2EtTHIydkdBOUlidWN0WHplbFJ1Mmt3WQ?oc=5",
+                    "date": "Recent"
+                }
+            ],
+            "score": 9.9,
+            "scanned_at": "2026-04-04T09:11:48.455107+00:00"
         }
-      ],
-      "score": 9.2,
-      "scanned_at": "2026-04-04T08:09:22.339210+00:00",
-      "tier2": {
-        "analysis": "TRV (Travelers Companies) presents a mixed but cautiously constructive picture. The P/E of 10.72 is attractively low for a major insurer, suggesting value relative to broader market multiples. The 1.5% dividend yield provides modest income support. RSI at 47.3 indicates neutral momentum \u2014 neither overbought nor oversold \u2014 with room to move in either direction. However, VIX at 23.87 signals elevated market anxiety, which historically pressures financials and insurers through investment portfolio volatility and potential reserve concerns. Aberdeen Group's $56.59M position signals institutional confidence. News flow is sparse and largely procedural, offering no near-term catalyst. Insurance sector faces headwinds from elevated catastrophe loss frequency and potential reserve adjustments. The price in EUR (\u20ac293.99) suggests European listing or FX conversion, adding currency risk for USD-denominated fundamentals. Moderate conviction warranted \u2014 value is present but macro headwinds and lack of positive catalysts limit upside aggressiveness.",
-        "conviction_score": 6,
-        "sentiment_score": 5,
-        "recommended_action": "hold",
-        "target_price": "\u20ac301.50",
-        "upside_percentage": "2.6%",
-        "analysed_at": "2026-04-04T08:09:46.985654+00:00"
-      }
-    },
-    {
-      "ticker": "HRL",
-      "name": "Hormel Foods Corporation",
-      "sector": "Consumer Defensive",
-      "price": 22.09,
-      "dividend_yield": 5.3,
-      "pe_ratio": 24.82,
-      "eps_growth_3yr": -5.1,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Assenagon Asset Management S.A. Has $415,000 Position in Hormel Foods Corporation $HRL - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQOVA2dy0tanhJTUt3QndnajBBcW9KYVpjR2hKcEtBUTRQYnJKVFlwZmxLUE9qVjBjcHQxQlRBMlhNaUhZM3JKN3A4X1FfZ2FOa3EtVnEtVjJFdm84VzE2U1FBQ1pOcmhjUTMzbHpiVl9rdU1BN2VJY1JkVVdjcGlyRW5rbl9FYWpQZFhkREFmVFJ5b1laUjFxTjAxWV8yTWxpdHk1UlYwemxaU3NPZGpNdHozam5ZaGlXdHJIXzBBOFVvZjVqaHpYQXBBcnRkTE1wVnlqYUFDaFBmZw?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Hormel Foods Corp. stock underperforms Tuesday when compared to competitors - MarketWatch",
-          "link": "https://news.google.com/rss/articles/CBMi1ANBVV95cUxQTm5ySXN3eWlTSnMtZWZxMVBtSUlWbGJSWkt2NW5BMDU3dnFhem5tQm5rMnI1R2poY2RtdWZGU2g5YVhSYUtkYXdfeHlmLThWbk5PeDFCZ2FEbVU2WFJXc2FMRHhnbkIzZDNISGhNY21OcXhVVGotZkRrbkkxaDZjcjZydmFIUWtpcjBobWV5OWhrS3l1ZHlhRGxRSW05OHI0OVF4RnVRcEdxZTlETkNUMDA5Y3J3U01EWW5HZkZGc09RU2FYTHBBbjlWMzFmd19BLTIzemhialh5cnVma0JiRWVwa2pvWWNNdkZsV19rM0M2a0hGc1AzcFBUSlZ4ZDdBb0cwUUJoUFBlckVQVGFjLTBLOUlNX0I4TmtmSXp4ajJDOVVyT3JhSTRpczh2OUY0VlFScW9faTZ1azVOWVVCLXB4QWR6REk4T1J1Ukh0dU5iOG1SY0syTUtXcmF0RS1yclV1NXhRZlJQcS1fU3Q2cVZBTXhkb2c5Q0p2b25SMU81QjZkczU0T0xGRENEeFYteWlsRzFOaGVHU2tSTU9PaGxQdzRlbU9DTjdBNGFpVXpEWHB1SVZpNS00Q2FKbGRKZW50c1lTUWNuVlJaYWtYMnNhejI?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 8.6,
-      "scanned_at": "2026-04-04T08:09:27.491475+00:00",
-      "tier2": {
-        "analysis": "Hormel Foods (HRL) presents a mixed picture. The 5.3% dividend yield is attractive and provides meaningful downside support for income investors, while the PE of 24.82 appears elevated relative to sector peers given current macro headwinds. RSI at 47.3 suggests neutral momentum with slight bearish lean - not yet oversold. VIX at 23.87 indicates elevated market anxiety, warranting caution on consumer staples names trading at premium multiples. Recent news is uninspiring: underperformance vs competitors signals weak relative strength, and the Assenagon position is a minor institutional footnote. HRL faces ongoing pressure from commodity input costs (pork, turkey), private-label competition, and sluggish volume recovery. The dividend is well-covered and the brand portfolio remains resilient, but near-term catalysts are limited. Price denominated in EUR adds currency translation risk if underlying USD dynamics shift. Conviction is moderate-low given macro uncertainty and relative underperformance trend.",
-        "conviction_score": 4,
-        "sentiment_score": 4,
-        "recommended_action": "hold",
-        "target_price": "\u20ac21.40",
-        "upside_percentage": "-3.12",
-        "analysed_at": "2026-04-04T08:09:58.363711+00:00"
-      }
-    },
-    {
-      "ticker": "WEC",
-      "name": "WEC Energy Group, Inc.",
-      "sector": "Utilities",
-      "price": 117.58,
-      "dividend_yield": 3.24,
-      "pe_ratio": 24.44,
-      "eps_growth_3yr": -30.2,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Heck Capital Advisors LLC Takes $938,000 Position in WEC Energy Group, Inc. $WEC - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNVVZ3TjVnaUF6ZDNaeEZQcU9sTmJITEpTRm5JQjBjQnNlRHJlX3JrejFBdm5Gd0xfc0VrVWRzMTFsSU10RThZOExYZWVsYi1HdjJjaWpTSVlBMG9XNFlfdUN4NVU5czk3Y2Z5VDZkcmwzQkw3dFA0c01oaC1GSVlCdHF4NERia2s3Q0VaNGdFWE9SR2hWODhHaGRJZFhzSGhUNzI2Mzg1RzVIcEFNdVFOdmhiVEFwN1Z1TG9wYWd3TWVVNk85bzVVaVVVVlM4V0lLdXc?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Assessing WEC Energy Group (WEC) Valuation After Recent Share Price Momentum And Data Center Growth Narrative - simplywall.st",
-          "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPMHpGenBhOWc3U2pDaGF0ZjZsMFFXdVlLYko5QVFyMDhMeXJQdy1rbi1Cb3ZqTXN5NzJmTzJhcG0tZTVCY0ZWV3VRdmZmM3BRbHpUTXV4WHdfVFV2cjhLUkczT0k4VUNaemtENzZYcjVScUJUTHVxY0VnRTJqRTcyRHhlalNYWHVJY3d1VjFaTVpUa1VJTjBBTTVZZzNZRnZJaGw4Q1VyOXZsaUlDTmduU003eE9sREh2SkNnUUE3YjFONnQ0Rkltclo1RHRCMG1IU1pLVtIB1AFBVV95cUxPMHpGenBhOWc3U2pDaGF0ZjZsMFFXdVlLYko5QVFyMDhMeXJQdy1rbi1Cb3ZqTXN5NzJmTzJhcG0tZTVCY0ZWV3VRdmZmM3BRbHpUTXV4WHdfVFV2cjhLUkczT0k4VUNaemtENzZYcjVScUJUTHVxY0VnRTJqRTcyRHhlalNYWHVJY3d1VjFaTVpUa1VJTjBBTTVZZzNZRnZJaGw4Q1VyOXZsaUlDTmduU003eE9sREh2SkNnUUE3YjFONnQ0Rkltclo1RHRCMG1IU1pLVg?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 8.2,
-      "scanned_at": "2026-04-04T08:09:16.781665+00:00",
-      "tier2": {
-        "analysis": "WEC Energy Group is a regulated utility trading at a modest premium (P/E 24.44) supported by stable earnings and a solid 3.24% dividend yield. The data center growth narrative provides a credible long-term demand catalyst for power utilities. RSI at 47.3 suggests neutral momentum, neither overbought nor oversold. Heck Capital's $938K position is a modest but positive institutional signal. VIX at 23.87 indicates elevated market anxiety, which historically benefits defensive utility names as investors seek safety. However, rising rate concerns could pressure utility valuations as dividend yields compete with fixed income. The share price is denominated in EUR which may suggest ADR or European listing, adding minor currency risk. Overall, WEC presents a defensive hold with modest upside potential in the current macro environment.",
-        "conviction_score": 6,
-        "sentiment_score": 6,
-        "recommended_action": "hold",
-        "target_price": "\u20ac121.50",
-        "upside_percentage": "3.33",
-        "analysed_at": "2026-04-04T08:10:07.631627+00:00"
-      }
-    },
-    {
-      "ticker": "ITW",
-      "name": "Illinois Tool Works Inc.",
-      "sector": "Industrials",
-      "price": 258.21,
-      "dividend_yield": 2.49,
-      "pe_ratio": 24.64,
-      "eps_growth_3yr": 5.3,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Illinois Tool Works Insider Ups Holding During Year - Yahoo Finance",
-          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNWTRuOHU3cDFSOHMyRWZweU0xd1RZc1dtb1BqYlpWMzBFVkp2ZERxNllNOElLSXZmMzJ1Q0lLWlYwYmNQTzYxMXo2QkxrYkJONjZSTmp2MFBoV2NnWW44a0RLakhoZUY2Sy1CUGF4eWR5Z1BJLUoyam5WVGwtUnhOMjdSbFVlc0lycGVjT1k3OTJoVUFCTjBKSmFHd1Y?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Assessing Illinois Tool Works (ITW) Valuation After A Recent Pullback In Share Performance - simplywall.st",
-          "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNNUtBeDdITjk3WnRvbVlmSUNJcHQ0SzJ0WlZtSFdVdFN5c0JESzRfMHE0Vm1kWEZVX1JPU2dvSFNaOEV0RElySENuQUVoMWRWZ3FRWWZCa2ZjWUFiUGxmSmlkOGVma3V6b28wWDdaOUtrMDNmNEZLSzVSRGpXYk5vdlZDNlVfZDBucmlwaFZlQlUzaEt2cWV3MWtOSVJIdU9ONTRCSE15ZkczZXRld0RIR2dFT1pXcXA0SjFRYzlPVDd0U0w3amtiN0xEZmVMVnZPcFRxWlZXMNIB3AFBVV95cUxQdnhZd0ZpUWxmbk1OXzhGQ0hiUmpZaVpxUjFRR2lLZUpoNW1uQjNQTGV0dHE1SjdnNnp2Skc4V2trbmRqbDNKSWJsVnlBTDl0b0NmOG43bU1mQl82bFJfSF84U1ItZ25mMmtKQVUyRHJDbC16Z0wyWURjYU45ZF83anlZTXZPQXoxUC1ocVAwMWM3TmdhWVIzbHV0cFB4NG5EcTVrZ25wN3FJS2ZRRnU4a0hVeG90TFJGZDdzQUFvblVPTUpzQVhhOXU4SWl1N2xldmpsb0FyM0lkRDlq?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 8.0,
-      "scanned_at": "2026-04-04T08:09:21.492364+00:00",
-      "tier2": {
-        "analysis": "ITW is a high-quality industrial compounder trading at \u20ac258.21 with a P/E of 24.64, which appears reasonable following a recent pullback. Insider buying is a constructive signal, suggesting management confidence at current levels. The 2.49% dividend yield provides income support. RSI at 47.3 indicates neutral-to-slightly-oversold territory, potentially offering a re-entry point. However, VIX at 23.87 signals elevated market uncertainty, warranting caution on near-term positioning. ITW's 80/20 business model and pricing power provide defensive characteristics, but macro headwinds including slower industrial demand and FX translation risks (EUR-denominated price) could weigh on near-term earnings. The valuation pullback creates a marginally attractive setup for long-term investors, but elevated VIX limits near-term conviction. Moderate buy with disciplined risk management recommended.",
-        "conviction_score": 6,
-        "sentiment_score": 6,
-        "recommended_action": "buy",
-        "target_price": "\u20ac268.00",
-        "upside_percentage": "3.8",
-        "analysed_at": "2026-04-04T08:10:17.333111+00:00"
-      }
-    },
-    {
-      "ticker": "EXPE",
-      "name": "Expedia Group, Inc.",
-      "sector": "Consumer Cyclical",
-      "price": 225.3,
-      "dividend_yield": 0.75,
-      "pe_ratio": 22.99,
-      "eps_growth_3yr": -31.4,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Expedia Group (NASDAQ:EXPE) Rating Increased to Strong-Buy at Wall Street Zen - MarketBeat",
-          "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPSkU5RW54cElEeWlEamx0NGRlbkVVTmJRaGtLTVVwM09LOHVoVWxvUFd6aWtiUEcxQ0ExNC12OUR1aWhGd2pyR1dKTi1rR1JZTEp3dGtZUldFcXg3eFA4YmFJZFdBeFNnSHdsZXozeEtMOVZnMGgyYUpSeExPUjlKNUcwUkJJUU82Q01lTURGTVEyM3ZfVXBfN3hkdEF5VjM4Y3ptQ0FTRjlPdnY1UGpJUmpNN2ZVRnNUdFZaZGNzc2d5OHg0cFNB?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "How Investors May Respond To Expedia Group (EXPE) After Jefferies\u2019 AI-Focused Upgrade And New Credit Facility - simplywall.st",
-          "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWmNBaElza1A5dUUzOVlTSHZ0MHNHVTZ5SHR4QUp3UVpmeWRVcmlVOVhxQ0ZNVHZ0WVZQVGFjMWo2NDB3RGd2RWRubTVnSjZ4UndkV2xfZlk2TklyblhxdmZjN3A3M3BNc2pjdjJkOFZ3NkctT0RYLUw0QTJzREdnaHRkTWFwV05xX3hkQ05GcnRhN0tGTXhtLWJvMlEzSXZ3ejZZT1FNSHRLaXBTUkJ6eThDN0cwZS0tYU5hRjNRZHlsc29pSWtrWGduYXprVnRKSVdHblQxZ1nSAd4BQVVfeXFMUGo3cWtQOEhWbGZCM1cxdWhLN2s1VHRvd2FIaFJLOEZNNTdGMVRxTkxHZDJsOFo4NFJWT095azdkMGluYTJrRjdJTElQdTlPeWhhaDNoYWNSX09hUHYwTVA2SXdVdkRWRDkyc2xGY3p0elJaWEtlUzc4LVZ3cTlIQjhnNnZWV3hObmlGbmJ6SUJkSmViNHExSFdkbDBKdS1KSVdoaExvaVVPMmxabnFKZlNDVHRTdHMyNmNFYTFFNVJkekJMa1E4MjVHNXh2ZXNBbkV5b3BuaW82cGlMdHh3?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 7.9,
-      "scanned_at": "2026-04-04T08:09:20.304075+00:00",
-      "tier2": {
-        "analysis": "Expedia Group shows moderate technical positioning with RSI at 47.3, suggesting neither overbought nor oversold conditions. The dual catalysts of a Strong-Buy upgrade at Wall Street Zen and Jefferies' AI-focused upgrade are meaningful positive signals, indicating institutional confidence in EXPE's AI integration strategy. The new credit facility adds financial flexibility. However, elevated VIX at 23.87 signals broader market uncertainty, which typically pressures discretionary travel stocks. PE of 22.99 is reasonable for the sector but not deeply undervalued. The 0.75% dividend provides minimal downside cushion. AI-driven personalization and dynamic pricing improvements could be genuine long-term value drivers, but near-term macro headwinds from higher volatility and consumer spending concerns temper immediate upside. Overall, the analyst upgrade momentum is a positive short-term catalyst worth acting on with measured conviction.",
-        "conviction_score": 6,
-        "sentiment_score": 7,
-        "recommended_action": "buy",
-        "target_price": "\u20ac238.50",
-        "upside_percentage": "5.9%",
-        "analysed_at": "2026-04-04T08:10:26.600739+00:00"
-      }
-    },
-    {
-      "ticker": "RL",
-      "name": "Ralph Lauren Corporation",
-      "sector": "Consumer Cyclical",
-      "price": 348.02,
-      "dividend_yield": 1.05,
-      "pe_ratio": 23.69,
-      "eps_growth_3yr": 21.6,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Citigroup Upgrades Ralph Lauren Corporation (RL), Highlights Brand Positioning Efforts and Resilient Consumers - Yahoo Finance",
-          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQZ2tQVUQ4MG1lLVU2T3hNaGJnaC03Mk1TQkVfbVQ4ajZaMEt1RTZwd1N0SDdIQWx2UDVqMjZ2cnFBR2JsSnRBR3FjQjdUc1lsSy1mV01mX0dSRXctMTAwZHZYUzY1TVFHVVBSX2QxT2dxd3puTEpKRXN4dlh2cHVFbDE2YlJvMDFJdXBST1o3QjRKckVNS2NocHFLSzlDWmpPQzM1TUlBV3BDZURW?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Ralph Lauren Corp. Cl A stock underperforms Thursday when compared to competitors - MarketWatch",
-          "link": "https://news.google.com/rss/articles/CBMi3ANBVV95cUxOQnh0czUtTmV5dWRjQzMtZGYxNGFfdTdVdnYwclJIQjBSN0ZVU0dVMmpWUmhFSVNPREItMFpXTFdyOHRpSlNjNnNkeDQ0QkZtT3IzNlVNU1UzZ0syblFPMmdpZVpMRjJTY2xVUEtDOGRZTDVmUTBtVWp4cU83TjN5MUJGZ2hwWTZEOUI3VXgzZk9ueTRQMXpYOVB2MmJUeDR4NmNBNTdzdkxvNXJLSWRKU1YxclBXc3R2ZHBSSmJUZnRkQ0JJVmdDaHMtM0lsSmFkQnQwS2gzYkh4U0dVbHFVNHNQSXIwSGp2dl9tUkVsV1hraEZYczdYbDM1aEZiTEtrRkg4S3NGUmpDR0xfaEsyNXplaWp5OFNuT243RlVtaEtQME5qQ29KZ0EyX0xaMXFra0NHNXdzRFNIT1Z5YllQWEcwMFRGM2g4NkxkMGdVTnp6dWVMdkQ3WGlYMEZ6Rml6WW9aUl81eUpuZTJSb1dCdUhMemFHSUJ3UzVoaFU3NWNEeXFhaEw2b0hCNG9aTDhPME5wUFMxTTlkUXhWTnNtNVVRTkNBcjB5UGJVSmxtdnp0QkpqRk9TbWd3Zy1YZzlUVDVMNkxWaGFwNlB0QXR0TWtjU3MybFlOLXgtMw?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 7.8,
-      "scanned_at": "2026-04-04T08:09:24.025703+00:00",
-      "tier2": {
-        "analysis": "Ralph Lauren (RL) presents a mixed picture at current levels. Citigroup's upgrade citing brand positioning and resilient consumers is a meaningful positive catalyst, suggesting institutional confidence in RL's premium strategy. However, the stock recently underperformed peers, and the RSI at 47.3 indicates neutral-to-slightly-bearish momentum with no clear directional conviction. VIX at 23.87 signals elevated market anxiety, warranting caution on discretionary consumer names. The P/E of 23.69 is reasonable for a luxury-adjacent brand with pricing power, and the 1.05% dividend provides modest income support. RL's ongoing elevation strategy (reducing discounting, focusing on direct-to-consumer) supports margin expansion long-term. At \u20ac348.02, the stock appears fairly valued with limited near-term upside given macro headwinds. The Citi upgrade is the strongest near-term bullish signal, but elevated VIX and recent underperformance temper enthusiasm. A cautious hold is appropriate, with a potential buy opportunity on any pullback toward the \u20ac330-335 range.",
-        "conviction_score": 5,
-        "sentiment_score": 6,
-        "recommended_action": "hold",
-        "target_price": "\u20ac358.50",
-        "upside_percentage": "3.01%",
-        "analysed_at": "2026-04-04T08:10:36.915246+00:00"
-      }
-    },
-    {
-      "ticker": "VLTO",
-      "name": "Veralto Corp",
-      "sector": "Industrials",
-      "price": 88.01,
-      "dividend_yield": 0.59,
-      "pe_ratio": 23.41,
-      "eps_growth_3yr": 11.9,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Veralto Corporation (VLTO) stock price, news, quote and history - Yahoo Finance Singapore",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5OckYxODFNajJHY003R2tDeGJYOGI3WHA5cTRZWTFMTHpPMHdIdzZ0NjRWejZ4YjY4TzRwUUpubnV5eDJnVF9LTlJyV01CanJISlE?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Veralto Corp. stock rises Tuesday, outperforms market - MarketWatch",
-          "link": "https://news.google.com/rss/articles/CBMitgNBVV95cUxQcGhwcTF6LVhDNVhfR0hrY2c1M1MzblczbkwwaGl5T0prTFlkNzV5d1NxbndXM3J5OVRxR0RTZUpHb1FZOVF3RVh4U0w1cDg2b2VDSzlsZ2pmU2tIWVpodjVtaU40VXNjNDVnTnVEOTVMOFU1VG9PdFRyQ2tHMnp0MjhDR0NUeVE3eXBhYmU4cXRfNVZabzMtcmNtQmpyaDcxVGVFWFZDb2ZfYUtTLTFvWXdBb0dxTFMwcDE3a2h6NmI2Q1NGYmc1TDY2eklCRTk1NHlsZjBCdjRTRWIwaGdXY2g1MklTeUZMLUdqS0dHaDlVR1k5TXBmVGRPYmsyTnpNdzVoTTRuOVhJT3RUQk5yUTNKMmRxY3ZHcmdRSEo3MTBCYW9vUEczZnBTeXI3YVBLMWk4eVRtTWg0cnhfVWZMRnV2eUxkcWg5eDB6dVc3OUFlNlBaQ0MtR1V6cVlwenZfU1dsbjJHTU11WDdTempPMEg0Mks4Wl9ONDNxTWJlVGdDWTVYa2FWNlpVbFpZbFdCS1VBR1pQeEJVeWZNODFvYUZJUXNkMzQ1emRucHpZYjRjWVBRZ2c?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 7.8,
-      "scanned_at": "2026-04-04T08:09:29.211130+00:00",
-      "tier2": {
-        "analysis": "Veralto Corporation (VLTO) trading at \u20ac88.01 with a moderate PE of 23.41, suggesting reasonable valuation for a water quality and product quality solutions company. RSI at 47.3 indicates neutral momentum, neither overbought nor oversold, with room for upside. The stock outperformed the market on Tuesday per MarketWatch, a mild positive signal. Dividend yield of 0.59% is modest but supportive. VIX at 23.87 signals elevated market uncertainty, warranting caution on position sizing. Macro headwinds from broader market volatility temper near-term enthusiasm. Veralto's defensive-leaning water/environmental analytics business provides some insulation against macro turbulence. No major negative catalysts visible from available news. Overall a cautiously constructive setup with limited downside given defensive business characteristics, but VIX elevation caps conviction.",
-        "conviction_score": 6,
-        "sentiment_score": 6,
-        "recommended_action": "buy",
-        "target_price": "\u20ac92.50",
-        "upside_percentage": "5.1%",
-        "analysed_at": "2026-04-04T08:10:47.224103+00:00"
-      }
-    },
-    {
-      "ticker": "ZBH",
-      "name": "Zimmer Biomet Holdings, Inc.",
-      "sector": "Healthcare",
-      "price": 90.89,
-      "dividend_yield": 1.06,
-      "pe_ratio": 25.6,
-      "eps_growth_3yr": -41.8,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "Zimmer Biomet Holdings, Inc. (ZBH) Stock Price, News, Quote &amp; History - Yahoo! Finance Canada",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFAzbnh4ZmJuNzNUZGtGSnk1azZRN3NVQzhUU1FNOGVlalE1RjU0ckk3SHBUaGtrbHg1MzlVb3pLUDJ0SjZlMzc5UENvOHRyTEYy?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Zimmer Biomet Holdings, Inc. (ZBH) stock price, news, quote and history - Yahoo Finance UK",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9vcEMwTFZCMi1sRzVveFVZS1Y1eGg5SWtpMDBCeWFMRGtkQkZhOFpRNWozcUxwVHZzNHhIaHFpMmpKMHhVNjlFRUxYRk4yb0hp?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 7.7,
-      "scanned_at": "2026-04-04T08:09:19.477575+00:00",
-      "tier2": {
-        "analysis": "Zimmer Biomet (ZBH) is a medical device company trading at \u20ac90.89 with a modest P/E of 25.6 and a 1.06% dividend yield. The RSI at 47.3 indicates neutral momentum, neither overbought nor oversold, suggesting consolidation. The VIX at 23.87 reflects elevated market uncertainty, which warrants some caution on cyclical/elective procedure-dependent names like ZBH. Medical device stocks with orthopedic exposure can face headwinds if elective surgeries slow, but ZBH's diversified portfolio and aging demographics provide structural tailwinds. The lack of specific recent news catalysts limits near-term conviction. Valuation at 25.6x earnings appears fair but not compelling at current macro uncertainty levels. Moderate hold stance is appropriate pending clearer macro direction.",
-        "conviction_score": 5,
-        "sentiment_score": 5,
-        "recommended_action": "hold",
-        "target_price": "\u20ac92.50",
-        "upside_percentage": "1.77",
-        "analysed_at": "2026-04-04T08:10:56.213111+00:00"
-      }
-    },
-    {
-      "ticker": "AMT",
-      "name": "American Tower Corporation (REI",
-      "sector": "Real Estate",
-      "price": 173.73,
-      "dividend_yield": 3.97,
-      "pe_ratio": 32.17,
-      "eps_growth_3yr": -33.3,
-      "news": [
-        {
-          "title": "Google News",
-          "link": "https://news.google.com/",
-          "date": "Recent"
-        },
-        {
-          "title": "10 of the Best REITs to Buy for 2026 - U.S. News Money",
-          "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTFA1NGE3YmZhMm5pbXJJUkFvS3A3YlpKM2lzYTBfckpMRHVjVVBkaElZcWdMamRnNjRIa3Z4QS1LaGdhVUZzeE9HSkY5Mll6Q05nc1hQMDRZWGtHR0tyX21FWktURHJTRDNOWlluQVdn?oc=5",
-          "date": "Recent"
-        },
-        {
-          "title": "Ring Energy (REI) Up More Than 48.5% Since FQ2 2025 Results, Wall Street Bullish - Finviz",
-          "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNRm9kTEtrZHEzU0FqVHBtNy1sMTZHVFU0MGYxZ1J1M1dzdjlrN1p3X3NSZmtrbUY4LTM3a2U5WVdMY2k1d0g0Uld1WDVfbVZPem1CU1NmalVyVExBYkhiamotVmtIZHZBMVJZa2EyZUFXd3F5SDZCRVI0bUZIb253dHU3NDRJN1NGUUxlSm5XcXpPeVd2VFFjTFJBLUpqV0g3dDRWa1ppN2E0QQ?oc=5",
-          "date": "Recent"
-        }
-      ],
-      "score": 7.6,
-      "scanned_at": "2026-04-04T08:09:18.659987+00:00",
-      "tier2": {
-        "analysis": "AMT (American Tower) is a leading infrastructure REIT trading at \u20ac173.73 with a solid 3.97% dividend yield. PE of 32.17 is reasonable for a tower REIT with strong recurring revenue streams. RSI at 47.3 indicates neutral momentum with no overbought/oversold conditions. VIX at 23.87 signals elevated market uncertainty, warranting caution on aggressive positioning. Positive tailwinds include 5G infrastructure build-out globally and data center expansion demand. The U.S. News REIT inclusion for 2026 best picks is a modest positive catalyst. Currency risk noted as price is denominated in EUR vs USD-based fundamentals. Macro headwinds include higher-for-longer interest rate environment which pressures REIT valuations and increases cost of capital. Overall, AMT offers defensive income characteristics but limited near-term upside given macro uncertainty and rate sensitivity.",
-        "conviction_score": 6,
-        "sentiment_score": 6,
-        "recommended_action": "hold",
-        "target_price": "\u20ac179.50",
-        "upside_percentage": "3.32",
-        "analysed_at": "2026-04-04T08:11:05.371531+00:00"
-      }
-    }
-  ],
-  "active_trades": []
+    ],
+    "active_trades": []
 }
