@@ -30,41 +30,37 @@
         .stats-bar { display: flex; gap: 25px; font-family: 'Share Tech Mono', monospace; }
         .stat-label { font-size: 0.7em; color: #888; text-transform: uppercase; }
         .stat-value { font-size: 1.2em; color: var(--neon-cyan); }
+        
         .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .panel { background: var(--panel-bg); border: 1px solid rgba(0, 255, 249, 0.2); padding: 20px; height: fit-content; margin-bottom: 20px; }
         .panel-title { font-family: 'Orbitron', sans-serif; font-size: 1em; margin-bottom: 15px; color: var(--neon-magenta); text-transform: uppercase; border-bottom: 1px solid rgba(255,0,255,0.2); padding-bottom: 5px;}
         
-        /* Portfolio Table */
-        .portfolio-table { width: 100%; border-collapse: collapse; font-family: 'Share Tech Mono'; font-size: 0.85em; margin-top: 10px; }
+        /* Charts */
+        .chart-container { height: 250px; width: 100%; position: relative; margin-top: 10px; }
+        .radar-container { height: 300px; width: 100%; position: relative; margin-top: 10px; }
+
+        /* Tables & Items */
+        .portfolio-table { width: 100%; border-collapse: collapse; font-family: 'Share Tech Mono'; font-size: 0.85em; }
         .portfolio-table th { text-align: left; color: #666; padding: 8px; border-bottom: 1px solid #333; }
         .portfolio-table td { padding: 8px; border-bottom: 1px solid #1a1a1a; }
         .pl-positive { color: var(--success-green); }
         .pl-negative { color: var(--danger-red); }
 
-        /* Market Items */
-        .market-item { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 4px; margin-bottom: 15px; border: 1px solid rgba(0, 255, 249, 0.1); transition: 0.3s; }
-        .market-item:hover { border-color: var(--neon-cyan); background: rgba(0, 255, 249, 0.05); }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-        .ticker-box h4 { font-size: 1.4em; color: #fff; }
-        .ticker-link { color: #fff; text-decoration: none; transition: 0.2s; }
-        .ticker-link:hover { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); }
+        .market-item { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 4px; margin-bottom: 15px; border: 1px solid rgba(0, 255, 249, 0.1); }
+        .ticker-link { color: #fff; text-decoration: none; font-weight: bold; }
+        .ticker-link:hover { color: var(--neon-cyan); }
         .action-badge { padding: 4px 12px; border-radius: 2px; font-weight: bold; font-family: 'Orbitron'; font-size: 0.8em; }
-        
         .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: rgba(0,0,0,0.4); padding: 10px; margin: 10px 0; border-radius: 4px; }
-        .target-val { font-size: 1.3em; font-family: 'Share Tech Mono'; }
         .analysis-text { font-size: 0.95em; color: #ccc; line-height: 1.6; margin-top: 10px; text-align: justify; }
-        .source-box { margin-top: 8px; font-size: 0.75em; opacity: 0.6; font-family: 'Share Tech Mono'; }
-        .source-link { color: var(--neon-cyan); text-decoration: none; margin-right: 12px; }
-        .source-link:hover { text-decoration: underline; }
-        .meta-line { font-size: 0.8em; color: #666; margin-top: 10px; font-family: 'Share Tech Mono'; }
-
-        /* Sidebar & Status */
-        .agent-line { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.9em; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success-green); box-shadow: 0 0 5px var(--success-green); }
+        .source-box { margin-top: 10px; font-size: 0.8em; font-family: 'Share Tech Mono'; }
+        .source-link { color: var(--neon-cyan); text-decoration: none; margin-right: 15px; opacity: 0.7; }
+        .source-link:hover { opacity: 1; text-decoration: underline; }
+        
+        /* Risk Bar */
         .risk-bar { height: 10px; background: #222; border-radius: 5px; margin-top: 10px; overflow: hidden; }
         .risk-fill { height: 100%; background: var(--success-green); transition: 1s; }
-        
-        .chart-wrapper { height: 250px; width: 100%; margin-top: 10px; position: relative; }
+        .agent-line { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.9em; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success-green); box-shadow: 0 0 5px var(--success-green); }
     </style>
 </head>
 <body>
@@ -83,24 +79,17 @@
             <div class="main-col">
                 <div class="panel" style="border-color: var(--neon-magenta);">
                     <h3 class="panel-title" style="color: var(--neon-magenta);">📈 PORTFOLIO EQUITY CURVE</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="equityChart"></canvas>
-                    </div>
+                    <div class="chart-container"><canvas id="equityChart"></canvas></div>
                 </div>
 
                 <div class="panel" style="border-color: var(--neon-cyan);">
                     <h3 class="panel-title" style="color: var(--neon-cyan);">📊 Virtual Performance Tracker</h3>
                     <table class="portfolio-table">
                         <thead>
-                            <tr>
-                                <th>ASSET</th>
-                                <th>ENTRY</th>
-                                <th>CURRENT</th>
-                                <th style="text-align: right;">P/L %</th>
-                            </tr>
+                            <tr><th>ASSET</th><th>ENTRY</th><th>CURRENT</th><th style="text-align: right;">P/L %</th></tr>
                         </thead>
                         <tbody id="trade-list">
-                            <tr><td colspan="4" style="color:#444; padding:10px;">Waiting for scan data...</td></tr>
+                            <tr><td colspan="4" style="color:#444; padding:10px;">Waiting for scan...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -112,6 +101,11 @@
             </div>
 
             <div class="side-col">
+                <div class="panel" style="border-color: var(--neon-cyan);">
+                    <h3 class="panel-title" style="color: var(--neon-cyan);">🌐 SECTOR EXPOSURE</h3>
+                    <div class="radar-container"><canvas id="sectorRadar"></canvas></div>
+                </div>
+
                 <div class="panel">
                     <h3 class="panel-title">🤖 Agent Status</h3>
                     <div class="agent-line"><div class="status-dot"></div><div>Scanner: <span id="agent-t1">Online</span></div></div>
@@ -132,6 +126,7 @@
 
     <script>
         let equityChart = null;
+        let radarChart = null;
 
         async function loadData() {
             try {
@@ -140,37 +135,53 @@
             } catch (e) { return null; }
         }
 
-        function initChart(history) {
-            const ctx = document.getElementById('equityChart').getContext('2d');
-            const labels = history.length > 0 ? history.map(h => h.date) : [new Date().toISOString().split('T')[0]];
-            const values = history.length > 0 ? history.map(h => h.value) : [10000];
+        function initCharts(data) {
+            // Equity Line Chart
+            const ctxLine = document.getElementById('equityChart').getContext('2d');
+            const history = data.equity_history || [];
+            const labelsLine = history.length > 0 ? history.map(h => h.date) : [new Date().toISOString().split('T')[0]];
+            const valuesLine = history.length > 0 ? history.map(h => h.value) : [10000];
 
             if (equityChart) equityChart.destroy();
-
-            equityChart = new Chart(ctx, {
+            equityChart = new Chart(ctxLine, {
                 type: 'line',
                 data: {
-                    labels: labels,
+                    labels: labelsLine,
                     datasets: [{
-                        label: 'Portfolio Value (€)',
-                        data: values,
+                        data: valuesLine,
                         borderColor: '#ff00ff',
                         backgroundColor: 'rgba(255, 0, 255, 0.1)',
-                        borderWidth: 2,
-                        tension: 0.4,
                         fill: true,
-                        pointBackgroundColor: '#00fff9',
-                        pointRadius: 4
+                        tension: 0.4,
+                        pointBackgroundColor: '#00fff9'
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { color: 'rgba(0, 255, 249, 0.05)' }, ticks: { color: '#666', font: { family: 'Share Tech Mono' } } },
-                        y: { grid: { color: 'rgba(0, 255, 249, 0.05)' }, ticks: { color: '#666', font: { family: 'Share Tech Mono' } } }
-                    }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+                    scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' } } }
+                }
+            });
+
+            // Sector Radar Chart
+            const ctxRadar = document.getElementById('sectorRadar').getContext('2d');
+            const candidates = data.top_candidates || [];
+            const sectorCounts = {};
+            candidates.forEach(c => { sectorCounts[c.sector || 'Other'] = (sectorCounts[c.sector || 'Other'] || 0) + 1; });
+            
+            if (radarChart) radarChart.destroy();
+            radarChart = new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: Object.keys(sectorCounts),
+                    datasets: [{
+                        data: Object.values(sectorCounts),
+                        backgroundColor: 'rgba(0, 255, 249, 0.2)',
+                        borderColor: '#00fff9',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#ff00ff'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+                    scales: { r: { angleLines: { color: 'rgba(255,255,255,0.1)' }, grid: { color: 'rgba(255,255,255,0.1)' }, pointLabels: { color: '#888' }, ticks: { display: false, stepSize: 1 } } }
                 }
             });
         }
@@ -178,88 +189,54 @@
         function render(data) {
             const m = data.macro || {};
             document.getElementById('stat-vix').innerText = m.vix || '—';
-            const treasuryVal = m.treasury_10y || 0;
-            document.getElementById('stat-treasury').innerText = (treasuryVal > 10 ? treasuryVal / 100 : treasuryVal).toFixed(2) + '%';
+            document.getElementById('stat-treasury').innerText = (m.treasury_10y || 0).toFixed(2) + '%';
             document.getElementById('stat-rsi').innerText = m.rsi || m.sp500_rsi || '—';
             document.getElementById('stat-fg').innerText = data.fear_and_greed?.score || '50';
 
-            initChart(data.equity_history || []);
+            initCharts(data);
 
             const trades = data.active_trades || [];
-            const tradeListEl = document.getElementById('trade-list');
-            if (trades.length === 0) {
-                tradeListEl.innerHTML = '<tr><td colspan="4" style="padding:10px; color:#444;">No active trades logged yet.</td></tr>';
-            } else {
-                tradeListEl.innerHTML = trades.map(t => {
-                    const pl = t.pl_percent || 0;
-                    const plClass = pl >= 0 ? 'pl-positive' : 'pl-negative';
-                    return `
-                        <tr>
-                            <td style="font-weight: bold; color: var(--neon-cyan);">${t.ticker}</td>
-                            <td>€${String(t.entry_price).replace('€', '')}</td>
-                            <td>€${String(t.current_price).replace('€', '')}</td>
-                            <td style="text-align: right;" class="${plClass}">${pl >= 0 ? '+' : ''}${pl}%</td>
-                        </tr>
-                    `;
-                }).join('');
-            }
+            document.getElementById('trade-list').innerHTML = trades.length === 0 ? '<tr><td colspan="4">No active trades.</td></tr>' :
+                trades.map(t => `<tr><td style="font-weight:bold;color:var(--neon-cyan)">${t.ticker}</td><td>€${t.entry_price}</td><td>€${t.current_price}</td><td style="text-align:right" class="${t.pl_percent >= 0 ? 'pl-positive' : 'pl-negative'}">${t.pl_percent >= 0 ? '+' : ''}${t.pl_percent}%</td></tr>`).join('');
 
-            const list = document.getElementById('candidates-list');
             const candidates = data.top_candidates || [];
-            if (candidates.length === 0) {
-                list.innerHTML = '<div>Geen actieve kandidaten gevonden.</div>';
-            } else {
-                list.innerHTML = candidates.map(c => {
-                    const t2 = c.tier2 || {};
-                    const action = (t2.recommended_action || 'HOLD').toUpperCase();
-                    const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
-                    
-                    const sourcesHtml = c.news && c.news.length > 0 
-                        ? `<div class="source-box">Sources: ${c.news.slice(0,2).map((n, i) => `<a href="${n.url}" target="_blank" class="source-link">[Link ${i+1}]</a>`).join('')}</div>` 
-                        : '';
+            document.getElementById('candidates-list').innerHTML = candidates.map(c => {
+                const t2 = c.tier2 || {};
+                const action = (t2.recommended_action || 'HOLD').toUpperCase();
+                const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
+                const sources = c.news ? c.news.slice(0,2).map((n, i) => `<a href="${n.url}" target="_blank" class="source-link">[Source ${i+1}]</a>`).join('') : '';
 
-                    return `
-                    <div class="market-item">
-                        <div class="card-header">
-                            <div class="ticker-box">
-                                <h4><a href="https://finance.yahoo.com/quote/${c.ticker}" target="_blank" class="ticker-link">${c.ticker}</a> 
-                                    <span style="font-size: 0.6em; color: #666;">${c.name || ''}</span>
-                                </h4>
-                                <div style="font-size: 0.8em; color: var(--neon-cyan); opacity: 0.7;">${c.sector || 'Equities'}</div>
-                            </div>
-                            <div class="action-badge" style="background: ${color}; color: #000;">${action}</div>
+                return `<div class="market-item">
+                    <div class="card-header">
+                        <div>
+                            <h4><a href="https://finance.yahoo.com/quote/${c.ticker}" target="_blank" class="ticker-link">${c.ticker}</a> <span style="font-size:0.6em;color:#666">${c.name || ''}</span></h4>
+                            <div style="font-size:0.8em;opacity:0.7">${c.sector || 'Equities'}</div>
                         </div>
-                        <div class="target-grid">
-                            <div><div class="stat-label">30D Target</div><div class="target-val">€${String(t2.target_price || '—').replace('€', '')}</div></div>
-                            <div style="text-align: right;"><div class="stat-label">Upside Potential</div><div class="target-val" style="color: ${color}">${String(t2.upside_percentage || 0).replace('%', '')}%</div></div>
-                        </div>
-                        <div class="analysis-text">${t2.analysis || 'Analysis pending...'}</div>
-                        ${sourcesHtml}
-                        <div class="meta-line">
-                            CONVICTION: ${t2.conviction_score || 0}/10 | SENTIMENT: ${t2.sentiment_score || 5}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%
-                        </div>
-                    </div>`;
-                }).join('');
-            }
+                        <div class="action-badge" style="background:${color};color:#000">${action}</div>
+                    </div>
+                    <div class="target-grid">
+                        <div><div class="stat-label">30D Target</div><div style="font-size:1.2em">€${String(t2.target_price || '—').replace('€', '')}</div></div>
+                        <div style="text-align:right"><div class="stat-label">Upside</div><div style="font-size:1.2em;color:${color}">${String(t2.upside_percentage || 0).replace('%','')}%</div></div>
+                    </div>
+                    <div class="analysis-text">${t2.analysis || 'Pending...'}</div>
+                    <div class="source-box">${sources}</div>
+                    <div class="meta-line">CONVICTION: ${t2.conviction_score || 0}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%</div>
+                </div>`;
+            }).join('');
 
             const scores = candidates.map(c => c.tier2?.conviction_score || 0).filter(s => s > 0);
             const avg = scores.length ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1) : 0;
             document.getElementById('conv-val').innerText = `${avg} / 10`;
             document.getElementById('risk-fill').style.width = (avg * 10) + '%';
-            document.getElementById('signals-summary').innerHTML = `BUY SIGNALS: ${candidates.filter(c => (c.tier2?.recommended_action || '').toLowerCase() === 'buy').length} | ASSETS SCANNED: ${candidates.length}`;
 
             if ([0, 6].includes(new Date().getDay())) {
-                const agentT1 = document.getElementById('agent-t1');
-                agentT1.innerHTML = 'OFFLINE • Weekend-modus (Nieuws-focus)';
-                agentT1.style.color = 'var(--neon-orange)';
+                const agent = document.getElementById('agent-t1');
+                agent.innerHTML = 'OFFLINE • Weekend-modus';
+                agent.style.color = 'var(--neon-orange)';
             }
         }
 
-        async function init() {
-            const data = await loadData();
-            if (data) render(data);
-        }
-
+        async function init() { const data = await loadData(); if (data) render(data); }
         init();
         setInterval(init, 60000);
     </script>
