@@ -88,21 +88,40 @@ def fetch_macro_indicators() -> dict:
     indicators["sp500_rsi"] = 47.3
     return indicators
 
+def get_debt_equity_ratio(info: dict) -> float:
+    """Berekent of haalt de Debt-to-Equity ratio op op een robuuste manier."""
+    try:
+        # Methode A: Directe ratio van Yahoo
+        de_ratio = info.get("debtToEquity")
+        if de_ratio is not None:
+            # Yahoo geeft soms 150 voor 1.5, soms 1.5. We corrigeren dit.
+            return round(de_ratio / 100, 2) if de_ratio > 5 else round(de_ratio, 2)
+        
+        # Methode B: Handmatige berekening (Debt / Equity)
+        total_debt = info.get("totalDebt")
+        total_equity = info.get("totalStockholderEquity")
+        if total_debt and total_equity and total_equity > 0:
+            return round(total_debt / total_equity, 2)
+            
+    except Exception:
+        pass
+    return 0.0  # Fallback
+
 def check_buffett_quality(info: dict) -> tuple[bool, str]:
     """
     Buffett Check: Kijkt of het bedrijf een kwalitatief goede business is.
-    ROE > 15% en Debt-to-Equity < 200%.
+    ROE > 15% en Debt-to-Equity < 2.0 (200%).
     """
     roe = info.get("returnOnEquity", 0)
-    debt_equity = info.get("debtToEquity", 0)
+    de_ratio = get_debt_equity_ratio(info)
     
-    # Als ROE negatief is of lager dan 15% (0.15), skippen we.
+    # Als ROE lager dan 15% (0.15), skippen we.
     if roe < 0.15:
         return False, f"ROE te laag ({round(roe*100, 1)}%)"
     
-    # Als de schuld meer dan 2x het eigen vermogen is, skippen we (behalve bij financials/utilities, maar we houden het streng)
-    if debt_equity > 200:
-        return False, f"Schuld te hoog ({round(debt_equity, 1)}%)"
+    # Als de schuld meer dan 2x het eigen vermogen is, skippen we (behalve banken, maar we blijven streng)
+    if de_ratio > 2.0:
+        return False, f"Schuld te hoog (Ratio: {de_ratio})"
     
     return True, "Quality Business"
 
@@ -112,10 +131,9 @@ def analyse_ticker(ticker: str) -> dict | None:
         t = yf.Ticker(ticker)
         info = t.info
         
-        # --- BUFFETT QUALITY FILTER (BUSINESS FIRST) ---
+        # --- BUFFETT QUALITY FILTER ---
         is_quality, reason = check_buffett_quality(info)
         if not is_quality:
-            # We loggen dit niet voor elk aandeel om de console schoon te houden
             return None
 
         # --- FUNDAMENTELE CIJFERS ---
@@ -123,16 +141,16 @@ def analyse_ticker(ticker: str) -> dict | None:
         div_yield = float(raw_div / 100 if raw_div > 0.20 else raw_div)
         pe = info.get("trailingPE")
         
-        # Extra prijs-checks
-        if not pe or div_yield < 0.005 or div_yield > 0.15: 
-            return None 
+        # Extra checks voor bruikbare data
+        if not pe or pe < 0: return None 
 
         name = str(info.get("shortName", ticker))
         news = fetch_news(name)
-
-        # Bereken de score (Buffett-bonus voor hoge ROE)
         roe = info.get("returnOnEquity", 0)
-        score = round(10 - (pe/10) + (div_yield * 20) + (roe * 5), 1)
+        de_ratio = get_debt_equity_ratio(info)
+
+        # Bereken de score
+        score = round(10 - (pe/15) + (div_yield * 20) + (roe * 5), 1)
 
         return {
             "ticker": ticker,
@@ -142,6 +160,7 @@ def analyse_ticker(ticker: str) -> dict | None:
             "dividend_yield": round(div_yield * 100, 2),
             "pe_ratio": round(float(pe), 2),
             "roe": round(roe * 100, 2),
+            "debt_to_equity": de_ratio,
             "news": news,
             "score": score,
             "scanned_at": datetime.now(timezone.utc).isoformat()
@@ -151,7 +170,7 @@ def analyse_ticker(ticker: str) -> dict | None:
 
 def main():
     log.info("=== NEXUS Tier 1 GLOBAL HUNTER starting ===")
-    log.info("BUFFETT MODE: ROE > 15% filter enabled.")
+    log.info("BUFFETT MODE: ROE > 15% & DEBT CHECK enabled.")
     
     macro = fetch_macro_indicators()
     universe = fetch_global_universe()
@@ -162,13 +181,12 @@ def main():
         res = analyse_ticker(ticker)
         if res:
             candidates.append(res)
-            log.info(f"PASS {ticker} (Quality Score: {res['score']}, ROE: {res['roe']}%)")
+            log.info(f"PASS {ticker} (Score: {res['score']}, ROE: {res['roe']}%, D/E: {res['debt_to_equity']})")
         
-        # We stoppen bij 15 sterke kandidaten voor de Tier 2 Analyse
         if len(candidates) >= 15: 
             break
         
-        time.sleep(0.05) # Rate limiting voorkomen
+        time.sleep(0.05)
     
     candidates.sort(key=lambda x: x['score'], reverse=True)
 
@@ -178,9 +196,8 @@ def main():
         try:
             with open(TRADES_PATH, "r") as f:
                 all_trades = json.load(f)
-                active_trades = all_trades[-5:] # Laatste 5 trades
-        except Exception as e:
-            log.warning(f"Kon trades.json niet laden: {e}")
+                active_trades = all_trades[-5:] 
+        except: pass
 
     # Opslaan van resultaten
     with open(OUTPUT_PATH, "w") as f:
@@ -191,7 +208,7 @@ def main():
             "active_trades": active_trades
         }, f, indent=2)
     
-    log.info(f"=== Done! {len(candidates)} quality candidates passed the Buffett-filter. ===")
+    log.info(f"=== Done! {len(candidates)} quality candidates passed. ===")
 
 if __name__ == "__main__":
     main()
