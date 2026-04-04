@@ -6,6 +6,7 @@
     <title>NEXUS MARKET TERMINAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -60,9 +61,13 @@
         
         .analysis-text { font-size: 0.9em; color: #ccc; line-height: 1.5; margin: 10px 0; text-align: justify; }
         .source-box { margin: 10px 0; }
-        .source-link { color: var(--neon-cyan); text-decoration: none; font-size: 0.8em; font-family: 'Share Tech Mono'; margin-right: 15px; opacity: 0.7; border: 1px solid rgba(0, 255, 249, 0.3); padding: 2px 6px; border-radius: 3px; }
+        .source-link { color: var(--neon-cyan); text-decoration: none; font-size: 0.8em; font-family: 'Share Tech Mono'; margin-right: 10px; opacity: 0.7; border: 1px solid rgba(0, 255, 249, 0.3); padding: 2px 6px; border-radius: 3px; cursor: pointer; display: inline-block; }
         .source-link:hover { opacity: 1; background: rgba(0, 255, 249, 0.1); }
         
+        /* Interactive Chart Area */
+        .chart-drop-area { display: none; height: 400px; margin-top: 15px; border: 1px solid var(--neon-cyan); background: #000; border-radius: 4px; overflow: hidden; }
+        .chart-active { display: block !important; }
+
         .risk-bar { height: 8px; background: #222; border-radius: 4px; margin-top: 8px; overflow: hidden; }
         .risk-fill { height: 100%; background: var(--success-green); transition: 1s; }
         .agent-line { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.85em; }
@@ -138,6 +143,41 @@
             } catch (e) { return null; }
         }
 
+        // TradingView Widget Toggle Functie
+        function toggleStockChart(ticker) {
+            const containerId = `chart-container-${ticker.replace('.', '-')}`;
+            const container = document.getElementById(containerId);
+            
+            // Toggle zichtbaarheid
+            container.classList.toggle('chart-active');
+
+            // Als de grafiek nog leeg is, laad de TradingView widget
+            if (container.innerHTML === "") {
+                // Formatteer ticker voor TradingView (bv ASML.AS naar EURONEXT:ASML)
+                let symbol = ticker;
+                if (ticker.includes('.AS')) {
+                    symbol = `EURONEXT:${ticker.split('.')[0]}`;
+                } else {
+                    symbol = `NASDAQ:${ticker}`;
+                }
+
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": symbol,
+                    "interval": "D",
+                    "timezone": "Etc/UTC",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "hide_side_toolbar": false,
+                    "allow_symbol_change": true,
+                    "container_id": containerId
+                });
+            }
+        }
+
         function render(data) {
             if (!data) return;
 
@@ -169,7 +209,7 @@
             document.getElementById('stat-rsi').innerText = data.macro?.rsi || '—';
             document.getElementById('stat-fg').innerText = data.fear_and_greed?.score || '50';
 
-            // 3. Charts
+            // 3. Equity Chart
             const hist = data.equity_history || [];
             if (equityChart) equityChart.destroy();
             equityChart = new Chart(document.getElementById('equityChart'), {
@@ -181,6 +221,7 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
+            // 4. Sector Radar
             const cand = data.top_candidates || [];
             const sects = {}; cand.forEach(c => sects[c.sector || 'Other'] = (sects[c.sector || 'Other'] || 0) + 1);
             if (radarChart) radarChart.destroy();
@@ -190,21 +231,20 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            // 4. Trades
+            // 5. Trades
             const trades = data.active_trades || [];
             document.getElementById('trade-list').innerHTML = trades.length ? trades.map(t => `<tr><td style="color:var(--neon-cyan)">${t.ticker}</td><td>€${t.entry_price}</td><td>€${t.current_price}</td><td style="text-align:right" class="${t.pl_percent >= 0 ? 'pl-positive' : 'pl-negative'}">${t.pl_percent}%</td></tr>`).join('') : '<tr><td colspan="4">No active trades.</td></tr>';
 
-            // 5. Candidates & FIX voor News Links
+            // 6. Candidates met Interactive Charts
             document.getElementById('candidates-list').innerHTML = cand.map(c => {
                 const t2 = c.tier2 || {}, action = (t2.recommended_action || 'HOLD').toUpperCase();
                 const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
                 
-                // FIX: Check zowel n.url als n.link
-                const sources = (c.news && Array.isArray(c.news)) 
+                const sources = (c.news && Array.isArray(c.news)) 
                     ? c.news.slice(0, 2).map((n, i) => {
                         const link = n.url || n.link;
                         return link ? `<a href="${link}" target="_blank" class="source-link">[Source ${i+1}]</a>` : '';
-                    }).join('') 
+                    }).join('') 
                     : '';
 
                 return `<div class="market-item">
@@ -218,8 +258,15 @@
                         <div style="text-align:right"><div class="stat-label">Upside</div><div style="color:${color}">${t2.upside_percentage || 0}%</div></div>
                     </div>
                     <div class="analysis-text">${t2.analysis || ''}</div>
-                    <div class="source-box">${sources}</div>
-                    <div style="font-size:0.75em; opacity:0.5; font-family:'Share Tech Mono'">CONVICTION: ${t2.conviction_score || 0}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%</div>
+                    
+                    <div class="source-box">
+                        ${sources}
+                        <span class="source-link" onclick="toggleStockChart('${c.ticker}')" style="border-color: var(--neon-magenta); color: var(--neon-magenta);">📊 LIVE CHART</span>
+                    </div>
+
+                    <div id="chart-container-${c.ticker.replace('.', '-')}" class="chart-drop-area"></div>
+
+                    <div style="font-size:0.75em; opacity:0.5; font-family:'Share Tech Mono'; margin-top:10px;">CONVICTION: ${t2.conviction_score || 0}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%</div>
                 </div>`;
             }).join('');
 
