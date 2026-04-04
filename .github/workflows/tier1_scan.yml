@@ -2,8 +2,8 @@ name: NEXUS Daily Scan
 
 on:
   schedule:
-    - cron: "0 7 * * 1-5" # Elke werkdag om 08:00 of 09:00 NL tijd
-  workflow_dispatch:      # Zorgt voor de handmatige "Run" knop
+    - cron: "0 7 * * *" # Dit scant nu ELKE dag om 09:00 NL tijd
+  workflow_dispatch:      # Houdt de handmatige knop beschikbaar
 
 jobs:
   scan_and_analyze:
