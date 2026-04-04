@@ -11,13 +11,17 @@ import pandas as pd
 import requests
 from io import StringIO
 
+# Logging setup
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger("tier1_scanner")
 
-OUTPUT_PATH = Path(__file__).parent.parent / "data.json"
+# Paden definitie
+BASE_DIR = Path(__file__).parent.parent
+OUTPUT_PATH = BASE_DIR / "data.json"
+TRADES_PATH = BASE_DIR / "trades.json"
 
 def fetch_news(query: str) -> list:
-    """Scoort de laatste 3 nieuwskoppen via Google News met robuuste Regex."""
+    """Scoort de laatste 3 nieuwskoppen via Google News."""
     news_items = []
     try:
         clean_query = query.split(',')[0].split(' N.V.')[0] + " stock news"
@@ -41,7 +45,7 @@ def fetch_news(query: str) -> list:
     return news_items
 
 def fetch_global_universe() -> list[str]:
-    """Combineert S&P 500, Nasdaq 100 en de volledige Nederlandse markt."""
+    """Combineert S&P 500, Nasdaq 100 en de Nederlandse markt."""
     tickers = []
     headers = {'User-Agent': 'Mozilla/5.0'}
     
@@ -55,27 +59,24 @@ def fetch_global_universe() -> list[str]:
     # 2. Nasdaq 100
     try:
         res = requests.get("https://en.wikipedia.org/wiki/Nasdaq-100", headers=headers, timeout=10)
-        # Wikipedia heeft vaak meerdere tabellen, tabel 4 is meestal de Nasdaq 100 lijst
         nasdaq_df = pd.read_html(StringIO(res.text))[4]
         tickers.extend(nasdaq_df["Ticker"].tolist())
         log.info("Nasdaq 100 tickers toegevoegd.")
     except: pass
 
-    # 3. Nederlandse Markt (AEX + AMX + Selectie)
+    # 3. Nederlandse Markt
     dutch_market = [
-        # AEX
         "ASML.AS", "ADYEN.AS", "UNA.AS", "HEIA.AS", "INGA.AS", "REN.AS", "ASM.AS", "AKZA.AS", "SHELL.AS",
         "AD.AS", "ABN.AS", "ASRNL.AS", "BEP0.AS", "BESI.AS", "DSFIR.AS", "IMCD.AS", "KPN.AS", "MT.AS",
         "NN.AS", "PHIA.AS", "PRX.AS", "RAND.AS", "UMG.AS", "URW.AS", "WKL.AS",
-        # AMX & Midcaps
         "AALB.AS", "AIRF.AS", "AMG.AS", "APAM.AS", "ARDS.AS", "BAMN.AS", "BFIT.AS", "CORB.AS", "CTP.AS", 
         "FLOW.AS", "FUGR.AS", "GLPG.AS", "JDEP.AS", "LIGHT.AS", "SBMO.AS", "VOPA.AS"
     ]
     tickers.extend(dutch_market)
-    
     return list(set(tickers))
 
 def fetch_macro_indicators() -> dict:
+    """Haalt VIX en Treasury yields op."""
     indicators = {}
     try:
         vix = yf.Ticker("^VIX").fast_info["lastPrice"]
@@ -88,6 +89,7 @@ def fetch_macro_indicators() -> dict:
     return indicators
 
 def analyse_ticker(ticker: str) -> dict | None:
+    """Filtert op basis van fundamentelen en scores."""
     try:
         t = yf.Ticker(ticker)
         info = t.info
@@ -95,7 +97,6 @@ def analyse_ticker(ticker: str) -> dict | None:
         div_yield = float(raw_div / 100 if raw_div > 0.20 else raw_div)
         pe = info.get("trailingPE")
         
-        # Strenge filter: Alleen winstgevende dividend-uitkerende aandelen
         if not pe or div_yield < 0.005 or div_yield > 0.15: return None 
 
         name = str(info.get("shortName", ticker))
@@ -122,25 +123,37 @@ def main():
     log.info(f"Scanning universe of {len(universe)} tickers...")
     
     candidates = []
-    
     for ticker in universe:
         res = analyse_ticker(ticker)
         if res:
             candidates.append(res)
             log.info(f"PASS {ticker} (Score: {res['score']})")
-        
-        # We scannen door tot we 15 sterke kandidaten hebben (iets meer voor Claude om uit te kiezen)
         if len(candidates) >= 15: break
-        time.sleep(0.05) # Iets sneller scannen
+        time.sleep(0.05)
     
     candidates.sort(key=lambda x: x['score'], reverse=True)
+
+    # --- BACKTESTER INTEGRATIE ---
+    active_trades = []
+    if TRADES_PATH.exists():
+        try:
+            with open(TRADES_PATH, "r") as f:
+                all_trades = json.load(f)
+                # Alleen de laatste 5 meest relevante trades voor het dashboard
+                active_trades = all_trades[-5:]
+        except Exception as e:
+            log.warning(f"Kon trades.json niet laden: {e}")
+
+    # Opslaan van resultaten
     with open(OUTPUT_PATH, "w") as f:
         json.dump({
             "generated_at": datetime.now(timezone.utc).isoformat(), 
             "macro": macro, 
-            "top_candidates": candidates[:10] # De beste 10 gaan naar data.json
+            "top_candidates": candidates[:10],
+            "active_trades": active_trades # De backtest resultaten gaan nu mee!
         }, f, indent=2)
-    log.info(f"=== Done! {len(candidates)} candidates found. ===")
+    
+    log.info(f"=== Done! {len(candidates)} candidates found. trades.json gekoppeld. ===")
 
 if __name__ == "__main__":
     main()
