@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS PRO | Financial Intelligence Unit</title>
+    <title>NEXUS PRO | Investment Command Center</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
@@ -13,141 +13,115 @@
             --slate-700: #334155; --slate-800: #1e293b; --slate-900: #0f172a;
             --blue-600: #2563eb; --blue-700: #1d4ed8;
             --green-600: #16a34a; --red-600: #dc2626;
-            --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--slate-50); color: var(--slate-900); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--slate-50); color: var(--slate-900); overflow: hidden; }
 
-        /* Header / Navigation */
         header {
             background: var(--slate-900); color: white;
             padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            height: 60px;
         }
-        .logo-box { display: flex; align-items: center; gap: 10px; }
-        .logo-box h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.5px; }
-        .status-pill { background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-family: 'Roboto Mono'; }
+        .logo-box h1 { font-size: 1rem; font-weight: 700; letter-spacing: -0.5px; }
+        .status-pill { background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 4px; font-size: 0.7rem; font-family: 'Roboto Mono'; }
 
-        /* Top Bar Stats */
         .market-bar {
             background: white; border-bottom: 1px solid var(--slate-200);
             display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            padding: 0.5rem 2rem; gap: 1rem;
+            padding: 0.5rem 2rem; height: 50px;
         }
-        .market-stat { border-right: 1px solid var(--slate-200); padding: 5px 0; }
-        .market-stat:last-child { border: none; }
-        .label { font-size: 0.65rem; color: var(--slate-700); text-transform: uppercase; font-weight: 600; display: block; }
-        .value { font-family: 'Roboto Mono', monospace; font-weight: 600; font-size: 0.95rem; }
+        .market-stat { border-right: 1px solid var(--slate-200); padding: 0 15px; }
+        .label { font-size: 0.6rem; color: var(--slate-700); text-transform: uppercase; font-weight: 700; }
+        .value { font-family: 'Roboto Mono', monospace; font-weight: 600; font-size: 0.9rem; }
 
-        /* Dashboard Layout */
         .dashboard {
-            display: grid; grid-template-columns: 320px 1fr 380px;
-            gap: 1.5rem; padding: 1.5rem; max-width: 1900px; margin: 0 auto;
+            display: grid; grid-template-columns: 350px 1fr 380px;
+            gap: 1rem; padding: 1rem; height: calc(100vh - 110px);
         }
 
-        /* Common Panel Style */
-        .panel { background: white; border: 1px solid var(--slate-200); border-radius: 6px; box-shadow: var(--panel-shadow); overflow: hidden; display: flex; flex-direction: column; }
-        .panel-header { padding: 12px 16px; background: var(--slate-100); border-bottom: 1px solid var(--slate-200); display: flex; justify-content: space-between; align-items: center; }
-        .panel-header h3 { font-size: 0.85rem; font-weight: 700; color: var(--slate-800); text-transform: uppercase; }
+        .panel { background: white; border: 1px solid var(--slate-200); border-radius: 6px; box-shadow: var(--panel-shadow); display: flex; flex-direction: column; height: 100%; }
+        .panel-header { padding: 10px 16px; background: var(--slate-100); border-bottom: 1px solid var(--slate-200); display: flex; justify-content: space-between; align-items: center; }
+        .panel-header h3 { font-size: 0.75rem; font-weight: 700; color: var(--slate-800); text-transform: uppercase; }
 
-        /* Candidate Cards */
-        .candidate-scroll { flex: 1; overflow-y: auto; padding: 1rem; max-height: 80vh; }
-        .stock-card { border: 1px solid var(--slate-200); border-radius: 6px; margin-bottom: 1rem; transition: 0.2s; cursor: pointer; }
-        .stock-card:hover { border-color: var(--blue-600); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .stock-card-top { padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--slate-100); }
-        .stock-info h4 { font-size: 1.1rem; color: var(--blue-600); }
-        .stock-info span { font-size: 0.75rem; color: var(--slate-700); }
+        .scroll-area { flex: 1; overflow-y: auto; padding: 1rem; }
         
-        .action-tag { padding: 3px 8px; border-radius: 3px; font-size: 0.7rem; font-weight: 700; }
-        .tag-buy { background: #dcfce7; color: #166534; }
-        .tag-hold { background: #fef9c3; color: #854d0e; }
+        /* Watchlist Cards */
+        .stock-card { border: 1px solid var(--slate-200); border-radius: 6px; margin-bottom: 0.75rem; transition: 0.2s; cursor: pointer; background: #fff; }
+        .stock-card:hover { border-color: var(--blue-600); background: var(--slate-50); }
+        .stock-card.active { border-left: 4px solid var(--blue-600); background: #f0f7ff; }
+        .card-inner { padding: 12px; }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .card-ticker { font-weight: 700; color: var(--blue-600); font-size: 1rem; }
+        
+        .badge { padding: 2px 8px; border-radius: 3px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; }
+        .badge-buy { background: #dcfce7; color: #166534; }
+        .badge-hold { background: #fef9c3; color: #854d0e; }
 
-        .analysis-preview { padding: 12px; font-size: 0.85rem; color: var(--slate-700); line-height: 1.4; border-bottom: 1px solid var(--slate-100); }
-        .mini-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 8px 12px; background: var(--slate-50); font-size: 0.75rem; }
+        .card-metrics { display: grid; grid-template-columns: 1fr 1fr; font-size: 0.75rem; color: var(--slate-700); }
 
-        /* Main Viewport (Charts) */
-        .main-view { display: flex; flex-direction: column; gap: 1.5rem; }
-        .chart-box { min-height: 500px; background: white; border: 1px solid var(--slate-200); border-radius: 6px; position: relative; }
-        #tv-container { height: 100%; width: 100%; }
+        /* Main Viewport */
+        .main-view { display: flex; flex-direction: column; gap: 1rem; height: 100%; }
+        .chart-box { flex: 2; background: white; border: 1px solid var(--slate-200); border-radius: 6px; position: relative; min-height: 400px; }
+        .analysis-box { flex: 1; background: white; border: 1px solid var(--slate-200); border-radius: 6px; overflow-y: auto; }
 
-        /* Sidebar Tables */
+        /* Data Tables */
         .data-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-        .data-table th { text-align: left; padding: 8px 16px; color: var(--slate-700); font-weight: 600; border-bottom: 2px solid var(--slate-200); }
+        .data-table th { text-align: left; padding: 8px 16px; color: var(--slate-700); border-bottom: 2px solid var(--slate-200); }
         .data-table td { padding: 10px 16px; border-bottom: 1px solid var(--slate-100); }
-        .pos-num { color: var(--green-600); font-weight: 600; }
-        .neg-num { color: var(--red-600); font-weight: 600; }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--slate-100); }
-        ::-webkit-scrollbar-thumb { background: var(--slate-200); border-radius: 10px; }
+        
+        .analysis-content { padding: 20px; line-height: 1.7; font-size: 0.95rem; color: var(--slate-800); }
+        .analysis-content h4 { color: var(--blue-600); margin-bottom: 15px; border-bottom: 1px solid var(--slate-100); padding-bottom: 10px; font-size: 1.1rem; }
+        .analysis-text { white-space: pre-wrap; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo-box">
-        <h1>NEXUS INTELLIGENCE</h1>
-        <div class="status-pill">SYSTEM: OPTIMIZED</div>
+        <h1>NEXUS INTELLIGENCE <span style="font-weight: 300; opacity: 0.6; margin-left: 10px;">PRO TERMINAL</span></h1>
     </div>
-    <div style="font-size: 0.75rem; color: #94a3b8;" id="last-update">Syncing...</div>
+    <div class="status-pill" id="last-update">Syncing...</div>
 </header>
 
 <div class="market-bar">
-    <div class="market-stat"><span class="label">Volatility Index</span><span class="value" id="vix-val">--</span></div>
-    <div class="market-stat"><span class="label">US 10Y Yield</span><span class="value" id="yield-val">--</span></div>
-    <div class="market-stat"><span class="label">Fear & Greed Index</span><span class="value" id="fg-val">--</span></div>
-    <div class="market-stat"><span class="label">Sector Strength</span><span class="value">FINANCIALS</span></div>
-    <div class="market-stat"><span class="label">Portfolio Return</span><span class="value" id="port-ret">--</span></div>
+    <div class="market-stat"><span class="label">Volatility (VIX)</span><div class="value" id="vix-val">--</div></div>
+    <div class="market-stat"><span class="label">US 10Y Yield</span><div class="value" id="yield-val">--</div></div>
+    <div class="market-stat"><span class="label">Fear & Greed</span><div class="value" id="fg-val">--</div></div>
+    <div class="market-stat"><span class="label">Risk Status</span><div class="value" id="risk-status">STABLE</div></div>
+    <div class="market-stat"><span class="label">Avg Conviction</span><div class="value" id="conv-avg">--</div></div>
 </div>
 
 <div class="dashboard">
     <div class="panel">
-        <div class="panel-header">
-            <h3>Top Candidates</h3>
-            <span style="font-size:0.7rem; color:var(--blue-600)">ROE > 15%</span>
+        <div class="panel-header"><h3>Quality Watchlist</h3></div>
+        <div class="scroll-area" id="candidates-list"></div>
+    </div>
+
+    <div class="main-view">
+        <div class="chart-box">
+            <div id="tv-container" style="height: 100%; width: 100%;"></div>
         </div>
-        <div class="candidate-scroll" id="candidates-list">
+        <div class="analysis-box">
+            <div class="panel-header"><h3>Fundamental Deep-Dive</h3></div>
+            <div id="full-analysis-content" class="analysis-content">
+                <p style="color: var(--slate-700);">Selecteer een aandeel uit de watchlist voor volledige Buffett-analyse.</p>
             </div>
+        </div>
     </div>
 
     <div class="main-view">
         <div class="panel" style="flex:1">
-            <div class="panel-header">
-                <h3 id="active-ticker-title">Select a ticker for technical view</h3>
-                <div id="active-tags"></div>
-            </div>
-            <div class="chart-box">
-                <div id="tv-container"></div>
-            </div>
-        </div>
-        
-        <div class="panel">
-            <div class="panel-header"><h3>Equity Curve (Historical)</h3></div>
-            <div style="padding:15px; height: 180px;"><canvas id="equityChart"></canvas></div>
-        </div>
-    </div>
-
-    <div class="main-view">
-        <div class="panel">
             <div class="panel-header"><h3>Active Positions</h3></div>
             <table class="data-table">
                 <thead><tr><th>Asset</th><th>Current</th><th>P/L %</th></tr></thead>
                 <tbody id="trades-list"></tbody>
             </table>
         </div>
-
-        <div class="panel">
-            <div class="panel-header"><h3>AI Intelligence Loop</h3></div>
-            <div style="padding: 16px;">
-                <p style="font-size: 0.85rem; color: var(--slate-700); margin-bottom: 10px;">
-                    <b>Model:</b> Claude 4.6 Sonnet (Business-First Mode)<br>
-                    <b>Strategy:</b> Buffett Quality Compounders
-                </p>
-                <div style="background: var(--slate-100); padding: 12px; border-radius: 4px; font-size: 0.75rem;">
-                    "Looking for strong moats and consistent capital allocation. Current VIX environment suggests caution on highly leveraged cyclicals."
-                </div>
-            </div>
+        <div class="panel" style="flex:0.6">
+            <div class="panel-header"><h3>Equity Curve</h3></div>
+            <div style="padding:15px; height: 150px;"><canvas id="equityChart"></canvas></div>
         </div>
     </div>
 </div>
@@ -158,83 +132,87 @@
     async function loadData() {
         const res = await fetch('data.json?v=' + Date.now());
         const data = await res.json();
-        updateMarketStats(data);
-        renderCandidates(data);
-        renderTrades(data);
-        renderEquityChart(data);
-        
-        // Load first ticker by default
-        if (data.top_candidates.length > 0) {
-            selectStock(data.top_candidates[0]);
-        }
+        updateUI(data);
     }
 
-    function updateMarketStats(data) {
+    function updateUI(data) {
+        // Macro stats
         document.getElementById('vix-val').innerText = data.macro.vix;
-        document.getElementById('vix-val').style.color = data.macro.vix > 22 ? 'var(--red-600)' : 'var(--green-600)';
         document.getElementById('yield-val').innerText = data.macro.treasury_10y + '%';
         document.getElementById('fg-val').innerText = data.fear_and_greed?.score || '50';
-        document.getElementById('last-update').innerText = 'Last Refresh: ' + new Date(data.generated_at).toLocaleTimeString();
-    }
+        document.getElementById('last-update').innerText = 'REFRESH: ' + new Date(data.generated_at).toLocaleTimeString();
+        
+        const risk = document.getElementById('risk-status');
+        risk.innerText = data.macro.vix > 22 ? 'CAUTION' : 'STABLE';
+        risk.style.color = data.macro.vix > 22 ? 'var(--red-600)' : 'var(--green-600)';
 
-    function renderCandidates(data) {
+        // Render Candidates
         const container = document.getElementById('candidates-list');
         container.innerHTML = data.top_candidates.map(c => `
-            <div class="stock-card" onclick='selectStock(${JSON.stringify(c)})'>
-                <div class="stock-card-top">
-                    <div class="stock-info">
-                        <h4>${c.ticker}</h4>
-                        <span>${c.sector}</span>
+            <div class="stock-card" onclick='selectStock(${JSON.stringify(c)})' id="card-${c.ticker.replace('.','-')}">
+                <div class="card-inner">
+                    <div class="card-top">
+                        <span class="card-ticker">${c.ticker}</span>
+                        <span class="badge ${c.tier2?.recommended_action === 'BUY' ? 'badge-buy' : 'badge-hold'}">
+                            ${c.tier2?.recommended_action || 'HOLD'}
+                        </span>
                     </div>
-                    <span class="action-tag ${c.tier2?.recommended_action === 'BUY' ? 'tag-buy' : 'tag-hold'}">
-                        ${c.tier2?.recommended_action || 'HOLD'}
-                    </span>
-                </div>
-                <div class="analysis-preview">${c.tier2?.analysis ? c.tier2.analysis.substring(0, 85) + '...' : 'No analysis yet.'}</div>
-                <div class="mini-metrics">
-                    <div><b>PE:</b> ${c.pe_ratio}</div>
-                    <div><b>Conv:</b> ${c.tier2?.conviction_score}/10</div>
-                    <div><b>Target:</b> €${c.tier2?.target_price}</div>
+                    <div class="card-metrics">
+                        <div>PE: <b>${c.pe_ratio}</b></div>
+                        <div>Conv: <b>${c.tier2?.conviction_score}/10</b></div>
+                    </div>
                 </div>
             </div>
         `).join('');
-    }
 
-    function selectStock(c) {
-        document.getElementById('active-ticker-title').innerText = `${c.ticker} - ${c.name}`;
-        
-        // Load TradingView
-        let symbol = c.ticker;
-        if (symbol.includes('.AS')) symbol = `EURONEXT:${symbol.split('.')[0]}`;
-        
-        new TradingView.widget({
-            "autosize": true,
-            "symbol": symbol,
-            "interval": "D",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "enable_publishing": false,
-            "hide_top_toolbar": false,
-            "container_id": "tv-container"
-        });
-    }
-
-    function renderTrades(data) {
+        // Render Trades
         const list = document.getElementById('trades-list');
         list.innerHTML = data.active_trades.map(t => `
             <tr>
                 <td><b>${t.ticker}</b></td>
                 <td>€${t.current_price}</td>
-                <td class="${t.pl_percent >= 0 ? 'pos-num' : 'neg-num'}">${t.pl_percent}%</td>
+                <td style="color:${t.pl_percent >= 0 ? 'var(--green-600)' : 'var(--red-600)'}; font-weight:700">${t.pl_percent}%</td>
             </tr>
         `).join('');
+
+        // Equity Chart
+        renderEquityChart(data);
+
+        // Auto-select first stock
+        if (data.top_candidates.length > 0) selectStock(data.top_candidates[0]);
+    }
+
+    function selectStock(c) {
+        // UI Highlighting
+        document.querySelectorAll('.stock-card').forEach(el => el.classList.remove('active'));
+        const activeCard = document.getElementById(`card-${c.ticker.replace('.','-')}`);
+        if(activeCard) activeCard.classList.add('active');
+
+        // Target Price Cleanup (Fix voor de dubbele €€)
+        const rawTarget = c.tier2?.target_price || '—';
+        const cleanTarget = rawTarget.replace(/€/g, '').trim();
+
+        // Analyse Injecteren
+        const analysisBox = document.getElementById('full-analysis-content');
+        analysisBox.innerHTML = `
+            <div class="analysis-content">
+                <h4>Research Report: ${c.name} (${c.ticker})</h4>
+                <div style="display:flex; gap: 20px; margin-bottom: 20px; background: var(--slate-50); padding: 15px; border-radius: 6px; font-family: 'Roboto Mono'; font-size: 0.85rem;">
+                    <div>TARGET: <b style="color:var(--blue-600)">€${cleanTarget}</b></div>
+                    <div>CONVICTION: <b>${c.tier2?.conviction_score}/10</b></div>
+                    <div>DIVIDEND: <b>${c.dividend_yield}%</b></div>
+                </div>
+                <div class="analysis-text">${c.tier2?.analysis || 'Geen analyse beschikbaar.'}</div>
+            </div>`;
+
+        // TradingView Update
+        let symbol = c.ticker;
+        if (symbol.includes('.AS')) symbol = `EURONEXT:${symbol.split('.')[0]}`;
         
-        // Calculate total port return
-        const totalPL = (data.active_trades.reduce((a, b) => a + parseFloat(b.pl_percent), 0) / (data.active_trades.length || 1)).toFixed(2);
-        document.getElementById('port-ret').innerText = (totalPL >= 0 ? '+' : '') + totalPL + '%';
-        document.getElementById('port-ret').style.color = totalPL >= 0 ? 'var(--green-600)' : 'var(--red-600)';
+        new TradingView.widget({
+            "autosize": true, "symbol": symbol, "interval": "D", "timezone": "Etc/UTC",
+            "theme": "light", "style": "1", "locale": "en", "container_id": "tv-container"
+        });
     }
 
     function renderEquityChart(data) {
@@ -244,21 +222,9 @@
             type: 'line',
             data: {
                 labels: hist.map(h => h.date),
-                datasets: [{ 
-                    data: hist.map(h => h.value), 
-                    borderColor: '#2563eb', 
-                    backgroundColor: 'rgba(37, 99, 235, 0.1)', 
-                    fill: true, 
-                    tension: 0.3,
-                    pointRadius: 0
-                }]
+                datasets: [{ data: hist.map(h => h.value), borderColor: '#2563eb', fill: false, tension: 0.3, pointRadius: 0 }]
             },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: { legend: { display: false } },
-                scales: { x: { display: false }, y: { position: 'right', grid: { color: '#f1f5f9' } } }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { position: 'right' } } }
         });
     }
 
