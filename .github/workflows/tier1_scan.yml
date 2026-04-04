@@ -2,7 +2,7 @@ name: NEXUS AUTONOMOUS TRADING ENGINE
 
 on:
   schedule:
-    - cron: "0 */3 * * *" # Elke 3 uur
+    - cron: "0 */6 * * *" # Elke 3 uur
   workflow_dispatch:      # Handmatige knop blijft bestaan
 
 permissions:
