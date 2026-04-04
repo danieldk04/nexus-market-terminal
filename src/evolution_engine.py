@@ -2,6 +2,11 @@ import json
 import yfinance as yf
 from datetime import datetime, timezone
 from pathlib import Path
+from notifier import (
+    notify_stop_loss, notify_take_profit,
+    notify_warning, notify_trade_opened,
+    notify_evolution_summary,
+)
 
 # Paden instellen
 BASE_DIR = Path(__file__).parent.parent
@@ -74,6 +79,7 @@ def run_evolution():
                 add_lesson(ticker, sector,
                            f"Stop-loss geraakt op {ticker} ({pl_pct:.1f}%). Vermijd {sector} bij zwak sentiment.",
                            "NEGATIVE_LEARNING")
+                notify_stop_loss(ticker, pl_pct, sector)
                 print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}%")
                 closed_count += 1
                 continue
@@ -83,6 +89,7 @@ def run_evolution():
                 add_lesson(ticker, sector,
                            f"Take-profit op {ticker} (+{pl_pct:.1f}%). {sector}-signalen werken goed.",
                            "POSITIVE_LEARNING")
+                notify_take_profit(ticker, pl_pct, sector)
                 print(f"TAKE-PROFIT: {ticker} gesloten op +{pl_pct:.1f}%")
                 closed_count += 1
                 continue
@@ -92,6 +99,7 @@ def run_evolution():
                 add_lesson(ticker, sector,
                            f"Verlies op {ticker} ({pl_pct:.1f}%). Monitor {sector} nauwlettend.",
                            "NEGATIVE_LEARNING")
+                notify_warning(ticker, pl_pct, sector)
 
             trade['current_price'] = current_price
             trade['pl_percent'] = pl_pct
@@ -149,7 +157,10 @@ def run_evolution():
         updated_trades.append(new_trade)
         current_tickers.add(ticker)
         sector_counts[sector] = sector_counts.get(sector, 0) + 1
+        notify_trade_opened(ticker, c['price'], score, sector)
         print(f"Nieuwe trade: {ticker} | sector: {sector} | score: {score}")
+
+    new_count = len(updated_trades) - (len(active_trades) - closed_count)
 
     # 4. Resultaten voorbereiden voor Dashboard
     data['active_trades'] = updated_trades
@@ -174,6 +185,14 @@ def run_evolution():
     }
     equity_history.append(history_point)
     data["equity_history"] = equity_history[-20:]
+
+    # Telegram dagrapport sturen
+    notify_evolution_summary(
+        active_trades=updated_trades,
+        closed_count=closed_count,
+        new_count=new_count,
+        equity_value=new_value,
+    )
 
     # Alles opslaan
     save_json(DATA_PATH, data)

@@ -8,6 +8,7 @@ import yfinance as yf
 import pandas as pd
 import requests
 from io import StringIO
+from notifier import notify_scan_complete
 
 # Logging setup
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S")
@@ -156,6 +157,9 @@ def main():
     with open(OUTPUT_PATH, "w") as f:
         json.dump(output, f, indent=4)
     log.info(f"Done! {len(candidates)} candidates saved with memory-logic.")
+
+    # Telegram: stuur scan-samenvatting
+    notify_scan_complete(candidates, scanned)
 
 if __name__ == "__main__":
     main()
