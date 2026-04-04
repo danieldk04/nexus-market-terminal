@@ -21,52 +21,59 @@
             background-size: 30px 30px;
         }
         .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
+        
+        /* Dynamic Header & Risk Animations */
+        @keyframes pulse-red { 0% { box-shadow: 0 0 5px #ff1744; } 50% { box-shadow: 0 0 20px #ff1744; } 100% { box-shadow: 0 0 5px #ff1744; } }
+        @keyframes pulse-blue { 0% { box-shadow: 0 0 5px #00fff9; } 50% { box-shadow: 0 0 20px #00fff9; } 100% { box-shadow: 0 0 5px #00fff9; } }
+        .risk-extreme { border: 2px solid var(--danger-red) !important; animation: pulse-red 2s infinite; }
+        .risk-stable { border: 2px solid var(--neon-cyan) !important; animation: pulse-blue 4s infinite; }
+        
         .header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px; background: var(--panel-bg); border: 1px solid var(--neon-cyan);
-            margin-bottom: 20px; box-shadow: 0 0 15px rgba(0, 255, 249, 0.2);
+            margin-bottom: 20px; transition: 0.5s;
         }
+        #market-status-banner {
+            font-family: 'Orbitron', sans-serif; font-size: 0.5em; padding: 2px 8px;
+            border-radius: 3px; margin-left: 15px; vertical-align: middle;
+        }
+
         .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8em; letter-spacing: 2px; }
         .stats-bar { display: flex; gap: 25px; font-family: 'Share Tech Mono', monospace; }
         .stat-label { font-size: 0.7em; color: #888; text-transform: uppercase; }
         .stat-value { font-size: 1.2em; color: var(--neon-cyan); }
         
         .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .panel { background: var(--panel-bg); border: 1px solid rgba(0, 255, 249, 0.2); padding: 20px; height: fit-content; margin-bottom: 20px; }
-        .panel-title { font-family: 'Orbitron', sans-serif; font-size: 1em; margin-bottom: 15px; color: var(--neon-magenta); text-transform: uppercase; border-bottom: 1px solid rgba(255,0,255,0.2); padding-bottom: 5px;}
+        .panel { background: var(--panel-bg); border: 1px solid rgba(0, 255, 249, 0.2); padding: 20px; margin-bottom: 20px; }
+        .panel-title { font-family: 'Orbitron', sans-serif; font-size: 0.9em; margin-bottom: 15px; color: var(--neon-magenta); text-transform: uppercase; border-bottom: 1px solid rgba(255,0,255,0.2); padding-bottom: 5px;}
         
-        /* Charts */
-        .chart-container { height: 250px; width: 100%; position: relative; margin-top: 10px; }
-        .radar-container { height: 300px; width: 100%; position: relative; margin-top: 10px; }
+        .chart-container { height: 230px; width: 100%; position: relative; }
+        .radar-container { height: 280px; width: 100%; position: relative; }
 
-        /* Tables & Items */
         .portfolio-table { width: 100%; border-collapse: collapse; font-family: 'Share Tech Mono'; font-size: 0.85em; }
         .portfolio-table th { text-align: left; color: #666; padding: 8px; border-bottom: 1px solid #333; }
         .portfolio-table td { padding: 8px; border-bottom: 1px solid #1a1a1a; }
-        .pl-positive { color: var(--success-green); }
-        .pl-negative { color: var(--danger-red); }
-
-        .market-item { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 4px; margin-bottom: 15px; border: 1px solid rgba(0, 255, 249, 0.1); }
-        .ticker-link { color: #fff; text-decoration: none; font-weight: bold; }
-        .ticker-link:hover { color: var(--neon-cyan); }
-        .action-badge { padding: 4px 12px; border-radius: 2px; font-weight: bold; font-family: 'Orbitron'; font-size: 0.8em; }
-        .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: rgba(0,0,0,0.4); padding: 10px; margin: 10px 0; border-radius: 4px; }
-        .analysis-text { font-size: 0.95em; color: #ccc; line-height: 1.6; margin-top: 10px; text-align: justify; }
-        .source-box { margin-top: 10px; font-size: 0.8em; font-family: 'Share Tech Mono'; }
-        .source-link { color: var(--neon-cyan); text-decoration: none; margin-right: 15px; opacity: 0.7; }
-        .source-link:hover { opacity: 1; text-decoration: underline; }
         
-        /* Risk Bar */
-        .risk-bar { height: 10px; background: #222; border-radius: 5px; margin-top: 10px; overflow: hidden; }
+        .market-item { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid rgba(0, 255, 249, 0.1); }
+        .ticker-link { color: #fff; text-decoration: none; font-weight: bold; font-size: 1.2em; }
+        .ticker-link:hover { color: var(--neon-cyan); }
+        .action-badge { padding: 4px 12px; border-radius: 2px; font-weight: bold; font-family: 'Orbitron'; font-size: 0.75em; }
+        
+        .analysis-text { font-size: 0.9em; color: #ccc; line-height: 1.5; margin: 10px 0; text-align: justify; }
+        .source-box { margin-bottom: 10px; }
+        .source-link { color: var(--neon-cyan); text-decoration: none; font-size: 0.8em; font-family: 'Share Tech Mono'; margin-right: 10px; opacity: 0.6; }
+        .source-link:hover { opacity: 1; }
+        
+        .risk-bar { height: 8px; background: #222; border-radius: 4px; margin-top: 8px; overflow: hidden; }
         .risk-fill { height: 100%; background: var(--success-green); transition: 1s; }
-        .agent-line { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.9em; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success-green); box-shadow: 0 0 5px var(--success-green); }
+        .agent-line { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.85em; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success-green); }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">⬢ NEXUS TERMINAL</div>
+            <div class="logo">⬢ NEXUS TERMINAL <span id="market-status-banner"></span></div>
             <div class="stats-bar">
                 <div class="stat"><div class="stat-label">VIX</div><div class="stat-value" id="stat-vix">—</div></div>
                 <div class="stat"><div class="stat-label">10Y YIELD</div><div class="stat-value" id="stat-treasury">—</div></div>
@@ -88,9 +95,7 @@
                         <thead>
                             <tr><th>ASSET</th><th>ENTRY</th><th>CURRENT</th><th style="text-align: right;">P/L %</th></tr>
                         </thead>
-                        <tbody id="trade-list">
-                            <tr><td colspan="4" style="color:#444; padding:10px;">Waiting for scan...</td></tr>
-                        </tbody>
+                        <tbody id="trade-list"></tbody>
                     </table>
                 </div>
 
@@ -117,16 +122,15 @@
                     <h3 class="panel-title">🛡 Risk Management</h3>
                     <div class="stat-label">Avg Conviction Score</div>
                     <div id="conv-val" style="font-size: 1.5em; margin: 5px 0;">0 / 10</div>
-                    <div class="risk-bar"><div id="risk-fill" class="risk-fill" style="width: 0%"></div></div>
-                    <div id="signals-summary" style="margin-top: 15px; font-family: 'Share Tech Mono'; font-size: 0.9em;"></div>
+                    <div class="risk-bar"><div id="risk-fill" class="risk-fill"></div></div>
+                    <div id="signals-summary" style="margin-top: 15px; font-family: 'Share Tech Mono'; font-size: 0.85em;"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let equityChart = null;
-        let radarChart = null;
+        let equityChart = null, radarChart = null;
 
         async function loadData() {
             try {
@@ -135,110 +139,85 @@
             } catch (e) { return null; }
         }
 
-        function initCharts(data) {
-            // Equity Line Chart
-            const ctxLine = document.getElementById('equityChart').getContext('2d');
-            const history = data.equity_history || [];
-            const labelsLine = history.length > 0 ? history.map(h => h.date) : [new Date().toISOString().split('T')[0]];
-            const valuesLine = history.length > 0 ? history.map(h => h.value) : [10000];
-
-            if (equityChart) equityChart.destroy();
-            equityChart = new Chart(ctxLine, {
-                type: 'line',
-                data: {
-                    labels: labelsLine,
-                    datasets: [{
-                        data: valuesLine,
-                        borderColor: '#ff00ff',
-                        backgroundColor: 'rgba(255, 0, 255, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        pointBackgroundColor: '#00fff9'
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-                    scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' } } }
-                }
-            });
-
-            // Sector Radar Chart
-            const ctxRadar = document.getElementById('sectorRadar').getContext('2d');
-            const candidates = data.top_candidates || [];
-            const sectorCounts = {};
-            candidates.forEach(c => { sectorCounts[c.sector || 'Other'] = (sectorCounts[c.sector || 'Other'] || 0) + 1; });
-            
-            if (radarChart) radarChart.destroy();
-            radarChart = new Chart(ctxRadar, {
-                type: 'radar',
-                data: {
-                    labels: Object.keys(sectorCounts),
-                    datasets: [{
-                        data: Object.values(sectorCounts),
-                        backgroundColor: 'rgba(0, 255, 249, 0.2)',
-                        borderColor: '#00fff9',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#ff00ff'
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-                    scales: { r: { angleLines: { color: 'rgba(255,255,255,0.1)' }, grid: { color: 'rgba(255,255,255,0.1)' }, pointLabels: { color: '#888' }, ticks: { display: false, stepSize: 1 } } }
-                }
-            });
-        }
-
         function render(data) {
-            const m = data.macro || {};
-            document.getElementById('stat-vix').innerText = m.vix || '—';
-            document.getElementById('stat-treasury').innerText = (m.treasury_10y || 0).toFixed(2) + '%';
-            document.getElementById('stat-rsi').innerText = m.rsi || m.sp500_rsi || '—';
+            // 1. Risk Overlay Logic
+            const vix = parseFloat(data.macro?.vix || 0);
+            const header = document.querySelector('.header');
+            const banner = document.getElementById('market-status-banner');
+            if (vix > 25) {
+                header.className = 'header risk-extreme';
+                banner.innerText = '⚠️ CRITICAL VOLATILITY';
+                banner.style.background = 'var(--danger-red)';
+            } else if (vix > 20) {
+                header.className = 'header';
+                header.style.border = '1px solid var(--neon-orange)';
+                banner.innerText = '🟠 CAUTION REQUIRED';
+                banner.style.background = 'var(--neon-orange)';
+                banner.style.color = '#000';
+            } else {
+                header.className = 'header risk-stable';
+                banner.innerText = '💎 STABLE MARKET';
+                banner.style.background = 'var(--success-green)';
+            }
+
+            // 2. Stats & Macro
+            document.getElementById('stat-vix').innerText = vix || '—';
+            document.getElementById('stat-treasury').innerText = (data.macro?.treasury_10y || 0).toFixed(2) + '%';
+            document.getElementById('stat-rsi').innerText = data.macro?.rsi || '—';
             document.getElementById('stat-fg').innerText = data.fear_and_greed?.score || '50';
 
-            initCharts(data);
+            // 3. Charts
+            const hist = data.equity_history || [];
+            if (equityChart) equityChart.destroy();
+            equityChart = new Chart(document.getElementById('equityChart'), {
+                type: 'line',
+                data: {
+                    labels: hist.map(h => h.date),
+                    datasets: [{ data: hist.map(h => h.value), borderColor: '#ff00ff', backgroundColor: 'rgba(255,0,255,0.1)', fill: true, tension: 0.4 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
 
+            const cand = data.top_candidates || [];
+            const sects = {}; cand.forEach(c => sects[c.sector || 'Other'] = (sects[c.sector || 'Other'] || 0) + 1);
+            if (radarChart) radarChart.destroy();
+            radarChart = new Chart(document.getElementById('sectorRadar'), {
+                type: 'radar',
+                data: { labels: Object.keys(sects), datasets: [{ data: Object.values(sects), backgroundColor: 'rgba(0,255,249,0.2)', borderColor: '#00fff9' }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // 4. Trades & Analysis
             const trades = data.active_trades || [];
-            document.getElementById('trade-list').innerHTML = trades.length === 0 ? '<tr><td colspan="4">No active trades.</td></tr>' :
-                trades.map(t => `<tr><td style="font-weight:bold;color:var(--neon-cyan)">${t.ticker}</td><td>€${t.entry_price}</td><td>€${t.current_price}</td><td style="text-align:right" class="${t.pl_percent >= 0 ? 'pl-positive' : 'pl-negative'}">${t.pl_percent >= 0 ? '+' : ''}${t.pl_percent}%</td></tr>`).join('');
+            document.getElementById('trade-list').innerHTML = trades.length ? trades.map(t => `<tr><td style="color:var(--neon-cyan)">${t.ticker}</td><td>€${t.entry_price}</td><td>€${t.current_price}</td><td style="text-align:right" class="${t.pl_percent >= 0 ? 'pl-positive' : 'pl-negative'}">${t.pl_percent}%</td></tr>`).join('') : '<tr><td colspan="4">No active trades.</td></tr>';
 
-            const candidates = data.top_candidates || [];
-            document.getElementById('candidates-list').innerHTML = candidates.map(c => {
-                const t2 = c.tier2 || {};
-                const action = (t2.recommended_action || 'HOLD').toUpperCase();
+            document.getElementById('candidates-list').innerHTML = cand.map(c => {
+                const t2 = c.tier2 || {}, action = (t2.recommended_action || 'HOLD').toUpperCase();
                 const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
-                const sources = c.news ? c.news.slice(0,2).map((n, i) => `<a href="${n.url}" target="_blank" class="source-link">[Source ${i+1}]</a>`).join('') : '';
-
                 return `<div class="market-item">
-                    <div class="card-header">
-                        <div>
-                            <h4><a href="https://finance.yahoo.com/quote/${c.ticker}" target="_blank" class="ticker-link">${c.ticker}</a> <span style="font-size:0.6em;color:#666">${c.name || ''}</span></h4>
-                            <div style="font-size:0.8em;opacity:0.7">${c.sector || 'Equities'}</div>
-                        </div>
-                        <div class="action-badge" style="background:${color};color:#000">${action}</div>
+                    <div style="display:flex; justify-content:space-between">
+                        <div><a href="https://finance.yahoo.com/quote/${c.ticker}" target="_blank" class="ticker-link">${c.ticker}</a> <span style="font-size:0.7em; opacity:0.5">${c.name || ''}</span></div>
+                        <div class="action-badge" style="background:${color}; color:#000">${action}</div>
                     </div>
-                    <div class="target-grid">
-                        <div><div class="stat-label">30D Target</div><div style="font-size:1.2em">€${String(t2.target_price || '—').replace('€', '')}</div></div>
-                        <div style="text-align:right"><div class="stat-label">Upside</div><div style="font-size:1.2em;color:${color}">${String(t2.upside_percentage || 0).replace('%','')}%</div></div>
+                    <div style="font-size:0.8em; opacity:0.7; margin-bottom:5px">${c.sector || ''}</div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; margin:8px 0">
+                        <div><div class="stat-label">Target</div><div>€${String(t2.target_price || '').replace('€','')}</div></div>
+                        <div style="text-align:right"><div class="stat-label">Upside</div><div style="color:${color}">${t2.upside_percentage || 0}%</div></div>
                     </div>
-                    <div class="analysis-text">${t2.analysis || 'Pending...'}</div>
-                    <div class="source-box">${sources}</div>
-                    <div class="meta-line">CONVICTION: ${t2.conviction_score || 0}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%</div>
+                    <div class="analysis-text">${t2.analysis || ''}</div>
+                    <div class="source-box">${(c.news || []).slice(0,2).map((n,i) => `<a href="${n.url}" target="_blank" class="source-link">[Source ${i+1}]</a>`).join('')}</div>
+                    <div style="font-size:0.75em; opacity:0.5; font-family:'Share Tech Mono'">CONVICTION: ${t2.conviction_score || 0}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%</div>
                 </div>`;
             }).join('');
 
-            const scores = candidates.map(c => c.tier2?.conviction_score || 0).filter(s => s > 0);
-            const avg = scores.length ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1) : 0;
+            const scores = cand.map(c => c.tier2?.conviction_score || 0).filter(s => s > 0);
+            const avg = scores.length ? (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1) : 0;
             document.getElementById('conv-val').innerText = `${avg} / 10`;
             document.getElementById('risk-fill').style.width = (avg * 10) + '%';
-
-            if ([0, 6].includes(new Date().getDay())) {
-                const agent = document.getElementById('agent-t1');
-                agent.innerHTML = 'OFFLINE • Weekend-modus';
-                agent.style.color = 'var(--neon-orange)';
-            }
         }
 
-        async function init() { const data = await loadData(); if (data) render(data); }
-        init();
-        setInterval(init, 60000);
+        async function init() { const d = await loadData(); if (d) render(d); }
+        init(); setInterval(init, 60000);
     </script>
 </body>
 </html>
