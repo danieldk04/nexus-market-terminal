@@ -56,7 +56,7 @@ def run_smart_analysis():
             
             try:
                 message = client.messages.create(
-                    model="claude-3-haiku-20240307", # Goedkoopste en snelste model
+                    model="claude-3-5-haiku-latest", # Goedkoopste en snelste model
                     max_tokens=300,
                     messages=[{"role": "user", "content": prompt}]
                 )
