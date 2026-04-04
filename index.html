@@ -108,61 +108,85 @@
         }
 
         function render(data) {
-            // Macro
+            // 1. Macro Indicators vullen
             const m = data.macro || {};
             document.getElementById('stat-vix').innerText = m.vix || '—';
-            document.getElementById('stat-treasury').innerText = (m.treasury_10y > 10 ? m.treasury_10y/100 : m.treasury_10y).toFixed(2) + '%';
+            
+            // Treasury fix: zorgt dat 4.31% goed getoond wordt
+            const treasuryVal = m.treasury_10y || 0;
+            document.getElementById('stat-treasury').innerText = (treasuryVal > 10 ? treasuryVal / 100 : treasuryVal).toFixed(2) + '%';
+            
             document.getElementById('stat-rsi').innerText = m.rsi || m.sp500_rsi || '—';
             document.getElementById('stat-fg').innerText = data.fear_and_greed?.score || '50';
 
-            // Candidates
+            // 2. Kandidatenlijst (Cards) opbouwen
             const list = document.getElementById('candidates-list');
             const candidates = data.top_candidates || [];
             
-            list.innerHTML = candidates.map(c => {
-                const t2 = c.tier2 || {};
-                const action = (t2.recommended_action || 'HOLD').toUpperCase();
-                const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
-                const conviction = t2.conviction_score || t2.conviction || 0;
+            if (candidates.length === 0) {
+                list.innerHTML = '<div class="empty-state">Geen actieve kandidaten gevonden in data.json</div>';
+            } else {
+                list.innerHTML = candidates.map(c => {
+                    const t2 = c.tier2 || {};
+                    const action = (t2.recommended_action || 'HOLD').toUpperCase();
+                    const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
+                    const conviction = t2.conviction_score || t2.conviction || 0;
 
-                return `
-                <div class="market-item">
-                    <div class="card-header">
-                        <div class="ticker-box">
-                            <h4>${c.ticker} <span style="font-size: 0.6em; color: #666;">${c.name || ''}</span></h4>
-                            <div style="font-size: 0.8em; color: var(--neon-cyan); opacity: 0.7;">${c.sector || 'Equities'}</div>
+                    return `
+                    <div class="market-item">
+                        <div class="card-header">
+                            <div class="ticker-box">
+                                <h4>${c.ticker} <span style="font-size: 0.6em; color: #666;">${c.name || ''}</span></h4>
+                                <div style="font-size: 0.8em; color: var(--neon-cyan); opacity: 0.7;">${c.sector || 'Equities'}</div>
+                            </div>
+                            <div class="action-badge" style="background: ${color}; color: #000;">${action}</div>
                         </div>
-                        <div class="action-badge" style="background: ${color}; color: #000;">${action}</div>
-                    </div>
 
-                    <div class="target-grid">
-                        <div>
-                            <div class="stat-label">30D Target</div>
-                            <div class="target-val">€${t2.target_price || '—'}</div>
+                        <div class="target-grid">
+                            <div>
+                                <div class="stat-label">30D Target</div>
+                                <div class="target-val">€${t2.target_price || '—'}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="stat-label">Upside Potential</div>
+                                <div class="target-val" style="color: ${color}">${t2.upside_percentage || 0}%</div>
+                            </div>
                         </div>
-                        <div style="text-align: right;">
-                            <div class="stat-label">Upside Potential</div>
-                            <div class="target-val" style="color: ${color}">${t2.upside_percentage || 0}%</div>
+
+                        <div class="analysis-text">${t2.analysis || 'Analysis pending...'}</div>
+                        
+                        <div class="meta-line">
+                            CONVICTION: ${conviction}/10 | SENTIMENT: ${t2.sentiment_score || 5}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%
                         </div>
-                    </div>
+                    </div>`;
+                }).join('');
+            }
 
-                    <div class="analysis-text">${t2.analysis || 'Analysis pending...'}</div>
-                    
-                    <div class="meta-line">
-                        CONVICTION: ${conviction}/10 | SENTIMENT: ${t2.sentiment_score || 5}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%
-                    </div>
-                </div>`;
-            }).join('');
-
-            // Risk
+// 3. Risk Management & Conviction Score berekenen
             const scores = candidates.map(c => c.tier2?.conviction_score || c.tier2?.conviction || 0).filter(s => s > 0);
-            const avg = scores.length ? (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1) : 0;
-            document.getElementById('conv-val').innerText = `${avg} / 10`;
-            document.getElementById('risk-fill').style.width = (avg * 10) + '%';
+            const avg = scores.length ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1) : 0;
+            
+            const convValEl = document.getElementById('conv-val');
+            const riskFillEl = document.getElementById('risk-fill');
+            
+            if (convValEl) convValEl.innerText = `${avg} / 10`;
+            if (riskFillEl) riskFillEl.style.width = (avg * 10) + '%';
             
             const buys = candidates.filter(c => (c.tier2?.recommended_action || '').toLowerCase() === 'buy').length;
-            document.getElementById('signals-summary').innerHTML = `BUY SIGNALS: ${buys} | ASSETS SCANNED: ${candidates.length}`;
-        }
+            const summaryEl = document.getElementById('signals-summary');
+            if (summaryEl) {
+                summaryEl.innerHTML = `BUY SIGNALS: ${buys} | ASSETS SCANNED: ${candidates.length}`;
+            }
+
+            // 4. Weekend-modus Status Update
+            const isWeekend = [0, 6].includes(new Date().getDay());
+            const agentT1 = document.getElementById('agent-t1');
+            
+            if (isWeekend && agentT1) {
+                agentT1.innerHTML = 'OFFLINE • Weekend-modus (Nieuws-focus)';
+                agentT1.style.color = 'var(--neon-orange)';
+            }
+        } // <--- Hier sluit de render functie maar één keer
 
         async function init() {
             const data = await loadData();
@@ -170,7 +194,7 @@
         }
 
         init();
-        setInterval(init, 60000);
+        setInterval(init, 60000); // Ververst elke minuut
     </script>
 </body>
 </html>
