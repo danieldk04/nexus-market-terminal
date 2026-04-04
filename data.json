@@ -1,361 +1,279 @@
 {
-    "generated_at": "2026-04-04T09:43:03.481691+00:00",
-    "macro": {
-        "vix": 23.87,
-        "treasury_10y": 4.31,
-        "sp500_rsi": 47.3
-    },
+    "generated_at": "2026-04-04T13:37:40.952069+00:00",
     "top_candidates": [
         {
-            "ticker": "ADP",
-            "name": "Automatic Data Processing, Inc.",
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
             "sector": "Technology",
-            "price": 204.01,
-            "dividend_yield": 3.33,
-            "pe_ratio": 19.62,
-            "roe": 73.84,
-            "debt_to_equity": 0.7,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Aberdeen Group plc Sells 15,320 Shares of Automatic Data Processing, Inc. $ADP - MarketBeat",
-                    "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPRDk1TC1BdHlnRDdTTHpSS0p4ejlTeTY0WEVBQmhvQTRWOTdSc0dVcy1ycVM1US1feUZtVmhJZ0RxbkdlcktDZXRYVFdkNnY5c2JRRlBua2VEUEJiU3FzLTVEQ05iMzdTRVpLUDByVnY3VUR5NVFzem9jZlZjWm5yNnE0TUJMeFdfWGtuWEl3ZWNTTmNXaWpLNFljRlg1SlVsVEszTTQ3N1g2MnpFQzVhcUFRcDRxUW9yR3d1akFsaGVRcG15NHBKM1pvVTVCbGpE?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "A Look At Automatic Data Processing\u2019s Valuation After Recent Share Price Weakness - Yahoo Finance",
-                    "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQLVdFQkRwNl94NmVKQldMYkc0emhSVGY4YXlqZFkzNGV2bHV3Y2NXdGVKVmdITVhxcjBZazlaVm1BRWhlYzdZcW9vSENEWTN6bDVONU5famVKbGtsSVdtNERGR3BOeWQ2QjNiVkZGVWdRcUxjeGhqZ05kWlhteGpCUjkxaDRfWmY3S3hmVEIyY3JIeV93b3lVUXFZbTdJWG1haU9DWldJTjg?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 13.1,
-            "scanned_at": "2026-04-04T09:43:03.481132+00:00",
+            "industry_group": "Tech & AI",
+            "roe": 58.77,
+            "pe_ratio": 14.16,
+            "debt_to_equity": 0.58,
+            "dividend_yield": 0,
+            "price": 242.92,
+            "score": 16.8,
             "tier2": {
-                "analysis": "# ADP Analysis: Great Business or Value Trap?\n\n## 1. THE MOAT \u2705\nADP possesses **exceptional switching costs** \u2014 payroll/HR infrastructure is deeply embedded in client operations. Migrating payroll systems is costly, risky, and disruptive. Combined with **network effects** (Employer Services database) and 75+ years of brand trust, the moat is genuinely durable.\n\n## 2. BUSINESS QUALITY \u2705\nRecurring subscription revenue (~90%+), mission-critical services, and pricing power make ADP remarkably resilient. Even in recessions, companies must process payroll. High float income benefits from elevated rates.\n\n## 3. VALUE TRAP CHECK \u2705\nP/E of ~19.6x is **historically attractive** for ADP (typically trades 25-30x). Recent weakness reflects macro concerns, not structural deterioration. Aberdeen's sale appears tactical, not fundamental. Dividend growth consistency reinforces quality.\n\n**Verdict:** This is a **Great Business at a fair-to-attractive price**, not a value trap.\n\n---",
+                "analysis": "# Adobe Inc. (ADBE) - Value Investor Analysis\n\n## 1. THE MOAT\nAdobe possesses **exceptional switching costs** through Creative Cloud and Document Cloud ecosystems. Industry-standard tools (Photoshop, Acrobat, Premiere) create deep professional lock-in. Network effects strengthen as workflows become Adobe-dependent across enterprises.\n\n## 2. BUSINESS QUALITY\nSubscription-based SaaS model (~95% recurring revenue) provides remarkable macro resilience. High gross margins (~88%) and strong free cash flow generation make Adobe defensively positioned during volatility. AI integration (Firefly) represents genuine product enhancement, not mere narrative.\n\n## 3. VALUE TRAP CHECK\nP/E of 14.16 is historically **anomalous** for Adobe - typically trades 30-50x. Compression reflects AI disruption fears (generative tools threatening creative workflows). However, Adobe is actively *becoming* the AI layer, not being displaced. This appears more gift than trap, though monitoring AI competitive dynamics is essential.",
+                "conviction_score": 7,
+                "recommended_action": "BUY",
+                "target_price": "\u20ac258"
+            }
+        },
+        {
+            "ticker": "ALL",
+            "name": "Allstate Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 39.52,
+            "pe_ratio": 5.44,
+            "debt_to_equity": 0.25,
+            "dividend_yield": 209.0,
+            "price": 207.03,
+            "score": 14.4,
+            "tier2": {
+                "analysis": "# Allstate Corporation (ALL) - Value Investor Analysis\n\n## THE MOAT\nAllstate possesses a **strong brand moat** built over 90+ years, with significant switching costs (policy bundling, claims relationships) and scale advantages in underwriting and distribution. Brand recognition drives customer retention in a commoditized industry.\n\n## BUSINESS QUALITY\nInsurance is recession-resilient \u2014 people maintain coverage regardless of macro conditions. However, catastrophic weather events (CAT losses) create earnings volatility. Allstate has demonstrated pricing discipline, successfully passing rate increases to restore profitability after recent underwriting losses.\n\n## VALUE TRAP CHECK\nP/E of 5.44 reflects **earnings recovery**, not structural decline. Recent profitability restoration after CAT-loss years represents cyclical normalization. The 209% dividend figure appears anomalous/data error \u2014 warrants verification. The low P/E signals opportunity, not value trap, given improved combined ratios.\n\nThis is a **Great Business at a Fair Price** \u2014 classic Buffett territory.\n\n---",
+                "conviction_score": 7,
+                "recommended_action": "BUY",
+                "target_price": "\u20ac218"
+            }
+        },
+        {
+            "ticker": "BR",
+            "name": "Broadridge Financial Solutions,",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 41.79,
+            "pe_ratio": 17.8,
+            "debt_to_equity": 1.17,
+            "dividend_yield": 242.0,
+            "price": 160.93,
+            "score": 13.7,
+            "tier2": {
+                "analysis": "# Broadridge Financial Solutions (BR) - Value Analysis\n\n## THE MOAT\nBroadridge possesses **exceptional switching costs** \u2014 processing ~$10 trillion daily in securities transactions. Its regulatory infrastructure, deep integration into broker-dealer workflows, and network effects across capital markets create near-impenetrable barriers. Clients simply cannot leave without massive operational disruption.\n\n## BUSINESS QUALITY\nHighly resilient: ~75% recurring revenue, mission-critical compliance/proxy services, and counter-cyclical regulatory demand. During volatility spikes (high VIX), trading volume *increases*, benefiting BR's processing revenues.\n\n## VALUE TRAP CHECK\nP/E of 17.8 appears genuinely attractive for this quality. The **242% dividend figure appears anomalous** (likely data error \u2014 actual yield ~1.6%). No structural decline visible; fintech modernization tailwinds support long-term growth.\n\n**Verdict: GREAT BUSINESS** \u2014 monopoly-like positioning in financial infrastructure with compounding free cash flow.\n\n---",
                 "conviction_score": 8,
                 "recommended_action": "BUY",
-                "target_price": "\u20ac215.00"
+                "target_price": "\u20ac168.00"
             }
         },
         {
-            "ticker": "LLY",
-            "name": "Eli Lilly and Company",
-            "sector": "Healthcare",
-            "price": 935.58,
-            "dividend_yield": 0.67,
-            "pe_ratio": 40.82,
-            "roe": 101.16,
-            "debt_to_equity": 1.65,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Eli Lilly stock pops after FDA approves new GLP-1 weight-loss pill - Yahoo Finance",
-                    "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNSC1IQjF5ZlMwTjdGbllMQjVQZWdza1FfTVB5ckEwZi1KZ1hmOEtLM09TN0FvVlEzRG1fOXctemxFOHVCWlQzY1pYa2Q3NEJ1clFqcThRT3FnbGJpZ0VFVFJZdTRiOTJCWVNFem0zYV8wT2haRzc3ZW5paUpCVnZJblBSSG9ES3l2Y044cHRSd2JjbU9wQjYxMEdxbDV4SVRxVGU5ZnhLUFVPR3ZWaHNTTVNR?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Is Eli Lilly and Company (LLY) The Best Pharma Stock to Invest In Now? - Yahoo Finance",
-                    "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNczRWWVNnNTNwUmtDd2hHdGZFRXNOQzZFcTB4OE1zTEpMQmllQXNRYmJ0RTBfdlhoR011cVd6SG5rbmFac1Bnemo5QlNZb1ZUb3pmNmlTekdOSzVxa2FhZDV4WU9kOTE4M19waGowSUtSNURXUnVoU2dEQ3RadkJSMVBpYjA1c1AtUkplcWNmVlpjSXVfbUstTkRhQQ?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 12.5,
-            "scanned_at": "2026-04-04T09:42:59.265545+00:00",
+            "ticker": "LDOS",
+            "name": "Leidos Holdings, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 31.03,
+            "pe_ratio": 14.27,
+            "debt_to_equity": 1.08,
+            "dividend_yield": 105.0,
+            "price": 158.82,
+            "score": 12.6,
             "tier2": {
-                "analysis": "# Eli Lilly (LLY) - Value Investor Analysis\n\n## THE MOAT\nEli Lilly possesses an **exceptional moat**: patent-protected GLP-1 drugs (tirzepatide/Mounjaro/Zepbound), deep R&D capabilities, FDA regulatory expertise, and manufacturing scale. The newly approved oral GLP-1 pill extends their competitive runway significantly against Novo Nordisk.\n\n## BUSINESS QUALITY\nHealthcare demand is **recession-resistant**. Obesity and diabetes represent secular growth markets worth trillions globally. LLY's pipeline depth and brand recognition create pricing power. High switching costs exist once patients establish treatment protocols.\n\n## VALUE TRAP CHECK\nAt P/E 40.82, this is **NOT cheap** \u2014 but it's not a value trap either. Premium valuation reflects genuine growth acceleration. The risk is execution: manufacturing capacity constraints and pricing pressure from policymakers remain real concerns.\n\n**This is a Great Business at a premium price** \u2014 classic Buffett scenario of paying fair price for exceptional quality.\n\n---",
-                "conviction_score": 7,
-                "recommended_action": "HOLD",
-                "target_price": "\u20ac970"
-            }
-        },
-        {
-            "ticker": "UPS",
-            "name": "United Parcel Service, Inc.",
-            "sector": "Industrials",
-            "price": 98.18,
-            "dividend_yield": 6.68,
-            "pe_ratio": 14.97,
-            "roe": 33.77,
-            "debt_to_equity": 1.76,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "11,078 Shares in United Parcel Service, Inc. $UPS Purchased by Shrier Wealth Management LLC - MarketBeat",
-                    "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQYlFpSjNjNmJWUXhnLTl5bllEUVc4Zk5TY1ZCZzZfcU5DWnliTkl0c3dGckd6SVFhLTB1amQ1ZjRzXy04Ti1qVWhwWmJRbklsWHp3QzlTZ29CYVlCVWEydVdpemlndnpqaDVEaGhhdGhWQUJfbDJ1b2tiVXJLbDBnQ3cxemg2cF9NWjNQZ1N6Tlp2MDlMYldMa2dkeWFnUy04eUt1U0xLVl9mQ3FKNlFqUFQwRkFaWlhYUWRNcjFQc2FUVklUQWtQZ3VnTjBxcGE5bzcwWjlBbmx4bEhKQTI4VEpR?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Aberdeen Group plc Has $48.47 Million Position in United Parcel Service, Inc. $UPS - MarketBeat",
-                    "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQRkRNaGg4aXY1Wl9mSmR3MXJXc3d3ZTlYMHRybGJtcWxZX283aVdyNHZxdWFKajEya25BdkFQbnpMSEZIV3JOWEhJYUZGQWlya0NGbG9BMXBkZEU1cGJSdmVHSlZ2b2VBY0dGd3doUWdSVHg5RjRxeUg2OGJGM2NyRU43dEpqLXNSaDV6aVFlRW5CWW9uTFVpZGkzX1NIZzE3cFNHNmxlVVZYS0xjWDBES3o5TjRXLU1iM2xnU2dBenc5bFowYUNWMHFyR2hOZ1NJTXl0eA?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 12.0,
-            "scanned_at": "2026-04-04T09:42:56.816150+00:00",
-            "tier2": {
-                "analysis": "# UPS \u2013 Business First Analysis\n\n## 1. THE MOAT\nUPS possesses a **genuine, durable moat** \u2014 a global logistics network with massive scale advantages, deep customer switching costs (integrated supply chains), and brand trust built over 115+ years. Replicating its infrastructure would require hundreds of billions.\n\n## 2. BUSINESS QUALITY\nThe model is **cyclically sensitive but structurally sound**. E-commerce tailwinds persist long-term. Current headwinds (volume softness, labor costs post-Teamsters contract) are real but manageable. High VIX environments pressure near-term earnings, but UPS historically recovers as an essential infrastructure provider.\n\n## 3. VALUE TRAP CHECK\nAt P/E ~15 and 6.68% dividend yield, the market prices in prolonged earnings pressure. This appears **more gift than trap** \u2014 dividends are well-covered historically, and management is executing on \"better not bigger\" efficiency strategy. Risk: prolonged volume decline or dividend cut would be a red flag.\n\n---",
+                "analysis": "# Leidos Holdings (LDOS) - Value Investor Analysis\n\n## The Moat\nLeidos possesses **strong switching costs** via long-term government contracts (DoD, intelligence agencies, DHS). Security clearances, classified system integrations, and deep bureaucratic relationships create substantial barriers. Competitors can't easily replicate years of credentialing and institutional knowledge.\n\n## Business Quality\nGovernment IT services provide **revenue stability** even during market volatility. ~87% revenue from U.S. federal government ensures consistent backlog (~$37B+). High VIX environments barely affect contract renewals. Margins are predictable, cash flows reliable.\n\n## Value Trap Check\nP/E of 14.27 appears genuinely **undervalued** for a defense/IT services firm with recurring revenue. The 105% dividend figure appears anomalous (likely data error - actual yield ~1.5%). No structural decline signals; defense spending remains politically bipartisan. Risk: potential budget sequestration or CR delays.\n\n**Verdict: Great Business at Fair Price**\n\n---",
                 "conviction_score": 7,
                 "recommended_action": "BUY",
-                "target_price": "\u20ac104"
+                "target_price": "\u20ac168.00"
             }
         },
         {
-            "ticker": "CMCSA",
-            "name": "Comcast Corporation",
+            "ticker": "GOOG",
+            "name": "Alphabet Inc.",
             "sector": "Communication Services",
-            "price": 27.93,
-            "dividend_yield": 4.73,
-            "pe_ratio": 5.18,
-            "roe": 21.41,
-            "debt_to_equity": 1.08,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Aberdeen Group plc Sells 80,829 Shares of Comcast Corporation $CMCSA - MarketBeat",
-                    "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxObjdka0N6bDBIN0k3RmY4MjdNc3lnZENBejUzcmE0cVNaV3NTOG9FdEJKM2dNTVN0emNIUHpGTU80VTJTNDdCdHh4V2VmZUZ6eVVHRmhnR0JQcm02aWg1VUoyVDVIbThQLTFTR3ZFU1B1WFVkSlJUOGZkaTRQWDNHOE1NRjQ2RDBhaGJFX2dST1YzbXFfTDJJWVppLUU4anQ5Ql9jaURoR2JLaHRXU2lqYS1rbm16dTV5eE0xazN3eHA1UFFKTXc?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Is Trending Stock Comcast Corporation (CMCSA) a Buy Now? - Yahoo Finance",
-                    "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxORWRSMGFWVnpHTndweERBUE90QnFpRmRlVk5ZSDYzSEZBUUcxRl9BQjBNZmt2dXF0WE9QVkdlVmlndG10NGI5TjBSQmc4T1doU3h0VmQ3aWx2cWtjbU9VdGRrcl9NN1laVTl5Y2dhU0EyN2x6allUdVRCWGZyYkRuZGs4N0xNUWdJaE9kYTJIb1RJX0dfMHhXbU1ISWw4M3hhMHd6dkJuUmI?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 11.7,
-            "scanned_at": "2026-04-04T09:43:00.120168+00:00",
+            "industry_group": "Tech & AI",
+            "roe": 35.71,
+            "pe_ratio": 27.24,
+            "debt_to_equity": 0.16,
+            "dividend_yield": 29.0,
+            "price": 294.46,
+            "score": 11.5,
             "tier2": {
-                "analysis": "## Comcast (CMCSA) \u2013 Business First Analysis\n\n**THE MOAT:** Comcast possesses a genuine infrastructure moat. Last-mile cable/broadband infrastructure creates near-monopolistic local franchises with enormous replacement costs. High switching costs in broadband, NBCUniversal's content library, and theme parks add durability. Network effect moderates but switching friction is strong.\n\n**BUSINESS QUALITY:** Broadband remains mission-critical utility-like revenue. However, cord-cutting pressures linear TV, and streaming competition (Peacock losses) creates headwinds. High leverage (~$100B debt) amplifies macro sensitivity. Free cash flow remains robust (~$14B annually), funding dividends and buybacks.\n\n**VALUE TRAP CHECK:** P/E of 5.18 reflects genuine secular concerns \u2013 broadband growth slowing, wireless competition intensifying (T-Mobile fixed wireless), and content spend pressure. This is partially a value trap: cheap for reasons, but not terminally broken. The dividend at 4.73% is well-covered.\n\nAberdeen's institutional selling warrants monitoring, but core infrastructure franchise persists.\n\n---",
-                "conviction_score": 6,
-                "recommended_action": "HOLD",
-                "target_price": "\u20ac29.50"
+                "analysis": "## Alphabet Inc. (GOOG) - Value Analysis\n\n### 1. THE MOAT\nAlphabet possesses an **exceptional multi-layered moat**: Google Search commands ~90% global market share (network effect + brand), YouTube is the dominant video platform, and Google Cloud is a fast-growing #3 player. Android/Chrome create massive switching costs. Moat is *durable and widening* via AI integration (Gemini).\n\n### 2. BUSINESS QUALITY\nHighly resilient. Advertising revenue diversified across millions of businesses. Cloud segment provides recurring revenue. 13%+ operating margins with massive free cash flow generation. AI investments position Alphabet as infrastructure, not just a user-facing service.\n\n### 3. VALUE TRAP CHECK\nP/E of 27x for a business growing earnings 15-20% annually is a **gift, not a trap**. The 29% dividend figure appears anomalous \u2014 likely a data error. No structural decline evident; AI is a tailwind, not a threat.\n\n**This is unequivocally a GREAT BUSINESS.**",
+                "conviction_score": 9,
+                "recommended_action": "BUY",
+                "target_price": "\u20ac315.00"
             }
         },
         {
-            "ticker": "UNP",
-            "name": "Union Pacific Corporation",
-            "sector": "Industrials",
-            "price": 244.71,
-            "dividend_yield": 2.26,
-            "pe_ratio": 20.41,
-            "roe": 40.38,
-            "debt_to_equity": 1.78,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Union Pacific Corporation (UNP) stock price, news, quote and history - Yahoo Finance Singapore",
-                    "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBVZFh3dzFMQW1aYnR4QnRtSGxBeU0xNkFTbXlzSS1sT0JXUTVqNzBINllrSU9yenBpNTZ5dXFaazJaLTM1RkZpTVVZZ2piWjVM?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "A rail merger promise: lifetime job protection for train dispatchers - Stock Titan",
-                    "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOamVDRWRieTRMLURhOEJicE9SWFNnRlJheTVfbXVtLVhXZ25QX1F2ZUFDak1ZT1daN3djSTBJM3hMSklzbDY0eG9fTWNldFVzS3dPTGZ1ek12ZTBxMlhENUJMNXVzQjBjNEFReWduaV92SXBNUzRHbFhwTG1MZ0tGZm0zWFYxS2YzRnh1OTFsaGU1ZnI4YTNJMnBYLW53YWdKZldCWG9QeWRzYldqMTNmM1Vzbks?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 11.1,
-            "scanned_at": "2026-04-04T09:43:01.455544+00:00",
-            "tier2": {
-                "analysis": "## Union Pacific Corporation (UNP) \u2013 Value Analysis\n\n### 1. THE MOAT \ud83c\udff0\nUnion Pacific possesses an **exceptional geographic moat** \u2013 it controls irreplaceable rail infrastructure across 23 western U.S. states. No competitor can duplicate 32,000+ route miles. Regulatory barriers, capital intensity, and land rights create near-impenetrable switching costs for freight customers.\n\n### 2. BUSINESS QUALITY \u2699\ufe0f\nRailroads are the backbone of U.S. commerce. UNP benefits from pricing power, fuel efficiency advantages over trucking, and steady volume from agricultural, industrial, and intermodal freight. Operating ratio improvements signal disciplined management. Dividend consistency reinforces capital allocation quality.\n\n### 3. VALUE TRAP CHECK \ud83d\udd0d\nP/E of ~20x is **fair, not cheap** for a capital-intensive business. The rail merger news adds slight uncertainty. No structural decline detected \u2013 secular tailwinds from reshoring and infrastructure investment support long-term demand.\n\n**Verdict: Great Business at a Fair Price.**\n\n---",
-                "conviction_score": 7,
-                "recommended_action": "HOLD",
-                "target_price": "\u20ac250.00"
-            }
-        },
-        {
-            "ticker": "TJX",
-            "name": "TJX Companies, Inc. (The)",
-            "sector": "Consumer Cyclical",
-            "price": 161.29,
-            "dividend_yield": 1.19,
-            "pe_ratio": 33.12,
-            "roe": 59.13,
-            "debt_to_equity": 1.32,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "TJX SEC Filings - Tjx Companies Inc 10-K, 10-Q, 8-K Forms - Stock Titan",
-                    "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5BYW9iOG1mYnFwSzFHQU5hUWlud1dVOVBCNjkzOUtZYm5zTUpfRU0tN041VmhVdHh2ckNHNTFEcWlQdWpwWDI4dlBoVVd5SVQzOVBhN3hNNmk4TDU4NWgzTkt1RGc?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "The TJX Companies, Inc. (TJX) stock price, news, quote and history - Yahoo Finance Singapore",
-                    "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE45WWcxdDA4RUt2TkFvbE1GOVBTcEpiQUdIWkozUm5zeERLaUMtdFByWjV2MUZFdW54MmtCODZCNmRtMno5eVFhS2EtTHIydkdBOUlidWN0WHplbFJ1Mmt3WQ?oc=5",
-                    "date": "Recent"
-                }
-            ],
+            "ticker": "META",
+            "name": "Meta Platforms, Inc.",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "roe": 30.24,
+            "pe_ratio": 24.45,
+            "debt_to_equity": 0.39,
+            "dividend_yield": 37.0,
+            "price": 574.46,
             "score": 11.0,
-            "scanned_at": "2026-04-04T09:42:52.548604+00:00",
             "tier2": {
-                "analysis": "# TJX Companies: Value Investor Analysis\n\n## THE MOAT\nTJX possesses a **genuine cost-based moat** through its off-price retail model. Its massive vendor relationships (21,000+ vendors globally), opportunistic buying capabilities, and treasure-hunt shopping experience create barriers nearly impossible to replicate at scale. Brand recognition as the category leader reinforces loyalty.\n\n## BUSINESS QUALITY\nThe model is **counter-cyclically resilient** \u2014 economic downturns actually drive value-seeking consumers toward TJX. High VIX environments historically benefit off-price retail. Consistent free cash flow generation, strong ROIC (~60%), and disciplined capital allocation reflect exceptional management.\n\n## VALUE TRAP CHECK\nAt P/E 33x, this is **not cheap** \u2014 it's a premium for quality. The valuation reflects durable growth expectations, not distress. No structural decline signals; expansion into Europe and Canada remains robust. The risk is valuation, not business deterioration.\n\n---",
-                "conviction_score": 7,
-                "recommended_action": "HOLD",
-                "target_price": "\u20ac164.50"
+                "analysis": "# Meta Platforms (META) - Value Investor Analysis\n\n## THE MOAT\nMeta possesses an extraordinary **network effect moat** - 3.2B+ daily active users across Facebook, Instagram, WhatsApp create an self-reinforcing ecosystem. Advertisers *must* be present where users congregate. Switching costs for both users and advertisers are substantial.\n\n## BUSINESS QUALITY\nThe advertising business generates exceptional free cash flow (~$50B+ annually). AI integration is enhancing ad targeting efficiency dramatically. Reality Labs remains a drag, but core business resilience is proven through economic cycles. High operating leverage amplifies earnings growth.\n\n## VALUE TRAP CHECK\nP/E of 24.45 for a business growing earnings 30%+ annually represents a **genuine gift**, not a trap. This is structural growth, not cyclical. The dividend yield data (37%) appears anomalous - likely a data error; Meta pays minimal dividends.\n\nThis is unambiguously a **Great Business** at a reasonable price.\n\n---",
+                "conviction_score": 8,
+                "recommended_action": "BUY",
+                "target_price": "\u20ac610"
             }
         },
         {
-            "ticker": "TGT",
-            "name": "Target Corporation",
-            "sector": "Consumer Defensive",
-            "price": 120.45,
-            "dividend_yield": 3.79,
-            "pe_ratio": 14.82,
-            "roe": 24.03,
-            "debt_to_equity": 1.26,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Target Corporation (TGT) Is a Trending Stock: Facts to Know Before Betting on It - Yahoo Finance Singapore",
-                    "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQWHJsZy1qLVhUZG4tSDhqTlYtVExQVjBrSzBWRUZIUWY1S0VDS0tZbmQ5bm41aHpXZWhwaDFXZUZTT2NoZkJicnpmQkZkdWdkdnVJcVR4RzViQTUwZkw3cUhjcnZ6a3F6R3lXX0tmZlFQVnBOemlJb3lhOVVqMmhmdGQtWVdSYXVDdzFmRlZxVQ?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "Director at Target (NYSE: TGT) receives 1,791-share equity award - Stock Titan",
-                    "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNTElJMUMwWW9HRVJiT2dLMGNXNkF3VkY2YWQybkN3VFg2VXF6Y2xDQjNVWGhZaWR2aWhvdkJncXVLa1NJeThYWk5sWUt0MFRrOWhvck0yOFVlY1FZeG9SZVBtdkNUX0ZDcmRDQXY3d016aUtWcDhKVGpuMGg2cUQyeUplTmc1UkJKeG91V0FfVGM1c1BOelNwZENVdmo3RUhrVzJxa2hCNA?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 11.0,
-            "scanned_at": "2026-04-04T09:43:02.161445+00:00",
+            "ticker": "VZ",
+            "name": "Verizon Communications Inc.",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "roe": 17.07,
+            "pe_ratio": 12.17,
+            "debt_to_equity": 1.75,
+            "dividend_yield": 573.0,
+            "price": 49.4,
+            "score": 10.8,
             "tier2": {
-                "analysis": "## Target Corporation (TGT) \u2013 Business First Analysis\n\n**THE MOAT:** Target possesses a moderate moat through brand loyalty, owned-brand portfolio (~$30B+ in private labels), and its omnichannel/same-day fulfillment ecosystem. However, it lacks deep switching costs and faces intense pressure from Walmart and Amazon.\n\n**BUSINESS QUALITY:** As Consumer Defensive, TGT offers recession resilience, but it's more discretionary-heavy than Walmart. Recent inventory challenges, shrinkage costs, and weakening consumer confidence create real headwinds. The ~3.8% dividend signals shareholder commitment but also limits reinvestment flexibility.\n\n**VALUE TRAP CHECK:** P/E of 14.82 appears cheap historically, but margin compression, cautious guidance, and competitive displacement risk suggest this may be a value trap in transition rather than a gift. Structural pressures from digital commerce and changing consumer behavior warrant caution.\n\nThe director equity award is mildly positive (insider alignment), but insufficient to change the thesis.\n\n---",
+                "analysis": "# Verizon Communications (VZ) - Value Investor Analysis\n\n## THE MOAT\nVerizon possesses a **genuine infrastructure moat** - network effects, massive capital barriers to entry, spectrum licenses, and high switching costs. Wireless connectivity is quasi-essential, creating sticky customers.\n\n## BUSINESS QUALITY\nTelecom is recession-resistant; consumers maintain mobile service even during downturns. However, Verizon carries **substantial debt (~$150B)** from 5G spectrum acquisitions, compressing flexibility. Rising rates amplify interest burden significantly.\n\n## VALUE TRAP CHECK\nThe P/E of 12x appears cheap, but growth is structurally limited - saturated US wireless market, fiber buildout requires massive capex, and T-Mobile continues gaining share. The **573% \"dividend\"** figure appears data anomalous (actual yield ~6.5%). The low valuation reflects legitimate concerns: debt load, competitive pressure, and thin FCF growth runway.\n\n**Verdict**: Decent business, not a great one. More \"toll road with potholes\" than Buffett's ideal.\n\n---",
                 "conviction_score": 5,
                 "recommended_action": "HOLD",
-                "target_price": "\u20ac123.00"
+                "target_price": "\u20ac51.50"
             }
         },
         {
-            "ticker": "AXP",
-            "name": "American Express Company",
-            "sector": "Financial Services",
-            "price": 300.18,
-            "dividend_yield": 1.27,
-            "pe_ratio": 19.53,
-            "roe": 33.99,
-            "debt_to_equity": 1.91,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "American Express Company (AXP) Expands Business Card Lineup - Yahoo Finance",
-                    "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQN2VXTGc1U0ZCOGZyTmxJa2pGek5INTdLWDlzOENuREpvZjhfVllWeGQ3ZVJFVXBtSi1RcXU4NVhObHVrdEp3d2NmZlZEcEpuZGFlTURudzlwOGlJazkzYThaWGVDRWpyLXBBblpIQmJVekhiSGtnSW9QM21CamNVandjS2VQQzZZWmZ0ZldSX294VEpkTm1LT0xTd1NGUC1yVnRN?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "8,138 Shares in American Express Company $AXP Bought by Triad Investment Management - MarketBeat",
-                    "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPOERZXzBMbXl1SjN6VWpRY2FDNURGd1NKRWVBR3pCVmthaVlnUUI4bXdULUFiQTZVdl9heVVQODVGb0oxWVpvRDBGYWFZdkJFelFhZ2pnVUpwRWVfUFdJMDlMREFpeE5BU0tlUTVFdGFRMzFIZDc5blJidWliN2pYYzhQNHdKYUh3M0FTUHZpN1JyRkN3SWVybjFpdUJyYTRrXzJ3bjNaYlI2UGRsbXRkV0xkYVR4RVd0cDhmaHZ6elYyci1Jd3dzdWFxSktOV0NTSUVES2JkZmwzZw?oc=5",
-                    "date": "Recent"
-                }
-            ],
+            "ticker": "FSLR",
+            "name": "First Solar, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 17.45,
+            "pe_ratio": 13.74,
+            "debt_to_equity": 0.07,
+            "dividend_yield": 0,
+            "price": 195.32,
             "score": 10.7,
-            "scanned_at": "2026-04-04T09:42:56.113191+00:00",
             "tier2": {
-                "analysis": "# American Express (AXP) - Value Investor Analysis\n\n## 1. THE MOAT \ud83c\udff0\nAXP possesses an **exceptional multi-layered moat**: premium brand prestige, a closed-loop network (issuer + network = unique data advantage), high switching costs among affluent cardholders, and merchant relationships. Buffett has held AXP for decades for precisely this reason.\n\n## 2. BUSINESS QUALITY \ud83d\udcaa\nThe spend-centric model targeting affluent customers demonstrates **remarkable resilience**. Premium cardholders maintain spending through mild recessions. Business card expansion signals growth optionality. Fee-based revenue reduces pure credit cycle dependency.\n\n## 3. VALUE TRAP CHECK \u2705\nAt P/E ~19.5x, this is **NOT a value trap**. AXP historically commands premium multiples. Current valuation reflects reasonable pricing for a high-quality compounder, not structural decline. Institutional accumulation confirms conviction.\n\n**Risk**: Consumer credit deterioration in severe recession; fintech disruption remains secondary concern.\n\n---",
-                "conviction_score": 19,
+                "analysis": "# First Solar (FSLR) - Value Investor Analysis\n\n## THE MOAT\nFirst Solar possesses a **genuine technological moat** through its proprietary thin-film cadmium telluride (CdTe) technology, offering lower manufacturing costs and superior performance in high-heat environments. Its domestic US manufacturing provides tariff insulation \u2014 a rare structural advantage in today's trade environment.\n\n## BUSINESS QUALITY\nThe business benefits from IRA tailwinds and utility-scale solar demand, but remains **cyclically exposed** to policy risk, interest rates (affecting project financing), and module pricing pressure. Revenue visibility is decent given multi-year order backlogs.\n\n## VALUE TRAP CHECK\nP/E of ~14x for a technology/clean energy manufacturer with earnings power is **genuinely cheap**, not a trap. Declining solar module prices are a risk, but First Solar's cost structure and US-made premium differentiate it meaningfully from Chinese competitors.\n\nThe low valuation appears to be **a gift**, not a warning.\n\n---",
+                "conviction_score": 7,
                 "recommended_action": "BUY",
-                "target_price": "\u20ac312"
+                "target_price": "\u20ac210"
+            }
+        },
+        {
+            "ticker": "HIG",
+            "name": "The Hartford Insurance Group, I",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 21.66,
+            "pe_ratio": 10.22,
+            "debt_to_equity": 0.24,
+            "dividend_yield": 176.0,
+            "price": 136.19,
+            "score": 10.4,
+            "tier2": {
+                "analysis": "# The Hartford (HIG) - Value Investor Analysis\n\n## THE MOAT\nHartford possesses meaningful competitive advantages: strong brand recognition (200+ year history), diversified insurance lines creating cross-selling opportunities, and significant switching costs in commercial insurance relationships. Data analytics capabilities in underwriting represent a growing moat.\n\n## BUSINESS QUALITY\nInsurance is recession-resilient with mandatory commercial coverage requirements. Hartford's commercial lines and group benefits provide stable premium income. However, catastrophe exposure and investment portfolio sensitivity to rate cycles create volatility during high-VIX environments.\n\n## VALUE TRAP CHECK\nP/E of 10.22 appears genuinely cheap for a quality insurer. The **176% dividend figure appears anomalous** (likely data error - possibly yield misrepresented). Assuming normalized ~2% yield, valuation reflects sector discount, not structural decline. Hartford's underwriting discipline and expense management suggest this is a **gift, not a trap**.\n\n---",
+                "conviction_score": 7,
+                "recommended_action": "BUY",
+                "target_price": "\u20ac142.00"
+            }
+        },
+        {
+            "ticker": "CTSH",
+            "name": "Cognizant Technology Solutions ",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 15.16,
+            "pe_ratio": 13.71,
+            "debt_to_equity": 0.08,
+            "dividend_yield": 211.0,
+            "price": 62.54,
+            "score": 10.3,
+            "tier2": {
+                "analysis": "# Cognizant Technology Solutions (CTSH) \u2013 Value Investor Analysis\n\n## The Moat\nCognizant possesses **moderate switching costs** \u2013 deep IT outsourcing relationships create stickiness, but the moat is narrower than pure software players. Competition from TCS, Infosys, and Wipro is fierce. No meaningful network effect or dominant brand premium.\n\n## Business Quality\nIT services remain recession-resilient at the core, but discretionary digital transformation spending softens during high-VIX periods. Revenue growth has been sluggish (~2-4%), reflecting client budget caution and AI disruption pressures on legacy services headcount.\n\n## Value Trap Check\nP/E of 13.71 looks cheap but reflects **structural concerns**: AI automation threatens traditional IT outsourcing models long-term. The 211% dividend figure appears anomalous/data error \u2013 likely ~2.1% yield. Low valuation may partially be justified given growth deceleration.\n\n**Verdict:** Decent business, not exceptional. Fairly priced mediocrity, not a Buffett-style \"wonderful company.\"\n\n---",
+                "conviction_score": 5,
+                "recommended_action": "HOLD",
+                "target_price": "\u20ac64.00"
             }
         },
         {
             "ticker": "PHM",
             "name": "PulteGroup, Inc.",
             "sector": "Consumer Cyclical",
-            "price": 117.29,
-            "dividend_yield": 0.89,
-            "pe_ratio": 10.55,
+            "industry_group": "Others",
             "roe": 17.67,
+            "pe_ratio": 10.55,
             "debt_to_equity": 0.18,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "How Investors Are Reacting To PulteGroup (PHM) Expanding Into Northwest Florida Amid Mixed Earnings Sentiment - simplywall.st",
-                    "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNVC1nSXlDOTlaWFFvYTlsVGlNU1FsZGZteDFXc0tmWHJkTWVHU0syQm9jb0hMQnVuRVE4OHhyR0ZOS3REZkdLX3dSalBkdkQ1bUdUNHN2Wm5KV2JOQWFqMVhaVTZtVVgtSG5SOTFKcVpKSU8tZ19EWjZlZFZSUUNldk1uODEtVkN3Z3REaDZOeXd2S0VTV1NyOHRGaFFfSF9PalZpWHlwT1lqZGNydDZRSHBGbmJYc0p2VlRJMzdRRFp1MHpDdDltTlB0MDNmTTTSAdQBQVVfeXFMTVpDdlFvaXFBendZWFRyU0Q2ZWszMVBJRnVxSG9DMGdqM3lpOVIyM0dQSkRLSkZIUUI1T291V3hxd1haeEM0VmhZVjVkLUpOTlhfTFlVWjhNTG0wdnIzUTRGR2pUMmZRSGg5VUw1LVlaME5qdkVkVE1OQnUzX0k5ZEhpd3dNelRQM3JUQngzeTZOdWIxZ19zWUF3OHBXTHlPWmpqVnpYSXh0akoxRU11UzZKZDBIeHMxektudklGa2ZyRjdDSmhjVTFVdm0zUkdycFNkLU0?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "More than 5,600 workers helped put PulteGroup on Fortune's best workplaces list - Stock Titan",
-                    "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPYm1zNVlnSS1MY1ZCWUFNQnY0MVF3UGRzSGlfUDYxTm50b0YySE94aGlrSEVVczVhRG1xQ1J0cHFrVDFPSnBTOFJVM0hBcGVXMHczbUNfdXVUcTFwQjhGa1FCMkhpOEhGSTJnd3pJQXNZT3J3M2lJM0laYXRsODNUbTktbFdsTks1d1YwUjV1S1N6TUFRNnJQMGdZaVVrdV9RRnFGOHpySWl6aU8tSW5pWFRXaExDV240TEVGUnFnQQ?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 10.4,
-            "scanned_at": "2026-04-04T09:43:00.770070+00:00",
+            "dividend_yield": 89.0,
+            "price": 117.29,
+            "score": 9.7,
             "tier2": {
-                "analysis": "## PulteGroup (PHM) \u2013 Business First Analysis\n\n**THE MOAT:** PulteGroup possesses a moderate moat through brand recognition, scale advantages in land acquisition, and operational efficiency in homebuilding. However, homebuilders lack strong switching costs or network effects \u2014 competition is intense and commoditized.\n\n**BUSINESS QUALITY:** Homebuilders are inherently cyclical. With elevated mortgage rates, affordability stress, and macro uncertainty, PHM faces real headwinds. The \"mixed earnings sentiment\" in recent news confirms near-term pressure. The Fortune workplace recognition suggests strong human capital, supporting execution quality.\n\n**VALUE TRAP CHECK:** P/E of 10.55x appears cheap, but homebuilder earnings are cyclically elevated. As rates remain high and housing demand softens, earnings could normalize downward, making current valuation less compelling. Northwest Florida expansion signals growth ambition but adds execution risk. This is more \"cheap for a reason\" than a hidden gem.\n\nThe dividend yield of 0.89% provides minimal downside protection.\n\n---",
-                "conviction_score": 5,
+                "analysis": "# PulteGroup (PHM) \u2013 Value Investor Analysis\n\n## Business Assessment\n\n**THE MOAT:** PulteGroup has a *moderate* moat through brand recognition, land banking advantages, and operational scale across diverse buyer segments (entry-level to active adult). However, homebuilding lacks strong switching costs or network effects. The moat is real but not exceptional.\n\n**BUSINESS QUALITY:** Homebuilding is inherently cyclical. Rising interest rates, affordability pressures, and consumer confidence swings directly impact demand. With high VIX environments, PHM faces significant revenue volatility. The balance sheet is conservative, providing resilience.\n\n**VALUE TRAP CHECK:** P/E of 10.55 reflects cyclical peak earnings concern \u2013 not structural decline. PHM benefits from chronic U.S. housing undersupply (structural tailwind). The 89% dividend payout warrants scrutiny for sustainability amid potential earnings compression. This appears more *gift than trap*, but timing risk is elevated.\n\n---",
+                "conviction_score": 6,
                 "recommended_action": "HOLD",
-                "target_price": "\u20ac114"
+                "target_price": "\u20ac121"
             }
         },
         {
-            "ticker": "EME",
-            "name": "EMCOR Group, Inc.",
-            "sector": "Industrials",
-            "price": 756.3,
-            "dividend_yield": 0.21,
-            "pe_ratio": 26.81,
-            "roe": 38.49,
-            "debt_to_equity": 0.13,
-            "news": [
-                {
-                    "title": "Google News",
-                    "link": "https://news.google.com/",
-                    "date": "Recent"
-                },
-                {
-                    "title": "EMCOR investors get $0.40 a share on April 30 dividend payout - Stock Titan",
-                    "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNNGlsdy1FRWNjRGlzZEJxVDFiMmkzaTQyODlzTTdHc3l2QU9hSmtMRVNxaUZCS0NILUR6c1FWb2JBSDQtWWwtVXczWEpJcmt6bFFfSFJiQVdkdV91c002RUdLQUV2aDNhalFhUmdCdkI3aElmWDdXcG5NUTNTMFZQeEtmblZULTgtaTZiMkJlNWd1VlZYRlpSelhYRmY?oc=5",
-                    "date": "Recent"
-                },
-                {
-                    "title": "How The EMCOR Group (EME) Narrative Is Shifting With New Guidance And Analyst Targets - Yahoo Finance",
-                    "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNamhwWXpZTkZKMXV6MmRwX3pOT2QwN1R3TEd5bXZZLUtOZjFWYmFkMDRrZWJITm1SdzB1dV9HQVFPbTdJeGQ4UG1qX2N2QTlVbDY4Z29sZTB4YUgzQlFkMWxvQXdfUklIS1pfcXNxM2ljdTB6MTRoaWh3bzZrRFBXb3JLTmgtdVJrMHQ0ckNpaFZYZnFLVHZ6LTZVdzY1djNE?oc=5",
-                    "date": "Recent"
-                }
-            ],
-            "score": 10.2,
-            "scanned_at": "2026-04-04T09:42:55.405459+00:00",
+            "ticker": "INGA.AS",
+            "name": "ING GROEP N.V.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 15.77,
+            "pe_ratio": 10.82,
+            "debt_to_equity": 0.0,
+            "dividend_yield": 473.0,
+            "price": 22.945,
+            "score": 9.4,
             "tier2": {
-                "analysis": "# EMCOR Group (EME) \u2013 Business First Analysis\n\n## 1. THE MOAT\nEMCOR possesses **meaningful switching costs** \u2013 long-term contracts in electrical/mechanical construction and facilities services create sticky client relationships. Scale advantages in specialty contracting (50,000+ employees) provide cost efficiency. However, moat is moderate; barriers are operational rather than structural.\n\n## 2. BUSINESS QUALITY\nEME benefits from **secular tailwinds**: data center buildout, grid modernization, and infrastructure spending (IRA/CHIPS Act). Backlog visibility provides recession buffering. P/E of ~27x reflects premium for quality, not speculation. Dividend yield is negligible but signals capital discipline.\n\n## 3. VALUE TRAP CHECK\nThis is **NOT a value trap**. Revenue and margin expansion driven by mission-critical infrastructure demand is structural. Analyst guidance revisions are positive. Risk: project execution, labor costs, and federal spending pullbacks under fiscal tightening.\n\n---\n\n**",
+                "analysis": "## ING Groep N.V. (INGA.AS) \u2014 Value Investor Analysis\n\n**THE MOAT:** ING possesses moderate moats via brand recognition across Europe, digital banking scale (ING Direct model), and meaningful switching costs from integrated retail/commercial banking relationships. However, banking moats are perpetually challenged by regulation and fintech disruption.\n\n**BUSINESS QUALITY:** ING's diversified pan-European franchise provides resilience, but financial services remain cyclically exposed. Rising rates previously boosted NII; potential rate cuts compress margins. High VIX environments stress credit quality and loan books. Capital ratios appear healthy, supporting dividend sustainability.\n\n**VALUE TRAP CHECK:** The 473% dividend figure appears anomalous \u2014 likely a data error or special dividend distortion. P/E of ~10.8x is typical for European banks, not a screaming bargain nor a trap. Structural concerns include European growth stagnation and digital competition pressure.\n\nOverall: Decent franchise, fair valuation, not exceptional quality for a Buffett-style \"forever hold.\"\n\n---",
+                "conviction_score": 5,
+                "recommended_action": "HOLD",
+                "target_price": "\u20ac23.50"
+            }
+        },
+        {
+            "ticker": "WRB",
+            "name": "W.R. Berkley Corporation",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 19.7,
+            "pe_ratio": 14.83,
+            "debt_to_equity": 0.32,
+            "dividend_yield": 55.0,
+            "price": 65.99,
+            "score": 8.8,
+            "tier2": {
+                "analysis": "# W.R. Berkley Corporation (WRB) - Value Analysis\n\n## THE MOAT\nWRB possesses a **genuine underwriting moat** \u2014 decentralized management model, disciplined risk selection, and 50+ years of superior combined ratios. Deep specialty insurance expertise creates meaningful switching costs and pricing power.\n\n## BUSINESS QUALITY\nSpecialty/commercial insurance is **countercyclically resilient**. Hard market conditions persist, supporting premium growth. High VIX environments actually benefit disciplined insurers through premium expansion. WRB's investment portfolio (benefiting from higher rates) adds earnings quality.\n\n## VALUE TRAP CHECK\nP/E of ~15x for a best-in-class specialty insurer is **reasonable, not alarming**. 55% dividend payout reflects confidence. No structural decline signals \u2014 regulatory moats strengthen, not weaken. This appears a **gift from market indifference**, not a warning.\n\nThe combination of disciplined underwriting culture, rising investment income, and hard market tailwinds makes this a **Great Business** at fair-to-attractive pricing.\n\n---",
+                "conviction_score": 8,
+                "recommended_action": "BUY",
+                "target_price": "\u20ac71.00"
+            }
+        },
+        {
+            "ticker": "NEM",
+            "name": "Newmont Corporation",
+            "sector": "Basic Materials",
+            "industry_group": "Others",
+            "roe": 22.34,
+            "pe_ratio": 17.85,
+            "debt_to_equity": 0.17,
+            "dividend_yield": 91.0,
+            "price": 114.05,
+            "score": 8.4,
+            "tier2": {
+                "analysis": "# Newmont Corporation (NEM) - Value Analysis\n\n## The Moat\nNewmont possesses a **moderate moat** via low-cost, tier-1 gold reserves, operational scale, and geographic diversification. However, gold mining lacks true pricing power \u2014 it's commodity-driven. No brand loyalty or network effects exist.\n\n## Business Quality\nGold miners are cyclical and capital-intensive. With a 91% dividend payout ratio, sustainability is questionable \u2014 this signals either peak earnings distribution or financial stress. High VIX environments typically boost gold prices, providing *temporary* resilience, but operational costs (energy, labor) remain inflationary headwinds.\n\n## Value Trap Check\nP/E of 17.85 appears reasonable for gold exposure, but the extreme dividend payout raises red flags. Free cash flow must be scrutinized \u2014 if dividends exceed organic cash generation, this is a **yield trap**, not a value opportunity. Gold price dependency makes earnings volatile.\n\n**Verdict:** Decent gold proxy, not a \"great business\" by Buffett standards.",
+                "conviction_score": 4,
+                "recommended_action": "HOLD",
+                "target_price": "\u20ac118.00"
+            }
+        },
+        {
+            "ticker": "TEL",
+            "name": "TE Connectivity plc",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 16.1,
+            "pe_ratio": 30.13,
+            "debt_to_equity": 0.46,
+            "dividend_yield": 139.0,
+            "price": 209.07,
+            "score": 8.1,
+            "tier2": {
+                "analysis": "## TE Connectivity (TEL) - Business First Analysis\n\n**THE MOAT:** TEL possesses genuine competitive advantages through high switching costs (deeply embedded connectors in automotive/industrial systems), engineering expertise, and long qualification cycles. Customers rarely switch suppliers mid-platform. This is a **real moat**.\n\n**BUSINESS QUALITY:** Revenue diversified across automotive (EV transition tailwind), industrial, and communications. However, cyclicality exists - industrial demand softens during macro weakness. The 139% dividend figure appears anomalous (likely data error; actual yield ~1.5%). P/E of 30x reflects premium quality pricing.\n\n**VALUE TRAP CHECK:** Not a value trap. TEL benefits from structural EV/electrification secular growth. The business compounds reliably. At 30x earnings, it's fairly-to-fully valued, not cheap - but quality commands premium. No signs of structural decline.\n\n**VERDICT:** Great Business at a fair price. Buffett would appreciate the moat and capital allocation discipline, though patience for better entry warranted.",
                 "conviction_score": 7,
-                "recommended_action": " HOLD",
-                "target_price": " \u20ac775"
+                "recommended_action": "HOLD",
+                "target_price": "\u20ac214"
             }
         }
     ],
-    "active_trades": []
+    "macro": {
+        "vix": 22.1,
+        "treasury_10y": 4.3
+    }
 }
