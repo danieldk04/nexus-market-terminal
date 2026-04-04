@@ -2,37 +2,44 @@ name: NEXUS AUTONOMOUS TRADING ENGINE
 
 on:
   schedule:
-    - cron: "0 7 * * *"
-  workflow_dispatch:
+    - cron: "0 */3 * * *" # Elke 3 uur
+  workflow_dispatch:      # Handmatige knop blijft bestaan
+
+permissions:
+  contents: write
 
 jobs:
   scan_and_analyze:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          cache: 'pip'
 
-      - name: Install dependencies
-        run: |
-          pip install yfinance pandas requests anthropic lxml
+      - name: Install Dependencies
+        run: pip install yfinance pandas requests anthropic lxml
 
-      - name: Step 1 Run Tier 1 Scanner
+      - name: Tier 1 - Intelligent Scanner
         run: python src/tier1_scanner.py
-
-      - name: Step 2 Run Tier 2 Analyser
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python src/tier2_analyser.py
 
-      - name: Step 3 Evolution and Learning Logic
+      - name: Tier 2 - Smart Analyser
+        run: python src/tier2_analyser.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Tier 3 - Evolution Engine
         run: python src/evolution_engine.py
 
-      - name: Step 4 Commit and Push results
+      - name: Commit & Push Results
         run: |
           git config --global user.name "NEXUS-Bot"
           git config --global user.email "bot@nexus.terminal"
