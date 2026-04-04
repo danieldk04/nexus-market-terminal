@@ -1,5 +1,5 @@
 """
-NEXUS MARKET TERMINAL - Tier 2 Analyser (V2.2 - Price Targets & Telegram)
+NEXUS MARKET TERMINAL - Tier 2 Analyser (V3.0 - Learning Loop & Virtual Trading)
 """
 
 import json
@@ -25,9 +25,10 @@ log = logging.getLogger("tier2_analyser")
 # ── Paths ─────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
 DATA_PATH = ROOT / "data.json"
+TRADES_PATH = ROOT / "trades.json"
 
 # ── Claude config ─────────────────────────────────────────────────────────────
-MODEL = "claude-sonnet-4-6" 
+MODEL = "claude-3-5-sonnet-20240620" # Gebruik de actuele stabiele identifier
 SLEEP_BETWEEN_CALLS = 3.0
 
 # ── Telegram Config ───────────────────────────────────────────────────────────
@@ -37,13 +38,8 @@ TELEGRAM_CHAT_ID = "7995706133"
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def send_telegram_msg(message):
-    """Verstuurt een notificatie naar Telegram."""
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": message,
-        "parse_mode": "HTML"
-    }
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
     try:
         res = requests.post(url, json=payload, timeout=10)
         res.raise_for_status()
@@ -51,145 +47,136 @@ def send_telegram_msg(message):
     except Exception as e:
         log.error(f"Telegram error: {e}")
 
-def load_json(path: Path) -> dict:
-    with open(path) as f:
-        return json.load(f)
+def log_virtual_trade(candidate, analysis):
+    """Slaat een nieuwe BUY trade op in trades.json voor de backtester."""
+    trades = []
+    if TRADES_PATH.exists():
+        with open(TRADES_PATH, "r") as f:
+            try: trades = json.load(f)
+            except: trades = []
+    
+    ticker = candidate["ticker"]
+    # Voorkom dubbele actieve trades
+    if any(t["ticker"] == ticker and t["status"] == "OPEN" for t in trades):
+        return
 
-def save_json(path: Path, data: dict) -> None:
-    with open(path, "w") as f:
-        json.dump(data, f, indent=2)
+    new_trade = {
+        "ticker": ticker,
+        "entry_date": datetime.now(timezone.utc).isoformat(),
+        "entry_price": candidate.get("price", 0),
+        "predicted_target": analysis.get("target_price", "N/A"),
+        "conviction": analysis.get("conviction_score", 0),
+        "status": "OPEN",
+        "current_price": candidate.get("price", 0),
+        "pl_percent": 0.0
+    }
+    trades.append(new_trade)
+    with open(TRADES_PATH, "w") as f:
+        json.dump(trades, f, indent=2)
+    log.info(f"VIRTUAL TRADE LOGGED: {ticker}")
 
-def build_system_prompt() -> str:
-    return dedent("""
-        You are a senior equity analyst for the NEXUS Market Terminal.
-        Assess the stock based on fundamentals and news provided.
+def build_system_prompt(history_context: str) -> str:
+    return dedent(f"""
+        You are the NEXUS Risk Engine, a senior equity analyst.
         
+        LEARNING LOOP CONTEXT:
+        {history_context}
+        Use the history above to avoid repeating past mistakes (e.g., being too bullish in high VIX).
+
         STRICT RULES:
         1. Respond ONLY with a valid JSON object.
-        2. Format: {
+        2. Format: {{
             "analysis": "concise note", 
             "conviction_score": 1-10, 
             "sentiment_score": 1-10,
             "recommended_action": "buy/hold/sell",
             "target_price": "estimated price in 30 days",
             "upside_percentage": "expected return in %"
-        }
-        3. 'sentiment_score' must reflect the tone of news (1=bearish, 10=bullish).
-        4. Be conservative with 'target_price' based on provided volatility.
-        5. Do NOT use markdown code blocks.
-        6. Do NOT include any introductory or concluding text.
+        }}
+        3. Do NOT use markdown code blocks.
     """).strip()
 
 def build_user_prompt(candidate: dict, macro: dict) -> str:
     news_items = candidate.get('news', [])
-    news_block = ""
-    if not news_items:
-        news_block = "No recent news found in feed."
-    else:
-        for i, n in enumerate(news_items, 1):
-            news_block += f"{i}. {n.get('title')} ({n.get('source')})\n"
+    news_block = "\n".join([f"- {n.get('title')}" for n in news_items]) if news_items else "No news."
 
     return dedent(f"""
         Ticker: {candidate.get('ticker')}
-        Scan Score: {candidate.get('score')}
-        Dividend Yield: {candidate.get('dividend_yield')}%
-        PE Ratio: {candidate.get('pe_ratio')}
-        
-        Macro Context: VIX={macro.get('vix')}, RSI={macro.get('rsi')}
+        Price: €{candidate.get('price')}
+        PE: {candidate.get('pe_ratio')} | Div: {candidate.get('dividend_yield')}%
+        Macro: VIX={macro.get('vix')}, RSI={macro.get('sp500_rsi', 'N/A')}
         
         Recent News:
         {news_block}
         
-        Analyze news sentiment vs fundamentals and provide the JSON response.
+        Analyze and provide JSON.
     """).strip()
 
 def extract_json(text: str) -> dict | None:
     try:
         match = re.search(r'(\{.*\})', text, re.DOTALL)
-        if match:
-            return json.loads(match.group(1))
-        return json.loads(text)
-    except Exception as e:
-        log.error(f"JSON Parsing failed: {e}")
+        return json.loads(match.group(1)) if match else json.loads(text)
+    except:
         return None
 
 def run_analysis() -> None:
     api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        log.error("ANTHROPIC_API_KEY missing!")
-        return
+    if not api_key: return
 
     client = anthropic.Anthropic(api_key=api_key)
-    if not DATA_PATH.exists():
-        log.error("data.json not found")
-        return
+    if not DATA_PATH.exists(): return
         
-    data = load_json(DATA_PATH)
+    data = json.load(open(DATA_PATH))
     candidates = data.get("top_candidates", [])
     macro = data.get("macro", {})
 
-    if not candidates:
-        log.info("No candidates to analyse.")
-        return
+    # Haal historie op voor de Learning Loop
+    history_context = "No history available."
+    if TRADES_PATH.exists():
+        with open(TRADES_PATH, "r") as f:
+            try:
+                hist = json.load(f)[-5:] # Laatste 5 trades
+                history_context = f"Recent performance history: {json.dumps(hist)}"
+            except: pass
 
-    system_prompt = build_system_prompt()
-    log.info("Analysing %d candidates...", len(candidates))
+    log.info("Analysing %d candidates with Learning Loop...", len(candidates))
 
     for candidate in candidates:
         ticker = candidate["ticker"]
         log.info("  → Processing %s", ticker)
         
-        user_prompt = build_user_prompt(candidate, macro)
-        
         try:
             message = client.messages.create(
                 model=MODEL,
                 max_tokens=1000,
-                system=system_prompt,
-                messages=[{"role": "user", "content": user_prompt}],
+                system=build_system_prompt(history_context),
+                messages=[{"role": "user", "content": build_user_prompt(candidate, macro)}],
             )
             
-            raw_text = message.content[0].text
-            analysis = extract_json(raw_text)
+            analysis = extract_json(message.content[0].text)
 
             if analysis:
                 candidate["tier2"] = {**analysis, "analysed_at": datetime.now(timezone.utc).isoformat()}
                 
-                # ── Telegram Notificatie Logica ────────────────────────────────
                 action = analysis.get("recommended_action", "").lower()
                 conviction = analysis.get("conviction_score", 0)
-                sentiment = analysis.get("sentiment_score", 0)
-                target = analysis.get("target_price", "N/A")
-                upside = analysis.get("upside_percentage", "0")
-                
-                if action == "buy" and conviction >= 7:
-                    msg = dedent(f"""
-                        🚀 <b>NEXUS BUY SIGNAL: {ticker}</b>
-                        
-                        🎯 <b>Target (30d):</b> €{target}
-                        📈 <b>Potentieel:</b> +{upside}%
-                        
-                        📊 <b>Conviction:</b> {conviction}/10
-                        🎭 <b>Sentiment:</b> {sentiment}/10
-                        
-                        <b>Analyse:</b> {analysis.get('analysis')}
-                        
-                        <i>Gegenereerd om: {datetime.now().strftime('%H:%M:%S')}</i>
-                    """).strip()
-                    send_telegram_msg(msg)
-                # ──────────────────────────────────────────────────────────────
-                
-            else:
-                candidate["tier2"] = {"error": "json_parsing_failed"}
-                
-        except Exception as exc:
-            log.error("Claude call failed for %s: %s", ticker, exc)
-            candidate["tier2"] = {"error": "api_call_failed"}
-        
-        time.sleep(SLEEP_BETWEEN_CALLS)
 
-    save_json(DATA_PATH, data)
-    log.info("Analysis complete and data.json updated.")
+                # Log trade als het een sterke BUY is
+                if action == "buy":
+                    log_virtual_trade(candidate, analysis)
+                
+                # Telegram alert voor High Conviction BUY
+                if action == "buy" and conviction >= 7:
+                    msg = f"🚀 <b>NEXUS BUY: {ticker}</b>\nTarget: €{analysis.get('target_price')}\nConviction: {conviction}/10\n{analysis.get('analysis')}"
+                    send_telegram_msg(msg)
+                
+            time.sleep(SLEEP_BETWEEN_CALLS)
+        except Exception as e:
+            log.error("Error for %s: %s", ticker, e)
+
+    with open(DATA_PATH, "w") as f:
+        json.dump(data, f, indent=2)
+    log.info("Analysis complete. Memory updated.")
 
 if __name__ == "__main__":
     run_analysis()
