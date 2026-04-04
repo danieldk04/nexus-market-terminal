@@ -2,7 +2,6 @@ import json
 import time
 import logging
 import urllib.parse
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 import yfinance as yf
@@ -17,8 +16,9 @@ log = logging.getLogger("tier1_scanner")
 # Paden
 BASE_DIR = Path(__file__).parent.parent
 OUTPUT_PATH = BASE_DIR / "data.json"
+MEMORY_PATH = BASE_DIR / "memory.json"
 
-# Sector Definities voor Circle of Competence
+# Sector Definities
 TECH_AI = ["Technology", "Communication Services", "Software", "Information Technology"]
 FINANCE_VINTAGE = ["Financial Services", "Financial Data Services", "Banks", "Insurance"]
 
@@ -27,8 +27,14 @@ def get_industry_group(sector):
     if sector in FINANCE_VINTAGE: return "Financials"
     return "Others"
 
+def load_memory():
+    """Laadt het geheugen van de bot om te leren van fouten."""
+    if not MEMORY_PATH.exists():
+        return {"lessons": []}
+    with open(MEMORY_PATH, "r") as f:
+        return json.load(f)
+
 def fetch_global_universe():
-    """Haalt automatisch de nieuwste tickers op."""
     tickers = []
     headers = {'User-Agent': 'Mozilla/5.0'}
     try:
@@ -38,23 +44,13 @@ def fetch_global_universe():
         # Nasdaq 100
         res = requests.get("https://en.wikipedia.org/wiki/Nasdaq-100", headers=headers, timeout=10)
         tickers.extend(pd.read_html(StringIO(res.text))[4]["Ticker"].tolist())
-        # Nederlandse Selectie
-        tickers.extend(["ASML.AS", "ADYEN.AS", "INGA.AS", "ABN.AS", "ASM.AS", "BESI.AS", "UNA.AS", "HEIA.AS"])
+        # NL Selectie
+        tickers.extend(["ASML.AS", "INGA.AS", "ADYEN.AS", "UNA.AS", "HEIA.AS"])
     except Exception as e:
         log.error(f"Fout bij ophalen universe: {e}")
     return list(set(tickers))
 
-def get_debt_equity_ratio(info):
-    try:
-        de = info.get("debtToEquity")
-        if de: return round(de / 100, 2) if de > 5 else round(de, 2)
-        td = info.get("totalDebt")
-        te = info.get("totalStockholderEquity")
-        if td and te and te > 0: return round(td / te, 2)
-    except: pass
-    return 0.0
-
-def analyse_ticker(ticker_symbol):
+def analyse_ticker(ticker_symbol, memory):
     try:
         t = yf.Ticker(ticker_symbol)
         info = t.info
@@ -64,31 +60,30 @@ def analyse_ticker(ticker_symbol):
 
         sector = info.get("sector", "Unknown")
         group = get_industry_group(sector)
-        de_ratio = get_debt_equity_ratio(info)
         pe = info.get("trailingPE", 0)
+        de_ratio = (info.get("debtToEquity", 0) / 100) if info.get("debtToEquity", 0) > 5 else info.get("debtToEquity", 0)
         
-        # Sector drempels
         max_pe = 35 if group == "Tech & AI" else 18
         if pe <= 0 or pe > max_pe: return None
         if de_ratio > 2.5: return None
 
-        # --- NIEUWE STRENGERE SCORE LOGICA ---
-        # Basis score begint op 5.0
+        # --- INTELLIGENTE SCORE LOGICA MET GEHEUGEN ---
         base = 5.0
-        
-        # PE Straf: Hoe dichter bij max_pe, hoe groter de aftrek (max -4.0)
         pe_penalty = (pe / max_pe) * 4.0
-        
-        # ROE Bonus: Beloon hoge ROE, maar vlakt af (max +4.0)
-        # We gebruiken een logische grens: 40% ROE is de 'gold standard'
         roe_bonus = min(4.0, (roe / 0.40) * 3.0)
-        
-        # Schuld straf: Kleine aftrek voor hogere schuld (max -1.0)
         debt_penalty = min(1.0, de_ratio / 2.5)
 
-        raw_score = base - pe_penalty + roe_bonus - debt_penalty
+        # DE ZELFREFLECTIE STAP:
+        # Check of we in deze sector eerder verlies hebben gemaakt
+        memory_penalty = 0.0
+        for lesson in memory.get('lessons', []):
+            if lesson.get('sector') == group and lesson.get('type') == "NEGATIVE_LEARNING":
+                memory_penalty += 0.5 # Trek 0.5 punt af per fout in deze sector
         
-        # Afronden naar 1 decimaal en binnen 1.0 - 10.0 houden
+        # Maximaal 2.0 punten aftrek door fouten (om te voorkomen dat een sector op 0 komt)
+        memory_penalty = min(2.0, memory_penalty)
+
+        raw_score = base - pe_penalty + roe_bonus - debt_penalty - memory_penalty
         score = round(max(1.0, min(10.0, raw_score)), 1)
 
         return {
@@ -98,34 +93,46 @@ def analyse_ticker(ticker_symbol):
             "industry_group": group,
             "roe": round(roe * 100, 2),
             "pe_ratio": round(pe, 2),
-            "debt_to_equity": de_ratio,
-            "dividend_yield": round((info.get("dividendYield", 0) or 0) * 100, 2),
+            "debt_to_equity": round(de_ratio, 2),
             "price": info.get("currentPrice", 0),
-            "score": score
+            "score": score,
+            "penalty_applied": memory_penalty > 0
         }
     except: return None
 
 def main():
-    log.info("=== NEXUS GLOBAL HUNTER STARTING (STRICT MODE) ===")
+    log.info("=== NEXUS INTELLIGENT SCAN STARTING ===")
+    memory = load_memory()
     universe = fetch_global_universe()
+    
     candidates = []
     for ticker in universe:
-        data = analyse_ticker(ticker)
+        data = analyse_ticker(ticker, memory)
         if data:
             candidates.append(data)
-            log.info(f"PASS: {ticker} Score: {data['score']}")
+            penalty_str = " [PENALTY APPLIED]" if data['penalty_applied'] else ""
+            log.info(f"PASS: {ticker} Score: {data['score']}{penalty_str}")
         if len(candidates) >= 15: break
         time.sleep(0.05)
+
+    # Inladen van bestaande data om trades niet te overschrijven
+    if OUTPUT_PATH.exists():
+        with open(OUTPUT_PATH, "r") as f:
+            old_data = json.load(f)
+    else:
+        old_data = {}
 
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "top_candidates": sorted(candidates, key=lambda x: x['score'], reverse=True),
+        "active_trades": old_data.get("active_trades", []), # Behou de trades!
+        "equity_history": old_data.get("equity_history", []),
         "macro": {"vix": 22.1, "treasury_10y": 4.3}
     }
     
     with open(OUTPUT_PATH, "w") as f:
         json.dump(output, f, indent=4)
-    log.info("Done! Scores zijn nu gekalibreerd.")
+    log.info(f"Done! {len(candidates)} candidates saved with memory-logic.")
 
 if __name__ == "__main__":
     main()
