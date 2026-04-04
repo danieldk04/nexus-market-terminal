@@ -1,6 +1,22 @@
 {
-    "generated_at": "2026-04-04T14:44:36.879077+00:00",
+    "generated_at": "2026-04-04T14:54:56.719986+00:00",
     "top_candidates": [
+        {
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 58.77,
+            "pe_ratio": 14.16,
+            "debt_to_equity": 0.58,
+            "price": 242.92,
+            "score": 7.1,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# Adobe (ADBE) - Waardeanalyse\n\n## Economische Moat (Sterk: 8/10)\nAdobe bezit een uitstekende moat via **sterke brand loyaliteit** en **switching costs** in creative & document workflows. Abonnementmodel genereert voorspelbare recurring revenue. Dominantie in design/video software (80%+ marktaandeel) is moeilijk uit te dagen.\n\n## Value Trap Risico (Matig: 6/10)\nHet lage P/E (14.16) lijkt aantrekkelijk, maar de **hoge ROE (58.77%)** wordt gedreven door aggressieve buybacks en schuldfinanciering (D/E: 0.58). Groei vertraagt; abonnementmarkt wordt saturering. Risico dat waarde-aantrekkelijkheid illusoir is.\n\n## Kritieke Risicofactor: AI-disruptie\nGeneratieve AI (Firefly, concurrenten) kan **ontwerpwerk democratiseren**, waardoor professionele tools devalueren. Pricing power onder druk als amateurs AI-tools kiezen over Adobe's premium suite.\n\n**Verdict:** Solide moat, maar geen bargain op 14.16 P/E.",
+                "last_run": "2026-04-04T14:55:02.292153+00:00"
+            }
+        },
         {
             "ticker": "ALL",
             "name": "Allstate Corporation (The)",
@@ -50,22 +66,6 @@
             }
         },
         {
-            "ticker": "AMP",
-            "name": "Ameriprise Financial, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 60.51,
-            "pe_ratio": 11.96,
-            "debt_to_equity": 0.58,
-            "price": 433.94,
-            "score": 6.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# AMP Analyse: Waardevol of Valstrik?\n\n**Economische Moat: Matig (5/10)**\nAMP's moat rust op merkrepuatie en klantretentie in vermogensbeheer, maar is niet erg duurzaam. Toenemende competitie van low-cost indexbeleggers (Vanguard, iShares) erodeert marges en differentiatie.\n\n**Value Trap Risico: Significant (7/10)**\nHet lage P/E (11.96) lijkt aantrekkelijk, maar het extreem hoge ROE (60.51%) is verhoogde schuld-gerelateerd (D/E: 0.58), niet operationele effici\u00ebntie. Dit infleert winstmarge artificeel\u2014typisch value trap signaal.\n\n**Kritieke Risicofactor: Regelgeving**\nStrikte financi\u00eble regelgeving rond vermogensbeheer en commissiestructuren drukt marges en groei. Nieuwe EU/US-regels kunnen rentabiliteit significant aantasten.\n\n**Conclusie:** Score 6.1 is terecht. Wacht op duidelijker groeitrends voordat belegging.",
-                "last_run": "2026-04-04T14:44:56.408553+00:00"
-            }
-        },
-        {
             "ticker": "UBER",
             "name": "Uber Technologies, Inc.",
             "sector": "Technology",
@@ -106,6 +106,18 @@
             "penalty_applied": false
         },
         {
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 40.45,
+            "pe_ratio": 10.15,
+            "debt_to_equity": 0.23,
+            "price": 195.25,
+            "score": 5.7,
+            "penalty_applied": false
+        },
+        {
             "ticker": "CDW",
             "name": "CDW Corporation",
             "sector": "Technology",
@@ -115,54 +127,6 @@
             "debt_to_equity": 2.37,
             "price": 122.01,
             "score": 5.6,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "CMCSA",
-            "name": "Comcast Corporation",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "roe": 21.41,
-            "pe_ratio": 5.18,
-            "debt_to_equity": 1.08,
-            "price": 27.93,
-            "score": 5.6,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "LDOS",
-            "name": "Leidos Holdings, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 31.03,
-            "pe_ratio": 14.27,
-            "debt_to_equity": 1.08,
-            "price": 158.82,
-            "score": 5.3,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "SYF",
-            "name": "Synchrony Financial",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 21.3,
-            "pe_ratio": 7.37,
-            "debt_to_equity": 0,
-            "price": 68.42,
-            "score": 5.0,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "AAPL",
-            "name": "Apple Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 152.02,
-            "pe_ratio": 32.35,
-            "debt_to_equity": 1.03,
-            "price": 255.92,
-            "score": 4.9,
             "penalty_applied": false
         },
         {
@@ -178,14 +142,26 @@
             "penalty_applied": false
         },
         {
-            "ticker": "T",
-            "name": "AT&T Inc.",
-            "sector": "Communication Services",
+            "ticker": "MKC",
+            "name": "McCormick & Company, Incorporat",
+            "sector": "Consumer Defensive",
+            "industry_group": "Others",
+            "roe": 25.35,
+            "pe_ratio": 8.01,
+            "debt_to_equity": 0.65,
+            "price": 48.85,
+            "score": 4.9,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "MSFT",
+            "name": "Microsoft Corporation",
+            "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 18.8,
-            "pe_ratio": 9.32,
-            "debt_to_equity": 1.24,
-            "price": 28.33,
+            "roe": 34.39,
+            "pe_ratio": 23.37,
+            "debt_to_equity": 0.32,
+            "price": 373.46,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -199,6 +175,30 @@
             "debt_to_equity": 0.36,
             "price": 155.72,
             "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "DAL",
+            "name": "Delta Air Lines, Inc.",
+            "sector": "Industrials",
+            "industry_group": "Others",
+            "roe": 27.69,
+            "pe_ratio": 8.72,
+            "debt_to_equity": 1.02,
+            "price": 66.76,
+            "score": 4.7,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "FSLR",
+            "name": "First Solar, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 17.45,
+            "pe_ratio": 13.74,
+            "debt_to_equity": 0.07,
+            "price": 195.32,
+            "score": 4.7,
             "penalty_applied": false
         }
     ],
@@ -223,15 +223,19 @@
         {
             "date": "04-04 14:45",
             "value": 10000.0
+        },
+        {
+            "date": "04-04 14:55",
+            "value": 10000.0
         }
     ],
-    "macro": {
-        "vix": 22.1,
-        "treasury_10y": 4.3
-    },
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-04T14:45:01.530766+00:00"
+        "last_update": "2026-04-04T14:55:02.914246+00:00"
+    },
+    "macro": {
+        "vix": 22.1,
+        "treasury_10y": 4.3
     }
 }
