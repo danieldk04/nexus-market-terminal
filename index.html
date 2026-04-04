@@ -22,7 +22,6 @@
         }
         .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
         
-        /* Dynamic Header & Risk Animations */
         @keyframes pulse-red { 0% { box-shadow: 0 0 5px #ff1744; } 50% { box-shadow: 0 0 20px #ff1744; } 100% { box-shadow: 0 0 5px #ff1744; } }
         @keyframes pulse-blue { 0% { box-shadow: 0 0 5px #00fff9; } 50% { box-shadow: 0 0 20px #00fff9; } 100% { box-shadow: 0 0 5px #00fff9; } }
         .risk-extreme { border: 2px solid var(--danger-red) !important; animation: pulse-red 2s infinite; }
@@ -34,8 +33,8 @@
             margin-bottom: 20px; transition: 0.5s;
         }
         #market-status-banner {
-            font-family: 'Orbitron', sans-serif; font-size: 0.5em; padding: 2px 8px;
-            border-radius: 3px; margin-left: 15px; vertical-align: middle;
+            font-family: 'Orbitron', sans-serif; font-size: 0.55em; padding: 3px 10px;
+            border-radius: 3px; margin-left: 15px; vertical-align: middle; font-weight: 900;
         }
 
         .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8em; letter-spacing: 2px; }
@@ -60,9 +59,9 @@
         .action-badge { padding: 4px 12px; border-radius: 2px; font-weight: bold; font-family: 'Orbitron'; font-size: 0.75em; }
         
         .analysis-text { font-size: 0.9em; color: #ccc; line-height: 1.5; margin: 10px 0; text-align: justify; }
-        .source-box { margin-bottom: 10px; }
-        .source-link { color: var(--neon-cyan); text-decoration: none; font-size: 0.8em; font-family: 'Share Tech Mono'; margin-right: 10px; opacity: 0.6; }
-        .source-link:hover { opacity: 1; }
+        .source-box { margin: 10px 0; }
+        .source-link { color: var(--neon-cyan); text-decoration: none; font-size: 0.8em; font-family: 'Share Tech Mono'; margin-right: 15px; opacity: 0.7; border: 1px solid rgba(0, 255, 249, 0.3); padding: 2px 6px; border-radius: 3px; }
+        .source-link:hover { opacity: 1; background: rgba(0, 255, 249, 0.1); }
         
         .risk-bar { height: 8px; background: #222; border-radius: 4px; margin-top: 8px; overflow: hidden; }
         .risk-fill { height: 100%; background: var(--success-green); transition: 1s; }
@@ -122,7 +121,7 @@
                     <h3 class="panel-title">🛡 Risk Management</h3>
                     <div class="stat-label">Avg Conviction Score</div>
                     <div id="conv-val" style="font-size: 1.5em; margin: 5px 0;">0 / 10</div>
-                    <div class="risk-bar"><div id="risk-fill" class="risk-fill"></div></div>
+                    <div class="risk-bar"><div id="risk-fill" class="risk-fill" style="width: 0%"></div></div>
                     <div id="signals-summary" style="margin-top: 15px; font-family: 'Share Tech Mono'; font-size: 0.85em;"></div>
                 </div>
             </div>
@@ -140,6 +139,8 @@
         }
 
         function render(data) {
+            if (!data) return;
+
             // 1. Risk Overlay Logic
             const vix = parseFloat(data.macro?.vix || 0);
             const header = document.querySelector('.header');
@@ -148,6 +149,7 @@
                 header.className = 'header risk-extreme';
                 banner.innerText = '⚠️ CRITICAL VOLATILITY';
                 banner.style.background = 'var(--danger-red)';
+                banner.style.color = '#fff';
             } else if (vix > 20) {
                 header.className = 'header';
                 header.style.border = '1px solid var(--neon-orange)';
@@ -158,9 +160,10 @@
                 header.className = 'header risk-stable';
                 banner.innerText = '💎 STABLE MARKET';
                 banner.style.background = 'var(--success-green)';
+                banner.style.color = '#000';
             }
 
-            // 2. Stats & Macro
+            // 2. Stats
             document.getElementById('stat-vix').innerText = vix || '—';
             document.getElementById('stat-treasury').innerText = (data.macro?.treasury_10y || 0).toFixed(2) + '%';
             document.getElementById('stat-rsi').innerText = data.macro?.rsi || '—';
@@ -187,13 +190,23 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
 
-            // 4. Trades & Analysis
+            // 4. Trades
             const trades = data.active_trades || [];
             document.getElementById('trade-list').innerHTML = trades.length ? trades.map(t => `<tr><td style="color:var(--neon-cyan)">${t.ticker}</td><td>€${t.entry_price}</td><td>€${t.current_price}</td><td style="text-align:right" class="${t.pl_percent >= 0 ? 'pl-positive' : 'pl-negative'}">${t.pl_percent}%</td></tr>`).join('') : '<tr><td colspan="4">No active trades.</td></tr>';
 
+            // 5. Candidates & FIX voor News Links
             document.getElementById('candidates-list').innerHTML = cand.map(c => {
                 const t2 = c.tier2 || {}, action = (t2.recommended_action || 'HOLD').toUpperCase();
                 const color = action === 'BUY' ? 'var(--success-green)' : (action === 'AVOID' ? 'var(--danger-red)' : '#ffcc00');
+                
+                // FIX: Check zowel n.url als n.link
+                const sources = (c.news && Array.isArray(c.news)) 
+                    ? c.news.slice(0, 2).map((n, i) => {
+                        const link = n.url || n.link;
+                        return link ? `<a href="${link}" target="_blank" class="source-link">[Source ${i+1}]</a>` : '';
+                    }).join('') 
+                    : '';
+
                 return `<div class="market-item">
                     <div style="display:flex; justify-content:space-between">
                         <div><a href="https://finance.yahoo.com/quote/${c.ticker}" target="_blank" class="ticker-link">${c.ticker}</a> <span style="font-size:0.7em; opacity:0.5">${c.name || ''}</span></div>
@@ -205,7 +218,7 @@
                         <div style="text-align:right"><div class="stat-label">Upside</div><div style="color:${color}">${t2.upside_percentage || 0}%</div></div>
                     </div>
                     <div class="analysis-text">${t2.analysis || ''}</div>
-                    <div class="source-box">${(c.news || []).slice(0,2).map((n,i) => `<a href="${n.url}" target="_blank" class="source-link">[Source ${i+1}]</a>`).join('')}</div>
+                    <div class="source-box">${sources}</div>
                     <div style="font-size:0.75em; opacity:0.5; font-family:'Share Tech Mono'">CONVICTION: ${t2.conviction_score || 0}/10 | PE: ${c.pe_ratio || 'N/A'} | DIV: ${c.dividend_yield || 0}%</div>
                 </div>`;
             }).join('');
@@ -216,7 +229,7 @@
             document.getElementById('risk-fill').style.width = (avg * 10) + '%';
         }
 
-        async function init() { const d = await loadData(); if (d) render(d); }
+        async function init() { const d = await loadData(); render(d); }
         init(); setInterval(init, 60000);
     </script>
 </body>
