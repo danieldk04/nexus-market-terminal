@@ -32,10 +32,10 @@ def get_moat_analysis(ticker, name, sector, price, pe, div, news_summary):
     TARGET_PRICE: [Estimate for 30 days]
     """
 
-    # FIXED: Updated model name to 'latest' to avoid 404
+    # GEUPDATE modelnaam voor de 4.6 release
     response = client.messages.create(
-        model="claude-3-5-sonnet-latest", 
-        max_tokens=600,
+        model="claude-sonnet-4-6", 
+        max_tokens=800,
         messages=[{"role": "user", "content": prompt}]
     )
     return response.content[0].text
