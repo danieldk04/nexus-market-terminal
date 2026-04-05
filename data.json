@@ -1,37 +1,17 @@
 {
-    "generated_at": "2026-04-04T16:00:00.772732+00:00",
+    "generated_at": "2026-04-05T06:43:16.627681+00:00",
     "top_candidates": [
         {
-            "ticker": "ADBE",
-            "name": "Adobe Inc.",
+            "ticker": "ADP",
+            "name": "Automatic Data Processing, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 58.77,
-            "pe_ratio": 14.16,
-            "debt_to_equity": 0.58,
-            "price": 242.92,
-            "score": 7.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# Adobe (ADBE) - Waardeanalyse\n\n## Economische Moat (Sterk: 8/10)\nAdobe bezit een uitstekende moat via **sterke brand loyaliteit** en **switching costs** in creative & document workflows. Abonnementmodel genereert voorspelbare recurring revenue. Dominantie in design/video software (80%+ marktaandeel) is moeilijk uit te dagen.\n\n## Value Trap Risico (Matig: 6/10)\nHet lage P/E (14.16) lijkt aantrekkelijk, maar de **hoge ROE (58.77%)** wordt gedreven door aggressieve buybacks en schuldfinanciering (D/E: 0.58). Groei vertraagt; abonnementmarkt wordt saturering. Risico dat waarde-aantrekkelijkheid illusoir is.\n\n## Kritieke Risicofactor: AI-disruptie\nGeneratieve AI (Firefly, concurrenten) kan **ontwerpwerk democratiseren**, waardoor professionele tools devalueren. Pricing power onder druk als amateurs AI-tools kiezen over Adobe's premium suite.\n\n**Verdict:** Solide moat, maar geen bargain op 14.16 P/E.",
-                "last_run": "2026-04-04T14:55:02.292153+00:00"
-            }
-        },
-        {
-            "ticker": "ALL",
-            "name": "Allstate Corporation (The)",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 39.52,
-            "pe_ratio": 5.44,
-            "debt_to_equity": 0.25,
-            "price": 207.03,
-            "score": 6.7,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# Allstate (ALL) - Waardebeleggingsanalyse\n\n## Economische Moat (Matig)\nAllstate bezit een bescheiden moat via brand recognition en verzekeringspooleffecten, maar intensieve concurrentie ondermijnt dit. De moat is niet sterk genoeg voor duurzame prijsmaatwerking.\n\n## Value Trap Risico (HOOG)\nDe zeer lage P/E (5.44) en hoge ROE (39.52%) zijn misleidend. Dit reflecteert vooral cyclische winstpieken in verzekeringsclasses, geen structureel voordeel. ROE's fluctueren sterk met schadeclaimcycli.\n\n## Kritische Risicofactor: Klimaatverandering\nToenemende frequentie en ernst van extreme weersgebeurtenissen (orkanen, branden) veroorzaken exploderend schadebedrag. Dit drukt directe marges en verhoogt kapitaaleisen, wat dividenden bedreigt.\n\n**Conclusie**: De 6.7/10 score is terecht. Ondanks waarde-indicatoren is dit eerder een value trap dan quality value.",
-                "last_run": "2026-04-04T14:44:41.813325+00:00"
-            }
+            "roe": 73.84,
+            "pe_ratio": 19.62,
+            "debt_to_equity": 0.7,
+            "price": 204.01,
+            "score": 6.5,
+            "penalty_applied": false
         },
         {
             "ticker": "UBER",
@@ -50,20 +30,16 @@
             }
         },
         {
-            "ticker": "NTAP",
-            "name": "NetApp, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 112.59,
-            "pe_ratio": 17.34,
-            "debt_to_equity": 2.36,
-            "price": 103.35,
+            "ticker": "AMP",
+            "name": "Ameriprise Financial, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 60.51,
+            "pe_ratio": 11.96,
+            "debt_to_equity": 0.58,
+            "price": 433.94,
             "score": 6.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# NTAP - Waardebeleggingsanalyse\n\n## Economische Moat (Matig)\nNTAP's moat rust op **data management expertise** en klantlocking via ecosysteem-integratie. Echter: cloud-competitors erodeerden marktpositie. Score: **6/10 moat-sterkte**.\n\n## Value Trap Risico (HOOG)\n\u26a0\ufe0f **Kritiek waarschuwingssignaal**: ROE van 112% is kunstmatig verhoogd door **extreme leverage (D/E: 2.36)**. Dit duidt op schuldenfinancering van winsten, niet operationele excellentie. Bij rentestijging of omzetdaling = kapitaalkost exploderend.\n\nP/E 17.34 lijkt goedkoop, maar normaliseert niet voor schuldenrisico.\n\n## Concrete Risicofactor\n**Cloud Migration Disruptie**: AWS/Azure/GCP bieden ge\u00efntegreerde storage. NTAP's traditionele hardware-footprint erodeertnaarmate bedrijven naar cloud migreren. Groeimomentum onvoldoende om schuldenlasten te dragen.\n\n**Verdict**: Vermijd. Score 6.1/10 maskeert strukturele risico's.",
-                "last_run": "2026-04-04T14:44:51.960362+00:00"
-            }
+            "penalty_applied": false
         },
         {
             "ticker": "MU",
@@ -94,27 +70,75 @@
             "penalty_applied": false
         },
         {
-            "ticker": "PGR",
-            "name": "Progressive Corporation (The)",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 40.45,
-            "pe_ratio": 10.15,
-            "debt_to_equity": 0.23,
-            "price": 195.25,
-            "score": 5.7,
+            "ticker": "CMCSA",
+            "name": "Comcast Corporation",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "roe": 21.41,
+            "pe_ratio": 5.18,
+            "debt_to_equity": 1.08,
+            "price": 27.93,
+            "score": 5.6,
             "penalty_applied": false
         },
         {
-            "ticker": "CDW",
-            "name": "CDW Corporation",
+            "ticker": "LDOS",
+            "name": "Leidos Holdings, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 43.02,
-            "pe_ratio": 15.1,
-            "debt_to_equity": 2.37,
-            "price": 122.01,
-            "score": 5.6,
+            "roe": 31.03,
+            "pe_ratio": 14.27,
+            "debt_to_equity": 1.08,
+            "price": 158.82,
+            "score": 5.3,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "SYF",
+            "name": "Synchrony Financial",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 21.3,
+            "pe_ratio": 7.37,
+            "debt_to_equity": 0,
+            "price": 68.42,
+            "score": 5.0,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "MKC",
+            "name": "McCormick & Company, Incorporat",
+            "sector": "Consumer Defensive",
+            "industry_group": "Others",
+            "roe": 25.35,
+            "pe_ratio": 8.01,
+            "debt_to_equity": 0.65,
+            "price": 48.85,
+            "score": 4.9,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "ACN",
+            "name": "Accenture plc",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 24.76,
+            "pe_ratio": 16.5,
+            "debt_to_equity": 0.25,
+            "price": 201.33,
+            "score": 4.9,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "LULU",
+            "name": "lululemon athletica inc.",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Others",
+            "roe": 34.01,
+            "pe_ratio": 11.73,
+            "debt_to_equity": 0.36,
+            "price": 155.72,
+            "score": 4.8,
             "penalty_applied": false
         },
         {
@@ -126,30 +150,6 @@
             "pe_ratio": 8.38,
             "debt_to_equity": 0.61,
             "price": 45.34,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "MSFT",
-            "name": "Microsoft Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 34.39,
-            "pe_ratio": 23.37,
-            "debt_to_equity": 0.32,
-            "price": 373.46,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "DECK",
-            "name": "Deckers Outdoor Corporation",
-            "sector": "Consumer Cyclical",
-            "industry_group": "Others",
-            "roe": 39.69,
-            "pe_ratio": 13.96,
-            "debt_to_equity": 0.13,
-            "price": 98.31,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -178,27 +178,15 @@
             "penalty_applied": false
         },
         {
-            "ticker": "FSLR",
-            "name": "First Solar, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 17.45,
-            "pe_ratio": 13.74,
-            "debt_to_equity": 0.07,
-            "price": 195.32,
+            "ticker": "DAL",
+            "name": "Delta Air Lines, Inc.",
+            "sector": "Industrials",
+            "industry_group": "Others",
+            "roe": 27.69,
+            "pe_ratio": 8.72,
+            "debt_to_equity": 1.02,
+            "price": 66.76,
             "score": 4.7,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "ACGL",
-            "name": "Arch Capital Group Ltd.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 19.54,
-            "pe_ratio": 8.34,
-            "debt_to_equity": 0.12,
-            "price": 96.74,
-            "score": 4.6,
             "penalty_applied": false
         }
     ],
@@ -231,12 +219,16 @@
         {
             "date": "04-04 16:00",
             "value": 10000.0
+        },
+        {
+            "date": "04-05 06:43",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-04T16:00:06.722699+00:00"
+        "last_update": "2026-04-05T06:43:18.438163+00:00"
     },
     "macro": {
         "vix": 22.1,
