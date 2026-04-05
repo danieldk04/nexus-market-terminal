@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-04-05T16:04:12.283294+00:00",
+    "generated_at": "2026-04-05T19:52:30.906962+00:00",
     "top_candidates": [
         {
             "ticker": "ADBE",
@@ -50,19 +50,19 @@
             }
         },
         {
-            "ticker": "UBER",
-            "name": "Uber Technologies, Inc.",
+            "ticker": "MU",
+            "name": "Micron Technology, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 39.93,
-            "pe_ratio": 15.19,
-            "debt_to_equity": 0.44,
-            "price": 71.84,
-            "score": 6.1,
+            "roe": 39.82,
+            "pe_ratio": 17.27,
+            "debt_to_equity": 0.15,
+            "price": 366.24,
+            "score": 6.0,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# UBER \u2013 Waarde-analyse\n\n**Economische Moat: Matig (6/10)**\nUber bezit netwerk-effecten en schaal-voordelen, maar deze zijn erodeerend. Concurrentie van Lyft, lokale spelers en potenti\u00eble interne competitie verzwakken de moat. Zonder duidelijk onderscheid wordt marges druk gezet.\n\n**Value Trap Risico: Hoog**\nOndanks aantrekkelijke P/E (15.19) en sterke ROE (39.93%) loert gevaar:\n- Hoge D/E (0.44) wijst op schuldenafhankelijkheid\n- Winsten kunnen onder druk komen door regelgeving\n- Autonome voertuigen bedreigen kernmodel\n\n**Kritieke Risicofactor: Regelgeving**\nStijgende arbeidsclassificatie-eisen (gig-worker bescherming) in EU en VS verhogen operationele kosten structureel. Dit ondermijnt marges zonder tegengewicht.\n\n**Conclusie:** Score 6.1/10 is realistisch. Niet ideaal voor waardebeleggers gezien risico's vs. moat-kwaliteit.",
-                "last_run": "2026-04-04T14:45:00.921726+00:00"
+                "analysis": "# Micron Technology \u2013 Waarde-Analyse\n\n## Economische Moat (Zwak - 4/10)\nMU opereert in een commoditized DRAM/NAND-markt met beperkte differentatie. Hoge kapitaalvereisten bieden enige bescherming, maar prijsconcurrentie blijft structureel risico.\n\n## Value Trap Risico (Hoog - 7/10)\n**Waarschuwing**: De aantrekkelijke P/E van 17,27 en ROE van 39,82% kunnen misleidend zijn. Deze metrics zijn cyclisch \u2013 DRAM-prijzen staan onder druk. Historisch zien we periodieke overcapaciteit, wat marges en inkomstengroei vernietigt.\n\n## Kritieke Risicofactor\n**Cyclische Downturn**: AI-vraag maskert fundamentele cycliciteit. Bij normalisering van chipvraag (2025-2026) stort geheugenmarkt in. MU's schuldratio (D/E: 0,15) geeft buffer, maar winsten kunnen 50%+ dalen.\n\n**Conclusie**: Niet geschikt voor conservatieve waardelingen. Score 6/10 is terecht \u2013 wacht op duidelijke cyclische bottom.",
+                "last_run": "2026-04-05T19:52:37.380519+00:00"
             }
         },
         {
@@ -94,20 +94,16 @@
             "penalty_applied": false
         },
         {
-            "ticker": "BR",
-            "name": "Broadridge Financial Solutions,",
-            "sector": "Technology",
+            "ticker": "CMCSA",
+            "name": "Comcast Corporation",
+            "sector": "Communication Services",
             "industry_group": "Tech & AI",
-            "roe": 41.79,
-            "pe_ratio": 17.8,
-            "debt_to_equity": 1.17,
-            "price": 160.93,
+            "roe": 21.41,
+            "pe_ratio": 5.18,
+            "debt_to_equity": 1.08,
+            "price": 27.93,
             "score": 5.6,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# BR (Broadridge) - Waardebeleggingsanalyse\n\n## Economische Moat (Zwak)\nBR bezit een **bescheiden moat** via klantenbinding (grote financi\u00eble instellingen) en schaalvoordelen in cloud/AI-diensten. Echter: substitutiebedreigingen van goedkopere SaaS-alternatieven en toenemende interne IT-capaciteiten van klanten verzwakken deze positie.\n\n## Value Trap Risico (Hoog)\nDe **rode vlag**: P/E van 17.8 lijkt aantrekkelijk, maar D/E van 1.17 signaleert aanzienlijke schulden. De sterke ROE (41.79%) wordt deels gefinancierd met leverage. Winstgroei moet deze schuld rechtvaardigen\u2014risico als groei stagneert.\n\n## Kritieke Risicofactor\n**Regelgeving financi\u00eble sector**: Toenemende compliance-eisen kunnen marges comprimeren. BR leeft van efficiencywinsten voor klanten; strenge regelgeving ondergraaft deze waardepropositie.\n\n**Conclusie**: Score 5.6/10 is terecht. Wacht op lagere waardering of bewezen winstgroei voordat je instapt.",
-                "last_run": "2026-04-05T14:02:11.848707+00:00"
-            }
+            "penalty_applied": false
         },
         {
             "ticker": "LDOS",
@@ -119,18 +115,6 @@
             "debt_to_equity": 1.08,
             "price": 158.82,
             "score": 5.3,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "SYF",
-            "name": "Synchrony Financial",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 21.3,
-            "pe_ratio": 7.37,
-            "debt_to_equity": 0,
-            "price": 68.42,
-            "score": 5.0,
             "penalty_applied": false
         },
         {
@@ -158,18 +142,6 @@
             "penalty_applied": false
         },
         {
-            "ticker": "MSFT",
-            "name": "Microsoft Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 34.39,
-            "pe_ratio": 23.37,
-            "debt_to_equity": 0.32,
-            "price": 373.46,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
             "ticker": "T",
             "name": "AT&T Inc.",
             "sector": "Communication Services",
@@ -179,6 +151,18 @@
             "debt_to_equity": 1.24,
             "price": 28.33,
             "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "DAL",
+            "name": "Delta Air Lines, Inc.",
+            "sector": "Industrials",
+            "industry_group": "Others",
+            "roe": 27.69,
+            "pe_ratio": 8.72,
+            "debt_to_equity": 1.02,
+            "price": 66.76,
+            "score": 4.7,
             "penalty_applied": false
         },
         {
@@ -194,15 +178,27 @@
             "penalty_applied": false
         },
         {
-            "ticker": "WDC",
-            "name": "Western Digital Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 41.13,
-            "pe_ratio": 27.91,
-            "debt_to_equity": 0.65,
-            "price": 294.97,
+            "ticker": "UHS",
+            "name": "Universal Health Services, Inc.",
+            "sector": "Healthcare",
+            "industry_group": "Others",
+            "roe": 21.33,
+            "pe_ratio": 7.65,
+            "debt_to_equity": 0.7,
+            "price": 176.7,
             "score": 4.6,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "FOX",
+            "name": "Fox Corporation",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "roe": 16.82,
+            "pe_ratio": 12.68,
+            "debt_to_equity": 0.67,
+            "price": 52.87,
+            "score": 4.5,
             "penalty_applied": false
         }
     ],
@@ -263,12 +259,16 @@
         {
             "date": "04-05 16:04",
             "value": 10000.0
+        },
+        {
+            "date": "04-05 19:52",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-05T16:04:24.422759+00:00"
+        "last_update": "2026-04-05T19:52:37.916763+00:00"
     },
     "macro": {
         "vix": 23.87,
