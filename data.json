@@ -1,6 +1,38 @@
 {
-    "generated_at": "2026-04-05T06:43:16.627681+00:00",
+    "generated_at": "2026-04-05T06:48:37.102180+00:00",
     "top_candidates": [
+        {
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 58.77,
+            "pe_ratio": 14.16,
+            "debt_to_equity": 0.58,
+            "price": 242.92,
+            "score": 7.1,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# Adobe (ADBE) - Value Analyse\n\n**Economische Moat: STERK (8/10)**\nSterke software-moat door lock-in via Creative Suite en document-standaarden. Subscription-model cre\u00ebert voorspelbare recurring revenue en hoge switching costs. Marktpositie in design/content creation quasi onbetwist.\n\n**Value Trap Risico: MATIG (6/10)**\nWaarschuwing: hoge ROE (58.77%) kan kunstmatig zijn door aggressief share buyback en operatingleverage. Groeiversnelling vertraagt; valuation-compressie risico als groei < 10% zakken. P/E van 14x lijkt voordelig, maar vergt groeiveronderstelling.\n\n**Kritiek Risico: SaaS-Disruption**\nOpkomende open-source en low-cost alternatieven (Figma, Canva) erodren marktaandeel bij SME's. Figma's groei beweegt kernmarges onder druk\u2014Adobe betaalt premie voor maturiteit, niet groei.\n\n**Verdict:** Solide, maar geen bargain op groeivertraging.",
+                "last_run": "2026-04-05T06:48:43.300623+00:00"
+            }
+        },
+        {
+            "ticker": "ALL",
+            "name": "Allstate Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 39.52,
+            "pe_ratio": 5.44,
+            "debt_to_equity": 0.25,
+            "price": 207.03,
+            "score": 6.7,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# Allstate Corporation (ALL) - Waardeanalyse\n\n**Economische Moat (Matig)**\nAllstate bezit een bescheiden moat via brand recognition en distributienetwerk, maar de verzekeringsmarkt is competitief. Digitale disruptie vormt groeiend risico. De moat is niet bijzonder robuust.\n\n**Value Trap Risico (Verhoogd)**\nWaarschuwing: De lage P/E (5.44) en torenhoge ROE (39.52%) kunnen misleidend zijn. Verzekeringsmaatschappijen vertonen cyclische winsten. De 6.7/10 score suggereert onderliggende problemen\u2014mogelijk stijgende schadeclaims of disintermediatie.\n\n**Concreet Risico: Katastrofeblootstelling**\nALL is zwaar blootgesteld aan natuurrampen (orkanen, branden). Klimaatverandering vergroot frequentie en ernst. E\u00e9n groot rampeizoen kan winsten dramatisch corrigeren en dividenden onder druk zetten.\n\n**Conclusie:** Te voorzichtig benaderen\u2014sterke multipelen maskeren mogelijk cyclische topvorming.",
+                "last_run": "2026-04-05T06:48:48.182270+00:00"
+            }
+        },
         {
             "ticker": "ADP",
             "name": "Automatic Data Processing, Inc.",
@@ -11,7 +43,27 @@
             "debt_to_equity": 0.7,
             "price": 204.01,
             "score": 6.5,
-            "penalty_applied": false
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# ADP Value-Analyse\n\n## Economische Moat (Sterk)\nADP bezit een diepe moat via **switching costs en netzwerkeffecten**. Als dominant HR/payroll-provider (40%+ marktaandeel) is uitstappen kostbaar voor klanten. Recurring revenue-model (74% van inkomsten) stabiliseert kasstromen.\n\n## Value Trap Risico (Matig)\nHet **hoge ROE (73.84%)** lijkt aantrekkelijk, maar wordt deels veroorzaakt door lage equitywaarde (buybacks). De P/E van 19.62 is redelijk, niet erg voordelig. Groeivertraging in kernbusiness vormt risico\u2014ADP rolt incrementeel uit, geen disruptieve innovatie.\n\n## Kritiek Risico: *Technologische Disruptie*\nCloud-gebaseerde HR-platforms (Workday, rippling) erodieren ADP's positie in midmarket. Migratie versnelt. De 6.5/10-score reflecteert terecht deze onzekerheid.\n\n**Verdict**: Defensief, maar geen koopkans.",
+                "last_run": "2026-04-05T06:48:52.332536+00:00"
+            }
+        },
+        {
+            "ticker": "NTAP",
+            "name": "NetApp, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 112.59,
+            "pe_ratio": 17.34,
+            "debt_to_equity": 2.36,
+            "price": 103.35,
+            "score": 6.1,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# NTAP Waardeanalyse\n\n**Economische Moat: Matig (6/10)**\nNetApp's moat rust op switching costs en data management expertise, maar wordt uitgehold door cloudmigratie en AWS/Azure concurrentie. De AI/storage-trend biedt kortstondig voordeel, maar niet duurzaam.\n\n**Value Trap Risico: Hoog (7/10)**\nWaarschuwing: Extreem hoge ROE (112%) is **niet duurzaam**\u2014gedreven door schuld (D/E 2.36), niet organische effici\u00ebntie. Lage P/E reflecteert terecht marktskepsis over winstgroei. De opwaartse AI-cycle kan misleidend zijn.\n\n**Kritiek Risico: Cloud Transition Risk**\nOn-premises storage-verlies accelereert. Enterprise-klanten migreren naar hyperscale-providers, erosie van recurring revenue ondanks cloud-positionering.\n\n**Conclusie:** Score 6.1 is eerlijk. Pas voor conservatieve waardebeleggers\u2014mix van schuld en fundamentele bedreigingen overschaduwen voordelen.",
+                "last_run": "2026-04-05T06:48:56.211449+00:00"
+            }
         },
         {
             "ticker": "UBER",
@@ -30,34 +82,6 @@
             }
         },
         {
-            "ticker": "AMP",
-            "name": "Ameriprise Financial, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 60.51,
-            "pe_ratio": 11.96,
-            "debt_to_equity": 0.58,
-            "price": 433.94,
-            "score": 6.1,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "MU",
-            "name": "Micron Technology, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 39.82,
-            "pe_ratio": 17.27,
-            "debt_to_equity": 0.15,
-            "price": 366.24,
-            "score": 6.0,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# Micron Technology (MU) \u2013 Waardebelegger Analyse\n\n## Economische Moat (Matig)\nMU bezit schaalvoordelen en hoge barri\u00e8res in geheugenchiptechnologie, maar de sector is intensief competitief (Samsung, SK Hynix). Cyclische markt ondermijnt duurzame voordeel.\n\n## Value Trap Risico (Hoog)\nDe aantrekkelijke P/E (17.27) met sterke ROE (39.82%) is misleidend. Geheugenmarkten cyclisch; huidige profitabiliteit reflecteert pieken niet noodzakelijk toekomstige winsten. Schuldratio (0,15) is gezond, maar winstmarges kunnen drastisch krimpen.\n\n## Kritiek Risico: Oversupply\nIndustrie-overcapaciteit dreigt prijzen naar beneden. AI-vraag momenteel positief, maar kapaciteitsuitbreidingen concurrenten kunnen dit opheffen. Margin-compressie is re\u00ebel risico.\n\n**Conclusie:** Score 6.0 is terecht\u2014solide bedrijf, maar waardeinvesteerders moeten cyclisch timing en supply-dynamics kritisch monitoren.",
-                "last_run": "2026-04-04T16:00:06.122981+00:00"
-            }
-        },
-        {
             "ticker": "SOLV",
             "name": "Solventum Corporation",
             "sector": "Healthcare",
@@ -67,6 +91,18 @@
             "debt_to_equity": 1.04,
             "price": 63.57,
             "score": 5.9,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "CDW",
+            "name": "CDW Corporation",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 43.02,
+            "pe_ratio": 15.1,
+            "debt_to_equity": 2.37,
+            "price": 122.01,
+            "score": 5.6,
             "penalty_applied": false
         },
         {
@@ -82,15 +118,15 @@
             "penalty_applied": false
         },
         {
-            "ticker": "LDOS",
-            "name": "Leidos Holdings, Inc.",
+            "ticker": "BR",
+            "name": "Broadridge Financial Solutions,",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 31.03,
-            "pe_ratio": 14.27,
-            "debt_to_equity": 1.08,
-            "price": 158.82,
-            "score": 5.3,
+            "roe": 41.79,
+            "pe_ratio": 17.8,
+            "debt_to_equity": 1.17,
+            "price": 160.93,
+            "score": 5.6,
             "penalty_applied": false
         },
         {
@@ -106,18 +142,6 @@
             "penalty_applied": false
         },
         {
-            "ticker": "MKC",
-            "name": "McCormick & Company, Incorporat",
-            "sector": "Consumer Defensive",
-            "industry_group": "Others",
-            "roe": 25.35,
-            "pe_ratio": 8.01,
-            "debt_to_equity": 0.65,
-            "price": 48.85,
-            "score": 4.9,
-            "penalty_applied": false
-        },
-        {
             "ticker": "ACN",
             "name": "Accenture plc",
             "sector": "Technology",
@@ -130,14 +154,26 @@
             "penalty_applied": false
         },
         {
-            "ticker": "LULU",
-            "name": "lululemon athletica inc.",
+            "ticker": "MSFT",
+            "name": "Microsoft Corporation",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 34.39,
+            "pe_ratio": 23.37,
+            "debt_to_equity": 0.32,
+            "price": 373.46,
+            "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "DECK",
+            "name": "Deckers Outdoor Corporation",
             "sector": "Consumer Cyclical",
             "industry_group": "Others",
-            "roe": 34.01,
-            "pe_ratio": 11.73,
-            "debt_to_equity": 0.36,
-            "price": 155.72,
+            "roe": 39.69,
+            "pe_ratio": 13.96,
+            "debt_to_equity": 0.13,
+            "price": 98.31,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -150,30 +186,6 @@
             "pe_ratio": 8.38,
             "debt_to_equity": 0.61,
             "price": 45.34,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "FTNT",
-            "name": "Fortinet, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 135.72,
-            "pe_ratio": 34.1,
-            "debt_to_equity": 0.86,
-            "price": 82.53,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "T",
-            "name": "AT&T Inc.",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "roe": 18.8,
-            "pe_ratio": 9.32,
-            "debt_to_equity": 1.24,
-            "price": 28.33,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -223,12 +235,16 @@
         {
             "date": "04-05 06:43",
             "value": 10000.0
+        },
+        {
+            "date": "04-05 06:48",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-05T06:43:18.438163+00:00"
+        "last_update": "2026-04-05T06:48:56.783202+00:00"
     },
     "macro": {
         "vix": 22.1,
