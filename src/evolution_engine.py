@@ -42,7 +42,7 @@ def run_evolution():
     candidates = data.get("top_candidates", [])
     active_trades = data.get("active_trades", [])
     
-    ENTRY_THRESHOLD    = 8.0   # Mathematisch haalbaar met scoringformule (max ~8.6)
+    ENTRY_THRESHOLD    = 7.5   # Top kandidaten in een dure markt scoren 6-7; 7.5 is realistisch haalbaar
     STOP_LOSS_PCT      = -5.0  # Sluit positie bij >= 5% verlies
     TAKE_PROFIT_PCT    = 15.0  # Sluit positie bij >= 15% winst
     MAX_TRADES         = 5     # Maximaal 5 gelijktijdige posities

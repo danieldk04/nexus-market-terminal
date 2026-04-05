@@ -51,6 +51,20 @@ def fetch_global_universe():
         log.error(f"Fout bij ophalen universe: {e}")
     return list(set(tickers))
 
+def fetch_macro():
+    """Haalt live VIX en 10-jaars rente op via yfinance."""
+    macro = {"vix": None, "treasury_10y": None}
+    try:
+        macro["vix"] = round(yf.Ticker("^VIX").info.get("regularMarketPrice", 0), 2)
+    except Exception:
+        pass
+    try:
+        macro["treasury_10y"] = round(yf.Ticker("^TNX").info.get("regularMarketPrice", 0), 2)
+    except Exception:
+        pass
+    log.info(f"Macro: VIX={macro['vix']}  10Y={macro['treasury_10y']}%")
+    return macro
+
 def analyse_ticker(ticker_symbol, memory):
     try:
         t = yf.Ticker(ticker_symbol)
@@ -151,7 +165,7 @@ def main():
         "active_trades": old_data.get("active_trades", []),
         "equity_history": old_data.get("equity_history", []),
         "memory": old_data.get("memory", {}),
-        "macro": {"vix": 22.1, "treasury_10y": 4.3}
+        "macro": fetch_macro()
     }
     
     with open(OUTPUT_PATH, "w") as f:
