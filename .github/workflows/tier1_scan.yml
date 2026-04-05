@@ -2,8 +2,8 @@ name: NEXUS AUTONOMOUS TRADING ENGINE
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # Elke 3 uur
-  workflow_dispatch:      # Handmatige knop blijft bestaan
+    - cron: "0 */3 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -30,14 +30,21 @@ jobs:
         run: python src/tier1_scanner.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Tier 2 - Smart Analyser
         run: python src/tier2_analyser.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Tier 3 - Evolution Engine
         run: python src/evolution_engine.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Commit & Push Results
         run: |
