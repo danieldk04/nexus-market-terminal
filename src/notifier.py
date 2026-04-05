@@ -1,7 +1,7 @@
 """
 NEXUS Quant Bot — Telegram Notifier
 Chat ID : 7995706133  (Nexus_Quant_Bot)
-Token   : sla op als GitHub Secret → TELEGRAM_BOT_TOKEN
+Token   : sla op als GitHub Secret -> TELEGRAM_BOT_TOKEN
 """
 
 import os
@@ -14,10 +14,21 @@ log = logging.getLogger("notifier")
 TELEGRAM_CHAT_ID = "7995706133"
 TELEGRAM_API_URL = "https://api.telegram.org/bot{token}/sendMessage"
 
-def _token() -> str | None:
+
+def _token():
     return os.environ.get("TELEGRAM_BOT_TOKEN")
 
-def send(message: str, parse_mode: str = "Markdown") -> bool:
+
+def _now():
+    """Geeft huidige UTC-tijd als string — buiten f-string om Python 3.10 compatibel te blijven."""
+    return datetime.now(timezone.utc).strftime("%d-%m %H:%M UTC")
+
+
+def _now_long():
+    return datetime.now(timezone.utc).strftime("%d-%m-%Y %H:%M UTC")
+
+
+def send(message, parse_mode="Markdown"):
     """Stuur een bericht naar Nexus_Quant_Bot. Geeft True terug bij succes."""
     token = _token()
     if not token:
@@ -35,106 +46,114 @@ def send(message: str, parse_mode: str = "Markdown") -> bool:
             timeout=8,
         )
         if not resp.ok:
-            log.error(f"Telegram fout {resp.status_code}: {resp.text[:120]}")
+            log.error("Telegram fout %s: %s", resp.status_code, resp.text[:120])
             return False
         return True
     except Exception as e:
-        log.error(f"Telegram verbindingsfout: {e}")
+        log.error("Telegram verbindingsfout: %s", e)
         return False
 
 
 # ─── Kant-en-klare berichten ─────────────────────────────────────────────────
 
-def notify_scan_complete(candidates: list, scanned: int) -> None:
+def notify_scan_complete(candidates, scanned):
     if not candidates:
         return
     top = candidates[:5]
-    lines = "\n".join(
-        f"  {i+1}\\. *{c['ticker']}* — score `{c['score']}` | {c.get('industry_group','?')}"
-        for i, c in enumerate(top)
-    )
-    timestamp = datetime.now(timezone.utc).strftime("%d\\-%m %H:%M UTC")
+    lines = []
+    for i, c in enumerate(top):
+        group = c.get("industry_group", "?")
+        score = c.get("score", "?")
+        lines.append("  {}. *{}* — score `{}` | {}".format(i + 1, c["ticker"], score, group))
+    candidate_list = "\n".join(lines)
     msg = (
-        f"🔍 *NEXUS SCAN KLAAR* — {timestamp}\n"
-        f"📊 {scanned} tickers gescand · {len(candidates)} kandidaten\n\n"
-        f"🏆 *Top kandidaten:*\n{lines}"
-    )
+        "🔍 *NEXUS SCAN KLAAR* — {ts}\n"
+        "📊 {scanned} tickers gescand · {n} kandidaten\n\n"
+        "🏆 *Top kandidaten:*\n"
+        "{candidates}"
+    ).format(ts=_now(), scanned=scanned, n=len(candidates), candidates=candidate_list)
     send(msg)
 
 
-def notify_trade_opened(ticker: str, price: float, score: float, sector: str) -> None:
+def notify_trade_opened(ticker, price, score, sector):
+    ts = _now()
     msg = (
-        f"🟢 *TRADE GEOPEND*\n"
-        f"📈 `{ticker}` · {sector}\n"
-        f"💰 Instapprijs: `${price:.2f}`\n"
-        f"⭐ Score bij instap: `{score}/10`\n"
-        f"🕒 {datetime.now(timezone.utc).strftime('%d-%m %H:%M UTC')}"
-    )
+        "🟢 *TRADE GEOPEND*\n"
+        "📈 `{ticker}` · {sector}\n"
+        "💰 Instapprijs: `${price:.2f}`\n"
+        "⭐ Score bij instap: `{score}/10`\n"
+        "🕒 {ts}"
+    ).format(ticker=ticker, sector=sector, price=price, score=score, ts=ts)
     send(msg)
 
 
-def notify_stop_loss(ticker: str, pl_pct: float, sector: str) -> None:
+def notify_stop_loss(ticker, pl_pct, sector):
+    ts = _now()
     msg = (
-        f"🔴 *STOP\\-LOSS GERAAKT*\n"
-        f"📉 `{ticker}` gesloten\n"
-        f"💸 Verlies: `{pl_pct:.1f}%`\n"
-        f"🧠 Les opgeslagen voor sector: _{sector}_\n"
-        f"🕒 {datetime.now(timezone.utc).strftime('%d-%m %H:%M UTC')}"
-    )
+        "🔴 *STOP-LOSS GERAAKT*\n"
+        "📉 `{ticker}` gesloten\n"
+        "💸 Verlies: `{pl:.1f}%`\n"
+        "🧠 Les opgeslagen voor sector: _{sector}_\n"
+        "🕒 {ts}"
+    ).format(ticker=ticker, pl=pl_pct, sector=sector, ts=ts)
     send(msg)
 
 
-def notify_take_profit(ticker: str, pl_pct: float, sector: str) -> None:
+def notify_take_profit(ticker, pl_pct, sector):
+    ts = _now()
     msg = (
-        f"💰 *TAKE\\-PROFIT\\!*\n"
-        f"📈 `{ticker}` gesloten\n"
-        f"✅ Winst: `+{pl_pct:.1f}%`\n"
-        f"🧠 Positive les opgeslagen voor sector: _{sector}_\n"
-        f"🕒 {datetime.now(timezone.utc).strftime('%d-%m %H:%M UTC')}"
-    )
+        "💰 *TAKE-PROFIT!*\n"
+        "📈 `{ticker}` gesloten\n"
+        "✅ Winst: `+{pl:.1f}%`\n"
+        "🧠 Positive les opgeslagen voor sector: _{sector}_\n"
+        "🕒 {ts}"
+    ).format(ticker=ticker, pl=pl_pct, sector=sector, ts=ts)
     send(msg)
 
 
-def notify_warning(ticker: str, pl_pct: float, sector: str) -> None:
+def notify_warning(ticker, pl_pct, sector):
     msg = (
-        f"⚠️ *WAARSCHUWING*\n"
-        f"`{ticker}` nadert stop\\-loss grens\n"
-        f"📉 Huidig verlies: `{pl_pct:.1f}%`\n"
-        f"Sector: _{sector}_"
-    )
+        "⚠️ *WAARSCHUWING*\n"
+        "`{ticker}` nadert stop-loss grens\n"
+        "📉 Huidig verlies: `{pl:.1f}%`\n"
+        "Sector: _{sector}_"
+    ).format(ticker=ticker, pl=pl_pct, sector=sector)
     send(msg)
 
 
-def notify_evolution_summary(
-    active_trades: list,
-    closed_count: int,
-    new_count: int,
-    equity_value: float,
-) -> None:
+def notify_evolution_summary(active_trades, closed_count, new_count, equity_value):
     n = len(active_trades)
-    avg_pl = (
-        sum(t.get("pl_percent", 0) for t in active_trades) / n
-        if n else 0.0
-    )
+    if n > 0:
+        avg_pl = sum(t.get("pl_percent", 0) for t in active_trades) / n
+    else:
+        avg_pl = 0.0
+
     pl_emoji = "📈" if avg_pl >= 0 else "📉"
-    pl_str = f"+{avg_pl:.2f}%" if avg_pl >= 0 else f"{avg_pl:.2f}%"
+    pl_sign = "+" if avg_pl >= 0 else ""
+    pl_str = "{}{:.2f}%".format(pl_sign, avg_pl)
 
     pos_lines = ""
     if active_trades:
-        pos_lines = "\n".join(
-            f"  • `{t['ticker']}` {'+' if t.get('pl_percent',0)>=0 else ''}{t.get('pl_percent',0):.1f}%"
-            for t in active_trades
-        )
-        pos_lines = f"\n*Posities:*\n{pos_lines}"
+        rows = []
+        for t in active_trades:
+            pl = t.get("pl_percent", 0)
+            sign = "+" if pl >= 0 else ""
+            rows.append("  • `{}` {}{:.1f}%".format(t["ticker"], sign, pl))
+        pos_lines = "\n*Posities:*\n" + "\n".join(rows)
 
+    ts = _now_long()
     msg = (
-        f"📊 *NEXUS DAGRAPPORT*\n"
-        f"🕒 {datetime.now(timezone.utc).strftime('%d\\-%m\\-%Y %H:%M UTC')}\n\n"
-        f"📌 Actieve posities: `{n}`\n"
-        f"{pl_emoji} Gem\\. P&L: `{pl_str}`\n"
-        f"💼 Portfolio waarde: `€{equity_value:,.2f}`\n"
-        f"🔒 Gesloten vandaag: `{closed_count}`\n"
-        f"🆕 Nieuw geopend: `{new_count}`"
-        f"{pos_lines}"
+        "📊 *NEXUS DAGRAPPORT*\n"
+        "🕒 {ts}\n\n"
+        "📌 Actieve posities: `{n}`\n"
+        "{pl_emoji} Gem. P&L: `{pl_str}`\n"
+        "💼 Portfolio waarde: `€{equity:,.2f}`\n"
+        "🔒 Gesloten vandaag: `{closed}`\n"
+        "🆕 Nieuw geopend: `{new}`"
+        "{pos_lines}"
+    ).format(
+        ts=ts, n=n, pl_emoji=pl_emoji, pl_str=pl_str,
+        equity=equity_value, closed=closed_count,
+        new=new_count, pos_lines=pos_lines,
     )
     send(msg)
