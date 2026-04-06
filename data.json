@@ -1,84 +1,68 @@
 {
-    "generated_at": "2026-04-05T22:00:28.455304+00:00",
+    "generated_at": "2026-04-06T06:20:59.868080+00:00",
     "top_candidates": [
         {
-            "ticker": "ADP",
-            "name": "Automatic Data Processing, Inc.",
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 73.84,
-            "pe_ratio": 19.62,
-            "debt_to_equity": 0.7,
-            "price": 204.01,
-            "score": 6.5,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# ADP: Value Trap Alert \ud83d\udea8\n\n**Economische Moat (Sterk)**\nADP's sticky B2B-payroll software schept hoge switching costs\u2014klassieke moat. Herhaalde inkomsten en marktleiderschap bieden defensieve kwaliteit.\n\n**Value Trap Risico (Matig-Hoog)**\n- **ROE 73.84%**: Verdacht hoog; mogelijk door lage equity (D/E 0.7 aanwezig) of accounting magic\n- **P/E 19.62**: Fair valued, maar groeimarges onder druk\n- Payroll-software veroudert\u2014Cloud-concurrentie (Workday, Guidepoint) neemt toe\n- Score 6.5 = geen bargain; betaalt u voor moat, niet voor groei\n\n**Kritiek Risico: Digitale Vervanging**\nLegacy payroll-software uit de jaren 2000 ziet competitie van goedkopere cloud-natives. ADP's upgrade-cyclus vertraagt; markt verzadigt.\n\n**Conclusie:** Defensieve quality-play, geen value. Betere kopen beschikbaar.",
-                "last_run": "2026-04-05T22:00:35.463868+00:00"
-            }
-        },
-        {
-            "ticker": "AMP",
-            "name": "Ameriprise Financial, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 60.51,
-            "pe_ratio": 11.96,
+            "roe": 58.77,
+            "pe_ratio": 14.16,
             "debt_to_equity": 0.58,
-            "price": 433.94,
-            "score": 6.1,
+            "price": 242.92,
+            "score": 7.1,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# AMP Analyse - Waardebelegger Perspectief\n\n## Economische Moat (Matig)\nAMP bezit een bescheiden moat via merkbekendheid en klantenloyaliteit in vermogensbeheer, maar ondervindt toenemende competitie van lage-kostenleveranciers en robo-advisors. De moat is niet duurzaam genoeg voor defensieve waardeinvestering.\n\n## Value Trap Risico (Significant)\nHet aantrekkelijke P/E van 11.96 maskeert waarschuwingstekenen:\n- **Extreem hoge ROE (60.51%)** lijkt onrealistisch; waarschijnlijk gebaseerd op verminderd eigen vermogen door agressieve buybacks\n- Dit ROE is niet duurzaam houdbaar\n\n## Kritieke Risicofactor\n**Regelgeving & Commissiedruk**: De financi\u00eble sector staat onder toenemende druk voor kostentransparantie. AMP's winsten zijn gevoelig voor commissieverlaging en fiduciaire regelgeving, wat de toekomstige inkomsten kan aantasten.\n\n**Conclusie**: Ondanks lage waardering: value trap-indicator. Score 6.1/10 is terecht voorzichtig.",
-                "last_run": "2026-04-05T16:04:23.841939+00:00"
+                "analysis": "# ADBE Waardeanalyse\n\n**Economische Moat (STERK)**\nAdobe bezit een uitgebreide moat via switching costs (Creative Cloud abonnementmodel), network effects (designer ecosystem) en brand dominantie. Het recurring revenue model (SaaS) biedt stabiliteit.\n\n**Value Trap Risico (MATIG-HOOG)**\nP/E van 14.16 lijkt aantrekkelijk, maar het hoge ROE (58.77%) is deels kunstmatig opgeblazen door agressieve buybacks en lage equity base. Groeivertraging in kernsegmenten (Creative) is zichtbaar. Waarschuwing: tegen cyclische recessie kan abonnementcancellatie accelereren.\n\n**Kritieke Risicofactor: AI-disruptie**\nGeneratieve AI (Midjourney, Runway) cannibaliseert Adobe's creativiteittools. Hoewel Adobe zelf AI integreert, fragmenteert de markt. Dit bedreigt de klassieke moat significant.\n\n**Conclusie:** Solide maar geen steal; betaal niet premium voor groei die er niet meer is.",
+                "last_run": "2026-04-06T06:21:05.235981+00:00"
             }
         },
         {
-            "ticker": "NTAP",
-            "name": "NetApp, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 112.59,
-            "pe_ratio": 17.34,
-            "debt_to_equity": 2.36,
-            "price": 103.35,
-            "score": 6.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# NTAP-Analyse: Waardebeleger's Perspectief\n\n**Economische Moat (Matig)**\nNetApp bezit een stevige moat via propri\u00ebtaire dataopslagtechnologie en switching costs. Echter, cloud-concurrentie (AWS, Azure) erodeert traditionale voordelen. De moat is eerder *defensief dan expansief*.\n\n**Value Trap Risico (HOOG)**\nHet 6.1-score waarschuwt terecht. De combinatie is alarmerend:\n- **ROE 112%** suggereert financi\u00eble engineering (zeer hoge schuld D/E 2.36)\n- **P/E 17.34** lijkt goedkoop, maar verdoezelt schuldenlast\n- Terugkerende winsten bedreigd door cloud-migratie\n\n**Kritieke Risicofactor**\n**Cloud-transitie versnelling**: Bedrijven migreren naar cloud-native storage. NTAP's on-premise focus wordt structureel onderuitgehold. Dit is geen cyclische daling maar *seculaire trend*.\n\n**Verdict**: Gemakkelijk geld voelt duur hier. Wacht op lagere waarderingen of aangetoonde cloud-strategie-succes.",
-                "last_run": "2026-04-05T22:00:40.525591+00:00"
-            }
-        },
-        {
-            "ticker": "MU",
-            "name": "Micron Technology, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 39.82,
-            "pe_ratio": 17.27,
-            "debt_to_equity": 0.15,
-            "price": 366.24,
-            "score": 6.0,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# Micron Technology \u2013 Waarde-Analyse\n\n## Economische Moat (Zwak - 4/10)\nMU opereert in een commoditized DRAM/NAND-markt met beperkte differentatie. Hoge kapitaalvereisten bieden enige bescherming, maar prijsconcurrentie blijft structureel risico.\n\n## Value Trap Risico (Hoog - 7/10)\n**Waarschuwing**: De aantrekkelijke P/E van 17,27 en ROE van 39,82% kunnen misleidend zijn. Deze metrics zijn cyclisch \u2013 DRAM-prijzen staan onder druk. Historisch zien we periodieke overcapaciteit, wat marges en inkomstengroei vernietigt.\n\n## Kritieke Risicofactor\n**Cyclische Downturn**: AI-vraag maskert fundamentele cycliciteit. Bij normalisering van chipvraag (2025-2026) stort geheugenmarkt in. MU's schuldratio (D/E: 0,15) geeft buffer, maar winsten kunnen 50%+ dalen.\n\n**Conclusie**: Niet geschikt voor conservatieve waardelingen. Score 6/10 is terecht \u2013 wacht op duidelijke cyclische bottom.",
-                "last_run": "2026-04-05T19:52:37.380519+00:00"
-            }
-        },
-        {
-            "ticker": "PGR",
-            "name": "Progressive Corporation (The)",
+            "ticker": "ALL",
+            "name": "Allstate Corporation (The)",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "roe": 40.45,
-            "pe_ratio": 10.15,
-            "debt_to_equity": 0.23,
-            "price": 195.25,
-            "score": 5.7,
+            "roe": 39.52,
+            "pe_ratio": 5.44,
+            "debt_to_equity": 0.25,
+            "price": 207.03,
+            "score": 6.7,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# PGR Analyse: Waardebelegger Perspectief\n\n**Economische Moat: STERK**\nPGR's brand-sterkte, schaalvoordelen en technologische voorsprong (Snapshot-technologie) cre\u00ebren defensieve voordelen in autoverzekeringen. Hoge wisselbaarheidskosten ondersteunen prijskracht.\n\n**Value Trap Risico: MATIG-HOOG**\nDe lage P/E (10.15) en uitstekende ROE (40.45%) lijken aantrekkelijk, maar waarschuwen: verzekeringscyclus is recessiegevoelig. Schadeclaims kunnen explosief stijgen bij economische tegenwind. De lage D/E (0.23) geeft speelruimte, maar maskeert onderliggende operationele risico's.\n\n**Kritieke Risicofactor: VERZEKERINGSRESULTAAT-VOLATILITEIT**\nCatastrofale weergebeurten, verkeersongelukkentrends en fraudefrequentie bepalen winsten. Een schadejaar kan jaren winsten opslokken\u2014onafhankelijk van fundamentals.\n\n**Conclusie:** 5.7/10 score is gerechtvaardigd. Moat-voordeel weegt niet op tegen cyclische en onvoorziene risico's.",
-                "last_run": "2026-04-05T22:00:45.596082+00:00"
+                "analysis": "# Allstate (ALL) - Waardebelegging Analyse\n\n## Economische Moat (Zwak tot Matig)\nAllstate bezit merknaam-recognitie en schaalvoordelen in verzekeringen, maar de moat is beperkt. Toenemende digitalisering en directe concurrenten (Geico, Progressive) erodeerden marktpositie. Geen duurzaam competitief voordeel waarneembaar.\n\n## Value Trap Risico (HOOG)\n**Waarschuwing**: Uitzonderlijk lage P/E (5.44) en hoge ROE (39.52%) roepen vragen op. Dit kan duiden op:\n- Verwachte winstdalingen\n- Schadeclaims uit natuurrampen\n- Cyclisch laagpunt in verzekeringsbranche\n\n## Kritieke Risicofactor: **Katastrofale Verzekeringsverliezen**\nALL is blootgesteld aan natuurrampen (orkanen, branden). Klimaatverandering vergroot frequentie/ernst van claims, wat premies verder onder druk zet en ROE kan doen instorten.\n\n**Conclusie**: Ondanks aantrekkelijke waarde-metrics, substanti\u00eble operationele risico's rechtvaardigen voorzichtigheid.",
+                "last_run": "2026-04-06T06:21:10.886000+00:00"
+            }
+        },
+        {
+            "ticker": "UBER",
+            "name": "Uber Technologies, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 39.93,
+            "pe_ratio": 15.19,
+            "debt_to_equity": 0.44,
+            "price": 71.84,
+            "score": 6.1,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# UBER Waardebelegger Analyse\n\n**Economische Moat: Zwak (6.1/10)**\nUbers netwerk-effecten en schaalvoordelen bieden bescherming, maar de moat is erodeerbaar. Intense concurrentie (Lyft, lokale spelers), regelgeving en lage switching costs verzwakken duurzame competitieve voordelen. Platform-afhankelijkheid van chauffeurs vermindert loyaliteit.\n\n**Value Trap Risico: Hoog**\nAantrekkelijke P/E (15.19) en sterke ROE (39.93%) kunnen misleiden. Terwijl winstgevendheid verbeterde, is UBER nog steeds omwenteling-gevoelig en marktgroei afhankelijk. Explosieve groeiverwachtingen zijn al ingepriced; normalisatie leidt tot devaluatie.\n\n**Kritieke Risicofactor: Regelgeving**\nGig-economie-classificatie in EU/VS (werknemersstatus chauffeurs) vormt existentieel risico. Nederlandse gerechtshof oordeelde chauffeurs werknemers = hoger kostenstructuur, marges onder druk.\n\n**Conclusie:** Voorzichtig. Aantrekkelijk gewaardeerd, maar moat en groei geven weinig marge voor fout.",
+                "last_run": "2026-04-06T06:21:15.706943+00:00"
+            }
+        },
+        {
+            "ticker": "SOLV",
+            "name": "Solventum Corporation",
+            "sector": "Healthcare",
+            "industry_group": "Others",
+            "roe": 38.86,
+            "pe_ratio": 7.16,
+            "debt_to_equity": 1.04,
+            "price": 63.57,
+            "score": 5.9,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# SOLV - Waardebeleggings Analyse\n\n## Economische Moat: Zwak (2/5)\nSOLV opereert in healthcare-technologie met gedifferentieerde producten, maar lacks pricing power. Marges onder druk van competitie en regelgeving. Geen duidelijke sustainable competitive advantage waarneembaar.\n\n## Value Trap Risico: Hoog (4/5)\n**Waarschuwingssignalen:**\n- Lage P/E van 7.16 kan verleiding zijn\n- Hoge ROE (38.86%) verdacht gezien zwakke moat \u2013 mogelijk unsustainable\n- D/E ratio 1.04 duidt op significant schuldniveau\n\nLage valuatie kan schuld aan fundamentele verslechtering zijn, niet onderwaardering.\n\n## Kritieke Risicofactor\n**Regelgeving & Reimbursement:**\nHealthcare-regelgeving vormt existentieel risico. Veranderingen in betaalmechanismes of hervorming van ziekenhuisfinanciering kunnen winstmarge's drastisch reduceren.\n\n## Conclusie\nScore 5.9/10 gerechtvaardigd. Value trap-karakteristieken overheersen; vermijd tenzij fundamentals aanzienlijk verbeteren.",
+                "last_run": "2026-04-06T06:21:21.405235+00:00"
             }
         },
         {
@@ -91,7 +75,11 @@
             "debt_to_equity": 1.08,
             "price": 27.93,
             "score": 5.6,
-            "penalty_applied": false
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# CMCSA Analyse: Value Trap Waarschuwing\n\n**Economische Moat (Zwak)**\nCMCSA bezit netwerkinfrastructuur en abonnee-lock-in, maar dit is erodeerend. Streaming-concurrentie en 5G-alternatieven ondermijnen de traditionele kabelmoat. Switching costs dalen.\n\n**Value Trap Risico (HOOG)**\nDe lage P/E (5.18) is verleidelijk, maar ROE van 21% maskeert de werkelijkheid: dit is *schijnrendement* gegenereerd door hoge schuld (D/E: 1.08). Zonder leverage zou ROE substantieel lager zijn. Dit is klassieke value-val terrain.\n\n**Kritieke Risicofactor: Abonnee-erosie**\nJaarlijks verliest CMCSA miljoenenen kabel- en videoabonnees. Deze trendbreuk is structureel, niet cyclisch. Zonder nieuwe kasstromen zal schuldafbouw mislukken.\n\n**Score 5.6/10 is verdiend.** Vermijden tot aannemelijke waarderingen en bewijs van transformatie.",
+                "last_run": "2026-04-06T06:21:25.586087+00:00"
+            }
         },
         {
             "ticker": "BR",
@@ -142,27 +130,27 @@
             "penalty_applied": false
         },
         {
-            "ticker": "FTNT",
-            "name": "Fortinet, Inc.",
+            "ticker": "AAPL",
+            "name": "Apple Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 135.72,
-            "pe_ratio": 34.1,
-            "debt_to_equity": 0.86,
-            "price": 82.53,
-            "score": 4.8,
+            "roe": 152.02,
+            "pe_ratio": 32.35,
+            "debt_to_equity": 1.03,
+            "price": 255.92,
+            "score": 4.9,
             "penalty_applied": false
         },
         {
-            "ticker": "T",
-            "name": "AT&T Inc.",
-            "sector": "Communication Services",
+            "ticker": "ACN",
+            "name": "Accenture plc",
+            "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 18.8,
-            "pe_ratio": 9.32,
-            "debt_to_equity": 1.24,
-            "price": 28.33,
-            "score": 4.8,
+            "roe": 24.76,
+            "pe_ratio": 16.5,
+            "debt_to_equity": 0.25,
+            "price": 201.33,
+            "score": 4.9,
             "penalty_applied": false
         },
         {
@@ -174,6 +162,18 @@
             "pe_ratio": 11.73,
             "debt_to_equity": 0.36,
             "price": 155.72,
+            "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "FTNT",
+            "name": "Fortinet, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 135.72,
+            "pe_ratio": 34.1,
+            "debt_to_equity": 0.86,
+            "price": 82.53,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -190,15 +190,15 @@
             "penalty_applied": false
         },
         {
-            "ticker": "FSLR",
-            "name": "First Solar, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 17.45,
-            "pe_ratio": 13.74,
-            "debt_to_equity": 0.07,
-            "price": 195.32,
-            "score": 4.7,
+            "ticker": "DECK",
+            "name": "Deckers Outdoor Corporation",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Others",
+            "roe": 39.69,
+            "pe_ratio": 13.96,
+            "debt_to_equity": 0.13,
+            "price": 98.31,
+            "score": 4.8,
             "penalty_applied": false
         }
     ],
@@ -267,12 +267,16 @@
         {
             "date": "04-05 22:00",
             "value": 10000.0
+        },
+        {
+            "date": "04-06 06:21",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-05T22:00:46.181282+00:00"
+        "last_update": "2026-04-06T06:21:26.196555+00:00"
     },
     "macro": {
         "vix": 23.87,
