@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-04-06T11:40:03.639967+00:00",
+    "generated_at": "2026-04-06T14:40:36.905092+00:00",
     "top_candidates": [
         {
             "ticker": "ADBE",
@@ -7,9 +7,9 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 58.77,
-            "pe_ratio": 14.16,
+            "pe_ratio": 14.31,
             "debt_to_equity": 0.58,
-            "price": 242.92,
+            "price": 245.25,
             "score": 7.1,
             "penalty_applied": false,
             "tier2": {
@@ -18,19 +18,35 @@
             }
         },
         {
-            "ticker": "UBER",
-            "name": "Uber Technologies, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 39.93,
-            "pe_ratio": 15.19,
-            "debt_to_equity": 0.44,
-            "price": 71.84,
-            "score": 6.1,
+            "ticker": "ALL",
+            "name": "Allstate Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 39.52,
+            "pe_ratio": 5.44,
+            "debt_to_equity": 0.25,
+            "price": 207.015,
+            "score": 6.7,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# UBER Waardebelegger Analyse\n\n**Economische Moat: Zwak (6.1/10)**\nUbers netwerk-effecten en schaalvoordelen bieden bescherming, maar de moat is erodeerbaar. Intense concurrentie (Lyft, lokale spelers), regelgeving en lage switching costs verzwakken duurzame competitieve voordelen. Platform-afhankelijkheid van chauffeurs vermindert loyaliteit.\n\n**Value Trap Risico: Hoog**\nAantrekkelijke P/E (15.19) en sterke ROE (39.93%) kunnen misleiden. Terwijl winstgevendheid verbeterde, is UBER nog steeds omwenteling-gevoelig en marktgroei afhankelijk. Explosieve groeiverwachtingen zijn al ingepriced; normalisatie leidt tot devaluatie.\n\n**Kritieke Risicofactor: Regelgeving**\nGig-economie-classificatie in EU/VS (werknemersstatus chauffeurs) vormt existentieel risico. Nederlandse gerechtshof oordeelde chauffeurs werknemers = hoger kostenstructuur, marges onder druk.\n\n**Conclusie:** Voorzichtig. Aantrekkelijk gewaardeerd, maar moat en groei geven weinig marge voor fout.",
-                "last_run": "2026-04-06T06:21:15.706943+00:00"
+                "analysis": "# Allstate Corporation - Waardeanalyse\n\n## Economische Moat (Zwak tot Matig)\nAllstate beschikt over een **beperkte duurzame concurrentievoordeel**. De verzekeringsbranche is competitief met lage switchkosten. Brand recognition en schaal bieden enige bescherming, maar onvoldoende voor een sterke moat.\n\n## Value Trap Risico (HOOG)\n**Waarschuwing**: De aantrekkelijke metrics (P/E 5.44, ROE 39.52%) kunnen misleidend zijn:\n- Verzekeringen ondergaan cyclische verliezen door rampen\n- Hogere schadeclaims erodeerden recente winstgevendheid\n- Lage P/E kan reeds pessimisme reflecteren\n\n## Kritieke Risicofactor\n**Klimaatgerelateerde schades**: Toenemende extreme weerpatronen verhogen catastrofale verliesrisico's dramatisch. Dit veroorzaakte al aanzienlijke claims en drukt op toekomstige winstmarges.\n\n**Conclusie**: Score 6.7 is terecht voorzichtig. Onderzoek onderliggende winststabiliteit voordat u investeert.",
+                "last_run": "2026-04-06T14:40:43.519471+00:00"
+            }
+        },
+        {
+            "ticker": "ADP",
+            "name": "Automatic Data Processing, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 73.84,
+            "pe_ratio": 19.68,
+            "debt_to_equity": 0.7,
+            "price": 204.69,
+            "score": 6.5,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# ADP Valuatie-Analyse\n\n## Economische Moat (Sterk)\nADP's recurring revenue model (loonverwerking, HR-software) cre\u00ebert sterke klant-switching costs. Marktpositie leidt tot pricing power en consistente cashflows\u2014klasieke moat.\n\n## Value Trap Risico (Matig-Hoog)\nHet hoge ROE (73.84%) lijkt aantrekkelijk, maar wordt gedreven door financi\u00eble leverage (D/E: 0.7) en kapitaalreductie, niet organische groei. P/E van 19.68 is redelijk, maar waarschuwt voor beperkte groei. Opbrengstgroei stagneert, waardoor de moat toenemend onder druk staat.\n\n## Kritieke Risicofactor: Automatisering\n**Kernbedreiging:** Cloud-gebaseerde concurrenten (Guidepoint, Zenefits) en AI-gedreven automatisering ondermijnen traditioneel loonverwerkingswerk. Dit erodeerd marges zonder innovatie in AI/Analytics.\n\n**Conclusie:** Solide bedrijf, maar groeimomentum ontbreekt. Score 6.5/10 is gerechtvaardigd.",
+                "last_run": "2026-04-06T14:40:47.568357+00:00"
             }
         },
         {
@@ -39,9 +55,9 @@
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 60.51,
-            "pe_ratio": 11.96,
+            "pe_ratio": 12.03,
             "debt_to_equity": 0.58,
-            "price": 433.94,
+            "price": 436.445,
             "score": 6.1,
             "penalty_applied": false,
             "tier2": {
@@ -50,14 +66,42 @@
             }
         },
         {
+            "ticker": "UBER",
+            "name": "Uber Technologies, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 39.93,
+            "pe_ratio": 15.22,
+            "debt_to_equity": 0.44,
+            "price": 72.01,
+            "score": 6.1,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# UBER Waardebelegger Analyse\n\n**Economische Moat: Zwak (6.1/10)**\nUbers netwerk-effecten en schaalvoordelen bieden bescherming, maar de moat is erodeerbaar. Intense concurrentie (Lyft, lokale spelers), regelgeving en lage switching costs verzwakken duurzame competitieve voordelen. Platform-afhankelijkheid van chauffeurs vermindert loyaliteit.\n\n**Value Trap Risico: Hoog**\nAantrekkelijke P/E (15.19) en sterke ROE (39.93%) kunnen misleiden. Terwijl winstgevendheid verbeterde, is UBER nog steeds omwenteling-gevoelig en marktgroei afhankelijk. Explosieve groeiverwachtingen zijn al ingepriced; normalisatie leidt tot devaluatie.\n\n**Kritieke Risicofactor: Regelgeving**\nGig-economie-classificatie in EU/VS (werknemersstatus chauffeurs) vormt existentieel risico. Nederlandse gerechtshof oordeelde chauffeurs werknemers = hoger kostenstructuur, marges onder druk.\n\n**Conclusie:** Voorzichtig. Aantrekkelijk gewaardeerd, maar moat en groei geven weinig marge voor fout.",
+                "last_run": "2026-04-06T06:21:15.706943+00:00"
+            }
+        },
+        {
+            "ticker": "MU",
+            "name": "Micron Technology, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 39.82,
+            "pe_ratio": 17.72,
+            "debt_to_equity": 0.15,
+            "price": 375.805,
+            "score": 5.9,
+            "penalty_applied": false
+        },
+        {
             "ticker": "PGR",
             "name": "Progressive Corporation (The)",
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 40.45,
-            "pe_ratio": 10.15,
+            "pe_ratio": 10.18,
             "debt_to_equity": 0.23,
-            "price": 195.25,
+            "price": 195.85,
             "score": 5.7,
             "penalty_applied": false,
             "tier2": {
@@ -71,9 +115,9 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 41.79,
-            "pe_ratio": 17.8,
+            "pe_ratio": 17.89,
             "debt_to_equity": 1.17,
-            "price": 160.93,
+            "price": 161.77,
             "score": 5.6,
             "penalty_applied": false,
             "tier2": {
@@ -82,39 +126,51 @@
             }
         },
         {
+            "ticker": "CMCSA",
+            "name": "Comcast Corporation",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "roe": 21.41,
+            "pe_ratio": 5.19,
+            "debt_to_equity": 1.08,
+            "price": 27.97,
+            "score": 5.6,
+            "penalty_applied": false
+        },
+        {
             "ticker": "CDW",
             "name": "CDW Corporation",
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 43.02,
-            "pe_ratio": 15.1,
+            "pe_ratio": 15.16,
             "debt_to_equity": 2.37,
-            "price": 122.01,
-            "score": 5.6,
+            "price": 122.52,
+            "score": 5.5,
             "penalty_applied": false
         },
         {
-            "ticker": "LDOS",
-            "name": "Leidos Holdings, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 31.03,
-            "pe_ratio": 14.27,
-            "debt_to_equity": 1.08,
-            "price": 158.82,
-            "score": 5.3,
+            "ticker": "MKC",
+            "name": "McCormick & Company, Incorporat",
+            "sector": "Consumer Defensive",
+            "industry_group": "Others",
+            "roe": 25.35,
+            "pe_ratio": 8.19,
+            "debt_to_equity": 0.65,
+            "price": 49.97,
+            "score": 4.8,
             "penalty_applied": false
         },
         {
-            "ticker": "SYF",
-            "name": "Synchrony Financial",
+            "ticker": "PYPL",
+            "name": "PayPal Holdings, Inc.",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "roe": 21.3,
-            "pe_ratio": 7.37,
-            "debt_to_equity": 0,
-            "price": 68.42,
-            "score": 5.0,
+            "roe": 25.73,
+            "pe_ratio": 8.52,
+            "debt_to_equity": 0.61,
+            "price": 46.12,
+            "score": 4.8,
             "penalty_applied": false
         },
         {
@@ -123,58 +179,10 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 152.02,
-            "pe_ratio": 32.35,
+            "pe_ratio": 32.95,
             "debt_to_equity": 1.03,
-            "price": 255.92,
-            "score": 4.9,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "FTNT",
-            "name": "Fortinet, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 135.72,
-            "pe_ratio": 34.1,
-            "debt_to_equity": 0.86,
-            "price": 82.53,
+            "price": 260.65,
             "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "MSFT",
-            "name": "Microsoft Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 34.39,
-            "pe_ratio": 23.37,
-            "debt_to_equity": 0.32,
-            "price": 373.46,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "T",
-            "name": "AT&T Inc.",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "roe": 18.8,
-            "pe_ratio": 9.32,
-            "debt_to_equity": 1.24,
-            "price": 28.33,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "FSLR",
-            "name": "First Solar, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 17.45,
-            "pe_ratio": 13.74,
-            "debt_to_equity": 0.07,
-            "price": 195.32,
-            "score": 4.7,
             "penalty_applied": false
         },
         {
@@ -183,22 +191,22 @@
             "sector": "Industrials",
             "industry_group": "Others",
             "roe": 27.69,
-            "pe_ratio": 8.72,
+            "pe_ratio": 8.68,
             "debt_to_equity": 1.02,
-            "price": 66.76,
+            "price": 66.5,
             "score": 4.7,
             "penalty_applied": false
         },
         {
-            "ticker": "UHS",
-            "name": "Universal Health Services, Inc.",
-            "sector": "Healthcare",
-            "industry_group": "Others",
-            "roe": 21.33,
-            "pe_ratio": 7.65,
-            "debt_to_equity": 0.7,
-            "price": 176.7,
-            "score": 4.6,
+            "ticker": "FSLR",
+            "name": "First Solar, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 17.45,
+            "pe_ratio": 13.77,
+            "debt_to_equity": 0.07,
+            "price": 195.81,
+            "score": 4.7,
             "penalty_applied": false
         }
     ],
@@ -275,15 +283,19 @@
         {
             "date": "04-06 11:40",
             "value": 10000.0
+        },
+        {
+            "date": "04-06 14:40",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-06T11:40:18.851721+00:00"
+        "last_update": "2026-04-06T14:40:48.131943+00:00"
     },
     "macro": {
-        "vix": 25.04,
-        "treasury_10y": 4.31
+        "vix": 23.97,
+        "treasury_10y": 4.33
     }
 }
