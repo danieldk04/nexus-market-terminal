@@ -1,36 +1,20 @@
 {
-    "generated_at": "2026-04-06T17:34:01.526581+00:00",
+    "generated_at": "2026-04-06T20:06:02.345702+00:00",
     "top_candidates": [
         {
-            "ticker": "AMP",
-            "name": "Ameriprise Financial, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 60.51,
-            "pe_ratio": 11.98,
-            "debt_to_equity": 0.58,
-            "price": 434.7,
-            "score": 6.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# AMP Analyse: Waardebelegging met Voorzichtigheid\n\n**Economische Moat (Matig)**\nAMP bezit een bescheiden moat via merksterkte en klantloyaliteit in vermogensbeheer, maar deze is erodeerbaar. Financi\u00eble diensten kennen lage switchingkosten; concurrentie is intens.\n\n**Value Trap Risico (HOOG)**\nWaarschuwing: Het 11.96 P/E lijkt aantrekkelijk, maar de exceptionele ROE van 60%+ is onhoudbaar. Dit suggereert mogelijk:\n- Boekhoudkundige manipulatie of eenmalige winsten\n- Re\u00ebel ROE ligt waarschijnlijk veel lager\n- Risico op winstdaling en P/E-expansie\n\n**Kritieke Risicofactor: Rentetariefafhankelijkheid**\nBij renteverlagingen dalen marges in vermogensbeheer en verzekeringsproducten. Huidige rentecyclus vormt significante downside-risico voor toekomstige kasstromen.\n\n**Conclusie:** Score 6.1/10 is terecht voorzichtig. Beter andere financials onderzoeken met duurzamere modellen.",
-                "last_run": "2026-04-06T11:40:09.688378+00:00"
-            }
-        },
-        {
-            "ticker": "UBER",
-            "name": "Uber Technologies, Inc.",
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 39.93,
-            "pe_ratio": 15.27,
-            "debt_to_equity": 0.44,
-            "price": 72.24,
-            "score": 6.1,
+            "roe": 58.77,
+            "pe_ratio": 14.25,
+            "debt_to_equity": 0.58,
+            "price": 244.355,
+            "score": 7.1,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# UBER Waardebelegger Analyse\n\n**Economische Moat: Zwak (6.1/10)**\nUbers netwerk-effecten en schaalvoordelen bieden bescherming, maar de moat is erodeerbaar. Intense concurrentie (Lyft, lokale spelers), regelgeving en lage switching costs verzwakken duurzame competitieve voordelen. Platform-afhankelijkheid van chauffeurs vermindert loyaliteit.\n\n**Value Trap Risico: Hoog**\nAantrekkelijke P/E (15.19) en sterke ROE (39.93%) kunnen misleiden. Terwijl winstgevendheid verbeterde, is UBER nog steeds omwenteling-gevoelig en marktgroei afhankelijk. Explosieve groeiverwachtingen zijn al ingepriced; normalisatie leidt tot devaluatie.\n\n**Kritieke Risicofactor: Regelgeving**\nGig-economie-classificatie in EU/VS (werknemersstatus chauffeurs) vormt existentieel risico. Nederlandse gerechtshof oordeelde chauffeurs werknemers = hoger kostenstructuur, marges onder druk.\n\n**Conclusie:** Voorzichtig. Aantrekkelijk gewaardeerd, maar moat en groei geven weinig marge voor fout.",
-                "last_run": "2026-04-06T06:21:15.706943+00:00"
+                "analysis": "# ADBE Waardebeleggingsanalyse\n\n## Economische Moat (Sterk) \u2b50\u2b50\u2b50\u2b50\nAdobe bezit een robuuste moat via:\n- **Ecosysteemeffect**: Creative Cloud integratie schept hoge switchingkosten\n- **Merkwaarde**: Marktleider in design/video software\n- **Abonnementmodel**: Terugkerende inkomsten vergrendelen klanten\n\n## Value Trap Risico (Matig) \u26a0\ufe0f\nP/E van 14,25 lijkt aantrekkelijk, maar:\n- Hoge ROE (58,77%) reflecteert sterke operationele efficientie, niet overwaarde\n- Lage D/E (0,58) biedt flexibiliteit\n- **Waarschuwing**: Adobe-aankopen (Figma, Workfront) kunnen verwachtingen niet waarmaken\n\n## Kritieke Risicofactor\n**SaaS-groeivertraging**: Marktmaturatie in creatieve software dreigt groei te bremmen. Concurrentie van gratis/open-source alternatieven (Canva, Blender) erodeert premiumpositionering.\n\n**Verdict**: Solide waarde voor langetermijnbeleggers; monitor groeitrend nauwlettend.",
+                "last_run": "2026-04-06T20:06:08.440699+00:00"
             }
         },
         {
@@ -39,9 +23,9 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 112.59,
-            "pe_ratio": 17.08,
+            "pe_ratio": 16.93,
             "debt_to_equity": 2.36,
-            "price": 101.78,
+            "price": 100.9,
             "score": 6.1,
             "penalty_applied": false,
             "tier2": {
@@ -50,14 +34,30 @@
             }
         },
         {
+            "ticker": "UBER",
+            "name": "Uber Technologies, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 39.93,
+            "pe_ratio": 15.26,
+            "debt_to_equity": 0.44,
+            "price": 72.185,
+            "score": 6.1,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# UBER Waardebelegger Analyse\n\n**Economische Moat: Zwak (6.1/10)**\nUbers netwerk-effecten en schaalvoordelen bieden bescherming, maar de moat is erodeerbaar. Intense concurrentie (Lyft, lokale spelers), regelgeving en lage switching costs verzwakken duurzame competitieve voordelen. Platform-afhankelijkheid van chauffeurs vermindert loyaliteit.\n\n**Value Trap Risico: Hoog**\nAantrekkelijke P/E (15.19) en sterke ROE (39.93%) kunnen misleiden. Terwijl winstgevendheid verbeterde, is UBER nog steeds omwenteling-gevoelig en marktgroei afhankelijk. Explosieve groeiverwachtingen zijn al ingepriced; normalisatie leidt tot devaluatie.\n\n**Kritieke Risicofactor: Regelgeving**\nGig-economie-classificatie in EU/VS (werknemersstatus chauffeurs) vormt existentieel risico. Nederlandse gerechtshof oordeelde chauffeurs werknemers = hoger kostenstructuur, marges onder druk.\n\n**Conclusie:** Voorzichtig. Aantrekkelijk gewaardeerd, maar moat en groei geven weinig marge voor fout.",
+                "last_run": "2026-04-06T06:21:15.706943+00:00"
+            }
+        },
+        {
             "ticker": "MU",
             "name": "Micron Technology, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 39.82,
-            "pe_ratio": 17.95,
+            "pe_ratio": 17.81,
             "debt_to_equity": 0.15,
-            "price": 380.6401,
+            "price": 377.76,
             "score": 5.9,
             "penalty_applied": false,
             "tier2": {
@@ -66,47 +66,43 @@
             }
         },
         {
-            "ticker": "CMCSA",
-            "name": "Comcast Corporation",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "roe": 21.41,
-            "pe_ratio": 5.15,
-            "debt_to_equity": 1.08,
-            "price": 27.785,
-            "score": 5.6,
+            "ticker": "SOLV",
+            "name": "Solventum Corporation",
+            "sector": "Healthcare",
+            "industry_group": "Others",
+            "roe": 38.86,
+            "pe_ratio": 7.12,
+            "debt_to_equity": 1.04,
+            "price": 63.24,
+            "score": 5.9,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# CMCSA Waardeanalyse\n\n**Economische Moat (zwak)**\nCMCSA bezit een infrastructuurmoat via kabelnetwerken, maar deze erodeerd door streaming-competitie en 5G. De omnichannel-positie (TV, internet, telecom) biedt beperkte defensie.\n\n**Value Trap Risico (HOOG)**\n- Lage P/E (5.15) lijkt aantrekkelijk, maar wordt gedrukt door *structureel dalende TV-inkomsten*\n- ROE 21.4% is misleidend: ondersteund door lage equity-waardering, niet sterke operationele groei\n- Hoge leverage (D/E 1.08) beperkt flexibiliteit bij marktverstoringen\n\n**Concreet Risicofactor: Cord-cutting**\nHuishoudens verlaten kabel-TV massaal. Dit kannibaliseert het kernbedrijf sneller dan internet/mobile-groei kan compenseren. Geen overtuigend transformatieplan richting high-growth segmenten.\n\n**Verdict**: Score 5.6/10 is terecht. Mijd als pure waardebelegging.",
-                "last_run": "2026-04-06T17:34:18.155058+00:00"
+                "analysis": "# SOLV Waardeanalyse\n\n**Economische Moat: Zwak (2/5)**\nSolventum (medische technologie/diensten) opereert in competitieve markten zonder duidelijke duurzame voordelen. Lage P/E (7.12) weerspiegelt beperkte groeivooruitzichten en marktpositie.\n\n**Value Trap Risico: HOOG**\nWaarschuwingssignalen:\n- Hoge ROE (38.86%) lijkt onhoudbaar gezien lage valuatie\n- D/E ratio 1.04 toont aanzienlijke schuld\n- Score 5.9/10 duidt op fundamentele zwaktes\n- Lage P/E kan schuld/winstdalingen maskeren\n\n**Kritieke Risicofactor: Schuldenrisico**\nD/E van 1.04 betekent 51% schuldfinanciering. Bij rentestijgingen en operationele tegenwind kunnen rente-uitgaven winsten onder druk zetten, waardoor dividendbesnoeiing dreigt.\n\n**Conclusie:** Ondanks lage valutatie: value trap waarschijnlijk. Diepgaande schuld- en cashflow-analyse noodzakelijk voordat investering overwogen wordt.",
+                "last_run": "2026-04-06T20:06:13.206453+00:00"
             }
         },
         {
-            "ticker": "BR",
-            "name": "Broadridge Financial Solutions,",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 41.79,
-            "pe_ratio": 17.94,
-            "debt_to_equity": 1.17,
-            "price": 162.22,
-            "score": 5.6,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# BR (Broadridge) - Waardebelegger Analyse\n\n## Economische Moat: MATIG\nBR heeft een solide moat via **switching costs** (klanten afhankelijk van hun cloudoplossingen) en schaalvoordelen. Echter, in AI-gedreven Tech is dit moat **erodeerbaar** door nieuwe competitors.\n\n## Value Trap Risico: VERHOOGD \u26a0\ufe0f\nHet hoge ROE (41.79%) bij P/E 17.8 lijkt aantrekkelijk, maar:\n- **D/E 1.17** signaleert aanzienlijke schuld\n- Winsten mogelijk inflated door financi\u00eble hefboomwerking\n- Tech-cyclus en AI-disruptie vormen groeirisico's\n\n## Concreet Risico: **AI-Commoditisering**\nBR's legacy-systeemoplossingen riskeren vervanging door goedkopere AI-native platforms. Marges onder druk.\n\n## Conclusie\nScore 5.6/10 rechtvaardigd. Zeker geen koopmoment voor waardebeleggers zonder duidelijke AI-strategie validatie.",
-                "last_run": "2026-04-06T11:40:18.277100+00:00"
-            }
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 40.45,
+            "pe_ratio": 10.21,
+            "debt_to_equity": 0.23,
+            "price": 196.365,
+            "score": 5.7,
+            "penalty_applied": false
         },
         {
-            "ticker": "LDOS",
-            "name": "Leidos Holdings, Inc.",
+            "ticker": "CDW",
+            "name": "CDW Corporation",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 31.03,
-            "pe_ratio": 14.3,
-            "debt_to_equity": 1.08,
-            "price": 159.165,
-            "score": 5.3,
+            "roe": 43.02,
+            "pe_ratio": 15.28,
+            "debt_to_equity": 2.37,
+            "price": 123.47,
+            "score": 5.5,
             "penalty_applied": false
         },
         {
@@ -115,45 +111,21 @@
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 21.3,
-            "pe_ratio": 7.41,
+            "pe_ratio": 7.46,
             "debt_to_equity": 0,
-            "price": 68.75,
-            "score": 5.0,
+            "price": 69.27,
+            "score": 4.9,
             "penalty_applied": false
         },
         {
-            "ticker": "PYPL",
-            "name": "PayPal Holdings, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 25.73,
-            "pe_ratio": 8.45,
-            "debt_to_equity": 0.61,
-            "price": 45.715,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "MSFT",
-            "name": "Microsoft Corporation",
-            "sector": "Technology",
+            "ticker": "T",
+            "name": "AT&T Inc.",
+            "sector": "Communication Services",
             "industry_group": "Tech & AI",
-            "roe": 34.39,
-            "pe_ratio": 23.3,
-            "debt_to_equity": 0.32,
-            "price": 372.26,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "MKC",
-            "name": "McCormick & Company, Incorporat",
-            "sector": "Consumer Defensive",
-            "industry_group": "Others",
-            "roe": 25.35,
-            "pe_ratio": 8.27,
-            "debt_to_equity": 0.65,
-            "price": 50.4737,
+            "roe": 18.8,
+            "pe_ratio": 9.31,
+            "debt_to_equity": 1.24,
+            "price": 28.315,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -163,9 +135,45 @@
             "sector": "Consumer Cyclical",
             "industry_group": "Others",
             "roe": 34.01,
-            "pe_ratio": 11.7,
+            "pe_ratio": 11.77,
             "debt_to_equity": 0.36,
-            "price": 155.245,
+            "price": 156.18,
+            "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "MSFT",
+            "name": "Microsoft Corporation",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 34.39,
+            "pe_ratio": 23.33,
+            "debt_to_equity": 0.32,
+            "price": 372.88,
+            "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "PYPL",
+            "name": "PayPal Holdings, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 25.73,
+            "pe_ratio": 8.41,
+            "debt_to_equity": 0.61,
+            "price": 45.48,
+            "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "MKC",
+            "name": "McCormick & Company, Incorporat",
+            "sector": "Consumer Defensive",
+            "industry_group": "Others",
+            "roe": 25.35,
+            "pe_ratio": 8.33,
+            "debt_to_equity": 0.65,
+            "price": 50.79,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -175,9 +183,9 @@
             "sector": "Industrials",
             "industry_group": "Others",
             "roe": 27.69,
-            "pe_ratio": 8.75,
+            "pe_ratio": 8.72,
             "debt_to_equity": 1.02,
-            "price": 67.01,
+            "price": 66.8,
             "score": 4.7,
             "penalty_applied": false
         },
@@ -187,31 +195,15 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 17.45,
-            "pe_ratio": 13.7,
+            "pe_ratio": 13.75,
             "debt_to_equity": 0.07,
-            "price": 194.75,
-            "score": 4.7,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "FTNT",
-            "name": "Fortinet, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 135.72,
-            "pe_ratio": 34.2,
-            "debt_to_equity": 0.86,
-            "price": 82.77,
+            "price": 195.57,
             "score": 4.7,
             "penalty_applied": false
         }
     ],
     "active_trades": [],
     "equity_history": [
-        {
-            "date": "04-04 14:11",
-            "value": 10000
-        },
         {
             "date": "04-04 14:16",
             "value": 10000
@@ -287,15 +279,19 @@
         {
             "date": "04-06 17:34",
             "value": 10000.0
+        },
+        {
+            "date": "04-06 20:06",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-06T17:34:18.755774+00:00"
+        "last_update": "2026-04-06T20:06:13.775360+00:00"
     },
     "macro": {
-        "vix": 24.67,
-        "treasury_10y": 4.34
+        "vix": 24.27,
+        "treasury_10y": 4.33
     }
 }
