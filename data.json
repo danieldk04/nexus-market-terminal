@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-04-07T18:13:05.848015+00:00",
+    "generated_at": "2026-04-07T23:09:20.517564+00:00",
     "top_candidates": [
         {
             "ticker": "ADBE",
@@ -7,9 +7,9 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 58.77,
-            "pe_ratio": 13.99,
+            "pe_ratio": 14.0,
             "debt_to_equity": 0.58,
-            "price": 239.95,
+            "price": 240.14,
             "score": 7.2,
             "penalty_applied": false,
             "tier2": {
@@ -23,9 +23,9 @@
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 39.52,
-            "pe_ratio": 5.52,
+            "pe_ratio": 5.53,
             "debt_to_equity": 0.25,
-            "price": 210.18,
+            "price": 210.53,
             "score": 6.6,
             "penalty_applied": false,
             "tier2": {
@@ -39,9 +39,9 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 73.84,
-            "pe_ratio": 19.67,
+            "pe_ratio": 19.58,
             "debt_to_equity": 0.7,
-            "price": 204.6,
+            "price": 203.61,
             "score": 6.5,
             "penalty_applied": false,
             "tier2": {
@@ -50,14 +50,30 @@
             }
         },
         {
+            "ticker": "NTAP",
+            "name": "NetApp, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 112.59,
+            "pe_ratio": 16.38,
+            "debt_to_equity": 2.36,
+            "price": 97.61,
+            "score": 6.2,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# NTAP Analyse: Waardebelegger Perspectief\n\n## Economische Moat (Matig)\nNTAP profiteert van sterke sticky enterprise-software/storage-klanten en cloud-integraties, maar concurrentie van hyperscalers (AWS, Azure) erodeerd traditionele margins. De moat is **zwakker wordend**.\n\n## Value Trap Risico (Hoog: \u26a0\ufe0f)\nHet aantrekkelijke P/E (16.38) en fenomenale ROE (112.59%) zijn **misleidend**:\n- Hoge ROE gedreven door aggressieve schulden (D/E: 2.36)\n- Schuldenquote wijst op financieel risico\n- Kans op rentestijgingen tast winstgevendheid aan\n\n## Kritieke Risicofactor\n**AI-disruptie**: Cloud-providers ontwikkelen eigen storage; NTAP's relevantie onder druk. Schakelovergang van capex naar opex-modellen fragmenteert inkomsten.\n\n## Verdict\nScore 6.2/10 is **terecht laag**. Interessant voor groeiinvesteerders, niet voor waardebeleggers met voorkeur voor lage schuld.",
+                "last_run": "2026-04-07T23:09:26.903862+00:00"
+            }
+        },
+        {
             "ticker": "MU",
             "name": "Micron Technology, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 39.82,
-            "pe_ratio": 17.7,
+            "pe_ratio": 17.82,
             "debt_to_equity": 0.15,
-            "price": 375.1428,
+            "price": 377.58,
             "score": 5.9,
             "penalty_applied": false,
             "tier2": {
@@ -66,20 +82,16 @@
             }
         },
         {
-            "ticker": "SOLV",
-            "name": "Solventum Corporation",
-            "sector": "Healthcare",
-            "industry_group": "Others",
-            "roe": 38.86,
-            "pe_ratio": 7.08,
-            "debt_to_equity": 1.04,
-            "price": 62.87,
-            "score": 5.9,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# SOLV Analyse: Waardebelegger Perspectief\n\n**Economische Moat: Zwak (3/5)**\nSOLV opereert in gediversifieerde healthcare/industri\u00eble segmenten zonder duidelijke duurzame concurrentievoordelen. Merkkracht en schaalvoordelen zijn bescheiden. Geen sterke pricing power waarneembaar.\n\n**Value Trap Risico: HOOG (7/10)**\nHet lage P/E (7.08) en hoge ROE (38.86%) roepen vragen op:\n- Torenhoge leverage (D/E: 1.04) verhoogt financieel risico\n- Mogelijke earnings-manipulatie of cyclische beroepspieken\n- Dividenduitkeringen kunnen niet duurzaam zijn bij teruglopende cashflows\n\n**Kritieke Risicofactor:**\n**Schuldenafhankelijkheid**: D/E van 1.04 betekent \u20ac1 schuld per \u20ac1 eigen vermogen. Bij renteverhoging of economische terugslag, stijgen rentelasten exponentieel, drukkend op marges.\n\n**Conclusie**: Mijd deze stock. Het voelt als een klassieke value trap\u2014goedkoop ja, maar dat heeft een reden.",
-                "last_run": "2026-04-07T18:13:16.768224+00:00"
-            }
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 40.45,
+            "pe_ratio": 10.24,
+            "debt_to_equity": 0.23,
+            "price": 196.85,
+            "score": 5.7,
+            "penalty_applied": false
         },
         {
             "ticker": "CMCSA",
@@ -87,9 +99,21 @@
             "sector": "Communication Services",
             "industry_group": "Tech & AI",
             "roe": 21.41,
-            "pe_ratio": 5.12,
+            "pe_ratio": 5.16,
             "debt_to_equity": 1.08,
-            "price": 27.615,
+            "price": 27.79,
+            "score": 5.6,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "BR",
+            "name": "Broadridge Financial Solutions,",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 41.79,
+            "pe_ratio": 17.71,
+            "debt_to_equity": 1.17,
+            "price": 159.9,
             "score": 5.6,
             "penalty_applied": false
         },
@@ -99,22 +123,22 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 43.02,
-            "pe_ratio": 15.39,
+            "pe_ratio": 15.33,
             "debt_to_equity": 2.37,
-            "price": 124.16,
+            "price": 123.69,
             "score": 5.5,
             "penalty_applied": false
         },
         {
-            "ticker": "SYF",
-            "name": "Synchrony Financial",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 21.3,
-            "pe_ratio": 7.41,
-            "debt_to_equity": 0,
-            "price": 68.81,
-            "score": 5.0,
+            "ticker": "LDOS",
+            "name": "Leidos Holdings, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 31.03,
+            "pe_ratio": 14.27,
+            "debt_to_equity": 1.08,
+            "price": 158.87,
+            "score": 5.3,
             "penalty_applied": false
         },
         {
@@ -123,45 +147,21 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 152.02,
-            "pe_ratio": 31.83,
+            "pe_ratio": 32.09,
             "debt_to_equity": 1.03,
-            "price": 251.7675,
-            "score": 5.0,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "ACN",
-            "name": "Accenture plc",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 24.76,
-            "pe_ratio": 16.2,
-            "debt_to_equity": 0.25,
-            "price": 197.6,
+            "price": 253.5,
             "score": 4.9,
             "penalty_applied": false
         },
         {
-            "ticker": "MKC",
-            "name": "McCormick & Company, Incorporat",
-            "sector": "Consumer Defensive",
+            "ticker": "DECK",
+            "name": "Deckers Outdoor Corporation",
+            "sector": "Consumer Cyclical",
             "industry_group": "Others",
-            "roe": 25.35,
-            "pe_ratio": 8.41,
-            "debt_to_equity": 0.65,
-            "price": 51.33,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "DAL",
-            "name": "Delta Air Lines, Inc.",
-            "sector": "Industrials",
-            "industry_group": "Others",
-            "roe": 27.69,
-            "pe_ratio": 8.61,
-            "debt_to_equity": 1.02,
-            "price": 65.92,
+            "roe": 39.69,
+            "pe_ratio": 14.24,
+            "debt_to_equity": 0.13,
+            "price": 100.26,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -171,21 +171,9 @@
             "sector": "Consumer Cyclical",
             "industry_group": "Others",
             "roe": 34.01,
-            "pe_ratio": 11.57,
+            "pe_ratio": 11.59,
             "debt_to_equity": 0.36,
-            "price": 153.47,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "MSFT",
-            "name": "Microsoft Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 34.39,
-            "pe_ratio": 23.18,
-            "debt_to_equity": 0.32,
-            "price": 370.855,
+            "price": 153.67,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -195,19 +183,27 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 17.45,
-            "pe_ratio": 13.47,
+            "pe_ratio": 13.52,
             "debt_to_equity": 0.07,
-            "price": 191.56,
+            "price": 192.31,
             "score": 4.7,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "ACGL",
+            "name": "Arch Capital Group Ltd.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 19.54,
+            "pe_ratio": 8.36,
+            "debt_to_equity": 0.12,
+            "price": 96.92,
+            "score": 4.6,
             "penalty_applied": false
         }
     ],
     "active_trades": [],
     "equity_history": [
-        {
-            "date": "04-04 14:55",
-            "value": 10000.0
-        },
         {
             "date": "04-04 16:00",
             "value": 10000.0
@@ -283,15 +279,19 @@
         {
             "date": "04-07 18:13",
             "value": 10000.0
+        },
+        {
+            "date": "04-07 23:09",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-07T18:13:17.347461+00:00"
+        "last_update": "2026-04-07T23:09:27.485829+00:00"
     },
     "macro": {
-        "vix": 26.59,
-        "treasury_10y": 4.35
+        "vix": 25.78,
+        "treasury_10y": 4.34
     }
 }
