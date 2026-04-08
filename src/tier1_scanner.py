@@ -19,14 +19,32 @@ BASE_DIR = Path(__file__).parent.parent
 OUTPUT_PATH = BASE_DIR / "data.json"
 MEMORY_PATH = BASE_DIR / "memory.json"
 
-# Sector Definities
-TECH_AI = ["Technology", "Communication Services", "Software", "Information Technology"]
-FINANCE_VINTAGE = ["Financial Services", "Financial Data Services", "Banks", "Insurance"]
+# Sector Definities — uitgebreid voor betere diversificatiecontrole
+SECTOR_MAP = {
+    "Technology":             "Tech & AI",
+    "Communication Services": "Tech & AI",
+    "Software":               "Tech & AI",
+    "Information Technology": "Tech & AI",
+    "Financial Services":     "Financials",
+    "Financial Data Services":"Financials",
+    "Banks":                  "Financials",
+    "Insurance":              "Financials",
+    "Healthcare":             "Healthcare",
+    "Biotechnology":          "Healthcare",
+    "Pharmaceuticals":        "Healthcare",
+    "Medical Devices":        "Healthcare",
+    "Energy":                 "Energy",
+    "Oil & Gas":              "Energy",
+    "Basic Materials":        "Materials",
+    "Utilities":              "Utilities",
+    "Real Estate":            "Real Estate",
+    "Consumer Defensive":     "Consumer Defensive",
+    "Consumer Cyclical":      "Consumer Cyclical",
+    "Industrials":            "Industrials",
+}
 
 def get_industry_group(sector):
-    if sector in TECH_AI: return "Tech & AI"
-    if sector in FINANCE_VINTAGE: return "Financials"
-    return "Others"
+    return SECTOR_MAP.get(sector, "Others")
 
 def load_memory():
     """Laadt het geheugen van de bot om te leren van fouten."""
@@ -82,36 +100,63 @@ def analyse_ticker(ticker_symbol, memory):
         if pe <= 0 or pe > max_pe: return None
         if de_ratio > 2.5: return None
 
-        # --- INTELLIGENTE SCORE LOGICA MET GEHEUGEN ---
-        base = 5.0
-        pe_penalty = (pe / max_pe) * 4.0
-        roe_bonus = min(4.0, (roe / 0.40) * 3.0)
+        # Aanvullende fundamentals voor rijkere scoring
+        rev_growth  = info.get("revenueGrowth", 0) or 0       # bv. 0.12 = 12% groei
+        fcf         = info.get("freeCashflow", None)           # absoluut getal
+        profit_margin = info.get("profitMargins", 0) or 0      # bv. 0.18 = 18%
+        beta        = info.get("beta", 1.0) or 1.0
+
+        # ── SCORE LOGICA ────────────────────────────────────────────────────
+        base         = 5.0
+        pe_penalty   = (pe / max_pe) * 4.0
+        roe_bonus    = min(4.0, (roe / 0.40) * 3.0)
         debt_penalty = min(1.0, de_ratio / 2.5)
 
-        # DE ZELFREFLECTIE STAP:
-        # Check of we in deze sector eerder verlies hebben gemaakt
+        # Groeibonus: omzetgroei > 10% geeft +0.4
+        growth_bonus = 0.4 if rev_growth > 0.10 else (0.2 if rev_growth > 0 else 0.0)
+
+        # FCF-kwaliteit: negatieve vrije kasstroom = rode vlag
+        fcf_penalty = 0.5 if (fcf is not None and fcf < 0) else 0.0
+
+        # Winstmarge-bonus: gezonde marge > 15% geeft +0.3
+        margin_bonus = 0.3 if profit_margin > 0.15 else 0.0
+
+        # Beta-correctie: extreem volatiele aandelen (beta > 2) krijgen kleine straf
+        beta_penalty = 0.3 if beta > 2.0 else 0.0
+
+        # Memory-penalty: lessen uit eerdere verliezen in dezelfde sector
         memory_penalty = 0.0
-        for lesson in memory.get('lessons', []):
-            if lesson.get('sector') == group and lesson.get('type') == "NEGATIVE_LEARNING":
-                memory_penalty += 0.5 # Trek 0.5 punt af per fout in deze sector
-        
-        # Maximaal 2.0 punten aftrek door fouten (om te voorkomen dat een sector op 0 komt)
+        for lesson in memory.get("lessons", []):
+            if lesson.get("sector") == group and lesson.get("type") == "NEGATIVE_LEARNING":
+                memory_penalty += 0.5
         memory_penalty = min(2.0, memory_penalty)
 
-        raw_score = base - pe_penalty + roe_bonus - debt_penalty - memory_penalty
+        raw_score = (base
+                     - pe_penalty
+                     + roe_bonus
+                     - debt_penalty
+                     + growth_bonus
+                     - fcf_penalty
+                     + margin_bonus
+                     - beta_penalty
+                     - memory_penalty)
         score = round(max(1.0, min(10.0, raw_score)), 1)
 
         return {
-            "ticker": ticker_symbol,
-            "name": info.get("shortName", ticker_symbol),
-            "sector": sector,
-            "industry_group": group,
-            "roe": round(roe * 100, 2),
-            "pe_ratio": round(pe, 2),
-            "debt_to_equity": round(de_ratio, 2),
-            "price": info.get("currentPrice", 0),
-            "score": score,
-            "penalty_applied": memory_penalty > 0
+            "ticker":          ticker_symbol,
+            "name":            info.get("shortName", ticker_symbol),
+            "sector":          sector,
+            "industry_group":  group,
+            "roe":             round(roe * 100, 2),
+            "pe_ratio":        round(pe, 2),
+            "debt_to_equity":  round(de_ratio, 2),
+            "revenue_growth":  round(rev_growth * 100, 1),
+            "profit_margin":   round(profit_margin * 100, 1),
+            "fcf_positive":    fcf is None or fcf >= 0,
+            "beta":            round(beta, 2),
+            "price":           info.get("currentPrice", 0),
+            "score":           score,
+            "penalty_applied": memory_penalty > 0,
         }
     except: return None
 

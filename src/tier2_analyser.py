@@ -45,19 +45,34 @@ def run_smart_analysis():
         
         if should_analyze:
             print(f"--- AI Analyse voor {ticker} wordt gestart ---")
+            fcf_str     = "positief" if c.get("fcf_positive", True) else "NEGATIEF (risico)"
+            growth_str  = "{}%".format(c.get("revenue_growth", "?"))
+            margin_str  = "{}%".format(c.get("profit_margin", "?"))
+            beta_str    = str(c.get("beta", "?"))
             prompt = (
-                f"Analyseer {ticker} ({c.get('name', ticker)}) als waardebelegger. "
-                f"Sector: {c.get('industry_group', 'Onbekend')}. "
-                f"Score: {c.get('score', '?')}/10. "
-                f"ROE: {c['roe']}%, P/E: {c['pe_ratio']}, D/E: {c.get('debt_to_equity', '?')}. "
-                f"Focus op: (1) economische Moat, (2) Value Trap risico, (3) één concreet risicofactor. "
-                f"Max 150 woorden."
+                "Je bent een topanalist die denkt als Warren Buffett, Charlie Munger en Benjamin Graham gecombineerd. "
+                "Analyseer {} ({}) voor een waardebelegger.\n\n"
+                "Fundamentals:\n"
+                "- Sector: {} | Score: {}/10\n"
+                "- ROE: {}% | P/E: {} | D/E: {}\n"
+                "- Omzetgroei: {} | Winstmarge: {} | FCF: {} | Beta: {}\n\n"
+                "Beantwoord kort (max 200 woorden) in 4 punten:\n"
+                "1. MOAT: Heeft het bedrijf een duurzaam concurrentievoordeel? (pricing power, switching costs, network effects, cost advantage)\n"
+                "2. KWALITEIT: Is het management-beslissingen goed kapitaalallloceerders? FCF-trend?\n"
+                "3. WAARDERING: Is de prijs fair of goedkoop t.o.v. intrinsieke waarde? Value trap risico?\n"
+                "4. RISICO: Noem het één grootste concrete risico voor de komende 12 maanden.\n"
+                "Geef een eindoordeel: KOOP / HOUD / MIJDEN."
+            ).format(
+                ticker, c.get("name", ticker),
+                c.get("industry_group", "?"), c.get("score", "?"),
+                c["roe"], c["pe_ratio"], c.get("debt_to_equity", "?"),
+                growth_str, margin_str, fcf_str, beta_str,
             )
 
             try:
                 message = client.messages.create(
                     model="claude-haiku-4-5-20251001",
-                    max_tokens=400,
+                    max_tokens=600,
                     messages=[{"role": "user", "content": prompt}]
                 )
                 
