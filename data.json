@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-04-07T23:09:20.517564+00:00",
+    "generated_at": "2026-04-08T06:07:49.215959+00:00",
     "top_candidates": [
         {
             "ticker": "ADBE",
@@ -7,7 +7,7 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 58.77,
-            "pe_ratio": 14.0,
+            "pe_ratio": 13.99,
             "debt_to_equity": 0.58,
             "price": 240.14,
             "score": 7.2,
@@ -66,19 +66,19 @@
             }
         },
         {
-            "ticker": "MU",
-            "name": "Micron Technology, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 39.82,
-            "pe_ratio": 17.82,
-            "debt_to_equity": 0.15,
-            "price": 377.58,
+            "ticker": "SOLV",
+            "name": "Solventum Corporation",
+            "sector": "Healthcare",
+            "industry_group": "Others",
+            "roe": 38.86,
+            "pe_ratio": 7.04,
+            "debt_to_equity": 1.04,
+            "price": 62.49,
             "score": 5.9,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# MU Value Analyse\n\n**Economische Moat: Zwak (4/10)**\nMU opereert in commoditized DRAM/NAND. Technologische voorsprong is voorbijgaand; concurrenten (Samsung, SK Hynix) sluiten snel aan. Schaalvoordelen bestaan, maar zijn onvoldoende voor duurzaam competitief voordeel. Winstmarges comprimeren in cyclische dips.\n\n**Value Trap Risico: Hoog**\nHoog ROE (39.82%) en lage P/E (17.81) lijken aantrekkelijk, maar maskeren cyclische piek. MU's winstgevendheid is zeer gevoelig voor chipvraag. Vorige cycli toonden drastische inkomstendalingen. Het lage D/E (0.15) biedt buffers, maar schuldcapaciteit blijft beperkt in downturn.\n\n**Kritieke Risicofactor: Vraagverzwakking**\nAI-hype vertaalt zich niet naar proportionele DRAM/NAND-volumes. Slabakkende PC/smartphone-markt en macroeconomische onzekerheid kunnen vraag irreversibel reduceren. Margecompressie volgt snel.\n\n**Verdict:** Score 5.9/10 gerechtvaardigd\u2014speculatief, niet waardebelegd.",
-                "last_run": "2026-04-07T12:02:01.475687+00:00"
+                "analysis": "# SOLV Analyse: Waardebelegging met waarschuwingen\n\n**Economische Moat (zwak)**\nSOLV ontbeert duidelijke moat-indicatoren. Ondanks degelijke ROE (38.86%) suggereert de lage P/E (7.04) marktskepsis over duurzaamheid. Zonder sterke merkpositionering of schaalvoordelen in 'Others'-sector riskeert dit bedrijf commoditisering.\n\n**Value Trap risico (HOOG)**\nKritieke waarschuwing: de combinatie van lage P/E + hoge ROE is klassieke value trap-signatuur. De ROE kan inflatie-gedreven zijn of op niet-duurzame effici\u00ebntie berusten. D/E van 1.04 duidt op agressieve leverage.\n\n**Concrete risicofactor: Schuldrisico**\nMet D/E = 1.04 is SOLV voor schuld-gefinancierd. Bij rentestijging of winstdaling zakt de solvabiliteit snel. Dit verhoogt faillissementsrisico aanzienlijk.\n\n**Conclusie:** Score 5.9/10 is terecht. Alleen aanraden voor contractanten met risicobereidheid en grondige due diligence.",
+                "last_run": "2026-04-08T06:07:55.183897+00:00"
             }
         },
         {
@@ -106,39 +106,27 @@
             "penalty_applied": false
         },
         {
-            "ticker": "BR",
-            "name": "Broadridge Financial Solutions,",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 41.79,
-            "pe_ratio": 17.71,
-            "debt_to_equity": 1.17,
-            "price": 159.9,
-            "score": 5.6,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "CDW",
-            "name": "CDW Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 43.02,
-            "pe_ratio": 15.33,
-            "debt_to_equity": 2.37,
-            "price": 123.69,
-            "score": 5.5,
-            "penalty_applied": false
-        },
-        {
             "ticker": "LDOS",
             "name": "Leidos Holdings, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 31.03,
-            "pe_ratio": 14.27,
+            "pe_ratio": 14.26,
             "debt_to_equity": 1.08,
             "price": 158.87,
             "score": 5.3,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "SYF",
+            "name": "Synchrony Financial",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 21.3,
+            "pe_ratio": 7.46,
+            "debt_to_equity": 0,
+            "price": 68.85,
+            "score": 4.9,
             "penalty_applied": false
         },
         {
@@ -154,6 +142,18 @@
             "penalty_applied": false
         },
         {
+            "ticker": "MSFT",
+            "name": "Microsoft Corporation",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 34.39,
+            "pe_ratio": 23.31,
+            "debt_to_equity": 0.32,
+            "price": 372.29,
+            "score": 4.8,
+            "penalty_applied": false
+        },
+        {
             "ticker": "DECK",
             "name": "Deckers Outdoor Corporation",
             "sector": "Consumer Cyclical",
@@ -166,27 +166,27 @@
             "penalty_applied": false
         },
         {
-            "ticker": "LULU",
-            "name": "lululemon athletica inc.",
-            "sector": "Consumer Cyclical",
-            "industry_group": "Others",
-            "roe": 34.01,
-            "pe_ratio": 11.59,
-            "debt_to_equity": 0.36,
-            "price": 153.67,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
             "ticker": "FSLR",
             "name": "First Solar, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 17.45,
-            "pe_ratio": 13.52,
+            "pe_ratio": 13.53,
             "debt_to_equity": 0.07,
             "price": 192.31,
             "score": 4.7,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "UHS",
+            "name": "Universal Health Services, Inc.",
+            "sector": "Healthcare",
+            "industry_group": "Others",
+            "roe": 21.33,
+            "pe_ratio": 7.82,
+            "debt_to_equity": 0.7,
+            "price": 180.61,
+            "score": 4.6,
             "penalty_applied": false
         },
         {
@@ -204,10 +204,6 @@
     ],
     "active_trades": [],
     "equity_history": [
-        {
-            "date": "04-04 16:00",
-            "value": 10000.0
-        },
         {
             "date": "04-05 06:43",
             "value": 10000.0
@@ -283,12 +279,16 @@
         {
             "date": "04-07 23:09",
             "value": 10000.0
+        },
+        {
+            "date": "04-08 06:07",
+            "value": 10000.0
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-04-07T23:09:27.485829+00:00"
+        "last_update": "2026-04-08T06:07:55.785476+00:00"
     },
     "macro": {
         "vix": 25.78,
