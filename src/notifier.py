@@ -13,6 +13,7 @@ log = logging.getLogger("notifier")
 
 TELEGRAM_CHAT_ID = "7995706133"
 TELEGRAM_API_URL = "https://api.telegram.org/bot{token}/sendMessage"
+DASHBOARD_URL    = "https://danieldk04.github.io/nexus-market-terminal/pro.html"
 
 
 def _token():
@@ -70,8 +71,9 @@ def notify_scan_complete(candidates, scanned):
         "🔍 *NEXUS SCAN KLAAR* — {ts}\n"
         "📊 {scanned} tickers gescand · {n} kandidaten\n\n"
         "🏆 *Top kandidaten:*\n"
-        "{candidates}"
-    ).format(ts=_now(), scanned=scanned, n=len(candidates), candidates=candidate_list)
+        "{candidates}\n\n"
+        "🌐 [Open Dashboard]({url})"
+    ).format(ts=_now(), scanned=scanned, n=len(candidates), candidates=candidate_list, url=DASHBOARD_URL)
     send(msg)
 
 
@@ -82,8 +84,9 @@ def notify_trade_opened(ticker, price, score, sector):
         "📈 `{ticker}` · {sector}\n"
         "💰 Instapprijs: `${price:.2f}`\n"
         "⭐ Score bij instap: `{score}/10`\n"
-        "🕒 {ts}"
-    ).format(ticker=ticker, sector=sector, price=price, score=score, ts=ts)
+        "🕒 {ts}\n\n"
+        "🌐 [Open Dashboard]({url})"
+    ).format(ticker=ticker, sector=sector, price=price, score=score, ts=ts, url=DASHBOARD_URL)
     send(msg)
 
 
@@ -94,8 +97,9 @@ def notify_stop_loss(ticker, pl_pct, sector):
         "📉 `{ticker}` gesloten\n"
         "💸 Verlies: `{pl:.1f}%`\n"
         "🧠 Les opgeslagen voor sector: _{sector}_\n"
-        "🕒 {ts}"
-    ).format(ticker=ticker, pl=pl_pct, sector=sector, ts=ts)
+        "🕒 {ts}\n\n"
+        "🌐 [Open Dashboard]({url})"
+    ).format(ticker=ticker, pl=pl_pct, sector=sector, ts=ts, url=DASHBOARD_URL)
     send(msg)
 
 
@@ -106,8 +110,9 @@ def notify_take_profit(ticker, pl_pct, sector):
         "📈 `{ticker}` gesloten\n"
         "✅ Winst: `+{pl:.1f}%`\n"
         "🧠 Positive les opgeslagen voor sector: _{sector}_\n"
-        "🕒 {ts}"
-    ).format(ticker=ticker, pl=pl_pct, sector=sector, ts=ts)
+        "🕒 {ts}\n\n"
+        "🌐 [Open Dashboard]({url})"
+    ).format(ticker=ticker, pl=pl_pct, sector=sector, ts=ts, url=DASHBOARD_URL)
     send(msg)
 
 
@@ -116,8 +121,9 @@ def notify_warning(ticker, pl_pct, sector):
         "⚠️ *WAARSCHUWING*\n"
         "`{ticker}` nadert stop-loss grens\n"
         "📉 Huidig verlies: `{pl:.1f}%`\n"
-        "Sector: _{sector}_"
-    ).format(ticker=ticker, pl=pl_pct, sector=sector)
+        "Sector: _{sector}_\n\n"
+        "🌐 [Open Dashboard]({url})"
+    ).format(ticker=ticker, pl=pl_pct, sector=sector, url=DASHBOARD_URL)
     send(msg)
 
 
@@ -150,10 +156,11 @@ def notify_evolution_summary(active_trades, closed_count, new_count, equity_valu
         "💼 Portfolio waarde: `€{equity:,.2f}`\n"
         "🔒 Gesloten vandaag: `{closed}`\n"
         "🆕 Nieuw geopend: `{new}`"
-        "{pos_lines}"
+        "{pos_lines}\n\n"
+        "🌐 [Open Dashboard]({url})"
     ).format(
         ts=ts, n=n, pl_emoji=pl_emoji, pl_str=pl_str,
         equity=equity_value, closed=closed_count,
-        new=new_count, pos_lines=pos_lines,
+        new=new_count, pos_lines=pos_lines, url=DASHBOARD_URL,
     )
     send(msg)
