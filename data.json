@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-04-10T21:02:45.377140+00:00",
+    "generated_at": "2026-04-11T10:03:29.777946+00:00",
     "top_candidates": [
         {
             "ticker": "ALL",
@@ -22,43 +22,63 @@
             }
         },
         {
-            "ticker": "AMP",
-            "name": "Ameriprise Financial, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 60.51,
-            "pe_ratio": 12.3,
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 58.77,
+            "pe_ratio": 13.14,
             "debt_to_equity": 0.58,
-            "revenue_growth": 8.6,
-            "profit_margin": 18.8,
+            "revenue_growth": 12.0,
+            "profit_margin": 29.5,
             "fcf_positive": true,
-            "beta": 1.27,
-            "price": 446.34,
-            "score": 6.5,
-            "penalty_applied": false,
+            "beta": 1.52,
+            "price": 225.35,
+            "score": 7.0,
+            "penalty_applied": true,
             "tier2": {
-                "analysis": "# AMP (Ameriprise Financial) \u2013 Waardeanalyse\n\n## 1. MOAT: Matig (6/10)\nAMP bezit een **beperkte duurzame moat**. Als vermogensbeheerder profiteert het van klantenbinding en schaalvoordelen, maar de sector is competitief en prijsdruk neemt toe. Switching costs zijn laag\u2014klanten kunnen makkelijk naar concurrenten (Vanguard, Schwab) migreren. Geen sterke brand-loyaliteit zoals verzekeraars hebben. Het verdienmodel is afhankelijk van assets under management, dus volatiliteit op beurzen is een directe bedreiging.\n\n## 2. KWALITEIT: Sterk (7.5/10)\n**ROE van 60%+ is indrukwekkend**\u2014beter dan veel peers. Positieve FCF-generatie duidt op gezonde operationele kracht. Management voert regelmatig aandeleninkoop uit, wat wijst op zelfvertrouwen en effici\u00ebnte kapitaalallocatie. Winstmarge van 18.8% is solide voor de sector.\n\n## 3. WAARDERING: Fair-tot-Goedkoop (7/10)\nP/E van 12.3 is **aantrekkelijk** voor een financi\u00eble dienstverlener met 60% ROE. Dit suggereert marktmisprijzing. Echter: bij renteverlagingen daalt vraag naar beleggingsproducten. Geen klassieke value trap, maar cyclisch risico.\n\n## 4. RISICO: Rente-risico\n**Primair risico**: Amerikaanse renteverlagingen (Fed-beleid). Lagere rentetariefen drukken provisie-inkomsten en verminderen klant-interesse in beleggingsproducten. Dit kan FCF en marges ondermijnen.\n\n---\n\n**EINDOORDEEL: HOUD**\nFair prijs voor kwaliteit, maar wacht op rentedaling-zekerheid voordat je groot instapt.",
-                "last_run": "2026-04-10T21:02:53.648709+00:00"
+                "analysis": "# ADBE Analyse: Waardebelegger Perspectief\n\n## 1. **MOAT: Sterk, maar onder druk** \u2b50\u2b50\u2b50\u2b50\nAdobe heeft een uitgesproken moat via:\n- **Switching costs**: Creative Cloud is diep ingebed in workflows van designers/marketers\n- **Pricing power**: Abonnementsmodel zorgt voor stabiele marges (29.5%)\n- **Netzwerkeffecten**: Dominantie in creatieve sector\n\n**MAAR**: AI-concurrentie (Figma, open-source tools) erodeerde moat in 2023-2024.\n\n## 2. **KWALITEIT: Uitstekend kapitaalalloceerder** \u2b50\u2b50\u2b50\u2b50\u2b50\n- ROE 58.77% = exceptional\n- Positief FCF met gezond D/E (0.58)\n- Abonnementensysteem genereert voorspelbare terugkerende inkomsten\n- Management focust op pricing & retention\n\n## 3. **WAARDERING: Fair, niet goedkoop** \u2b50\u2b50\u2b50\n- P/E 13.14 lijkt laag, maar houdt geen rekening met groeivertraging (12% = historisch lager)\n- EV/FCF waarschijnlijk reasonabeler meetstaf\n- **Risico**: Valuation kan snel draaien bij groeivertraging\n\n## 4. **RISICO: AI-cannibalisme** \ud83c\udfaf\nGeneratieve AI (ChatGPT, Midjourney) ondermijnt kernproducten. Dit is het concrete risico voor 12 maanden.\n\n---\n\n## **Eindoordeel: HOUD**\nSolide moat & kwaliteit, maar groei stagneert en waardering biedt geen margin of safety. Geen koopaanleiding tot P/E <10 of duidelijk AI-strategie bewijs.",
+                "last_run": "2026-04-11T10:03:37.396096+00:00"
             }
         },
         {
-            "ticker": "SOLV",
-            "name": "Solventum Corporation",
-            "sector": "Healthcare",
-            "industry_group": "Healthcare",
-            "roe": 38.86,
-            "pe_ratio": 7.41,
-            "debt_to_equity": 1.04,
-            "revenue_growth": -3.7,
-            "profit_margin": 18.7,
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 40.45,
+            "pe_ratio": 10.09,
+            "debt_to_equity": 0.23,
+            "revenue_growth": 12.2,
+            "profit_margin": 12.9,
             "fcf_positive": true,
-            "beta": 0.77,
-            "price": 65.79,
-            "score": 6.2,
+            "beta": 0.33,
+            "price": 194.13,
+            "score": 6.1,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# SOLV Analyse: Waardebelegger Perspectief\n\n## 1. MOAT: Zwak tot Matig (\u26a0\ufe0f)\nSOLV opereert in gefragmenteerde healthcare-segmenten zonder sterke prijsmacht. De omzetdaling (-3.7%) suggereert erosie van marktpositie. Switching costs bestaan voor ziekenhuisklanten, maar zijn onvoldoende voor defensief voordeel. Geen duidelijke cost leadership of technologisch moat zichtbaar.\n\n## 2. KWALITEIT: Teleurstellend\nOndanks indrukwekkende ROE (38.86%) en positieve FCF: de teruglopende omzet is alarmerend. Dit wijst op organische groeivertraging, niet effici\u00ebntieverbetering. Een gezond bedrijf groeit; SOLV krimpt. Management-kapitaalallocatie verdient twijfel zonder groeistrategie.\n\n## 3. WAARDERING: Schijnbaar Goedkoop (Potenti\u00eble Value Trap)\nP/E van 7.45 oogt vogelgoedkoop, maar tegen dalende omzet is het earnings-beeld mogelijk niet duurzaam. High D/E (1.04) biedt weinig buffer. Graham zou waarschuwen: \"een goedkope prijs is geen waarborg voor waarde.\"\n\n## 4. GROOTSTE RISICO: Omzeterosie Acceleratie\nVerdere marktaandeel-verlies en mogelijke winstmarges-compressie door operationele problemen of concurrentie.\n\n---\n\n## **EINDOORDEEL: MIJDEN**\nZwakke moat + omzetdaling + value-trap signalen = onvoldoende marge of safety voor geduldige waardebeleggers.",
-                "last_run": "2026-04-09T21:36:37.630255+00:00"
+                "analysis": "# PGR Analyse: Waardebelegger Perspectief\n\n## 1. MOAT: STERK \u2713\nPGR's \"Flo\" (mascotte + brand recognition) en gedifferentieerde directe-schrijfmodel cre\u00ebren switching costs. Algoritmes voor risicoprijzing zijn moeilijk te repliceren. Schaal geeft kostvoordeel. **Echter**: verzekeringsmarkt is competitief; margins onder druk van claims-inflatie.\n\n## 2. KWALITEIT: UITSTEKEND \u2713\nROE van 40%+ en positieve FCF duiden op excellent kapitaalbeheer. Management (bijv. CEO Jagjivan Duggal) reinvesteert winsten disciplinair in groei + buybacks. **Concern**: ROE kan inflatie weerspiegelen; normalisatie mogelijk.\n\n## 3. WAARDERING: FAIR-TOT-GOEDKOOP \u2713\nP/E 10.09 is aantrekkelijk voor financials (gemiddelde ~13). Echter: verzekeringswinsten zijn cyclisch. Omzetgroei 12.2% steunt groeicase. **Voorzichtig**: tegen reserves testen onder stress-scenarios.\n\n## 4. RISICO: CLAIMS-INFLATIE \u26a0\ufe0f\nAutoschade- en medische-inflatie kunnen vergoedingen sneller doen stijgen dan premie-verhoging. Dit drukt rechtstreeks op winstmarge (nu 12.9%).\n\n---\n\n## EINDOORDEEL: **HOUD / KOOP** (defensieve positie)\nSterke moat, excellent management, redelijke prijs. Ideaal voor risicomijdende waardebeleggers. Geen overtuigend margin-of-safety; wacht op dip <P/E 9 of 15%+ inzinking.",
+                "last_run": "2026-04-11T10:03:44.027242+00:00"
+            }
+        },
+        {
+            "ticker": "ADP",
+            "name": "Automatic Data Processing, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 73.84,
+            "pe_ratio": 18.15,
+            "debt_to_equity": 0.7,
+            "revenue_growth": 6.2,
+            "profit_margin": 20.0,
+            "fcf_positive": true,
+            "beta": 0.86,
+            "price": 188.79,
+            "score": 6.1,
+            "penalty_applied": true,
+            "tier2": {
+                "analysis": "# ADP-Analyse: Waardebeleggersperspectief\n\n## 1. MOAT: STERK \u2713\nADP bezit een klassieke \"sticky\" moat via hoge switching costs. Werkgevers zijn afhankelijk van payroll-software\u2014migratie is kostbaar en riskant. Dit stelt ADP in staat regelmatig prijzen te verhogen zonder klantverlies. De 20% winstmarge en 73,84% ROE bewijzen pricing power. Het is geen tech-moat (product-innovatie), maar een operationele moat van duurzaam formaat.\n\n## 2. KWALITEIT: MATIG \u2713\nHet management alloceert kapitaal voorzichtig: lage schuld (D/E 0,7), positieve FCF en regelmatige buybacks. Echter: 6,2% omzetgroei is sissig voor een tech-bedrijf. Dit duidt op marktrijpheid. FCF-conversie lijkt gezond, maar groei stagneert\u2014geen \"compounding machine\" zoals Buffett zou zeggen.\n\n## 3. WAARDERING: REDELIJK GEPRIJSD \u26a0\ufe0f\nP/E van 18,15 lijkt fair voor een stabiel, moat-bedrijf met 20% winstmarge. Echter: tegen lagere groei verwacht je P/E ~15-16. **Value-trap-risico**: je betaalt voor geschiedenis (sterk management), niet toekomst (zwakke groei).\n\n## 4. GROOTSTE RISICO:\n**Automatisering & digitale disruptie**: Nieuwkomers (bv. op cloud-basis) kunnen laagdrempelig integreren. ADP's legacy-positie beschermt tegen prijs-concurrentie, maar niet tegen substitutie.\n\n---\n\n## EINDOORDEEL: **HOUD**\nSolide defensieve positie voor beleggers die stabiliteit zoeken, maar geen compounding-groei. Geen koop onder 16x P/E.",
+                "last_run": "2026-04-11T10:03:50.813582+00:00"
             }
         },
         {
@@ -102,12 +122,28 @@
             }
         },
         {
+            "ticker": "MKC",
+            "name": "McCormick & Company, Incorporat",
+            "sector": "Consumer Defensive",
+            "industry_group": "Consumer Defensive",
+            "roe": 25.35,
+            "pe_ratio": 8.8,
+            "debt_to_equity": 0.65,
+            "revenue_growth": 16.7,
+            "profit_margin": 23.1,
+            "fcf_positive": true,
+            "beta": 0.71,
+            "price": 53.71,
+            "score": 5.4,
+            "penalty_applied": false
+        },
+        {
             "ticker": "SYF",
             "name": "Synchrony Financial",
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 21.3,
-            "pe_ratio": 7.75,
+            "pe_ratio": 7.8,
             "debt_to_equity": 0,
             "revenue_growth": 5.0,
             "profit_margin": 36.4,
@@ -115,42 +151,6 @@
             "beta": 1.38,
             "price": 72.41,
             "score": 5.4,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "CMCSA",
-            "name": "Comcast Corporation",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "roe": 21.41,
-            "pe_ratio": 5.18,
-            "debt_to_equity": 1.08,
-            "revenue_growth": 1.2,
-            "profit_margin": 16.2,
-            "fcf_positive": true,
-            "beta": 0.79,
-            "price": 27.93,
-            "score": 5.1,
-            "penalty_applied": true,
-            "tier2": {
-                "analysis": "# CMCSA Analyse: Waardebelegger Perspectief\n\n## 1. MOAT: ZWAK TOT MATIG \u26a0\ufe0f\nComcast heeft lokale monopolies in kabelinfrastructuur (switching costs, prijskracht), maar deze erodeerde drastisch. Streaming-concurrentie, 5G-alternatieven en cord-cutting ondermijnen de traditionele TV-moat. De internettak is sterker, maar ook daar groeit concurrentie. **Moat is aan het afkalven.**\n\n## 2. KWALITEIT: MIDDELMATIG \ud83d\ude10\nROE van 21% lijkt sterk maar wordt opgeblazen door schulden (D/E: 1.08). Omzetgroei van slechts 1.2% en stagnatie wijzen op een rijp, niet-groeiend bedrijf. Positieve FCF is goed, maar moet dienen voor schuldafbouw \u00e9n dividend\u2014wat kapitaalallocatie complexer maakt. **Management cykelgevoelig, geen innovator.**\n\n## 3. WAARDERING: VERLEIDELIJK GOEDKOOP \ud83d\udcb0\nP/E van 5.19 voelt aantrekkelijk, maar is waarschijnlijk justified. Dit is typisch een value trap: goedkoop *omdat* groei ontbreekt en marktaandeel slinkt. Zonder sterke groei of MOAT-herstel zal de multipel niet normaliseren.\n\n## 4. GROOTSTE RISICO: CORD-CUTTING VERSNELLING \ud83d\udcc9\nVoortdurende afname videoabonnees direct naar winstmarge. Serviceverlies leidt tot prijsdruk en margecompressie.\n\n---\n\n## **EINDOORDEEL: MIJDEN**\n\nGeen Buffett-stijl \"economic moat\" meer. Goedkoop ja, maar terecht. Beter: zoek kwaliteit tegen eerlijke prijs.",
-                "last_run": "2026-04-08T21:32:25.000033+00:00"
-            }
-        },
-        {
-            "ticker": "PDD",
-            "name": "PDD Holdings Inc.",
-            "sector": "Consumer Cyclical",
-            "industry_group": "Consumer Cyclical",
-            "roe": 27.29,
-            "pe_ratio": 10.24,
-            "debt_to_equity": 1.3,
-            "revenue_growth": 12.0,
-            "profit_margin": 23.0,
-            "fcf_positive": true,
-            "beta": 0.06,
-            "price": 100.17,
-            "score": 5.0,
             "penalty_applied": false
         },
         {
@@ -170,18 +170,34 @@
             "penalty_applied": true
         },
         {
-            "ticker": "APA",
-            "name": "APA Corporation",
-            "sector": "Energy",
-            "industry_group": "Energy",
-            "roe": 25.32,
-            "pe_ratio": 9.68,
-            "debt_to_equity": 0.69,
-            "revenue_growth": -28.0,
-            "profit_margin": 16.5,
+            "ticker": "UHS",
+            "name": "Universal Health Services, Inc.",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "roe": 21.33,
+            "pe_ratio": 7.83,
+            "debt_to_equity": 0.7,
+            "revenue_growth": 9.1,
+            "profit_margin": 8.6,
             "fcf_positive": true,
-            "beta": 0.48,
-            "price": 38.63,
+            "beta": 1.29,
+            "price": 180.78,
+            "score": 4.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "LULU",
+            "name": "lululemon athletica inc.",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Consumer Cyclical",
+            "roe": 34.01,
+            "pe_ratio": 12.57,
+            "debt_to_equity": 0.36,
+            "revenue_growth": 0.8,
+            "profit_margin": 14.2,
+            "fcf_positive": true,
+            "beta": 1.07,
+            "price": 163.86,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -218,52 +234,36 @@
             "penalty_applied": false
         },
         {
-            "ticker": "CDW",
-            "name": "CDW Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 43.02,
-            "pe_ratio": 15.56,
-            "debt_to_equity": 2.37,
-            "revenue_growth": 6.3,
-            "profit_margin": 4.8,
+            "ticker": "BBY",
+            "name": "Best Buy Co., Inc.",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Consumer Cyclical",
+            "roe": 37.04,
+            "pe_ratio": 12.38,
+            "debt_to_equity": 1.39,
+            "revenue_growth": -1.0,
+            "profit_margin": 2.6,
             "fcf_positive": true,
-            "beta": 1.02,
-            "price": 125.53,
-            "score": 4.7,
-            "penalty_applied": true
-        },
-        {
-            "ticker": "ACGL",
-            "name": "Arch Capital Group Ltd.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 19.54,
-            "pe_ratio": 8.27,
-            "debt_to_equity": 0.12,
-            "revenue_growth": 8.5,
-            "profit_margin": 22.1,
-            "fcf_positive": false,
-            "beta": 0.38,
-            "price": 95.97,
-            "score": 4.6,
+            "beta": 1.37,
+            "price": 62.37,
+            "score": 4.5,
             "penalty_applied": false
         },
         {
-            "ticker": "MSFT",
-            "name": "Microsoft Corporation",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 34.39,
-            "pe_ratio": 23.22,
-            "debt_to_equity": 0.32,
-            "revenue_growth": 16.7,
-            "profit_margin": 39.0,
+            "ticker": "GL",
+            "name": "Globe Life Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 20.59,
+            "pe_ratio": 10.37,
+            "debt_to_equity": 0.51,
+            "revenue_growth": 3.6,
+            "profit_margin": 19.4,
             "fcf_positive": true,
-            "beta": 1.11,
-            "price": 370.87,
+            "beta": 0.47,
+            "price": 145.84,
             "score": 4.5,
-            "penalty_applied": true
+            "penalty_applied": false
         }
     ],
     "active_trades": [
@@ -308,6 +308,20 @@
             "position_value": 1000.0,
             "shares": 2.207,
             "pl_percent": -1.49
+        },
+        {
+            "ticker": "ADBE",
+            "buy_price": 225.35,
+            "current_price": 225.35,
+            "current_value": 1000.0,
+            "buy_date": "2026-04-11",
+            "industry_group": "Tech & AI",
+            "sector": "Technology",
+            "score_at_entry": 7.0,
+            "allocation_pct": 0.1,
+            "position_value": 1000.0,
+            "shares": 4.4375,
+            "pl_percent": 0.0
         }
     ],
     "equity_history": [
@@ -414,6 +428,10 @@
         {
             "date": "04-10 21:03",
             "value": 14371.09
+        },
+        {
+            "date": "04-11 10:03",
+            "value": 12494.26
         }
     ],
     "memory": {
@@ -434,14 +452,14 @@
             }
         ],
         "positive_sectors": [],
-        "last_update": "2026-04-10T21:03:01.971166+00:00"
+        "last_update": "2026-04-11T10:03:52.352985+00:00"
     },
     "macro": {
         "vix": 19.23,
         "treasury_10y": 4.32
     },
     "portfolio": {
-        "cash": 11876.83,
+        "cash": 9000.0,
         "starting_capital": 10000.0
     }
 }
