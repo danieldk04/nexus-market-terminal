@@ -53,6 +53,15 @@
         .status-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
         .sync-time { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); border: 1px solid var(--border2); padding: 3px 8px; border-radius: 3px; }
 
+        /* ─── LIVE PRICE INDICATOR ─── */
+        .live-pill { display: flex; align-items: center; gap: 5px; padding: 3px 8px; border: 1px solid var(--border2); border-radius: 3px; }
+        .live-dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0; transition: background 0.3s, box-shadow 0.3s; }
+        .live-dot2.ld-ok      { background: #4ade80; box-shadow: 0 0 7px #4ade80; animation: pulse 2s infinite; }
+        .live-dot2.ld-fetch   { background: #fbbf24; box-shadow: 0 0 7px #fbbf24; animation: pulse 0.4s infinite; }
+        .live-dot2.ld-error   { background: #f87171; box-shadow: 0 0 5px #f87171; animation: none; }
+        .live-pill-tag { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; }
+        .live-pill-ago { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); }
+
         /* ─── LAYOUT ─── */
         .dashboard { display: grid; grid-template-columns: 300px 1fr 340px; gap: 10px; padding: 10px; flex: 1; overflow: hidden; min-height: 0; }
 
@@ -176,6 +185,11 @@
         <div class="status-dot"></div>
         <div class="status-label">LIVE</div>
         <div class="sync-time" id="sync-time">--:--:--</div>
+        <div class="live-pill">
+            <div class="live-dot2" id="live-dot"></div>
+            <div class="live-pill-tag">KOERSEN</div>
+            <div class="live-pill-ago" id="live-ago">--</div>
+        </div>
     </div>
 </header>
 
@@ -480,10 +494,12 @@ function renderTrades(trades) {
             <div>
                 <div class="trade-ticker">${t.ticker}</div>
                 <div class="trade-sector"><span class="sector-badge ${meta.cls}" style="font-size:0.5rem">${meta.label}</span></div>
+                <div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);margin-top:2px">in: €${t.buy_price.toFixed(2)}</div>
             </div>
-            <div>
-                <div class="trade-pl ${pl >= 0 ? 'pl-pos' : 'pl-neg'}">${plStr}</div>
-                <div class="trade-price">€${(t.current_price || t.buy_price).toFixed(2)}</div>
+            <div style="text-align:right">
+                <div class="trade-pl ${pl >= 0 ? 'pl-pos' : 'pl-neg'}" id="live-pl-${t.ticker}">${plStr}</div>
+                <div class="trade-price" id="live-price-${t.ticker}">€${(t.current_price || t.buy_price).toFixed(2)}</div>
+                <div class="trade-price" id="live-value-${t.ticker}" style="font-size:0.58rem;opacity:0.7">€${((t.current_value || t.position_value) || 0).toFixed(0)}</div>
             </div>
         </div>`;
     }).join('');
@@ -583,9 +599,121 @@ function renderChart() {
     });
 }
 
+// ─── LIVE PRICE ENGINE ────────────────────────────────────────────────────
+const LIVE_INTERVAL_MS = 30000;   // elke 30 seconden
+let liveLastOk = null;
+
+function setLiveIndicator(state) {
+    const dot = document.getElementById('live-dot');
+    const ago = document.getElementById('live-ago');
+    dot.className = 'live-dot2';
+    if (state === 'fetch') {
+        dot.classList.add('ld-fetch');
+        ago.textContent = '…';
+    } else if (state === 'ok') {
+        dot.classList.add('ld-ok');
+        liveLastOk = Date.now();
+        ago.textContent = 'nu';
+    } else if (state === 'error') {
+        dot.classList.add('ld-error');
+        ago.textContent = 'fout';
+    }
+}
+
+// Houdt de "x sec geleden" tekst bij
+setInterval(() => {
+    if (!liveLastOk) return;
+    const sec = Math.round((Date.now() - liveLastOk) / 1000);
+    const ago = document.getElementById('live-ago');
+    if (sec < 60) ago.textContent = sec + 's';
+    else ago.textContent = Math.floor(sec / 60) + 'm';
+}, 5000);
+
+async function fetchLivePrices() {
+    const trades = globalData?.active_trades;
+    if (!trades || !trades.length) return;
+
+    const symbols = trades.map(t => t.ticker).join(',');
+    const yahooUrl = 'https://query1.finance.yahoo.com/v7/finance/quote'
+        + '?symbols=' + symbols
+        + '&fields=regularMarketPrice&formatted=false&lang=en&region=US';
+
+    setLiveIndicator('fetch');
+
+    // Probeer eerst directe fetch, daarna via proxy
+    const urls = [
+        yahooUrl,
+        'https://api.allorigins.win/raw?url=' + encodeURIComponent(yahooUrl),
+    ];
+
+    for (const url of urls) {
+        try {
+            const res = await fetch(url, { signal: AbortSignal.timeout(7000) });
+            if (!res.ok) continue;
+            const json = await res.json();
+            const quotes = json?.quoteResponse?.result;
+            if (!quotes || !quotes.length) continue;
+
+            const priceMap = {};
+            quotes.forEach(q => { priceMap[q.symbol] = q.regularMarketPrice; });
+            updateLiveTrades(priceMap);
+            setLiveIndicator('ok');
+            return;   // succes — stop
+        } catch (_) { /* probeer volgende url */ }
+    }
+    setLiveIndicator('error');
+}
+
+function updateLiveTrades(priceMap) {
+    const trades = globalData?.active_trades;
+    if (!trades) return;
+
+    let totalPl = 0;
+    let count   = 0;
+
+    trades.forEach(t => {
+        const livePrice = priceMap[t.ticker];
+        if (!livePrice) return;
+
+        const pl        = ((livePrice - t.buy_price) / t.buy_price) * 100;
+        const liveValue = t.shares * livePrice;
+        const plStr     = (pl >= 0 ? '+' : '') + pl.toFixed(2) + '%';
+        totalPl += pl;
+        count++;
+
+        const plEl  = document.getElementById('live-pl-'    + t.ticker);
+        const prEl  = document.getElementById('live-price-' + t.ticker);
+        const valEl = document.getElementById('live-value-' + t.ticker);
+
+        if (plEl) {
+            plEl.textContent = plStr;
+            plEl.className   = 'trade-pl ' + (pl >= 0 ? 'pl-pos' : 'pl-neg');
+        }
+        if (prEl)  prEl.textContent  = '€' + livePrice.toFixed(2);
+        if (valEl) valEl.textContent = '€' + liveValue.toFixed(0);
+    });
+
+    // Totaal badge bijwerken
+    if (count > 0) {
+        const avg    = totalPl / count;
+        const avgStr = (avg >= 0 ? '+' : '') + avg.toFixed(2) + '% avg';
+        const badge  = document.getElementById('pl-total');
+        badge.textContent   = avgStr;
+        badge.style.color        = avg >= 0 ? '#4ade80' : '#f87171';
+        badge.style.borderColor  = avg >= 0 ? 'rgba(74,222,128,0.3)' : 'rgba(248,113,113,0.3)';
+        badge.style.background   = avg >= 0 ? 'rgba(74,222,128,0.1)' : 'rgba(248,113,113,0.1)';
+    }
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────
 loadData();
 setInterval(loadData, 60000);
+
+// Start live koersen na eerste data-load (wacht 1s zodat globalData gevuld is)
+setTimeout(() => {
+    fetchLivePrices();
+    setInterval(fetchLivePrices, LIVE_INTERVAL_MS);
+}, 1000);
 </script>
 </body>
 </html>
