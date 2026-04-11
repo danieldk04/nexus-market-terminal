@@ -600,13 +600,19 @@ function renderChart() {
 }
 
 // ─── LIVE PRICE ENGINE ────────────────────────────────────────────────────
-const LIVE_INTERVAL_MS  = 30000;   // normaal interval: 30s
-const LIVE_RETRY_DELAY  = 5000;    // retry na fout: 5s
-const LIVE_MAX_RETRIES  = 3;       // rood na 3 mislukte pogingen
-let liveLastOk    = null;
-let liveFailCount = 0;
-let liveRetryTimer = null;
+// Strategie: JSONP omzeilt CORS compleet (geen fetch → geen CORS-check).
+// Fallback: v8/chart per ticker. Na 3 mislukte pogingen → paused-modus.
+const LIVE_INTERVAL_MS = 30000;   // normaal interval: 30s
+const LIVE_RETRY_DELAY = 5000;    // wachttijd tussen retries: 5s
+const LIVE_MAX_RETRIES = 3;       // paused na 3 mislukte pogingen
 
+let liveLastOk     = null;
+let liveAttempt    = 0;
+let liveRetryTimer = null;
+let livePaused     = false;
+let liveFetching   = false;   // voorkomt gelijktijdige runs
+
+// ── Indicator ─────────────────────────────────────────────────────────────
 function setLiveIndicator(state, label) {
     const dot = document.getElementById('live-dot');
     const ago = document.getElementById('live-ago');
@@ -616,94 +622,170 @@ function setLiveIndicator(state, label) {
         ago.textContent = label || '…';
     } else if (state === 'ok') {
         dot.classList.add('ld-ok');
-        liveLastOk    = Date.now();
-        liveFailCount = 0;
+        liveLastOk  = Date.now();
+        liveAttempt = 0;
+        livePaused  = false;
         ago.textContent = 'nu';
-    } else if (state === 'error') {
+        removePauseBanner();
+    } else if (state === 'paused') {
         dot.classList.add('ld-error');
-        ago.textContent = label || 'fout';
+        ago.textContent = 'pauze';
     }
 }
 
-// Houdt de "x sec geleden" tekst bij
 setInterval(() => {
-    if (!liveLastOk) return;
+    if (!liveLastOk || livePaused) return;
     const sec = Math.round((Date.now() - liveLastOk) / 1000);
     const ago = document.getElementById('live-ago');
-    if (sec < 60) ago.textContent = sec + 's';
-    else ago.textContent = Math.floor(sec / 60) + 'm';
+    ago.textContent = sec < 60 ? sec + 's' : Math.floor(sec / 60) + 'm';
 }, 5000);
 
-// Alle proxy-URL fabrieken voor de Yahoo quote-endpoint
-function buildUrls(yahooUrl) {
-    const enc = encodeURIComponent(yahooUrl);
-    return [
-        // 1. Direct (werkt als de browser geen strict CORS-policy heeft)
-        { label: 'direct',       url: yahooUrl },
-        // 2. allorigins.win – parse .contents want het is wrapped JSON
-        { label: 'allorigins',   url: 'https://api.allorigins.win/get?url=' + enc, wrap: true },
-        // 3. corsproxy.io
-        { label: 'corsproxy.io', url: 'https://corsproxy.io/?' + enc },
-        // 4. thingproxy (laatste redmiddel)
-        { label: 'thingproxy',   url: 'https://thingproxy.freeboard.io/fetch/' + yahooUrl },
-    ];
+// ── Methode 1: JSONP – injecteert <script>, geen CORS ─────────────────────
+// Yahoo Finance v7 ondersteunt &callback= natively.
+function fetchViaJSONP(symbols) {
+    return new Promise((resolve, reject) => {
+        const cbName = '_nxLive' + Date.now();
+        const timer  = setTimeout(() => {
+            cleanup(); reject(new Error('JSONP timeout na 8s'));
+        }, 8000);
+
+        function cleanup() {
+            delete window[cbName];
+            const el = document.getElementById('_nx_jsonp');
+            if (el) el.remove();
+        }
+
+        window[cbName] = (data) => {
+            clearTimeout(timer);
+            cleanup();
+            const quotes = data?.quoteResponse?.result;
+            if (!quotes || !quotes.length)
+                reject(new Error('JSONP: lege quoteResponse (mogelijk rate-limit)'));
+            else
+                resolve(quotes);
+        };
+
+        const s  = document.createElement('script');
+        s.id     = '_nx_jsonp';
+        s.onerror = (e) => {
+            clearTimeout(timer); cleanup();
+            reject(new Error('JSONP script-fout – mogelijk geblokkeerd door CSP of network'));
+        };
+        s.src = 'https://query1.finance.yahoo.com/v7/finance/quote'
+            + '?symbols=' + symbols
+            + '&fields=regularMarketPrice&formatted=false'
+            + '&callback=' + cbName;
+        console.log('[NEXUS LIVE] JSONP src:', s.src);
+        document.head.appendChild(s);
+    });
 }
 
-async function tryFetch(entry, timeout = 8000) {
-    const res = await fetch(entry.url, { signal: AbortSignal.timeout(timeout) });
-    if (!res.ok) throw new Error('HTTP ' + res.status + ' via ' + entry.label);
-    let json = await res.json();
-    // allorigins wraps de response in { contents: "..." }
-    if (entry.wrap && typeof json.contents === 'string') json = JSON.parse(json.contents);
-    const quotes = json?.quoteResponse?.result;
-    if (!quotes || !quotes.length) throw new Error('Lege quoteResponse via ' + entry.label);
-    return quotes;
+// ── Methode 2: v8/finance/chart per ticker (direct fetch) ─────────────────
+// Chart-endpoint is soms minder streng dan quote-endpoint.
+async function fetchViaChart(tickers) {
+    const priceMap = {};
+    const errors   = [];
+    await Promise.all(tickers.map(async (ticker) => {
+        try {
+            const url = 'https://query2.finance.yahoo.com/v8/finance/chart/'
+                + ticker + '?interval=1m&range=1d&includePrePost=false';
+            const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const json  = await res.json();
+            const price = json?.chart?.result?.[0]?.meta?.regularMarketPrice;
+            if (!price) throw new Error('regularMarketPrice ontbreekt');
+            priceMap[ticker] = price;
+            console.log('[NEXUS LIVE] chart OK:', ticker, '→', price);
+        } catch (e) {
+            errors.push(ticker + ': ' + e.message);
+            console.warn('[NEXUS LIVE] chart FAIL:', ticker, '—', e.message);
+        }
+    }));
+    if (!Object.keys(priceMap).length)
+        throw new Error('Alle chart-fetches gefaald — ' + errors.join('; '));
+    return priceMap;
 }
 
+// ── Graceful degradation banner ────────────────────────────────────────────
+function showPauseBanner() {
+    if (document.getElementById('live-pause-banner')) return;
+    const container = document.getElementById('trades-container');
+    if (!container) return;
+    const el = document.createElement('div');
+    el.id = 'live-pause-banner';
+    el.style.cssText = 'padding:6px 10px;font-size:0.62rem;font-family:var(--mono);'
+        + 'color:#fbbf24;background:rgba(251,191,36,0.07);'
+        + 'border-bottom:1px solid rgba(251,191,36,0.2);'
+        + 'display:flex;align-items:center;gap:6px;';
+    el.innerHTML = '<span>⚠</span> Marktfeed tijdelijk offline &middot; Prijzen zijn van laatste scan';
+    container.insertBefore(el, container.firstChild);
+}
+
+function removePauseBanner() {
+    const el = document.getElementById('live-pause-banner');
+    if (el) el.remove();
+}
+
+// ── Hoofd fetchLivePrices ──────────────────────────────────────────────────
 async function fetchLivePrices() {
+    if (livePaused || liveFetching) return;
     const trades = globalData?.active_trades;
     if (!trades || !trades.length) return;
 
-    const symbols = trades.map(t => t.ticker).join(',');
-    const yahooUrl = 'https://query1.finance.yahoo.com/v7/finance/quote'
-        + '?symbols=' + symbols
-        + '&fields=regularMarketPrice&formatted=false&lang=en&region=US';
+    liveFetching = true;
+    liveAttempt++;
+    const tickers = trades.map(t => t.ticker);
+    const symbols = tickers.join(',');
+    const retryLbl = liveAttempt > 1 ? 'retry ' + liveAttempt + '/' + LIVE_MAX_RETRIES : '…';
+    setLiveIndicator('fetch', retryLbl);
+    console.log('[NEXUS LIVE] ─── Poging', liveAttempt, '/', LIVE_MAX_RETRIES, '───');
 
-    // Amber tonen: poging X/3
-    liveFailCount++;
-    const attempt = Math.min(liveFailCount, LIVE_MAX_RETRIES);
-    setLiveIndicator('fetch', attempt > 1 ? 'retry ' + (attempt - 1) + '/3' : '…');
-
-    const entries = buildUrls(yahooUrl);
-    for (const entry of entries) {
+    try {
+        // ─ Methode 1: JSONP ─────────────────────────────────────────────
         try {
-            console.log('[NEXUS LIVE] Probeer:', entry.label, entry.url);
-            const quotes = await tryFetch(entry);
+            const quotes   = await fetchViaJSONP(symbols);
             const priceMap = {};
             quotes.forEach(q => { priceMap[q.symbol] = q.regularMarketPrice; });
-            console.log('[NEXUS LIVE] ✓ Succes via', entry.label, priceMap);
+            console.log('[NEXUS LIVE] ✓ JSONP succes:', priceMap);
             updateLiveTrades(priceMap);
             setLiveIndicator('ok');
             if (liveRetryTimer) { clearTimeout(liveRetryTimer); liveRetryTimer = null; }
-            return;   // succes
-        } catch (err) {
-            console.warn('[NEXUS LIVE] ✗', entry.label, '—', err.message);
+            return;
+        } catch (e) {
+            console.warn('[NEXUS LIVE] ✗ JSONP:', e.message);
         }
-    }
 
-    // Alle proxies gefaald
-    const failLabel = 'fout ' + Math.min(liveFailCount, LIVE_MAX_RETRIES) + '/3';
-    if (liveFailCount < LIVE_MAX_RETRIES) {
-        // Nog onder de limiet → amber houden, retry na 5s
-        setLiveIndicator('fetch', failLabel);
-        console.warn('[NEXUS LIVE] Alle proxies gefaald. Retry over', LIVE_RETRY_DELAY / 1000, 's…');
-        liveRetryTimer = setTimeout(fetchLivePrices, LIVE_RETRY_DELAY);
-    } else {
-        // 3 pogingen voorbij → rood
-        setLiveIndicator('error', failLabel);
-        console.error('[NEXUS LIVE] Maximaal aantal retries bereikt. Live koersen gestopt.');
-        // Reset failCount na 2 minuten zodat de gewone 30s-interval het opnieuw probeert
-        setTimeout(() => { liveFailCount = 0; }, 120000);
+        // ─ Methode 2: v8/chart per ticker ───────────────────────────────
+        try {
+            const priceMap = await fetchViaChart(tickers);
+            console.log('[NEXUS LIVE] ✓ Chart succes:', priceMap);
+            updateLiveTrades(priceMap);
+            setLiveIndicator('ok');
+            if (liveRetryTimer) { clearTimeout(liveRetryTimer); liveRetryTimer = null; }
+            return;
+        } catch (e) {
+            console.warn('[NEXUS LIVE] ✗ Chart:', e.message);
+        }
+
+        // ─ Beide methodes gefaald ────────────────────────────────────────
+        console.error('[NEXUS LIVE] Alle methodes gefaald (poging ' + liveAttempt + ')');
+        if (liveAttempt < LIVE_MAX_RETRIES) {
+            setLiveIndicator('fetch', 'retry ' + (liveAttempt + 1) + '/' + LIVE_MAX_RETRIES);
+            console.warn('[NEXUS LIVE] Wacht 5s voor retry…');
+            liveRetryTimer = setTimeout(fetchLivePrices, LIVE_RETRY_DELAY);
+        } else {
+            livePaused = true;
+            setLiveIndicator('paused');
+            showPauseBanner();
+            console.error('[NEXUS LIVE] Paused na', LIVE_MAX_RETRIES, 'pogingen. Auto-herstart over 2 min.');
+            setTimeout(() => {
+                liveAttempt = 0; livePaused = false;
+                console.log('[NEXUS LIVE] Auto-herstart…');
+                fetchLivePrices();
+            }, 120000);
+        }
+    } finally {
+        liveFetching = false;
     }
 }
 
