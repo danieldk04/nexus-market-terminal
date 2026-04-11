@@ -1,0 +1,42 @@
+name: NEXUS LIVE TICKER
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update_ticker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installeer dependencies
+        run: pip install yfinance pandas requests
+
+      - name: Koersen updaten
+        env:
+          PYTHONPATH: src
+        run: python src/ticker_update.py
+
+      - name: Commit data.json
+        run: |
+          git config user.name  "nexus-ticker-bot"
+          git config user.email "nexus@bot.local"
+          git add data.json
+          git diff --cached --quiet || git commit -m "Auto-update: Ticker $(date -u +'%H:%M UTC')"
+          git push
