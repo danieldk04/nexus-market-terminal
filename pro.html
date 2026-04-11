@@ -185,9 +185,9 @@
         <div class="status-dot"></div>
         <div class="status-label">LIVE</div>
         <div class="sync-time" id="sync-time">--:--:--</div>
-        <div class="live-pill">
+        <div class="live-pill" title="Data wordt elke 15 minuten vernieuwd via GitHub Actions">
             <div class="live-dot2" id="live-dot"></div>
-            <div class="live-pill-tag">KOERSEN</div>
+            <div class="live-pill-tag">SERVER</div>
             <div class="live-pill-ago" id="live-ago">--</div>
         </div>
     </div>
@@ -320,14 +320,19 @@ async function loadData() {
         const res = await fetch('data.json?t=' + Date.now());
         globalData = await res.json();
         updateUI();
-    } catch(e) { console.error('Load error:', e); }
+        setServerIndicator('ok');
+    } catch(e) {
+        console.error('Load error:', e);
+        setServerIndicator('error');
+    }
 }
 
 function updateUI() {
     const macro = globalData.macro || {};
     document.getElementById('vix-val').innerText    = macro.vix ?? '--';
     document.getElementById('yield-val').innerText  = macro.treasury_10y ? macro.treasury_10y + '%' : '--';
-    document.getElementById('sync-time').innerText  = new Date(globalData.generated_at).toLocaleTimeString('nl-NL');
+    const updateTs = globalData.ticker_updated_at || globalData.generated_at;
+    document.getElementById('sync-time').innerText  = new Date(updateTs).toLocaleTimeString('nl-NL');
 
     const cands  = globalData.top_candidates || [];
     const trades = globalData.active_trades  || [];
@@ -599,246 +604,46 @@ function renderChart() {
     });
 }
 
-// ─── LIVE PRICE ENGINE ────────────────────────────────────────────────────
-// Strategie: JSONP omzeilt CORS compleet (geen fetch → geen CORS-check).
-// Fallback: v8/chart per ticker. Na 3 mislukte pogingen → paused-modus.
-const LIVE_INTERVAL_MS = 30000;   // normaal interval: 30s
-const LIVE_RETRY_DELAY = 5000;    // wachttijd tussen retries: 5s
-const LIVE_MAX_RETRIES = 3;       // paused na 3 mislukte pogingen
+// ─── SERVER INDICATOR ────────────────────────────────────────────────────
+// Koersen worden server-side vernieuwd via GitHub Actions (elke 15 min).
+// Het dashboard herlaadt data.json elke 60 seconden.
+let serverLastOk = null;
 
-let liveLastOk     = null;
-let liveAttempt    = 0;
-let liveRetryTimer = null;
-let livePaused     = false;
-let liveFetching   = false;   // voorkomt gelijktijdige runs
-
-// ── Indicator ─────────────────────────────────────────────────────────────
-function setLiveIndicator(state, label) {
+// ── Server indicator ──────────────────────────────────────────────────────
+function setServerIndicator(state) {
     const dot = document.getElementById('live-dot');
     const ago = document.getElementById('live-ago');
     dot.className = 'live-dot2';
-    if (state === 'fetch') {
-        dot.classList.add('ld-fetch');
-        ago.textContent = label || '…';
-    } else if (state === 'ok') {
+    if (state === 'ok') {
         dot.classList.add('ld-ok');
-        liveLastOk  = Date.now();
-        liveAttempt = 0;
-        livePaused  = false;
-        ago.textContent = 'nu';
-        removePauseBanner();
-    } else if (state === 'paused') {
-        dot.classList.add('ld-error');
-        ago.textContent = 'pauze';
-    }
-}
-
-setInterval(() => {
-    if (!liveLastOk || livePaused) return;
-    const sec = Math.round((Date.now() - liveLastOk) / 1000);
-    const ago = document.getElementById('live-ago');
-    ago.textContent = sec < 60 ? sec + 's' : Math.floor(sec / 60) + 'm';
-}, 5000);
-
-// ── Methode 1: JSONP – injecteert <script>, geen CORS ─────────────────────
-// Yahoo Finance v7 ondersteunt &callback= natively.
-function fetchViaJSONP(symbols) {
-    return new Promise((resolve, reject) => {
-        const cbName = '_nxLive' + Date.now();
-        const timer  = setTimeout(() => {
-            cleanup(); reject(new Error('JSONP timeout na 8s'));
-        }, 8000);
-
-        function cleanup() {
-            delete window[cbName];
-            const el = document.getElementById('_nx_jsonp');
-            if (el) el.remove();
-        }
-
-        window[cbName] = (data) => {
-            clearTimeout(timer);
-            cleanup();
-            const quotes = data?.quoteResponse?.result;
-            if (!quotes || !quotes.length)
-                reject(new Error('JSONP: lege quoteResponse (mogelijk rate-limit)'));
-            else
-                resolve(quotes);
-        };
-
-        const s  = document.createElement('script');
-        s.id     = '_nx_jsonp';
-        s.onerror = (e) => {
-            clearTimeout(timer); cleanup();
-            reject(new Error('JSONP script-fout – mogelijk geblokkeerd door CSP of network'));
-        };
-        s.src = 'https://query1.finance.yahoo.com/v7/finance/quote'
-            + '?symbols=' + symbols
-            + '&fields=regularMarketPrice&formatted=false'
-            + '&callback=' + cbName;
-        console.log('[NEXUS LIVE] JSONP src:', s.src);
-        document.head.appendChild(s);
-    });
-}
-
-// ── Methode 2: v8/finance/chart per ticker (direct fetch) ─────────────────
-// Chart-endpoint is soms minder streng dan quote-endpoint.
-async function fetchViaChart(tickers) {
-    const priceMap = {};
-    const errors   = [];
-    await Promise.all(tickers.map(async (ticker) => {
-        try {
-            const url = 'https://query2.finance.yahoo.com/v8/finance/chart/'
-                + ticker + '?interval=1m&range=1d&includePrePost=false';
-            const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const json  = await res.json();
-            const price = json?.chart?.result?.[0]?.meta?.regularMarketPrice;
-            if (!price) throw new Error('regularMarketPrice ontbreekt');
-            priceMap[ticker] = price;
-            console.log('[NEXUS LIVE] chart OK:', ticker, '→', price);
-        } catch (e) {
-            errors.push(ticker + ': ' + e.message);
-            console.warn('[NEXUS LIVE] chart FAIL:', ticker, '—', e.message);
-        }
-    }));
-    if (!Object.keys(priceMap).length)
-        throw new Error('Alle chart-fetches gefaald — ' + errors.join('; '));
-    return priceMap;
-}
-
-// ── Graceful degradation banner ────────────────────────────────────────────
-function showPauseBanner() {
-    if (document.getElementById('live-pause-banner')) return;
-    const container = document.getElementById('trades-container');
-    if (!container) return;
-    const el = document.createElement('div');
-    el.id = 'live-pause-banner';
-    el.style.cssText = 'padding:6px 10px;font-size:0.62rem;font-family:var(--mono);'
-        + 'color:#fbbf24;background:rgba(251,191,36,0.07);'
-        + 'border-bottom:1px solid rgba(251,191,36,0.2);'
-        + 'display:flex;align-items:center;gap:6px;';
-    el.innerHTML = '<span>⚠</span> Marktfeed tijdelijk offline &middot; Prijzen zijn van laatste scan';
-    container.insertBefore(el, container.firstChild);
-}
-
-function removePauseBanner() {
-    const el = document.getElementById('live-pause-banner');
-    if (el) el.remove();
-}
-
-// ── Hoofd fetchLivePrices ──────────────────────────────────────────────────
-async function fetchLivePrices() {
-    if (livePaused || liveFetching) return;
-    const trades = globalData?.active_trades;
-    if (!trades || !trades.length) return;
-
-    liveFetching = true;
-    liveAttempt++;
-    const tickers = trades.map(t => t.ticker);
-    const symbols = tickers.join(',');
-    const retryLbl = liveAttempt > 1 ? 'retry ' + liveAttempt + '/' + LIVE_MAX_RETRIES : '…';
-    setLiveIndicator('fetch', retryLbl);
-    console.log('[NEXUS LIVE] ─── Poging', liveAttempt, '/', LIVE_MAX_RETRIES, '───');
-
-    try {
-        // ─ Methode 1: JSONP ─────────────────────────────────────────────
-        try {
-            const quotes   = await fetchViaJSONP(symbols);
-            const priceMap = {};
-            quotes.forEach(q => { priceMap[q.symbol] = q.regularMarketPrice; });
-            console.log('[NEXUS LIVE] ✓ JSONP succes:', priceMap);
-            updateLiveTrades(priceMap);
-            setLiveIndicator('ok');
-            if (liveRetryTimer) { clearTimeout(liveRetryTimer); liveRetryTimer = null; }
-            return;
-        } catch (e) {
-            console.warn('[NEXUS LIVE] ✗ JSONP:', e.message);
-        }
-
-        // ─ Methode 2: v8/chart per ticker ───────────────────────────────
-        try {
-            const priceMap = await fetchViaChart(tickers);
-            console.log('[NEXUS LIVE] ✓ Chart succes:', priceMap);
-            updateLiveTrades(priceMap);
-            setLiveIndicator('ok');
-            if (liveRetryTimer) { clearTimeout(liveRetryTimer); liveRetryTimer = null; }
-            return;
-        } catch (e) {
-            console.warn('[NEXUS LIVE] ✗ Chart:', e.message);
-        }
-
-        // ─ Beide methodes gefaald ────────────────────────────────────────
-        console.error('[NEXUS LIVE] Alle methodes gefaald (poging ' + liveAttempt + ')');
-        if (liveAttempt < LIVE_MAX_RETRIES) {
-            setLiveIndicator('fetch', 'retry ' + (liveAttempt + 1) + '/' + LIVE_MAX_RETRIES);
-            console.warn('[NEXUS LIVE] Wacht 5s voor retry…');
-            liveRetryTimer = setTimeout(fetchLivePrices, LIVE_RETRY_DELAY);
+        serverLastOk = Date.now();
+        // Toon leeftijd van de ticker-update (of de scan-tijd als fallback)
+        const ts = globalData?.ticker_updated_at || globalData?.generated_at;
+        if (ts) {
+            const mins = Math.round((Date.now() - new Date(ts)) / 60000);
+            ago.textContent = mins < 1 ? 'nu' : mins + 'm';
         } else {
-            livePaused = true;
-            setLiveIndicator('paused');
-            showPauseBanner();
-            console.error('[NEXUS LIVE] Paused na', LIVE_MAX_RETRIES, 'pogingen. Auto-herstart over 2 min.');
-            setTimeout(() => {
-                liveAttempt = 0; livePaused = false;
-                console.log('[NEXUS LIVE] Auto-herstart…');
-                fetchLivePrices();
-            }, 120000);
+            ago.textContent = 'ok';
         }
-    } finally {
-        liveFetching = false;
+    } else {
+        dot.classList.add('ld-error');
+        ago.textContent = 'fout';
     }
 }
 
-function updateLiveTrades(priceMap) {
-    const trades = globalData?.active_trades;
-    if (!trades) return;
-
-    let totalPl = 0;
-    let count   = 0;
-
-    trades.forEach(t => {
-        const livePrice = priceMap[t.ticker];
-        if (!livePrice) return;
-
-        const pl        = ((livePrice - t.buy_price) / t.buy_price) * 100;
-        const liveValue = t.shares * livePrice;
-        const plStr     = (pl >= 0 ? '+' : '') + pl.toFixed(2) + '%';
-        totalPl += pl;
-        count++;
-
-        const plEl  = document.getElementById('live-pl-'    + t.ticker);
-        const prEl  = document.getElementById('live-price-' + t.ticker);
-        const valEl = document.getElementById('live-value-' + t.ticker);
-
-        if (plEl) {
-            plEl.textContent = plStr;
-            plEl.className   = 'trade-pl ' + (pl >= 0 ? 'pl-pos' : 'pl-neg');
-        }
-        if (prEl)  prEl.textContent  = '€' + livePrice.toFixed(2);
-        if (valEl) valEl.textContent = '€' + liveValue.toFixed(0);
-    });
-
-    // Totaal badge bijwerken
-    if (count > 0) {
-        const avg    = totalPl / count;
-        const avgStr = (avg >= 0 ? '+' : '') + avg.toFixed(2) + '% avg';
-        const badge  = document.getElementById('pl-total');
-        badge.textContent   = avgStr;
-        badge.style.color        = avg >= 0 ? '#4ade80' : '#f87171';
-        badge.style.borderColor  = avg >= 0 ? 'rgba(74,222,128,0.3)' : 'rgba(248,113,113,0.3)';
-        badge.style.background   = avg >= 0 ? 'rgba(74,222,128,0.1)' : 'rgba(248,113,113,0.1)';
-    }
-}
+// Ververs de leeftijdsindicator elke minuut
+setInterval(() => {
+    if (!serverLastOk) return;
+    const ts = globalData?.ticker_updated_at || globalData?.generated_at;
+    if (!ts) return;
+    const mins = Math.round((Date.now() - new Date(ts)) / 60000);
+    const ago  = document.getElementById('live-ago');
+    ago.textContent = mins < 1 ? 'nu' : mins + 'm';
+}, 60000);
 
 // ─── INIT ─────────────────────────────────────────────────────────────────
 loadData();
 setInterval(loadData, 60000);
-
-// Start live koersen na eerste data-load (wacht 1s zodat globalData gevuld is)
-setTimeout(() => {
-    fetchLivePrices();
-    setInterval(fetchLivePrices, LIVE_INTERVAL_MS);
-}, 1000);
 </script>
 </body>
 </html>
