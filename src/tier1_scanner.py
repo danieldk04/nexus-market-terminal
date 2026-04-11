@@ -205,12 +205,13 @@ def main():
             log.info(f"Tier2 cache bewaard voor {c['ticker']}")
 
     output = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at":  datetime.now(timezone.utc).isoformat(),
         "top_candidates": candidates,
-        "active_trades": old_data.get("active_trades", []),
+        "active_trades":  old_data.get("active_trades", []),
         "equity_history": old_data.get("equity_history", []),
-        "memory": old_data.get("memory", {}),
-        "macro": fetch_macro()
+        "memory":         old_data.get("memory", {}),
+        "macro":          fetch_macro(),
+        "portfolio":      old_data.get("portfolio", {"cash": 10000.0, "starting_capital": 10000.0}),
     }
     
     with open(OUTPUT_PATH, "w") as f:
