@@ -153,6 +153,129 @@
         .eq-stat { font-family: var(--mono); font-size: 0.65rem; }
         .eq-label { color: var(--muted); font-size: 0.55rem; }
         .canvas-wrap { flex: 1; min-height: 80px; }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE — TABLET (768 – 1024px)
+           ═══════════════════════════════════════════════════════════ */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 240px 1fr;
+                grid-template-rows: 1fr auto;
+            }
+            .dashboard > .right-col {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                display: flex;
+                gap: 10px;
+                height: 260px;
+                overflow: visible;
+            }
+            .right-col .panel { flex: 1; min-height: 0 !important; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE — MOBIEL (≤ 767px)
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 767px) {
+
+            /* Schakel fixed-height uit → pagina scrollt verticaal */
+            html, body { height: auto; overflow: visible; overflow-x: hidden; }
+            body { overflow-y: auto; }
+
+            /* ── Header ─────────────────────────────────────────── */
+            header {
+                height: auto;
+                min-height: 52px;
+                padding: 10px 12px;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            /* Stats-rij schuift naar tweede regel, horizontaal scrollbaar */
+            .header-stats {
+                order: 3;
+                width: 100%;
+                flex: none;
+                justify-content: flex-start;
+                gap: 1.2rem;
+                overflow-x: auto;
+                padding-bottom: 2px;
+                scrollbar-width: none;
+            }
+            .header-stats::-webkit-scrollbar { display: none; }
+            /* Verberg overbodig in kleine header */
+            .status-label, .sync-time { display: none; }
+            .live-pill-tag { display: none; }
+            .header-right { gap: 6px; }
+
+            /* ── Dashboard: één kolom ─────────────────────────── */
+            .dashboard {
+                grid-template-columns: 1fr;
+                height: auto;
+                overflow: visible;
+                padding: 8px;
+                gap: 8px;
+            }
+            /* Visuele volgorde: posities eerst, dan equity, dan rest */
+            .dashboard > .panel:first-child { order: 3; }   /* Candidates */
+            .dashboard > .main-view         { order: 4; }   /* Chart + AI */
+            .dashboard > .right-col         { order: 1; }   /* Posities/Equity/Learning */
+
+            /* ── Panels ──────────────────────────────────────── */
+            .panel { overflow: visible; min-height: 0 !important; flex: none !important; }
+            /* Begrens scrollbare gebieden zodat pagina-scroll werkt */
+            .scroll-area {
+                overflow-y: auto;
+                max-height: 300px;
+                flex: none;
+            }
+
+            /* ── Right-column: verticaal stapelen ────────────── */
+            .right-col {
+                overflow: visible;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            /* ── Posities: ruimere touch-targets ─────────────── */
+            .trade-row { padding: 12px 14px; }
+            .trade-ticker { font-size: 0.9rem; }
+            .trade-pl     { font-size: 0.88rem; }
+            .trade-price  { font-size: 0.68rem; }
+
+            /* ── Equity chart ────────────────────────────────── */
+            .canvas-wrap  { min-height: 120px; }
+            .equity-wrap  { padding: 12px; }
+
+            /* ── TradingView: vaste hoogte op mobiel ─────────── */
+            .main-view { overflow: visible; min-height: 0; }
+            #tv-container {
+                flex: none !important;
+                height: 260px;
+                min-height: 260px;
+            }
+            .analysis-panel .scroll-area { max-height: 260px; }
+
+            /* ── Kandidaat-cards ─────────────────────────────── */
+            .stock-card { padding: 12px 14px; margin-bottom: 8px; }
+            .ticker-sym  { font-size: 1.0rem; }
+            .ticker-name { max-width: 100%; }
+
+            /* ── Filter-knoppen: touch-friendly ──────────────── */
+            .filter-bar { gap: 6px; padding: 8px 10px; }
+            .filter-btn {
+                padding: 8px 13px;
+                font-size: 0.65rem;
+                min-height: 36px;
+                touch-action: manipulation;
+            }
+
+            /* ── Panel-headers iets ruimer ───────────────────── */
+            .panel-header { padding: 10px 14px; }
+            .panel-title  { font-size: 0.68rem; }
+            .panel-badge  { font-size: 0.62rem; padding: 3px 8px; }
+        }
     </style>
 </head>
 <body>
