@@ -1,26 +1,6 @@
 {
-    "generated_at": "2026-04-18T20:06:54.823280+00:00",
+    "generated_at": "2026-04-19T10:11:41.255357+00:00",
     "top_candidates": [
-        {
-            "ticker": "ALL",
-            "name": "Allstate Corporation (The)",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 39.52,
-            "pe_ratio": 5.68,
-            "debt_to_equity": 0.25,
-            "revenue_growth": 5.1,
-            "profit_margin": 15.2,
-            "fcf_positive": true,
-            "beta": 0.22,
-            "price": 216.16,
-            "score": 7.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# Allstate Corporation (ALL) - Waardeanalyse\n\n## 1. MOAT: MATIG (6/10)\nAllstate bezit een **brandmoat** en schaalvoordelen in schadevergoeding, maar geen onoverkombare barri\u00e8re. Verzekeringsconcurrentie is intens; switching costs zijn laag. Digitalisering erodieert traditionele voordelen. De moat is eerder **verdedigbaar dan onneembaar**.\n\n## 2. KWALITEIT: GOED (7/10)\n**ROE van 39%** suggereert effici\u00ebnte kapitaalalllocatie, maar dit is typisch voor verzekeringsmodellen met leverage. FCF blijft positief, maar groei is bescheiden (5.1%). Management heeft consequent winsten geherinvesteerd, hoewel aandeleninkoopprogramma's recent zijn versneld\u2014positief signaal of wanhoop?\n\n## 3. WAARDERING: WAARSCHUWING (5/10)\n**P/E van 5.68 lijkt goedkoop, maar...**\n- Verzekeringswinsten zijn cyclisch; ondergeschaalde schadeclaims kunnen jaren ineenstorten\n- Huisverzekering staat onder druk (klimaat, inflatie)\n- Dit kan een **value trap** zijn als schadequoten stijgen\n\n## 4. GROOTSTE RISICO: SCHADECLAIMS\nNatuurrampen en inflatie van reparatiekosten kunnen winstmarges in \u00e9\u00e9n kwartaal halveren. ALL heeft al marges opgewaardeerd\u2014ruimte voor tegenvaller beperkt.\n\n---\n\n## **EINDOORDEEL: HOUD / VOORZICHTIG KOPEN**\nAantrekkelijke waardering voor buffettiaan (lage P/E, sterke ROE), maar **wachten op bewijs van stabiele schadequoten** is voorzichtiger dan direct inzetten.",
-                "last_run": "2026-04-17T21:29:30.150037+00:00"
-            }
-        },
         {
             "ticker": "ADBE",
             "name": "Adobe Inc.",
@@ -42,23 +22,63 @@
             }
         },
         {
-            "ticker": "UBER",
-            "name": "Uber Technologies, Inc.",
+            "ticker": "AMP",
+            "name": "Ameriprise Financial, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 60.51,
+            "pe_ratio": 12.58,
+            "debt_to_equity": 0.58,
+            "revenue_growth": 8.6,
+            "profit_margin": 18.8,
+            "fcf_positive": true,
+            "beta": 1.27,
+            "price": 456.2,
+            "score": 6.5,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# AMP (Ameriprise Financial) - Waardebelegger Analyse\n\n## 1. MOAT (6/10)\nAMP bezit een **matige moat**. Het advisory-model cre\u00ebert switching costs en klantenloyaliteit, maar dit is erodeerend door digitalisering en concurrentie (Vanguard, Schwab). De merknaam biedt bescherming, maar geen uitzonderlijke pricing power. Schaalvoordelen in asset management zijn aanwezig maar niet dominant.\n\n## 2. KWALITEIT (7/10)\n**Sterk kapitaalalloceerder**: 60% ROE duidt op effici\u00ebntie, hoewel deels door leverage (D/E 0.58). Positieve FCF is goed, maar moet groeien beter dan omzet. Aandeleninkoopen suggereren zelfvertrouwen. Echter: het model is afhankelijk van marktsentiment\u2014geen structureel voordeel.\n\n## 3. WAARDERING (7/10)\nP/E 12.58 is **aantrekkelijk** tegen sector-average (~15-16). Maar opgepast: financials waren altijd goedkoop in bull markets (2017-2021 ook). Geen duidelijk margin of safety zonder duurzame winstgroei >8%. Mogelijk value trap als AUM afneemt.\n\n## 4. RISICO (8/10)\n**Grootste risico**: Marktneergang (recessie/beurscorrectie) drukt AUM en advisory fees direct. Beta 1.27 versterkt dit. Rentestijging helpt insurance, maar advisory-kern is cyclisch kwetsbaar.\n\n---\n\n## EINDOORDEEL: **HOUD**\nNiet slecht, maar niet overtuigend. Fair gewaardeerd, geen echte margin of safety. Geschikt voor defensieve waardebeleggers, niet ideaal voor Graham-fans. Wacht op betere inzendingen of 25% daling.",
+                "last_run": "2026-04-19T10:11:49.365813+00:00"
+            }
+        },
+        {
+            "ticker": "ADP",
+            "name": "Automatic Data Processing, Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 39.93,
-            "pe_ratio": 16.3,
-            "debt_to_equity": 0.44,
-            "revenue_growth": 20.1,
-            "profit_margin": 19.3,
+            "roe": 73.84,
+            "pe_ratio": 19.28,
+            "debt_to_equity": 0.7,
+            "revenue_growth": 6.2,
+            "profit_margin": 20.0,
             "fcf_positive": true,
-            "beta": 1.21,
-            "price": 77.12,
-            "score": 5.7,
+            "beta": 0.86,
+            "price": 200.47,
+            "score": 6.0,
             "penalty_applied": true,
             "tier2": {
-                "analysis": "# UBER-ANALYSE | Waardebelegger Perspectief\n\n## 1. MOAT: Zwak tot Matig (\u26a0\ufe0f)\nUber heeft **netzwerkeffecten** (rijen + bestuurders) en **schaalvoordelen**, maar deze zijn **erodeerend**:\n- Lage switching costs voor consumenten (app-hoppen is gratis)\n- Intense prijsconcurrentie met lokale spelers\n- Geen sterke branding/loyaliteit\n- **Conclusie**: Moat is fragiel, geen Buffett-waardig niveau\n\n## 2. KWALITEIT: Verbeterend maar Onvolkomen (5/10)\n- **Positief**: FCF nu positief (eindelijk!), ROE 39.9% impressionant\n- **Negatief**: Decennialang geld brandend voordat winst ontstond\n- Dara Khosrowshahi (CEO) toont discipline, maar kapitaalallocatie-geschiedenis is zwak\n- **Risico**: Winstgevendheid kan verdwijnen bij marktvolatiliteit\n\n## 3. WAARDERING: Fair Price, Geen Bargain (6/10)\n- P/E 16.3 is niet duur voor groeibedrijf (20% omzetgroei)\n- Maar **intrinsieke waarde lastig in te schatten** bij cyclische bedrijf\n- Geen margin of safety zichtbaar\n- **Value trap risico: JA** \u2013 ziet er goedkoop uit, maar fundamenteel zwak\n\n## 4. GROOTSTE RISICO: Regelgeving (12 maanden)\n**Reclassificatie van bestuurders als werknemers** (VS, EU) = direct grote kostenstijging en marginaaldaling\n\n---\n\n## EINDOORDEEL: **MIJDEN**\n\nTe weinig moat, te veel regelgeving-risico, geen marges of safety voor waardebelegger.",
-                "last_run": "2026-04-18T20:07:02.854416+00:00"
+                "analysis": "# ADP-Analyse: Een Klassieke Moat-Speler\n\n## 1. MOAT: STERK \u2713\nADP heeft een herculische moat via **switching costs** (payroll-systemen zijn \"sticky\") en **scale-voordelen**. Klanten zijn diep ge\u00efntegreerd; migratie is pijnlijk en kostbaar. Dit rechtvaardigt premiumwaardering. De 73% ROE bewijst pricing power.\n\n## 2. KWALITEIT: GEMENGD \u26a0\ufe0f\nPositief: Consistent positieve FCF, defensieve businessmodel. Negatief: **6.2% omzetgroei is zwak** voor een quality-compounder. Management geeft veel terug via buybacks (goed), maar organische groei stagneert. Hoge ROE wordt deels gedreven door schuldfinanciering (D/E: 0.7), niet alleen operationele uitmuntendheid.\n\n## 3. WAARDERING: EERLIJK GEPRIJSD\nP/E 19.3x is redelijk voor een moat-bedrijf met stabiele kasstromen, maar **niet goedkoop**. Bij 6% groei verwacht je eerder 15-17x. Geen waarde-aanbieding; meer 'fair value to slightly expensive'.\n\n## 4. RISICO: DIGITALISATIE-DISRUPTION\nTech-innovatoren (Guidepoint, cloud-native alternatieven) eroderen marges. Fragmentering van payroll-landscape vormt langzaam maar zeker bedreiging.\n\n---\n\n## **EINDOORDEEL: HOUD**\n\nKlassieke defensieve compounder met moat, maar groei is te mager en waardering te hoog voor kapitaalallocatie. Geen koop; geen verkoop.",
+                "last_run": "2026-04-19T10:11:56.046933+00:00"
+            }
+        },
+        {
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 37.9,
+            "pe_ratio": 10.31,
+            "debt_to_equity": 0.26,
+            "revenue_growth": 8.7,
+            "profit_margin": 12.9,
+            "fcf_positive": true,
+            "beta": 0.33,
+            "price": 202.58,
+            "score": 5.6,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# PGR Analyse\n\n## 1. MOAT: Matig \u26a0\ufe0f\nPGR's \"Flo\" branding en directe-verzekeringmodel cre\u00ebren enkele voordelen, maar de moat is **niet duurzaam**. Switching costs zijn laag (consumentenverzekeringen), prijsconcurrentie intens. Het algoritme voor risicobeoordeling is waardevol maar nabootsbaar. Een echte moat ontbreekt\u2014dit is een **commodity-achtig bedrijf** met marginale voordelen.\n\n## 2. KWALITEIT: Uitstekend \u2713\nROE van 37,9% is indrukwekkend, positieve FCF solide. Maar **let op**: verzekeraars floreren in goede verzekeringsmarkten. Management alloceert kapitaal voorzichtig (D/E 0,26), teruggaven zijn bescheiden. De vraag: hoe perform zij in een schadejaar?\n\n## 3. WAARDERING: Waarschijnlijk Fair\nP/E 10,31 oogt goedkoop, maar verzekeraars verdienen fors minder in slechte onderwriting-cycli. Een \"value trap\" risico: je betaalt laag omdat de markt voorziet dat ROE zal dalen. **Intrinsieke waarde moeilijk defensief in te schatten**.\n\n## 4. RISICO (12M): Katastrofaal weer/verzekeringsverliezen\nVerzekeraars zijn gevoelig voor grote schadeclaims (stormen, branden). \u00c9\u00e9n slecht schadejaar kan winsten halveren\u2014zie 2022.\n\n## **OORDEEL: HOUD**\nGeen duidelijke moat, cyclische winsten. Beter dan gemiddelde kwaliteit, maar niet Buffett-waardig. Geschikt als portefeuillestabilisator (lage beta 0,33), niet als kernbelegging.",
+                "last_run": "2026-04-19T10:12:03.051512+00:00"
             }
         },
         {
@@ -102,19 +122,19 @@
             }
         },
         {
-            "ticker": "SYF",
-            "name": "Synchrony Financial",
+            "ticker": "PYPL",
+            "name": "PayPal Holdings, Inc.",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "roe": 21.3,
-            "pe_ratio": 8.44,
-            "debt_to_equity": 0,
-            "revenue_growth": 5.0,
-            "profit_margin": 36.4,
+            "roe": 25.73,
+            "pe_ratio": 9.39,
+            "debt_to_equity": 0.61,
+            "revenue_growth": 3.7,
+            "profit_margin": 15.8,
             "fcf_positive": true,
-            "beta": 1.38,
-            "price": 78.34,
-            "score": 5.2,
+            "beta": 1.41,
+            "price": 50.81,
+            "score": 5.1,
             "penalty_applied": false
         },
         {
@@ -131,54 +151,6 @@
             "beta": 0.79,
             "price": 29.63,
             "score": 5.0,
-            "penalty_applied": true
-        },
-        {
-            "ticker": "DECK",
-            "name": "Deckers Outdoor Corporation",
-            "sector": "Consumer Cyclical",
-            "industry_group": "Consumer Cyclical",
-            "roe": 39.69,
-            "pe_ratio": 15.98,
-            "debt_to_equity": 0.13,
-            "revenue_growth": 7.1,
-            "profit_margin": 19.3,
-            "fcf_positive": true,
-            "beta": 1.21,
-            "price": 112.5,
-            "score": 4.9,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "PDD",
-            "name": "PDD Holdings Inc.",
-            "sector": "Consumer Cyclical",
-            "industry_group": "Consumer Cyclical",
-            "roe": 27.29,
-            "pe_ratio": 10.66,
-            "debt_to_equity": 1.3,
-            "revenue_growth": 12.0,
-            "profit_margin": 23.0,
-            "fcf_positive": true,
-            "beta": 0.06,
-            "price": 104.79,
-            "score": 4.9,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "BR",
-            "name": "Broadridge Financial Solutions,",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 41.79,
-            "pe_ratio": 18.02,
-            "debt_to_equity": 1.17,
-            "revenue_growth": 7.8,
-            "profit_margin": 14.9,
-            "fcf_positive": true,
-            "beta": 1.01,
-            "price": 162.92,
-            "score": 4.8,
             "penalty_applied": true
         },
         {
@@ -214,20 +186,36 @@
             "penalty_applied": false
         },
         {
-            "ticker": "DAL",
-            "name": "Delta Air Lines, Inc.",
-            "sector": "Industrials",
-            "industry_group": "Industrials",
-            "roe": 24.99,
-            "pe_ratio": 10.47,
-            "debt_to_equity": 1.05,
-            "revenue_growth": 12.9,
-            "profit_margin": 6.9,
+            "ticker": "CDW",
+            "name": "CDW Corporation",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 43.02,
+            "pe_ratio": 16.58,
+            "debt_to_equity": 2.37,
+            "revenue_growth": 6.3,
+            "profit_margin": 4.8,
             "fcf_positive": true,
-            "beta": 1.31,
-            "price": 71.72,
+            "beta": 1.02,
+            "price": 133.96,
+            "score": 4.6,
+            "penalty_applied": true
+        },
+        {
+            "ticker": "FTNT",
+            "name": "Fortinet, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 135.72,
+            "pe_ratio": 33.82,
+            "debt_to_equity": 0.86,
+            "revenue_growth": 14.8,
+            "profit_margin": 27.3,
+            "fcf_positive": true,
+            "beta": 1.0,
+            "price": 81.84,
             "score": 4.5,
-            "penalty_applied": false
+            "penalty_applied": true
         },
         {
             "ticker": "ACGL",
@@ -246,20 +234,36 @@
             "penalty_applied": false
         },
         {
-            "ticker": "CF",
-            "name": "CF Industries Holdings, Inc.",
-            "sector": "Basic Materials",
-            "industry_group": "Materials",
-            "roe": 23.4,
-            "pe_ratio": 12.56,
-            "debt_to_equity": 0.47,
-            "revenue_growth": 22.8,
-            "profit_margin": 20.5,
+            "ticker": "GL",
+            "name": "Globe Life Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 20.59,
+            "pe_ratio": 10.79,
+            "debt_to_equity": 0.51,
+            "revenue_growth": 3.6,
+            "profit_margin": 19.4,
             "fcf_positive": true,
-            "beta": 0.52,
-            "price": 112.68,
-            "score": 4.5,
+            "beta": 0.47,
+            "price": 151.86,
+            "score": 4.4,
             "penalty_applied": false
+        },
+        {
+            "ticker": "AAPL",
+            "name": "Apple Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 152.02,
+            "pe_ratio": 34.25,
+            "debt_to_equity": 1.03,
+            "revenue_growth": 15.7,
+            "profit_margin": 27.0,
+            "fcf_positive": true,
+            "beta": 1.11,
+            "price": 270.23,
+            "score": 4.4,
+            "penalty_applied": true
         }
     ],
     "active_trades": [
@@ -321,10 +325,6 @@
         }
     ],
     "equity_history": [
-        {
-            "date": "04-05 22:00",
-            "value": 10000.0
-        },
         {
             "date": "04-06 06:21",
             "value": 10000.0
@@ -440,6 +440,10 @@
         {
             "date": "04-18 20:07",
             "value": 10167.07
+        },
+        {
+            "date": "04-19 10:12",
+            "value": 10167.07
         }
     ],
     "memory": {
@@ -460,7 +464,7 @@
             }
         ],
         "positive_sectors": [],
-        "last_update": "2026-04-18T20:07:17.529085+00:00"
+        "last_update": "2026-04-19T10:12:04.432453+00:00"
     },
     "macro": {
         "vix": 17.48,
@@ -469,6 +473,5 @@
     "portfolio": {
         "cash": 6480.0,
         "starting_capital": 10000.0
-    },
-    "ticker_updated_at": "2026-04-19T09:11:04.824473+00:00"
+    }
 }
