@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-04-22T11:44:07.307568+00:00",
+    "generated_at": "2026-04-22T22:06:34.627861+00:00",
     "top_candidates": [
         {
             "ticker": "ALL",
@@ -7,13 +7,13 @@
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 39.52,
-            "pe_ratio": 5.69,
+            "pe_ratio": 5.63,
             "debt_to_equity": 0.25,
             "revenue_growth": 5.1,
             "profit_margin": 15.2,
             "fcf_positive": true,
             "beta": 0.22,
-            "price": 216.34,
+            "price": 214.16,
             "score": 7.1,
             "penalty_applied": false,
             "tier2": {
@@ -27,13 +27,13 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 58.77,
-            "pe_ratio": 14.41,
+            "pe_ratio": 14.92,
             "debt_to_equity": 0.58,
             "revenue_growth": 12.0,
             "profit_margin": 29.5,
             "fcf_positive": true,
             "beta": 1.52,
-            "price": 247.18,
+            "price": 255.94,
             "score": 6.8,
             "penalty_applied": true,
             "tier2": {
@@ -42,18 +42,38 @@
             }
         },
         {
+            "ticker": "AMP",
+            "name": "Ameriprise Financial, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 60.51,
+            "pe_ratio": 12.91,
+            "debt_to_equity": 0.58,
+            "revenue_growth": 8.6,
+            "profit_margin": 18.8,
+            "fcf_positive": true,
+            "beta": 1.27,
+            "price": 468.51,
+            "score": 6.4,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# AMP (Ameriprise Financial) - Waardeanalyse\n\n## 1. MOAT: Matig (\u2605\u2605\u2605\u2606\u2606)\nAMP heeft een bescheiden moat via klantrelaties en merk, maar geen sterke prijsmacht. Financi\u00eble diensten zijn competitief; switching costs zijn laag. Het verdienmodel (advisory fees) is repliceerbaar. Een echte moat ontbreekt\u2014dit is geen Berkshire Hathaway.\n\n## 2. KWALITEIT: Sterk (\u2605\u2605\u2605\u2605\u2606)\nROE van 60% is uitzonderlijk sterk, vooral voor financials. Management alloceert kapitaal agressief via buybacks (positief teken). FCF positief en omzetgroei solide (8.6%). Dit suggereert een goed draaiend bedrijf, maar hoge ROE kan kunstmatig zijn door leverage (D/E 0.58 is redelijk).\n\n## 3. WAARDERING: Goedkoop (\u2605\u2605\u2605\u2605\u2606)\nP/E 12.91 is zeer aantrekkelijk voor een rentabel, FCF-genererend bedrijf. Echter: financials waarderen voorzichtig\u2014vaak omdat boekhoudkundige winsten niet gelijk zijn aan duurzame winsten. Controleer of ROE duurzaam is bij rentestijgingen.\n\n## 4. RISICO: Renterisico (\u2605\u2605\u2605\u2605\u2605)\n**Grootste risico:** Renteverlaging scenario schrompelt marges en vermogenswaardering. Beleggersportefeuilles dalen \u2192 lagere advisory fees. Dit is een contracyclisch bedrijf.\n\n---\n\n## **EINDOORDEEL: HOUD**\nNiet kopen op sentiment; wachten op duidelijke rente-trajectory en voorzichtiger waardering van duurzame FCF. Geen value trap, maar ook geen bargain. Fair price voor gematigde groei.",
+                "last_run": "2026-04-22T22:06:42.689417+00:00"
+            }
+        },
+        {
             "ticker": "SOLV",
             "name": "Solventum Corporation",
             "sector": "Healthcare",
             "industry_group": "Healthcare",
             "roe": 38.86,
-            "pe_ratio": 7.77,
+            "pe_ratio": 7.78,
             "debt_to_equity": 1.04,
             "revenue_growth": -3.7,
             "profit_margin": 18.7,
             "fcf_positive": true,
             "beta": 0.77,
-            "price": 68.97,
+            "price": 69.11,
             "score": 6.1,
             "penalty_applied": false,
             "tier2": {
@@ -67,13 +87,13 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 73.84,
-            "pe_ratio": 19.49,
+            "pe_ratio": 19.37,
             "debt_to_equity": 0.7,
             "revenue_growth": 6.2,
             "profit_margin": 20.0,
             "fcf_positive": true,
             "beta": 0.86,
-            "price": 202.87,
+            "price": 201.69,
             "score": 6.0,
             "penalty_applied": true,
             "tier2": {
@@ -82,19 +102,35 @@
             }
         },
         {
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 37.9,
+            "pe_ratio": 10.32,
+            "debt_to_equity": 0.26,
+            "revenue_growth": 8.7,
+            "profit_margin": 12.9,
+            "fcf_positive": true,
+            "beta": 0.33,
+            "price": 202.71,
+            "score": 5.6,
+            "penalty_applied": false
+        },
+        {
             "ticker": "MKC",
             "name": "McCormick & Company, Incorporat",
             "sector": "Consumer Defensive",
             "industry_group": "Consumer Defensive",
             "roe": 25.35,
-            "pe_ratio": 8.52,
+            "pe_ratio": 8.44,
             "debt_to_equity": 0.65,
             "revenue_growth": 16.7,
             "profit_margin": 23.1,
             "fcf_positive": true,
             "beta": 0.71,
-            "price": 51.98,
-            "score": 5.4,
+            "price": 51.47,
+            "score": 5.5,
             "penalty_applied": false,
             "tier2": {
                 "analysis": "# McCormick & Company - Waardeanalyse\n\n## 1. MOAT: Sterk maar onder druk \u2b50\u2b50\u2b50\nMKC heeft een solide moat via merkherkenning (100+ jaar), distributie en switching costs (restaurants/voedingsindustrie). Echter: commoditisering van kruiden dreigt. Pricing power zwakt af in competitieve markt. **Moat: middelmatig duurzaam.**\n\n## 2. KWALITEIT: Excellent kapitaalallocatie \u2b50\u2b50\u2b50\u2b50\n- ROE van 25% is uitzonderlijk voor Consumer Defensive\n- Positieve, stabiele FCF wijst op solide cash-generatie\n- D/E van 0,65 is gezond (niet overleveraged)\n- Management heeft herhaaldelijk dividenden verhoogd en aandelen teruggekocht\n**Kapitaalallocatie: klassiek Buffett-waardig.**\n\n## 3. WAARDERING: Waarschijnlijk fair, geen koopje \u2b50\u2b50\u2b50\nP/E van 8,52 lijkt laag, maar:\n- Omzetgroei 16,7% is tijdelijk (dankzij inflatiedruk)\n- Margin 23,1% kan compressie lijden\n- **Geen opvallende veiligheidsmarge**\nWaardering is **fair, niet goedkoop**. Minimaal value trap-risico door sterke fundamentals.\n\n## 4. GROOTSTE RISICO: Grondstofkosteninflatie\nKruiden/specerijen volgen wereldwijde grondstofprijzen. Verdere prijsstijgingen kunnen marge en FCF aanvallen als retailprijzen niet volgen.\n\n---\n\n## **EINDOORDEEL: HOUD**\nKwaliteitsbedrijf met goede moat, maar tegen faire prijs. Wacht op duidelijke daling in grondstofkosten of P/E onder 7 voor aantrekkelijke entry.",
@@ -102,36 +138,36 @@
             }
         },
         {
-            "ticker": "NTAP",
-            "name": "NetApp, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 112.59,
-            "pe_ratio": 18.76,
-            "debt_to_equity": 2.36,
-            "revenue_growth": 4.4,
-            "profit_margin": 18.1,
+            "ticker": "TRV",
+            "name": "The Travelers Companies, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 25.27,
+            "pe_ratio": 9.0,
+            "debt_to_equity": 0.29,
+            "revenue_growth": 1.0,
+            "profit_margin": 15.5,
             "fcf_positive": true,
-            "beta": 1.29,
-            "price": 111.8,
-            "score": 5.4,
-            "penalty_applied": true
+            "beta": 0.52,
+            "price": 301.68,
+            "score": 5.3,
+            "penalty_applied": false
         },
         {
-            "ticker": "MU",
-            "name": "Micron Technology, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 39.82,
-            "pe_ratio": 21.19,
-            "debt_to_equity": 0.15,
-            "revenue_growth": 196.3,
-            "profit_margin": 41.5,
+            "ticker": "SYF",
+            "name": "Synchrony Financial",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 21.78,
+            "pe_ratio": 8.15,
+            "debt_to_equity": 0,
+            "revenue_growth": 6.1,
+            "profit_margin": 36.4,
             "fcf_positive": true,
-            "beta": 1.61,
-            "price": 449.38,
-            "score": 5.2,
-            "penalty_applied": true
+            "beta": 1.0,
+            "price": 78.69,
+            "score": 5.3,
+            "penalty_applied": false
         },
         {
             "ticker": "CMCSA",
@@ -139,13 +175,13 @@
             "sector": "Communication Services",
             "industry_group": "Tech & AI",
             "roe": 21.41,
-            "pe_ratio": 5.39,
+            "pe_ratio": 5.45,
             "debt_to_equity": 1.08,
             "revenue_growth": 1.2,
             "profit_margin": 16.2,
             "fcf_positive": true,
             "beta": 0.79,
-            "price": 29.05,
+            "price": 29.37,
             "score": 5.1,
             "penalty_applied": true
         },
@@ -155,45 +191,29 @@
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 25.73,
-            "pe_ratio": 9.4,
+            "pe_ratio": 9.47,
             "debt_to_equity": 0.61,
             "revenue_growth": 3.7,
             "profit_margin": 15.8,
             "fcf_positive": true,
             "beta": 1.41,
-            "price": 50.88,
+            "price": 51.22,
             "score": 5.1,
             "penalty_applied": false
         },
         {
-            "ticker": "DECK",
-            "name": "Deckers Outdoor Corporation",
-            "sector": "Consumer Cyclical",
-            "industry_group": "Consumer Cyclical",
-            "roe": 39.69,
-            "pe_ratio": 15.78,
-            "debt_to_equity": 0.13,
-            "revenue_growth": 7.1,
-            "profit_margin": 19.3,
+            "ticker": "UHS",
+            "name": "Universal Health Services, Inc.",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "roe": 21.33,
+            "pe_ratio": 7.82,
+            "debt_to_equity": 0.7,
+            "revenue_growth": 9.1,
+            "profit_margin": 8.6,
             "fcf_positive": true,
-            "beta": 1.21,
-            "price": 110.17,
-            "score": 4.9,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "APA",
-            "name": "APA Corporation",
-            "sector": "Energy",
-            "industry_group": "Energy",
-            "roe": 25.32,
-            "pe_ratio": 9.42,
-            "debt_to_equity": 0.69,
-            "revenue_growth": -28.0,
-            "profit_margin": 16.5,
-            "fcf_positive": true,
-            "beta": 0.48,
-            "price": 37.6,
+            "beta": 1.29,
+            "price": 180.72,
             "score": 4.8,
             "penalty_applied": false
         },
@@ -203,15 +223,31 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 41.79,
-            "pe_ratio": 17.93,
+            "pe_ratio": 17.79,
             "debt_to_equity": 1.17,
             "revenue_growth": 7.8,
             "profit_margin": 14.9,
             "fcf_positive": true,
             "beta": 1.01,
-            "price": 161.87,
+            "price": 160.64,
             "score": 4.8,
             "penalty_applied": true
+        },
+        {
+            "ticker": "EIX",
+            "name": "Edison International",
+            "sector": "Utilities",
+            "industry_group": "Utilities",
+            "roe": 24.1,
+            "pe_ratio": 6.01,
+            "debt_to_equity": 2.16,
+            "revenue_growth": 30.8,
+            "profit_margin": 23.1,
+            "fcf_positive": false,
+            "beta": 0.77,
+            "price": 69.38,
+            "score": 4.8,
+            "penalty_applied": false
         },
         {
             "ticker": "NFLX",
@@ -219,55 +255,23 @@
             "sector": "Communication Services",
             "industry_group": "Tech & AI",
             "roe": 48.49,
-            "pe_ratio": 29.86,
+            "pe_ratio": 30.08,
             "debt_to_equity": 0.54,
             "revenue_growth": 16.2,
             "profit_margin": 28.5,
             "fcf_positive": true,
             "beta": 1.67,
-            "price": 92.58,
+            "price": 93.24,
             "score": 4.7,
             "penalty_applied": true
-        },
-        {
-            "ticker": "ACGL",
-            "name": "Arch Capital Group Ltd.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 19.54,
-            "pe_ratio": 8.52,
-            "debt_to_equity": 0.12,
-            "revenue_growth": 8.5,
-            "profit_margin": 22.1,
-            "fcf_positive": false,
-            "beta": 0.38,
-            "price": 98.85,
-            "score": 4.5,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "GL",
-            "name": "Globe Life Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 20.59,
-            "pe_ratio": 10.73,
-            "debt_to_equity": 0.51,
-            "revenue_growth": 3.6,
-            "profit_margin": 19.4,
-            "fcf_positive": true,
-            "beta": 0.47,
-            "price": 150.92,
-            "score": 4.5,
-            "penalty_applied": false
         }
     ],
     "active_trades": [
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 213.445,
-            "current_value": 811.07,
+            "current_price": 214.16,
+            "current_value": 813.79,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -275,13 +279,13 @@
             "allocation_pct": 0.1,
             "position_value": 800.0,
             "shares": 3.7999,
-            "pl_percent": 1.38
+            "pl_percent": 1.72
         },
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 75.445,
-            "current_value": 757.29,
+            "current_price": 75.58,
+            "current_value": 758.64,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -289,13 +293,13 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 5.18
+            "pl_percent": 5.37
         },
         {
             "ticker": "AMP",
             "buy_price": 453.1,
-            "current_price": 467.43,
-            "current_value": 1031.62,
+            "current_price": 468.51,
+            "current_value": 1034.0,
             "buy_date": "2026-04-09",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -303,13 +307,13 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 2.207,
-            "pl_percent": 3.16
+            "pl_percent": 3.4
         },
         {
             "ticker": "ADBE",
             "buy_price": 225.35,
-            "current_price": 255.665,
-            "current_value": 1134.51,
+            "current_price": 255.94,
+            "current_value": 1135.73,
             "buy_date": "2026-04-11",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -317,14 +321,10 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 4.4375,
-            "pl_percent": 13.45
+            "pl_percent": 13.57
         }
     ],
     "equity_history": [
-        {
-            "date": "04-07 06:02",
-            "value": 10000.0
-        },
         {
             "date": "04-07 12:02",
             "value": 10000.0
@@ -440,6 +440,10 @@
         {
             "date": "04-22 11:44",
             "value": 10192.03
+        },
+        {
+            "date": "04-22 22:06",
+            "value": 10222.16
         }
     ],
     "memory": {
@@ -460,15 +464,14 @@
             }
         ],
         "positive_sectors": [],
-        "last_update": "2026-04-22T11:44:30.710339+00:00"
+        "last_update": "2026-04-22T22:06:44.517382+00:00"
     },
     "macro": {
-        "vix": 19.19,
+        "vix": 18.92,
         "treasury_10y": 4.29
     },
     "portfolio": {
         "cash": 6480.0,
         "starting_capital": 10000.0
-    },
-    "ticker_updated_at": "2026-04-22T19:55:13.366869+00:00"
+    }
 }
