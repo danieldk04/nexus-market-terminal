@@ -1,64 +1,24 @@
 {
-    "generated_at": "2026-04-28T16:19:35.356452+00:00",
+    "generated_at": "2026-04-28T22:16:57.807307+00:00",
     "top_candidates": [
         {
-            "ticker": "ALL",
-            "name": "Allstate Corporation (The)",
+            "ticker": "AMP",
+            "name": "Ameriprise Financial, Inc.",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "roe": 39.52,
-            "pe_ratio": 5.72,
-            "debt_to_equity": 0.25,
-            "revenue_growth": 5.1,
-            "profit_margin": 15.2,
+            "roe": 66.94,
+            "pe_ratio": 11.84,
+            "debt_to_equity": 0.53,
+            "revenue_growth": 9.0,
+            "profit_margin": 20.2,
             "fcf_positive": true,
-            "beta": 0.22,
-            "price": 217.84,
-            "score": 7.1,
+            "beta": 1.27,
+            "price": 475.35,
+            "score": 6.7,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# Allstate Corporation (ALL) - Waardeanalyse\n\n## 1. MOAT: Matig (6/10)\nAllstate heeft een **brand moat** en schaalvoordelen in distributie, maar de verzekeringsbranche is structureel competitief. Switching costs zijn laag\u2014consumenten wisselen gemakkelijk van verzekeraar. De P/E van 5.72 suggereert dat de markt cyclische winsten ziet, geen structurele pricing power. De sector score (7.1/10) bevestigt dit: verzekeraars zijn kwetsbaar voor commoditisering.\n\n## 2. KWALITEIT: Goed (7/10)\nROE van 39.52% is indrukwekkend voor een verzekeraar, wat wijst op effici\u00ebnt kapitaalbeheer. Positieve FCF is cruciaal\u2014veel verzekeraars destrueren waarde door overkapitalisatie. D/E van 0.25 is conservatief. Echter: bij verzekeraars is ROE afhankelijk van verzekeringsresultaten en beleggingsrendementen\u2014beide cyclisch.\n\n## 3. WAARDERING: Voorzichtig (6/10)\nP/E 5.72 klinkt goedkoop, maar voor verzekeraars is dit misleidend\u2014de \"E\" is volatiel. Dit lijkt eerder **value trap** dan bargain. Je betaalt voor cyclische topwinsten, niet structurele waarde. Vraag jezelf af: waarom handelt dit tegen 5x P/E? Antwoord: markt verwacht normalisatie.\n\n## 4. RISICO: Verzekeringscatastrofes (8/10)\nKlimaatgerelateerde schade neemt toe. \u00c9\u00e9n zware orkaan/stormseizoen kan winsten decimeren. Dit is oncontroleerbaar en onverzekerbaar voor Allstate zelf.\n\n---\n\n**EINDOORDEEL: MIJDEN**\n\nTe cyclisch, te laag moat, waardering lijkt goedkoop maar voelt als value trap. Buffett's \"wide moat, lasting advantage\" zit hier niet in.",
-                "last_run": "2026-04-28T16:19:43.812503+00:00"
-            }
-        },
-        {
-            "ticker": "ADBE",
-            "name": "Adobe Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 58.77,
-            "pe_ratio": 14.2,
-            "debt_to_equity": 0.58,
-            "revenue_growth": 12.0,
-            "profit_margin": 29.5,
-            "fcf_positive": true,
-            "beta": 1.52,
-            "price": 243.7385,
-            "score": 6.8,
-            "penalty_applied": true,
-            "tier2": {
-                "analysis": "# ADBE Analyse: Waardebelegger Perspectief\n\n## 1. MOAT: Sterk, maar erodeerbaar \u2b50\u2b50\u2b50\u2b50\nAdobe heeft een **duurzaam voordeel** via:\n- Zeer hoge **switching costs** (Creative Cloud ecosysteem is moeilijk te verlaten)\n- **Pricing power** (premiumpositionering, abonnementmodel)\n- Brand & lock-in effect\n\n*Maar*: AI-disruption door open-source alternatieven (Figma, Canva) vormt langetermijnbedreiging.\n\n## 2. KWALITEIT: Uitstekend kapitaalallokateur \u2b50\u2b50\u2b50\u2b50\u2b50\n- **ROE 58.77%** is fenomenaal \u2013 bovengemiddeld voor tech\n- Positieve FCF + abonnementmodel = voorspelbaar\n- Slimme M&A (Figma-poging, Workfront)\n- *Voorzichtig*: Hoge R&D-uitgaven nodig voor AI-competitie\n\n## 3. WAARDERING: Fair priced, geen bargain \ud83d\udfe1\n- P/E 14.3 lijkt laag voor groei + kwaliteit\n- *Maar* groeiverwachting 12% is matig voor cloud-software\n- **Geen waarde-trap**, echter ook geen margin of safety\n- Eerder \"fair price for a fair business\"\n\n## 4. GROOTSTE RISICO: AI-commoditisering \ud83d\udd34\nGeneratieve AI (ChatGPT, open-source tools) erosie van **premium pricing power** in design/content. Beperkt pricing power als features generiek worden.\n\n---\n\n## **EINDOORDEEL: HOUD**\n\u2713 Sterke fundamentals & moat  \n\u2713 Betrouwbare kasstromen  \n\u2717 Geen aantrekkelijke inkoopprijs  \n\u2717 Groei stagnatie vs. risico's  \n\n**Geschikt voor defensieve waardebeleggers; wacht op dip naar P/E <12 voor KOOP.**",
-                "last_run": "2026-04-26T21:04:41.822754+00:00"
-            }
-        },
-        {
-            "ticker": "SOLV",
-            "name": "Solventum Corporation",
-            "sector": "Healthcare",
-            "industry_group": "Healthcare",
-            "roe": 38.86,
-            "pe_ratio": 7.67,
-            "debt_to_equity": 1.04,
-            "revenue_growth": -3.7,
-            "profit_margin": 18.7,
-            "fcf_positive": true,
-            "beta": 0.77,
-            "price": 68.15,
-            "score": 6.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# SOLV - Waardeanalyse\n\n## 1. MOAT: Zwak tot Matig (5/10)\nSolventum erft mogelijk schaarse activiteiten van 3M, maar de moat is **niet overtuigend**. Healthcare-divisiebedrijven hebben beperkte pricing power zonder dominante merken of network effects. Switching costs zijn laag-matig. De sector-score van 6.1/10 bevestigt dit: geen fortress-business.\n\n## 2. KWALITEIT: Zorgwekkend (4/10)\n- **ROE van 38.86%** lijkt uitstekend, maar is inflatie-getekend door spin-off accounting\n- **Omzetdaling van -3.7%** = kernprobleem. Geen groei, apenas shrinkflation\n- **Positieve FCF** is goed, maar onvoldoende zonder groei\n- Capital allocation: onbekend, maar spin-off suggereert geen brillante strategie\n\n## 3. WAARDERING: Goedkoop, maar waarschijnlijk een **Value Trap** (3/10)\n- **P/E van 7.86** is zeer laag, maar rechtmatig gegeven omzetdaling\n- Lage waardering weerspiegelt fundamentele groei-problemen\n- Buffett zou zeggen: \"Goedkoop is niet hetzelfde als waardevol\"\n\n## 4. RISICO: Omzetdaling accelereert\nVerdere marktaandeel-verlies in concurrenti\u00eble healthcare \u2192 marge-druk \u2192 FCF-daling\n\n## **EINDOORDEEL: MIJDEN**\nTe weinig duurzame groei, zwakke moat, value trap-signalen. Wacht op stabilisatie.",
-                "last_run": "2026-04-27T22:09:19.550128+00:00"
+                "analysis": "# AMP Analyse: Waardebelegger Perspectief\n\n## 1. MOAT: MATIG (\u2b50\u2b50\u2b50)\nAMP bezit een bescheiden moat via **merkwaarde en switching costs** in vermogensbeheer. Echter: intense competitie van lage-kostenrivalen (Vanguard, Fidelity) erodeerd prijskracht. De 66% ROE is geflatteerd door financi\u00eble hefboomwerking (D/E 0.53), niet door echte operationele superieuriteit. **Moat is niet onoverkomelijk.**\n\n## 2. KWALITEIT: GOED (\u2b50\u2b50\u2b50\u2b50)\n- **Sterke signalen**: Positieve FCF, gezonde winstmarge (20%), organische omzetgroei (9%)\n- **Kapitaalallocatie**: Management heeft recent aandelen ingekocht\u2014signaal dat ze kapitaal nuttig inzetten\n- **Waarschuwing**: Afhankelijkheid van beleggingsmarkten (hogere beta 1.27) maakt inkomsten cyclisch\n\n## 3. WAARDERING: AANTREKKELIJK (\u2b50\u2b50\u2b50\u2b50)\nP/E 11.84 is **20-30% korting** op sector & markt. Bij 20% winstmarge en 9% groei lijkt dit redelijk waardevol. **Echter**: financi\u00eble sector-score 6.7/10 suggereert onderliggende zwaktes (rentevoetrisico? regelgeving?).\n\n## 4. GROOTSTE RISICO: RENTEVOETDRUK\n**Concrete bedreiging**: Aanhoudende druk op vermogensbeheermarges door rentestijging (DMA-druk) en vluchting naar low-cost indexering. Dit erodeerd groei sneller dan geprijd.\n\n---\n\n## EINDOORDEEL: **HOUD** \ud83d\udfe1\nFaire waardering + solide fundamentals = NIET slecht. Maar onvoldoende duidelijke moat + cyclische inkomsten = GEEN overtuigende koop. Wacht op 15-20% correctie of sterkere groei-catalysatoren.",
+                "last_run": "2026-04-28T22:17:07.728557+00:00"
             }
         },
         {
@@ -67,13 +27,13 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 73.84,
-            "pe_ratio": 19.2,
+            "pe_ratio": 19.13,
             "debt_to_equity": 0.7,
             "revenue_growth": 6.2,
             "profit_margin": 20.0,
             "fcf_positive": true,
             "beta": 0.86,
-            "price": 199.87,
+            "price": 199.17,
             "score": 6.0,
             "penalty_applied": true,
             "tier2": {
@@ -87,13 +47,13 @@
             "sector": "Technology",
             "industry_group": "Tech & AI",
             "roe": 39.93,
-            "pe_ratio": 15.82,
+            "pe_ratio": 15.67,
             "debt_to_equity": 0.44,
             "revenue_growth": 20.1,
             "profit_margin": 19.3,
             "fcf_positive": true,
             "beta": 1.21,
-            "price": 74.83,
+            "price": 74.11,
             "score": 5.7,
             "penalty_applied": true,
             "tier2": {
@@ -102,24 +62,60 @@
             }
         },
         {
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 37.9,
+            "pe_ratio": 10.33,
+            "debt_to_equity": 0.26,
+            "revenue_growth": 8.7,
+            "profit_margin": 12.9,
+            "fcf_positive": true,
+            "beta": 0.33,
+            "price": 203.03,
+            "score": 5.6,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# Progressive Corporation (PGR) - Waardebelegger Analyse\n\n## 1. MOAT: STERK (7/10)\nPGR heeft een duidelijke moat via **brand recognition** (Flo-campagnes), **schaalvoordelen** en **data-analytics superiority** in auto-verzekeringen. De lage D/E (0.26) toont financi\u00eble discipline. Switching costs zijn matig\u2014klanten kunnen makkelijk overstappen, maar hoge customer retention (80%+) spreekt voor loyaliteit.\n\n## 2. KWALITEIT: UITSTEKEND (8/10)\n**ROE 37.9% is exceptional** voor een verzekeraar. Management alloceert kapitaal conservatief (lage leverage) en reinvesteert winsten slim. Positieve FCF-trend bewijst operationele gezondheid. Combined ratio rond 95% (schade/premie) is gezond.\n\n## 3. WAARDERING: AANTREKKELIJK (7/10)\nP/E 10.33 is **goedkoop** voor dit kwaliteitstransport. Sector-score (5.6/10) waarschuwt voor cyclische druk (inflatie, claims), maar niet voor value trap. Omzetgroei 8.7% is solide.\n\n## 4. RISICO: INFLATIE + CLAIMS-COST\n**Grootste risico**: Stijgende schadeclaims door inflatie en medische kosten kunnen marginale winsten sneller opeten dan premies omhoog gaan. Verzekeraars hebben lag-effect.\n\n---\n\n## EINDOORDEEL: **KOOP** \u2713\nKwaliteit tegen lage prijs. PGR combineert Graham's veiligheid (ROE, lage schuld) met Buffett-achtige operational excellence. Entry-point nu aantrekkelijk.",
+                "last_run": "2026-04-28T22:17:13.737733+00:00"
+            }
+        },
+        {
             "ticker": "MKC",
             "name": "McCormick & Company, Incorporat",
             "sector": "Consumer Defensive",
             "industry_group": "Consumer Defensive",
             "roe": 25.35,
-            "pe_ratio": 8.41,
+            "pe_ratio": 8.38,
             "debt_to_equity": 0.65,
             "revenue_growth": 16.7,
             "profit_margin": 23.1,
             "fcf_positive": true,
             "beta": 0.71,
-            "price": 51.315,
+            "price": 51.14,
             "score": 5.5,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# MKC Waardeanalyse\n\n## 1. MOAT: **STERK** \u2b50\u2b50\u2b50\u2b50\nHuismerken (McCormick, French's) en wereldwijde distributie in kruiden & condimenten = hoge switching costs. Consumenten zijn loyal aan vertrouwde merken. Winstmarge van 23% wijst op echte pricing power. Dit is een echte \"toll booth\" in de keuken.\n\n## 2. KWALITEIT: **GOED MET VOORBEHOUD** \u2b50\u2b50\u2b50\nROE van 25% is uitstekend. Echter: D/E van 0,65 + omzetgroei van 16,7% lijkt aggressief\u2014vraag is of dit organisch is of M&A-gedreven. Positieve FCF is essentieel; zonder detail is dit onvoldoende. Management moet kapitaal in bestaande merken investeren, niet in overpriced acquisities.\n\n## 3. WAARDERING: **AANTREKKELIJK** \u2b50\u2b50\u2b50\u2b50\nP/E van 8,45 is scherp voor een defensieve kwaliteit met 23% marges. Dit zou 12-15x waard zijn. Echter: lage b\u00e8ta (0,71) suggereert dat markt dit conservatief waardeert\u2014mogelijk terecht gegeven schuld.\n\n## 4. RISICO: **INFLATIEDRUK** \u26a0\ufe0f\nOndanks pricing power: inputs (agrarisch, verpakking) stijgen sneller dan MKC kan doorberekenen. Dit kan marges comprimeren en FCF onder druk zetten.\n\n---\n\n## **EINDOORDEEL: HOUD / VOORZICHTIG KOPEN**\nFair value rond 9-10x P/E. Koop enkel bij 7,5x of lager. Te duur voor initi\u00eble positie, prima add-on voor bestaande defensieve portefeuille.",
-                "last_run": "2026-04-25T10:32:06.286897+00:00"
+                "analysis": "# McCormick & Company (MKC) - Waardeanalyse\n\n## 1. MOAT: STERK \u2b50\u2b50\u2b50\u2b50\nMKC bezit een klassieke **brand moat** (werelds grootste kruidenmerk) + **schaalvoordeel** in distributie. Huismerken kunnen niet tippen aan 150+ jaar geschiedenis en vertrouwen. Hoge winstmarge (23%) bewijst **pricing power**. Consument zal niet massaal wisselen van merk\u2014dit is defensief goud.\n\n## 2. KWALITEIT: GOED \u2b50\u2b50\u2b50\u2b50\nROE van 25% is uitstekend. Positieve FCF + 16,7% omzetgroei suggereert gezonde groei zonder wanhopig kapitaalverbruik. D/E van 0,65 is matig\u2014manageable maar niet minimaal. Management lijkt redelijk te alloceren, hoewel je FCF-trend d\u00e9tail moet checken (is dit gegroeid of stagnerend?).\n\n## 3. WAARDERING: AANTREKKELIJK \u2b50\u2b50\u2b50\u2b50\n**P/E 8,38 is goedkoop** voor een bedrijf met 25% ROE en defensieve stabiliteit. Klassieke Benjamin Graham setup. **Value trap risico: laag**\u2014duurzame moat + groei weerleggen dit.\n\n## 4. RISICO: INFLATIE-GEVOELIGHEID\nGrootste bedreiging: grondstofprijzen (peper, vanille). Hoewel MKC prijsverhogingen doorvoert, kan agressieve inflatie marges kraken sneller dan compensatie.\n\n---\n\n**EINDOORDEEL: KOOP** \ud83c\udfaf\nZeldzame combinatie: defensief + groei + goedkoop. Graham zou dit waarderen.",
+                "last_run": "2026-04-28T22:17:19.966866+00:00"
             }
+        },
+        {
+            "ticker": "NTAP",
+            "name": "NetApp, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 112.59,
+            "pe_ratio": 18.17,
+            "debt_to_equity": 2.36,
+            "revenue_growth": 4.4,
+            "profit_margin": 18.1,
+            "fcf_positive": true,
+            "beta": 1.29,
+            "price": 108.28,
+            "score": 5.5,
+            "penalty_applied": true
         },
         {
             "ticker": "SYF",
@@ -127,13 +123,13 @@
             "sector": "Financial Services",
             "industry_group": "Financials",
             "roe": 21.78,
-            "pe_ratio": 7.93,
+            "pe_ratio": 7.89,
             "debt_to_equity": 0,
             "revenue_growth": 6.1,
             "profit_margin": 36.4,
             "fcf_positive": true,
             "beta": 1.38,
-            "price": 76.57,
+            "price": 76.25,
             "score": 5.4,
             "penalty_applied": false
         },
@@ -143,13 +139,29 @@
             "sector": "Consumer Cyclical",
             "industry_group": "Consumer Cyclical",
             "roe": 34.01,
-            "pe_ratio": 10.91,
+            "pe_ratio": 10.75,
             "debt_to_equity": 0.36,
             "revenue_growth": 0.8,
             "profit_margin": 14.2,
             "fcf_positive": true,
             "beta": 1.07,
-            "price": 144.6,
+            "price": 142.39,
+            "score": 5.2,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "TRV",
+            "name": "The Travelers Companies, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 25.27,
+            "pe_ratio": 9.25,
+            "debt_to_equity": 0.29,
+            "revenue_growth": 1.0,
+            "profit_margin": 15.5,
+            "fcf_positive": true,
+            "beta": 0.52,
+            "price": 310.02,
             "score": 5.2,
             "penalty_applied": false
         },
@@ -159,31 +171,31 @@
             "sector": "Consumer Cyclical",
             "industry_group": "Consumer Cyclical",
             "roe": 39.69,
-            "pe_ratio": 15.18,
+            "pe_ratio": 15.08,
             "debt_to_equity": 0.13,
             "revenue_growth": 7.1,
             "profit_margin": 19.3,
             "fcf_positive": true,
             "beta": 1.21,
-            "price": 106.9,
-            "score": 5.0,
+            "price": 106.18,
+            "score": 5.1,
             "penalty_applied": false
         },
         {
-            "ticker": "MU",
-            "name": "Micron Technology, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 39.82,
-            "pe_ratio": 23.33,
-            "debt_to_equity": 0.15,
-            "revenue_growth": 196.3,
-            "profit_margin": 41.5,
+            "ticker": "PYPL",
+            "name": "PayPal Holdings, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 25.73,
+            "pe_ratio": 9.18,
+            "debt_to_equity": 0.61,
+            "revenue_growth": 3.7,
+            "profit_margin": 15.8,
             "fcf_positive": true,
-            "beta": 1.61,
-            "price": 494.275,
-            "score": 5.0,
-            "penalty_applied": true
+            "beta": 1.41,
+            "price": 49.64,
+            "score": 5.1,
+            "penalty_applied": false
         },
         {
             "ticker": "UHS",
@@ -191,79 +203,63 @@
             "sector": "Healthcare",
             "industry_group": "Healthcare",
             "roe": 21.37,
-            "pe_ratio": 7.27,
+            "pe_ratio": 7.04,
             "debt_to_equity": 0.67,
             "revenue_growth": 9.6,
             "profit_margin": 8.6,
             "fcf_positive": true,
             "beta": 1.0,
-            "price": 167.975,
+            "price": 162.54,
+            "score": 5.0,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "CMCSA",
+            "name": "Comcast Corporation",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "roe": 20.92,
+            "pe_ratio": 5.42,
+            "debt_to_equity": 1.07,
+            "revenue_growth": 5.3,
+            "profit_margin": 15.0,
+            "fcf_positive": true,
+            "beta": 0.79,
+            "price": 27.64,
+            "score": 5.0,
+            "penalty_applied": true
+        },
+        {
+            "ticker": "BR",
+            "name": "Broadridge Financial Solutions,",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 41.79,
+            "pe_ratio": 17.57,
+            "debt_to_equity": 1.17,
+            "revenue_growth": 7.8,
+            "profit_margin": 14.9,
+            "fcf_positive": true,
+            "beta": 1.01,
+            "price": 158.83,
             "score": 4.9,
-            "penalty_applied": false
+            "penalty_applied": true
         },
         {
-            "ticker": "EIX",
-            "name": "Edison International",
-            "sector": "Utilities",
-            "industry_group": "Utilities",
-            "roe": 24.1,
-            "pe_ratio": 5.94,
-            "debt_to_equity": 2.16,
-            "revenue_growth": 30.8,
-            "profit_margin": 23.1,
-            "fcf_positive": false,
-            "beta": 0.77,
-            "price": 68.66,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "UAL",
-            "name": "United Airlines Holdings, Inc.",
-            "sector": "Industrials",
-            "industry_group": "Industrials",
-            "roe": 25.73,
-            "pe_ratio": 8.05,
-            "debt_to_equity": 1.95,
-            "revenue_growth": 10.6,
-            "profit_margin": 6.1,
+            "ticker": "MU",
+            "name": "Micron Technology, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "roe": 39.82,
+            "pe_ratio": 23.8,
+            "debt_to_equity": 0.15,
+            "revenue_growth": 196.3,
+            "profit_margin": 41.5,
             "fcf_positive": true,
-            "beta": 1.29,
-            "price": 90.045,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "APA",
-            "name": "APA Corporation",
-            "sector": "Energy",
-            "industry_group": "Energy",
-            "roe": 25.32,
-            "pe_ratio": 9.73,
-            "debt_to_equity": 0.69,
-            "revenue_growth": -28.0,
-            "profit_margin": 16.5,
-            "fcf_positive": true,
-            "beta": 0.48,
-            "price": 38.8283,
-            "score": 4.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "DAL",
-            "name": "Delta Air Lines, Inc.",
-            "sector": "Industrials",
-            "industry_group": "Industrials",
-            "roe": 24.99,
-            "pe_ratio": 9.86,
-            "debt_to_equity": 1.05,
-            "revenue_growth": 12.9,
-            "profit_margin": 6.9,
-            "fcf_positive": true,
-            "beta": 1.31,
-            "price": 67.53,
-            "score": 4.7,
-            "penalty_applied": false
+            "beta": 1.61,
+            "price": 504.29,
+            "score": 4.9,
+            "penalty_applied": true
         }
     ],
     "active_trades": [
@@ -325,10 +321,6 @@
         }
     ],
     "equity_history": [
-        {
-            "date": "04-13 11:59",
-            "value": 9974.25
-        },
         {
             "date": "04-13 21:36",
             "value": 10093.25
@@ -444,6 +436,10 @@
         {
             "date": "04-28 16:19",
             "value": 10199.4
+        },
+        {
+            "date": "04-28 22:17",
+            "value": 10174.49
         }
     ],
     "memory": {
@@ -464,15 +460,14 @@
             }
         ],
         "positive_sectors": [],
-        "last_update": "2026-04-28T16:19:51.774066+00:00"
+        "last_update": "2026-04-28T22:17:21.763371+00:00"
     },
     "macro": {
-        "vix": 18.56,
-        "treasury_10y": 4.36
+        "vix": 17.83,
+        "treasury_10y": 4.35
     },
     "portfolio": {
         "cash": 6480.0,
         "starting_capital": 10000.0
-    },
-    "ticker_updated_at": "2026-04-28T20:49:35.043271+00:00"
+    }
 }
