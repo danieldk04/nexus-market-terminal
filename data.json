@@ -270,8 +270,8 @@
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 217.84,
-            "current_value": 827.77,
+            "current_price": 217.825,
+            "current_value": 827.71,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -284,8 +284,8 @@
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 74.8201,
-            "current_value": 751.01,
+            "current_price": 74.81,
+            "current_value": 750.91,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -293,13 +293,13 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 4.31
+            "pl_percent": 4.29
         },
         {
             "ticker": "AMP",
             "buy_price": 453.1,
-            "current_price": 479.81,
-            "current_value": 1058.94,
+            "current_price": 479.5,
+            "current_value": 1058.26,
             "buy_date": "2026-04-09",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -307,13 +307,13 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 2.207,
-            "pl_percent": 5.89
+            "pl_percent": 5.83
         },
         {
             "ticker": "ADBE",
             "buy_price": 225.35,
-            "current_price": 243.76,
-            "current_value": 1081.68,
+            "current_price": 243.87,
+            "current_value": 1082.17,
             "buy_date": "2026-04-11",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -321,7 +321,7 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 4.4375,
-            "pl_percent": 8.17
+            "pl_percent": 8.22
         }
     ],
     "equity_history": [
@@ -473,5 +473,6 @@
     "portfolio": {
         "cash": 6480.0,
         "starting_capital": 10000.0
-    }
+    },
+    "ticker_updated_at": "2026-04-28T16:25:08.518226+00:00"
 }
