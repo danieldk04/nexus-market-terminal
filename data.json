@@ -270,8 +270,8 @@
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 212.33,
-            "current_value": 806.83,
+            "current_price": 217.49,
+            "current_value": 826.44,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -279,13 +279,13 @@
             "allocation_pct": 0.1,
             "position_value": 800.0,
             "shares": 3.7999,
-            "pl_percent": 0.85
+            "pl_percent": 3.31
         },
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 74.47,
-            "current_value": 747.5,
+            "current_price": 73.9,
+            "current_value": 741.78,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -293,13 +293,13 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 3.82
+            "pl_percent": 3.03
         },
         {
             "ticker": "AMP",
             "buy_price": 453.1,
-            "current_price": 475.38,
-            "current_value": 1049.16,
+            "current_price": 478.8375,
+            "current_value": 1056.79,
             "buy_date": "2026-04-09",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -307,13 +307,13 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 2.207,
-            "pl_percent": 4.92
+            "pl_percent": 5.68
         },
         {
             "ticker": "ADBE",
             "buy_price": 225.35,
-            "current_price": 243.57,
-            "current_value": 1080.84,
+            "current_price": 241.0201,
+            "current_value": 1069.53,
             "buy_date": "2026-04-11",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -321,7 +321,7 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 4.4375,
-            "pl_percent": 8.09
+            "pl_percent": 6.95
         }
     ],
     "equity_history": [
@@ -473,5 +473,6 @@
     "portfolio": {
         "cash": 6480.0,
         "starting_capital": 10000.0
-    }
+    },
+    "ticker_updated_at": "2026-04-30T17:04:15.953736+00:00"
 }
