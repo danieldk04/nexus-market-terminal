@@ -266,8 +266,8 @@
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 218.48,
-            "current_value": 830.2,
+            "current_price": 218.51,
+            "current_value": 830.32,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -275,13 +275,13 @@
             "allocation_pct": 0.1,
             "position_value": 800.0,
             "shares": 3.7999,
-            "pl_percent": 3.78
+            "pl_percent": 3.79
         },
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 72.99,
-            "current_value": 732.64,
+            "current_price": 72.95,
+            "current_value": 732.24,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -289,13 +289,13 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 1.76
+            "pl_percent": 1.7
         },
         {
             "ticker": "AMP",
             "buy_price": 453.1,
-            "current_price": 474.662,
-            "current_value": 1047.58,
+            "current_price": 474.65,
+            "current_value": 1047.55,
             "buy_date": "2026-04-09",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -469,5 +469,6 @@
     "portfolio": {
         "cash": 6480.0,
         "starting_capital": 10000.0
-    }
+    },
+    "ticker_updated_at": "2026-05-05T21:12:30.603657+00:00"
 }
