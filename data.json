@@ -1,26 +1,6 @@
 {
-    "generated_at": "2026-05-10T09:43:43.849330+00:00",
+    "generated_at": "2026-05-10T20:01:32.834373+00:00",
     "top_candidates": [
-        {
-            "ticker": "ALL",
-            "name": "Allstate Corporation (The)",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "roe": 45.22,
-            "pe_ratio": 4.71,
-            "debt_to_equity": 0.24,
-            "revenue_growth": 3.0,
-            "profit_margin": 17.8,
-            "fcf_positive": true,
-            "beta": 0.21,
-            "price": 213.15,
-            "score": 7.7,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# Allstate Corporation (ALL) - Waardeanalyse\n\n## 1. MOAT \u2b50\u2b50\u2b50\n**Matig sterk.** Allstate heeft merkwaarde en schaalvoordelen als grote verzekeraar, maar de branche is competitief en commoditized. Switching costs zijn laag\u2014consumenten vergelijken gemakkelijk premies. Prijsmacht is beperkt door regelgeving. De directe-schrijftak (Mayhem-campagne) biedt enig differentiatie, maar geen onneembare moat.\n\n## 2. KWALITEIT \u2b50\u2b50\u2b50\u2b50\n**Goed.** ROE van 45% is uitstekend\u2014boven gemiddelde. Positieve FCF en gezond D/E (0,24) duiden op solide financi\u00eble discipline. Management concentreert zich op winstgevendheid over groei, wat typisch is voor waardegerichte bestuurders. Dit past bij Graham's \"margin of safety\"-filosofie.\n\n## 3. WAARDERING \u2b50\u2b50\u2b50\u2b50\u2b50\n**Zeer aantrekkelijk.** P/E van 4,71 is extreem laag\u2014zeer onder de markt. Bij 17,8% winstmarge en 45% ROE lijkt dit potentieel een value-gelegenheid. Controleer wel: is dit cyclisch depressie in verzekeringen of werkelijke mispricing? Kijk kritisch naar underwriting-winsten vs. investeringsrendementen.\n\n## 4. RISICO \u2b50\u2b50\u2b50\u2b50\n**Schadeclaims-inflatie (12M).** Stijgende auto- en huishoudensschadeclaims door inflatie kunnen marges klemzetten, zelfs met prijsverhogingen. Regelgeving kan premieverhoging blokkeren.\n\n---\n\n## **EINDOORDEEL: KOOP** \u2705\nBij zo'n lage P/E + sterke ROE + gezonde balans: de marge of safety is present. Verificatie van claim-trends essentieel.",
-                "last_run": "2026-05-09T20:00:00.651510+00:00"
-            }
-        },
         {
             "ticker": "AMP",
             "name": "Ameriprise Financial, Inc.",
@@ -102,26 +82,6 @@
             }
         },
         {
-            "ticker": "PTC",
-            "name": "PTC Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 34.4,
-            "pe_ratio": 14.09,
-            "debt_to_equity": 0.36,
-            "revenue_growth": 21.7,
-            "profit_margin": 41.6,
-            "fcf_positive": true,
-            "beta": 0.98,
-            "price": 146.65,
-            "score": 5.5,
-            "penalty_applied": true,
-            "tier2": {
-                "analysis": "# PTC Inc. - Waardeanalyse\n\n## 1. MOAT: Matig (6/10)\nPTC bezit software-sticky switching costs (PLM, IoT-platforms), maar de moat is **niet onverwrikbaar**. Concurrentie van Autodesk en Siemens is fel. Pricing power is beperkt in commoditiserende segmenten. De AI-claims zijn nog niet bewezen in duurzaam voordeel.\n\n## 2. KWALITEIT: Sterk (8/10)\n- **ROE 34,4%**: Excellent, wijst op effici\u00ebnte kapitaalallocatie\n- **Winstmarge 41,6%**: SaaS-model met sterke operationele hefboomwerking\n- **Positief FCF + lage D/E (0,36)**: Conservatieve balans, flexibiliteit behouden\n- Management lijkt disciplinair. Organische groei (21,7%) + margin-expansie is voorzichtig maar solide.\n\n## 3. WAARDERING: Fair (7/10)\nP/E 14,09 is **niet goedkoop** voor groei van 21,7%, maar ook niet duur. Bij 41,6% winstmarge en positieve FCF verdient het een slight premium. Geen klassieke value trap\u2014eerder een **quality at fair price**. Intrinsieke waarde ligt waarschijnlijk 15-20% hoger.\n\n## 4. RISICO: Tech-cyclus & SaaS-valoratie (8/10)\n**Grootste concrete risico**: Rentestijging drukt SaaS-waarderingen. Bij rentes >5% zakt PTC's forward P/E snel in. Klantenbeperkingen in recessie kunnen abrupt gebeuren.\n\n---\n\n## **EINDOORDEEL: HOUD**\n\n\u2705 Sterk management, gezonde balans, duurzame groei  \n\u26a0\ufe0f Maat is kwetsbaar, waardering biedt geen marge of safety  \n\ud83c\udfaf **Voor waardebeleggers**: Wacht op 15-20% correctie of hogere rendementen. Nu geen overtuigende margin of safety.",
-                "last_run": "2026-05-09T20:00:15.314253+00:00"
-            }
-        },
-        {
             "ticker": "LULU",
             "name": "lululemon athletica inc.",
             "sector": "Consumer Cyclical",
@@ -135,7 +95,11 @@
             "beta": 0.9,
             "price": 131.18,
             "score": 5.4,
-            "penalty_applied": false
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# LULU Waardeanalyse\n\n## 1. MOAT: ZWAK TOT MATIG\nLULU heeft een **merkmota** via brand loyalty en premium positioning in activewear. Echter: het moat erodeert. Concurrentie van Nike, Adidas en On neemt toe. Switching costs zijn laag (klanten springen makkelijk over). De 34% ROE is indrukwekkend, maar gegenereerd uit een verzadigde markt. **Conclusie: geen breed/duurzaam moat.**\n\n## 2. KWALITEIT: PASSABEL, MET WAARSCHUWING\nManagement investeert in internationale expansie en DTC-kanalen\u2014goeie zetten. Echter: **0,8% omzetgroei is alarmerend** voor een \"groeistock.\" Dit suggereert verzadiging of verlies aan momentum. Positief FCF is een plus, maar zonder groei wordt dit uitgehold door inflatie. **Vraag: waarom groeit LULU niet meer?**\n\n## 3. WAARDERING: VALUE TRAP\nP/E van 9,9x ziet goedkoop, maar is dat terecht? Bij 0,8% groei is dit eerder een \"fallen angel\" dan een bargain. De markt prijst in dat groei voorbij is. **Risico: je koopt tegen discount omdat het bedrijf werkelijk in problemen zit.**\n\n## 4. RISICO: CONSUMENTENVOORZICHTIGHEID\nMet inflatie drukkend op discretionaire uitgaven (activewear is luxe-essentieel) zakt verkoop en marges. Beta 0,9 maskeert grote blootstelling aan consumentencyclus.\n\n---\n\n## EINDOORDEEL: **MIJDEN**\nWaardeprijs, maar geen waarde. Groei stopt, moat zwak, risico's re\u00ebel. Wacht op 3-5% groei-revival of 15-20% lagere prijs.",
+                "last_run": "2026-05-10T20:01:41.442976+00:00"
+            }
         },
         {
             "ticker": "BR",
@@ -152,6 +116,22 @@
             "price": 149.5,
             "score": 5.4,
             "penalty_applied": true
+        },
+        {
+            "ticker": "CF",
+            "name": "CF Industries Holdings, Inc.",
+            "sector": "Basic Materials",
+            "industry_group": "Materials",
+            "roe": 27.3,
+            "pe_ratio": 10.36,
+            "debt_to_equity": 0.44,
+            "revenue_growth": 19.4,
+            "profit_margin": 23.7,
+            "fcf_positive": true,
+            "beta": 0.42,
+            "price": 115.02,
+            "score": 5.3,
+            "penalty_applied": false
         },
         {
             "ticker": "DECK",
@@ -202,22 +182,6 @@
             "penalty_applied": false
         },
         {
-            "ticker": "APA",
-            "name": "APA Corporation",
-            "sector": "Energy",
-            "industry_group": "Energy",
-            "roe": 26.22,
-            "pe_ratio": 8.29,
-            "debt_to_equity": 0.61,
-            "revenue_growth": -11.9,
-            "profit_margin": 18.3,
-            "fcf_positive": true,
-            "beta": 0.37,
-            "price": 35.56,
-            "score": 5.2,
-            "penalty_applied": false
-        },
-        {
             "ticker": "CDW",
             "name": "CDW Corporation",
             "sector": "Technology",
@@ -245,7 +209,7 @@
             "profit_margin": 55.3,
             "fcf_positive": true,
             "beta": 2.16,
-            "price": 480.0,
+            "price": 480.005,
             "score": 5.0,
             "penalty_applied": true
         },
@@ -264,6 +228,38 @@
             "price": 75.45,
             "score": 5.0,
             "penalty_applied": true
+        },
+        {
+            "ticker": "UHS",
+            "name": "Universal Health Services, Inc.",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "roe": 21.37,
+            "pe_ratio": 7.1,
+            "debt_to_equity": 0.67,
+            "revenue_growth": 9.6,
+            "profit_margin": 8.6,
+            "fcf_positive": true,
+            "beta": 1.13,
+            "price": 169.96,
+            "score": 5.0,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "CINF",
+            "name": "Cincinnati Financial Corporatio",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "roe": 18.73,
+            "pe_ratio": 9.23,
+            "debt_to_equity": 0.06,
+            "revenue_growth": 11.6,
+            "profit_margin": 21.3,
+            "fcf_positive": true,
+            "beta": 0.6,
+            "price": 161.5,
+            "score": 5.0,
+            "penalty_applied": false
         }
     ],
     "active_trades": [
@@ -325,10 +321,6 @@
         }
     ],
     "equity_history": [
-        {
-            "date": "04-24 21:36",
-            "value": 10151.58
-        },
         {
             "date": "04-25 10:32",
             "value": 10151.58
@@ -444,6 +436,10 @@
         {
             "date": "05-10 09:44",
             "value": 10197.65
+        },
+        {
+            "date": "05-10 20:01",
+            "value": 10197.65
         }
     ],
     "memory": {
@@ -464,7 +460,7 @@
             }
         ],
         "positive_sectors": [],
-        "last_update": "2026-05-10T09:44:00.469438+00:00"
+        "last_update": "2026-05-10T20:01:42.773565+00:00"
     },
     "macro": {
         "vix": 17.19,
@@ -473,6 +469,5 @@
     "portfolio": {
         "cash": 6480.0,
         "starting_capital": 10000.0
-    },
-    "ticker_updated_at": "2026-05-10T19:21:35.451925+00:00"
+    }
 }
