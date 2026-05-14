@@ -861,46 +861,52 @@ document.addEventListener('click', e => {
 });
 
 // ─── LIVE STOCK LOOKUP ───────────────────────────────────────────────────────
-// Try multiple proxies in order; Yahoo Finance v8 chart works without auth
-const YF_PROXIES = [
-    url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-    url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-];
-
-async function yfFetch(yfUrl) {
-    for (const proxy of YF_PROXIES) {
+// Returns parsed JSON or throws. Validates JSON before accepting a proxy response.
+async function yfFetchJson(yfUrl) {
+    const sources = [
+        // Direct (works on some networks where YF allows CORS)
+        () => fetch(yfUrl, { signal: AbortSignal.timeout(5000) }),
+        // allorigins wraps in { contents: "..." } for some endpoints — use /raw for JSON
+        () => fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(yfUrl)}`, { signal: AbortSignal.timeout(9000) }),
+        () => fetch(`https://thingproxy.freeboard.io/fetch/${yfUrl}`, { signal: AbortSignal.timeout(9000) }),
+        () => fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(yfUrl)}`, { signal: AbortSignal.timeout(9000) }),
+        () => fetch(`https://corsproxy.io/?${encodeURIComponent(yfUrl)}`, { signal: AbortSignal.timeout(9000) }),
+    ];
+    const errors = [];
+    for (const src of sources) {
         try {
-            const r = await fetch(proxy(yfUrl), { signal: AbortSignal.timeout(8000) });
-            if (r.ok) return r;
-        } catch (_) { /* try next */ }
+            const r = await src();
+            if (!r.ok) { errors.push(`HTTP ${r.status}`); continue; }
+            const text = await r.text();
+            return JSON.parse(text); // throws SyntaxError if not JSON → try next
+        } catch (err) { errors.push(err.message?.slice(0, 40) || '?'); }
     }
-    throw new Error('Alle proxies mislukt');
+    throw new Error(`Geen databron beschikbaar (${errors.slice(-2).join(' / ')})`);
 }
 
 function parseChart(json, ticker) {
     const res = json?.chart?.result?.[0];
-    if (!res) throw new Error('Geen chart data');
+    if (!res) throw new Error('Lege chart response');
     const meta = res.meta || {};
     return {
-        name:    meta.longName || meta.shortName || ticker,
-        price:   meta.regularMarketPrice,
-        prev:    meta.chartPreviousClose || meta.previousClose,
+        name:     meta.longName || meta.shortName || ticker,
+        price:    meta.regularMarketPrice,
+        prev:     meta.chartPreviousClose || meta.previousClose,
         currency: meta.currency || 'USD',
-        high52:  meta.fiftyTwoWeekHigh,
-        low52:   meta.fiftyTwoWeekLow,
+        high52:   meta.fiftyTwoWeekHigh,
+        low52:    meta.fiftyTwoWeekLow,
         exchange: meta.exchangeName || '',
     };
 }
 
-function parseQuote(json) {
+function parseQuoteSummary(json) {
     const r = json?.quoteSummary?.result?.[0] || {};
-    const pr = r.price || {};
-    const fd = r.financialData || {};
-    const sd = r.summaryDetail || {};
-    const ks = r.defaultKeyStatistics || {};
-    const fmtp = (v, na='n/b') => v?.fmt ?? na;
-    return { pr, fd, sd, ks, fmtp };
+    return {
+        fd:    r.financialData          || {},
+        sd:    r.summaryDetail          || {},
+        ks:    r.defaultKeyStatistics   || {},
+        fmtp: (v, na='n/b') => v?.fmt ?? na,
+    };
 }
 
 async function liveStockLookup(ticker) {
@@ -909,41 +915,40 @@ async function liveStockLookup(ticker) {
     panel.innerHTML = `<div class="sr-live-loading">Live ophalen ${ticker}...</div>`;
 
     try {
-        // Phase 1: chart endpoint — works without authentication
-        const chartUrl  = `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=5d`;
-        const chartResp = await yfFetch(chartUrl);
-        const chartJson = await chartResp.json();
+        // Phase 1: chart — no auth required, gives price + 52w range
+        const chartJson = await yfFetchJson(
+            `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=5d`
+        );
         const base = parseChart(chartJson, ticker);
 
         const chgRaw = base.prev ? ((base.price - base.prev) / base.prev) : 0;
-        const chgPct = (chgRaw * 100).toFixed(2);
         const chgCol = chgRaw >= 0 ? 'var(--green)' : '#f87171';
-        const chgStr = `${chgRaw >= 0 ? '+' : ''}${chgPct}%`;
+        const chgStr = `${chgRaw >= 0 ? '+' : ''}${(chgRaw * 100).toFixed(2)}%`;
 
-        // Phase 2: quoteSummary for fundamentals — best-effort, may fail
+        // Phase 2: fundamentals — best-effort
         let fd = {}, sd = {}, ks = {}, fmtp = (v, na='n/b') => v?.fmt ?? na;
         try {
-            const qsUrl  = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}` +
-                           `?modules=financialData,summaryDetail,defaultKeyStatistics`;
-            const qsResp = await yfFetch(qsUrl);
-            const qsJson = await qsResp.json();
-            const parsed = parseQuote(qsJson);
-            fd = parsed.fd; sd = parsed.sd; ks = parsed.ks; fmtp = parsed.fmtp;
-        } catch(_) { /* fundamentals unavailable — show price only */ }
+            const qsJson = await yfFetchJson(
+                `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}` +
+                `?modules=financialData,summaryDetail,defaultKeyStatistics`
+            );
+            ({ fd, sd, ks, fmtp } = parseQuoteSummary(qsJson));
+        } catch(_) { /* show price-only panel if fundamentals fail */ }
 
+        const cur = base.currency;
         const rows = [
-            ['Prijs',       `<span style="color:${chgCol}">${base.currency} ${base.price?.toFixed(2) ?? 'n/b'} (${chgStr})</span>`],
-            ['52w Laag',    base.low52  ? `${base.currency} ${base.low52.toFixed(2)}`  : 'n/b'],
-            ['52w Hoog',    base.high52 ? `${base.currency} ${base.high52.toFixed(2)}` : 'n/b'],
-            ['P/E (trail)', fmtp(sd.trailingPE)],
-            ['Forward P/E', fmtp(sd.forwardPE)],
-            ['ROE',         fmtp(fd.returnOnEquity)],
-            ['Winstmarge',  fmtp(fd.profitMargins)],
-            ['Omzetgroei',  fmtp(fd.revenueGrowth)],
-            ['Analyst doel',fmtp(fd.targetMeanPrice)],
-            ['Aanbeveling', fd.recommendationKey?.toUpperCase() ?? 'n/b'],
-            ['Beta',        fmtp(ks.beta)],
-            ['Beurs',       base.exchange],
+            ['Prijs',        `<span style="color:${chgCol}">${cur} ${base.price?.toFixed(2) ?? 'n/b'} (${chgStr})</span>`],
+            ['52w Laag',     base.low52  ? `${cur} ${base.low52.toFixed(2)}`  : 'n/b'],
+            ['52w Hoog',     base.high52 ? `${cur} ${base.high52.toFixed(2)}` : 'n/b'],
+            ['P/E (trail)',  fmtp(sd.trailingPE)],
+            ['Forward P/E',  fmtp(sd.forwardPE)],
+            ['ROE',          fmtp(fd.returnOnEquity)],
+            ['Winstmarge',   fmtp(fd.profitMargins)],
+            ['Omzetgroei',   fmtp(fd.revenueGrowth)],
+            ['Analyst doel', fmtp(fd.targetMeanPrice)],
+            ['Aanbeveling',  fd.recommendationKey?.toUpperCase() ?? 'n/b'],
+            ['Beta',         fmtp(ks.beta)],
+            ['Beurs',        base.exchange],
         ];
 
         panel.innerHTML = `
