@@ -1688,8 +1688,8 @@
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 216.455,
-            "current_value": 822.51,
+            "current_price": 216.45,
+            "current_value": 822.49,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -1703,8 +1703,8 @@
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 74.7,
-            "current_value": 749.81,
+            "current_price": 74.69,
+            "current_value": 749.71,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -1712,14 +1712,14 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 4.14,
+            "pl_percent": 4.13,
             "tp_target": 30.0
         },
         {
             "ticker": "AMP",
             "buy_price": 453.1,
-            "current_price": 472.05,
-            "current_value": 1041.81,
+            "current_price": 472.04,
+            "current_value": 1041.79,
             "buy_date": "2026-04-09",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -1749,8 +1749,8 @@
             "ticker": "PGR",
             "name": "Progressive Corporation (The)",
             "buy_price": 197.19,
-            "current_price": 196.89,
-            "current_value": 1294.02,
+            "current_price": 196.88,
+            "current_value": 1293.95,
             "buy_date": "2026-05-14",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -1762,7 +1762,7 @@
             "kelly_fraction": 0.2,
             "position_value": 1296.0,
             "shares": 6.5723,
-            "pl_percent": -0.15
+            "pl_percent": -0.16
         },
         {
             "ticker": "BR",
@@ -1844,8 +1844,8 @@
             "ticker": "CF",
             "name": "CF Industries Holdings, Inc.",
             "buy_price": 123.09,
-            "current_price": 122.9,
-            "current_value": 503.52,
+            "current_price": 122.97,
+            "current_value": 503.81,
             "buy_date": "2026-05-14",
             "industry_group": "Materials",
             "sector": "Basic Materials",
@@ -1857,7 +1857,7 @@
             "kelly_fraction": 0.2,
             "position_value": 504.3,
             "shares": 4.097,
-            "pl_percent": -0.15
+            "pl_percent": -0.1
         }
     ],
     "equity_history": [
@@ -2320,5 +2320,6 @@
             "retrieved_at": "2026-05-14T20:11:01.009740+00:00"
         }
     },
-    "filings_at": "2026-05-14T20:11:01.509889+00:00"
+    "filings_at": "2026-05-14T20:11:01.509889+00:00",
+    "ticker_updated_at": "2026-05-14T20:43:10.805535+00:00"
 }
