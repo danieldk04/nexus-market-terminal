@@ -1,25 +1,22 @@
 import json
 import time
 import logging
-import urllib.parse
+import requests
 from datetime import datetime, timezone
 from pathlib import Path
 import yfinance as yf
 import pandas as pd
-import requests
 from io import StringIO
+from dcf_engine import compute_dcf, compute_roic, compute_roce, check_dividend_sustainability
 from notifier import notify_scan_complete
 
-# Logging setup
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger("tier1_scanner")
 
-# Paden
-BASE_DIR = Path(__file__).parent.parent
+BASE_DIR    = Path(__file__).parent.parent
 OUTPUT_PATH = BASE_DIR / "data.json"
 MEMORY_PATH = BASE_DIR / "memory.json"
 
-# Sector Definities — uitgebreid voor betere diversificatiecontrole
 SECTOR_MAP = {
     "Technology":             "Tech & AI",
     "Communication Services": "Tech & AI",
@@ -43,103 +40,231 @@ SECTOR_MAP = {
     "Industrials":            "Industrials",
 }
 
+FALLBACK_TICKERS = [
+    "AAPL","MSFT","GOOGL","AMZN","META","NVDA","BRK-B","JPM","V","MA",
+    "UNH","JNJ","PG","KO","WMT","HD","CVX","MRK","ABBV","PEP",
+    "TMO","COST","ACN","LLY","TXN","AVGO","QCOM","INTU","AMAT","ADP",
+    "CB","CME","ICE","SPGI","MCO","BLK","GS","MS","AXP","C",
+    "ISRG","SYK","MDT","EW","BSX","DHR","A","IDXX","BIO","MTD",
+    "EOG","COP","PSX","MPC","VLO","XOM","SLB","HAL","BKR","DVN",
+    "NKE","SBUX","MCD","YUM","DPZ","CMG","DRI","EL","CL","CHD",
+    "AMT","PLD","EQIX","CCI","PSA","SPG","O","WELL","DLR","AVB",
+    "ALL","PGR","CB","TRV","MET","PRU","AFL","AIG","HIG","UNM",
+    "ASML","SHOP","TSM","NVO","SAP",
+]
+
+
 def get_industry_group(sector):
     return SECTOR_MAP.get(sector, "Others")
 
+
 def load_memory():
-    """Laadt het geheugen van de bot om te leren van fouten."""
     if not MEMORY_PATH.exists():
         return {"lessons": []}
-    with open(MEMORY_PATH, "r") as f:
+    with open(MEMORY_PATH) as f:
         return json.load(f)
+
 
 def fetch_global_universe():
     tickers = []
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; NEXUSBot/3.0)"}
+
+    # S&P 500
     try:
-        # S&P 500
-        res = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=headers, timeout=10)
-        tickers.extend(pd.read_html(StringIO(res.text))[0]["Symbol"].str.replace(".", "-", regex=False).tolist())
-        # Nasdaq 100
-        res = requests.get("https://en.wikipedia.org/wiki/Nasdaq-100", headers=headers, timeout=10)
-        tickers.extend(pd.read_html(StringIO(res.text))[4]["Ticker"].tolist())
-        # NL Selectie
-        tickers.extend(["ASML.AS", "INGA.AS", "ADYEN.AS", "UNA.AS", "HEIA.AS"])
+        res = requests.get(
+            "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+            headers=headers, timeout=15
+        )
+        sp500 = pd.read_html(StringIO(res.text))[0]["Symbol"].str.replace(".", "-", regex=False).tolist()
+        tickers.extend(sp500)
+        log.info(f"S&P 500: {len(sp500)} tickers")
     except Exception as e:
-        log.error(f"Fout bij ophalen universe: {e}")
-    return list(set(tickers))
+        log.warning(f"S&P 500 scraping mislukt: {e}")
+
+    # Nasdaq-100 — meerdere tabel-indices proberen
+    for idx in [4, 3, 5, 2]:
+        try:
+            res    = requests.get("https://en.wikipedia.org/wiki/Nasdaq-100", headers=headers, timeout=15)
+            tables = pd.read_html(StringIO(res.text))
+            for col in ["Ticker", "Symbol", "Tick"]:
+                if col in tables[idx].columns:
+                    ndx = tables[idx][col].dropna().tolist()
+                    tickers.extend(ndx)
+                    log.info(f"Nasdaq-100: {len(ndx)} tickers (tabel {idx})")
+                    break
+            break
+        except Exception:
+            continue
+
+    # NL selectie
+    tickers.extend(["ASML.AS","INGA.AS","ADYEN.AS","UNA.AS","HEIA.AS","PHIA.AS","WKL.AS"])
+
+    if len(tickers) < 60:
+        log.warning("Scraping laag — fallback actief")
+        tickers.extend(FALLBACK_TICKERS)
+
+    unique = list(set(tickers))
+    log.info(f"Universe: {len(unique)} unieke tickers")
+    return unique
+
 
 def fetch_macro():
-    """Haalt live VIX en 10-jaars rente op via yfinance."""
     macro = {"vix": None, "treasury_10y": None}
     try:
-        macro["vix"] = round(yf.Ticker("^VIX").info.get("regularMarketPrice", 0), 2)
+        macro["vix"] = round(yf.Ticker("^VIX").info.get("regularMarketPrice", 0) or 0, 2)
     except Exception:
         pass
     try:
-        macro["treasury_10y"] = round(yf.Ticker("^TNX").info.get("regularMarketPrice", 0), 2)
+        macro["treasury_10y"] = round(yf.Ticker("^TNX").info.get("regularMarketPrice", 0) or 0, 2)
     except Exception:
         pass
     log.info(f"Macro: VIX={macro['vix']}  10Y={macro['treasury_10y']}%")
     return macro
 
-def analyse_ticker(ticker_symbol, memory):
+
+def compute_5yr_data(t):
+    result = {"rev_cagr_5yr": None, "ni_cagr_5yr": None}
     try:
-        t = yf.Ticker(ticker_symbol)
+        fin = t.financials
+        if fin is None or fin.empty:
+            return result
+
+        def _cagr(keys):
+            for key in keys:
+                matches = [k for k in fin.index if key in str(k)]
+                if matches:
+                    series = fin.loc[matches[0]].dropna()
+                    if len(series) >= 2:
+                        n = float(series.iloc[0])
+                        o = float(series.iloc[-1])
+                        y = len(series) - 1
+                        if o > 0 and n > 0:
+                            return round(((n / o) ** (1 / y) - 1) * 100, 1)
+            return None
+
+        result["rev_cagr_5yr"] = _cagr(["Total Revenue", "Revenue"])
+        result["ni_cagr_5yr"]  = _cagr(["Net Income", "Net Income Common Stockholders"])
+    except Exception:
+        pass
+    return result
+
+
+def analyse_ticker(ticker_symbol, memory, post_mortem):
+    try:
+        t    = yf.Ticker(ticker_symbol)
         info = t.info
-        
-        roe = info.get("returnOnEquity", 0)
-        if roe < 0.15: return None 
+
+        # Basisfilters
+        roic = compute_roic(info)
+        roce = compute_roce(info)
+
+        # Minimale kwaliteitsdrempel: ROIC > 10% OF ROE > 15%
+        roe = info.get("returnOnEquity", 0) or 0
+        if roe < 0.15 and (roic is None or roic < 10):
+            return None
 
         sector = info.get("sector", "Unknown")
-        group = get_industry_group(sector)
-        pe = info.get("trailingPE", 0)
-        de_ratio = (info.get("debtToEquity", 0) / 100) if info.get("debtToEquity", 0) > 5 else info.get("debtToEquity", 0)
-        
-        max_pe = 35 if group == "Tech & AI" else 18
-        if pe <= 0 or pe > max_pe: return None
-        if de_ratio > 2.5: return None
+        group  = get_industry_group(sector)
+        pe     = info.get("trailingPE", 0) or 0
+        max_pe = 45 if group == "Tech & AI" else 28
+        if pe <= 0 or pe > max_pe:
+            return None
 
-        # Aanvullende fundamentals voor rijkere scoring
-        rev_growth  = info.get("revenueGrowth", 0) or 0       # bv. 0.12 = 12% groei
-        fcf         = info.get("freeCashflow", None)           # absoluut getal
-        profit_margin = info.get("profitMargins", 0) or 0      # bv. 0.18 = 18%
-        beta        = info.get("beta", 1.0) or 1.0
+        de_raw   = info.get("debtToEquity", 0) or 0
+        de_ratio = (de_raw / 100) if de_raw > 5 else de_raw
+        if de_ratio > 3.0:
+            return None
 
-        # ── SCORE LOGICA ────────────────────────────────────────────────────
+        rev_growth    = info.get("revenueGrowth", 0) or 0
+        fcf           = info.get("freeCashflow")
+        profit_margin = info.get("profitMargins", 0) or 0
+        beta          = info.get("beta", 1.0) or 1.0
+        price         = info.get("currentPrice") or info.get("regularMarketPrice") or 0
+
+        # P/FCF
+        market_cap = info.get("marketCap", 0) or 0
+        pfcf = round(market_cap / fcf, 1) if fcf and fcf > 0 and market_cap > 0 else None
+
+        # Analist targets
+        analyst_target = info.get("targetMeanPrice")
+        analyst_count  = info.get("numberOfAnalystOpinions", 0) or 0
+        analyst_upside = None
+        if analyst_target and price and price > 0:
+            analyst_upside = round(((analyst_target / price) - 1) * 100, 1)
+
+        # 5-jaars data
+        five_yr = compute_5yr_data(t)
+
+        # DCF berekening
+        dcf = compute_dcf(info)
+
+        # Dividend sustainability
+        div_check = check_dividend_sustainability(info)
+
+        # ── SCORE LOGICA ─────────────────────────────────────────────────────
         base         = 5.0
-        pe_penalty   = (pe / max_pe) * 4.0
-        roe_bonus    = min(4.0, (roe / 0.40) * 3.0)
-        debt_penalty = min(1.0, de_ratio / 2.5)
+        max_pe_norm  = max_pe
+        pe_penalty   = (pe / max_pe_norm) * 3.5
+        roe_bonus    = min(3.5, (roe / 0.30) * 2.5)
+        debt_penalty = min(1.2, de_ratio / 3.0)
+        growth_bonus = 0.4 if rev_growth > 0.10 else (0.2 if rev_growth > 0 else 0)
+        fcf_penalty  = 0.5 if (fcf is not None and fcf < 0) else 0
+        margin_bonus = 0.3 if profit_margin > 0.15 else 0
+        beta_penalty = 0.3 if beta > 2.2 else 0
 
-        # Groeibonus: omzetgroei > 10% geeft +0.4
-        growth_bonus = 0.4 if rev_growth > 0.10 else (0.2 if rev_growth > 0 else 0.0)
+        # ROIC bonus
+        roic_bonus = 0.0
+        if roic is not None:
+            if roic > 25:   roic_bonus = 0.7
+            elif roic > 15: roic_bonus = 0.4
 
-        # FCF-kwaliteit: negatieve vrije kasstroom = rode vlag
-        fcf_penalty = 0.5 if (fcf is not None and fcf < 0) else 0.0
+        # ROCE bonus
+        roce_bonus = 0.0
+        if roce is not None:
+            if roce > 20:   roce_bonus = 0.4
+            elif roce > 12: roce_bonus = 0.2
 
-        # Winstmarge-bonus: gezonde marge > 15% geeft +0.3
-        margin_bonus = 0.3 if profit_margin > 0.15 else 0.0
+        # P/FCF bonus
+        pfcf_bonus = 0.0
+        if pfcf is not None:
+            if pfcf < 15:   pfcf_bonus = 0.5
+            elif pfcf < 22: pfcf_bonus = 0.25
 
-        # Beta-correctie: extreem volatiele aandelen (beta > 2) krijgen kleine straf
-        beta_penalty = 0.3 if beta > 2.0 else 0.0
+        # DCF upside bonus
+        dcf_bonus = 0.0
+        if dcf is not None and dcf.get("dcf_upside") is not None:
+            upside = dcf["dcf_upside"]
+            if upside > 40:   dcf_bonus = 0.8
+            elif upside > 20: dcf_bonus = 0.4
+            elif upside < -15: dcf_bonus = -0.5   # Overgewaardeerd
 
-        # Memory-penalty: lessen uit eerdere verliezen in dezelfde sector
+        # Analyst upside bonus
+        analyst_bonus = 0.0
+        if analyst_upside is not None and analyst_count >= 5:
+            if analyst_upside > 20:   analyst_bonus = 0.3
+            elif analyst_upside > 10: analyst_bonus = 0.15
+
+        # Dividend risico straf
+        div_penalty = 0.0
+        if div_check is not None and not div_check["sustainable"]:
+            div_penalty = 0.5
+
+        # Memory-penalty: lessen uit post-mortem sector-adjustments
         memory_penalty = 0.0
         for lesson in memory.get("lessons", []):
             if lesson.get("sector") == group and lesson.get("type") == "NEGATIVE_LEARNING":
-                memory_penalty += 0.5
+                memory_penalty += 0.4
+        # Post-mortem sector adjustments
+        pm_adjustments = post_mortem.get("sector_adjustments", {})
+        pm_adj = pm_adjustments.get(group, 0)
         memory_penalty = min(2.0, memory_penalty)
 
-        raw_score = (base
-                     - pe_penalty
-                     + roe_bonus
-                     - debt_penalty
-                     + growth_bonus
-                     - fcf_penalty
-                     + margin_bonus
-                     - beta_penalty
-                     - memory_penalty)
+        raw_score = (
+            base - pe_penalty + roe_bonus - debt_penalty + growth_bonus
+            - fcf_penalty + margin_bonus - beta_penalty + roic_bonus
+            + roce_bonus + pfcf_bonus + dcf_bonus + analyst_bonus
+            - div_penalty - memory_penalty + pm_adj
+        )
         score = round(max(1.0, min(10.0, raw_score)), 1)
 
         return {
@@ -147,6 +272,7 @@ def analyse_ticker(ticker_symbol, memory):
             "name":            info.get("shortName", ticker_symbol),
             "sector":          sector,
             "industry_group":  group,
+            "price":           round(price, 2) if price else 0,
             "roe":             round(roe * 100, 2),
             "pe_ratio":        round(pe, 2),
             "debt_to_equity":  round(de_ratio, 2),
@@ -154,72 +280,88 @@ def analyse_ticker(ticker_symbol, memory):
             "profit_margin":   round(profit_margin * 100, 1),
             "fcf_positive":    fcf is None or fcf >= 0,
             "beta":            round(beta, 2),
-            "price":           info.get("currentPrice", 0),
+            "roic":            roic,
+            "roce":            roce,
+            "pfcf":            pfcf,
+            "rev_cagr_5yr":    five_yr["rev_cagr_5yr"],
+            "ni_cagr_5yr":     five_yr["ni_cagr_5yr"],
+            "analyst_target":  analyst_target,
+            "analyst_upside":  analyst_upside,
+            "analyst_count":   analyst_count,
+            "dcf":             dcf,
+            "dividend":        div_check,
             "score":           score,
-            "penalty_applied": memory_penalty > 0,
+            "penalty_applied": memory_penalty > 0 or pm_adj < 0,
         }
-    except: return None
+    except Exception:
+        return None
 
-MAX_SCAN = 300   # Maximaal te scannen tickers
-TOP_N    = 15    # Beste N kandidaten teruggeven
+
+MAX_SCAN = 400
+TOP_N    = 20
+
 
 def main():
-    log.info("=== NEXUS INTELLIGENT SCAN STARTING ===")
-    memory = load_memory()
-    universe = fetch_global_universe()
-    log.info(f"Universe: {len(universe)} tickers beschikbaar, max {MAX_SCAN} worden gescand.")
+    log.info("=== NEXUS DEEP VALUE SCAN STARTING ===")
+    memory     = load_memory()
+    post_mortem = memory.get("post_mortem", {})
+    universe   = fetch_global_universe()
+    log.info(f"Universe: {len(universe)} tickers, scanning max {MAX_SCAN}")
 
     candidates = []
-    scanned = 0
+    scanned    = 0
     for ticker in universe:
         if scanned >= MAX_SCAN:
             break
         scanned += 1
-        data = analyse_ticker(ticker, memory)
+        data = analyse_ticker(ticker, memory, post_mortem)
         if data:
             candidates.append(data)
-            penalty_str = " [PENALTY APPLIED]" if data['penalty_applied'] else ""
-            log.info(f"PASS: {ticker} Score: {data['score']}{penalty_str}")
+            dcf_str = f" DCF={data['dcf']['dcf_upside']}%" if data.get("dcf") else ""
+            log.info(
+                f"PASS: {ticker:8s} Score={data['score']} "
+                f"ROIC={data['roic']} ROCE={data['roce']}{dcf_str}"
+            )
         time.sleep(0.05)
 
-    # Sorteer ALLE gevonden kandidaten op score, neem dan de top N
-    candidates = sorted(candidates, key=lambda x: x['score'], reverse=True)[:TOP_N]
-    log.info(f"Beste {len(candidates)} kandidaten geselecteerd na full scan van {scanned} tickers.")
+    candidates = sorted(candidates, key=lambda x: x["score"], reverse=True)[:TOP_N]
+    log.info(f"Top {len(candidates)} geselecteerd uit {scanned} gescand.")
 
-    # Inladen van bestaande data om trades, equity en tier2-analyses niet te overschrijven
+    # Laad bestaande data
     if OUTPUT_PATH.exists():
-        with open(OUTPUT_PATH, "r") as f:
+        with open(OUTPUT_PATH) as f:
             old_data = json.load(f)
     else:
         old_data = {}
 
-    # DATA-INTEGRITEIT: bewaar bestaande tier2-analyses voor tickers die nog in de top zitten
-    old_tier2_by_ticker = {
+    # Bewaar bestaande tier2 analyses
+    old_tier2 = {
         c["ticker"]: c["tier2"]
         for c in old_data.get("top_candidates", [])
         if c.get("tier2")
     }
     for c in candidates:
-        if c["ticker"] in old_tier2_by_ticker:
-            c["tier2"] = old_tier2_by_ticker[c["ticker"]]
-            log.info(f"Tier2 cache bewaard voor {c['ticker']}")
+        if c["ticker"] in old_tier2:
+            c["tier2"] = old_tier2[c["ticker"]]
 
     output = {
-        "generated_at":  datetime.now(timezone.utc).isoformat(),
+        "generated_at":   datetime.now(timezone.utc).isoformat(),
         "top_candidates": candidates,
         "active_trades":  old_data.get("active_trades", []),
         "equity_history": old_data.get("equity_history", []),
         "memory":         old_data.get("memory", {}),
         "macro":          fetch_macro(),
         "portfolio":      old_data.get("portfolio", {"cash": 10000.0, "starting_capital": 10000.0}),
+        "watchlist":      old_data.get("watchlist", []),
+        "filings":        old_data.get("filings", {}),
     }
-    
+
     with open(OUTPUT_PATH, "w") as f:
         json.dump(output, f, indent=4)
-    log.info(f"Done! {len(candidates)} candidates saved with memory-logic.")
 
-    # Telegram: stuur scan-samenvatting
+    log.info(f"Klaar — {len(candidates)} kandidaten opgeslagen.")
     notify_scan_complete(candidates, scanned)
+
 
 if __name__ == "__main__":
     main()

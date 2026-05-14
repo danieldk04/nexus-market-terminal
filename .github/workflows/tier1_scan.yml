@@ -1,55 +1,71 @@
-name: NEXUS AUTONOMOUS TRADING ENGINE
+name: NEXUS AUTONOMOUS INVESTMENT ENGINE
 
 on:
   schedule:
-    - cron: "0 8,19 * * *"
+    - cron: "0 8,19 * * 1-5"   # Werkdagen 08:00 + 19:00 UTC
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  scan_and_analyze:
+  deep_value_scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Python
+      - name: Python 3.11 setup
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-          cache: 'pip'
+          python-version: "3.11"
+          cache: pip
 
-      - name: Install Dependencies
+      - name: Installeer dependencies
         run: pip install yfinance pandas requests anthropic lxml
 
-      - name: Tier 1 - Intelligent Scanner
+      - name: Tier 1 — Deep Value Scanner (ROIC + DCF + ROCE)
+        env:
+          PYTHONPATH: src
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python src/tier1_scanner.py
+
+      - name: Tier 1.5 — SEC EDGAR Filing Agent (8-K / 10-K)
         env:
+          PYTHONPATH: src
+        run: python src/filing_agent.py || echo "Filing agent mislukt — doorgaan"
+
+      - name: Tier 2 — Bull vs Bear AI Analyser (Sonnet + DCF + Nieuws)
+        env:
+          PYTHONPATH: src
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
-      - name: Tier 2 - Smart Analyser
         run: python src/tier2_analyser.py
+
+      - name: Tier 3 — Evolution Engine (Kelly Criterion + DCF Exits)
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PYTHONPATH: src
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
-      - name: Tier 3 - Evolution Engine
         run: python src/evolution_engine.py
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
-      - name: Commit & Push Results
+      - name: Tier 4 — Post-Mortem Analyser (Self-Learning)
+        env:
+          PYTHONPATH: src
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/post_mortem.py || echo "Post-mortem overgeslagen"
+
+      - name: Commit & Push resultaten
         run: |
-          git config --global user.name "NEXUS-Bot"
-          git config --global user.email "bot@nexus.terminal"
+          git config user.name  "NEXUS-InvestBot"
+          git config user.email "nexus@bot.local"
           git add data.json memory.json
-          git commit -m "Auto-update: Autonomous Scan & Learning $(date +'%Y-%m-%d')" || exit 0
+          git diff --cached --quiet || git commit -m "Auto-update: Deep Value Scan $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push

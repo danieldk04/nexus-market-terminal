@@ -1,0 +1,47 @@
+name: NEXUS Stock Lookup
+
+on:
+  workflow_dispatch:
+    inputs:
+      ticker:
+        description: 'Aandeel ticker (bijv. AAPL, MSFT, ASML.AS)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installeer dependencies
+        run: pip install yfinance pandas requests anthropic lxml
+
+      - name: Stock Lookup
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LOOKUP_TICKER: ${{ inputs.ticker }}
+          PYTHONPATH: src
+        run: python src/stock_lookup.py ${{ inputs.ticker }}
+
+      - name: Commit resultaat
+        run: |
+          git config user.name  "nexus-lookup-bot"
+          git config user.email "nexus@bot.local"
+          git add data.json
+          git diff --cached --quiet || git commit -m "Lookup: ${{ inputs.ticker }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
