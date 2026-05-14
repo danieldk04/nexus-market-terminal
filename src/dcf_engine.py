@@ -41,9 +41,11 @@ def compute_wacc(info: dict) -> float:
 
 def compute_dcf(info: dict) -> dict | None:
     """
-    5-jaars DCF met twee-fase groeimodel:
-      Fase 1: 5 jaar op geschatte groeivoet (van revenue- en EPS-groei)
-      Fase 2: terminal value op TERMINAL_GROWTH voor altijd
+    5-jaars DCF met twee-fase groeimodel + drie conservatieve correcties:
+      1. FCF genormaliseerd op max 1.2× nettowinst (filtert insurance float en anomalieën)
+      2. Groei vervaagt lineair van g1 naar TERMINAL_GROWTH over 5 jaar (geen constante hoge groei)
+      3. WACC-vloer 7.5% voor DCF (conservatiever dan algemene WACC-berekening)
+    Fase 2: terminal value op TERMINAL_GROWTH voor altijd.
     Geeft None als verplichte velden ontbreken of ongeldig zijn.
     """
     fcf    = info.get("freeCashflow", 0) or 0
@@ -53,18 +55,29 @@ def compute_dcf(info: dict) -> dict | None:
     if fcf <= 0 or shares <= 0 or price <= 0:
         return None
 
-    wacc = compute_wacc(info)
+    # FCF normalisatie: cap op 1.2× nettowinst
+    # Verzekeraars en bedrijven met hoge werkkapitaalschommelingen melden FCF die sterk
+    # afwijkt van echte owner earnings. Nettowinst × 1.2 geeft een realistischer ceiling.
+    net_income = info.get("netIncomeToCommon", 0) or 0
+    if net_income > 0:
+        fcf = min(fcf, net_income * 1.2)
 
-    # Groeivoet fase 1: gemiddelde omzet- en winstgroei, geclipped 0-25%
+    # WACC: conservatieve vloer van 7.5% specifiek voor DCF-waardering
+    wacc = max(0.075, compute_wacc(info))
+
+    # Groeivoet fase 1: geclipped op max 15% (was 25%) — realistische grens voor DCF
     rev_growth = float(info.get("revenueGrowth", 0.05) or 0.05)
     eps_growth = float(info.get("earningsGrowth", 0.05) or 0.05)
-    g1 = min(0.25, max(0.0, (rev_growth + eps_growth) / 2))
+    g1 = min(0.15, max(0.0, (rev_growth + eps_growth) / 2))
 
-    # FCF projectie fase 1
+    # FCF projectie met lineaire groei-fade: jaar 1 = g1, jaar 5 = TERMINAL_GROWTH
+    # Voorkomt dat hoge kortetermijngroei voor altijd geprojecteerd wordt
     projected = []
     cf = float(fcf)
-    for _ in range(5):
-        cf *= (1 + g1)
+    for i in range(5):
+        fade   = i / 4                                   # 0.0 → 1.0 over 5 jaar
+        g_year = g1 * (1 - fade) + TERMINAL_GROWTH * fade
+        cf    *= (1 + g_year)
         projected.append(cf)
 
     pv_fcf = sum(c / (1 + wacc) ** (i + 1) for i, c in enumerate(projected))
