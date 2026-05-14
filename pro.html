@@ -861,56 +861,94 @@ document.addEventListener('click', e => {
 });
 
 // ─── LIVE STOCK LOOKUP ───────────────────────────────────────────────────────
-const CORS = 'https://corsproxy.io/?url=';
+// Try multiple proxies in order; Yahoo Finance v8 chart works without auth
+const YF_PROXIES = [
+    url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+];
+
+async function yfFetch(yfUrl) {
+    for (const proxy of YF_PROXIES) {
+        try {
+            const r = await fetch(proxy(yfUrl), { signal: AbortSignal.timeout(8000) });
+            if (r.ok) return r;
+        } catch (_) { /* try next */ }
+    }
+    throw new Error('Alle proxies mislukt');
+}
+
+function parseChart(json, ticker) {
+    const res = json?.chart?.result?.[0];
+    if (!res) throw new Error('Geen chart data');
+    const meta = res.meta || {};
+    return {
+        name:    meta.longName || meta.shortName || ticker,
+        price:   meta.regularMarketPrice,
+        prev:    meta.chartPreviousClose || meta.previousClose,
+        currency: meta.currency || 'USD',
+        high52:  meta.fiftyTwoWeekHigh,
+        low52:   meta.fiftyTwoWeekLow,
+        exchange: meta.exchangeName || '',
+    };
+}
+
+function parseQuote(json) {
+    const r = json?.quoteSummary?.result?.[0] || {};
+    const pr = r.price || {};
+    const fd = r.financialData || {};
+    const sd = r.summaryDetail || {};
+    const ks = r.defaultKeyStatistics || {};
+    const fmtp = (v, na='n/b') => v?.fmt ?? na;
+    return { pr, fd, sd, ks, fmtp };
+}
 
 async function liveStockLookup(ticker) {
     const panel = document.getElementById('sr-live-panel');
     if (!panel) return;
-    panel.innerHTML = `<div class="sr-live-loading">Ophalen ${ticker}...</div>`;
+    panel.innerHTML = `<div class="sr-live-loading">Live ophalen ${ticker}...</div>`;
 
     try {
-        const enc = encodeURIComponent(
-            `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${ticker}` +
-            `?modules=price,summaryDetail,financialData,defaultKeyStatistics`
-        );
-        const resp = await fetch(CORS + enc);
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const json = await resp.json();
-        const res  = json?.quoteSummary?.result?.[0];
-        if (!res) throw new Error('Geen data');
+        // Phase 1: chart endpoint — works without authentication
+        const chartUrl  = `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=5d`;
+        const chartResp = await yfFetch(chartUrl);
+        const chartJson = await chartResp.json();
+        const base = parseChart(chartJson, ticker);
 
-        const pr   = res.price            || {};
-        const fd   = res.financialData    || {};
-        const sd   = res.summaryDetail    || {};
-        const ks   = res.defaultKeyStatistics || {};
+        const chgRaw = base.prev ? ((base.price - base.prev) / base.prev) : 0;
+        const chgPct = (chgRaw * 100).toFixed(2);
+        const chgCol = chgRaw >= 0 ? 'var(--green)' : '#f87171';
+        const chgStr = `${chgRaw >= 0 ? '+' : ''}${chgPct}%`;
 
-        const fmt  = (v, suf='', na='n/b') => (v?.raw != null ? `${v.raw}${suf}` : (v != null && typeof v === 'number' ? `${v}${suf}` : na));
-        const fmtp = (v, na='n/b') => v?.fmt ?? na;
-
-        const name  = pr.longName || pr.shortName || ticker;
-        const price = fmtp(pr.regularMarketPrice);
-        const chg   = fmtp(pr.regularMarketChangePercent);
-        const chgN  = pr.regularMarketChangePercent?.raw ?? 0;
-        const chgCol= chgN >= 0 ? 'var(--green)' : '#f87171';
+        // Phase 2: quoteSummary for fundamentals — best-effort, may fail
+        let fd = {}, sd = {}, ks = {}, fmtp = (v, na='n/b') => v?.fmt ?? na;
+        try {
+            const qsUrl  = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}` +
+                           `?modules=financialData,summaryDetail,defaultKeyStatistics`;
+            const qsResp = await yfFetch(qsUrl);
+            const qsJson = await qsResp.json();
+            const parsed = parseQuote(qsJson);
+            fd = parsed.fd; sd = parsed.sd; ks = parsed.ks; fmtp = parsed.fmtp;
+        } catch(_) { /* fundamentals unavailable — show price only */ }
 
         const rows = [
-            ['Prijs',        `<span style="color:${chgCol}">${price} (${chg})</span>`],
-            ['Market Cap',   fmtp(pr.marketCap)],
-            ['P/E (trail)',  fmtp(sd.trailingPE)],
-            ['Forward P/E',  fmtp(sd.forwardPE)],
-            ['52w Laag',     fmtp(sd.fiftyTwoWeekLow)],
-            ['52w Hoog',     fmtp(sd.fiftyTwoWeekHigh)],
-            ['ROE',          fmtp(fd.returnOnEquity)],
-            ['Winstmarge',   fmtp(fd.profitMargins)],
-            ['Omzetgroei',   fmtp(fd.revenueGrowth)],
-            ['Analyst doel', fmtp(fd.targetMeanPrice)],
-            ['Aanbeveling',  fd.recommendationKey?.toUpperCase() ?? 'n/b'],
-            ['Beta',         fmtp(ks.beta)],
+            ['Prijs',       `<span style="color:${chgCol}">${base.currency} ${base.price?.toFixed(2) ?? 'n/b'} (${chgStr})</span>`],
+            ['52w Laag',    base.low52  ? `${base.currency} ${base.low52.toFixed(2)}`  : 'n/b'],
+            ['52w Hoog',    base.high52 ? `${base.currency} ${base.high52.toFixed(2)}` : 'n/b'],
+            ['P/E (trail)', fmtp(sd.trailingPE)],
+            ['Forward P/E', fmtp(sd.forwardPE)],
+            ['ROE',         fmtp(fd.returnOnEquity)],
+            ['Winstmarge',  fmtp(fd.profitMargins)],
+            ['Omzetgroei',  fmtp(fd.revenueGrowth)],
+            ['Analyst doel',fmtp(fd.targetMeanPrice)],
+            ['Aanbeveling', fd.recommendationKey?.toUpperCase() ?? 'n/b'],
+            ['Beta',        fmtp(ks.beta)],
+            ['Beurs',       base.exchange],
         ];
 
         panel.innerHTML = `
             <div class="sr-live-panel">
-                <div class="sr-live-title">${ticker} — ${name}</div>
+                <div class="sr-live-title">${ticker} — ${base.name}</div>
                 <div class="sr-live-grid">
                     ${rows.map(([l,v]) => `
                         <div class="sr-live-row">
