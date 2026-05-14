@@ -899,13 +899,24 @@ function parseChart(json, ticker) {
     };
 }
 
-function parseQuoteSummary(json) {
-    const r = json?.quoteSummary?.result?.[0] || {};
+function parseV7Quote(json, ticker) {
+    // v7 returns raw numbers directly, no {raw, fmt} wrapper
+    const q = json?.quoteResponse?.result?.find(r => r.symbol?.toUpperCase() === ticker.toUpperCase())
+           || json?.quoteResponse?.result?.[0]
+           || {};
+    const pct = v => (v != null && isFinite(v)) ? `${(v * 100).toFixed(1)}%` : 'n/b';
+    const num = (v, dec=2) => (v != null && isFinite(v)) ? v.toFixed(dec) : 'n/b';
     return {
-        fd:    r.financialData          || {},
-        sd:    r.summaryDetail          || {},
-        ks:    r.defaultKeyStatistics   || {},
-        fmtp: (v, na='n/b') => v?.fmt ?? na,
+        pe:        num(q.trailingPE, 1),
+        fwdPe:     num(q.forwardPE, 1),
+        roe:       pct(q.returnOnEquity),
+        margin:    pct(q.profitMargins),
+        revGrowth: pct(q.revenueGrowth),
+        target:    q.targetMeanPrice ? num(q.targetMeanPrice) : 'n/b',
+        reco:      q.averageAnalystRating || (q.recommendationKey?.toUpperCase()) || 'n/b',
+        beta:      num(q.beta, 2),
+        eps:       num(q.epsTrailingTwelveMonths, 2),
+        mcap:      q.marketCap ? `${(q.marketCap / 1e9).toFixed(1)}B` : 'n/b',
     };
 }
 
@@ -925,29 +936,34 @@ async function liveStockLookup(ticker) {
         const chgCol = chgRaw >= 0 ? 'var(--green)' : '#f87171';
         const chgStr = `${chgRaw >= 0 ? '+' : ''}${(chgRaw * 100).toFixed(2)}%`;
 
-        // Phase 2: fundamentals — best-effort
-        let fd = {}, sd = {}, ks = {}, fmtp = (v, na='n/b') => v?.fmt ?? na;
+        // Phase 2: v7 quote — simpler endpoint, works through proxies, raw numbers
+        let q = { pe:'n/b', fwdPe:'n/b', roe:'n/b', margin:'n/b', revGrowth:'n/b',
+                  target:'n/b', reco:'n/b', beta:'n/b', eps:'n/b', mcap:'n/b' };
         try {
-            const qsJson = await yfFetchJson(
-                `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}` +
-                `?modules=financialData,summaryDetail,defaultKeyStatistics`
+            const v7Json = await yfFetchJson(
+                `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${ticker}` +
+                `&fields=trailingPE,forwardPE,returnOnEquity,profitMargins,revenueGrowth,` +
+                `targetMeanPrice,recommendationKey,averageAnalystRating,beta,` +
+                `epsTrailingTwelveMonths,marketCap`
             );
-            ({ fd, sd, ks, fmtp } = parseQuoteSummary(qsJson));
-        } catch(_) { /* show price-only panel if fundamentals fail */ }
+            q = parseV7Quote(v7Json, ticker);
+        } catch(_) { /* price-only if v7 also fails */ }
 
         const cur = base.currency;
         const rows = [
             ['Prijs',        `<span style="color:${chgCol}">${cur} ${base.price?.toFixed(2) ?? 'n/b'} (${chgStr})</span>`],
+            ['Market Cap',   q.mcap],
             ['52w Laag',     base.low52  ? `${cur} ${base.low52.toFixed(2)}`  : 'n/b'],
             ['52w Hoog',     base.high52 ? `${cur} ${base.high52.toFixed(2)}` : 'n/b'],
-            ['P/E (trail)',  fmtp(sd.trailingPE)],
-            ['Forward P/E',  fmtp(sd.forwardPE)],
-            ['ROE',          fmtp(fd.returnOnEquity)],
-            ['Winstmarge',   fmtp(fd.profitMargins)],
-            ['Omzetgroei',   fmtp(fd.revenueGrowth)],
-            ['Analyst doel', fmtp(fd.targetMeanPrice)],
-            ['Aanbeveling',  fd.recommendationKey?.toUpperCase() ?? 'n/b'],
-            ['Beta',         fmtp(ks.beta)],
+            ['P/E (trail)',  q.pe],
+            ['Forward P/E',  q.fwdPe],
+            ['EPS (trail)',  q.eps],
+            ['ROE',          q.roe],
+            ['Winstmarge',   q.margin],
+            ['Omzetgroei',   q.revGrowth],
+            ['Analyst doel', q.target ? `${cur} ${q.target}` : 'n/b'],
+            ['Aanbeveling',  q.reco],
+            ['Beta',         q.beta],
             ['Beurs',        base.exchange],
         ];
 
