@@ -1,11 +1,12 @@
 {
-    "generated_at": "2026-05-14T10:27:32.083068+00:00",
+    "generated_at": "2026-05-14T19:26:08.193432+00:00",
     "top_candidates": [
         {
             "ticker": "ALL",
             "name": "Allstate Corporation (The)",
             "sector": "Financial Services",
             "industry_group": "Financials",
+            "price": 215.38,
             "roe": 45.22,
             "pe_ratio": 4.77,
             "debt_to_equity": 0.24,
@@ -13,8 +14,32 @@
             "profit_margin": 17.8,
             "fcf_positive": true,
             "beta": 0.21,
-            "price": 215.54,
-            "score": 7.7,
+            "roic": null,
+            "roce": null,
+            "pfcf": 4.5,
+            "rev_cagr_5yr": 9.8,
+            "ni_cagr_5yr": null,
+            "analyst_target": 241.45454,
+            "analyst_upside": 12.1,
+            "analyst_count": 22,
+            "dcf": {
+                "dcf_per_share": 3062.03,
+                "dcf_upside": 1321.7,
+                "mos_price": 2296.52,
+                "wacc": 6.58,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 102822.0,
+                "pv_terminal_m": 692901.3
+            },
+            "dividend": {
+                "yield": 200.0,
+                "eps_payout": 9.6,
+                "fcf_payout": 8.9,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 9.8,
             "penalty_applied": false,
             "tier2": {
                 "analysis": "# ALL (Allstate) - Waardeanalyse\n\n## 1. MOAT: Sterk \u2605\u2605\u2605\u2605\u2606\nAllstate bezit een solide moat via merkrecognitie (\"You're in Good Hands\"), grote schaalvoordelen en hoge switching costs in verzekeringsbranche. De gevestigde distributie (agents, digitaal) vormt barri\u00e8re. Echter: prijscompetitie neemt toe; moat is eerder \"breed\" dan \"onoverwinbaar.\"\n\n## 2. KWALITEIT: Uitstekend \u2605\u2605\u2605\u2605\u2605\nROE van 45% is buitengewoon\u2014teken van effici\u00ebnte kapitaalalloctie. Positieve FCF en D/E van slechts 0,24 wijzen op voorzichtig financieel beleid. Management heeft discipline getoond via buybacks in aandelenteruggkoop. Dit is Buffett-stijl: winsten omzetten in waarde.\n\n## 3. WAARDERING: Goedkoop \u2605\u2605\u2605\u2605\u2605\nP/E van 4,77 is spectaculair laag. Bij 45% ROE impliceert dit sterke earnings power waarschijnlijk ondergewaardeerd. Risico van value trap echter re\u00ebel\u2014verzekeraars kunnen plotseling onderwriting losses leden door rampen/inflatie.\n\n## 4. RISICO: Onderwriting-inflatie \u2605\u2605\u2605\u2605\u2605\n**Grootste risico**: Verzekeringsschades stijgen sneller dan premies kunnen stijgen (natuurrampen, medische inflatie, auto's). Dit drukt marges direct.\n\n---\n\n## Eindoordeel: **KOOP** (voorzichtig)\nALL is ondergewaardeerd voor langetermijn belegger met tolerantie voor cyclische risico's. Wachten op dip is wijzer.",
@@ -22,19 +47,88 @@
             }
         },
         {
+            "ticker": "AMP",
+            "name": "Ameriprise Financial, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "price": 472.44,
+            "roe": 66.94,
+            "pe_ratio": 11.78,
+            "debt_to_equity": 0.56,
+            "revenue_growth": 9.0,
+            "profit_margin": 20.2,
+            "fcf_positive": true,
+            "beta": 1.2,
+            "roic": null,
+            "roce": null,
+            "pfcf": 12.7,
+            "rev_cagr_5yr": 9.0,
+            "ni_cagr_5yr": 4.2,
+            "analyst_target": 540.8182,
+            "analyst_upside": 14.5,
+            "analyst_count": 11,
+            "dcf": {
+                "dcf_per_share": 1140.72,
+                "dcf_upside": 141.5,
+                "mos_price": 855.54,
+                "wacc": 10.38,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 24745.7,
+                "pv_terminal_m": 81296.0
+            },
+            "dividend": {
+                "yield": 145.0,
+                "eps_payout": 17.0,
+                "fcf_payout": 18.2,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 8.8,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nAmeriprise is een hoogwaardige wealth management- en asset management-franchise met structurele voordelen. De combinatie van Advice & Wealth Management (AWM) en Columbia Threadneedle cre\u00ebert significante switching costs: klanten met ge\u00efntegreerde financi\u00eble planning, beleggingsportefeuilles \u00e9n verzekeringen vertrekken zelden. ROE van 66.94% is fenomenaal \u2014 vergelijkbaar met de beste financi\u00eble compounders wereldwijd. Dit signaleert een lichte balance-sheet leverage maar vooral echte operationele kwaliteit. De 9% omzet-CAGR over 5 jaar toont consistentie, hoewel de winst-CAGR van 4.2% achterblijft \u2014 een kritisch signaal dat margedruk of kapitaalkosten toenemen.\n\n---\n\n## DCF & WAARDERING\n\nP/E van 11.78 en P/FCF van 12.7 zijn ronduit goedkoop voor dit kwaliteitsniveau. De DCF-intrinsieke waarde van $1.140 impliceert 141% upside \u2014 **maar let op de rode vlag**: de fase-1 groeiveronderstelling van 25% is agressief voor een mature financi\u00eble dienstverlener met 9% historische omzetgroei. Dit maakt de DCF-uitkomst onbetrouwbaar. Realistische groeiassumptie van 12-15% geeft intrinsieke waarde van circa $600-700, wat nog steeds 27-48% upside biedt. Geen value trap: FCF is positief, payout ratio gezond, D/E gematigd.\n\n---\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Spotgoedkoop op cashflow**: P/FCF van 12.7x voor een bedrijf met >65% ROE is een anomalie die de markt onderschat \u2014 demografische rugwind van verouderende rijke Amerikanen versnelt AUM-groei structureel.\n2. **Kapitaalallocatie-excellentie**: Agressieve buybacks reduceren uitstaande aandelen stelselmatig, wat EPS-groei mechanisch versnelt ongeacht topline-groei.\n3. **Analistenconsensus + margin of safety**: 14.5% upside naar $540 is conservatief; bij normalisatie naar sectorgemiddeld P/E van 15-16x ligt koers op $580-620.\n\n---\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Winst-CAGR slechts 4.2%**: Omzetgroei van 9% converteert nauwelijks naar winstgroei \u2014 kostenstructuur of vergoedingsdruk eet rendement op.\n2. **Marktgevoeligheid**: Beta 1.2 plus AUM-afhankelijkheid betekent dat een beursdaling van 20% direct AUM, vergoedingen \u00e9n vertrouwen raakt \u2014 cyclisch risico wordt onderschat.\n3. **Dividend yield 145% is een datakwaliteitsfout**: Dit cijfer is foutief en wijst op mogelijke rapportage-inconsistenties \u2014 analist due diligence vereist.\n\n---\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $545 (+15% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu, maar positie opbouwen in tranches \u2014 wacht gedeeltelijk op bevestiging Q2-marges",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-14T19:26:45.710972+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
             "ticker": "ADBE",
             "name": "Adobe Inc.",
             "sector": "Technology",
             "industry_group": "Tech & AI",
+            "price": 236.03,
             "roe": 58.77,
-            "pe_ratio": 13.76,
+            "pe_ratio": 13.75,
             "debt_to_equity": 0.58,
             "revenue_growth": 12.0,
             "profit_margin": 29.5,
             "fcf_positive": true,
             "beta": 1.42,
-            "price": 236.07,
-            "score": 6.9,
+            "roic": null,
+            "roce": null,
+            "pfcf": 10.2,
+            "rev_cagr_5yr": 10.5,
+            "ni_cagr_5yr": 14.5,
+            "analyst_target": 327.955,
+            "analyst_upside": 38.9,
+            "analyst_count": 34,
+            "dcf": {
+                "dcf_per_share": 358.26,
+                "dcf_upside": 51.8,
+                "mos_price": 268.69,
+                "wacc": 11.59,
+                "growth_phase1": 11.5,
+                "terminal_growth": 2.5,
+                "pv_fcf": 46556.8,
+                "pv_terminal_m": 104920.8
+            },
+            "dividend": null,
+            "score": 8.7,
             "penalty_applied": true,
             "tier2": {
                 "analysis": "# Adobe (ADBE) - Waardeanalyse\n\n## 1. MOAT: STERK \u2713\nAdobe heeft een **zeer duurzame moat** via:\n- **Switching costs**: Creatieve professionals zijn afhankelijk van Adobe's ecosystem (Photoshop, Illustrator, Premiere)\n- **Netzwerkeffecten**: Industrie-standaard cre\u00ebert lock-in\n- **Brand + immateri\u00eble activa**: 20+ jaar dominantie\n- **Pricing power**: Subscription-model met stevige marges\n\nDit is echter onder druk door competitie (Figma, open-source tools) en AI-disruptie.\n\n## 2. KWALITEIT: GEMENGD \u26a0\ufe0f\n- **ROE 58.77%** is indrukwekkend, maar grotendeels door share buybacks en schuld (D/E 0.58)\n- **Echte ROIC-analyse nodig**: Is organische winstgroei sterk?\n- **Omzetgroei 12%** is matig voor tech; suggest klanten besparen\n- **Positieve FCF** is goed, maar buybacks maskeren mogelijk zwakker operationeel momentum\n\n## 3. WAARDERING: REDELIJK, NIET GOEDKOOP\n- **P/E 13.76** lijkt laag, maar:\n  - Groei van 12% \u2192 PEG \u2248 1.15 (fair, niet goedkoop)\n  - Tech-sector gemiddeld: 20-25x P/E voor groeiers\n  - Adobe prijs weerspiegelt **groeitwijfel**\n  - Geen \"value trap\" maar ook geen bargain\n\n## 4. RISICO: AI-DISRUPTIE\nGrootste concrete risico: **Generatieve AI vernietigt pricing power**. Als gratis AI-tools 80% van Adobe's use-cases kunnen doen, tollen abonnementen af \u2192 marge-compressie mogelijk in 18 maanden.\n\n---\n\n## **EINDOORDEEL: HOUD**\n\n\u2705 **Sterk moat + solide fundamentals** rechtvaardigen aandeel in portfolio  \n\u274c **Niet goedkoop genoeg** voor contrariaan waardebelegger  \n\u26a0\ufe0f **AI-risico te groot** voor initi\u00eble positie; wacht tot clarity over AI-strategie\n\n*Graham zou zeggen:",
@@ -42,103 +136,335 @@
             }
         },
         {
-            "ticker": "ADP",
-            "name": "Automatic Data Processing, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 71.21,
-            "pe_ratio": 19.46,
-            "debt_to_equity": 0.69,
-            "revenue_growth": 7.0,
-            "profit_margin": 20.1,
-            "fcf_positive": true,
-            "beta": 0.84,
-            "price": 208.63,
-            "score": 6.0,
-            "penalty_applied": true,
-            "tier2": {
-                "analysis": "# ADP-Analyse: Waardebeleggersperspectief\n\n## 1. MOAT (Sterk) \u2b50\u2b50\u2b50\u2b50\nADP heeft een klassieke, duurzame moat:\n- **Switching costs**: Loonstrookverwerking is \"sticky\" \u2013 bedrijven wisselen niet zomaar van leverancier\n- **Pricing power**: Stabiele marges (20,1%) ondanks concurrentie bewijzen prijsverheffingsvermogen\n- **Network effects**: 10 mln. werknemers/werkgevers in ecosysteem\n- **Scale-voordeel**: Dominante marktpositie in payroll-SaaS\n\nGraham zou dit waarschijnlijk goedkeuren.\n\n## 2. KWALITEIT (Solide) \u2b50\u2b50\u2b50\u2b50\n- **ROE 71%** \u2192 Zeer effici\u00ebnte kapitaalallocatie\n- **FCF positief**: Consistent cashgenerator (typisch $2-3 mld. jaarlijks)\n- **Management**: Conservatief, focus op langetermijnwaarde (niet aggressief M&A)\n- **Schuldratio 0,69**: Matig, gezond\n\n**Minpunt**: Omzetgroei 7% is modest voor Tech.\n\n## 3. WAARDERING (Fair, geen bargain) \u2b50\u2b50\u2b50\n- **P/E 19,96**: Voor een monopolistische payroll-speler met 70%+ ROE eigenlijk *goedkoop*\n- **FCF-yield**: Waarschijnlijk ~3-4% (fris, geen exces)\n- **Risico**: Geen value trap, maar ook geen \"margin of safety\" \u00e0 la Graham (15-20% discount ideaal)\n\n## 4. GROOTSTE RISICO (Automatisering/AI)\n**Concrete bedreiging**: AI-gestuurde payroll-automatisering (generieke cloud-tools) kan switching costs verlagen. Klanten zoeken goedkopere alternatieven. Marges onder druk 2024-2026.\n\n---\n\n## EINDOORDEEL: **HOUD**\n\n\u2705 **Waarom niet KOOP**: Geen significante margin of safety; groei matig  \n\u2705 **Waarom niet MIJDEN**: Moat echt, FCF sterk, geen schuldenprobleem  \n\u2705",
-                "last_run": "2026-05-12T20:44:29.771540+00:00"
-            }
-        },
-        {
-            "ticker": "MKC",
-            "name": "McCormick & Company, Incorporat",
-            "sector": "Consumer Defensive",
-            "industry_group": "Consumer Defensive",
-            "roe": 25.35,
-            "pe_ratio": 7.48,
-            "debt_to_equity": 0.65,
-            "revenue_growth": 16.7,
-            "profit_margin": 23.1,
-            "fcf_positive": true,
-            "beta": 0.67,
-            "price": 45.6,
-            "score": 5.7,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# MKC Analyse: McCormick & Company\n\n## 1. MOAT: Sterk maar niet onkwetsbaar \u2b50\u2b50\u2b50\u2b50\n**Duurzaam voordeel:** Ja. Merknaam (McCormick is marktleider kruiden/condimenten), schaalvoordelen in distributie, en hoge wisselskosten (aangezien consumenten gewend zijn aan het merk). De 23,1% winstmarge bewijst prijzetting power. Echter: niet als brand-moat van Coca-Cola, want verwisselbaar product.\n\n## 2. KWALITEIT: Gemiddeld, met voorzichtigheid \u2b50\u2b50\u2b50\n**Kapitaalallocatie:** Gemengd. De 25% ROE is uitstekend, maar 16,7% omzetgroei is verdacht hoog voor een volwassen staple-bedrijf\u2014suggereerd acquisities in plaats van organische groei. D/E van 0,65 is acceptabel maar sinds recente overnames (FONA, 2024) wellicht gestegen. FCF-trend cruciaal; zonder details zien we hier risico.\n\n## 3. WAARDERING: Value trap-waarschuwing \u26a0\ufe0f \u2b50\u2b50\u2b50\n**P/E 7,48 is goedkoop,** maar vraag: waarom? Markt prijst waarschijnlijk winstdaling in (deleveraging nodig na overnames) of groeivertraging. Bij 25% ROE zou 15-18x P/E eerlijker zijn. Niet onmiddellijk cheap\u2014eerder eerlijk geprijsd als groei afvlakt.\n\n## 4. RISICO: Schuldenafbouw-scenario \u26a0\ufe0f\n**Grootste risico:** Dividendkort of daling door agressieve schuldenreductie na FONA-overname. Dit drukt toekomstige winstuitkeringen.\n\n---\n\n## **OORDEEL: HOUD**\n*Solide defensieve positie, maar wacht op schuldennormalisatie. Geen koopmogelijkheid tot D/E < 0,50.*",
-                "last_run": "2026-05-13T20:49:42.030066+00:00"
-            }
-        },
-        {
-            "ticker": "LULU",
-            "name": "lululemon athletica inc.",
-            "sector": "Consumer Cyclical",
-            "industry_group": "Consumer Cyclical",
-            "roe": 34.01,
-            "pe_ratio": 9.14,
-            "debt_to_equity": 0.36,
-            "revenue_growth": 0.8,
-            "profit_margin": 14.2,
-            "fcf_positive": true,
-            "beta": 0.9,
-            "price": 121.21,
-            "score": 5.6,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# LULU-Analyse: Waardebelegger Perspectief\n\n## 1. MOAT: MATIG \u2713\nLULU heeft een **merkmoat** (premium positioning, loyaliteit) en **switching costs** via community/lifestyle. Echter: **fragiel**. De athleisure-markt is verzadigd; Nike, On, Athleta concurreren fel. Prijsmacht bestaat, maar erosie dreigt. Geen structurele cost-advantage. **Verdict: 6/10 moat-sterkte** \u2013 te dunne schutting voor een Buffett-favoriet.\n\n## 2. KWALITEIT: STERK \u26a0\ufe0f\n- **ROE 34%** = uitstekende kapitaalallocatie (repurchases, gecontroleerde schuld D/E 0.36)\n- **Maar**: omzetgroei 0.8% = **alarm**. Groeiverhaal is voorbij\n- FCF positief = goed, maar groei stagnatie is onheilspellend\n- Risk: management kan verleiding voelen voor M&A of goedkope dillutie\n\n## 3. WAARDERING: WAARSCHUWING \ud83d\udea9\n- **P/E 9.14** lijkt goedkoop, maar: **value-trap**. Bij 0.8% groei is dit fair-value, niet goedkoop\n- Intrinsieke waarde hangt af van groei-aannames \u2013 minimale marge voor veiligheid\n- Risico: earnings revision downward = koersdaling ondanks lage P/E\n\n## 4. GROOTSTE RISICO (12M):\n**Consumentenvraag-inzinking** (recessie) + **consumer discretionary meltdown**. Beta 0.9 helpt, maar athleisure is luxe.\n\n---\n\n## EINDOORDEEL: **MIJDEN**\n\n*Te veel doen voor te weinig groei. Geen margin of safety.*",
-                "last_run": "2026-05-14T10:27:59.290902+00:00"
-            }
-        },
-        {
-            "ticker": "SYF",
-            "name": "Synchrony Financial",
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "roe": 21.78,
-            "pe_ratio": 7.23,
-            "debt_to_equity": 0,
-            "revenue_growth": 6.1,
-            "profit_margin": 36.4,
+            "price": 197.19,
+            "roe": 37.9,
+            "pe_ratio": 10.03,
+            "debt_to_equity": 0.26,
+            "revenue_growth": 8.7,
+            "profit_margin": 12.9,
             "fcf_positive": true,
-            "beta": 1.36,
-            "price": 69.81,
-            "score": 5.5,
+            "beta": 0.29,
+            "roic": null,
+            "roce": null,
+            "pfcf": 7.4,
+            "rev_cagr_5yr": 20.9,
+            "ni_cagr_5yr": 150.2,
+            "analyst_target": 230.80952,
+            "analyst_upside": 17.1,
+            "analyst_count": 21,
+            "dcf": {
+                "dcf_per_share": 822.1,
+                "dcf_upside": 316.9,
+                "mos_price": 616.58,
+                "wacc": 6.87,
+                "growth_phase1": 9.2,
+                "terminal_growth": 2.5,
+                "pv_fcf": 82842.8,
+                "pv_terminal_m": 405926.9
+            },
+            "dividend": {
+                "yield": 709.0,
+                "eps_payout": 70.7,
+                "fcf_payout": 52.4,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 8.5,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# Synchrony Financial (SYF) - Waardeanalyse\n\n## 1. MOAT: Zwak (4/10)\nSYF is een creditcarduitgever zonder duurzaam voordeel. Switching costs zijn laag, concurrentie intens. Het verdienmodel hangt af van:\n- Relationshipintensiteit met retailers (afhankelijkheid)\n- Creditspreadruimte (cyclisch, niet defensief)\n- Scale voordelen zijn beperkt vs. grote banken\n\n**Geen Buffett-waardig moat.**\n\n## 2. KWALITEIT: Matig (5/10)\nROE van 21.78% klinkt aantrekkelijk, maar:\n- Dit is **leverage-driven** (financi\u00eble industrie)\n- Positieve FCF is goed, maar opgebouwd in cyclische hoogtepunt\n- D/E=0 is misleidend: banken hebben inherent hoge leverage\n- Management alloceert winsten veelal naar buybacks, geen organische groei\n\n**Geen sterke capital allocator.**\n\n## 3. WAARDERING: Value Trap Alert (4/10)\nP/E van 7.33 lijkt goedkoop, maar:\n- **Earnings zijn cyclisch**: volgende recessie drukt winstgeving sterk\n- Normaliseerde P/E zou 10-12x moeten zijn\n- Omzetgroei van 6.1% te laag voor groeicompensatie\n- Risico op creditverliezen stijgt in downturn\n\n**Cheap \u2260 Cheap for good reason.**\n\n## 4. RISICO: Recessie & Creditdeterioration (8/10)\nMet Beta 1.36 en pure creditexposure: economische slowdown veroorzaakt winstdalingen van 40-60%. Nu al signalen van consumer stress.\n\n---\n\n## **EINDOORDEEL: MIJDEN** \u26d4\n\nSYF is een cyclische financieel zonder echte moat. De 7.33 P/E is geen vangnetje\u2014het is een waarschuwing. Graham zou zeggen: \"Price is what you pay, value is what you get.\" Hier krijg je blootstelling aan recessie zonder downside-bescherming.\n\n**Alternatieven**: Zoek financials met moats (verzekeraars, betaaldiensten) of meer stabiliteit.",
-                "last_run": "2026-05-13T10:37:02.613940+00:00"
+                "analysis": "# PGR \u2013 Progressive Corporation: Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nProgressive is een zeldzame compounding-machine in de verzekeringssector. De moat rust op drie pijlers: **data-gedreven prijszetting** via Snapshot/UBI-telematics, **operationele effici\u00ebntie** (combined ratio structureel onder 96%) en schaalvoordelen die nieuwe concurrenten ontmoedigen. Een ROE van 37,9% in een typisch matige sector is geen geluk \u2013 het is bewijs van structurele pricing power. De 5-jaars omzet-CAGR van 20,9% met een winst-CAGR van 150,2% toont aan dat progressive leverage in het bedrijfsmodel volledig werkt. Beta van 0,29 bevestigt: dit is defensief geld dat offensief groeit.\n\n## DCF & WAARDERING\nHier ontstaat cognitieve dissonantie. De DCF geeft een intrinsieke waarde van **$822** \u2013 ruim 4x de huidige koers. Dit roept een rode vlag op: of het model is te optimistisch (9,2% groeifase-1 bij lage WACC van 6,87%), of Progressive is fenomenaal ondergewaardeerd. De **P/E van 10x** en **P/FCF van 7,4x** zijn onmiskenbaar goedkoop voor dit groeiprofiel. Analistenconsensus van $230 (+17%) is waarschijnlijk te conservatief. De **dividendyield van 709%** is vrijwel zeker een data-artefact (speciaal dividend of rapportage-anomalie) \u2013 negeer dit cijfer.\n\n## \ud83d\udfe2 BULL CASE\n1. **Onaantastbare underwriting-discipline**: Combined ratio-leiderschap + telematics-voorsprong cre\u00ebert een self-reinforcing data moat die Allstate en GEICO structureel achtervolgen.\n2. **Groeipijplijn intact**: Auto-verzekering is een groeimarkt door hogere rijkosten, en Progressive pakt marktaandeel van zwakkere spelers door superieure risk-selectie.\n3. **Spotgoedkoop voor kwaliteit**: P/FCF van 7,4x voor een bedrijf met 20%+ CAGR en 37,9% ROE is een anomalie. Zelfs bij halvering van groeiverwachtingen blijft het aantrekkelijk.\n\n## \ud83d\udd34 BEAR CASE\n1. **Catastroferisico**: Klimaat-gedreven frequentiestijging in auto/property kan combined ratio's plotseling verslechteren \u2013 het is een fat-tail risico dat DCF-modellen missen.\n2. **Regulatoire druk**: Tariefgoedkeuringen in Californi\u00eb en andere staten beperken pricing power precies wanneer schadeclaims stijgen.\n3. **Normalisatie-risico**: De winstgroei van 150% p.j. reflecteert deels mean-reversion na verliesjaren. Duurzaamheid op dit niveau is onrealistisch.\n\n## VERDICT\n**ACTIE:** KOOP\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $245 (+24% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2013 geen betere entry nodig bij deze waardering",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-14T19:27:05.585387+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
             }
         },
         {
-            "ticker": "SOLV",
-            "name": "Solventum Corporation",
-            "sector": "Healthcare",
-            "industry_group": "Healthcare",
-            "roe": 34.79,
-            "pe_ratio": 9.11,
-            "debt_to_equity": 1.06,
-            "revenue_growth": -3.0,
-            "profit_margin": 17.3,
+            "ticker": "BR",
+            "name": "Broadridge Financial Solutions,",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "price": 143.72,
+            "roe": 42.31,
+            "pe_ratio": 15.36,
+            "debt_to_equity": 1.21,
+            "revenue_growth": 7.8,
+            "profit_margin": 15.0,
             "fcf_positive": true,
-            "beta": 0.66,
-            "price": 74.41,
-            "score": 5.5,
+            "beta": 0.9,
+            "roic": null,
+            "roce": null,
+            "pfcf": 14.0,
+            "rev_cagr_5yr": 6.5,
+            "ni_cagr_5yr": 15.9,
+            "analyst_target": 206.5,
+            "analyst_upside": 43.7,
+            "analyst_count": 8,
+            "dcf": {
+                "dcf_per_share": 244.79,
+                "dcf_upside": 70.3,
+                "mos_price": 183.59,
+                "wacc": 8.12,
+                "growth_phase1": 11.4,
+                "terminal_growth": 2.5,
+                "pv_fcf": 6510.1,
+                "pv_terminal_m": 25208.7
+            },
+            "dividend": {
+                "yield": 271.0,
+                "eps_payout": 41.7,
+                "fcf_payout": 38.0,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 8.2,
+            "penalty_applied": true,
+            "tier2": {
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nBroadridge is een klassieke *mission-critical infrastructure* speler: het verwerkt jaarlijks biljoenen dollars aan securities-transacties en verzorgt proxy-communicatie voor vrijwel elke beursgenoteerde onderneming in Noord-Amerika. Switching costs zijn astronomisch \u2014 een bank die BR vervangt riskeert operationele chaos. De ROE van 42% is indrukwekkend, al wordt deze deels opgeblazen door schuldfinanciering (D/E: 1.21). De 5-jaar winst-CAGR van 15.9% bij slechts 6.5% omzetgroei wijst op serieuze margeexpansie en operationele leverage. Dit is een echte compounder, geen glamourstock.\n\n## DCF & WAARDERING\n\nHier knijp ik mijn ogen uit. P/E van 15.36 en P/FCF van 14.0 voor een business van deze kwaliteit? Dat is verrassend laag. De DCF geeft \u20ac244 intrinsieke waarde bij een WACC van 8.12% \u2014 zelfs met een haircut van 25% zit je op $183. De markt prijst dit in alsof groei stopt, terwijl de winstgroei het tegendeel bewijst. Geen value trap: de FCF is solide, payout ratio van 38% is gezond, schuld is beheersbaar. *\u00c9\u00e9n grote waarschuwing*: het dividend van 271% yield is ongetwijfeld een datafout \u2014 vermoedelijk ~1.8-2%. Dit ondermijnt de datakwaliteit marginaal maar verandert de thesis niet.\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Onvervangbare marktpositie**: BR zit diep ingebed in de financi\u00eble infrastructuur van Wall Street. Regulatory compliance-mandaten zijn structurele rugwind \u2014 niemand gooit dit systeem overboord.\n2. **Waardering op de vloer**: P/FCF van 14x voor een bedrijf met 15.9% winstgroei is een anomalie. De markt slaapt. Analistendoel van $206 impliceert 44% upside zonder hero\u00efsche aannames.\n3. **AI-gedreven productexpansie**: Broadridge investeert in data-analytics en wealth management platforms. De combinatie van bestaande data-assets + AI = significante upsell-mogelijkheden bij bestaande klanten.\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Schuld en rentegevoeligheid**: D/E van 1.21 is niet alarmerend maar laat weinig ruimte bij hogere rentes of economische schok.\n2. **Magere organische groei**: 6.5% omzet-CAGR is bescheiden. Winstgroei dreigt te vertragen als margeoptimalisatie uitgewerkt is.\n3. **Concentratierisico**: Afhankelijkheid van grote financi\u00eble instellingen maakt BR kwetsbaar bij consolidatie in de banksector.\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $195 (+36%)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 bij $143 betaal je een Buffett-prijs voor een Buffett-business.",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-14T19:27:24.554031+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
+            "ticker": "PTC",
+            "name": "PTC Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "price": 139.35,
+            "roe": 34.4,
+            "pe_ratio": 13.39,
+            "debt_to_equity": 0.36,
+            "revenue_growth": 21.7,
+            "profit_margin": 41.6,
+            "fcf_positive": true,
+            "beta": 0.98,
+            "roic": null,
+            "roce": null,
+            "pfcf": 16.3,
+            "rev_cagr_5yr": 12.3,
+            "ni_cagr_5yr": 32.8,
+            "analyst_target": 183.89474,
+            "analyst_upside": 32.0,
+            "analyst_count": 19,
+            "dcf": {
+                "dcf_per_share": 308.88,
+                "dcf_upside": 121.7,
+                "mos_price": 231.66,
+                "wacc": 9.22,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 7526.1,
+                "pv_terminal_m": 29531.9
+            },
+            "dividend": null,
+            "score": 8.0,
+            "penalty_applied": true,
+            "tier2": {
+                "analysis": "# PTC Inc. (PTC) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\n\nPTC is een gespecialiseerde industri\u00eble software-speler met ijzersterke switching costs. Hun PLM-software (Windchill), CAD-platform (Creo) en IoT-platform (ThingWorx) zijn diep verankerd in de productie-engineering van Fortune 500-bedrijven. Eenmaal ge\u00efmplementeerd verlaat niemand dit ecosysteem vrijwillig \u2014 dataverlies, hersteltraining en workflow-disruption zijn prohibitief.\n\nDe overgang naar een SaaS/abonnementsmodel (volledig doorgevoerd ~2021) heeft structureel hogere, voorspelbare recurring revenue gecre\u00eberd. Winstmarge van 41.6%, ROE van 34.4% en een 5-jaar winst CAGR van 32.8% zijn geen toeval \u2014 dit is echte compounding. ROIC ontbreekt in de data, maar de ROE-niveaus suggereren kapitaaleffici\u00ebnte groei. De lage schuld (D/E 0.36) geeft financi\u00eble flexibiliteit. **Moat-kwaliteit: solide.**\n\n## DCF & WAARDERING\n\nOp P/E 13.39 en P/FCF 16.3 lijkt PTC schreeuwend goedkoop voor een kwalitatief bedrijf. De DCF geeft een intrinsieke waarde van $308.88 \u2014 maar hier is kritische voorzichtigheid geboden: de fase-1 groeiaanname van 25% is ambitieus. Duurzame 25%-groei op een al mature PLM-basis vereist bewijs, niet hoop. Neem de DCF met een korrel zout. Desondanks: bij een conservatievere 15% groeiassumptie blijft de huidige prijs aantrekkelijk.\n\n## \ud83d\udfe2 BULL CASE\n\n1. **AI-integratie als groeikatalysator:** PTC integreert AI in Creo en Windchill voor generatief design en predictive maintenance \u2014 dit versterkt de moat \u00e9n rechtvaardigt prijsverhogingen.\n2. **Waardering absurd laag voor kwaliteit:** P/FCF 16.3 voor een 33%-winst-CAGR compounder is een cadeau. De markt onderwaardeert de abonnements-ruggengraat.\n3. **Consensus upside 32%:** 19 analisten met gemiddeld koersdoel $184 biedt institutionele rugwind en fundamentele validatie.\n\n## \ud83d\udd34 BEAR CASE\n\n1. **DCF-groeiaanname onrealistisch:** 25% fase-1 groei inprijzen in een cyclisch-industri\u00eble omgeving is gevaarlijk optimistisch.\n2. **Macro-kwetsbaarheid:** PTC bedient zwaar de maakindustrie. Capex-bezuinigingen bij industri\u00eble klanten raken direct de software-budgetten.\n3. **Concurrentiedruk:** Siemens Teamcenter, Dassault Syst\u00e8mes en Autodesk vechten om dezelfde enterprise-deals met diepe zakken.\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $178 (+28% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 de combinatie van lage waardering, sterke moat en AI-tailwind maakt wachten kostbaar.",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-14T19:27:44.971154+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
+            "ticker": "TRV",
+            "name": "The Travelers Companies, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "price": 297.31,
+            "roe": 25.27,
+            "pe_ratio": 8.87,
+            "debt_to_equity": 0.29,
+            "revenue_growth": 1.0,
+            "profit_margin": 15.5,
+            "fcf_positive": true,
+            "beta": 0.51,
+            "roic": null,
+            "roce": null,
+            "pfcf": 4.8,
+            "rev_cagr_5yr": 9.8,
+            "ni_cagr_5yr": 30.3,
+            "analyst_target": 313.73914,
+            "analyst_upside": 5.5,
+            "analyst_count": 23,
+            "dcf": {
+                "dcf_per_share": 3962.0,
+                "dcf_upside": 1232.6,
+                "mos_price": 2971.5,
+                "wacc": 6.58,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 110063.8,
+                "pv_terminal_m": 741702.4
+            },
+            "dividend": {
+                "yield": 169.0,
+                "eps_payout": 14.9,
+                "fcf_payout": 8.0,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.7,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# SOLV Analyse \u2013 Waardebelegger Perspectief\n\n## 1. MOAT: Matig (5.5/10)\nSolventum heeft **beperkte duurzame voordelen**. De healthcare IT/services sector is competitief met sterke spelers (Optum, CVS). Switching costs bestaan, maar prijskracht ontbreekt \u2013 omzetdaling van -3% suggereert marktpositie onder druk. Geen klassieke moat zoals Buffett zoekt.\n\n## 2. KWALITEIT: Positief signaal\n**ROE van 34.79% is indrukwekkend** en duidt op kapitaaleffici\u00ebntie. D/E van 1.06 is matig maar beheerbaar. Het cruciale punt: **positieve FCF is essentieel** \u2013 dit is waar kwaliteit zich echt openbaart. Zonder FCF-groei zijn deze rendementen misleidend (kapitaalintensieve aankopen kunnen ROE opblazen).\n\n## 3. WAARDERING: Value Trap waarschuwing \u26a0\ufe0f\nP/E van 9.11 lijkt goedkoop, **maar omzetdaling is het rode vlaggetje**. Graham zou zeggen: \"Cheap is not the same as cheap.\" Dit kan een value trap zijn \u2013 lage P/E omdat markt groeiverlies ziet.\n\n## 4. RISICO: Omzeterosie\n**Structurele industrie-shift** (digitalisering, consolidatie) kan doorlopende daling betekenen. Rente-lastige balans (D/E 1.06) = minder flexibiliteit.\n\n---\n\n## EINDOORDEEL: **MIJDEN**\n\nTe veel twijfel. Combinatie van omzetdaling + matige moat + waarschijnlijke value trap. Buffett zou dit \"too difficult\" noemen.",
-                "last_run": "2026-05-13T20:49:50.445489+00:00"
+                "analysis": "# TRV \u2013 The Travelers Companies, Inc.\n\n## MOAT & BUSINESS KWALITEIT\nTravelers is een zeldzame compounding-machine in de verzekeringssector. Met een ROE van 25,3% demonstreert het bedrijf superieure underwriting-discipline \u2014 de echte moat hier. Als een van de weinige P&C-verzekeraars die consequent een combined ratio onder de 100% behaalt, beschikt Travelers over decennialange actuari\u00eble expertise, schaalvoordelen in claims-verwerking en sterke distributienetwerken via onafhankelijke agenten. Switching costs zijn re\u00ebel: commerci\u00eble klanten veranderen niet graag van verzekeraar mid-contract. De 5-jaar winst CAGR van 30,3% bij slechts 9,8% omzetgroei bewijst dat margeverbetering en pricing power de echte motor zijn. Dit is geen value trap \u2014 dit is een stille compounder.\n\n## DCF & WAARDERING\n**Let op:** De DCF-uitkomst van $3.962 (1.232% upside) is rekenkundig artefact. Een fase-1 groei van 25% voor een verzekeraar is fundamenteel onrealistisch \u2014 verzekeringen groeien met de economie, niet exponentieel. Dit cijfer negeren. De werkelijke waardering rust op P/E van 8,87 en P/FCF van 4,8 \u2014 beide uitstekend goedkoop voor een bedrijf van deze kwaliteit. Bij sector-gemiddelden van P/E ~14-16 is TRV minstens 40-50% ondergewaardeerd op fundamentele basis. Analistendoel van $313 is dan ook extreem conservatief.\n\n**Dividend yield van 169% is een datafout** \u2014 de werkelijke yield ligt rond 2,0-2,5%, met FCF payout van slechts 8%: robuust en ruimschoots houdbaar.\n\n## \ud83d\udfe2 BULL CASE\n1. **Pricing power in harde markt:** P&C-premies stijgen structureel door klimaatrisico's en hogere herbouwkosten \u2014 Travelers profiteert als prijszetter\n2. **Goedkope waardering met kwaliteitsgarantie:** P/FCF van 4,8 voor een ROE-machine van 25%+ is abnormaal laag \u2014 markt prijst tijdelijke cat-losses in als permanent probleem\n3. **Capital return machine:** Lage D/E (0,29), solide FCF, actief buyback-programma \u2014 aandelencount daalt jaar na jaar\n\n## \ud83d\udd34 BEAR CASE\n1. **Catastroferisico:** Klimaatverandering verhoogt frequentie en ernst van natural disasters \u2014 \u00e9\u00e9n slecht seizoen vernietigt meerdere kwartalen winst\n2. **Omzetgroei van 1% is teleurstellend:** Premium volume stagneert terwijl kosten (inflatie, arbeid) toenemen\n3. **Renterisico:** Beleggingsportefeuille kwetsbaar bij rentedaling \u2014 float-rendement daalt, wat kernwinstgevendheid drukt\n\n## VERDICT\n**ACTIE:** KOOP\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $345 (+16% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 waardering biedt voldoende margin of safety bij huidige prijs",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-14T19:28:04.284887+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
+            "ticker": "NFLX",
+            "name": "Netflix, Inc.",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "price": 87.05,
+            "roe": 48.49,
+            "pe_ratio": 28.08,
+            "debt_to_equity": 0.54,
+            "revenue_growth": 16.2,
+            "profit_margin": 28.5,
+            "fcf_positive": true,
+            "beta": 1.55,
+            "roic": null,
+            "roce": null,
+            "pfcf": 14.1,
+            "rev_cagr_5yr": 12.6,
+            "ni_cagr_5yr": 34.7,
+            "analyst_target": 114.555,
+            "analyst_upside": 31.6,
+            "analyst_count": 44,
+            "dcf": {
+                "dcf_per_share": 145.82,
+                "dcf_upside": 67.5,
+                "mos_price": 109.37,
+                "wacc": 12.51,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 180217.0,
+                "pv_terminal_m": 450559.3
+            },
+            "dividend": null,
+            "score": 7.6,
+            "penalty_applied": true,
+            "tier2": {
+                "analysis": "# NFLX \u2014 Netflix, Inc. | Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nNetflix heeft een indrukwekkende moat opgebouwd via content-netwerk effecten, algoritmische personalisatie en een wereldwijd merk dat synoniem staat aan streaming. De 48.5% ROE is uitzonderlijk sterk en bewijst echte pricing power \u2014 recente prijsverhogingen werden amper betwist door abonnees. De ommezwaai van verlieslatend content-monster naar een winstmachine (winstmarge 28.5%, positieve FCF) is een echte kwaliteitssprong. Advertentietier en live sports events (WWE, NFL) cre\u00ebren nieuwe monetisatielagen. Toch: ROIC-data ontbreekt, wat voorzichtigheid rechtvaardigt \u2014 content is capex-intensief en blijft een tredmolen.\n\n## DCF & WAARDERING\nBij $87.05 noteert NFLX tegen een P/FCF van slechts 14.1 \u2014 voor een 16% groeiend, 28% marginal business verrassend laag. De DCF-intrinsieke waarde van $145.82 impliceert 67.5% upside, maar leunt op 25% groei in fase-1 (ambitieus). De Margin of Safety-prijs van $109.37 ligt boven de huidige koers \u2014 dat is opmerkelijk positief. P/E van 28x is redelijk voor de winstgroei-CAGR van 34.7%. Geen value trap: de FCF is re\u00ebel en groeiend. Wel: WACC van 12.51% is streng, Beta 1.55 reflecteert volatiliteitsrisico.\n\n## \ud83d\udfe2 BULL CASE\n1. **Winstleverageeffect:** Van -$2Bn FCF (2019) naar structureel positief vandaag. Elke nieuw abonnee is nu bijna puur marge \u2014 het operationeel hefboombedrijf is net begonnen.\n2. **Advertentierevolutie:** De ad-tier groeit explosief. Advertentie-inkomsten per gebruiker kunnen het ARPU verdubbelen in markten waar premium-abonnementen te duur zijn.\n3. **Koers < Margin of Safety:** Bij $87 noteert NFLX onder de 25%-kortingsprijs van $109 \u2014 een zeldzaam moment voor kwaliteit tegen een eerlijke prijs.\n\n## \ud83d\udd34 BEAR CASE\n1. **Content-tredmolen:** Netflix moet jaarlijks $17-20Bn aan content uitgeven om relevant te blijven. Stijgende productiekosten vreten aan FCF-groei.\n2. **Marktverzadiging:** In rijke markten nadert de penetratie plafonds. Groei moet komen uit ARPU-stijging en emerging markets \u2014 beiden onzeker.\n3. **Concurrentie-escalatie:** Disney+, Amazon en Apple branden kapitaal. Een prijzenoorlog kan marges snel aantasten.\n\n## VERDICT\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $118 (+35%)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 koers ligt onder Margin of Safety prijs; aantrekkelijk risico/rendement voor geduldige belegger.",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-14T19:28:25.123821+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
+            "ticker": "GILD",
+            "name": "Gilead Sciences, Inc.",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "price": 132.56,
+            "roe": 43.36,
+            "pe_ratio": 18.06,
+            "debt_to_equity": 0.95,
+            "revenue_growth": 4.4,
+            "profit_margin": 31.0,
+            "fcf_positive": true,
+            "beta": 0.33,
+            "roic": null,
+            "roce": null,
+            "pfcf": 20.7,
+            "rev_cagr_5yr": 2.6,
+            "ni_cagr_5yr": 22.8,
+            "analyst_target": 157.9643,
+            "analyst_upside": 19.2,
+            "analyst_count": 28,
+            "dcf": {
+                "dcf_per_share": 391.26,
+                "dcf_upside": 195.2,
+                "mos_price": 293.45,
+                "wacc": 6.58,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 65637.0,
+                "pv_terminal_m": 442317.6
+            },
+            "dividend": {
+                "yield": 247.0,
+                "eps_payout": 44.7,
+                "fcf_payout": 51.3,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.6,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nGilead's moat rust op patentbescherming, FDA-goedkeuringen en diepe expertise in antivirale therapie\u00ebn (HIV, HBV). Het HIV-franchise (Biktarvy, Descovy) genereert een bijna-monopolistische cashflow dankzij hoge switching costs \u2014 pati\u00ebnten wisselen zelden van werkend regime. De winstmarge van 31% en ROE van 43% zijn indrukwekkend, maar de 5-jaar omzet-CAGR van slechts 2.6% onthult een bedrijf dat worstelt met groei buiten de HIV-kern. Oncologie (Trodelvy, Yescarta) biedt potentieel maar is nog geen volwaardige tweede pijler. Echte compounding vereist herhaalde herinvestering tegen hoge rendementen \u2014 bij Gilead ontbreekt die groeikracht structureel.\n\n## DCF & WAARDERING\n\nDe DCF-waarde van $391,26 met 25% groeifase-1 is gevaarlijk optimistisch voor een bedrijf met 2,6% historische omzetgroei. Dit is een klassiek garbage-in-garbage-out scenario: de aanname van 25% groei is niet onderbouwd door fundamentals. De analistenconsensusprijs van $157,96 is realistischer. Bij P/E 18x en P/FCF 20,7x is het aandeel redelijk maar niet goedkoop geprijsd. **Let op: de dividendyield van 247% is een evidente datafout** \u2014 Gilead keert circa 3,5-4% dividend uit, houdbaar dankzij FCF-payout van 51%. Geen value trap, maar ook geen koopje.\n\n## \ud83d\udfe2 BULL CASE\n1. **HIV-franchise is een kasgeldmachine** \u2014 Biktarvy domineert marktaandeel met lange patentlooptijd en minimale churn. Stabiele, voorspelbare FCF financiert dividend en buybacks.\n2. **Oncologie-optionaliteit onderschat** \u2014 Trodelvy en CAR-T programma's kunnen de volgende groeicurve inluiden; markt prijst dit nauwelijks in bij de huidige waardering.\n3. **Defensief profiel in volatiele markten** \u2014 Beta 0,33 maakt Gilead een uitstekende schuilplaats; het bedrijf presteert ongeacht de economische cyclus.\n\n## \ud83d\udd34 BEAR CASE\n1. **Generieke dreiging HIV-medicijnen** \u2014 Patentcliffs naderen; generieke concurrentie kan marges en volumes structureel aantasten na 2027-2028.\n2. **Magere organische groei** \u2014 2,6% CAGR in omzet is teleurstellend voor een farmaceutisch bedrijf; acquisities (Immunomedics, Kite) hebben nog niet de verwachte waarde gecre\u00eberd.\n3. **Schuldpositie en R&D-druk** \u2014 D/E van 0,95 combineert met hoge R&D-vereisten; mislukte pijplijn-trials kunnen kapitaaleffici\u00ebntie verder beschadigen.\n\n## VERDICT\n**ACTIE:** HOUD\n**CONVICTION:** 6/10\n**KOERSDOEL 18mnd:** $152 (+14.7% van huidig)\n**SENTIMENT SCORE:** NEUTRAAL\n**INSTAPMOMENT:** Wacht op dip tot $118-122",
+                "sentiment_score": "NEUTRAAL",
+                "last_run": "2026-05-14T19:28:45.608419+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
+            "ticker": "ACGL",
+            "name": "Arch Capital Group Ltd.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "price": 93.61,
+            "roe": 21.31,
+            "pe_ratio": 7.2,
+            "debt_to_equity": 0.11,
+            "revenue_growth": -3.3,
+            "profit_margin": 24.6,
+            "fcf_positive": true,
+            "beta": 0.33,
+            "roic": null,
+            "roce": null,
+            "pfcf": 6.2,
+            "rev_cagr_5yr": 26.1,
+            "ni_cagr_5yr": 43.9,
+            "analyst_target": 108.92105,
+            "analyst_upside": 16.3,
+            "analyst_count": 19,
+            "dcf": {
+                "dcf_per_share": 904.62,
+                "dcf_upside": 866.3,
+                "mos_price": 678.46,
+                "wacc": 6.81,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 43337.4,
+                "pv_terminal_m": 275456.0
+            },
+            "dividend": null,
+            "score": 7.6,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# ACGL \u2014 Arch Capital Group Ltd. | Bull vs Bear Analyse\n\n---\n\n## MOAT & BUSINESS KWALITEIT\n\nArch Capital is een Bermuda-gebaseerde (her)verzekeraar met een bewezen track record in disciplined underwriting. De echte moat zit in **selectiviteit**: ACGL stapt agressief in wanneer premiumcycli gunstig zijn en trekt terug bij onderprijzing. Dit gedragsmatige discipline, gecombineerd met een sterk risicobeheer, resulteert in een ROE van 21%+ \u2014 uitzonderlijk voor de sector. De 5-jaar winst-CAGR van **43.9%** is geen geluk maar structureel compounding. De lage D/E (0.11) toont financi\u00eble kracht. Beta van 0.33 bevestigt defensieve karakteristieken. Werkelijke ROIC ontbreekt, maar ROE en winstmarge (24.6%) wijzen op een echte compounding machine.\n\n---\n\n## DCF & WAARDERING\n\nHier schiet het model door. Een intrinsieke waarde van **$904** met 25% groei in fase 1 is hero\u00efsch optimistisch voor een verzekeraar in een cyclische sector. Verzekeraars verdienen hun premies in goede jaren en betalen uit bij catastrofes \u2014 constante hoge groei van 25% is onhoudbaar. **De DCF is een rekenartefact, geen koersdoel.** Maar de realistische waardering is desondanks aantrekkelijk: P/E van 7.2 en P/FCF van 6.2 voor een bedrijf met 40%+ winst-CAGR over 5 jaar is **evident ondergewaardeerd**. Analisten zien 16% upside \u2014 conservatief. Geen value trap: FCF positief, balans solide, winst re\u00ebel.\n\n---\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Exceptionele winstgroei vs. spotgoedkope waardering:** P/E 7.2 bij een 5-jaar winst-CAGR van 44% is een anomalie. De markt prijst cyclicaliteit in, maar negeert de underwriting-kwaliteit.\n2. **Harde verzekeringsmarkt tailwind:** Stijgende premiumcycli post-CAT events bevoordelen gedisciplineerde underwriters zoals ACGL disproportioneel.\n3. **Kapitaaleffici\u00ebntie en aandeelhouderswaarde:** Lage schuld + hoge ROE + eigen aandeleninkopen = klassiek Munger-compounding profiel.\n\n---\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Cycliciteit:** Een zachte verzekeringsmarkt of mega-catastrofe (orkaanseizoen, aardbevingen) kan kwartalen winst wegvagen in \u00e9\u00e9n klap.\n2. **Omzetdaling -3.3%:** Signaal van premium-cycle verzwakking? Waakzaamheid geboden voor structurele margepressie.\n3. **Bermuda-regulatoire risico's:** Toenemende internationale belastingdruk (OECD minimum tax) treft Bermuda-holdingstructuren direct.\n\n---\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $112 (20% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 marge van veiligheid is ruim voldoende bij huidige prijs",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-14T19:29:05.890207+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
             }
         },
         {
@@ -146,47 +472,75 @@
             "name": "Deckers Outdoor Corporation",
             "sector": "Consumer Cyclical",
             "industry_group": "Consumer Cyclical",
+            "price": 94.45,
             "roe": 39.69,
-            "pe_ratio": 13.34,
+            "pe_ratio": 13.42,
             "debt_to_equity": 0.13,
             "revenue_growth": 7.1,
             "profit_margin": 19.3,
             "fcf_positive": true,
             "beta": 1.14,
-            "price": 93.93,
-            "score": 5.5,
+            "roic": null,
+            "roce": null,
+            "pfcf": 17.7,
+            "rev_cagr_5yr": 16.5,
+            "ni_cagr_5yr": 28.8,
+            "analyst_target": 128.90475,
+            "analyst_upside": 36.5,
+            "analyst_count": 21,
+            "dcf": {
+                "dcf_per_share": 86.81,
+                "dcf_upside": -8.1,
+                "mos_price": 65.1,
+                "wacc": 10.55,
+                "growth_phase1": 9.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 3642.0,
+                "pv_terminal_m": 9023.0
+            },
+            "dividend": null,
+            "score": 7.6,
             "penalty_applied": false
         },
         {
-            "ticker": "NTAP",
-            "name": "NetApp, Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "roe": 112.59,
-            "pe_ratio": 19.9,
-            "debt_to_equity": 2.36,
-            "revenue_growth": 4.4,
-            "profit_margin": 18.1,
-            "fcf_positive": true,
-            "beta": 1.27,
-            "price": 118.58,
-            "score": 5.3,
-            "penalty_applied": true
-        },
-        {
-            "ticker": "TRV",
-            "name": "The Travelers Companies, Inc.",
+            "ticker": "FDS",
+            "name": "FactSet Research Systems Inc.",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "roe": 25.27,
-            "pe_ratio": 8.8,
-            "debt_to_equity": 0.29,
-            "revenue_growth": 1.0,
-            "profit_margin": 15.5,
+            "price": 199.35,
+            "roe": 28.08,
+            "pe_ratio": 12.83,
+            "debt_to_equity": 0.73,
+            "revenue_growth": 7.1,
+            "profit_margin": 24.5,
             "fcf_positive": true,
-            "beta": 0.51,
-            "price": 295.02,
-            "score": 5.3,
+            "beta": 0.69,
+            "roic": null,
+            "roce": null,
+            "pfcf": 12.3,
+            "rev_cagr_5yr": 8.0,
+            "ni_cagr_5yr": 14.6,
+            "analyst_target": 252.4375,
+            "analyst_upside": 26.6,
+            "analyst_count": 16,
+            "dcf": {
+                "dcf_per_share": 298.67,
+                "dcf_upside": 49.8,
+                "mos_price": 224.0,
+                "wacc": 7.11,
+                "growth_phase1": 1.3,
+                "terminal_growth": 2.5,
+                "pv_fcf": 2504.3,
+                "pv_terminal_m": 9930.1
+            },
+            "dividend": {
+                "yield": 230.0,
+                "eps_payout": 29.9,
+                "fcf_payout": 28.6,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.6,
             "penalty_applied": false
         },
         {
@@ -194,15 +548,40 @@
             "name": "APA Corporation",
             "sector": "Energy",
             "industry_group": "Energy",
+            "price": 37.15,
             "roe": 26.22,
-            "pe_ratio": 8.62,
+            "pe_ratio": 8.66,
             "debt_to_equity": 0.61,
             "revenue_growth": -11.9,
             "profit_margin": 18.3,
             "fcf_positive": true,
             "beta": 0.37,
-            "price": 36.97,
-            "score": 5.1,
+            "roic": null,
+            "roce": null,
+            "pfcf": 7.8,
+            "rev_cagr_5yr": -7.0,
+            "ni_cagr_5yr": -26.4,
+            "analyst_target": 41.55556,
+            "analyst_upside": 11.9,
+            "analyst_count": 27,
+            "dcf": {
+                "dcf_per_share": 196.64,
+                "dcf_upside": 429.4,
+                "mos_price": 147.48,
+                "wacc": 5.79,
+                "growth_phase1": 10.2,
+                "terminal_growth": 2.5,
+                "pv_fcf": 9561.1,
+                "pv_terminal_m": 64481.5
+            },
+            "dividend": {
+                "yield": 270.0,
+                "eps_payout": 23.3,
+                "fcf_payout": 20.9,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.6,
             "penalty_applied": false
         },
         {
@@ -210,72 +589,295 @@
             "name": "CF Industries Holdings, Inc.",
             "sector": "Basic Materials",
             "industry_group": "Materials",
+            "price": 123.09,
             "roe": 27.3,
-            "pe_ratio": 11.32,
+            "pe_ratio": 11.1,
             "debt_to_equity": 0.44,
             "revenue_growth": 19.4,
             "profit_margin": 23.7,
             "fcf_positive": true,
             "beta": 0.42,
-            "price": 125.5,
-            "score": 5.1,
+            "roic": null,
+            "roce": null,
+            "pfcf": 17.6,
+            "rev_cagr_5yr": -14.1,
+            "ni_cagr_5yr": -24.2,
+            "analyst_target": 120.73684,
+            "analyst_upside": -1.9,
+            "analyst_count": 19,
+            "dcf": {
+                "dcf_per_share": 454.54,
+                "dcf_upside": 269.3,
+                "mos_price": 340.91,
+                "wacc": 6.34,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 8971.4,
+                "pv_terminal_m": 64479.7
+            },
+            "dividend": {
+                "yield": 159.0,
+                "eps_payout": 18.0,
+                "fcf_payout": 28.5,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.5,
             "penalty_applied": false
         },
         {
-            "ticker": "PYPL",
-            "name": "PayPal Holdings, Inc.",
+            "ticker": "NEM",
+            "name": "Newmont Corporation",
+            "sector": "Basic Materials",
+            "industry_group": "Materials",
+            "price": 116.61,
+            "roe": 25.83,
+            "pe_ratio": 15.12,
+            "debt_to_equity": 0.16,
+            "revenue_growth": 45.8,
+            "profit_margin": 33.9,
+            "fcf_positive": true,
+            "beta": 0.45,
+            "roic": null,
+            "roce": null,
+            "pfcf": 12.7,
+            "rev_cagr_5yr": 23.9,
+            "ni_cagr_5yr": null,
+            "analyst_target": 144.008,
+            "analyst_upside": 23.5,
+            "analyst_count": 20,
+            "dcf": {
+                "dcf_per_share": 523.76,
+                "dcf_upside": 349.2,
+                "mos_price": 392.82,
+                "wacc": 7.01,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 80038.9,
+                "pv_terminal_m": 484638.2
+            },
+            "dividend": {
+                "yield": 87.0,
+                "eps_payout": 13.5,
+                "fcf_payout": 11.3,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.5,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "CINF",
+            "name": "Cincinnati Financial Corporatio",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "roe": 25.12,
-            "pe_ratio": 8.49,
-            "debt_to_equity": 0.58,
-            "revenue_growth": 7.2,
-            "profit_margin": 15.0,
+            "price": 165.05,
+            "roe": 18.73,
+            "pe_ratio": 9.44,
+            "debt_to_equity": 0.06,
+            "revenue_growth": 11.6,
+            "profit_margin": 21.3,
             "fcf_positive": true,
-            "beta": 1.4,
-            "price": 45.23,
-            "score": 5.0,
+            "beta": 0.6,
+            "roic": null,
+            "roce": null,
+            "pfcf": 9.3,
+            "rev_cagr_5yr": 24.4,
+            "ni_cagr_5yr": null,
+            "analyst_target": 179.16667,
+            "analyst_upside": 8.6,
+            "analyst_count": 6,
+            "dcf": {
+                "dcf_per_share": 455.55,
+                "dcf_upside": 176.0,
+                "mos_price": 341.67,
+                "wacc": 7.58,
+                "growth_phase1": 8.3,
+                "terminal_growth": 2.5,
+                "pv_fcf": 14019.6,
+                "pv_terminal_m": 57332.5
+            },
+            "dividend": {
+                "yield": 230.0,
+                "eps_payout": 21.5,
+                "fcf_payout": 21.2,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.4,
             "penalty_applied": false
         },
         {
-            "ticker": "UHS",
-            "name": "Universal Health Services, Inc.",
+            "ticker": "BMY",
+            "name": "Bristol-Myers Squibb Company",
             "sector": "Healthcare",
             "industry_group": "Healthcare",
-            "roe": 21.37,
-            "pe_ratio": 7.14,
-            "debt_to_equity": 0.67,
-            "revenue_growth": 9.6,
-            "profit_margin": 8.6,
+            "price": 56.72,
+            "roe": 38.73,
+            "pe_ratio": 15.89,
+            "debt_to_equity": 2.31,
+            "revenue_growth": 2.6,
+            "profit_margin": 15.0,
             "fcf_positive": true,
-            "beta": 1.13,
-            "price": 171.01,
-            "score": 4.9,
+            "beta": 0.26,
+            "roic": null,
+            "roce": null,
+            "pfcf": 11.8,
+            "rev_cagr_5yr": 1.4,
+            "ni_cagr_5yr": 3.7,
+            "analyst_target": 62.96,
+            "analyst_upside": 11.0,
+            "analyst_count": 25,
+            "dcf": {
+                "dcf_per_share": 161.59,
+                "dcf_upside": 184.9,
+                "mos_price": 121.19,
+                "wacc": 5.63,
+                "growth_phase1": 5.9,
+                "terminal_growth": 2.5,
+                "pv_fcf": 49637.8,
+                "pv_terminal_m": 326765.6
+            },
+            "dividend": {
+                "yield": 447.0,
+                "eps_payout": 70.6,
+                "fcf_payout": 52.2,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.4,
             "penalty_applied": false
         },
         {
-            "ticker": "WDC",
-            "name": "Western Digital Corporation",
+            "ticker": "HIG",
+            "name": "The Hartford Insurance Group, I",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "price": 134.07,
+            "roe": 22.74,
+            "pe_ratio": 9.44,
+            "debt_to_equity": 0.23,
+            "revenue_growth": 6.1,
+            "profit_margin": 14.1,
+            "fcf_positive": true,
+            "beta": 0.5,
+            "roic": null,
+            "roce": null,
+            "pfcf": 6.6,
+            "rev_cagr_5yr": 8.7,
+            "ni_cagr_5yr": 28.2,
+            "analyst_target": 149.45,
+            "analyst_upside": 11.5,
+            "analyst_count": 20,
+            "dcf": {
+                "dcf_per_share": 1202.97,
+                "dcf_upside": 797.3,
+                "mos_price": 902.23,
+                "wacc": 6.67,
+                "growth_phase1": 23.8,
+                "terminal_growth": 2.5,
+                "pv_fcf": 44715.0,
+                "pv_terminal_m": 289429.2
+            },
+            "dividend": {
+                "yield": 181.0,
+                "eps_payout": 16.9,
+                "fcf_payout": 11.7,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.3,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "CDW",
+            "name": "CDW Corporation",
             "sector": "Technology",
             "industry_group": "Tech & AI",
-            "roe": 85.92,
-            "pe_ratio": 29.59,
-            "debt_to_equity": 0.18,
-            "revenue_growth": 45.5,
-            "profit_margin": 55.3,
+            "price": 100.92,
+            "roe": 44.16,
+            "pe_ratio": 12.29,
+            "debt_to_equity": 2.41,
+            "revenue_growth": 9.2,
+            "profit_margin": 4.7,
             "fcf_positive": true,
-            "beta": 2.16,
-            "price": 494.09,
-            "score": 4.9,
+            "beta": 1.03,
+            "roic": null,
+            "roce": null,
+            "pfcf": 14.6,
+            "rev_cagr_5yr": -1.9,
+            "ni_cagr_5yr": -1.5,
+            "analyst_target": 147.3,
+            "analyst_upside": 46.0,
+            "analyst_count": 10,
+            "dcf": {
+                "dcf_per_share": 139.11,
+                "dcf_upside": 37.8,
+                "mos_price": 104.33,
+                "wacc": 7.41,
+                "growth_phase1": 8.4,
+                "terminal_growth": 2.5,
+                "pv_fcf": 4550.6,
+                "pv_terminal_m": 19367.2
+            },
+            "dividend": {
+                "yield": 251.0,
+                "eps_payout": 30.7,
+                "fcf_payout": 36.4,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.3,
             "penalty_applied": true
+        },
+        {
+            "ticker": "BBY",
+            "name": "Best Buy Co., Inc.",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Consumer Cyclical",
+            "price": 56.6,
+            "roe": 37.04,
+            "pe_ratio": 11.23,
+            "debt_to_equity": 1.39,
+            "revenue_growth": -1.0,
+            "profit_margin": 2.6,
+            "fcf_positive": true,
+            "beta": 1.25,
+            "roic": null,
+            "roce": null,
+            "pfcf": 14.2,
+            "rev_cagr_5yr": -3.4,
+            "ni_cagr_5yr": -9.0,
+            "analyst_target": 72.5,
+            "analyst_upside": 28.1,
+            "analyst_count": 20,
+            "dcf": {
+                "dcf_per_share": 140.42,
+                "dcf_upside": 148.1,
+                "mos_price": 105.31,
+                "wacc": 8.84,
+                "growth_phase1": 25.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 6504.2,
+                "pv_terminal_m": 27215.2
+            },
+            "dividend": {
+                "yield": 692.0,
+                "eps_payout": 76.2,
+                "fcf_payout": 96.0,
+                "sustainable": false,
+                "risk_flag": "FCF payout 96.0% \u2014 risico op dividendverlaging"
+            },
+            "score": 7.3,
+            "penalty_applied": false
         }
     ],
     "active_trades": [
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 215.765,
-            "current_value": 819.89,
+            "current_price": 215.66,
+            "current_value": 819.49,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -283,7 +885,8 @@
             "allocation_pct": 0.1,
             "position_value": 800.0,
             "shares": 3.7999,
-            "pl_percent": 2.49
+            "pl_percent": 2.44,
+            "tp_target": 1057.4
         },
         {
             "ticker": "UBER",
@@ -297,13 +900,14 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 4.81
+            "pl_percent": 4.81,
+            "tp_target": 30.0
         },
         {
             "ticker": "AMP",
             "buy_price": 453.1,
-            "current_price": 471.15,
-            "current_value": 1039.83,
+            "current_price": 472.395,
+            "current_value": 1042.58,
             "buy_date": "2026-04-09",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -311,13 +915,14 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 2.207,
-            "pl_percent": 3.98
+            "pl_percent": 4.26,
+            "tp_target": 113.2
         },
         {
             "ticker": "ADBE",
             "buy_price": 225.35,
-            "current_price": 236.3682,
-            "current_value": 1048.88,
+            "current_price": 235.75,
+            "current_value": 1046.14,
             "buy_date": "2026-04-11",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -325,7 +930,122 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 4.4375,
-            "pl_percent": 4.89
+            "pl_percent": 4.62,
+            "tp_target": 41.4
+        },
+        {
+            "ticker": "PGR",
+            "name": "Progressive Corporation (The)",
+            "buy_price": 197.19,
+            "current_price": 197.19,
+            "current_value": 1296.0,
+            "buy_date": "2026-05-14",
+            "industry_group": "Financials",
+            "sector": "Financial Services",
+            "score_at_entry": 8.5,
+            "roic_at_entry": null,
+            "roce_at_entry": null,
+            "dcf_upside_entry": 316.9,
+            "tp_target": 253.5,
+            "kelly_fraction": 0.2,
+            "position_value": 1296.0,
+            "shares": 6.5723,
+            "pl_percent": 0.0
+        },
+        {
+            "ticker": "BR",
+            "name": "Broadridge Financial Solutions,",
+            "buy_price": 143.72,
+            "current_price": 143.72,
+            "current_value": 1036.8,
+            "buy_date": "2026-05-14",
+            "industry_group": "Tech & AI",
+            "sector": "Technology",
+            "score_at_entry": 8.2,
+            "roic_at_entry": null,
+            "roce_at_entry": null,
+            "dcf_upside_entry": 70.3,
+            "tp_target": 56.2,
+            "kelly_fraction": 0.2,
+            "position_value": 1036.8,
+            "shares": 7.214,
+            "pl_percent": 0.0
+        },
+        {
+            "ticker": "GILD",
+            "name": "Gilead Sciences, Inc.",
+            "buy_price": 132.56,
+            "current_price": 132.56,
+            "current_value": 829.44,
+            "buy_date": "2026-05-14",
+            "industry_group": "Healthcare",
+            "sector": "Healthcare",
+            "score_at_entry": 7.6,
+            "roic_at_entry": null,
+            "roce_at_entry": null,
+            "dcf_upside_entry": 195.2,
+            "tp_target": 156.2,
+            "kelly_fraction": 0.2,
+            "position_value": 829.44,
+            "shares": 6.2571,
+            "pl_percent": 0.0
+        },
+        {
+            "ticker": "DECK",
+            "name": "Deckers Outdoor Corporation",
+            "buy_price": 94.45,
+            "current_price": 94.45,
+            "current_value": 165.89,
+            "buy_date": "2026-05-14",
+            "industry_group": "Consumer Cyclical",
+            "sector": "Consumer Cyclical",
+            "score_at_entry": 7.6,
+            "roic_at_entry": null,
+            "roce_at_entry": null,
+            "dcf_upside_entry": -8.1,
+            "tp_target": 30.0,
+            "kelly_fraction": 0.05,
+            "position_value": 165.89,
+            "shares": 1.7564,
+            "pl_percent": 0.0
+        },
+        {
+            "ticker": "APA",
+            "name": "APA Corporation",
+            "buy_price": 37.15,
+            "current_price": 37.15,
+            "current_value": 630.37,
+            "buy_date": "2026-05-14",
+            "industry_group": "Energy",
+            "sector": "Energy",
+            "score_at_entry": 7.6,
+            "roic_at_entry": null,
+            "roce_at_entry": null,
+            "dcf_upside_entry": 429.4,
+            "tp_target": 343.5,
+            "kelly_fraction": 0.2,
+            "position_value": 630.37,
+            "shares": 16.9682,
+            "pl_percent": 0.0
+        },
+        {
+            "ticker": "CF",
+            "name": "CF Industries Holdings, Inc.",
+            "buy_price": 123.09,
+            "current_price": 123.09,
+            "current_value": 504.3,
+            "buy_date": "2026-05-14",
+            "industry_group": "Materials",
+            "sector": "Basic Materials",
+            "score_at_entry": 7.5,
+            "roic_at_entry": null,
+            "roce_at_entry": null,
+            "dcf_upside_entry": 269.3,
+            "tp_target": 215.4,
+            "kelly_fraction": 0.2,
+            "position_value": 504.3,
+            "shares": 4.097,
+            "pl_percent": 0.0
         }
     ],
     "equity_history": [
@@ -448,6 +1168,10 @@
         {
             "date": "05-14 10:28",
             "value": 10131.88
+        },
+        {
+            "date": "05-14 19:29",
+            "value": 10142.84
         }
     ],
     "memory": {
@@ -468,15 +1192,303 @@
             }
         ],
         "positive_sectors": [],
-        "last_update": "2026-05-14T10:28:03.205825+00:00"
+        "last_update": "2026-05-14T19:29:09.486593+00:00",
+        "version": "nexus-v3-kelly",
+        "vix_threshold": 6.5
     },
     "macro": {
-        "vix": 17.79,
-        "treasury_10y": 4.48
+        "vix": 17.27,
+        "treasury_10y": 4.46
     },
     "portfolio": {
-        "cash": 6480.0,
-        "starting_capital": 10000.0
+        "cash": 2017.2,
+        "starting_capital": 10000.0,
+        "open_value": 8125.64,
+        "total_value": 10142.84,
+        "return_pct": 1.43
     },
-    "ticker_updated_at": "2026-05-14T19:04:08.622834+00:00"
+    "watchlist": [],
+    "filings": {
+        "ALL": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-04-29",
+                    "accession": "0000899051-26-000075",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-29",
+                    "accession": "0000899051-26-000074",
+                    "description": "8-K",
+                    "excerpt": "all-20260429 0000899051 false Common Stock, par value $.01 per share ALL NYSE Common Stock, par value $.01 per share ALL CHX 0000899051 2026-04-29 2026-04-29 0000899051 all:SubordinatedDebenturesDue2053At5.10PercentMember exch:XNYS 2026-04-29 2026-04-29 0000899051 us-gaap:SeriesHPreferredStockMember exch:XNYS 2026-04-29 2026-04-29 0000899051 all:SeriesIPreferredStockMember exch:XNYS 2026-04-29 2026-04-29 0000899051 all:SeriesJPreferredStockMember exch:XNYS 2026-04-29 2026-04-29 0000899051 us-gaap:CommonStockMember exch:XNYS 2026-04-29 2026-04-29 0000899051 us-gaap:CommonStockMember exch:XCHI 2026-04-29 2026-04-29 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM&#160; 8-K &#160; CURRENT REPORT PURSUANT TO SECTION&#160;13 OR 15 (d)&#160;OF THE SECURITIES EXCHANGE ACT OF 1934 &#160; Date of report (Date of earliest event reported):&#160; April 29, 2026 THE ALLSTATE CORP ORATION (Exact name of registrant as specified in its charter) &#160; Delaware &#160; 1-11840 &#160; 36-3871531 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (IRS Employer Identification No.) &#160; 3100 Sanders Road , Northbrook , Illinois &#160;&#160;&#160;&#160; 60062 (Address of principal executive offices)&#160;&#160;&#160;&#160;(Zip Code) &#160; Registrant&#8217;s telephone number, including area code &#160; ( 847 ) 402-2800 &#160; Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the f"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-16",
+                    "accession": "0000899051-26-000067",
+                    "description": "8-K",
+                    "excerpt": "all-20260416 0000899051 false Common Stock, par value $.01 per share ALL NYSE Common Stock, par value $.01 per share ALL CHX 0000899051 2026-04-16 2026-04-16 0000899051 all:SubordinatedDebenturesDue2053At5.10PercentMember exch:XNYS 2026-04-16 2026-04-16 0000899051 us-gaap:SeriesHPreferredStockMember exch:XNYS 2026-04-16 2026-04-16 0000899051 all:SeriesIPreferredStockMember exch:XNYS 2026-04-16 2026-04-16 0000899051 all:SeriesJPreferredStockMember exch:XNYS 2026-04-16 2026-04-16 0000899051 us-gaap:CommonStockMember exch:XNYS 2026-04-16 2026-04-16 0000899051 us-gaap:CommonStockMember exch:XCHI 2026-04-16 2026-04-16 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM&#160; 8-K &#160; CURRENT REPORT PURSUANT TO SECTION&#160;13 OR 15 (d)&#160;OF THE SECURITIES EXCHANGE ACT OF 1934 &#160; Date of report (Date of earliest event reported): &#160; April 16, 2026 THE ALLSTATE CORP ORATION (Exact name of registrant as specified in its charter) &#160; Delaware &#160; 1-11840 &#160; 36-3871531 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (IRS Employer Identification No.) 3100 Sanders Road , Northbrook , Illinois &#160;&#160;&#160;&#160; 60062 (Address of principal executive offices)&#160;&#160;&#160;&#160;(Zip Code) Registrant&#8217;s telephone number, including area code &#160; ( 847 ) 402-2800 Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of "
+                }
+            ],
+            "cik": "0000899051",
+            "retrieved_at": "2026-05-14T19:26:10.100923+00:00"
+        },
+        "AMP": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-05-07",
+                    "accession": "0000820027-26-000027",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-30",
+                    "accession": "0001104659-26-052928",
+                    "description": "FORM 8-K",
+                    "excerpt": "false 0000820027 AMERIPRISE FINANCIAL INC 0000820027 2026-04-29 2026-04-29 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, DC 20549 &#160; FORM&#160; 8-K &#160; CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): April 29, 2026 &#160; AMERIPRISE FINANCIAL,&#160;INC. (Exact name of registrant as specified in its charter) &#160; Delaware &#160; 001-32525 &#160; 13-3180631 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (IRS Employer Identification No.) &#160; 1099 Ameriprise Financial Center Minneapolis , Minnesota &#160; 55474 (Address of principal executive offices) &#160; (Zip Code) &#160; Registrant&#8217;s telephone number, including area code: ( 612 ) 671-3131 &#160; Former name or former address, if changed since last report: Not Applicable &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#160; &#168; &#160; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#168; &#160;Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#168; &#160;Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;und"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-23",
+                    "accession": "0000820027-26-000020",
+                    "description": "8-K",
+                    "excerpt": "amp-20260423 0000820027 false 0000820027 2026-04-23 2026-04-23 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section&#160;13 OR 15(d)&#160;of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 23, 2026 AMERIPRISE FINANCIAL,&#160;INC. (Exact name of registrant as specified in its charter) Delaware &#160; 001-32525 13-3180631 (State or other jurisdiction of incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 1099 Ameriprise Financial Center Minneapolis Minnesota 55474 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code 612 671-3131 Former name or former address, if changed since last report: Not Applicable Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions ( see General Instruction A.2. below): &#9744; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule&#160;13e-4(c)&#160;under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b)"
+                }
+            ],
+            "cik": "0000820027",
+            "retrieved_at": "2026-05-14T19:26:11.402354+00:00"
+        },
+        "ADBE": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-04-21",
+                    "accession": "0000796343-26-000101",
+                    "description": "8-K",
+                    "excerpt": "adbe-20260415 0000796343 false 0000796343 2026-04-15 2026-04-15 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 _________________________ FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (date of earliest event reported): April 15, 2026 ADOBE INC. (Exact name of registrant as specified in its charter) Delaware 000-15175 77-0019522 (State or other jurisdiction of incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 345 Park Avenue San Jose , California 95110-2704 (Address of principal executive offices and zip code) Registrant&#8217;s telephone number, including area code: ( 408 ) 536-6000 Not Applicable (Former name or former address, if changed since last report) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of Each Class Trading Symbol Nam"
+                }
+            ],
+            "cik": "0000796343",
+            "retrieved_at": "2026-05-14T19:26:12.420919+00:00"
+        },
+        "PGR": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-05-12",
+                    "accession": "0000080661-26-000200",
+                    "description": "8-K",
+                    "excerpt": "pgr-20260508 False PROGRESSIVE CORP/OH/ 0000080661 0000080661 2026-05-08 2026-05-08 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported) May&#160;8, 2026 &#160; THE PROGRESSIVE CORPORATION (Exact name of registrant as specified in its charter) Ohio 001-09518 34-0963169 (State or other jurisdiction of incorporation) (Commission File Number) (IRS Employer Identification No.) 300 North Commons Blvd., Mayfield Village, Ohio &#160; 44143 (Address of principal executive offices) &#160; (Zip Code) Registrant&#8217;s telephone number, including area code ( 440 ) 461-5000 Not Applicable (Former name or former address, if changed since last report.) &#160; &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of each class Trading Symb"
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-05-04",
+                    "accession": "0000080661-26-000177",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-15",
+                    "accession": "0000080661-26-000173",
+                    "description": "8-K",
+                    "excerpt": "pgr-20260415 False PROGRESSIVE CORP/OH/ 0000080661 0000080661 2026-04-15 2026-04-15 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT &#160; Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported) April 15, 2026 THE PROGRESSIVE CORPORATION (Exact name of registrant as specified in its charter) Ohio 001-09518 34-0963169 (State or other jurisdiction of incorporation) (Commission File Number) (IRS Employer Identification No.) 300 North Commons Blvd., Mayfield Village, Ohio &#160; 44143 (Address of principal executive offices) &#160; (Zip Code) Registrant&#8217;s telephone number, including area code ( 440 ) 461-5000 Not Applicable (Former name or former address, if changed since last report.) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: "
+                }
+            ],
+            "cik": "0000080661",
+            "retrieved_at": "2026-05-14T19:26:13.723170+00:00"
+        },
+        "BR": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-05-06",
+                    "accession": "0001140361-26-019332",
+                    "description": "8-K",
+                    "excerpt": "false 0001383312 0001383312 2026-05-04 2026-05-04 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 4, 2026 BROADRIDGE FINANCIAL SOLUTIONS, INC. (Exact name of registrant as specified in its charter) Delaware 001-33220 33-1151291 (State or other jurisdiction of incorporation) (Commission file number) (I.R.S. Employer Identification No.) 5 Dakota Drive Lake Success New York 11042 &#160; &#160; &#160; &#160; (Street Address) (City) (State) Zip Code Registrant&#8217;s telephone number, including area code: ( 516 ) 472-5400 N/A (Former name or former address, if changed since last report) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Indicate by check mark whether the registrant is an emerging growth company as defined in Rule 405 of the Securities Act of 1933 (&#167;230.405 of this ch"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-06",
+                    "accession": "0001383312-26-000015",
+                    "description": "8-K",
+                    "excerpt": "br-20260506 0001383312 false 0001383312 2026-05-06 2026-05-06 &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 6, 2026 ------------ BROADRIDGE FINANCIAL SOLUTIONS, INC. (Exact name of registrant as specified in its charter) Delaware 001-33220 33-1151291 (State or other jurisdiction of incorporation) (Commission file number) (I.R.S. Employer Identification No.) 5 Dakota Drive Lake Success New York 11042 (Street Address) (City) (State) Zip Code Registrant&#8217;s telephone number, including area code: ( 516 ) 472-5400 N/A (Former name or former address, if changed since last report) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Indicate by check mark whether the registrant is an emerging growth company as defined in Rule 405 of the Securities Act of 1933 (&#167;230.405 of thi"
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-04-30",
+                    "accession": "0001628280-26-028675",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-30",
+                    "accession": "0001383312-26-000013",
+                    "description": "8-K",
+                    "excerpt": "br-20260430 0001383312 false 0001383312 2026-04-30 2026-04-30 &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 30, 2026 ------------ BROADRIDGE FINANCIAL SOLUTIONS, INC. (Exact name of registrant as specified in its charter) Delaware 001-33220 33-1151291 (State or other jurisdiction of incorporation) (Commission file number) (I.R.S. Employer Identification No.) 5 Dakota Drive Lake Success New York 11042 (Street Address) (City) (State) Zip Code Registrant&#8217;s telephone number, including area code: ( 516 ) 472-5400 N/A (Former name or former address, if changed since last report) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Indicate by check mark whether the registrant is an emerging growth company as defined in Rule 405 of the Securities Act of 1933 (&#167;230.405 of "
+                }
+            ],
+            "cik": "0001383312",
+            "retrieved_at": "2026-05-14T19:26:15.380387+00:00"
+        },
+        "PTC": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-05-07",
+                    "accession": "0001193125-26-209869",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-06",
+                    "accession": "0001193125-26-208904",
+                    "description": "8-K",
+                    "excerpt": "8-K false 0000857005 0000857005 2026-05-06 2026-05-06 &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 &#160; FORM 8-K &#160; CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 06, 2026 &#160; &#160; PTC Inc. (Exact name of Registrant as Specified in Its Charter) &#160; &#160; Massachusetts 0-18059 04-2866152 (State or Other Jurisdiction of Incorporation) (Commission File Number) (IRS Employer Identification No.) &#160; &#160; &#160; &#160; &#160; 121 Seaport Boulevard &#160; Boston , Massachusetts &#160; 02210 (Address of Principal Executive Offices) &#160; (Zip Code) &#160; Registrant&#8217;s Telephone Number, Including Area Code: (781) 370-5000 &#160; (Former Name or Former Address, if Changed Since Last Report) &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act:"
+                }
+            ],
+            "cik": "0000857005",
+            "retrieved_at": "2026-05-14T19:26:16.356184+00:00"
+        },
+        "TRV": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-04-16",
+                    "accession": "0000086312-26-000111",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-16",
+                    "accession": "0000086312-26-000110",
+                    "description": "8-K",
+                    "excerpt": "trv-20260416 0000086312 false 0000086312 2026-04-16 2026-04-16 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160;_______________________________________ &#160; FORM&#160; 8-K &#160;______________________________________ CURRENT REPORT Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): &#160; April&#160;16, 2026 &#160;_______________________________________________ The Travelers Companies,&#160;Inc. (Exact name of registrant as specified in its charter) &#160;_______________________________________________ &#160; Minnesota &#160; 001-10898 &#160; 41-0518860 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (I.R.S. Employer Identification No.) 485 Lexington Avenue New York , New York 10017 (Address of principal executive offices) (Zip Code) &#160; ( 917 ) 778-6000 (Registrant&#8217;s telephone number, including area code) &#160; Not Applicable (Former name or former address, if changed since last report) &#160;_________________________________________________ Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions ( see General Instruction A.2. below): &#160; &#9744; &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CF"
+                }
+            ],
+            "cik": "0000086312",
+            "retrieved_at": "2026-05-14T19:26:17.359303+00:00"
+        },
+        "NFLX": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-04-23",
+                    "accession": "0001065280-26-000139",
+                    "description": "8-K",
+                    "excerpt": "nflx-20260422 NETFLIX INC 0001065280 false 0001065280 2026-04-22 2026-04-22 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 __________________________________ FORM 8-K __________________________________ CURRENT REPORT Pursuant to Section&#160;13 OR 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 22, 2026 __________________________________ NETFLIX, INC. (Exact name of registrant as specified in its charter) __________________________________ Delaware 001-35727 77-0467272 (State or other jurisdiction of incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 121 Albright Way , Los Gatos , California 95032 (Address of principal executive offices) (Zip Code) ( 408 ) 540-3700 (Registrant&#8217;s telephone number, including area code) Not applicable (Former name or former address, if changed since last report) __________________________________ Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160;Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160;Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744;"
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-04-17",
+                    "accession": "0001065280-26-000138",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-16",
+                    "accession": "0001065280-26-000137",
+                    "description": "8-K",
+                    "excerpt": "nflx-20260410 NETFLIX INC 0001065280 false 0001065280 2026-04-10 2026-04-10 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 __________________________________ FORM 8-K __________________________________ CURRENT REPORT Pursuant to Section&#160;13 OR 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 10, 2026 __________________________________ NETFLIX, INC. (Exact name of registrant as specified in its charter) __________________________________ Delaware 001-35727 77-0467272 (State or other jurisdiction of incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 121 Albright Way , Los Gatos , California 95032 (Address of principal executive offices) (Zip Code) ( 408 ) 540-3700 (Registrant&#8217;s telephone number, including area code) (Former name or former address, if changed since last report) __________________________________ Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160;Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160;Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#"
+                }
+            ],
+            "cik": "0001065280",
+            "retrieved_at": "2026-05-14T19:26:18.679910+00:00"
+        },
+        "GILD": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-05-07",
+                    "accession": "0000882095-26-000024",
+                    "description": "FORM 10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-07",
+                    "accession": "0000882095-26-000022",
+                    "description": "FORM 8-K",
+                    "excerpt": "gild-20260507 0000882095 false 0000882095 2026-05-07 2026-05-07 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 DATE OF REPORT (DATE OF EARLIEST EVENT REPORTED): May&#160;7, 2026 GILEAD SCIENCES, INC. (Exact name of registrant as specified in its charter) Delaware 000-19731 94-3047598 (State or Other Jurisdiction of Incorporation) (Commission File No.) (IRS Employer Identification No.) 333 Lakeside Drive , Foster City , California (Address of principal executive offices) 94404 (Zip Code) 650 - 574-3000 (Registrant&#8217;s Telephone Number, Including Area Code) Not Applicable (Former name or former address, if changed since last report) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12 &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) "
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-04",
+                    "accession": "0000882095-26-000008",
+                    "description": "FORM 8-K",
+                    "excerpt": "gild-20260430 0000882095 false 0000882095 2026-05-04 2026-05-04 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 DATE OF REPORT (DATE OF EARLIEST EVENT REPORTED): April&#160;30, 2026 GILEAD SCIENCES, INC. (Exact name of registrant as specified in its charter) Delaware 000-19731 94-3047598 (State or Other Jurisdiction of Incorporation) (Commission File No.) (IRS Employer Identification No.) 333 Lakeside Drive , Foster City , California (Address of principal executive offices) 94404 (Zip Code) 650 - 574-3000 (Registrant&#8217;s Telephone Number, Including Area Code) Not Applicable (Former name or former address, if changed since last report) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12 &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12("
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-28",
+                    "accession": "0001104659-26-049874",
+                    "description": "FORM 8-K",
+                    "excerpt": "false 0000882095 0000882095 2026-04-28 2026-04-28 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM 8-K &#160; CURRENT REPORT &#160; Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 &#160; DATE OF REPORT (DATE OF EARLIEST EVENT REPORTED) : April 28, 2026 &#160; GILEAD SCIENCES, INC. (Exact name of registrant as specified in its charter) &#160; Delaware 0-19731 94-3047598 (State or other jurisdiction of incorporation) (Commission File No.) (IRS Employer &#8239;Identification No.) &#160; 333 Lakeside Drive , Foster City , California (Address of principal executive offices) &#160; 94404 (Zip Code) &#160; ( 650 ) 574-3000 (Registrant&#8217;s telephone number, including area code) &#160; Not Applicable (Former name or former address, if changed since last report) &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#168; &#8239;&#8239;&#8239;&#8239;&#8239;Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#168; &#8239;&#8239;&#8239;&#8239;&#8239;Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#168; &#8239;&#8239;&#8239;&#8239;Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#168; &#8239;&#8239;&#"
+                }
+            ],
+            "cik": "0000882095",
+            "retrieved_at": "2026-05-14T19:26:20.343174+00:00"
+        },
+        "ACGL": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-05-07",
+                    "accession": "0000947484-26-000063",
+                    "description": "8-K",
+                    "excerpt": "ITEM 5.07&#160;&#160;&#160;&#160; Submission of Matters to a Vote of Security Holders . Arch Capital Group Ltd.'s (&#8220;ACGL&#8221;) annual meeting of shareholders was held on May 5, 2026. At the meeting, the holders of 311,259,137 common shares, which represents approximately 87 percent of the outstanding shares entitled to vote as of the record date of March 9, 2026, were represented in person or by proxy. Matters submitted to shareholders at the meeting and the voting results thereof were as follows: Item 1. The vote on the election of the three Class I directors to hold office for a term of three years and until their respective successors are duly elected and qualified or their earlier resignation or removal. The voting results were as follows: NOMINEE FOR AGAINST WITHHELD BROKER NON-VOTES Francis Ebong 264,284,191 33,720,096 587,870 12,666,980 Eileen Mallesch 291,998,486 6,510,150 83,521 12,666,980 Brian S. Posner 288,275,104 10,233,019 84,034 12,666,980 Item 2 . The vote on a proposal on advisory vote to approve named executive officer compensation. The voting results were as follows: FOR AGAINST ABSTAIN BROKER NON-VOTES 280,228,167 17,650,116 713,874 12,666,980 Item 3 . The vote on the ratification of the selection of PricewaterhouseCoopers LLP as ACGL&#8217;s independent registered public accounting firm for the year ending December 31, 2026. The voting results were as follows: FOR AGAINST ABSTAIN BROKER NON-VOTES 292,837,090 18,363,136 58,911 &#8212; Item 4 . The "
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-05-05",
+                    "accession": "0000947484-26-000058",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-28",
+                    "accession": "0000947484-26-000051",
+                    "description": "8-K",
+                    "excerpt": "ITEM 2.02&#160;&#160;&#160;&#160; Results of Operations and Financial Condition . On April 28, 2026 Arch Capital Group Ltd. issued a press release reporting its earnings and the availability of its financial supplement for the quarter ended March 31, 2026. The press release and financial supplement are attached to this Current Report on Form 8-K as Exhibit 99.1 and Exhibit 99.2, respectively, and are incorporated herein by reference. The information in this Current Report on Form 8-K, including the information set forth in Exhibit 99.1 and Exhibit 99.2, shall not be deemed &#8220;filed&#8221; for purposes of Section 18 of the Securities Exchange Act of 1934, as amended (the &#8220;Exchange Act&#8221;), or incorporated by reference in any filing under the Securities Act of 1933, as amended, or the Exchange Act, except as shall be expressly set forth by specific reference in such a filing. ITEM 9.01&#160;&#160;&#160;&#160; Financial Statements and Exhibits . (d):&#160;&#160;&#160;&#160; The following exhibits are being filed herewith. EXHIBIT&#160;NO. &#160; DESCRIPTION 99.1 &#160; Press Release dated April 28, 2026 announcing the earnings of Arch Capital Group Ltd. for the quarter ended March 31, 2026 99.2 &#160; 2026 First Quarter Financial Supplement 104 Cover Page Interactive Data File (embedded within the Inline XBRL document) 2 SIGNATURES &#160; Pursuant to the requirements of the Securities Exchange Act of 1934, as amended, the registrant has duly caused this report to b"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-20",
+                    "accession": "0000947484-26-000044",
+                    "description": "8-K",
+                    "excerpt": "ITEM 8.01&#160;&#160;&#160;&#160; Other Events . On April 19, 2026, Arch Capital Group Ltd. (the &#8220;Company&#8221;) increased its authorization for its existing share repurchase program by $3.0 billion, which, as in the past, may be effected from time to time in open market or privately negotiated transactions. After taking into account this increased authorization and recent share repurchases, approximately $3.1 billion of share repurchases are available under the program as of April 20, 2026. The timing and amount of the repurchase transactions under this program will depend on a variety of factors, including market conditions and corporate and regulatory considerations. 2 SIGNATURES &#160; Pursuant to the requirements of the Securities Exchange Act of 1934, as amended, the registrant has duly caused this report to be signed on its behalf by the undersigned hereunto duly authorized. &#160; &#160; ARCH CAPITAL GROUP LTD. &#160; &#160; &#160; &#160; &#160; &#160; Date: April 20, 2026 By: /s/ Fran&#231;ois Morin &#160; &#160; Name: Fran&#231;ois Morin &#160; &#160; Title: Executive Vice President, Chief Financial Officer and Treasurer 3"
+                }
+            ],
+            "cik": "0000947484",
+            "retrieved_at": "2026-05-14T19:26:22.039381+00:00"
+        },
+        "FDS": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-04-08",
+                    "accession": "0000950103-26-005447",
+                    "description": "FORM 8-K",
+                    "excerpt": "false 0001013237 0001013237 2026-04-02 2026-04-02 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; Form 8-K &#160; CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): April 2, 2026 &#160; FactSet Research Systems Inc. (Exact name of registrant as specified in its charter) &#160; Delaware 1-11869 13-3362547 (State or other jurisdiction of incorporation) (Commission File Number) (I.R.S. Employer Identification No.) &#160; 45 Glover Avenue Norwalk , Connecticut 06850 (Address of principal executive offices) (Zip code) &#160; Registrant&#8217;s telephone number, including area code: ( 203 ) 810-1000 &#160; Former name or former address, if changed since last report: None &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#160; &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) &#160; Securit"
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-04-02",
+                    "accession": "0001628280-26-022873",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-03-31",
+                    "accession": "0001628280-26-022203",
+                    "description": "8-K",
+                    "excerpt": "fds-20260331 0001013237 FALSE 0001013237 2026-03-31 2026-03-31 0001013237 fds:CommonStock1Member 2026-03-31 2026-03-31 0001013237 fds:CommonStock2Member 2026-03-31 2026-03-31 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 Form 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): March&#160;31, 2026 FactSet Research Systems Inc. (Exact name of registrant as specified in its charter) Delaware 1-11869 13-3362547 (State or other jurisdiction of (Commission (I.R.S. Employer incorporation) File Number) Identification No.) 45 Glover Avenue Norwalk , Connecticut 06850 (Address of principal executive offices) (Zip code) Registrant&#8217;s telephone number, including area code: ( 203 ) 810-1000 Former name or former address, if changed since last report: None Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12("
+                }
+            ],
+            "cik": "0001013237",
+            "retrieved_at": "2026-05-14T19:26:23.504514+00:00"
+        }
+    },
+    "filings_at": "2026-05-14T19:26:24.004678+00:00"
 }

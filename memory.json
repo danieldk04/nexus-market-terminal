@@ -16,5 +16,23 @@
         }
     ],
     "initialized_at": "2026-04-04T00:00:00+00:00",
-    "version": "nexus-v2"
+    "version": "nexus-v2",
+    "post_mortem": {
+        "analysis": "# POST-MORTEM RAPPORT - AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Volledig falen op identieke positie.** Bot heeft tweemaal dezelfde aandeel (ADBE) gekocht met identieke verliesomvang (-4.2%). Geen diversificatie; geen leereffect tussen trades.\n\n## 2. ROOT CAUSE\n**Kritieke scorelogica-bug.** Bot erkent verlies maar herhaalt dezelfde positie de volgende dag. Waarschijnlijke oorzaken:\n- Geen memory van recente verliesposities\n- Scoringmodel ignoreert momentum (negatief)\n- Geen circuit breaker op herhaalde sectoren\n\n## 3. AANBEVELINGEN\n\n**A) Implementeer 5-dagse lockout:** ADBE en alle Tech & AI posities in verlies mogen 5 dagen niet opnieuw worden gekocht. Voorkomt haalde-terugslag-trading.\n\n**B) Verlaag Tech & AI exposure van default naar 15%:** Sector-weighting gebaseerd op win rate per sector. Tech & AI: 0% win rate \u2192 maximaal 15% van portfolio tot herstel.\n\n## 4. SECTOR BIAS\n**Te mijden:** Tech & AI (0% win rate, 100% van verlies)  \n**Zwaarder wegen:** Geen data beschikbaar \u2013 pauzeer deployments tot sector met positief track record is ge\u00efdentificeerd.\n\n---\n**Actie:** Herstart bot niet zonder lockout-mechanisme. Current versie is ongeschikt voor live trading.",
+        "win_rate": 0.0,
+        "worst_sectors": [
+            [
+                "Tech & AI",
+                2
+            ]
+        ],
+        "best_sectors": [],
+        "repeat_losers": [
+            "ADBE"
+        ],
+        "sector_adjustments": {
+            "Tech & AI": -1.0
+        },
+        "run_at": "2026-05-14T19:29:16.281953+00:00"
+    }
 }
