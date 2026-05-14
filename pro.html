@@ -99,6 +99,16 @@
         .sr-name { font-size: 0.62rem; color: var(--muted); }
         .sr-badge { font-family: var(--mono); font-size: 0.58rem; padding: 2px 6px; border-radius: 3px; }
         .sr-no-result { padding: 12px 10px; font-size: 0.7rem; color: var(--muted); font-family: var(--mono); text-align: center; }
+        .sr-live-btn { display: block; width: calc(100% - 20px); margin: 8px 10px; padding: 7px 12px; background: transparent; border: 1px solid var(--accent); border-radius: 4px; color: var(--accent); font-family: var(--mono); font-size: 0.7rem; cursor: pointer; text-align: center; transition: background 0.15s; }
+        .sr-live-btn:hover { background: rgba(96,165,250,0.12); }
+        .sr-live-panel { padding: 10px; border-top: 1px solid var(--border2); }
+        .sr-live-title { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+        .sr-live-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+        .sr-live-row { display: flex; justify-content: space-between; font-size: 0.62rem; padding: 2px 0; border-bottom: 1px solid var(--border); }
+        .sr-live-label { color: var(--muted); }
+        .sr-live-val { font-family: var(--mono); color: var(--text); font-weight: 500; }
+        .sr-live-loading { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); text-align: center; padding: 8px; }
+        .sr-live-hint { font-size: 0.58rem; color: var(--muted); text-align: center; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
 
         .header-stats { display: flex; gap: 1.2rem; align-items: center; }
         .hstat { text-align: center; }
@@ -797,7 +807,9 @@ function onSearchInput(query) {
     ).slice(0, 8);
 
     if (!found.length) {
-        box.innerHTML = `<div class="sr-no-result">Niet gevonden in huidige scan.<br>Trigger "NEXUS Stock Lookup" in GitHub Actions.</div>`;
+        box.innerHTML = `<div class="sr-no-result">Niet gevonden in huidige scan.</div>
+            <button class="sr-live-btn" onclick="liveStockLookup('${q}')">Live ophalen: ${q} →</button>
+            <div id="sr-live-panel"></div>`;
     } else {
         const meta_src = { candidates: 'SCAN', watchlist: 'WATCH' };
         box.innerHTML = found.map(c => {
@@ -847,6 +859,71 @@ document.addEventListener('click', e => {
         document.getElementById('search-results').classList.remove('open');
     }
 });
+
+// ─── LIVE STOCK LOOKUP ───────────────────────────────────────────────────────
+const CORS = 'https://corsproxy.io/?url=';
+
+async function liveStockLookup(ticker) {
+    const panel = document.getElementById('sr-live-panel');
+    if (!panel) return;
+    panel.innerHTML = `<div class="sr-live-loading">Ophalen ${ticker}...</div>`;
+
+    try {
+        const enc = encodeURIComponent(
+            `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${ticker}` +
+            `?modules=price,summaryDetail,financialData,defaultKeyStatistics`
+        );
+        const resp = await fetch(CORS + enc);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const json = await resp.json();
+        const res  = json?.quoteSummary?.result?.[0];
+        if (!res) throw new Error('Geen data');
+
+        const pr   = res.price            || {};
+        const fd   = res.financialData    || {};
+        const sd   = res.summaryDetail    || {};
+        const ks   = res.defaultKeyStatistics || {};
+
+        const fmt  = (v, suf='', na='n/b') => (v?.raw != null ? `${v.raw}${suf}` : (v != null && typeof v === 'number' ? `${v}${suf}` : na));
+        const fmtp = (v, na='n/b') => v?.fmt ?? na;
+
+        const name  = pr.longName || pr.shortName || ticker;
+        const price = fmtp(pr.regularMarketPrice);
+        const chg   = fmtp(pr.regularMarketChangePercent);
+        const chgN  = pr.regularMarketChangePercent?.raw ?? 0;
+        const chgCol= chgN >= 0 ? 'var(--green)' : '#f87171';
+
+        const rows = [
+            ['Prijs',        `<span style="color:${chgCol}">${price} (${chg})</span>`],
+            ['Market Cap',   fmtp(pr.marketCap)],
+            ['P/E (trail)',  fmtp(sd.trailingPE)],
+            ['Forward P/E',  fmtp(sd.forwardPE)],
+            ['52w Laag',     fmtp(sd.fiftyTwoWeekLow)],
+            ['52w Hoog',     fmtp(sd.fiftyTwoWeekHigh)],
+            ['ROE',          fmtp(fd.returnOnEquity)],
+            ['Winstmarge',   fmtp(fd.profitMargins)],
+            ['Omzetgroei',   fmtp(fd.revenueGrowth)],
+            ['Analyst doel', fmtp(fd.targetMeanPrice)],
+            ['Aanbeveling',  fd.recommendationKey?.toUpperCase() ?? 'n/b'],
+            ['Beta',         fmtp(ks.beta)],
+        ];
+
+        panel.innerHTML = `
+            <div class="sr-live-panel">
+                <div class="sr-live-title">${ticker} — ${name}</div>
+                <div class="sr-live-grid">
+                    ${rows.map(([l,v]) => `
+                        <div class="sr-live-row">
+                            <span class="sr-live-label">${l}</span>
+                            <span class="sr-live-val">${v}</span>
+                        </div>`).join('')}
+                </div>
+                <div class="sr-live-hint">Volledige AI-analyse: GitHub Actions → "NEXUS Stock Lookup" → ticker: ${ticker}</div>
+            </div>`;
+    } catch(e) {
+        panel.innerHTML = `<div class="sr-live-loading" style="color:#f87171">Ophalen mislukt: ${e.message}</div>`;
+    }
+}
 
 // ─── TRADES ──────────────────────────────────────────────────────────────────
 function renderTrades(trades) {

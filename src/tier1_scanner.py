@@ -298,7 +298,7 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
 
 
 MAX_SCAN = 400
-TOP_N    = 20
+TOP_N    = 40
 
 
 def main():
