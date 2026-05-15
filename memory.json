@@ -18,7 +18,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Concentratierisico & herhaald falen**: 100% van verliezen in Tech & AI sector; dezelfde positie (ADBE) tweemaal achtereenvolgens verloren op identieke datum (+1 dag). Dit duidt op onvoldoende diversificatie en mechanisch herhaalde fouten.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: Bot opent positie in ADBE op 2026-04-09 (-4.2%), sluit niet, herhaalt 2026-04-10 met identiek verlies\n- **Geen stop-loss**: Positie wordt niet afgesloten na eerste verlies\n- **Sector-bias**: Algoritmische overfitting op Tech/AI zonder correlatiebewust hedging\n\n## 3. AANBEVELINGEN\n\n**A) Implementeer hard stop-loss op -2.5%**\nVoorkomt cascadeverliezen. Huidige verlies (-4.2% \u00d7 2) had tot -2.5% beperkt kunnen worden.\n\n**B) Maximum sector-concentratie van 30%**\nTech & AI nu 100% van portefeuille. Spreiding naar Finance/Healthcare/Industrials verplicht.\n\n## 4. SECTOR BIAS\n**Te mijden**: Tech & AI totaal (0-2 ratio)\n**Toevoegen**: Sectoren met historisch stabielere correlaties\n\n---\n**Status**: Bot offline tot correcties ge\u00efmplementeerd.",
+        "analysis": "# POST-MORTEM RAPPORT | Autonome Bot\n\n## 1. PATROON\n**Identieke dubbelverlies**: ADBE twee opeenvolgende dagen (-4.2% elk). Geen diversificatie; 100% van verliezen in \u00e9\u00e9n aandeel, \u00e9\u00e9n sector.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: Bot kocht ADBE op 2026-04-09 zonder exit-signaal. Herhaling op 2026-04-10 suggereert geen dynamisch risicobeheer.\n- **Scorelogica-blind**: Sector Tech & AI weegt 100% van portfolio (0% wins elders). Geen correlatie-checks of momentum-reversal triggers.\n\n## 3. AANBEVELINGEN\n1. **Position-sizing implementeren**: ADBE max. 25% per transactie; sector-cap Tech & AI op 40% van portfolio.\n2. **Stop-loss & re-entry-regel**: -2% stop-loss na eerste verlies; minimaal 48-uur cooldown v\u00f3\u00f3r hernieuwde ADBE-positie (voorkomen overtradingen).\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI (2/2 verliezen = 100% verliesratio)\n- **Zwaarder wegen**: Diversifieer naar niet-gecorreleerde sectoren (Utilities, Healthcare, Industrials)\n\n**Urgentie**: Win rate 0% is onhoudbaar. Implementeer risicocontroles v\u00f3\u00f3r volgende trading cycle.",
         "win_rate": 0.0,
         "worst_sectors": [
             [
@@ -33,6 +33,6 @@
         "sector_adjustments": {
             "Tech & AI": -1.0
         },
-        "run_at": "2026-05-14T20:13:15.723569+00:00"
+        "run_at": "2026-05-15T10:14:06.655052+00:00"
     }
 }
