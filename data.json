@@ -1700,8 +1700,8 @@
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 217.375,
-            "current_value": 826.0,
+            "current_price": 217.37,
+            "current_value": 825.98,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -1715,8 +1715,8 @@
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 75.12,
-            "current_value": 754.02,
+            "current_price": 75.09,
+            "current_value": 753.72,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -1724,14 +1724,14 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 4.73,
+            "pl_percent": 4.68,
             "tp_target": 30.0
         },
         {
             "ticker": "AMP",
             "buy_price": 453.1,
-            "current_price": 470.4275,
-            "current_value": 1038.23,
+            "current_price": 470.38,
+            "current_value": 1038.13,
             "buy_date": "2026-04-09",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -1739,15 +1739,15 @@
             "allocation_pct": 0.1,
             "position_value": 1000.0,
             "shares": 2.207,
-            "pl_percent": 3.82,
+            "pl_percent": 3.81,
             "tp_target": 21.8
         },
         {
             "ticker": "PGR",
             "name": "Progressive Corporation (The)",
             "buy_price": 197.19,
-            "current_price": 199.7,
-            "current_value": 1312.49,
+            "current_price": 199.73,
+            "current_value": 1312.69,
             "buy_date": "2026-05-14",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -1759,14 +1759,14 @@
             "kelly_fraction": 0.2,
             "position_value": 1296.0,
             "shares": 6.5723,
-            "pl_percent": 1.27
+            "pl_percent": 1.29
         },
         {
             "ticker": "BR",
             "name": "Broadridge Financial Solutions,",
             "buy_price": 143.72,
-            "current_price": 145.67,
-            "current_value": 1050.86,
+            "current_price": 145.62,
+            "current_value": 1050.5,
             "buy_date": "2026-05-14",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -1778,7 +1778,7 @@
             "kelly_fraction": 0.2,
             "position_value": 1036.8,
             "shares": 7.214,
-            "pl_percent": 1.36
+            "pl_percent": 1.32
         },
         {
             "ticker": "GILD",
@@ -1841,8 +1841,8 @@
             "ticker": "CF",
             "name": "CF Industries Holdings, Inc.",
             "buy_price": 123.09,
-            "current_price": 125.205,
-            "current_value": 512.96,
+            "current_price": 125.24,
+            "current_value": 513.11,
             "buy_date": "2026-05-14",
             "industry_group": "Materials",
             "sector": "Basic Materials",
@@ -1854,7 +1854,7 @@
             "kelly_fraction": 0.2,
             "position_value": 504.3,
             "shares": 4.097,
-            "pl_percent": 1.72
+            "pl_percent": 1.75
         },
         {
             "ticker": "EXE",
@@ -2353,5 +2353,6 @@
             "retrieved_at": "2026-05-15T20:12:14.392525+00:00"
         }
     },
-    "filings_at": "2026-05-15T20:12:14.892703+00:00"
+    "filings_at": "2026-05-15T20:12:14.892703+00:00",
+    "ticker_updated_at": "2026-05-15T20:57:33.475934+00:00"
 }
