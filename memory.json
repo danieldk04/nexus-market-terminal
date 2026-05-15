@@ -13,26 +13,38 @@
             "sector": "Tech & AI",
             "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
             "type": "NEGATIVE_LEARNING"
+        },
+        {
+            "date": "2026-05-15",
+            "ticker": "ADBE",
+            "sector": "Tech & AI",
+            "insight": "Take-profit ADBE (+9.9%, doel was 9.4%). Tech & AI werkt.",
+            "type": "POSITIVE_LEARNING"
         }
     ],
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT | Autonome Bot\n\n## 1. PATROON\n**Identieke dubbelverlies**: ADBE twee opeenvolgende dagen (-4.2% elk). Geen diversificatie; 100% van verliezen in \u00e9\u00e9n aandeel, \u00e9\u00e9n sector.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: Bot kocht ADBE op 2026-04-09 zonder exit-signaal. Herhaling op 2026-04-10 suggereert geen dynamisch risicobeheer.\n- **Scorelogica-blind**: Sector Tech & AI weegt 100% van portfolio (0% wins elders). Geen correlatie-checks of momentum-reversal triggers.\n\n## 3. AANBEVELINGEN\n1. **Position-sizing implementeren**: ADBE max. 25% per transactie; sector-cap Tech & AI op 40% van portfolio.\n2. **Stop-loss & re-entry-regel**: -2% stop-loss na eerste verlies; minimaal 48-uur cooldown v\u00f3\u00f3r hernieuwde ADBE-positie (voorkomen overtradingen).\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI (2/2 verliezen = 100% verliesratio)\n- **Zwaarder wegen**: Diversifieer naar niet-gecorreleerde sectoren (Utilities, Healthcare, Industrials)\n\n**Urgentie**: Win rate 0% is onhoudbaar. Implementeer risicocontroles v\u00f3\u00f3r volgende trading cycle.",
-        "win_rate": 0.0,
+        "analysis": "# POST-MORTEM RAPPORT - AUTONOME BOT\n\n## 1. PATROON\n**Extreme concentratierisico**: 100% van transacties in \u00e9\u00e9n aandeel (ADBE). Met n=3 trades is statistische significantie afwezig, maar sectorfocus op Tech & AI duidelijk overgewogen.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: Twee identieke verliezen (-4.2% elk) op opeenvolgende dagen suggereert geen leerfunctie tussen trades\n- **Positiemanagement**: Win (+9.9%) \u00e9\u00e9n maand *na* twee verliezen \u2013 geen snelle rebalancing\n- **Scorelogica**: Onvoldoende diversificatie-constraint; algorithm houdt niet van gerealiseerde verliezen\n\n## 3. AANBEVELINGEN\n1. **Positiegrootte-limiet**: Max. 15% per aandeel; max. 40% per sector. ADBE concentratie = onacceptabel risico\n2. **Stop-loss regel**: -3% hard stop per positie. Twee -4.2% verliezen achtereen wijst op afwezige risicokader\n\n## 4. SECTOR BIAS\n- **Te mijden**: Tech & AI (2 verliezen, 1 win = negatieve Sharpe)\n- **Gewicht**: Diversifieer naar Finance, Healthcare, Consumer\n- **Onderzoek**: ADBE-specifieke zwakte vs. sector-breedte-issue\n\n**Conclusie**: Bot heeft geen gediversificeerde strategie \u2013 eerder lucky pick dan systeem.",
+        "win_rate": 33.3,
         "worst_sectors": [
             [
                 "Tech & AI",
                 2
             ]
         ],
-        "best_sectors": [],
+        "best_sectors": [
+            [
+                "Tech & AI",
+                1
+            ]
+        ],
         "repeat_losers": [
             "ADBE"
         ],
         "sector_adjustments": {
-            "Tech & AI": -1.0
+            "Tech & AI": -0.7
         },
-        "run_at": "2026-05-15T10:14:06.655052+00:00"
+        "run_at": "2026-05-15T20:13:25.990323+00:00"
     }
 }
