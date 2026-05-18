@@ -25,7 +25,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT - AUTONOME BOT\n\n## 1. PATROON\n**Extreme concentratierisico**: 100% van transacties in \u00e9\u00e9n aandeel (ADBE). Met n=3 trades is statistische significantie afwezig, maar sectorfocus op Tech & AI duidelijk overgewogen.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: Twee identieke verliezen (-4.2% elk) op opeenvolgende dagen suggereert geen leerfunctie tussen trades\n- **Positiemanagement**: Win (+9.9%) \u00e9\u00e9n maand *na* twee verliezen \u2013 geen snelle rebalancing\n- **Scorelogica**: Onvoldoende diversificatie-constraint; algorithm houdt niet van gerealiseerde verliezen\n\n## 3. AANBEVELINGEN\n1. **Positiegrootte-limiet**: Max. 15% per aandeel; max. 40% per sector. ADBE concentratie = onacceptabel risico\n2. **Stop-loss regel**: -3% hard stop per positie. Twee -4.2% verliezen achtereen wijst op afwezige risicokader\n\n## 4. SECTOR BIAS\n- **Te mijden**: Tech & AI (2 verliezen, 1 win = negatieve Sharpe)\n- **Gewicht**: Diversifieer naar Finance, Healthcare, Consumer\n- **Onderzoek**: ADBE-specifieke zwakte vs. sector-breedte-issue\n\n**Conclusie**: Bot heeft geen gediversificeerde strategie \u2013 eerder lucky pick dan systeem.",
+        "analysis": "# POST-MORTEM RAPPORT - AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Tech & AI concentratierisico**: 100% van trades in \u00e9\u00e9n sector (3/3 trades). ADBE gerepresenteerd in 67% van portfolio (2 verliezen, 1 winst). Extreem kleine steekproef (n=3) maakt statistische conclusies onbetrouwbaar.\n\n## 2. ROOT CAUSE\n**Timing failure + sector bias**: Bot handelende dezelfde positie (ADBE) twee dagen achtereen (-4.2%, -4.2%) zonder stop-loss. Daarna dezelfde positie +9.9% opbrengst \u2013 suggerest geen fundamentele scorelogica-fout, maar **onvoldoende risicobeheer** (geen diversificatie, geen dynamische exits).\n\n## 3. AANBEVELINGEN\n1. **Maximum sector-allocatie**: Beperk Tech & AI tot 33% van portfolio. Dwing geografische/sectorale spreiding af (min. 5 sectoren per week).\n2. **Trailing stop-loss implementatie**: Auto-exit bij -3% per positie. Bescherm tegen opeenvolgende verliezen dezelfde asset.\n\n## 4. SECTOR BIAS\n**Mijden**: Tech & AI voorlopig (win rate 50%, hoge volatiliteit). \n**Actie**: Andere sectoren backtesten; Tech & AI pas gebruiken na n\u226520 trades met positieve edge-validatie.\n\n---\n**Conclusie**: Grootte-effect maskeert patroon. Wacht op grotere dataset (n\u226530) voordat strategiewijzigingen finaliseren.",
         "win_rate": 33.3,
         "worst_sectors": [
             [
@@ -45,6 +45,6 @@
         "sector_adjustments": {
             "Tech & AI": -0.7
         },
-        "run_at": "2026-05-15T20:13:25.990323+00:00"
+        "run_at": "2026-05-18T11:38:17.753076+00:00"
     }
 }
