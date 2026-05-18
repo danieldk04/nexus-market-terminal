@@ -25,7 +25,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT - AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Tech & AI concentratierisico**: 100% van trades in \u00e9\u00e9n sector (3/3 trades). ADBE gerepresenteerd in 67% van portfolio (2 verliezen, 1 winst). Extreem kleine steekproef (n=3) maakt statistische conclusies onbetrouwbaar.\n\n## 2. ROOT CAUSE\n**Timing failure + sector bias**: Bot handelende dezelfde positie (ADBE) twee dagen achtereen (-4.2%, -4.2%) zonder stop-loss. Daarna dezelfde positie +9.9% opbrengst \u2013 suggerest geen fundamentele scorelogica-fout, maar **onvoldoende risicobeheer** (geen diversificatie, geen dynamische exits).\n\n## 3. AANBEVELINGEN\n1. **Maximum sector-allocatie**: Beperk Tech & AI tot 33% van portfolio. Dwing geografische/sectorale spreiding af (min. 5 sectoren per week).\n2. **Trailing stop-loss implementatie**: Auto-exit bij -3% per positie. Bescherm tegen opeenvolgende verliezen dezelfde asset.\n\n## 4. SECTOR BIAS\n**Mijden**: Tech & AI voorlopig (win rate 50%, hoge volatiliteit). \n**Actie**: Andere sectoren backtesten; Tech & AI pas gebruiken na n\u226520 trades met positieve edge-validatie.\n\n---\n**Conclusie**: Grootte-effect maskeert patroon. Wacht op grotere dataset (n\u226530) voordat strategiewijzigingen finaliseren.",
+        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Extreme concentratierisico**: 100% van transacties gaat naar ADBE (Tech & AI). Met slechts 3 trades is statistische validatie onmogelijk. Win rate van 33% is insignificant \u2013 verwacht rendement binnen betrouwbaarheidsinterval ligt rond nul.\n\n## 2. ROOT CAUSE\n**Twee kritieke fouten:**\n- **Timing-falen**: Twee opeenvolgende verliezen (-4.2%) in 24 uur suggereren slechte entry-signalen, niet sectorkennis\n- **Confirmation bias**: Eenmalige win (+9.9%) wordt als validatie gebruikt, terwijl deze 2 verliezen overschaduwt (netto: -1.5%)\n\n## 3. CONCRETE AANBEVELINGEN\n1. **Diversificatie-hard rule**: Maximaal 25% per ticker, minimaal 5 sectoren per 10 trades. Huidig risico is onacceptabel.\n2. **Entry-filtering**: Implementeer minimum 3-day confirmatie voordat entry; vermijd daily whipsaws. Backtest op 252-dag dataset v\u00f3\u00f3r live trading.\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI totaal \u2013 bot toont geen edge (50% van outcomes in 2 verlies-trades)\n- **Verbreden**: Defensive sectoren testen (Healthcare, Utilities) voor stabiliteit\n\n**Verdict**: Handel stopzetten tot n\u226550 trades voor statistisch inzicht.",
         "win_rate": 33.3,
         "worst_sectors": [
             [
@@ -45,6 +45,6 @@
         "sector_adjustments": {
             "Tech & AI": -0.7
         },
-        "run_at": "2026-05-18T11:38:17.753076+00:00"
+        "run_at": "2026-05-18T20:24:23.688079+00:00"
     }
 }
