@@ -445,8 +445,10 @@ def generate_ai_briefing(client: anthropic.Anthropic, market: list[dict],
 
 # ─── TELEGRAM OPMAAK ──────────────────────────────────────────────────────────
 
+SEP = "─" * 30
+
+
 def _perf_line(perf: dict) -> str:
-    """Dag | Week | Maand | YTD als één regel."""
     parts = []
     for key, label in [("dag", "Dag"), ("week", "Week"), ("maand", "Maand"), ("ytd", "YTD")]:
         v = perf.get(key)
@@ -454,92 +456,114 @@ def _perf_line(perf: dict) -> str:
     return "  " + " · ".join(parts)
 
 
-def _portfolio_block(label: str, data: dict | None, perf: dict) -> str:
+def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> str:
+    """Gestructureerd portfolio-blok met P&L per positie."""
     if not data:
         return ""
-    total     = data["total"]
-    pl_pct    = data.get("total_pl_pct")
-    invested  = data.get("total_invested")
+    total    = data["total"]
+    pl_pct   = data.get("total_pl_pct")
+    invested = data.get("total_invested")
 
-    # Header: naam + totaalwaarde + totaal rendement
-    header = f"💼 *{label}*  €{total:,.0f}"
-    if pl_pct is not None:
-        sign = "+" if pl_pct >= 0 else ""
-        header += f"  _{sign}{pl_pct:.1f}% totaal_"
-    if invested:
-        header += f"  _(inleg €{invested:,.0f})_"
-    lines = [header]
+    # Header
+    pl_s = f"  _{'+' if (pl_pct or 0) >= 0 else ''}{pl_pct:.1f}% totaal_" if pl_pct is not None else ""
+    inv_s = f"  _(inleg €{invested:,.0f})_" if invested else ""
+    lines = [f"{icon} *{label}*  `€{total:,.0f}`{pl_s}{inv_s}"]
 
     if perf:
         lines.append(_perf_line(perf))
 
-    # Per positie: naam | gewicht | P&L% | waarde
-    for p in data["positions"][:10]:
-        name   = p.get("name", "?")[:11]
+    lines.append("")  # lege regel voor leesbaarheid
+
+    # Posities — alleen met waarde > 0
+    visible = [p for p in data["positions"] if p.get("value", 0) > 0][:10]
+    for p in visible:
+        name   = p.get("name", "?")[:13]
         val    = p.get("value", 0)
         pl     = p.get("pl_pct")
         weight = round(val / total * 100, 1) if total > 0 else 0
 
         if pl is not None:
-            arrow = "🟢" if pl >= 0 else "🔴"
-            pl_s  = f"`{pl:+.1f}%`"
+            dot = "🟢" if pl >= 0 else "🔴"
+            pl_s = f"`{pl:+.1f}%`"
         else:
-            arrow = "⬜"
-            pl_s  = "`  n/b  `"
+            dot  = "⬜"
+            pl_s = "`  n/b `"
 
-        lines.append(f"  {arrow} `{name:<11}` {weight:>4.1f}%  {pl_s}  €{val:>7,.0f}")
+        lines.append(f"  {dot} `{name:<13}` {weight:>4.1f}%  {pl_s}  `€{val:>7,.0f}`")
 
     return "\n".join(lines)
 
 
 def build_telegram_message(market, news, nexus, degiro, tr,
                             degiro_perf, tr_perf, ai_text) -> str:
-    now     = datetime.now(timezone.utc)
-    dag_nl  = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
-    mnd_nl  = ["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"][now.month-1]
-    date_s  = f"{dag_nl} {now.day} {mnd_nl} {now.year}"
+    now    = datetime.now(timezone.utc)
+    dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
+    mnd_nl = ["jan","feb","mrt","apr","mei","jun",
+               "jul","aug","sep","okt","nov","dec"][now.month - 1]
+    date_s = f"{dag_nl} {now.day} {mnd_nl} {now.year}"
 
-    # Markten
+    # ── 1. HEADER ────────────────────────────────────────────────────────────
+    header = (
+        f"🌅 *NEXUS MORNING BRIEFING*\n"
+        f"_{date_s} · {now.strftime('%H:%M')} UTC_"
+    )
+
+    # ── 2. MARKTEN ───────────────────────────────────────────────────────────
     mkt_lines = []
     for m in market:
         if m["price"] is None:
             mkt_lines.append(f"  ❓ *{m['label']}*: n/b")
             continue
-        p = m["price"]
+        p       = m["price"]
         price_s = f"{p:,.0f}" if p >= 1000 else f"{p:,.2f}"
-        mkt_lines.append(f"  {_arrow(m['pct'])} *{m['label']}* `{price_s}` ({m['pct']:+.2f}%)")
+        mkt_lines.append(
+            f"  {_arrow(m['pct'])} *{m['label']}* `{price_s}` ({m['pct']:+.2f}%)"
+        )
+    markten = "📊 *MARKTEN*\n" + "\n".join(mkt_lines)
 
-    # NEXUS posities
-    nexus_lines = []
+    # ── 3. EIGEN PORTFOLIO (DEGIRO + TR) ─────────────────────────────────────
+    eigen_parts = []
+    db = _portfolio_block("🏦", "DEGIRO", degiro, degiro_perf)
+    tb = _portfolio_block("📱", "Trade Republic", tr, tr_perf)
+    if db: eigen_parts.append(db)
+    if tb: eigen_parts.append(tb)
+
+    eigen = ""
+    if eigen_parts:
+        eigen = "💼 *EIGEN PORTFOLIO*\n\n" + f"\n{SEP}\n".join(eigen_parts)
+
+    # ── 4. NEXUS BOT (papier) ────────────────────────────────────────────────
+    nexus_block = ""
     if nexus.get("positions"):
-        nexus_lines.append(f"\n🤖 *NEXUS TRACKER* ({nexus['n']} posities · gem. {nexus['avg_pl']:+.1f}%)")
-        for p in nexus["positions"][:5]:
-            nexus_lines.append(f"  {_arrow(p['pl'])} `{p['ticker']}` {p['pl']:+.1f}%")
+        pos      = nexus["positions"]
+        winners  = [p for p in pos if p["pl"] >= 0]
+        losers   = [p for p in pos if p["pl"] < 0]
+        win_s    = "  ".join(f"{_arrow(p['pl'])} `{p['ticker']}` {p['pl']:+.1f}%" for p in winners[:4])
+        lose_s   = "  ".join(f"{_arrow(p['pl'])} `{p['ticker']}` {p['pl']:+.1f}%" for p in losers[:2])
+        nexus_block = (
+            f"🤖 *NEXUS BOT* _(papier trading)_\n"
+            f"  {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
+            + (f"  {win_s}\n" if win_s else "")
+            + (f"  {lose_s}" if lose_s else "")
+        ).rstrip()
 
-    # Portfolios
-    port_blocks = []
-    db = _portfolio_block("DEGIRO", degiro, degiro_perf)
-    tb = _portfolio_block("Trade Republic", tr, tr_perf)
-    if db: port_blocks.append(db)
-    if tb: port_blocks.append(tb)
+    # ── 5. NIEUWS ────────────────────────────────────────────────────────────
+    nieuws = ""
+    if news:
+        nieuws = "📰 *NIEUWS*\n" + "\n".join(f"  • {h}" for h in news[:6])
 
-    # Nieuws
-    news_lines = ["📰 *NIEUWS*"] + [f"  • {h}" for h in news[:6]] if news else []
+    # ── 6. AI ANALYSE ────────────────────────────────────────────────────────
+    ai_block = f"🧠 *AI ANALYSE*\n{ai_text}"
 
-    sep = "─" * 28
-    msg = (
-        f"🌅 *NEXUS MORNING BRIEFING*\n"
-        f"_{date_s} · {now.strftime('%H:%M')} UTC_\n"
-        f"{sep}\n\n"
-        f"📊 *MARKTEN*\n" + "\n".join(mkt_lines)
-        + "".join(f"\n{b}" for b in ["\n".join(nexus_lines)] if b)
-        + ("\n\n" + "\n\n".join(port_blocks) if port_blocks else "")
-        + ("\n\n" + "\n".join(news_lines) if news_lines else "")
-        + f"\n\n{sep}\n"
-        f"🧠 *NEXUS AI ANALYSE*\n{ai_text}\n\n"
-        f"🌐 [Open Dashboard]({DASHBOARD_URL})"
-    )
-    return msg
+    # ── SAMENSTELLEN ─────────────────────────────────────────────────────────
+    sections = [header, markten]
+    if eigen:      sections.append(eigen)
+    if nexus_block: sections.append(nexus_block)
+    if nieuws:     sections.append(nieuws)
+    sections.append(ai_block)
+    sections.append(f"🌐 [Open Dashboard]({DASHBOARD_URL})")
+
+    return f"\n{SEP}\n".join(sections)
 
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────

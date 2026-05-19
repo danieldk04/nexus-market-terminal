@@ -22,20 +22,23 @@ import yfinance as yf
 
 log = logging.getLogger("tr_portfolio")
 
-# ─── ISIN → yfinance ticker mapping ─────────────────────────────────────────
-# Europese ETF's noteren in EUR op hun primaire beurs
-ISIN_TO_TICKER: dict[str, str] = {
-    # Vanguard FTSE All-World UCITS ETF USD Acc — Xetra
-    "IE00BK5BQT80": "VWCE.DE",
-    # Vanguard FTSE All-World High Dividend Yield UCITS ETF USD Acc — Xetra
-    "IE00BK5BR626": "VHYL.DE",
-    # Amundi S&P 500 UCITS ETF EUR Acc — Euronext Paris
-    "LU1681048804": "CSP1.PA",
-    # VanEck Morningstar Developed Markets Dividend Leaders — Amsterdam
-    "NL0011683594": "TDIV.AS",
-    # Bitcoin — genoteerd in EUR
-    "BTC": "BTC-EUR",
+# ─── ISIN → yfinance tickers (primair + fallbacks) ──────────────────────────
+# Lijst per ISIN: probeer in volgorde tot een prijs gevonden wordt
+ISIN_TO_TICKERS: dict[str, list[str]] = {
+    # Vanguard FTSE All-World UCITS ETF USD Acc
+    "IE00BK5BQT80": ["VWCE.DE", "VWCE.MI", "VWRD.AS"],
+    # Vanguard FTSE All-World High Dividend Yield UCITS ETF Dist
+    "IE00BK5BR626": ["VHYL.AS", "VHYL.DE", "VGWD.DE"],
+    # Amundi S&P 500 UCITS ETF EUR Acc
+    "LU1681048804": ["PCAR.DE", "CSP1.PA", "CSPX.AS"],
+    # VanEck Morningstar Developed Markets Dividend Leaders
+    "NL0011683594": ["TDIV.AS"],
+    # Bitcoin — in EUR
+    "BTC":          ["BTC-EUR"],
 }
+
+# Backwards-compat: gebruik eerste ticker als primair
+ISIN_TO_TICKER: dict[str, str] = {k: v[0] for k, v in ISIN_TO_TICKERS.items()}
 
 # Mooie weergavenamen voor de briefing
 DISPLAY_NAMES: dict[str, str] = {
@@ -79,16 +82,26 @@ def _parse_tr_holdings() -> list[dict]:
     return holdings
 
 
-def _fetch_price_eur(ticker: str) -> float | None:
-    """Haal actuele prijs op via yfinance (in EUR)."""
-    try:
-        info  = yf.Ticker(ticker).fast_info
-        price = getattr(info, "last_price", None)
-        if price and price > 0:
-            return float(price)
-    except Exception as e:
-        log.warning(f"yfinance {ticker}: {e}")
-    return None
+def _fetch_price_eur(isin: str) -> tuple[str | None, float | None]:
+    """
+    Probeer tickers in volgorde tot een geldige prijs gevonden wordt.
+    Geeft (gebruikte_ticker, prijs) terug, of (None, None) als alles mislukt.
+    """
+    tickers = ISIN_TO_TICKERS.get(isin, [ISIN_TO_TICKER.get(isin, "")])
+    for ticker in tickers:
+        if not ticker:
+            continue
+        try:
+            info  = yf.Ticker(ticker).fast_info
+            price = getattr(info, "last_price", None)
+            if price and float(price) > 0:
+                log.info(f"{isin} → {ticker}: €{price:.2f}")
+                return ticker, float(price)
+        except Exception as e:
+            log.debug(f"yfinance {ticker}: {e}")
+        time.sleep(0.2)
+    log.warning(f"{isin}: geen prijs gevonden (geprobeerd: {tickers})")
+    return None, None
 
 
 def fetch_tr_portfolio() -> dict | None:
@@ -106,23 +119,18 @@ def fetch_tr_portfolio() -> dict | None:
     for h in holdings:
         isin   = h["isin"]
         shares = h["shares"]
-        ticker = ISIN_TO_TICKER.get(isin)
+        ticker, price = _fetch_price_eur(isin)
 
-        if not ticker:
-            log.warning(f"Geen ticker gevonden voor ISIN {isin} — positie overgeslagen.")
-            continue
-
-        price = _fetch_price_eur(ticker)
-        if price is None:
-            log.warning(f"{ticker}: geen prijs beschikbaar.")
-            # Toch toevoegen zonder waarde
+        if price is None or ticker is None:
+            # Positie tonen zonder waarde (prijs onbekend)
             positions.append({
                 "name":   DISPLAY_NAMES.get(isin, isin),
-                "ticker": ticker,
+                "ticker": isin,
                 "isin":   isin,
                 "size":   shares,
                 "price":  None,
                 "value":  0.0,
+                "pl_pct": None,
             })
             continue
 
@@ -135,8 +143,9 @@ def fetch_tr_portfolio() -> dict | None:
             "size":   round(shares, 6),
             "price":  round(price, 4),
             "value":  round(value, 2),
+            "pl_pct": None,   # Aankoopprijs n/b — toe te voegen aan TR_HOLDINGS
         })
-        time.sleep(0.3)   # beleefd naar yfinance
+        time.sleep(0.1)
 
     if not positions:
         log.warning("TR portfolio: geen posities met prijs.")
