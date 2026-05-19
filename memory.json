@@ -1,50 +1,58 @@
 {
-    "lessons": [
-        {
-            "date": "2026-04-09",
-            "ticker": "ADBE",
-            "sector": "Tech & AI",
-            "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-04-10",
-            "ticker": "ADBE",
-            "sector": "Tech & AI",
-            "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-05-15",
-            "ticker": "ADBE",
-            "sector": "Tech & AI",
-            "insight": "Take-profit ADBE (+9.9%, doel was 9.4%). Tech & AI werkt.",
-            "type": "POSITIVE_LEARNING"
-        }
-    ],
-    "initialized_at": "2026-04-04T00:00:00+00:00",
-    "version": "nexus-v2",
-    "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BOT ANALYSE\n\n## 1. PATROON\n**Sector concentratie + timing volatiliteit**: 100% van transacties in Tech & AI, met herhaalde ADBE-positie binnen 24 uur. Winrate 33.3% is kritiek.\n\n## 2. ROOT CAUSE\n**Twee oorzaken**:\n- **Scorelogica**: Bot faalt in trend-reversal detectie (ADBE -4.2% \u00d7 2, dan +9.9%). Geen volatility-buffer ingebouwd.\n- **Timing**: Twee back-to-back verliezen op dezelfde ticker suggest geen cooldown-mechanisme tussen gelijkaardige posities.\n\n## 3. AANBEVELINGEN\n1. **Sector-diversificatie**: Maximum 40% kapitaal in Tech & AI. Andere sectoren (Healthcare, Financials) toevoegen om idiosyncratisch risico te spreiden.\n2. **Position-management**: Implementeer 72-uur cooldown op dezelfde ticker na verlies. Voeg volatility-filter toe: skip posities als intraday-range >6%.\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI als sole-focus (slecht/winst ratio onbetrouwbaar)\n- **Zwaarder wegen**: Defensieve sectoren; ADBE-exposure beperken tot 1x per week\n\n**Conclusie**: Urgente ingreep nodig. Huidige bot onderperformt toeval; diversificatie + risk controls eerste prioriteit.",
-        "win_rate": 33.3,
-        "worst_sectors": [
-            [
-                "Tech & AI",
-                2
-            ]
-        ],
-        "best_sectors": [
-            [
-                "Tech & AI",
-                1
-            ]
-        ],
-        "repeat_losers": [
-            "ADBE"
-        ],
-        "sector_adjustments": {
-            "Tech & AI": -0.7
-        },
-        "run_at": "2026-05-19T14:00:14.892372+00:00"
+  "lessons": [
+    {
+      "date": "2026-04-09",
+      "ticker": "ADBE",
+      "sector": "Tech & AI",
+      "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
+      "type": "NEGATIVE_LEARNING"
+    },
+    {
+      "date": "2026-04-10",
+      "ticker": "ADBE",
+      "sector": "Tech & AI",
+      "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
+      "type": "NEGATIVE_LEARNING"
+    },
+    {
+      "date": "2026-05-15",
+      "ticker": "ADBE",
+      "sector": "Tech & AI",
+      "insight": "Take-profit ADBE (+9.9%, doel was 9.4%). Tech & AI werkt.",
+      "type": "POSITIVE_LEARNING"
     }
+  ],
+  "initialized_at": "2026-04-04T00:00:00+00:00",
+  "version": "nexus-v2",
+  "post_mortem": {
+    "analysis": "# POST-MORTEM RAPPORT: AUTONOME BOT ANALYSE\n\n## 1. PATROON\n**Sector concentratie + timing volatiliteit**: 100% van transacties in Tech & AI, met herhaalde ADBE-positie binnen 24 uur. Winrate 33.3% is kritiek.\n\n## 2. ROOT CAUSE\n**Twee oorzaken**:\n- **Scorelogica**: Bot faalt in trend-reversal detectie (ADBE -4.2% \u00d7 2, dan +9.9%). Geen volatility-buffer ingebouwd.\n- **Timing**: Twee back-to-back verliezen op dezelfde ticker suggest geen cooldown-mechanisme tussen gelijkaardige posities.\n\n## 3. AANBEVELINGEN\n1. **Sector-diversificatie**: Maximum 40% kapitaal in Tech & AI. Andere sectoren (Healthcare, Financials) toevoegen om idiosyncratisch risico te spreiden.\n2. **Position-management**: Implementeer 72-uur cooldown op dezelfde ticker na verlies. Voeg volatility-filter toe: skip posities als intraday-range >6%.\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI als sole-focus (slecht/winst ratio onbetrouwbaar)\n- **Zwaarder wegen**: Defensieve sectoren; ADBE-exposure beperken tot 1x per week\n\n**Conclusie**: Urgente ingreep nodig. Huidige bot onderperformt toeval; diversificatie + risk controls eerste prioriteit.",
+    "win_rate": 33.3,
+    "worst_sectors": [
+      [
+        "Tech & AI",
+        2
+      ]
+    ],
+    "best_sectors": [
+      [
+        "Tech & AI",
+        1
+      ]
+    ],
+    "repeat_losers": [
+      "ADBE"
+    ],
+    "sector_adjustments": {
+      "Tech & AI": -0.7
+    },
+    "run_at": "2026-05-19T14:00:14.892372+00:00"
+  },
+  "portfolio_history": [
+    {
+      "date": "2026-05-19",
+      "degiro": null,
+      "tr": 6274.19,
+      "nexus": 2547.85
+    }
+  ]
 }
