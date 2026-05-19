@@ -25,7 +25,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Extreme concentratierisico**: 100% van transacties gaat naar ADBE (Tech & AI). Met slechts 3 trades is statistische validatie onmogelijk. Win rate van 33% is insignificant \u2013 verwacht rendement binnen betrouwbaarheidsinterval ligt rond nul.\n\n## 2. ROOT CAUSE\n**Twee kritieke fouten:**\n- **Timing-falen**: Twee opeenvolgende verliezen (-4.2%) in 24 uur suggereren slechte entry-signalen, niet sectorkennis\n- **Confirmation bias**: Eenmalige win (+9.9%) wordt als validatie gebruikt, terwijl deze 2 verliezen overschaduwt (netto: -1.5%)\n\n## 3. CONCRETE AANBEVELINGEN\n1. **Diversificatie-hard rule**: Maximaal 25% per ticker, minimaal 5 sectoren per 10 trades. Huidig risico is onacceptabel.\n2. **Entry-filtering**: Implementeer minimum 3-day confirmatie voordat entry; vermijd daily whipsaws. Backtest op 252-dag dataset v\u00f3\u00f3r live trading.\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI totaal \u2013 bot toont geen edge (50% van outcomes in 2 verlies-trades)\n- **Verbreden**: Defensive sectoren testen (Healthcare, Utilities) voor stabiliteit\n\n**Verdict**: Handel stopzetten tot n\u226550 trades voor statistisch inzicht.",
+        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Extreme sector concentratie**: 100% van transacties in Tech & AI, waarvan 66% verliesgevend. ADBE is 3x voorgekomen met 1 win (+9.9%) en 2 verliezen (-4.2% elk). Het bot is overgespecialiseerd en kwetsbaar voor sectorale volatiliteit.\n\n## 2. ROOT CAUSE\n**Timing- en schaalprobleem**: ADBE werd tweemaal achtereenvolgens (9-10 april) met identieke verliesgrootte afgesloten, wat duidt op:\n- Geen exit-logica na eerste verlies (no stop-loss discipline)\n- Herhaalde entry op dezelfde positie zonder directie-validatie\n- Onvoldoende inter-trade interval om marktherziening mogelijk te maken\n\n## 3. AANBEVELINGEN\n1. **Sector-diversificatie**: Maximaal 40% kapitaal in Tech & AI; voeg Healthcare, Financials en Energie toe\n2. **Stop-loss discipline**: Implementeer -3% hard stop. Na verlies: wacht 5 handelsdagen voor re-entry dezelfde ticker\n\n## 4. SECTOR BIAS\n**Te mijden**: Tech & AI (Sharpe-ratio negatief bij huidige logica)  \n**Zwaarder wegen**: Sectoren buiten Tech (momenteel n=0; cre\u00ebert diversificatiewinst)\n\n**Conclusie**: Win rate is zuiver statistisch ruis met n=3. Fix stop-loss en sector-spreiding eerst.",
         "win_rate": 33.3,
         "worst_sectors": [
             [
@@ -45,6 +45,6 @@
         "sector_adjustments": {
             "Tech & AI": -0.7
         },
-        "run_at": "2026-05-18T20:24:23.688079+00:00"
+        "run_at": "2026-05-19T10:55:44.933081+00:00"
     }
 }
