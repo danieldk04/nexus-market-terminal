@@ -80,6 +80,45 @@ def load_history() -> list[dict]:
     return mem.get(HISTORY_KEY, [])
 
 
+def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None):
+    """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
+    mem = _load_json(MEMORY_PATH, {})
+    mem["last_news"] = news[:8]
+    if degiro:
+        mem["degiro_summary"] = {
+            "total":          degiro.get("total"),
+            "total_pl_pct":   degiro.get("total_pl_pct"),
+            "total_invested": degiro.get("total_invested"),
+            "positions": [
+                {
+                    "name":    p.get("name", "?"),
+                    "value":   p.get("value", 0),
+                    "pl_pct":  p.get("pl_pct"),
+                    "pl_eur":  p.get("pl_eur"),
+                    "weight":  round(p["value"] / degiro["total"] * 100, 1) if degiro.get("total") else None,
+                }
+                for p in degiro.get("positions", []) if p.get("value", 0) > 0
+            ],
+        }
+    if tr:
+        mem["tr_summary"] = {
+            "total":         tr.get("total"),
+            "total_pl_pct":  tr.get("total_pl_pct"),
+            "positions": [
+                {
+                    "name":   p.get("name", "?"),
+                    "value":  p.get("value", 0),
+                    "pl_pct": p.get("pl_pct"),
+                    "weight": round(p["value"] / tr["total"] * 100, 1) if tr.get("total") else None,
+                }
+                for p in tr.get("positions", []) if p.get("value", 0) > 0
+            ],
+        }
+    mem["dashboard_updated"] = datetime.now(timezone.utc).isoformat()
+    _save_json(MEMORY_PATH, mem)
+    log.info("Dashboard data opgeslagen in memory.json")
+
+
 def save_snapshot(degiro_total: float | None, tr_total: float | None, nexus_total: float | None):
     """Sla dagelijkse portfoliowaarden op in memory.json."""
     mem      = _load_json(MEMORY_PATH, {})
@@ -593,12 +632,13 @@ def run_morning_briefing():
     degiro_perf = compute_perf(history, degiro.get("total") if degiro else None, "degiro")
     tr_perf     = compute_perf(history, tr.get("total") if tr else None, "tr")
 
-    # Snapshot opslaan VOOR de briefing zodat morgen al data beschikbaar is
+    # Snapshot + dashboard data opslaan
     save_snapshot(
         degiro_total=degiro.get("total") if degiro else None,
         tr_total=tr.get("total") if tr else None,
         nexus_total=nexus.get("cash"),
     )
+    save_dashboard_data(news, degiro, tr)
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."

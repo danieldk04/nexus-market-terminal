@@ -181,6 +181,8 @@
         .filter-btn:hover, .filter-btn.active { background: rgba(34,211,238,0.1); color: var(--accent); border-color: rgba(34,211,238,0.3); }
         .filter-btn.tab-watch { border-color: rgba(167,139,250,0.3); }
         .filter-btn.tab-watch.active { background: rgba(167,139,250,0.1); color: var(--purple); border-color: rgba(167,139,250,0.4); }
+        .filter-btn.tab-portfolio.active { background: rgba(74,222,128,0.1); color: var(--green); border-color: rgba(74,222,128,0.4); }
+        .filter-btn.tab-portfolio { border-color: rgba(74,222,128,0.2); }
 
         /* ─── CENTER ─── */
         .main-view { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
@@ -268,6 +270,28 @@
             .right-col .panel { flex: 1; min-height: 0 !important; }
             .search-wrap { max-width: 220px; }
         }
+        /* ─── NEWS ITEMS ─── */
+        .news-item { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+        .news-title { font-size: 0.72rem; line-height: 1.5; color: var(--text); }
+        .news-time  { font-size: 0.58rem; color: var(--muted); margin-top: 2px; font-family: var(--mono); }
+
+        /* ─── PORTFOLIO POSITIONS ─── */
+        .port-header { padding: 10px 12px 6px; border-bottom: 1px solid var(--border); background: rgba(74,222,128,0.04); }
+        .port-label  { font-family: var(--mono); font-size: 0.65rem; font-weight: 700; color: var(--green); }
+        .port-total  { font-family: var(--mono); font-size: 0.9rem; font-weight: 700; color: var(--text); margin-top: 2px; }
+        .port-sub    { font-size: 0.58rem; color: var(--muted); margin-top: 1px; }
+        .port-row    { display: grid; grid-template-columns: 1fr auto auto auto; gap: 6px; align-items: center; padding: 7px 12px; border-bottom: 1px solid var(--border); }
+        .port-name   { font-size: 0.72rem; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .port-weight { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+        .port-pl     { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; text-align: right; }
+        .port-val    { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); text-align: right; }
+
+        /* ─── POST-MORTEM ─── */
+        .pm-stat { display: flex; justify-content: space-between; padding: 7px 12px; border-bottom: 1px solid var(--border); font-size: 0.7rem; }
+        .pm-label { color: var(--muted); }
+        .pm-val   { font-family: var(--mono); font-weight: 600; }
+        .pm-analysis { padding: 12px; font-size: 0.72rem; line-height: 1.65; color: #9ca3af; white-space: pre-wrap; }
+
         @media (max-width: 767px) {
             html, body { height: auto; overflow: visible; overflow-x: hidden; }
             body { overflow-y: auto; }
@@ -331,6 +355,10 @@
             <div class="hstat-label">Engine</div>
             <div class="hstat-value" id="engine-state" style="color:var(--green)">ACTIVE</div>
         </div>
+        <div class="hstat">
+            <div class="hstat-label">Win Rate</div>
+            <div class="hstat-value" id="win-rate-val">--</div>
+        </div>
     </div>
     <div class="header-right">
         <div class="status-dot"></div>
@@ -354,6 +382,7 @@
         </div>
         <div class="filter-bar" id="filter-bar">
             <button class="filter-btn active" data-sector="ALL" onclick="filterSector('ALL',this)">ALL</button>
+            <button class="filter-btn tab-portfolio" data-sector="PORTFOLIO" onclick="filterSector('PORTFOLIO',this)">PORTFOLIO</button>
             <button class="filter-btn tab-watch" data-sector="WATCHLIST" onclick="filterSector('WATCHLIST',this)">WATCHLIST</button>
         </div>
         <div class="scroll-area" id="list-container"></div>
@@ -378,21 +407,23 @@
         </div>
     </div>
 
-    <!-- RIGHT: Trades + Learning + Equity -->
+    <!-- RIGHT: Tabbed panel + Equity -->
     <div class="right-col">
-        <div class="panel" style="flex:1.2; min-height:0;">
-            <div class="panel-header">
-                <span class="panel-title">Autonomous Positions</span>
-                <span id="pl-total" class="panel-badge">0 open</span>
+        <div class="panel" style="flex:2.2; min-height:0;">
+            <div class="panel-header" style="flex-direction:column;gap:6px;padding-bottom:6px">
+                <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
+                    <span class="panel-title" id="right-panel-title">Autonomous Positions</span>
+                    <span id="pl-total" class="panel-badge">0 open</span>
+                </div>
+                <div style="display:flex;gap:4px" id="right-tabs">
+                    <button class="filter-btn active" id="tab-positions" onclick="switchRightTab('positions',this)">POSITIES</button>
+                    <button class="filter-btn" id="tab-news" onclick="switchRightTab('news',this)">NIEUWS</button>
+                    <button class="filter-btn" id="tab-postmortem" onclick="switchRightTab('postmortem',this)">ANALYSE</button>
+                </div>
             </div>
             <div class="scroll-area" id="trades-container"></div>
-        </div>
-        <div class="panel" style="flex:1; min-height:0;">
-            <div class="panel-header">
-                <span class="panel-title">Learning Log</span>
-                <span class="panel-badge" id="lesson-count">0 insights</span>
-            </div>
-            <div class="scroll-area" id="learning-container"></div>
+            <div class="scroll-area" id="news-container" style="display:none"></div>
+            <div class="scroll-area" id="postmortem-container" style="display:none"></div>
         </div>
         <div class="panel" style="flex:0.85; min-height:0;">
             <div class="panel-header">
@@ -483,11 +514,137 @@ let activeTicker = null;
 let seenSectors  = new Set();
 let serverLastOk = null;
 
+// ─── MEMORY.JSON DATA ─────────────────────────────────────────────────────────
+let memoryData = null;
+
+async function loadMemory() {
+    try {
+        const res = await fetch('memory.json?t=' + Date.now());
+        memoryData = await res.json();
+    } catch(e) {
+        console.warn('memory.json niet beschikbaar:', e.message);
+    }
+}
+
+// ─── RIGHT TAB SWITCHING ──────────────────────────────────────────────────────
+let activeRightTab = 'positions';
+
+function switchRightTab(tab, btn) {
+    activeRightTab = tab;
+    document.querySelectorAll('#right-tabs .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('trades-container').style.display    = tab === 'positions'  ? '' : 'none';
+    document.getElementById('news-container').style.display      = tab === 'news'        ? '' : 'none';
+    document.getElementById('postmortem-container').style.display= tab === 'postmortem'  ? '' : 'none';
+    const titles = { positions: 'Autonomous Positions', news: 'Nieuws', postmortem: 'Bot Analyse' };
+    document.getElementById('right-panel-title').textContent = titles[tab] || '';
+    if (tab === 'news')       renderNews();
+    if (tab === 'postmortem') renderPostMortem();
+}
+
+// ─── NEWS RENDERING ───────────────────────────────────────────────────────────
+function renderNews() {
+    const container = document.getElementById('news-container');
+    const news = memoryData?.last_news || [];
+    if (!news.length) {
+        container.innerHTML = '<div class="no-analysis">Nieuws wordt geladen bij de volgende morning briefing (07:00 UTC).</div>';
+        return;
+    }
+    const updated = memoryData?.dashboard_updated
+        ? new Date(memoryData.dashboard_updated).toLocaleString('nl-NL')
+        : '';
+    container.innerHTML =
+        `<div style="padding:6px 12px;font-size:0.58rem;color:var(--muted);border-bottom:1px solid var(--border)">Bijgewerkt: ${updated}</div>` +
+        news.map(h => `
+        <div class="news-item">
+            <div class="news-title">${h}</div>
+        </div>`).join('');
+}
+
+// ─── POST-MORTEM RENDERING ────────────────────────────────────────────────────
+function renderPostMortem() {
+    const container = document.getElementById('postmortem-container');
+    const pm = memoryData?.post_mortem;
+    const lessons = memoryData?.lessons || [];
+
+    if (!pm) {
+        container.innerHTML = '<div class="no-analysis">Post-mortem analyse beschikbaar na eerste trades.</div>';
+        return;
+    }
+
+    const winRate   = pm.win_rate ?? '--';
+    const winCol    = winRate >= 50 ? '#4ade80' : winRate >= 35 ? '#fbbf24' : '#f87171';
+    const worstSec  = (pm.worst_sectors || []).map(([s,n]) => `${s} (${n}x)`).join(', ') || '--';
+    const bestSec   = (pm.best_sectors  || []).map(([s,n]) => `${s} (${n}x)`).join(', ') || '--';
+    const repeaters = (pm.repeat_losers || []).join(', ') || 'geen';
+
+    container.innerHTML = `
+        <div class="pm-stat"><span class="pm-label">Win rate</span><span class="pm-val" style="color:${winCol}">${winRate}%</span></div>
+        <div class="pm-stat"><span class="pm-label">Beste sectoren</span><span class="pm-val" style="color:#4ade80;font-size:0.62rem">${bestSec}</span></div>
+        <div class="pm-stat"><span class="pm-label">Zwakste sectoren</span><span class="pm-val" style="color:#f87171;font-size:0.62rem">${worstSec}</span></div>
+        <div class="pm-stat"><span class="pm-label">Herhaalde verliezers</span><span class="pm-val" style="color:#fbbf24;font-size:0.62rem">${repeaters}</span></div>
+        ${pm.analysis ? `<div class="pm-analysis">${pm.analysis.substring(0,600)}${pm.analysis.length > 600 ? '...' : ''}</div>` : ''}`;
+}
+
+// ─── PORTFOLIO TAB RENDERING ──────────────────────────────────────────────────
+function renderPortfolioTab() {
+    const container = document.getElementById('list-container');
+    const degiro    = memoryData?.degiro_summary;
+    const tr        = memoryData?.tr_summary;
+    const updated   = memoryData?.dashboard_updated
+        ? new Date(memoryData.dashboard_updated).toLocaleString('nl-NL')
+        : 'Nog niet geladen';
+
+    if (!degiro && !tr) {
+        container.innerHTML = `<div class="no-analysis">Portfolio-data beschikbaar na de morning briefing (07:00 UTC).<br><br>
+            <span style="font-size:0.62rem">Start de <b>NEXUS Morning Briefing</b> workflow<br>in GitHub Actions om te vullen.</span></div>`;
+        return;
+    }
+
+    let html = `<div style="padding:5px 10px;font-size:0.58rem;color:var(--muted);border-bottom:1px solid var(--border)">Ochtendmeting: ${updated}</div>`;
+
+    function portBlock(label, data) {
+        if (!data) return '';
+        const total    = data.total || 0;
+        const plPct    = data.total_pl_pct;
+        const plCol    = plPct == null ? 'var(--muted)' : plPct >= 0 ? '#4ade80' : '#f87171';
+        const plStr    = plPct != null ? `${plPct >= 0 ? '+' : ''}${plPct.toFixed(1)}%` : '';
+
+        let rows = (data.positions || []).map(p => {
+            const pl    = p.pl_pct;
+            const dot   = pl == null ? '⬜' : pl >= 0 ? '🟢' : '🔴';
+            const plS   = pl != null ? `<span style="color:${pl>=0?'#4ade80':'#f87171'}">${pl>=0?'+':''}${pl.toFixed(1)}%</span>` : '<span style="color:var(--muted)">n/b</span>';
+            const wt    = p.weight != null ? p.weight.toFixed(1) + '%' : '';
+            const val   = p.value ? '€' + p.value.toLocaleString('nl-NL', {maximumFractionDigits:0}) : '';
+            return `<div class="port-row">
+                <div class="port-name">${dot} ${p.name || '?'}</div>
+                <div class="port-weight">${wt}</div>
+                <div class="port-pl">${plS}</div>
+                <div class="port-val">${val}</div>
+            </div>`;
+        }).join('');
+
+        return `
+        <div class="port-header">
+            <div class="port-label">${label}</div>
+            <div class="port-total">€${total.toLocaleString('nl-NL', {maximumFractionDigits:0})}
+                ${plStr ? `<span style="font-size:0.7rem;color:${plCol};margin-left:8px">${plStr}</span>` : ''}
+            </div>
+        </div>
+        ${rows}`;
+    }
+
+    html += portBlock('🏦 DEGIRO', degiro);
+    html += portBlock('📱 TRADE REPUBLIC', tr);
+    container.innerHTML = html;
+}
+
 // ─── DATA LOAD ────────────────────────────────────────────────────────────────
 async function loadData() {
     try {
         const res  = await fetch('data.json?t=' + Date.now());
         globalData = await res.json();
+        await loadMemory();
         updateUI();
         setServerIndicator('ok');
     } catch(e) {
@@ -522,6 +679,16 @@ function updateUI() {
     else if (scanAge > 12) { engEl.textContent = 'IDLE'; engEl.style.color = '#fbbf24'; }
     else { engEl.textContent = 'ACTIVE'; engEl.style.color = '#4ade80'; }
 
+    // Win rate from post-mortem
+    const pm = memoryData?.post_mortem;
+    if (pm?.win_rate !== undefined) {
+        const wrEl = document.getElementById('win-rate-val');
+        if (wrEl) {
+            wrEl.textContent = pm.win_rate + '%';
+            wrEl.style.color = pm.win_rate >= 50 ? '#4ade80' : pm.win_rate >= 35 ? '#fbbf24' : '#f87171';
+        }
+    }
+
     buildFilterBar(cands);
     renderCurrentView();
     renderTrades(trades);
@@ -552,19 +719,19 @@ function buildFilterBar(cands) {
 
 function filterSector(sector, btn) {
     activeFilter = sector;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const title = document.getElementById('left-panel-title');
-    title.textContent = sector === 'WATCHLIST' ? 'Watchlist' : 'Scanner Candidates';
+    if (sector === 'WATCHLIST')  title.textContent = 'Watchlist';
+    else if (sector === 'PORTFOLIO') title.textContent = 'Eigen Portfolio';
+    else title.textContent = 'Scanner Candidates';
     renderCurrentView();
 }
 
 function renderCurrentView() {
-    if (activeFilter === 'WATCHLIST') {
-        renderWatchlist();
-    } else {
-        renderList(globalData?.top_candidates || []);
-    }
+    if (activeFilter === 'WATCHLIST')       renderWatchlist();
+    else if (activeFilter === 'PORTFOLIO')  renderPortfolioTab();
+    else                                    renderList(globalData?.top_candidates || []);
 }
 
 // ─── CANDIDATES ───────────────────────────────────────────────────────────────
