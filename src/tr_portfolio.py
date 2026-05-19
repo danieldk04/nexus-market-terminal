@@ -34,8 +34,12 @@ ISIN_TO_TICKERS: dict[str, list[str]] = {
     "IE00BK5BQT80": ["VWCE.DE", "VWCE.MI", "VWRD.AS"],
     # Vanguard FTSE All-World High Dividend Yield UCITS ETF Dist
     "IE00BK5BR626": ["VHYL.AS", "VHYL.DE", "VGWD.DE"],
-    # Amundi S&P 500 UCITS ETF EUR Acc
-    "LU1681048804": ["PCAR.DE", "CSP1.PA", "CSPX.AS"],
+    # Amundi S&P 500 UCITS ETF EUR Acc (LU1681048804)
+    # PCAR.DE = PacCar (vrachtwagens) — fout
+    # CSPX.AS = iShares Core S&P 500 (~$540) — verkeerde ETF
+    # CSP1.MI = Borsa Italiana listing van Amundi S&P 500
+    # SPX5.DE = Xetra listing
+    "LU1681048804": ["CSP1.MI", "SPX5.DE", "CSP1.PA"],
     # VanEck Morningstar Developed Markets Dividend Leaders
     "NL0011683594": ["TDIV.AS"],
     # Bitcoin — in EUR

@@ -386,7 +386,24 @@ def fetch_degiro_portfolio() -> dict | None:
         return None
 
     session = requests.Session()
-    session.headers.update({"Content-Type": "application/json"})
+    # Browser-achtige headers om Cloudflare/bot-detectie te omzeilen
+    session.headers.update({
+        "User-Agent":      ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                            "AppleWebKit/537.36 (KHTML, like Gecko) "
+                            "Chrome/124.0.0.0 Safari/537.36"),
+        "Accept":          "application/json, text/plain, */*",
+        "Accept-Language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Referer":         "https://trader.degiro.nl/",
+        "Origin":          "https://trader.degiro.nl",
+        "Content-Type":    "application/json",
+        "sec-ch-ua":       '"Chromium";v="124", "Google Chrome";v="124"',
+        "sec-ch-ua-mobile":"?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "Sec-Fetch-Dest":  "empty",
+        "Sec-Fetch-Mode":  "cors",
+        "Sec-Fetch-Site":  "same-origin",
+    })
 
     # Login
     try:
