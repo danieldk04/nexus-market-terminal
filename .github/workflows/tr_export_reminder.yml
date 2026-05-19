@@ -1,4 +1,4 @@
-name: TR Export Herinnering
+name: Maandelijkse Portfolio Herinnering
 
 on:
   schedule:
@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Stuur TR-exportherinnering via Telegram
+      - name: Stuur maandelijkse portfolio-herinnering via Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -23,21 +23,35 @@ jobs:
           chat_id = os.environ["TELEGRAM_CHAT_ID"]
 
           msg = (
-              "📤 *NEXUS Herinnering — Trade Republic export*\n\n"
-              "Het is de 19e\\. Exporteer je transacties en update je posities\\.\n\n"
-              "*Stappen:*\n"
-              "1\\. Open Trade Republic app\n"
-              "2\\. Instellingen → Documenten → Transactie\\-export\n"
-              "3\\. Download de CSV\n"
-              "4\\. Bereken bijgewerkte aantallen \\(cumulatief optellen\\)\n"
-              "5\\. Ga naar GitHub → Settings → Secrets → `TR_HOLDINGS`\n"
-              "6\\. Update de waarden \\(ISIN aantal per regel\\)\n\n"
-              "_Huidig formaat TR\\_HOLDINGS:_\n"
-              "`BTC              0.0702790`\n"
-              "`IE00BK5BQT80     5.1854850`\n"
-              "`IE00BK5BR626     2.3065390`\n"
-              "`LU1681048804     5.9527900`\n"
-              "`NL0011683594     15.2324020`"
+              "📅 *NEXUS Maandelijkse Herinnering*\n\n"
+              "Het is de 19e — tijd om je portfolio\\-secrets bij te werken\\!\n\n"
+
+              "━━━━━━━━━━━━━━━━━━━━\n"
+              "🟠 *Trade Republic — TR\\_HOLDINGS*\n"
+              "━━━━━━━━━━━━━━━━━━━━\n"
+              "1\\. TR app → Profiel → Documenten → Transactie\\-export\n"
+              "2\\. Tel nieuwe aankopen bij de aantallen op\n"
+              "3\\. GitHub → Secrets → `TR_HOLDINGS` updaten\n\n"
+              "_Huidig formaat \\(ISIN  aandelen  gem\\.prijs\\):_\n"
+              "`BTC              0.0702790   60000`\n"
+              "`IE00BK5BQT80     5.1854850   150.18`\n"
+              "`IE00BK5BR626     2.3065390   86.71`\n"
+              "`LU1681048804     5.9527900   117.59`\n"
+              "`NL0011683594     15.2324020  52.52`\n\n"
+
+              "━━━━━━━━━━━━━━━━━━━━\n"
+              "🔵 *DEGIRO — DEGIRO\\_HOLDINGS*\n"
+              "━━━━━━━━━━━━━━━━━━━━\n"
+              "1\\. DEGIRO app → Activiteit → Transacties → exporteer indien nodig\n"
+              "2\\. Controleer of aantallen nog kloppen \\(aankopen/verkopen\\/maand\\)\n"
+              "3\\. GitHub → Secrets → `DEGIRO_HOLDINGS` updaten\n\n"
+              "_Huidig formaat \\(ticker  aandelen  gem\\.prijs\\):_\n"
+              "`VWRL\\.AS   39   119\\.31`\n"
+              "`VUSA\\.AS   42   89\\.00`\n"
+              "`VHYL\\.AS   56   62\\.98`\n"
+              "`V          2    201\\.95`\n\n"
+
+              "📊 Na updaten: run Morning Briefing handmatig om te controleren\\."
           )
 
           data = urllib.parse.urlencode({
