@@ -2,11 +2,11 @@ name: NEXUS Morning Briefing
 
 on:
   schedule:
-    - cron: "0 7 * * *"   # Elke dag 07:00 UTC = 09:00 CEST (zomer) / 08:00 CET (winter)
-  workflow_dispatch:        # Handmatig starten vanuit GitHub Actions UI
+    - cron: "0 7 * * *"   # Elke dag 07:00 UTC = 09:00 CEST / 08:00 CET
+  workflow_dispatch:
 
 permissions:
-  contents: read            # Alleen lezen — briefing schrijft niets terug
+  contents: write           # Nodig om portfolio-snapshots in memory.json te committen
 
 jobs:
   morning_briefing:
@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Python 3.11 setup
         uses: actions/setup-python@v5
@@ -26,22 +28,23 @@ jobs:
       - name: Installeer dependencies
         run: |
           pip install yfinance anthropic requests pandas
-          # pytr voor Trade Republic (optioneel — installeert ook als TR_PHONE/TR_PIN niet gezet zijn)
           pip install pytr || echo "pytr niet beschikbaar — Trade Republic overgeslagen"
 
       - name: Morning Briefing verzenden
         env:
           PYTHONPATH: src
-          ANTHROPIC_API_KEY:   ${{ secrets.ANTHROPIC_API_KEY }}
-          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
-          # ── DEGIRO (optioneel) ───────────────────────────────────────────────
-          # Één secret genaamd DEGIRO met twee regels:
-          #   DEGIRO_USERNAME danieldk04
-          #   DEGIRO_PASSWORD mijnwachtwoord
-          DEGIRO:              ${{ secrets.DEGIRO }}
-          # ── Trade Republic (optioneel) ───────────────────────────────────────
-          # Vereist eenmalige lokale setup met SMS-verificatie (zie README)
-          TR_PHONE:            ${{ secrets.TR_PHONE }}
-          TR_PIN:              ${{ secrets.TR_PIN }}
+          ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          DEGIRO:             ${{ secrets.DEGIRO }}
+          TR_PHONE:           ${{ secrets.TR_PHONE }}
+          TR_PIN:             ${{ secrets.TR_PIN }}
         run: python src/morning_briefing.py
+
+      - name: Sla portfolio-snapshot op (memory.json)
+        run: |
+          git config user.name  "NEXUS-MorningBot"
+          git config user.email "nexus@bot.local"
+          git add memory.json
+          git diff --cached --quiet || git commit -m "Snapshot: portfolio $(date -u +'%Y-%m-%d')"
+          git push
