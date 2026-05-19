@@ -28,7 +28,6 @@ jobs:
       - name: Installeer dependencies
         run: |
           pip install yfinance anthropic requests pandas
-          pip install pytr || echo "pytr niet beschikbaar — Trade Republic overgeslagen"
 
       - name: Morning Briefing verzenden
         env:
@@ -37,8 +36,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
           DEGIRO:             ${{ secrets.DEGIRO }}
-          TR_PHONE:           ${{ secrets.TR_PHONE }}
-          TR_PIN:             ${{ secrets.TR_PIN }}
+          TR_HOLDINGS:        ${{ secrets.TR_HOLDINGS }}
         run: python src/morning_briefing.py
 
       - name: Sla portfolio-snapshot op (memory.json)
@@ -48,3 +46,4 @@ jobs:
           git add memory.json
           git diff --cached --quiet || git commit -m "Snapshot: portfolio $(date -u +'%Y-%m-%d')"
           git push
+

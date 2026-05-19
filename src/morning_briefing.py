@@ -3,7 +3,7 @@ NEXUS Morning Briefing — Dagelijkse marktupdate (07:00 UTC)
 ─────────────────────────────────────────────────────────────
 Marktdata   : yfinance — AEX, S&P 500, NASDAQ, BTC, goud
 Nieuws      : Google News RSS — actueel, Nederlandstalig, gratis
-Portfolio   : DEGIRO REST + Trade Republic pytr
+Portfolio   : DEGIRO REST + Trade Republic via TR_HOLDINGS secret
 Snapshots   : dagelijkse opslag in memory.json → dag/week/maand/YTD
 AI          : Claude Haiku marktbrief
 Output      : Telegram
@@ -21,6 +21,7 @@ import requests
 import yfinance as yf
 
 from notifier import send, DASHBOARD_URL
+from tr_portfolio import fetch_tr_portfolio
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger("morning_briefing")
@@ -311,36 +312,9 @@ def fetch_degiro_portfolio() -> dict | None:
 
 
 # ─── TRADE REPUBLIC ───────────────────────────────────────────────────────────
-
-def fetch_tr_portfolio() -> dict | None:
-    phone = os.environ.get("TR_PHONE")
-    pin   = os.environ.get("TR_PIN")
-    if not phone or not pin:
-        log.info("Trade Republic credentials niet beschikbaar.")
-        return None
-    try:
-        from pytr.api import TradeRepublicApi  # type: ignore
-        api = TradeRepublicApi(phone=phone, pin=pin, locale="nl")
-        api.login()
-        portfolio = api.get_portfolio()
-        items, total = [], 0.0
-        for pos in portfolio.get("positions", []):
-            name  = pos.get("name") or pos.get("instrumentId", "?")
-            qty   = pos.get("quantity", 0)
-            price = pos.get("currentPrice", 0)
-            value = qty * price
-            items.append({"name": name, "size": qty, "price": round(price, 2),
-                           "value": round(value, 2)})
-            total += value
-        items.sort(key=lambda i: i["value"], reverse=True)
-        log.info(f"Trade Republic: {len(items)} posities, totaal €{total:.2f}")
-        return {"positions": items, "total": round(total, 2)}
-    except ImportError:
-        log.info("pytr niet geïnstalleerd.")
-        return None
-    except Exception as e:
-        log.warning(f"Trade Republic fout: {e}")
-        return None
+# fetch_tr_portfolio() is geïmporteerd uit tr_portfolio.py
+# Gebruikt TR_HOLDINGS secret (ISIN + aantal per regel) + yfinance voor prijzen.
+# Geen pytr / SMS 2FA nodig — werkt in GitHub Actions.
 
 
 # ─── CLAUDE MARKTBRIEF ────────────────────────────────────────────────────────

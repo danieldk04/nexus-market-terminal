@@ -1,0 +1,56 @@
+name: TR Export Herinnering
+
+on:
+  schedule:
+    - cron: "0 8 19 * *"   # Elke 19e van de maand, 08:00 UTC = 10:00 CEST / 09:00 CET
+  workflow_dispatch:
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Stuur TR-exportherinnering via Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python3 - <<'EOF'
+          import os, urllib.request, urllib.parse, json
+
+          token   = os.environ["TELEGRAM_BOT_TOKEN"]
+          chat_id = os.environ["TELEGRAM_CHAT_ID"]
+
+          msg = (
+              "📤 *NEXUS Herinnering — Trade Republic export*\n\n"
+              "Het is de 19e\\. Exporteer je transacties en update je posities\\.\n\n"
+              "*Stappen:*\n"
+              "1\\. Open Trade Republic app\n"
+              "2\\. Instellingen → Documenten → Transactie\\-export\n"
+              "3\\. Download de CSV\n"
+              "4\\. Bereken bijgewerkte aantallen \\(cumulatief optellen\\)\n"
+              "5\\. Ga naar GitHub → Settings → Secrets → `TR_HOLDINGS`\n"
+              "6\\. Update de waarden \\(ISIN aantal per regel\\)\n\n"
+              "_Huidig formaat TR\\_HOLDINGS:_\n"
+              "`BTC              0.0702790`\n"
+              "`IE00BK5BQT80     5.1854850`\n"
+              "`IE00BK5BR626     2.3065390`\n"
+              "`LU1681048804     5.9527900`\n"
+              "`NL0011683594     15.2324020`"
+          )
+
+          data = urllib.parse.urlencode({
+              "chat_id":    chat_id,
+              "text":       msg,
+              "parse_mode": "MarkdownV2",
+          }).encode()
+
+          req = urllib.request.Request(
+              f"https://api.telegram.org/bot{token}/sendMessage",
+              data=data, method="POST"
+          )
+          with urllib.request.urlopen(req, timeout=10) as r:
+              result = json.loads(r.read())
+              print("Verzonden:", result.get("ok"))
+          EOF
