@@ -42,6 +42,7 @@ DEGIRO_LOGIN_URL   = "https://trader.degiro.nl/login/secure/login"
 DEGIRO_CONFIG_URL  = "https://trader.degiro.nl/pa/secure/client"
 DEGIRO_PORT_URL    = "https://trader.degiro.nl/trading/secure/v5/update/{int_account}"
 DEGIRO_PROD_URL    = "https://trader.degiro.nl/product_search/secure/v5/products/info"
+DEGIRO_TRANS_URL   = "https://trader.degiro.nl/reporting/secure/v4/transactions"
 
 
 # ─── HELPERS ──────────────────────────────────────────────────────────────────
@@ -218,6 +219,70 @@ def _parse_degiro_secret() -> tuple[str | None, str | None]:
     return username, password
 
 
+def _fetch_degiro_transactions(session: requests.Session, session_id: str,
+                               int_account) -> list[dict]:
+    """
+    Haal volledige transactiehistorie op via DEGIRO reporting API.
+    Gebruikt totalInBaseCurrency (altijd EUR) voor valuta-onafhankelijke P&L.
+    """
+    try:
+        today = date.today().strftime("%d/%m/%Y")
+        r = session.get(
+            DEGIRO_TRANS_URL,
+            params={
+                "fromDate":                "01/01/2010",
+                "toDate":                  today,
+                "groupTransactionsByOrder": 0,
+                "intAccount":              int_account,
+                "sessionId":               session_id,
+            },
+            timeout=25,
+        )
+        txns = r.json().get("data", [])
+        log.info(f"DEGIRO: {len(txns)} transacties opgehaald.")
+        return txns
+    except Exception as e:
+        log.warning(f"DEGIRO transacties mislukt: {e}")
+        return []
+
+
+def _compute_avg_costs(transactions: list[dict]) -> dict[str, dict]:
+    """
+    Bereken gewogen gemiddelde aankoopkosten in EUR per productId.
+    Bij bijkopen (DCA): gewogen gemiddelde.
+    Bij verkopen: proportioneel de kostenbasis verminderen.
+    Geeft {pid: {cost_eur, shares}} terug voor posities met resterende aandelen.
+    """
+    holdings: dict[str, dict] = {}
+
+    for txn in sorted(transactions, key=lambda t: t.get("date", "")):
+        pid     = str(txn.get("productId", ""))
+        action  = txn.get("buysell", "").upper()
+        qty     = abs(float(txn.get("quantity", 0) or 0))
+        # totalInBaseCurrency is negatief bij koop (geld uit), positief bij verkoop
+        cost    = abs(float(txn.get("totalInBaseCurrency", 0) or 0))
+
+        if not pid or qty == 0:
+            continue
+
+        if pid not in holdings:
+            holdings[pid] = {"shares": 0.0, "cost_eur": 0.0}
+
+        if action == "B":
+            holdings[pid]["shares"]   += qty
+            holdings[pid]["cost_eur"] += cost
+        elif action == "S" and holdings[pid]["shares"] > 0:
+            ratio = min(qty / holdings[pid]["shares"], 1.0)
+            holdings[pid]["cost_eur"] *= (1 - ratio)
+            holdings[pid]["shares"]    = max(0.0, holdings[pid]["shares"] - qty)
+
+    return {
+        pid: {"shares": round(h["shares"], 6), "cost_eur": round(h["cost_eur"], 2)}
+        for pid, h in holdings.items()
+        if h["shares"] > 0.001 and h["cost_eur"] > 0
+    }
+
+
 def _degiro_resolve_names(session: requests.Session, session_id: str,
                            int_account, product_ids: list[str]) -> dict[str, str]:
     """Vertaal DEGIRO product-ID's naar aandelennamen."""
@@ -303,9 +368,32 @@ def fetch_degiro_portfolio() -> dict | None:
             item["name"] = names.get(item["pid"], item["pid"])
 
         total = sum(i["value"] for i in items)
+
+        # Transactiehistorie → gemiddelde aankoopkosten → P&L per positie
+        transactions = _fetch_degiro_transactions(session, session_id, int_account)
+        avg_costs    = _compute_avg_costs(transactions)
+        total_invested = 0.0
+        for item in items:
+            h = avg_costs.get(item["pid"])
+            if h and h["cost_eur"] > 0 and item["value"] > 0:
+                item["cost_eur"]   = h["cost_eur"]
+                item["pl_pct"]     = round((item["value"] / h["cost_eur"] - 1) * 100, 2)
+                item["pl_eur"]     = round(item["value"] - h["cost_eur"], 2)
+                total_invested    += h["cost_eur"]
+            else:
+                item["cost_eur"]   = None
+                item["pl_pct"]     = None
+                item["pl_eur"]     = None
+
+        total_pl_pct = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
         items.sort(key=lambda i: i["value"], reverse=True)
-        log.info(f"DEGIRO: {len(items)} posities, totaal €{total:.2f}")
-        return {"positions": items, "total": round(total, 2)}
+        log.info(f"DEGIRO: {len(items)} posities, totaal €{total:.2f}, totaal P&L {total_pl_pct}%")
+        return {
+            "positions":       items,
+            "total":           round(total, 2),
+            "total_invested":  round(total_invested, 2),
+            "total_pl_pct":    total_pl_pct,
+        }
     except Exception as e:
         log.warning(f"DEGIRO portfolio fout: {e}")
         return None
@@ -369,15 +457,38 @@ def _perf_line(perf: dict) -> str:
 def _portfolio_block(label: str, data: dict | None, perf: dict) -> str:
     if not data:
         return ""
-    lines = [f"💼 *{label}*  (€{data['total']:,.0f})"]
+    total     = data["total"]
+    pl_pct    = data.get("total_pl_pct")
+    invested  = data.get("total_invested")
+
+    # Header: naam + totaalwaarde + totaal rendement
+    header = f"💼 *{label}*  €{total:,.0f}"
+    if pl_pct is not None:
+        sign = "+" if pl_pct >= 0 else ""
+        header += f"  _{sign}{pl_pct:.1f}% totaal_"
+    if invested:
+        header += f"  _(inleg €{invested:,.0f})_"
+    lines = [header]
+
     if perf:
         lines.append(_perf_line(perf))
-    for p in data["positions"][:6]:
-        name  = p.get("name", "?")[:12]
-        val   = p.get("value", 0)
-        size  = p.get("size", "")
-        size_s = f"{size}×" if size else ""
-        lines.append(f"  `{name:<12}` {size_s:>5}  €{val:>8,.0f}")
+
+    # Per positie: naam | gewicht | P&L% | waarde
+    for p in data["positions"][:10]:
+        name   = p.get("name", "?")[:11]
+        val    = p.get("value", 0)
+        pl     = p.get("pl_pct")
+        weight = round(val / total * 100, 1) if total > 0 else 0
+
+        if pl is not None:
+            arrow = "🟢" if pl >= 0 else "🔴"
+            pl_s  = f"`{pl:+.1f}%`"
+        else:
+            arrow = "⬜"
+            pl_s  = "`  n/b  `"
+
+        lines.append(f"  {arrow} `{name:<11}` {weight:>4.1f}%  {pl_s}  €{val:>7,.0f}")
+
     return "\n".join(lines)
 
 
