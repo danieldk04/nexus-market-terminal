@@ -121,22 +121,17 @@ def notify_scan_complete(candidates, scanned):
     sector_dist = Counter(c.get("industry_group", "?") for c in candidates[:10])
     sector_line = " · ".join(f"{s}: {n}" for s, n in sector_dist.most_common(4))
 
-    # Nieuws
-    news    = _fetch_brief_news(3)
-    news_s  = "\n".join(f"  • {h}" for h in news) if news else "  Niet beschikbaar."
-
     msg = (
         "🔍 *NEXUS SCAN KLAAR* — {ts}\n"
         "📊 {scanned} tickers gescand · {n} kandidaten\n\n"
         "🏆 *Top 5:*\n"
         "{candidates}\n\n"
         "📂 Sectoren top 10: _{sector_line}_\n\n"
-        "📰 *Nieuws:*\n{news}\n\n"
         "🌐 [Open Dashboard]({url})"
     ).format(
         ts=_now(), scanned=scanned, n=len(candidates),
         candidates=candidate_list, sector_line=sector_line,
-        news=news_s, url=DASHBOARD_URL,
+        url=DASHBOARD_URL,
     )
     send(msg)
 
@@ -214,24 +209,6 @@ def notify_evolution_summary(active_trades, closed_count, new_count, equity_valu
             rows.append("  {} `{}` {}{:.1f}%".format(emoji, t["ticker"], sign, pl))
         pos_lines = "\n*Posities:*\n" + "\n".join(rows)
 
-    # Echte portfolio uit morning briefing snapshot
-    real_port_block = ""
-    snap = _load_portfolio_snapshot()
-    if snap:
-        parts = []
-        if snap.get("degiro"):
-            parts.append("  DEGIRO: `€{:,.0f}`".format(snap["degiro"]))
-        if snap.get("tr"):
-            parts.append("  Trade Republic: `€{:,.0f}`".format(snap["tr"]))
-        if parts:
-            snap_date = snap.get("date", "?")
-            real_port_block = "\n\n💼 *Echte portfolio* _(ochtendmeting {}_)\n{}".format(
-                snap_date, "\n".join(parts))
-
-    # Nieuws
-    news   = _fetch_brief_news(4)
-    news_s = "\n".join("  • {}".format(h) for h in news) if news else "  Niet beschikbaar."
-
     ts = _now_long()
     msg = (
         "📊 *NEXUS DAGRAPPORT*\n"
@@ -241,14 +218,11 @@ def notify_evolution_summary(active_trades, closed_count, new_count, equity_valu
         "💼 NEXUS waarde: `€{equity:,.2f}`\n"
         "🔒 Gesloten vandaag: `{closed}`\n"
         "🆕 Nieuw geopend: `{new}`"
-        "{pos_lines}"
-        "{real_port}"
-        "\n\n📰 *Nieuws:*\n{news}\n\n"
+        "{pos_lines}\n\n"
         "🌐 [Open Dashboard]({url})"
     ).format(
         ts=ts, n=n, pl_emoji=pl_emoji, pl_str=pl_str,
         equity=equity_value, closed=closed_count, new=new_count,
-        pos_lines=pos_lines, real_port=real_port_block,
-        news=news_s, url=DASHBOARD_URL,
+        pos_lines=pos_lines, url=DASHBOARD_URL,
     )
     send(msg)
