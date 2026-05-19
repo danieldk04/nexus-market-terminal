@@ -25,7 +25,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Tech & AI concentratierisico**: 100% van transacties (3/3) in \u00e9\u00e9n sector. Win rate 33,3% is statistisch onbetrouwbaar bij n=3. ADBE dubbel verlies (-4,2% beide dagen) suggereert **herhaalde positionering zonder mean-reversion-buffer**.\n\n## 2. ROOT CAUSE\n**Timing & positionering**: Bot neemt identieke positie twee dagen achter elkaar in ADBE zonder erkende stop-loss na eerste verlies (-4,2%). Win op +9,9% toont potentieel, maar twee opeenvolgende identieke verliezen duidt op:\n- Geen dynamische stop-loss mechaniek\n- Ontbrekende correlatie-check (ADBE 2x, waarschijnlijk batch-effect)\n\n## 3. AANBEVELINGEN\n1. **Implementeer sector-cap**: Max 40% kapitaal in \u00e9\u00e9n sector (momenteel 100%)\n2. **Adaptief stop-loss**: Na verlies >3%, verhoog stop-loss naar 2% op identieke ticker binnen 5 dagen\n\n## 4. SECTOR BIAS\n**Te mijden**: Tech & AI (2 verliezen vs 1 win, -4,2% drawdown). \n**Actie**: Diversifieer naar minimum 3 ongecorreleerde sectoren voor statistische validiteit. Huidge n=3 is onvoldoende voor strategiebeslissingen.\n\n**Advies**: Pause bot totdat n\u226530 transacties en sector-spreiding normaliseren.",
+        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BOT ANALYSE\n\n## 1. PATROON\n**Sector concentratie + timing volatiliteit**: 100% van transacties in Tech & AI, met herhaalde ADBE-positie binnen 24 uur. Winrate 33.3% is kritiek.\n\n## 2. ROOT CAUSE\n**Twee oorzaken**:\n- **Scorelogica**: Bot faalt in trend-reversal detectie (ADBE -4.2% \u00d7 2, dan +9.9%). Geen volatility-buffer ingebouwd.\n- **Timing**: Twee back-to-back verliezen op dezelfde ticker suggest geen cooldown-mechanisme tussen gelijkaardige posities.\n\n## 3. AANBEVELINGEN\n1. **Sector-diversificatie**: Maximum 40% kapitaal in Tech & AI. Andere sectoren (Healthcare, Financials) toevoegen om idiosyncratisch risico te spreiden.\n2. **Position-management**: Implementeer 72-uur cooldown op dezelfde ticker na verlies. Voeg volatility-filter toe: skip posities als intraday-range >6%.\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI als sole-focus (slecht/winst ratio onbetrouwbaar)\n- **Zwaarder wegen**: Defensieve sectoren; ADBE-exposure beperken tot 1x per week\n\n**Conclusie**: Urgente ingreep nodig. Huidige bot onderperformt toeval; diversificatie + risk controls eerste prioriteit.",
         "win_rate": 33.3,
         "worst_sectors": [
             [
@@ -45,6 +45,6 @@
         "sector_adjustments": {
             "Tech & AI": -0.7
         },
-        "run_at": "2026-05-19T13:35:58.378502+00:00"
+        "run_at": "2026-05-19T14:00:14.892372+00:00"
     }
 }
