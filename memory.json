@@ -25,7 +25,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Extreme sector concentratie**: 100% van transacties in Tech & AI, waarvan 66% verliesgevend. ADBE is 3x voorgekomen met 1 win (+9.9%) en 2 verliezen (-4.2% elk). Het bot is overgespecialiseerd en kwetsbaar voor sectorale volatiliteit.\n\n## 2. ROOT CAUSE\n**Timing- en schaalprobleem**: ADBE werd tweemaal achtereenvolgens (9-10 april) met identieke verliesgrootte afgesloten, wat duidt op:\n- Geen exit-logica na eerste verlies (no stop-loss discipline)\n- Herhaalde entry op dezelfde positie zonder directie-validatie\n- Onvoldoende inter-trade interval om marktherziening mogelijk te maken\n\n## 3. AANBEVELINGEN\n1. **Sector-diversificatie**: Maximaal 40% kapitaal in Tech & AI; voeg Healthcare, Financials en Energie toe\n2. **Stop-loss discipline**: Implementeer -3% hard stop. Na verlies: wacht 5 handelsdagen voor re-entry dezelfde ticker\n\n## 4. SECTOR BIAS\n**Te mijden**: Tech & AI (Sharpe-ratio negatief bij huidige logica)  \n**Zwaarder wegen**: Sectoren buiten Tech (momenteel n=0; cre\u00ebert diversificatiewinst)\n\n**Conclusie**: Win rate is zuiver statistisch ruis met n=3. Fix stop-loss en sector-spreiding eerst.",
+        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Tech & AI concentratierisico**: 100% van transacties (3/3) in \u00e9\u00e9n sector. Win rate 33,3% is statistisch onbetrouwbaar bij n=3. ADBE dubbel verlies (-4,2% beide dagen) suggereert **herhaalde positionering zonder mean-reversion-buffer**.\n\n## 2. ROOT CAUSE\n**Timing & positionering**: Bot neemt identieke positie twee dagen achter elkaar in ADBE zonder erkende stop-loss na eerste verlies (-4,2%). Win op +9,9% toont potentieel, maar twee opeenvolgende identieke verliezen duidt op:\n- Geen dynamische stop-loss mechaniek\n- Ontbrekende correlatie-check (ADBE 2x, waarschijnlijk batch-effect)\n\n## 3. AANBEVELINGEN\n1. **Implementeer sector-cap**: Max 40% kapitaal in \u00e9\u00e9n sector (momenteel 100%)\n2. **Adaptief stop-loss**: Na verlies >3%, verhoog stop-loss naar 2% op identieke ticker binnen 5 dagen\n\n## 4. SECTOR BIAS\n**Te mijden**: Tech & AI (2 verliezen vs 1 win, -4,2% drawdown). \n**Actie**: Diversifieer naar minimum 3 ongecorreleerde sectoren voor statistische validiteit. Huidge n=3 is onvoldoende voor strategiebeslissingen.\n\n**Advies**: Pause bot totdat n\u226530 transacties en sector-spreiding normaliseren.",
         "win_rate": 33.3,
         "worst_sectors": [
             [
@@ -45,6 +45,6 @@
         "sector_adjustments": {
             "Tech & AI": -0.7
         },
-        "run_at": "2026-05-19T10:55:44.933081+00:00"
+        "run_at": "2026-05-19T13:35:58.378502+00:00"
     }
 }
