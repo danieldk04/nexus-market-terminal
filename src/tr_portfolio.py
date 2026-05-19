@@ -69,14 +69,21 @@ def _parse_tr_holdings() -> list[dict]:
         parts = line.split()
         if len(parts) < 2:
             continue
-        isin    = parts[0].upper()
+        isin = parts[0].upper()
         try:
-            shares  = float(parts[1])
+            shares = float(parts[1])
         except ValueError:
             log.warning(f"TR_HOLDINGS: ongeldige hoeveelheid voor {isin}: {parts[1]}")
             continue
+        # Optionele derde kolom: gemiddelde aankoopprijs in EUR
+        avg_price = None
+        if len(parts) >= 3:
+            try:
+                avg_price = float(parts[2])
+            except ValueError:
+                pass
         if shares > 0:
-            holdings.append({"isin": isin, "shares": shares})
+            holdings.append({"isin": isin, "shares": shares, "avg_price": avg_price})
 
     log.info(f"TR_HOLDINGS: {len(holdings)} posities geladen.")
     return holdings
@@ -134,16 +141,31 @@ def fetch_tr_portfolio() -> dict | None:
             })
             continue
 
-        value = shares * price
-        total += value
+        value     = shares * price
+        avg_price = h.get("avg_price")   # uit TR_HOLDINGS (optioneel)
+        total    += value
+
+        # P&L berekenen als aankoopprijs bekend is
+        if avg_price and avg_price > 0:
+            cost_eur = shares * avg_price
+            pl_pct   = round((price / avg_price - 1) * 100, 2)
+            pl_eur   = round(value - cost_eur, 2)
+        else:
+            cost_eur = None
+            pl_pct   = None
+            pl_eur   = None
+
         positions.append({
-            "name":   DISPLAY_NAMES.get(isin, isin),
-            "ticker": ticker,
-            "isin":   isin,
-            "size":   round(shares, 6),
-            "price":  round(price, 4),
-            "value":  round(value, 2),
-            "pl_pct": None,   # Aankoopprijs n/b — toe te voegen aan TR_HOLDINGS
+            "name":     DISPLAY_NAMES.get(isin, isin),
+            "ticker":   ticker,
+            "isin":     isin,
+            "size":     round(shares, 6),
+            "price":    round(price, 4),
+            "value":    round(value, 2),
+            "avg_price": avg_price,
+            "cost_eur":  round(cost_eur, 2) if cost_eur else None,
+            "pl_pct":    pl_pct,
+            "pl_eur":    pl_eur,
         })
         time.sleep(0.1)
 
@@ -152,5 +174,15 @@ def fetch_tr_portfolio() -> dict | None:
         return None
 
     positions.sort(key=lambda p: p["value"], reverse=True)
-    log.info(f"Trade Republic: {len(positions)} posities, totaal €{total:.2f}")
-    return {"positions": positions, "total": round(total, 2)}
+
+    # Totaal rendement berekenen (alleen posities met aankoopprijs)
+    total_invested = sum(p["cost_eur"] for p in positions if p.get("cost_eur"))
+    total_pl_pct   = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
+
+    log.info(f"Trade Republic: {len(positions)} posities, totaal €{total:.2f}, P&L {total_pl_pct}%")
+    return {
+        "positions":      positions,
+        "total":          round(total, 2),
+        "total_invested": round(total_invested, 2) if total_invested else None,
+        "total_pl_pct":   total_pl_pct,
+    }
