@@ -1,10 +1,12 @@
 """
 NEXUS Evolution Engine — Agressieve Investor Mode met Kelly Criterion
 DCF-gebaseerde exits + dynamische VIX-drempel + post-mortem sector-aanpassingen
++ Cooldown per ticker (48u na sluiten)
++ Sector-cap op portfoliowaarde (max 40%)
 """
 import json
 import yfinance as yf
-from datetime import datetime, timezone
+from datetime import datetime, date, timezone, timedelta
 from pathlib import Path
 from dcf_engine import vix_dynamic_threshold, kelly_position_size
 from notifier import (
@@ -18,14 +20,29 @@ DATA_PATH   = BASE_DIR / "data.json"
 MEMORY_PATH = BASE_DIR / "memory.json"
 
 # ─── INVESTOR CONFIGURATIE ───────────────────────────────────────────────────
-STARTING_CAPITAL = 10_000.0
-STOP_LOSS_PCT    = -8.0    # Ruimer voor langetermijn (investor)
-TAKE_PROFIT_PCT  = 30.0    # Hoog doel — laat winnaars lopen
-MAX_TRADES       = 10      # Gespreide portefeuille
-MAX_PER_SECTOR   = 3       # Diversificatie
-VIX_BLOCK        = 42.0    # Blokkeer alleen bij extreme paniek
-VIX_CAUTION      = 36.0    # Alleen high-conviction bij hoge VIX
-MAX_KELLY_PCT    = 0.20    # Maximaal 20% per positie (Kelly-cap)
+STARTING_CAPITAL  = 10_000.0
+STOP_LOSS_PCT     = -8.0    # Ruimer voor langetermijn (investor)
+TAKE_PROFIT_PCT   = 30.0    # Hoog doel — laat winnaars lopen
+MAX_TRADES        = 10      # Gespreide portefeuille
+MAX_PER_SECTOR    = 3       # Max aantal posities per sector
+MAX_SECTOR_PCT    = 0.40    # Max 40% van portfoliowaarde in één sector
+VIX_BLOCK         = 42.0    # Blokkeer alleen bij extreme paniek
+VIX_CAUTION       = 36.0    # Alleen high-conviction bij hoge VIX
+MAX_KELLY_PCT     = 0.20    # Maximaal 20% per positie (Kelly-cap)
+COOLDOWN_DAYS     = 2       # Geen herinstap binnen 2 dagen na sluiten
+
+
+def _is_in_cooldown(ticker: str, cooldowns: dict, today: str) -> bool:
+    """Geeft True als ticker recent gesloten is en cooldown nog actief is."""
+    closed_date_str = cooldowns.get(ticker)
+    if not closed_date_str:
+        return False
+    try:
+        closed = date.fromisoformat(closed_date_str)
+        current = date.fromisoformat(today)
+        return (current - closed).days < COOLDOWN_DAYS
+    except Exception:
+        return False
 
 
 def load_json(path, default):
@@ -116,7 +133,11 @@ def run_evolution():
                            f"Stop-loss {ticker} ({pl_pct:.1f}%). Sector {sector} voorzichtig.",
                            "NEGATIVE_LEARNING")
                 notify_stop_loss(ticker, pl_pct, sector)
-                print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}% | €{cur_value:.2f}")
+                # Cooldown: blokkeer herinstap voor COOLDOWN_DAYS
+                if "cooldowns" not in memory:
+                    memory["cooldowns"] = {}
+                memory["cooldowns"][ticker] = today
+                print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}% | €{cur_value:.2f} | cooldown {COOLDOWN_DAYS}d")
                 closed_count += 1
                 continue
 
@@ -127,6 +148,10 @@ def run_evolution():
                            f"Take-profit {ticker} (+{pl_pct:.1f}%, doel was {tp_target}%). {sector} werkt.",
                            "POSITIVE_LEARNING")
                 notify_take_profit(ticker, pl_pct, sector)
+                # Korte cooldown na take-profit (herinstap mag, maar niet meteen)
+                if "cooldowns" not in memory:
+                    memory["cooldowns"] = {}
+                memory["cooldowns"][ticker] = today
                 print(f"TAKE-PROFIT: {ticker} gesloten op +{pl_pct:.1f}% (DCF-doel: +{tp_target}%) | €{cur_value:.2f}")
                 closed_count += 1
                 continue
@@ -167,12 +192,19 @@ def run_evolution():
     # ── 4. Nieuwe posities openen — Kelly Criterion sizing ───────────────────
     positive_sectors = {l["sector"] for l in memory["lessons"] if l.get("type") == "POSITIVE_LEARNING"}
     pm_sector_adj    = post_mortem.get("sector_adjustments", {})
+    cooldowns        = memory.get("cooldowns", {})
 
     current_tickers = {t["ticker"] for t in updated_trades}
     sector_counts   = {}
+    sector_values   = {}
     for t in updated_trades:
         sg = t.get("industry_group", "Others")
         sector_counts[sg] = sector_counts.get(sg, 0) + 1
+        sector_values[sg] = sector_values.get(sg, 0) + t.get("current_value", t.get("position_value", 0))
+
+    # Huidige totale portfoliowaarde voor sector-% berekening
+    current_open_value = sum(t.get("current_value", t.get("position_value", 0)) for t in updated_trades)
+    current_portfolio  = cash + current_open_value
 
     new_count = 0
     for c in candidates:
@@ -186,8 +218,15 @@ def run_evolution():
 
         if ticker in current_tickers or price <= 0:
             continue
+
+        # Cooldown-check: geen herinstap binnen COOLDOWN_DAYS na sluiten
+        if _is_in_cooldown(ticker, cooldowns, today):
+            print(f"Overgeslagen: {ticker} — cooldown actief ({COOLDOWN_DAYS}d).")
+            continue
+
+        # Sector-cap: max MAX_PER_SECTOR posities EN max MAX_SECTOR_PCT van portfolio
         if sector_counts.get(sector, 0) >= MAX_PER_SECTOR:
-            print(f"Overgeslagen: {ticker} — max {MAX_PER_SECTOR} in {sector}.")
+            print(f"Overgeslagen: {ticker} — max {MAX_PER_SECTOR} posities in {sector}.")
             continue
 
         # Sectorbonus uit post-mortem
@@ -197,7 +236,7 @@ def run_evolution():
         if score < effective_threshold:
             continue
 
-        # Kelly Criterion positie-sizing
+        # Kelly Criterion positie-sizing (voorlopige schatting voor sector-% check)
         dcf = c.get("dcf") or {}
         dcf_upside = dcf.get("dcf_upside")
         kelly_frac, position_value = kelly_position_size(
@@ -207,6 +246,18 @@ def run_evolution():
             max_pct=MAX_KELLY_PCT,
         )
         position_value = min(position_value, cash)
+
+        # Sector-% cap: voorkom dat één sector > MAX_SECTOR_PCT van totaal portfolio wordt
+        projected_sector_val = sector_values.get(sector, 0) + position_value
+        projected_port_val   = max(current_portfolio, 1)
+        if projected_sector_val / projected_port_val > MAX_SECTOR_PCT:
+            print(
+                f"Overgeslagen: {ticker} — {sector} zou "
+                f"{projected_sector_val / projected_port_val:.0%} van portfolio worden "
+                f"(max {MAX_SECTOR_PCT:.0%})."
+            )
+            continue
+
         shares = round(position_value / price, 4)
 
         # DCF-gebaseerde take-profit target voor nieuwe trade
@@ -235,6 +286,7 @@ def run_evolution():
         updated_trades.append(new_trade)
         current_tickers.add(ticker)
         sector_counts[sector] = sector_counts.get(sector, 0) + 1
+        sector_values[sector] = sector_values.get(sector, 0) + position_value
         new_count += 1
         notify_trade_opened(ticker, price, score, sector)
         print(

@@ -181,6 +181,18 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
         beta          = info.get("beta", 1.0) or 1.0
         price         = info.get("currentPrice") or info.get("regularMarketPrice") or 0
 
+        # Trend-filter: prijs vs. 50- en 200-daags gemiddelde
+        ma50  = info.get("fiftyDayAverage") or 0
+        ma200 = info.get("twoHundredDayAverage") or 0
+        trend_penalty = 0.0
+        if ma50 > 0 and price < ma50 * 0.97:       # >3% onder MA50
+            trend_penalty = 0.5
+        if ma200 > 0 and price < ma200 * 0.97:     # ook onder MA200 → dubbele downtrend
+            trend_penalty = max(trend_penalty, 0.9)
+        # Hard filter: skip als prijs >10% onder beide MA's (sterke dalende trend)
+        if ma50 > 0 and ma200 > 0 and price < ma50 * 0.90 and price < ma200 * 0.90:
+            return None
+
         # P/FCF
         market_cap = info.get("marketCap", 0) or 0
         pfcf = round(market_cap / fcf, 1) if fcf and fcf > 0 and market_cap > 0 else None
@@ -263,7 +275,7 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
             base - pe_penalty + roe_bonus - debt_penalty + growth_bonus
             - fcf_penalty + margin_bonus - beta_penalty + roic_bonus
             + roce_bonus + pfcf_bonus + dcf_bonus + analyst_bonus
-            - div_penalty - memory_penalty + pm_adj
+            - div_penalty - memory_penalty + pm_adj - trend_penalty
         )
         score = round(max(1.0, min(10.0, raw_score)), 1)
 
