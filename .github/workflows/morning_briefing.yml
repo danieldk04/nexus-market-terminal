@@ -36,10 +36,10 @@ jobs:
           TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
           # ── DEGIRO (optioneel) ───────────────────────────────────────────────
-          # Zet deze secrets in: GitHub repo → Settings → Secrets → Actions
-          DEGIRO_USERNAME:     ${{ secrets.DEGIRO_USERNAME }}
-          DEGIRO_PASSWORD:     ${{ secrets.DEGIRO_PASSWORD }}
-          DEGIRO_INT_ACCOUNT:  ${{ secrets.DEGIRO_INT_ACCOUNT }}
+          # Één secret genaamd DEGIRO met twee regels:
+          #   DEGIRO_USERNAME danieldk04
+          #   DEGIRO_PASSWORD mijnwachtwoord
+          DEGIRO:              ${{ secrets.DEGIRO }}
           # ── Trade Republic (optioneel) ───────────────────────────────────────
           # Vereist eenmalige lokale setup met SMS-verificatie (zie README)
           TR_PHONE:            ${{ secrets.TR_PHONE }}

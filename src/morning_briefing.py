@@ -127,14 +127,32 @@ DEGIRO_CONFIG_URL = "https://trader.degiro.nl/pa/secure/client"
 DEGIRO_PORT_URL   = "https://trader.degiro.nl/trading/secure/v5/update/{int_account}"
 
 
+def _parse_degiro_secret() -> tuple[str | None, str | None]:
+    """
+    Leest gebruikersnaam en wachtwoord uit één GitHub Secret genaamd DEGIRO.
+    Verwacht formaat (twee regels):
+        DEGIRO_USERNAME danieldk04
+        DEGIRO_PASSWORD mijnwachtwoord
+    Valt terug op losse env vars DEGIRO_USERNAME / DEGIRO_PASSWORD.
+    """
+    raw = os.environ.get("DEGIRO", "")
+    parsed: dict[str, str] = {}
+    for line in raw.splitlines():
+        parts = line.strip().split(None, 1)
+        if len(parts) == 2:
+            parsed[parts[0]] = parts[1]
+    username = parsed.get("DEGIRO_USERNAME") or os.environ.get("DEGIRO_USERNAME")
+    password = parsed.get("DEGIRO_PASSWORD") or os.environ.get("DEGIRO_PASSWORD")
+    return username, password
+
+
 def fetch_degiro_portfolio() -> dict | None:
     """
     Login bij DEGIRO via REST en haal portefeuille op.
-    Vereiste secrets: DEGIRO_USERNAME, DEGIRO_PASSWORD
-    Optioneel:        DEGIRO_INT_ACCOUNT (account-ID, anders auto-detect)
+    Leest uit één secret DEGIRO (twee regels: DEGIRO_USERNAME / DEGIRO_PASSWORD).
+    Optioneel: DEGIRO_INT_ACCOUNT als losse secret voor snellere login.
     """
-    username = os.environ.get("DEGIRO_USERNAME")
-    password = os.environ.get("DEGIRO_PASSWORD")
+    username, password = _parse_degiro_secret()
     if not username or not password:
         log.info("DEGIRO credentials niet beschikbaar — sectie overgeslagen.")
         return None
