@@ -247,14 +247,47 @@ def fetch_nexus_portfolio() -> dict:
 # ─── DEGIRO ───────────────────────────────────────────────────────────────────
 
 def _parse_degiro_secret() -> tuple[str | None, str | None]:
+    """
+    Haal DEGIRO-credentials op uit het DEGIRO-secret.
+    Ondersteunt meerdere formaten:
+      DEGIRO_USERNAME email@example.com   ← spatie-gescheiden met prefix
+      DEGIRO_PASSWORD wachtwoord
+      username=email@example.com          ← = gescheiden zonder prefix
+      password=wachtwoord
+      username email@example.com          ← spatie-gescheiden zonder prefix
+      password wachtwoord
+    """
     raw = os.environ.get("DEGIRO", "")
     parsed: dict[str, str] = {}
     for line in raw.splitlines():
-        parts = line.strip().split(None, 1)
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        # Normaliseer: vervang '=' door spatie voor uniforme verwerking
+        if "=" in line and " " not in line.split("=")[0]:
+            line = line.replace("=", " ", 1)
+        parts = line.split(None, 1)
         if len(parts) == 2:
-            parsed[parts[0]] = parts[1]
-    username = parsed.get("DEGIRO_USERNAME") or os.environ.get("DEGIRO_USERNAME")
-    password = parsed.get("DEGIRO_PASSWORD") or os.environ.get("DEGIRO_PASSWORD")
+            parsed[parts[0].lower().replace("degiro_", "")] = parts[1].strip()
+
+    username = (
+        parsed.get("username")
+        or os.environ.get("DEGIRO_USERNAME")
+        or parsed.get("degiro_username")
+    )
+    password = (
+        parsed.get("password")
+        or os.environ.get("DEGIRO_PASSWORD")
+        or parsed.get("degiro_password")
+    )
+
+    if username:
+        log.info(f"DEGIRO credentials geladen: {username[:3]}***@***")
+    else:
+        log.warning("DEGIRO: geen username gevonden in secret. "
+                    "Controleer het DEGIRO secret formaat:\n"
+                    "  username jouw@email.nl\n"
+                    "  password jouwwachtwoord")
     return username, password
 
 
@@ -357,18 +390,21 @@ def fetch_degiro_portfolio() -> dict | None:
 
     # Login
     try:
+        log.info(f"DEGIRO: inloggen op {DEGIRO_LOGIN_URL} ...")
         r = session.post(DEGIRO_LOGIN_URL,
                          json={"username": username, "password": password,
                                "isRedirectToMobile": False}, timeout=15)
+        log.info(f"DEGIRO login response: HTTP {r.status_code}")
         if not r.ok:
-            log.warning(f"DEGIRO login mislukt: {r.status_code}")
+            log.warning(f"DEGIRO login mislukt: {r.status_code} — {r.text[:200]}")
             return None
-        session_id = r.json().get("sessionId")
+        resp_json = r.json()
+        session_id = resp_json.get("sessionId")
         if not session_id:
-            log.warning("DEGIRO: geen sessionId.")
+            log.warning(f"DEGIRO: geen sessionId in response. Keys: {list(resp_json.keys())}")
             return None
         session.headers.update({"Cookie": f"JSESSIONID={session_id}"})
-        log.info("DEGIRO: ingelogd.")
+        log.info("DEGIRO: succesvol ingelogd.")
     except Exception as e:
         log.warning(f"DEGIRO login fout: {e}")
         return None
