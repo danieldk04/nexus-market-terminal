@@ -658,6 +658,112 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     return f"\n{SEP}\n".join(sections)
 
 
+# ─── DEGIRO HANDMATIG (fallback als API geblokkeerd is) ───────────────────────
+
+def fetch_degiro_manual() -> dict | None:
+    """
+    Lees DEGIRO_HOLDINGS omgevingsvariabele als fallback wanneer DEGIRO API
+    niet bereikbaar is (bijv. Cloudflare 503 op GitHub Actions).
+
+    Formaat — één positie per regel (# = commentaar):
+      yfinance_ticker  aandelen  [gemiddelde_aankoopprijs_eur]
+
+    Voorbeelden:
+      ASML.AS    10    650.00
+      SHELL.AS   50    28.30
+      AAPL       15    145.00
+    """
+    raw = os.environ.get("DEGIRO_HOLDINGS", "").strip()
+    if not raw:
+        log.info("DEGIRO_HOLDINGS niet ingesteld — DEGIRO wordt overgeslagen.")
+        return None
+
+    holdings = []
+    for line in raw.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split()
+        if len(parts) < 2:
+            continue
+        ticker = parts[0]
+        try:
+            shares = float(parts[1])
+        except ValueError:
+            log.warning(f"DEGIRO_HOLDINGS: ongeldige hoeveelheid voor {ticker}: {parts[1]}")
+            continue
+        avg_price = None
+        if len(parts) >= 3:
+            try:
+                avg_price = float(parts[2])
+            except ValueError:
+                pass
+        if shares > 0:
+            holdings.append({"ticker": ticker, "shares": shares, "avg_price": avg_price})
+
+    if not holdings:
+        log.warning("DEGIRO_HOLDINGS: geen geldige posities gevonden.")
+        return None
+
+    log.info(f"DEGIRO_HOLDINGS: {len(holdings)} posities geladen — prijzen ophalen via yfinance...")
+    positions = []
+    total     = 0.0
+
+    for h in holdings:
+        ticker = h["ticker"]
+        shares = h["shares"]
+        try:
+            info  = yf.Ticker(ticker).fast_info
+            price = getattr(info, "last_price", None)
+            if not price or float(price) <= 0:
+                log.warning(f"DEGIRO manual: geen prijs voor {ticker}")
+                continue
+            price = float(price)
+        except Exception as e:
+            log.warning(f"DEGIRO manual {ticker}: {e}")
+            continue
+
+        value      = shares * price
+        total     += value
+        avg_price  = h.get("avg_price")
+
+        if avg_price and avg_price > 0:
+            cost_eur = shares * avg_price
+            pl_pct   = round((price / avg_price - 1) * 100, 2)
+            pl_eur   = round(value - cost_eur, 2)
+        else:
+            cost_eur = pl_pct = pl_eur = None
+
+        positions.append({
+            "name":      ticker,
+            "pid":       ticker,
+            "size":      round(shares, 4),
+            "price":     round(price, 2),
+            "value":     round(value, 2),
+            "avg_price": avg_price,
+            "cost_eur":  round(cost_eur, 2) if cost_eur else None,
+            "pl_pct":    pl_pct,
+            "pl_eur":    pl_eur,
+        })
+        time.sleep(0.15)
+
+    if not positions:
+        log.warning("DEGIRO manual: geen posities met prijs.")
+        return None
+
+    positions.sort(key=lambda p: p["value"], reverse=True)
+    total_invested = sum(p["cost_eur"] for p in positions if p.get("cost_eur"))
+    total_pl_pct   = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
+
+    log.info(f"DEGIRO manual: {len(positions)} posities, totaal €{total:.2f}, P&L {total_pl_pct}%")
+    return {
+        "positions":      positions,
+        "total":          round(total, 2),
+        "total_invested": round(total_invested, 2) if total_invested else None,
+        "total_pl_pct":   total_pl_pct,
+    }
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def run_morning_briefing():
@@ -676,6 +782,9 @@ def run_morning_briefing():
 
     log.info("DEGIRO portfolio ophalen...")
     degiro = fetch_degiro_portfolio()
+    if degiro is None:
+        log.info("DEGIRO API niet bereikbaar — probeer DEGIRO_HOLDINGS secret...")
+        degiro = fetch_degiro_manual()
 
     log.info("Trade Republic portfolio ophalen...")
     tr = fetch_tr_portfolio()

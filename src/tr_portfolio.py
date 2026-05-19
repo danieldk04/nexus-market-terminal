@@ -34,12 +34,10 @@ ISIN_TO_TICKERS: dict[str, list[str]] = {
     "IE00BK5BQT80": ["VWCE.DE", "VWCE.MI", "VWRD.AS"],
     # Vanguard FTSE All-World High Dividend Yield UCITS ETF Dist
     "IE00BK5BR626": ["VHYL.AS", "VHYL.DE", "VGWD.DE"],
-    # Amundi S&P 500 UCITS ETF EUR Acc (LU1681048804)
-    # PCAR.DE = PacCar (vrachtwagens) — fout
-    # CSPX.AS = iShares Core S&P 500 (~$540) — verkeerde ETF
-    # CSP1.MI = Borsa Italiana listing van Amundi S&P 500
-    # SPX5.DE = Xetra listing
-    "LU1681048804": ["CSP1.MI", "SPX5.DE", "CSP1.PA"],
+    # Amundi S&P 500 UCITS ETF EUR Acc (LU1681048804, ~€123/stuk)
+    # Amundi staat niet op Yahoo Finance. Proxy: SXR8.DE (iShares Core S&P 500, Xetra EUR)
+    # → prijs wordt geschaald via _scale_proxy hieronder.
+    "LU1681048804": ["SXR8.DE"],
     # VanEck Morningstar Developed Markets Dividend Leaders
     "NL0011683594": ["TDIV.AS"],
     # Bitcoin — in EUR
@@ -47,6 +45,14 @@ ISIN_TO_TICKERS: dict[str, list[str]] = {
 }
 
 ISIN_TO_TICKER: dict[str, str] = {k: v[0] for k, v in ISIN_TO_TICKERS.items()}
+
+# Proxy-schaling voor ISINs die geen eigen Yahoo Finance ticker hebben.
+# ratio = eigen_NAV / proxy_NAV  →  pas aan als NAV sterk verschuift.
+# SXR8.DE (iShares Core S&P 500 EUR, Xetra) ≈ €540
+# Amundi S&P 500 (LU1681048804) ≈ €123  →  ratio = 123/540 ≈ 0.228
+PROXY_RATIO: dict[str, float] = {
+    "LU1681048804": 0.228,
+}
 
 DISPLAY_NAMES: dict[str, str] = {
     "IE00BK5BQT80": "VWCE (All-World Acc)",
@@ -212,8 +218,14 @@ def _fetch_price_eur(isin: str) -> tuple[str | None, float | None]:
             info  = yf.Ticker(ticker).fast_info
             price = getattr(info, "last_price", None)
             if price and float(price) > 0:
-                log.info(f"{isin} → {ticker}: €{price:.2f}")
-                return ticker, float(price)
+                price = float(price)
+                # Schaal proxy-prijs naar werkelijke ETF NAV indien nodig
+                if isin in PROXY_RATIO:
+                    price = round(price * PROXY_RATIO[isin], 4)
+                    log.info(f"{isin} → {ticker} (proxy×{PROXY_RATIO[isin]}): €{price:.2f}")
+                else:
+                    log.info(f"{isin} → {ticker}: €{price:.2f}")
+                return ticker, price
         except Exception as e:
             log.debug(f"yfinance {ticker}: {e}")
         time.sleep(0.2)
