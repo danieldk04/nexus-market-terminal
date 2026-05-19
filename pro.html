@@ -578,12 +578,29 @@ function renderPostMortem() {
     const bestSec   = (pm.best_sectors  || []).map(([s,n]) => `${s} (${n}x)`).join(', ') || '--';
     const repeaters = (pm.repeat_losers || []).join(', ') || 'geen';
 
+    // Lessen uit data.json (bot memory)
+    const dataLessons = (globalData?.memory?.lessons || []);
+    const vixThr      = globalData?.memory?.vix_threshold;
+    const lessonsHtml = dataLessons.length ? `
+        <div style="padding:6px 12px 4px;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);font-weight:700;border-top:1px solid var(--border);margin-top:4px">
+            Recente lessen (${dataLessons.length})
+            ${vixThr ? `<span style="float:right;color:var(--accent)">VIX-drempel: ${vixThr}</span>` : ''}
+        </div>` +
+        [...dataLessons].reverse().slice(0, 10).map(l => {
+            const isPos = l.type === 'POSITIVE_LEARNING';
+            return `<div class="lesson-item ${isPos ? 'lesson-pos' : 'lesson-neg'}">
+                <div class="lesson-label">${isPos ? '✓ WIN' : '✗ LOSS'} [${l.ticker}] · ${l.date||''}</div>
+                <div class="lesson-text">${l.insight}</div>
+            </div>`;
+        }).join('') : '';
+
     container.innerHTML = `
         <div class="pm-stat"><span class="pm-label">Win rate</span><span class="pm-val" style="color:${winCol}">${winRate}%</span></div>
         <div class="pm-stat"><span class="pm-label">Beste sectoren</span><span class="pm-val" style="color:#4ade80;font-size:0.62rem">${bestSec}</span></div>
         <div class="pm-stat"><span class="pm-label">Zwakste sectoren</span><span class="pm-val" style="color:#f87171;font-size:0.62rem">${worstSec}</span></div>
         <div class="pm-stat"><span class="pm-label">Herhaalde verliezers</span><span class="pm-val" style="color:#fbbf24;font-size:0.62rem">${repeaters}</span></div>
-        ${pm.analysis ? `<div class="pm-analysis">${pm.analysis.substring(0,600)}${pm.analysis.length > 600 ? '...' : ''}</div>` : ''}`;
+        ${pm.analysis ? `<div class="pm-analysis">${pm.analysis.substring(0,600)}${pm.analysis.length > 600 ? '...' : ''}</div>` : ''}
+        ${lessonsHtml}`;
 }
 
 // ─── PORTFOLIO TAB RENDERING ──────────────────────────────────────────────────
@@ -1178,30 +1195,13 @@ function renderTrades(trades) {
 
 // ─── LEARNING LOG ─────────────────────────────────────────────────────────────
 function renderLearning() {
-    const container = document.getElementById('learning-container');
-    const lessons   = globalData.memory?.lessons || [];
-    const pm        = globalData.memory?.vix_threshold;
-    document.getElementById('lesson-count').textContent = lessons.length + ' insights';
-    if (!lessons.length) {
-        container.innerHTML = '<div class="no-analysis">Engine leert van elke trade.</div>';
-        return;
-    }
-    // Post-mortem header als beschikbaar
-    let pmHtml = '';
-    const pmData = globalData.memory;
-    if (pmData?.version === 'nexus-v3-kelly' && pm) {
-        pmHtml = `<div style="padding:6px 10px;background:rgba(34,211,238,0.05);border-bottom:1px solid var(--border)">
-            <div style="font-family:var(--mono);font-size:0.58rem;color:var(--muted)">VIX-drempel: <b style="color:var(--accent)">${pm}</b></div>
-        </div>`;
-    }
-    container.innerHTML = pmHtml + [...lessons].reverse().map(l => {
-        const isPos = l.type === 'POSITIVE_LEARNING';
-        return `
-        <div class="lesson-item ${isPos ? 'lesson-pos' : 'lesson-neg'}">
-            <div class="lesson-label">${isPos ? '✓ WIN' : '✗ LOSS'} [${l.ticker}] · ${l.date||''}</div>
-            <div class="lesson-text">${l.insight}</div>
-        </div>`;
-    }).join('');
+    // Learning log is nu onderdeel van de ANALYSE tab (renderPostMortem)
+    // Deze functie vult de lessen in als de postmortem-container zichtbaar is
+    const container = document.getElementById('postmortem-container');
+    if (!container) return;
+    // Alleen opnieuw renderen als de tab actief is
+    if (container.style.display === 'none') return;
+    renderPostMortem();
 }
 
 // ─── EQUITY CHART ─────────────────────────────────────────────────────────────
