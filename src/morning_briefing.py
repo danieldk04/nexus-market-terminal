@@ -80,10 +80,13 @@ def load_history() -> list[dict]:
     return mem.get(HISTORY_KEY, [])
 
 
-def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None):
+def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
+                        news_summary: list[dict] | None = None):
     """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
     mem = _load_json(MEMORY_PATH, {})
     mem["last_news"] = news[:8]
+    if news_summary:
+        mem["news_summary"] = news_summary
     if degiro:
         mem["degiro_summary"] = {
             "total":          degiro.get("total"),
@@ -199,8 +202,8 @@ NEWS_FEEDS = [
 ]
 
 
-def fetch_news(max_items: int = 8) -> list[str]:
-    """Haal actuele headlines op via Google News RSS."""
+def fetch_news(max_items: int = 16) -> list[str]:
+    """Haal actuele headlines op via Google News RSS (meer items voor betere AI-samenvatting)."""
     headlines = []
     seen      = set()
     for url in NEWS_FEEDS:
@@ -219,6 +222,54 @@ def fetch_news(max_items: int = 8) -> list[str]:
         except Exception as e:
             log.warning(f"Nieuws RSS mislukt ({url[:50]}): {e}")
     return headlines[:max_items]
+
+
+def generate_news_summary(client: anthropic.Anthropic, headlines: list[str]) -> list[dict]:
+    """
+    Gebruik Claude om ruwe headlines om te zetten in 4 bruikbare nieuwssegmenten.
+    Geeft lijst van dicts: [{"theme": str, "summary": str}, ...]
+    """
+    if not headlines or not client:
+        return []
+
+    headlines_text = "\n".join(f"{i+1}. {h}" for i, h in enumerate(headlines))
+
+    prompt = (
+        f"Hieronder staan {len(headlines)} beursnieuws-headlines van vandaag.\n\n"
+        f"{headlines_text}\n\n"
+        "Groepeer dit in precies 4 thematische nieuwssegmenten voor een belegger. "
+        "Per segment:\n"
+        "- theme: korte titel (max 5 woorden, Nederlands)\n"
+        "- summary: 2-3 zinnen die uitleggen WAT er precies speelt en WAAROM het relevant is "
+        "voor iemand met posities in ETFs (AEX, S&P500, World) en aandelen\n\n"
+        "Antwoord ALLEEN in dit JSON-formaat, geen uitleg eromheen:\n"
+        '[{"theme":"...","summary":"..."},{"theme":"...","summary":"..."},'
+        '{"theme":"...","summary":"..."},{"theme":"...","summary":"..."}]'
+    )
+
+    try:
+        import json as _json
+        msg = client.messages.create(
+            model="claude-haiku-4-5", max_tokens=700,
+            system=(
+                "Je bent een beursanalist die headlines omzet in bruikbare marktinzichten. "
+                "Antwoord altijd als geldig JSON-array, niets anders."
+            ),
+            messages=[{"role": "user", "content": prompt}],
+        )
+        text = msg.content[0].text.strip()
+        # Verwijder eventuele markdown code-block wrapper
+        if "```" in text:
+            text = text.split("```")[1]
+            if text.lower().startswith("json"):
+                text = text[4:]
+            text = text.strip()
+        result = _json.loads(text)
+        log.info(f"Nieuws-samenvatting: {len(result)} segmenten gegenereerd")
+        return result if isinstance(result, list) else []
+    except Exception as e:
+        log.warning(f"Nieuws-samenvatting mislukt: {e}")
+        return []
 
 
 # ─── NEXUS PORTFOLIO ──────────────────────────────────────────────────────────
@@ -800,7 +851,11 @@ def run_morning_briefing():
         tr_total=tr.get("total") if tr else None,
         nexus_total=nexus.get("cash"),
     )
-    save_dashboard_data(news, degiro, tr)
+
+    log.info("AI nieuws-samenvatting genereren...")
+    news_summary = generate_news_summary(client, news) if client else []
+
+    save_dashboard_data(news, degiro, tr, news_summary)
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."

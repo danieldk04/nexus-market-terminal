@@ -552,20 +552,46 @@ function switchRightTab(tab, btn) {
 // ─── NEWS RENDERING ───────────────────────────────────────────────────────────
 function renderNews() {
     const container = document.getElementById('news-container');
-    const news = memoryData?.last_news || [];
-    if (!news.length) {
+    const summary   = memoryData?.news_summary || [];
+    const rawNews   = memoryData?.last_news    || [];
+    const updated   = memoryData?.dashboard_updated
+        ? new Date(memoryData.dashboard_updated).toLocaleString('nl-NL')
+        : '';
+
+    if (!summary.length && !rawNews.length) {
         container.innerHTML = '<div class="no-analysis">Nieuws wordt geladen bij de volgende morning briefing (07:00 UTC).</div>';
         return;
     }
-    const updated = memoryData?.dashboard_updated
-        ? new Date(memoryData.dashboard_updated).toLocaleString('nl-NL')
-        : '';
-    container.innerHTML =
-        `<div style="padding:6px 12px;font-size:0.58rem;color:var(--muted);border-bottom:1px solid var(--border)">Bijgewerkt: ${updated}</div>` +
-        news.map(h => `
+
+    const header = `<div style="padding:6px 12px 5px;font-size:0.56rem;color:var(--muted);
+        border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <span style="text-transform:uppercase;letter-spacing:0.08em;font-weight:600">AI Nieuwsanalyse</span>
+        <span>${updated}</span>
+    </div>`;
+
+    if (summary.length) {
+        // Nieuwskaarten op basis van AI-samenvatting
+        const cards = summary.map((item, i) => {
+            const colors = ['#22d3ee','#4ade80','#fbbf24','#a78bfa'];
+            const col = colors[i % colors.length];
+            return `
+            <div class="news-item" style="border-left:3px solid ${col};padding:10px 12px 10px 14px">
+                <div style="font-family:var(--mono);font-size:0.7rem;font-weight:700;
+                    color:${col};margin-bottom:5px">${item.theme || '—'}</div>
+                <div class="news-title" style="color:#cbd5e1;line-height:1.6;font-size:0.72rem">
+                    ${item.summary || ''}
+                </div>
+            </div>`;
+        }).join('');
+        container.innerHTML = header + cards;
+    } else {
+        // Fallback: ruwe headlines
+        const items = rawNews.map(h => `
         <div class="news-item">
             <div class="news-title">${h}</div>
         </div>`).join('');
+        container.innerHTML = header + items;
+    }
 }
 
 // ─── POST-MORTEM RENDERING ────────────────────────────────────────────────────
