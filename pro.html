@@ -292,25 +292,101 @@
         .pm-val   { font-family: var(--mono); font-weight: 600; }
         .pm-analysis { padding: 12px; font-size: 0.72rem; line-height: 1.65; color: #9ca3af; white-space: pre-wrap; }
 
+        /* ─── MOBILE BOTTOM NAV ─── */
+        .mobile-nav {
+            display: none;
+        }
         @media (max-width: 767px) {
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                background: var(--surface);
+                border-top: 1px solid var(--border2);
+                z-index: 200;
+                height: 58px;
+            }
+            .mobile-nav-btn {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 3px;
+                background: transparent;
+                border: none;
+                color: var(--muted);
+                font-family: var(--mono);
+                font-size: 0.52rem;
+                letter-spacing: 0.05em;
+                cursor: pointer;
+                transition: color 0.15s;
+                padding: 6px 0;
+            }
+            .mobile-nav-btn .nav-icon { font-size: 1.1rem; line-height: 1; }
+            .mobile-nav-btn.active { color: var(--accent); }
+            .mobile-nav-btn.active .nav-dot {
+                width: 4px; height: 4px; border-radius: 50%;
+                background: var(--accent); margin: 0 auto; margin-top: 2px;
+            }
+
+            /* Header: compact op mobiel */
             html, body { height: auto; overflow: visible; overflow-x: hidden; }
-            body { overflow-y: auto; }
-            header { height: auto; min-height: 52px; padding: 10px 12px; flex-wrap: wrap; gap: 6px; }
-            .search-wrap { order: 3; max-width: 100%; width: 100%; }
-            .header-stats { order: 4; width: 100%; flex: none; justify-content: flex-start; gap: 1.1rem; overflow-x: auto; scrollbar-width: none; }
-            .header-stats::-webkit-scrollbar { display: none; }
-            .status-label, .sync-time { display: none; }
-            .dashboard { grid-template-columns: 1fr; height: auto; overflow: visible; padding: 8px; gap: 8px; }
-            .dashboard > .panel:first-child { order: 3; }
-            .dashboard > .main-view { order: 4; }
-            .dashboard > .right-col { order: 1; }
-            .panel { overflow: visible; min-height: 0 !important; flex: none !important; }
-            .scroll-area { overflow-y: auto; max-height: 300px; flex: none; }
-            .right-col { overflow: visible; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
-            .main-view { overflow: visible; min-height: 0; }
-            #tv-container { flex: none !important; height: 260px; min-height: 260px; }
-            .analysis-panel .scroll-area { max-height: 260px; }
+            body { overflow-y: auto; padding-bottom: 58px; }
+            header {
+                height: auto; padding: 8px 12px;
+                flex-wrap: nowrap; gap: 8px;
+            }
+            .search-wrap { display: none; }
+            .header-stats { display: none; }
+            .header-right { gap: 8px; }
+            .sync-time { display: none; }
+            /* Compacte mobiele header-stats als losse rij */
+            .mobile-header-stats {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+            .mhs { text-align: center; }
+            .mhs-label { font-size: 0.48rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; }
+            .mhs-value { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; }
+
+            /* Dashboard: verberg alles op mobiel standaard */
+            .dashboard {
+                display: block;
+                padding: 8px;
+                height: auto;
+                overflow: visible;
+            }
+            .dashboard > * { display: none; }
+
+            /* Mobiele panels: elk neemt volledige breedte */
+            .mobile-active { display: block !important; }
+            .right-col.mobile-active { display: flex !important; flex-direction: column; gap: 8px; }
+            .main-view.mobile-active { display: flex !important; flex-direction: column; gap: 8px; }
+
+            /* Panel aanpassingen mobiel */
+            .panel { overflow: visible; border-radius: 8px; }
+            .scroll-area { overflow-y: auto; flex: none; max-height: 65vh; }
+            #tv-container { height: 280px !important; min-height: 280px; flex: none !important; }
+            .analysis-panel { flex: none !important; }
+            .analysis-panel .scroll-area { max-height: 50vh; }
             .dcf-strip { overflow-x: auto; flex-wrap: nowrap; }
+
+            /* Right col op mobiel */
+            .right-col .panel:first-child { flex: none !important; }
+            .right-col .panel:first-child .scroll-area { max-height: 55vh; }
+            .right-col .panel:last-child { flex: none !important; }
+
+            /* Kaarten iets groter touch-target */
+            .stock-card { padding: 12px 14px; margin-bottom: 8px; }
+            .ticker-sym { font-size: 1.05rem; }
+            .trade-row { padding: 10px 12px; }
+            .port-row { padding: 9px 12px; }
+            .filter-btn { padding: 5px 10px; font-size: 0.62rem; }
+
+            /* Verberg desktop-only elementen */
+            .status-label { display: none; }
         }
     </style>
 </head>
@@ -318,6 +394,17 @@
 
 <header>
     <div class="logo">NEXUS<span> PRO</span></div>
+    <!-- Mobiele compacte stats (alleen zichtbaar op mobiel via JS) -->
+    <div class="mobile-header-stats" id="mobile-header-stats" style="display:none">
+        <div class="mhs">
+            <div class="mhs-label">Vermogen</div>
+            <div class="mhs-value" id="mhs-networth" style="color:var(--green)">--</div>
+        </div>
+        <div class="mhs">
+            <div class="mhs-label">VIX</div>
+            <div class="mhs-value" id="mhs-vix" style="color:var(--yellow)">--</div>
+        </div>
+    </div>
 
     <!-- SEARCH BAR -->
     <div class="search-wrap" id="search-wrap">
@@ -446,6 +533,35 @@
     </div>
 
 </div>
+
+<!-- MOBIELE BOTTOM NAV -->
+<nav class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-btn active" data-tab="portfolio" onclick="mobileTab('portfolio',this)">
+        <span class="nav-icon">💼</span>
+        <span>Portfolio</span>
+        <div class="nav-dot"></div>
+    </button>
+    <button class="mobile-nav-btn" data-tab="scanner" onclick="mobileTab('scanner',this)">
+        <span class="nav-icon">🔍</span>
+        <span>Scanner</span>
+        <div class="nav-dot"></div>
+    </button>
+    <button class="mobile-nav-btn" data-tab="chart" onclick="mobileTab('chart',this)">
+        <span class="nav-icon">📈</span>
+        <span>Chart</span>
+        <div class="nav-dot"></div>
+    </button>
+    <button class="mobile-nav-btn" data-tab="nieuws" onclick="mobileTab('nieuws',this)">
+        <span class="nav-icon">📰</span>
+        <span>Nieuws</span>
+        <div class="nav-dot"></div>
+    </button>
+    <button class="mobile-nav-btn" data-tab="bot" onclick="mobileTab('bot',this)">
+        <span class="nav-icon">🤖</span>
+        <span>Bot</span>
+        <div class="nav-dot"></div>
+    </button>
+</nav>
 
 <script>
 // ─── SECTOR MAP ───────────────────────────────────────────────────────────────
@@ -641,12 +757,13 @@ function renderPortfolioRight() {
     const container = document.getElementById('portfolio-container');
     const degiro    = memoryData?.degiro_summary;
     const tr        = memoryData?.tr_summary;
+    const bux       = memoryData?.bux_summary;
     const bot       = globalData?.portfolio;
     const updated   = memoryData?.dashboard_updated
         ? new Date(memoryData.dashboard_updated).toLocaleString('nl-NL')
         : 'Nog niet geladen';
 
-    if (!degiro && !tr) {
+    if (!degiro && !tr && !bux) {
         container.innerHTML = `<div class="no-analysis">Portfolio-data beschikbaar na de morning briefing (07:00 UTC).<br><br>
             <span style="font-size:0.62rem">Start de <b>NEXUS Morning Briefing</b> workflow<br>in GitHub Actions om te vullen.</span></div>`;
         document.getElementById('pl-total').textContent = '--';
@@ -656,14 +773,16 @@ function renderPortfolioRight() {
     // Gecombineerd totaal
     const degiroTotal = degiro?.total || 0;
     const trTotal     = tr?.total     || 0;
+    const buxTotal    = bux?.total    || 0;
     const botTotal    = bot?.total_value || 0;
-    const grandTotal  = degiroTotal + trTotal + botTotal;
+    const grandTotal  = degiroTotal + trTotal + buxTotal + botTotal;
 
     // Gewogen gecombineerde P&L
     const degiroInv = degiro?.total_invested || 0;
     const trInv     = tr?.total_invested     || 0;
-    const totalInv  = degiroInv + trInv;
-    const totalPos  = degiroTotal + trTotal;
+    const buxInv    = bux?.total_invested    || 0;
+    const totalInv  = degiroInv + trInv + buxInv;
+    const totalPos  = degiroTotal + trTotal + buxTotal;
     const combinedPl = totalInv > 0 ? ((totalPos / totalInv - 1) * 100) : null;
     const plCol  = combinedPl == null ? 'var(--muted)' : combinedPl >= 0 ? '#4ade80' : '#f87171';
     const plStr  = combinedPl != null ? `${combinedPl >= 0 ? '+' : ''}${combinedPl.toFixed(1)}%` : '';
@@ -693,6 +812,7 @@ function renderPortfolioRight() {
         <div style="display:flex;gap:12px;margin-top:6px">
             ${degiroTotal ? `<div style="font-size:0.58rem;color:var(--muted)">🏦 DEGIRO <span style="color:var(--text);font-family:var(--mono)">€${degiroTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</span></div>` : ''}
             ${trTotal     ? `<div style="font-size:0.58rem;color:var(--muted)">📱 TR <span style="color:var(--text);font-family:var(--mono)">€${trTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</span></div>` : ''}
+            ${buxTotal    ? `<div style="font-size:0.58rem;color:var(--muted)">🟠 BUX <span style="color:var(--text);font-family:var(--mono)">€${buxTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</span></div>` : ''}
             ${botTotal    ? `<div style="font-size:0.58rem;color:var(--muted)">🤖 Bot <span style="color:var(--text);font-family:var(--mono)">€${botTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</span></div>` : ''}
         </div>
         <div style="font-size:0.54rem;color:var(--muted);margin-top:5px">Ochtendmeting: ${updated}</div>
@@ -741,6 +861,7 @@ function renderPortfolioRight() {
 
     html += portBlock('🏦 DEGIRO', degiro);
     html += portBlock('📱 TRADE REPUBLIC', tr);
+    html += portBlock('🟠 BUX', bux);
 
     // Bot portfolio samenvatting onderaan
     if (bot && bot.total_value) {
@@ -814,15 +935,21 @@ function updateUI() {
         }
     }
 
-    // Net Worth header (DEGIRO + TR + Bot)
+    // Net Worth header (DEGIRO + TR + BUX + Bot)
     const degiroT  = memoryData?.degiro_summary?.total || 0;
     const trT      = memoryData?.tr_summary?.total     || 0;
+    const buxT     = memoryData?.bux_summary?.total    || 0;
     const botT     = globalData?.portfolio?.total_value || 0;
-    const nwTotal  = degiroT + trT + botT;
+    const nwTotal  = degiroT + trT + buxT + botT;
     const nwEl     = document.getElementById('net-worth-val');
     if (nwEl && nwTotal > 0) {
         nwEl.textContent = '€' + nwTotal.toLocaleString('nl-NL', {maximumFractionDigits: 0});
     }
+    // Mobiele header stats
+    const mhsNw  = document.getElementById('mhs-networth');
+    const mhsVix = document.getElementById('mhs-vix');
+    if (mhsNw && nwTotal > 0) mhsNw.textContent = '€' + nwTotal.toLocaleString('nl-NL', {maximumFractionDigits: 0});
+    if (mhsVix) { mhsVix.textContent = macro.vix ?? '--'; mhsVix.style.color = vixEl.style.color; }
 
     buildFilterBar(cands);
     renderCurrentView();
@@ -1407,9 +1534,64 @@ setInterval(() => {
     document.getElementById('live-ago').textContent = mins < 1 ? 'nu' : mins + 'm';
 }, 60000);
 
+// ─── MOBIELE NAVIGATIE ────────────────────────────────────────────────────────
+const isMobile = () => window.innerWidth <= 767;
+
+function mobileTab(tab, btn) {
+    if (!isMobile()) return;
+
+    // Nav-knoppen updaten
+    document.querySelectorAll('.mobile-nav-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    // Verberg alle dashboard-secties
+    const scanner  = document.querySelector('.dashboard > .panel');
+    const mainView = document.querySelector('.main-view');
+    const rightCol = document.querySelector('.right-col');
+    [scanner, mainView, rightCol].forEach(el => { if (el) el.classList.remove('mobile-active'); });
+
+    if (tab === 'portfolio') {
+        rightCol?.classList.add('mobile-active');
+        switchRightTab('portfolio', document.getElementById('tab-portfolio'));
+    } else if (tab === 'scanner') {
+        scanner?.classList.add('mobile-active');
+    } else if (tab === 'chart') {
+        mainView?.classList.add('mobile-active');
+    } else if (tab === 'nieuws') {
+        rightCol?.classList.add('mobile-active');
+        switchRightTab('news', document.getElementById('tab-news'));
+    } else if (tab === 'bot') {
+        rightCol?.classList.add('mobile-active');
+        switchRightTab('positions', document.getElementById('tab-positions'));
+    }
+}
+
+function initMobile() {
+    if (!isMobile()) return;
+    // Toon compacte mobiele header-stats
+    const mhs = document.getElementById('mobile-header-stats');
+    if (mhs) mhs.style.display = 'flex';
+    // Stel standaard tab in
+    const portfolioBtn = document.querySelector('.mobile-nav-btn[data-tab="portfolio"]');
+    mobileTab('portfolio', portfolioBtn);
+}
+
+window.addEventListener('resize', () => {
+    if (isMobile()) {
+        initMobile();
+    } else {
+        // Desktop: herstel alle secties
+        document.querySelector('.dashboard > .panel')?.classList.remove('mobile-active');
+        document.querySelector('.main-view')?.classList.remove('mobile-active');
+        document.querySelector('.right-col')?.classList.remove('mobile-active');
+        document.getElementById('mobile-header-stats').style.display = 'none';
+    }
+});
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 loadData();
 setInterval(loadData, 60000);
+initMobile();
 </script>
 </body>
 </html>

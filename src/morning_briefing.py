@@ -81,12 +81,31 @@ def load_history() -> list[dict]:
 
 
 def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
-                        news_summary: list[dict] | None = None):
+                        news_summary: list[dict] | None = None,
+                        bux: dict | None = None):
     """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
     mem = _load_json(MEMORY_PATH, {})
     mem["last_news"] = news[:8]
     if news_summary:
         mem["news_summary"] = news_summary
+    if bux:
+        mem["bux_summary"] = {
+            "total":          bux.get("total"),
+            "total_pl_pct":   bux.get("total_pl_pct"),
+            "total_invested": bux.get("total_invested"),
+            "positions": [
+                {
+                    "name":   p.get("name", "?"),
+                    "ticker": p.get("pid", p.get("name", "?")),
+                    "value":  p.get("value", 0),
+                    "price":  p.get("price"),
+                    "pl_pct": p.get("pl_pct"),
+                    "pl_eur": p.get("pl_eur"),
+                    "weight": round(p["value"] / bux["total"] * 100, 1) if bux.get("total") else None,
+                }
+                for p in bux.get("positions", []) if p.get("value", 0) > 0
+            ],
+        }
     if degiro:
         mem["degiro_summary"] = {
             "total":          degiro.get("total"),
@@ -712,23 +731,25 @@ def build_telegram_message(market, news, nexus, degiro, tr,
 # ─── DEGIRO HANDMATIG (fallback als API geblokkeerd is) ───────────────────────
 
 def fetch_degiro_manual() -> dict | None:
-    """
-    Lees DEGIRO_HOLDINGS omgevingsvariabele als fallback wanneer DEGIRO API
-    niet bereikbaar is (bijv. Cloudflare 503 op GitHub Actions).
-
-    Formaat — één positie per regel (# = commentaar):
-      yfinance_ticker  aandelen  [gemiddelde_aankoopprijs_eur]
-
-    Voorbeelden:
-      ASML.AS    10    650.00
-      SHELL.AS   50    28.30
-      AAPL       15    145.00
-    """
-    raw = os.environ.get("DEGIRO_HOLDINGS", "").strip()
-    if not raw:
+    """Lees DEGIRO_HOLDINGS als fallback (Cloudflare blokkeert API vanuit GitHub Actions)."""
+    holdings = _parse_holdings_secret("DEGIRO_HOLDINGS", "DEGIRO")
+    if not holdings:
         log.info("DEGIRO_HOLDINGS niet ingesteld — DEGIRO wordt overgeslagen.")
         return None
+    log.info(f"DEGIRO_HOLDINGS: {len(holdings)} posities geladen — prijzen ophalen via yfinance...")
+    return _holdings_to_portfolio(holdings, "DEGIRO manual")
 
+
+# ─── BUX HANDMATIG (via BUX_HOLDINGS secret of BUX CSV-export) ───────────────
+
+def _parse_holdings_secret(env_key: str, label: str) -> list[dict]:
+    """
+    Generieke parser voor holdings-secrets.
+    Formaat: yfinance_ticker  aandelen  [gemiddelde_aankoopprijs_eur]
+    """
+    raw = os.environ.get(env_key, "").strip()
+    if not raw:
+        return []
     holdings = []
     for line in raw.splitlines():
         line = line.strip()
@@ -741,7 +762,7 @@ def fetch_degiro_manual() -> dict | None:
         try:
             shares = float(parts[1])
         except ValueError:
-            log.warning(f"DEGIRO_HOLDINGS: ongeldige hoeveelheid voor {ticker}: {parts[1]}")
+            log.warning(f"{label}: ongeldige hoeveelheid voor {ticker}: {parts[1]}")
             continue
         avg_price = None
         if len(parts) >= 3:
@@ -751,15 +772,15 @@ def fetch_degiro_manual() -> dict | None:
                 pass
         if shares > 0:
             holdings.append({"ticker": ticker, "shares": shares, "avg_price": avg_price})
+    return holdings
 
+
+def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
+    """Haal yfinance-prijzen op voor een lijst holdings en bereken totaalwaarde + P&L."""
     if not holdings:
-        log.warning("DEGIRO_HOLDINGS: geen geldige posities gevonden.")
         return None
-
-    log.info(f"DEGIRO_HOLDINGS: {len(holdings)} posities geladen — prijzen ophalen via yfinance...")
     positions = []
     total     = 0.0
-
     for h in holdings:
         ticker = h["ticker"]
         shares = h["shares"]
@@ -767,24 +788,21 @@ def fetch_degiro_manual() -> dict | None:
             info  = yf.Ticker(ticker).fast_info
             price = getattr(info, "last_price", None)
             if not price or float(price) <= 0:
-                log.warning(f"DEGIRO manual: geen prijs voor {ticker}")
+                log.warning(f"{label}: geen prijs voor {ticker}")
                 continue
             price = float(price)
         except Exception as e:
-            log.warning(f"DEGIRO manual {ticker}: {e}")
+            log.warning(f"{label} {ticker}: {e}")
             continue
-
-        value      = shares * price
-        total     += value
-        avg_price  = h.get("avg_price")
-
+        value     = shares * price
+        total    += value
+        avg_price = h.get("avg_price")
         if avg_price and avg_price > 0:
             cost_eur = shares * avg_price
             pl_pct   = round((price / avg_price - 1) * 100, 2)
             pl_eur   = round(value - cost_eur, 2)
         else:
             cost_eur = pl_pct = pl_eur = None
-
         positions.append({
             "name":      ticker,
             "pid":       ticker,
@@ -797,22 +815,38 @@ def fetch_degiro_manual() -> dict | None:
             "pl_eur":    pl_eur,
         })
         time.sleep(0.15)
-
     if not positions:
-        log.warning("DEGIRO manual: geen posities met prijs.")
+        log.warning(f"{label}: geen posities met prijs.")
         return None
-
     positions.sort(key=lambda p: p["value"], reverse=True)
     total_invested = sum(p["cost_eur"] for p in positions if p.get("cost_eur"))
     total_pl_pct   = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
-
-    log.info(f"DEGIRO manual: {len(positions)} posities, totaal €{total:.2f}, P&L {total_pl_pct}%")
+    log.info(f"{label}: {len(positions)} posities, totaal €{total:.2f}, P&L {total_pl_pct}%")
     return {
         "positions":      positions,
         "total":          round(total, 2),
         "total_invested": round(total_invested, 2) if total_invested else None,
         "total_pl_pct":   total_pl_pct,
     }
+
+
+def fetch_bux_manual() -> dict | None:
+    """
+    Lees BUX_HOLDINGS omgevingsvariabele.
+    Formaat — één positie per regel (# = commentaar):
+      yfinance_ticker  aandelen  [gemiddelde_aankoopprijs_eur]
+
+    Voorbeelden:
+      ASML.AS   5    680.00
+      NVDA      3    95.00
+      BTC-EUR   0.05 55000
+    """
+    holdings = _parse_holdings_secret("BUX_HOLDINGS", "BUX")
+    if not holdings:
+        log.info("BUX_HOLDINGS niet ingesteld — BUX wordt overgeslagen.")
+        return None
+    log.info(f"BUX_HOLDINGS: {len(holdings)} posities geladen — prijzen ophalen via yfinance...")
+    return _holdings_to_portfolio(holdings, "BUX manual")
 
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
@@ -840,6 +874,9 @@ def run_morning_briefing():
     log.info("Trade Republic portfolio ophalen...")
     tr = fetch_tr_portfolio()
 
+    log.info("BUX portfolio ophalen...")
+    bux = fetch_bux_manual()
+
     # Performance berekenen vanuit history
     history     = load_history()
     degiro_perf = compute_perf(history, degiro.get("total") if degiro else None, "degiro")
@@ -855,7 +892,7 @@ def run_morning_briefing():
     log.info("AI nieuws-samenvatting genereren...")
     news_summary = generate_news_summary(client, news) if client else []
 
-    save_dashboard_data(news, degiro, tr, news_summary)
+    save_dashboard_data(news, degiro, tr, news_summary, bux)
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
