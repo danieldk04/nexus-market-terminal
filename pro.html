@@ -128,7 +128,7 @@
         .live-pill-ago { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); }
 
         /* ─── LAYOUT ─── */
-        .dashboard { display: grid; grid-template-columns: 300px 1fr 340px; gap: 10px; padding: 10px; flex: 1; overflow: hidden; min-height: 0; }
+        .dashboard { display: grid; grid-template-columns: 280px 1fr 390px; gap: 10px; padding: 10px; flex: 1; overflow: hidden; min-height: 0; }
 
         /* ─── PANELS ─── */
         .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; display: flex; flex-direction: column; overflow: hidden; }
@@ -280,7 +280,7 @@
         .port-label  { font-family: var(--mono); font-size: 0.65rem; font-weight: 700; color: var(--green); }
         .port-total  { font-family: var(--mono); font-size: 0.9rem; font-weight: 700; color: var(--text); margin-top: 2px; }
         .port-sub    { font-size: 0.58rem; color: var(--muted); margin-top: 1px; }
-        .port-row    { display: grid; grid-template-columns: 1fr auto auto auto; gap: 6px; align-items: center; padding: 7px 12px; border-bottom: 1px solid var(--border); }
+        .port-row    { display: flex; justify-content: space-between; align-items: center; padding: 7px 12px; border-bottom: 1px solid var(--border); gap: 8px; }
         .port-name   { font-size: 0.72rem; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .port-weight { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
         .port-pl     { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; text-align: right; }
@@ -356,6 +356,10 @@
             <div class="hstat-value" id="engine-state" style="color:var(--green)">ACTIVE</div>
         </div>
         <div class="hstat">
+            <div class="hstat-label">Net Worth</div>
+            <div class="hstat-value" id="net-worth-val" style="color:var(--green)">--</div>
+        </div>
+        <div class="hstat">
             <div class="hstat-label">Win Rate</div>
             <div class="hstat-value" id="win-rate-val">--</div>
         </div>
@@ -382,7 +386,6 @@
         </div>
         <div class="filter-bar" id="filter-bar">
             <button class="filter-btn active" data-sector="ALL" onclick="filterSector('ALL',this)">ALL</button>
-            <button class="filter-btn tab-portfolio" data-sector="PORTFOLIO" onclick="filterSector('PORTFOLIO',this)">PORTFOLIO</button>
             <button class="filter-btn tab-watch" data-sector="WATCHLIST" onclick="filterSector('WATCHLIST',this)">WATCHLIST</button>
         </div>
         <div class="scroll-area" id="list-container"></div>
@@ -407,21 +410,23 @@
         </div>
     </div>
 
-    <!-- RIGHT: Tabbed panel + Equity -->
+    <!-- RIGHT: Portfolio + Tabs + Equity -->
     <div class="right-col">
         <div class="panel" style="flex:2.2; min-height:0;">
             <div class="panel-header" style="flex-direction:column;gap:6px;padding-bottom:6px">
                 <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
-                    <span class="panel-title" id="right-panel-title">Autonomous Positions</span>
-                    <span id="pl-total" class="panel-badge">0 open</span>
+                    <span class="panel-title" id="right-panel-title">Portfolio</span>
+                    <span id="pl-total" class="panel-badge">--</span>
                 </div>
                 <div style="display:flex;gap:4px" id="right-tabs">
-                    <button class="filter-btn active" id="tab-positions" onclick="switchRightTab('positions',this)">POSITIES</button>
+                    <button class="filter-btn tab-portfolio active" id="tab-portfolio" onclick="switchRightTab('portfolio',this)">PORTFOLIO</button>
+                    <button class="filter-btn" id="tab-positions" onclick="switchRightTab('positions',this)">BOT</button>
                     <button class="filter-btn" id="tab-news" onclick="switchRightTab('news',this)">NIEUWS</button>
                     <button class="filter-btn" id="tab-postmortem" onclick="switchRightTab('postmortem',this)">ANALYSE</button>
                 </div>
             </div>
-            <div class="scroll-area" id="trades-container"></div>
+            <div class="scroll-area" id="portfolio-container"></div>
+            <div class="scroll-area" id="trades-container" style="display:none"></div>
             <div class="scroll-area" id="news-container" style="display:none"></div>
             <div class="scroll-area" id="postmortem-container" style="display:none"></div>
         </div>
@@ -527,17 +532,19 @@ async function loadMemory() {
 }
 
 // ─── RIGHT TAB SWITCHING ──────────────────────────────────────────────────────
-let activeRightTab = 'positions';
+let activeRightTab = 'portfolio';
 
 function switchRightTab(tab, btn) {
     activeRightTab = tab;
     document.querySelectorAll('#right-tabs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('trades-container').style.display    = tab === 'positions'  ? '' : 'none';
-    document.getElementById('news-container').style.display      = tab === 'news'        ? '' : 'none';
-    document.getElementById('postmortem-container').style.display= tab === 'postmortem'  ? '' : 'none';
-    const titles = { positions: 'Autonomous Positions', news: 'Nieuws', postmortem: 'Bot Analyse' };
+    document.getElementById('portfolio-container').style.display  = tab === 'portfolio'  ? '' : 'none';
+    document.getElementById('trades-container').style.display     = tab === 'positions'  ? '' : 'none';
+    document.getElementById('news-container').style.display       = tab === 'news'       ? '' : 'none';
+    document.getElementById('postmortem-container').style.display = tab === 'postmortem' ? '' : 'none';
+    const titles = { portfolio: 'Portfolio', positions: 'Bot Posities', news: 'Nieuws', postmortem: 'Bot Analyse' };
     document.getElementById('right-panel-title').textContent = titles[tab] || '';
+    if (tab === 'portfolio')  renderPortfolioRight();
     if (tab === 'news')       renderNews();
     if (tab === 'postmortem') renderPostMortem();
 }
@@ -603,11 +610,12 @@ function renderPostMortem() {
         ${lessonsHtml}`;
 }
 
-// ─── PORTFOLIO TAB RENDERING ──────────────────────────────────────────────────
-function renderPortfolioTab() {
-    const container = document.getElementById('list-container');
+// ─── PORTFOLIO RENDERING (rechter paneel) ────────────────────────────────────
+function renderPortfolioRight() {
+    const container = document.getElementById('portfolio-container');
     const degiro    = memoryData?.degiro_summary;
     const tr        = memoryData?.tr_summary;
+    const bot       = globalData?.portfolio;
     const updated   = memoryData?.dashboard_updated
         ? new Date(memoryData.dashboard_updated).toLocaleString('nl-NL')
         : 'Nog niet geladen';
@@ -615,29 +623,83 @@ function renderPortfolioTab() {
     if (!degiro && !tr) {
         container.innerHTML = `<div class="no-analysis">Portfolio-data beschikbaar na de morning briefing (07:00 UTC).<br><br>
             <span style="font-size:0.62rem">Start de <b>NEXUS Morning Briefing</b> workflow<br>in GitHub Actions om te vullen.</span></div>`;
+        document.getElementById('pl-total').textContent = '--';
         return;
     }
 
-    let html = `<div style="padding:5px 10px;font-size:0.58rem;color:var(--muted);border-bottom:1px solid var(--border)">Ochtendmeting: ${updated}</div>`;
+    // Gecombineerd totaal
+    const degiroTotal = degiro?.total || 0;
+    const trTotal     = tr?.total     || 0;
+    const botTotal    = bot?.total_value || 0;
+    const grandTotal  = degiroTotal + trTotal + botTotal;
+
+    // Gewogen gecombineerde P&L
+    const degiroInv = degiro?.total_invested || 0;
+    const trInv     = tr?.total_invested     || 0;
+    const totalInv  = degiroInv + trInv;
+    const totalPos  = degiroTotal + trTotal;
+    const combinedPl = totalInv > 0 ? ((totalPos / totalInv - 1) * 100) : null;
+    const plCol  = combinedPl == null ? 'var(--muted)' : combinedPl >= 0 ? '#4ade80' : '#f87171';
+    const plStr  = combinedPl != null ? `${combinedPl >= 0 ? '+' : ''}${combinedPl.toFixed(1)}%` : '';
+
+    // Update badge
+    const badge = document.getElementById('pl-total');
+    if (combinedPl != null) {
+        badge.textContent       = plStr;
+        badge.style.color       = plCol;
+        badge.style.borderColor = combinedPl >= 0 ? 'rgba(74,222,128,0.3)' : 'rgba(248,113,113,0.3)';
+        badge.style.background  = combinedPl >= 0 ? 'rgba(74,222,128,0.1)' : 'rgba(248,113,113,0.1)';
+    } else {
+        badge.textContent = '--';
+        badge.style.color = '';
+        badge.style.borderColor = '';
+        badge.style.background  = '';
+    }
+
+    // Gecombineerde totaalbanner
+    let html = `
+    <div style="padding:10px 12px;background:rgba(34,211,238,0.05);border-bottom:1px solid var(--border2)">
+        <div style="font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-weight:700;margin-bottom:4px">Totaal vermogen</div>
+        <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--text)">
+            €${grandTotal.toLocaleString('nl-NL', {maximumFractionDigits:0})}
+            ${plStr ? `<span style="font-size:0.72rem;color:${plCol};margin-left:8px">${plStr}</span>` : ''}
+        </div>
+        <div style="display:flex;gap:12px;margin-top:6px">
+            ${degiroTotal ? `<div style="font-size:0.58rem;color:var(--muted)">🏦 DEGIRO <span style="color:var(--text);font-family:var(--mono)">€${degiroTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</span></div>` : ''}
+            ${trTotal     ? `<div style="font-size:0.58rem;color:var(--muted)">📱 TR <span style="color:var(--text);font-family:var(--mono)">€${trTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</span></div>` : ''}
+            ${botTotal    ? `<div style="font-size:0.58rem;color:var(--muted)">🤖 Bot <span style="color:var(--text);font-family:var(--mono)">€${botTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</span></div>` : ''}
+        </div>
+        <div style="font-size:0.54rem;color:var(--muted);margin-top:5px">Ochtendmeting: ${updated}</div>
+    </div>`;
 
     function portBlock(label, data) {
         if (!data) return '';
-        const total    = data.total || 0;
-        const plPct    = data.total_pl_pct;
-        const plCol    = plPct == null ? 'var(--muted)' : plPct >= 0 ? '#4ade80' : '#f87171';
-        const plStr    = plPct != null ? `${plPct >= 0 ? '+' : ''}${plPct.toFixed(1)}%` : '';
+        const total = data.total || 0;
+        const plPct = data.total_pl_pct;
+        const plC   = plPct == null ? 'var(--muted)' : plPct >= 0 ? '#4ade80' : '#f87171';
+        const plS   = plPct != null ? `${plPct >= 0 ? '+' : ''}${plPct.toFixed(1)}%` : '';
 
-        let rows = (data.positions || []).map(p => {
-            const pl    = p.pl_pct;
-            const dot   = pl == null ? '⬜' : pl >= 0 ? '🟢' : '🔴';
-            const plS   = pl != null ? `<span style="color:${pl>=0?'#4ade80':'#f87171'}">${pl>=0?'+':''}${pl.toFixed(1)}%</span>` : '<span style="color:var(--muted)">n/b</span>';
-            const wt    = p.weight != null ? p.weight.toFixed(1) + '%' : '';
-            const val   = p.value ? '€' + p.value.toLocaleString('nl-NL', {maximumFractionDigits:0}) : '';
+        const rows = (data.positions || []).map(p => {
+            const pl  = p.pl_pct;
+            const dot = pl == null ? '⬜' : pl >= 0 ? '🟢' : '🔴';
+            const plHtml = pl != null
+                ? `<span style="color:${pl>=0?'#4ade80':'#f87171'};font-weight:700">${pl>=0?'+':''}${pl.toFixed(1)}%</span>`
+                : '<span style="color:var(--muted)">n/b</span>';
+            const val = p.value
+                ? `<div style="font-family:var(--mono);font-size:0.6rem;color:var(--muted)">€${p.value.toLocaleString('nl-NL',{maximumFractionDigits:0})}</div>`
+                : '';
+            const priceStr = p.price != null
+                ? `<div style="font-family:var(--mono);font-size:0.56rem;color:var(--muted)">€${p.price.toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>`
+                : '';
             return `<div class="port-row">
-                <div class="port-name">${dot} ${p.name || '?'}</div>
-                <div class="port-weight">${wt}</div>
-                <div class="port-pl">${plS}</div>
-                <div class="port-val">${val}</div>
+                <div>
+                    <div class="port-name">${dot} ${p.name || p.ticker || '?'}</div>
+                    ${priceStr}
+                </div>
+                <div style="text-align:right">
+                    <div class="port-pl">${plHtml}</div>
+                    ${val}
+                </div>
             </div>`;
         }).join('');
 
@@ -645,7 +707,7 @@ function renderPortfolioTab() {
         <div class="port-header">
             <div class="port-label">${label}</div>
             <div class="port-total">€${total.toLocaleString('nl-NL', {maximumFractionDigits:0})}
-                ${plStr ? `<span style="font-size:0.7rem;color:${plCol};margin-left:8px">${plStr}</span>` : ''}
+                ${plS ? `<span style="font-size:0.7rem;color:${plC};margin-left:8px">${plS}</span>` : ''}
             </div>
         </div>
         ${rows}`;
@@ -653,6 +715,26 @@ function renderPortfolioTab() {
 
     html += portBlock('🏦 DEGIRO', degiro);
     html += portBlock('📱 TRADE REPUBLIC', tr);
+
+    // Bot portfolio samenvatting onderaan
+    if (bot && bot.total_value) {
+        const rp   = bot.return_pct || 0;
+        const rpC  = rp >= 0 ? '#4ade80' : '#f87171';
+        const rpS  = (rp >= 0 ? '+' : '') + rp.toFixed(2) + '%';
+        html += `
+        <div class="port-header">
+            <div class="port-label">🤖 NEXUS BOT</div>
+            <div class="port-total">€${bot.total_value.toLocaleString('nl-NL',{maximumFractionDigits:0})}
+                <span style="font-size:0.7rem;color:${rpC};margin-left:8px">${rpS}</span>
+            </div>
+        </div>
+        <div style="padding:6px 12px;font-size:0.62rem;color:var(--muted);border-bottom:1px solid var(--border)">
+            Cash: <span style="font-family:var(--mono);color:var(--text)">€${(bot.cash||0).toLocaleString('nl-NL',{maximumFractionDigits:0})}</span>
+            &nbsp;·&nbsp; Open: <span style="font-family:var(--mono);color:var(--text)">€${(bot.open_value||0).toLocaleString('nl-NL',{maximumFractionDigits:0})}</span>
+            &nbsp;·&nbsp; <span style="color:var(--accent);cursor:pointer" onclick="document.getElementById('tab-positions').click()">→ bekijk posities</span>
+        </div>`;
+    }
+
     container.innerHTML = html;
 }
 
@@ -706,9 +788,20 @@ function updateUI() {
         }
     }
 
+    // Net Worth header (DEGIRO + TR + Bot)
+    const degiroT  = memoryData?.degiro_summary?.total || 0;
+    const trT      = memoryData?.tr_summary?.total     || 0;
+    const botT     = globalData?.portfolio?.total_value || 0;
+    const nwTotal  = degiroT + trT + botT;
+    const nwEl     = document.getElementById('net-worth-val');
+    if (nwEl && nwTotal > 0) {
+        nwEl.textContent = '€' + nwTotal.toLocaleString('nl-NL', {maximumFractionDigits: 0});
+    }
+
     buildFilterBar(cands);
     renderCurrentView();
     renderTrades(trades);
+    renderPortfolioRight();
     renderLearning();
     renderChart();
 
@@ -739,16 +832,14 @@ function filterSector(sector, btn) {
     document.querySelectorAll('#filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const title = document.getElementById('left-panel-title');
-    if (sector === 'WATCHLIST')  title.textContent = 'Watchlist';
-    else if (sector === 'PORTFOLIO') title.textContent = 'Eigen Portfolio';
+    if (sector === 'WATCHLIST') title.textContent = 'Watchlist';
     else title.textContent = 'Scanner Candidates';
     renderCurrentView();
 }
 
 function renderCurrentView() {
-    if (activeFilter === 'WATCHLIST')       renderWatchlist();
-    else if (activeFilter === 'PORTFOLIO')  renderPortfolioTab();
-    else                                    renderList(globalData?.top_candidates || []);
+    if (activeFilter === 'WATCHLIST') renderWatchlist();
+    else                              renderList(globalData?.top_candidates || []);
 }
 
 // ─── CANDIDATES ───────────────────────────────────────────────────────────────
