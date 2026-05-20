@@ -830,17 +830,128 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
     }
 
 
+# BUX ISIN → yfinance-ticker mapping
+# Voeg toe als je nieuwe posities hebt die niet herkend worden
+BUX_ISIN_TO_TICKER: dict[str, str | None] = {
+    "NL0000009082": "KPN.AS",       # KPN — Amsterdam (EUR)
+    "US88160R1014": "TSLA.DE",      # Tesla — Frankfurt (EUR)
+    "US7134481081": "PEP",          # PepsiCo — NYSE (USD)
+    "US29355A1079": "ENPH",         # Enphase Energy — NASDAQ (USD)
+    "US30303M1027": "META",         # Meta Platforms — NASDAQ (USD)
+    "US02079K3059": "GOOGL",        # Alphabet A — NASDAQ (USD)
+    "US98986T1088": None,           # Zynga — overgenomen door Take-Two
+    "US5949181045": "MSFT",         # Microsoft — NASDAQ (USD)
+    "US0231351067": "AMZN",         # Amazon — NASDAQ (USD)
+    "US0378331005": "AAPL",         # Apple — NASDAQ (USD)
+    "US67066G1040": "NVDA",         # NVIDIA — NASDAQ (USD)
+    "US46090E1038": "IVV",          # iShares S&P 500 ETF (USD)
+    "US4592001014": "IBM",          # IBM — NYSE (USD)
+    "NL0015436031": "ASML.AS",      # ASML — Amsterdam (EUR)
+    "US46625H1005": "JPM",          # JPMorgan — NYSE (USD)
+}
+
+
+def _parse_bux_transactions_csv() -> dict | None:
+    """
+    Verwerk BUX_TRANSACTIONS_CSV omgevingsvariabele (volledige BUX export).
+    Berekent automatisch aandelen en gewogen gemiddelde aankoopprijs per ISIN.
+
+    BUX CSV-formaat:
+      Transaction Time, Transaction Category, Transaction Type, Transfer Type,
+      Transaction Amount, Transaction Currency, ..., Asset Id, Asset Name,
+      Asset Quantity, Asset Price, Asset Currency, ...
+
+    Geeft een portfolio-dict terug of None als niet beschikbaar.
+    """
+    import csv as _csv, io as _io
+    raw = os.environ.get("BUX_TRANSACTIONS_CSV", "").strip()
+    if not raw:
+        return None
+
+    acc: dict[str, dict] = {}   # ISIN → {name, shares, cost_eur}
+
+    try:
+        reader = _csv.DictReader(_io.StringIO(raw))
+        rows_ok = 0
+        for row in reader:
+            tx_type   = (row.get("Transaction Type")    or "").strip()
+            xfer_type = (row.get("Transfer Type")       or "").strip()
+            isin      = (row.get("Asset Id")             or "").strip()
+            name      = (row.get("Asset Name")           or isin).strip()
+            currency  = (row.get("Transaction Currency") or "").strip()
+            qty_str   = (row.get("Asset Quantity")       or "").strip()
+            amt_str   = (row.get("Transaction Amount")   or "").strip()
+
+            if not isin or not qty_str or currency != "EUR":
+                continue
+
+            try:
+                qty = abs(float(qty_str))
+            except ValueError:
+                continue
+
+            if isin not in acc:
+                acc[isin] = {"name": name, "shares": 0.0, "cost_eur": 0.0}
+            h = acc[isin]
+
+            if tx_type == "Buy Trade" and xfer_type == "CASH_DEBIT":
+                try:
+                    h["shares"]   += qty
+                    h["cost_eur"] += abs(float(amt_str))
+                    rows_ok += 1
+                except ValueError:
+                    pass
+
+            elif tx_type == "Sell Trade" and xfer_type == "CASH_CREDIT":
+                if h["shares"] > 0 and qty > 0:
+                    ratio = min(qty / h["shares"], 1.0)
+                    h["cost_eur"] *= (1 - ratio)
+                    h["shares"]    = max(0.0, h["shares"] - qty)
+                    rows_ok += 1
+
+        log.info(f"BUX CSV: {rows_ok} regels verwerkt, {len(acc)} ISINs gevonden")
+
+    except Exception as e:
+        log.warning(f"BUX CSV parsing fout: {e}")
+        return None
+
+    # Bouw holdings op vanuit open posities
+    holdings = []
+    for isin, h in acc.items():
+        if h["shares"] < 0.0001:
+            continue  # Gesloten positie
+
+        ticker = BUX_ISIN_TO_TICKER.get(isin)
+        if ticker is None:
+            if isin in BUX_ISIN_TO_TICKER:
+                log.info(f"BUX CSV: {isin} ({h['name']}) overgeslagen (acquired/delisted)")
+            else:
+                log.warning(f"BUX CSV: geen ticker voor ISIN {isin} ({h['name']}) — voeg toe aan BUX_ISIN_TO_TICKER")
+            continue
+
+        avg_eur = round(h["cost_eur"] / h["shares"], 4)
+        holdings.append({"ticker": ticker, "shares": round(h["shares"], 6), "avg_price": avg_eur})
+        log.info(f"BUX CSV: {ticker} ({isin}) — {h['shares']:.4f} aandelen, avg €{avg_eur:.2f}")
+
+    if not holdings:
+        log.warning("BUX CSV: geen open posities gevonden na verwerking.")
+        return None
+
+    return _holdings_to_portfolio(holdings, "BUX CSV")
+
+
 def fetch_bux_manual() -> dict | None:
     """
-    Lees BUX_HOLDINGS omgevingsvariabele.
-    Formaat — één positie per regel (# = commentaar):
-      yfinance_ticker  aandelen  [gemiddelde_aankoopprijs_eur]
-
-    Voorbeelden:
-      ASML.AS   5    680.00
-      NVDA      3    95.00
-      BTC-EUR   0.05 55000
+    BUX portfolio ophalen:
+    1. Probeert eerst BUX_TRANSACTIONS_CSV (volledige CSV-export, auto-berekening)
+    2. Valt terug op BUX_HOLDINGS (handmatig: ticker  aandelen  [avg_prijs])
     """
+    # 1. Auto via CSV-export
+    csv_result = _parse_bux_transactions_csv()
+    if csv_result:
+        return csv_result
+
+    # 2. Handmatige fallback
     holdings = _parse_holdings_secret("BUX_HOLDINGS", "BUX")
     if not holdings:
         log.info("BUX_HOLDINGS niet ingesteld — BUX wordt overgeslagen.")
