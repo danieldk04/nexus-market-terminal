@@ -888,7 +888,7 @@ def _parse_bux_transactions_csv() -> dict | None:
             qty_str   = (row.get("Asset Quantity")       or "").strip()
             amt_str   = (row.get("Transaction Amount")   or "").strip()
 
-            if not isin or not qty_str or currency != "EUR":
+            if not isin or not qty_str:
                 continue
 
             try:
