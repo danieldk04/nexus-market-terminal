@@ -262,8 +262,8 @@ def generate_news_summary(client: anthropic.Anthropic, headlines: list[str]) -> 
         "- summary: 2-3 zinnen die uitleggen WAT er precies speelt en WAAROM het relevant is "
         "voor iemand met posities in ETFs (AEX, S&P500, World) en aandelen\n\n"
         "Antwoord ALLEEN in dit JSON-formaat, geen uitleg eromheen:\n"
-        '[{"theme":"...","summary":"..."},{"theme":"...","summary":"..."},'
-        '{"theme":"...","summary":"..."},{"theme":"...","summary":"..."}]'
+        '[{"theme":"...","summary":"..."},  {"theme":"...","summary":"..."},'
+        '{"theme":"...","summary":"..."},  {"theme":"...","summary":"..."}]'
     )
 
     try:
@@ -657,7 +657,8 @@ def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> st
 
 
 def build_telegram_message(market, news, nexus, degiro, tr,
-                            degiro_perf, tr_perf, ai_text) -> str:
+                            degiro_perf, tr_perf, ai_text,
+                            news_summary=None) -> str:
     now    = datetime.now(timezone.utc)
     dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
     mnd_nl = ["jan","feb","mrt","apr","mei","jun",
@@ -711,7 +712,12 @@ def build_telegram_message(market, news, nexus, degiro, tr,
 
     # ── 5. NIEUWS ────────────────────────────────────────────────────────────
     nieuws = ""
-    if news:
+    if news_summary:
+        parts = []
+        for seg in news_summary[:4]:
+            parts.append(f"  📌 *{seg['theme']}*\n  {seg['summary']}")
+        nieuws = "📰 *NIEUWS*\n\n" + "\n\n".join(parts)
+    elif news:
         nieuws = "📰 *NIEUWS*\n" + "\n".join(f"  • {h}" for h in news[:6])
 
     # ── 6. AI ANALYSE ────────────────────────────────────────────────────────
@@ -1008,7 +1014,7 @@ def run_morning_briefing():
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
 
-    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text)
+    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text, news_summary)
 
     log.info("Telegram verzenden...")
     ok = send(msg)
