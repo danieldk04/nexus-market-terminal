@@ -1571,9 +1571,12 @@ function initMobile() {
     // Toon compacte mobiele header-stats
     const mhs = document.getElementById('mobile-header-stats');
     if (mhs) mhs.style.display = 'flex';
-    // Stel standaard tab in
-    const portfolioBtn = document.querySelector('.mobile-nav-btn[data-tab="portfolio"]');
-    mobileTab('portfolio', portfolioBtn);
+    // Stel standaard tab in alleen als er geen actieve tab is
+    const activeBtn = document.querySelector('.mobile-nav-btn.active');
+    if (!activeBtn) {
+        const portfolioBtn = document.querySelector('.mobile-nav-btn[data-tab="portfolio"]');
+        mobileTab('portfolio', portfolioBtn);
+    }
 }
 
 window.addEventListener('resize', () => {
