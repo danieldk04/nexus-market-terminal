@@ -1,145 +1,151 @@
 {
-    "portfolio_history": [
-        {
-            "date": "2026-05-21",
-            "degiro": 16145.17,
-            "tr": 7460.86,
-            "nexus": 2547.85
-        }
-    ],
-    "last_news": [
-        "Unilever grootste daler op lager gesloten beurs",
-        "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
-        "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-        "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
-        "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran",
-        "IEX.nl | Beurs - Beleggen - Realtime Koersen - Aandelen - Adviezen - Forum - Nieuws - Columns",
-        "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten",
-        "AEX koers opent lager door Iran, maar Shell en defensie-aandelen profiteren"
-    ],
-    "news_summary": [
-        {
-            "theme": "Geopolitieke spanningen Iran-impact",
-            "summary": "De conflict met Iran veroorzaakt divergente marktreacties: Aziatische aandelen dalen, energieprijzen stijgen, en luchtvaart (Air France-KLM) krijgt klappen door Midden-Oosten-annuleringen. Voor AEX en World-ETF beleggers betekent dit volatiliteit, waarbij defensie- en energiebedrijven als tegengewicht fungeren."
-        },
-        {
-            "theme": "Grote individuele aandelen onder druk",
-            "summary": "Unilever, Novo Nordisk en Private Equity CVC dalen fors op slechte resultaten/teleurstellingen, terwijl Philips juist stijgt als 'smaakmaker'. Deze selectieve koersbewegingen wijzen op earnings-gevoeligheid en beleggersselectiviteit, relevant voor wie individuele posities in AEX-constituenten houdt."
-        },
-        {
-            "theme": "Tech en AI cre\u00ebren tweedeling",
-            "summary": "AI-vrees zorgt voor 'gooi- en smijtdagen' met polarisatie tussen tech-profiteurs (drijven AEX boven 1000 punten) en traditionele industrie\u00ebn. Deze volatiliteit en sector-rotation zijn cruciaal voor World en S&P500-ETF beleggers die techweging moeten monitoren."
-        },
-        {
-            "theme": "Beursintroducties en insidervertrouwen",
-            "summary": "CSG (Tsjechisch defensie) en Brunel tonen insidervertrouwen via aankopen en succesvolle IPO's, wat wijst op onderwaardering/groeipotentieel. Dit signaal van management-conviction kan interessant zijn voor growth-geori\u00ebnteerde beleggers."
-        }
-    ],
-    "bux_summary": {
-        "total": 356.41,
-        "total_pl_pct": -30.66,
-        "total_invested": 513.99,
-        "positions": [
-            {
-                "name": "PEP",
-                "ticker": "PEP",
-                "value": 298.58,
-                "price": 149.29,
-                "pl_pct": -9.83,
-                "pl_eur": -32.56,
-                "weight": 83.8
-            },
-            {
-                "name": "ENPH",
-                "ticker": "ENPH",
-                "value": 53.15,
-                "price": 53.15,
-                "pl_pct": -70.4,
-                "pl_eur": -126.42,
-                "weight": 14.9
-            },
-            {
-                "name": "KPN.AS",
-                "ticker": "KPN.AS",
-                "value": 4.68,
-                "price": 4.68,
-                "pl_pct": 42.71,
-                "pl_eur": 1.4,
-                "weight": 1.3
-            }
-        ]
+  "portfolio_history": [
+    {
+      "date": "2026-05-22",
+      "degiro": 16234.0,
+      "tr": 7442.58,
+      "nexus": 2547.85
     },
-    "degiro_summary": {
-        "total": 16145.17,
-        "total_pl_pct": 31.03,
-        "total_invested": 12321.87,
-        "positions": [
-            {
-                "name": "VWRL.AS",
-                "value": 6077.76,
-                "pl_pct": 30.62,
-                "pl_eur": 1424.67,
-                "weight": 37.6
-            },
-            {
-                "name": "VUSA.AS",
-                "value": 5096.15,
-                "pl_pct": 36.33,
-                "pl_eur": 1358.15,
-                "weight": 31.6
-            },
-            {
-                "name": "VHYL.AS",
-                "value": 4309.76,
-                "pl_pct": 22.2,
-                "pl_eur": 782.88,
-                "weight": 26.7
-            },
-            {
-                "name": "V",
-                "value": 661.5,
-                "pl_pct": 63.78,
-                "pl_eur": 257.6,
-                "weight": 4.1
-            }
-        ]
+    {
+      "date": "2026-05-21",
+      "degiro": 16145.17,
+      "tr": 7460.86,
+      "nexus": 2547.85
+    }
+  ],
+  "last_news": [
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
+    "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
+    "Unilever grootste daler op lager gesloten beurs",
+    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
+    "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
+    "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran",
+    "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten",
+    "AEX koers opent lager door Iran, maar Shell en defensie-aandelen profiteren"
+  ],
+  "news_summary": [
+    {
+      "theme": "Geopolitieke spanningen drukken markten",
+      "summary": "Iran-spanningen veroorzaken vliegannuleringen en druk op luchtvaart (Air France-KLM) en bredere marktdalingen in Azi\u00eb, terwijl defensie- en energiebedrijven (Shell) juist profiteren. Dit zorgt voor volatiliteit in AEX en wereldportfolio's, met gedifferentieerde impact per sector."
     },
-    "tr_summary": {
-        "total": 7460.86,
-        "total_pl_pct": 11.43,
-        "positions": [
-            {
-                "name": "Bitcoin",
-                "value": 4706.58,
-                "pl_pct": 11.62,
-                "weight": 63.1
-            },
-            {
-                "name": "CSP1 (S&P 500 EUR)",
-                "value": 933.78,
-                "pl_pct": 33.4,
-                "weight": 12.5
-            },
-            {
-                "name": "VWCE (All-World Acc)",
-                "value": 829.88,
-                "pl_pct": 6.57,
-                "weight": 11.1
-            },
-            {
-                "name": "TDIV (Dev Div Leaders)",
-                "value": 813.11,
-                "pl_pct": 1.64,
-                "weight": 10.9
-            },
-            {
-                "name": "VHYL (High Div Yield)",
-                "value": 177.51,
-                "pl_pct": -11.24,
-                "weight": 2.4
-            }
-        ]
+    {
+      "theme": "Tech-sector leidt, maar verdeeldheid groeit",
+      "summary": "AI-gerelateerde bedrijven trekken beleggers aan (AEX boven 1000, tech stijgt) maar tegelijk ontstaat tweedeling door AI-vrees, wat wijst op voorzichtigheid ondanks optimisme. Voor ETF-beleggers betekent dit mogelijke volatiliteit in tech-heavywaights."
     },
-    "dashboard_updated": "2026-05-21T09:19:08.798725+00:00",
-    "lessons": []
+    {
+      "theme": "Concernspecifieke bedrijfsnieuws beweegt koersen",
+      "summary": "Unilever daalt, Novo Nordisk zakt door teleurstelling geneesmiddelonderzoek, terwijl Adyen, Philips en CSG stijgen op goede cijfers en management-vertrouwen. Deze individuele bedrijfsdynamiek biedt kansen maar vereist selectieve positiebepaling buiten brede indexen."
+    },
+    {
+      "theme": "Herstructurering en buyouts cre\u00ebren waardesubstituties",
+      "summary": "Prosus haalt Just Eat Takeaway van de beurs met waardegroei, Brunel-insiders kopen na dip, en CSG profiteert van beursgang-sentiment. Deze bewegingen tonen actief kapitaalmanagement en herverdelingsmogelijkheden, relevant voor actieve aandelenbeleggers naast ETF-posities."
+    }
+  ],
+  "bux_summary": {
+    "total": 364.7,
+    "total_pl_pct": -29.04,
+    "total_invested": 513.99,
+    "positions": [
+      {
+        "name": "PEP",
+        "ticker": "PEP",
+        "value": 297.7,
+        "price": 148.85,
+        "pl_pct": -10.1,
+        "pl_eur": -33.44,
+        "weight": 81.6
+      },
+      {
+        "name": "ENPH",
+        "ticker": "ENPH",
+        "value": 62.34,
+        "price": 62.34,
+        "pl_pct": -65.28,
+        "pl_eur": -117.23,
+        "weight": 17.1
+      },
+      {
+        "name": "KPN.AS",
+        "ticker": "KPN.AS",
+        "value": 4.66,
+        "price": 4.66,
+        "pl_pct": 42.16,
+        "pl_eur": 1.38,
+        "weight": 1.3
+      }
+    ]
+  },
+  "degiro_summary": {
+    "total": 16234.0,
+    "total_pl_pct": 31.75,
+    "total_invested": 12321.87,
+    "positions": [
+      {
+        "name": "VWRL.AS",
+        "value": 6111.3,
+        "pl_pct": 31.34,
+        "pl_eur": 1458.21,
+        "weight": 37.6
+      },
+      {
+        "name": "VUSA.AS",
+        "value": 5123.71,
+        "pl_pct": 37.07,
+        "pl_eur": 1385.71,
+        "weight": 31.6
+      },
+      {
+        "name": "VHYL.AS",
+        "value": 4336.75,
+        "pl_pct": 22.96,
+        "pl_eur": 809.87,
+        "weight": 26.7
+      },
+      {
+        "name": "V",
+        "value": 662.24,
+        "pl_pct": 63.96,
+        "pl_eur": 258.34,
+        "weight": 4.1
+      }
+    ]
+  },
+  "tr_summary": {
+    "total": 7442.58,
+    "total_pl_pct": 11.16,
+    "positions": [
+      {
+        "name": "Bitcoin",
+        "value": 4676.6,
+        "pl_pct": 10.91,
+        "weight": 62.8
+      },
+      {
+        "name": "CSP1 (S&P 500 EUR)",
+        "value": 938.64,
+        "pl_pct": 34.09,
+        "weight": 12.6
+      },
+      {
+        "name": "VWCE (All-World Acc)",
+        "value": 834.55,
+        "pl_pct": 7.16,
+        "weight": 11.2
+      },
+      {
+        "name": "TDIV (Dev Div Leaders)",
+        "value": 814.17,
+        "pl_pct": 1.77,
+        "weight": 10.9
+      },
+      {
+        "name": "VHYL (High Div Yield)",
+        "value": 178.62,
+        "pl_pct": -10.69,
+        "weight": 2.4
+      }
+    ]
+  },
+  "dashboard_updated": "2026-05-22T10:21:45.354003+00:00",
+  "lessons": []
 }
