@@ -1,6 +1,12 @@
 {
   "portfolio_history": [
     {
+      "date": "2026-05-24",
+      "degiro": 16293.3,
+      "tr": 7424.79,
+      "nexus": 2547.85
+    },
+    {
       "date": "2026-05-23",
       "degiro": 16293.3,
       "tr": 7292.93,
@@ -20,31 +26,31 @@
     }
   ],
   "last_news": [
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
     "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
+    "SpaceX-beursgang dreigt Bitcoin koers en tech-aandelen te raken",
     "Unilever grootste daler op lager gesloten beurs",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-    "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
     "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran",
-    "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten",
-    "CEO en CFO van Brunel kopen aandelen in na dip op de beurs"
+    "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
+    "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten"
   ],
   "news_summary": [
     {
-      "theme": "Geopolitieke spanningen Midden-Oosten",
-      "summary": "Conflicten tussen Iran en omringende landen veroorzaken volatiliteit op de beurzen, met name in Azi\u00eb en Europa. Dit be\u00efnvloedt sectoren zoals luchtvaart (Air France-KLM), maar stuurt beleggers juist naar defensie- en energieaandelen als veilige haven."
+      "theme": "Technologie en AI-volatiliteit",
+      "summary": "Tech-aandelen tonen sterke winsten (AEX boven 1000 punten, Philips stijger) maar beleggers maken zich zorgen over AI-oververwachtingen en een mogelijke tweedeling in de markt. Dit be\u00efnvloedt direct S&P500 en World ETFs waar tech zwaar gewogen is."
     },
     {
-      "theme": "AI-volatiliteit en markttweedeling",
-      "summary": "Beleggers vertonen extreem gedrag rond AI-gerelateerde aandelen en techsector, wat leidt tot sterke koersschommelingen en tweedeling in marktsentiment. Dit raakt ETF-portefeuilles die tech-exposure hebben, zoals World en S&P500."
+      "theme": "Geopolitieke onrust en defensie",
+      "summary": "Spanningen met Iran en oorlogsdreiging stuwen defensie-aandelen omhoog, terwijl Aziatische markten dalen en Air France-KLM onder druk staat door Midden-Oosten-annuleringen. Geopolitieke risico's veroorzaken volatiliteit in brede portefeuilles."
     },
     {
-      "theme": "Individuele aandelen onder druk",
-      "summary": "Grote spelers als Unilever, Novo Nordisk en Air France-KLM ondervinden negatieve bedrijfsnieuws (afslankmiddel teleurstelling, vervoer annuleringen, bedrijfsafstoting). Dit be\u00efnvloedt heftig hun koersen en draagt bij aan algehele marktweakness."
+      "theme": "Sectorale noodgebeurtenissen",
+      "summary": "Novo Nordisk zakt op teleurstelling afslankmedicijn, Unilever is grootste daler, en Brunel-insiders kopen aandelen na een dip. Deze bedrijfsspecifieke gebeurtenissen zorgen voor selectieve druk in diverseportfolio's."
     },
     {
-      "theme": "Selectieve herstel en positieve signalen",
-      "summary": "Ondanks turbulentie bouwen insiders (Brunel-bestuur) aan hun posities, en sectoren als defensie en Philips herstellen zich. De AEX doorbreekt de 1000-puntgrens, wat suggereert dat selectieve waarden nog steeds aantrekkelijk zijn voor long-termijn beleggers."
+      "theme": "Marktvolatiliteit en sentiment",
+      "summary": "Beurzen schommelen fors met wisselende signalen (herstel Europees, dalende Aziatische markten, Bitcoin onder druk). Consumentenvertrouwen blijft zwak ondanks rijkdom door beurs, wat wijst op bredere onzekerheid in economisch sentiment."
     }
   ],
   "bux_summary": {
@@ -117,41 +123,41 @@
     ]
   },
   "tr_summary": {
-    "total": 7292.93,
-    "total_pl_pct": 8.92,
+    "total": 7424.79,
+    "total_pl_pct": 10.89,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4520.31,
-        "pl_pct": 7.2,
-        "weight": 62.0
+        "value": 4652.17,
+        "pl_pct": 10.33,
+        "weight": 62.7
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
         "value": 943.04,
         "pl_pct": 34.72,
-        "weight": 12.9
+        "weight": 12.7
       },
       {
         "name": "VWCE (All-World Acc)",
         "value": 838.08,
         "pl_pct": 7.62,
-        "weight": 11.5
+        "weight": 11.3
       },
       {
         "name": "TDIV (Dev Div Leaders)",
         "value": 812.19,
         "pl_pct": 1.52,
-        "weight": 11.1
+        "weight": 10.9
       },
       {
         "name": "VHYL (High Div Yield)",
         "value": 179.31,
         "pl_pct": -10.34,
-        "weight": 2.5
+        "weight": 2.4
       }
     ]
   },
-  "dashboard_updated": "2026-05-23T09:00:34.825155+00:00",
+  "dashboard_updated": "2026-05-24T09:18:28.237416+00:00",
   "lessons": []
 }
