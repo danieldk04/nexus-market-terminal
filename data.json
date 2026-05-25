@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-05-25T11:42:50.276403+00:00",
+    "generated_at": "2026-05-25T20:19:07.577330+00:00",
     "top_candidates": [
         {
             "ticker": "ALL",
@@ -52,49 +52,93 @@
             }
         },
         {
-            "ticker": "NEM",
-            "name": "Newmont Corporation",
-            "sector": "Basic Materials",
-            "industry_group": "Materials",
-            "price": 107.64,
-            "roe": 25.83,
-            "pe_ratio": 13.96,
-            "debt_to_equity": 0.16,
-            "revenue_growth": 45.8,
-            "profit_margin": 33.9,
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "price": 244.76,
+            "roe": 58.77,
+            "pe_ratio": 14.26,
+            "debt_to_equity": 0.58,
+            "revenue_growth": 12.0,
+            "profit_margin": 29.5,
             "fcf_positive": true,
-            "beta": 0.45,
+            "beta": 1.42,
             "roic": null,
             "roce": null,
-            "pfcf": 11.7,
-            "rev_cagr_5yr": 23.9,
-            "ni_cagr_5yr": null,
-            "analyst_target": 143.48381,
-            "analyst_upside": 33.3,
-            "analyst_count": 21,
+            "pfcf": 10.6,
+            "rev_cagr_5yr": 10.5,
+            "ni_cagr_5yr": 14.5,
+            "analyst_target": 327.2847,
+            "analyst_upside": 33.7,
+            "analyst_count": 34,
             "dcf": {
-                "dcf_per_share": 243.73,
-                "dcf_upside": 126.4,
-                "mos_price": 182.8,
+                "dcf_per_share": 276.53,
+                "dcf_upside": 13.0,
+                "mos_price": 207.4,
+                "wacc": 11.62,
+                "growth_phase1": 11.5,
+                "terminal_growth": 2.5,
+                "pv_fcf": 39833.7,
+                "pv_terminal_m": 78608.6
+            },
+            "dividend": null,
+            "score": 7.8,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "# Adobe Inc. (ADBE) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nAdobe bezit een van de sterkste softwaremoats in de markt. Creative Cloud en Document Cloud genereren diepe switching costs: wie eenmaal zijn workflow bouwt rond Photoshop, Premiere of Acrobat, verlaat het ecosysteem zelden. De ROE van 58.77% bij een D/E van slechts 0.58 is indrukwekkend \u2014 dit is geen financieel geoptimaliseerd getal, maar echte operationele kracht. Winstmarges van 29.5% en een P/FCF van slechts 10.6 wijzen op een echte cashflow-machine. De 5-jaar winst CAGR van 14.5% overtreft omzetgroei consistent, wat duidt op operationele leverage. Bewijs van compounding: **ja, overtuigend.**\n\n## DCF & WAARDERING\nDe DCF-intrinsieke waarde van $276.53 geeft 13% upside \u2014 geen koopje, maar ook geen bubbel. De Margin of Safety-prijs van $207 is ver weg bij $244. Met P/E van 14.26 lijkt Adobe opvallend goedkoop voor een dominante SaaS-speler \u2014 maar dit reflecteert angstige markt voor AI-disruptie. Value trap? Mogelijk als Firefly en AI-integratie niet monetariseren. De WACC van 11.62% is realistisch bij Beta 1.42. Analistenconsensus van $327 (34 analisten) suggereert de markt de AI-risico's overdrijft.\n\n## \ud83d\udfe2 BULL CASE\n1. **Goedkope waardering voor franchise-kwaliteit:** P/FCF van 10.6 voor een bedrijf met 58% ROE en stijgende marges is historisch uitzonderlijk laag \u2014 markt straft onterecht AI-angst af.\n2. **AI als accelerator, niet disruptor:** Firefly-integratie verdiept het ecosysteem en rechtvaardigt prijsverhogingen. Adobe *is* de workflow \u2014 generatieve AI maakt hun tools onmisbaarder, niet overbodig.\n3. **Consistente compounding:** 14.5% winst CAGR over 5 jaar met solide FCF-conversie. Dit is het soort bedrijf dat stil vermogen opbouwt terwijl beleggers panikeren.\n\n## \ud83d\udd34 BEAR CASE\n1. **AI-concurrentie is re\u00ebel:** Canva, Midjourney, en open-source tools democratiseren creativiteit. De drempel voor instappers daalt structureel.\n2. **Groeivertraging zichtbaar:** 12% omzetgroei is degelijk, maar geen hoog groeibedrijf meer. Elke verdere vertraging herprijst de thesis dramatisch.\n3. **Mislukte Figma-overname signaal:** Regulatoire afwijzing kostte $1 miljard en onthulde strategische kwetsbaarheid in design-tooling \u2014 precies waar de concurrentie het hardst aanvalt.\n\n## VERDICT\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $295 (+21%)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu, met bijkopen bij dip richting $220",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-05-25T20:19:50.417194+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
+            "ticker": "TRV",
+            "name": "The Travelers Companies, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "price": 306.46,
+            "roe": 25.27,
+            "pe_ratio": 9.15,
+            "debt_to_equity": 0.29,
+            "revenue_growth": 1.0,
+            "profit_margin": 15.5,
+            "fcf_positive": true,
+            "beta": 0.51,
+            "roic": null,
+            "roce": null,
+            "pfcf": 4.9,
+            "rev_cagr_5yr": 9.8,
+            "ni_cagr_5yr": 30.3,
+            "analyst_target": 313.73914,
+            "analyst_upside": 2.4,
+            "analyst_count": 23,
+            "dcf": {
+                "dcf_per_share": 1110.95,
+                "dcf_upside": 262.5,
+                "mos_price": 833.21,
                 "wacc": 7.5,
                 "growth_phase1": 15.0,
                 "terminal_growth": 2.5,
-                "pv_fcf": 53643.1,
-                "pv_terminal_m": 212082.3
+                "pv_fcf": 49561.3,
+                "pv_terminal_m": 195944.4
             },
             "dividend": {
-                "yield": 97.0,
-                "eps_payout": 13.5,
-                "fcf_payout": 11.3,
+                "yield": 163.0,
+                "eps_payout": 14.9,
+                "fcf_payout": 8.0,
                 "sustainable": true,
                 "risk_flag": null
             },
             "score": 7.7,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "# NEM (Newmont Corporation) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nNewmont bezit na de Newcrest-acquisitie de grootste goudreservebasis ter wereld \u2014 een geologische moat die nauwelijks repliceerbaar is. Pricing power is volledig afhankelijk van goudprijs; geen klantenswitching costs, geen network effects. De ROE van 25.83% oogt indrukwekkend, maar wordt deels opgeblazen door acquisitiegoodwill en goudprijshausse. Zonder ROIC-data is echte compounding-kwaliteit moeilijk te bewijzen \u2014 mijnbouw is capital-intensive en historisch slecht in het vernietigen van kapitaal via cyclusblinde M&A. De 45.8% omzetgroei is grotendeels consolidatie-effect, geen organische kracht.\n\n## DCF & WAARDERING\nDe DCF van $243.73 (+126%) vereist 15% groei in fase-1 \u2014 agressief voor een grondstoffenbedrijf afhankelijk van externe prijsvorming. P/E van 13.96 en P/FCF van 11.7 zijn echter genuanceerd goedkoop, zeker met goud boven $3.000/oz. De dividendyield van 97% is een duidelijke datafout (vermoedelijk een berekeningsartefact) \u2014 negeer dit cijfer. FCF payout van 11.3% suggereert juist ruimte. De Margin of Safety prijs van $182.80 tegenover $107.64 huidig geeft substanti\u00eble buffer, maar DCF-modellen voor miners zijn notoir gevoelig voor aannames.\n\n## \ud83d\udfe2 BULL CASE\n1. **Goudprijs-leverage met laag risicoprofiel:** Beta van 0.45 is uitzonderlijk laag voor een goudminer. Bij aanhoudend geopolitiek en monetair onzekerheidsklimaat fungeert NEM als portfolio-hedge \u00e9n groeivehikel tegelijk.\n2. **Waardering is scherp:** P/FCF van 11.7x met positieve FCF bij recordgoudprijzen is structureel onderwaardering. Analisten zien 33% upside bij een consensus van 21 professionals.\n3. **Schaalvoordeel post-Newcrest:** De grootste gediversifieerde goudproducent ter wereld heeft kostensynergie\u00ebn, toegang tot kapitaalmarkten en portfolio-diversificatie over tiers en geopolitieke zones.\n\n## \ud83d\udd34 BEAR CASE\n1. **Commodity-afhankelijkheid is geen moat:** Zodra goud corrigeert, verdampt de winstmarge snel. Geen prijszettingsvermogen zonder externe prijskatalysator.\n2. **M&A-integratie risico:** De Newcrest-deal van $19 miljard vereist perfecte executie. Historisch is mijnbouw-M&A een graveyard voor aandeelhouderswaarde.\n3. **Operationele kosteninflatie:** Energie, arbeid en regelgeving in Australi\u00eb/Afrika/LatAm drukken marges structureel \u2014 bij goudprijsdaling is de hefboom pijnlijk omgekeerd.\n\n## VERDICT\n**ACTIE:** HOUD/KOOP BIJ ZWAKTE\n**CONVICTION:** 6/10\n**KOERSDOEL 18mnd:** $138 (+28%)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Wacht op dip tot $95-100 voor optimale margin of safety",
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nTravelers is een van de meest gedisciplineerde underwriters in de Amerikaanse P&C-verzekeringssector. De combined ratio schommelt structureel rond de 95-100%, wat in een cyclische sector een bewijs van echte pricing discipline is. Met een ROE van 25.27% presteert TRV ver boven sectorgenoten \u2014 een sterk signaal van een duurzame moat. Die moat rust op drie pijlers: schaalvoordelen in risicomodellering, diepgewortelde makelaarsrelaties (hoge switching costs voor zakelijke klanten) en een sterke investment float die als stille compounder fungeert. De 5-jaar winst CAGR van 30.3% bij slechts 9.8% omzetgroei toont operationele leverage en kostendiscipline. Dit is geen mediocre verzekeraar \u2014 dit is een echte compounding machine.\n\n## DCF & WAARDERING\n\nHier wordt het interessant \u00e9n verdacht tegelijk. De DCF-waarde van $1.110,95 impliceert 262% upside \u2014 een getal dat onmiddellijk rode vlaggen oproept. Met een fase-1 groeiaanname van 15% en WACC van 7,5% is het model mogelijk te optimistisch voor een verzekeringsbedrijf met slechts 1% omzetgroei dit jaar. Echter: de P/E van 9.15 en P/FCF van 4.9 zijn objectief goedkoop voor een bedrijf van deze kwaliteit. FCF payout van slechts 8% bij een dividend yield van 163% is een data-anomalie \u2014 vermoedelijk een meetfout in de databron. Toch suggereert de lage payout ratio dat het dividend ijzersterk geborgd is. De huidige prijs van $306 is waarschijnlijk rationeel geprijsd door de markt, maar zeker niet duur.\n\n## \ud83d\udfe2 BULL CASE\n1. **Exceptionele ROE + pricing power**: 25%+ ROE in combinatie met harde marktcondities in commercieel vastgoed en specialty verzekeringen = nog jaren runway voor bovengemiddelde rendementen.\n2. **Defensief profiel in onzeker klimaat**: Beta van 0.51 en stabiele FCF maken TRV een uitstekende haven bij economische volatiliteit \u2014 Buffett-stijl kwaliteit tegen een redelijke prijs.\n3. **Winstgroei ontkoppeld van omzet**: 30% winst-CAGR bij beperkte topline-groei bewijst dat management excelleert in capital allocation en underwriting discipline.\n\n## \ud83d\udd34 BEAR CASE\n1. **Catastroferisico**: Toenemende klimaatgerelateerde verliezen (orkanen, wildfires) kunnen de combined ratio plotseling de verkeerde kant opsturen.\n2. **Lage organische groei**: 1% omzetgroei is mager. Als de harde verzekeringsmarkt omslaat, verdampt de pricing power snel.\n3. **Analistenconsensus smal**: Slechts 2.4% upside tot analistendoel suggereert dat de markt TRV al fair gewaardeerd acht \u2014 beperkt kortetermijnpotentieel.\n\n## VERDICT\n**ACTIE:** HOUD / Selectief KOOP bij dips\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $340 (+11% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Wacht op dip tot $280-285",
                 "sentiment_score": "BULLISH",
-                "last_run": "2026-05-25T11:43:33.876456+00:00",
+                "last_run": "2026-05-25T20:20:11.591251+00:00",
                 "model": "claude-sonnet-4-6",
                 "news_used": true,
                 "filing_used": true,
@@ -152,56 +196,6 @@
             }
         },
         {
-            "ticker": "AMP",
-            "name": "Ameriprise Financial, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "price": 452.31,
-            "roe": 66.94,
-            "pe_ratio": 11.27,
-            "debt_to_equity": 0.56,
-            "revenue_growth": 9.0,
-            "profit_margin": 20.2,
-            "fcf_positive": true,
-            "beta": 1.2,
-            "roic": null,
-            "roce": null,
-            "pfcf": 12.1,
-            "rev_cagr_5yr": 9.0,
-            "ni_cagr_5yr": 4.2,
-            "analyst_target": 540.8182,
-            "analyst_upside": 19.6,
-            "analyst_count": 11,
-            "dcf": {
-                "dcf_per_share": 601.3,
-                "dcf_upside": 32.9,
-                "mos_price": 450.97,
-                "wacc": 10.35,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 16987.1,
-                "pv_terminal_m": 40561.7
-            },
-            "dividend": {
-                "yield": 150.0,
-                "eps_payout": 16.9,
-                "fcf_payout": 18.2,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 7.6,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nAmeriprise is een gevestigde vermogensbeheerder en financieel planner met stevige switching costs: klanten die hun pensioenportefeuilles, verzekeringsproducten en financial planning-relaties overdragen, betalen hoge emotionele \u00e9n financi\u00eble drempels. De ROE van 67% is indrukwekkend en wijst op een licht-kapitaalintensief model met aanzienlijke hefboom via klantgelden. De 9% omzetgroei CAGR is consistent en suggereert prijsdiscipline. Echter, de winst-CAGR van slechts 4,2% over 5 jaar is zorgwekkend \u2014 marges staan onder druk, mogelijk door hogere distributievergoedingen en concurrentie van goedkope ETF-aanbieders. Geen ROIC-cijfer beschikbaar, wat een blinde vlek blijft in de kwaliteitsbeoordeling.\n\n## DCF & WAARDERING\n\nP/E van 11,2 en P/FCF van 12,1 zijn laag voor een financieel merk van deze kwaliteit. De DCF-intrinsieke waarde van $601 impliceert 34% upside, en de huidige prijs raakt nagenoeg exact de Margin of Safety-grens van $450,97. Dit is een zeldzame situatie: de markt biedt de veiligheidsmarge gratis aan. De DCF-aanname van 15% groei in fase-1 oogt optimistisch gegeven de historische winst-CAGR van 4,2% \u2014 hier zit het grootste verwaardingsrisico. **Geen value trap** op basis van FCF-dekking, maar groeiassumpties vereisen kritisch oog.\n\n\u26a0\ufe0f *Opmerking: Dividend yield van 149% is vrijwel zeker een datafout \u2014 FCF payout van 18,2% en duurzaamheid \"JA\" bevestigen dit.*\n\n## \ud83d\udfe2 BULL CASE\n1. **Waardering op bodemprijs**: P/FCF van 12x en prijs exact op MoS-niveau biedt asymmetrisch risico/rendement met 33% DCF-upside.\n2. **Structurele tailwind**: Vergrijzende babyboomers behoeven wealth management \u2014 Ameriprise zit precies in dit demografisch sweetspot.\n3. **Kapitaaldiscipline**: Agressieve buybacks combineren met een lage FCF payout ratio \u2014 management beloont aandeelhouders effici\u00ebnt.\n\n## \ud83d\udd34 BEAR CASE\n1. **Winstgroei achterblijvend**: 4,2% winst-CAGR versus 9% omzetgroei impliceert margedilutie \u2014 structureel of cyclisch?\n2. **Marktgevoeligheid**: Beta 1,2 plus afhankelijkheid van AUM-niveaus maakt dit een volatiel aandeel in bear markets.\n3. **Disruptierisico**: Goedkope robo-advisors en Vanguard/Fidelity prijscompetitie ondermijnen langzaam het verdienmodel.\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $530 (+18% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 prijs zit exact op MoS-grens, asymmetrie werkt in uw voordeel",
-                "sentiment_score": "BULLISH",
-                "last_run": "2026-05-21T20:32:27.873316+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true
-            }
-        },
-        {
             "ticker": "PGR",
             "name": "Progressive Corporation (The)",
             "sector": "Financial Services",
@@ -245,56 +239,6 @@
                 "analysis": "## MOAT & BUSINESS KWALITEIT\n\nProgressive is een uitzonderlijke verzekeringsmachine. De echte moat zit in **superieure data-analytics en telematics** (Snapshot-programma), waardoor Progressive zijn verliesratio structureel beter beheert dan concurrenten. Met een ROE van 37,9% en een 5-jaar winst-CAGR van 150% spreekt de cijfertaal boekdelen. Progressive is een zeldzame verzekeraar die groeit *zonder* proportioneel kapitaal op te slokken. De combined ratio ligt consistent onder 96, wat bij schaalgroei direct doorvertaalt naar underwriting profit. Lage beta (0,29) bevestigt de defensieve cashflow-kwaliteit. Echte compounder.\n\n---\n\n## DCF & WAARDERING\n\nDe DCF-waarde van $553,85 bij WACC 7,5% en 9,2% groei fase-1 lijkt royaal, maar is niet absurd gegeven de historische groeisnelheid. Bij $199,51 noteert Progressive op slechts 10x winst en 7,5x FCF \u2014 dat is spotgoedkoop voor dit kwaliteitsprofiel. **Geen value trap**: groei is organisch, balans is gezond (D/E 0,26), FCF positief en dividend houdbaar. De margin-of-safety prijs van $415 zit ver boven de marktprijs \u2014 dat suggereert dat Mr. Market de structurele groei onderschat. De dividendyield van 697% lijkt een datafout (vermoedelijk speciale dividenden meegeteld), maar de FCF-payout van 52,3% is solide.\n\n---\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Pricing power + data-edge**: Telematics geeft Progressive een permanent informatievoordeel op concurrenten. Hogere premies voor slechte rijders, lagere voor goede \u2014 de pool blijft profitable.\n2. **Goedkoop op alle multiples**: P/E 10x en P/FCF 7,5x voor een bedrijf met 20%+ omzetgroei CAGR is structureel mispriced. Analisten zien 15,6% upside, DCF suggereert 177%.\n3. **Macro-resilient**: Autoverzekering is non-discretionair. Lage beta, stabiele cashflows, weinig cycliciteit \u2014 ideaal in onzekere markten.\n\n---\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Catastroferisco**: Klimaatverandering verhoogt de frequentie van extreme weersgebeurtenissen. \u00c9\u00e9n slecht catastrofejaar kan de combined ratio hard raken.\n2. **Concurrentiedruk**: Allstate en Geico investeren massief in eigen telematics. Het data-voordeel kan eroderen naarmate de industrie convergeert.\n3. **Groei-normalisatie**: Na explosieve winstgroei (150% CAGR) is terugkeer naar gemiddelde onvermijdelijk. Tegenvallende kwartalen kunnen het narratief snel omdraaien.\n\n---\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $240 (+20% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 waardering biedt ruime veiligheidsmarge",
                 "sentiment_score": "BULLISH",
                 "last_run": "2026-05-25T11:43:54.653805+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true
-            }
-        },
-        {
-            "ticker": "CI",
-            "name": "The Cigna Group",
-            "sector": "Healthcare",
-            "industry_group": "Healthcare",
-            "price": 286.24,
-            "roe": 16.27,
-            "pe_ratio": 2.52,
-            "debt_to_equity": 0.73,
-            "revenue_growth": 4.6,
-            "profit_margin": 2.3,
-            "fcf_positive": true,
-            "beta": 0.31,
-            "roic": null,
-            "roce": null,
-            "pfcf": 10.9,
-            "rev_cagr_5yr": 15.3,
-            "ni_cagr_5yr": -3.9,
-            "analyst_target": 341.75,
-            "analyst_upside": 19.4,
-            "analyst_count": 24,
-            "dcf": {
-                "dcf_per_share": 592.49,
-                "dcf_upside": 107.0,
-                "mos_price": 444.37,
-                "wacc": 7.5,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 37878.2,
-                "pv_terminal_m": 149754.6
-            },
-            "dividend": {
-                "yield": 218.0,
-                "eps_payout": 5.5,
-                "fcf_payout": 23.8,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 7.4,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nCigna opereert als een ge\u00efntegreerde zorgverzekeraar met Evernorth (PBM/apotheekcyclus) als kernmotor. De switching costs zijn re\u00ebel \u2014 werkgevers stappen zelden over vanuit ge\u00efntegreerde health management platforms \u2014 maar de moat is structureel zwakker dan UnitedHealth of CVS. De winstmarge van slechts **2.3%** is alarmerend voor een bedrijf van deze schaal: dit is een razorsmal profitabiliteitsprofiel dat weinig foutmarge laat. De 5-jaar winst CAGR van **-3.9%** terwijl omzet met 15.1% groeide, suggereert dat groei niet naar aandeelhouders doorstroomt \u2014 een fundamenteel waarschuwingssignaal. ROIC ontbreekt in de data, maar op basis van de marges is echte compounding twijfelachtig.\n\n## DCF & WAARDERING\n\nDe P/E van **2.52** lijkt spectaculair goedkoop, maar bij 2.3% nettomarge is de absolute winstbasis fragiel. Een DCF met 15% groei fase-1 levert $592.49 intrinsieke waarde \u2014 maar die aanname is agressief gezien de negatieve winstgroeitrend. De **dividend yield van 218%** is evident een datafout of tijdelijke anomalie; de FCF payout van 23.8% en positieve FCF zijn echter solide. P/FCF van **11x** is de meest betrouwbare waarderingsmetric hier en wijst op echte onderwaardering. Value trap-risico bestaat als marges verder comprimeren door regulatoire druk of wegvallende PBM-volumes.\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Structurele onderwaardering via FCF**: P/FCF van 11x combineert met positieve kasstromen en een FCF payout van slechts 23.8% \u2014 kapitaaldiscipline die ruimte laat voor buybacks en dividendgroei.\n2. **Evernorth-vliegwiel**: PBM-integratie cre\u00ebert cross-selling synergie\u00ebn en sticky B2B-relaties; 5-jaar omzetgroei van 15.1% CAGR bewijst commerci\u00eble executiekracht.\n3. **Defensief profiel**: Beta van 0.31 bij 18.8% analistconsensus upside en 24 analisten die $340 zien \u2014 laag neerwaarts risico in recessiescenario's.\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Margecompressie is structureel**: Winst-CAGR van -3.9% over 5 jaar bij sterke omzetgroei = omzet zonder winstcreatie. Dit is een effici\u00ebntieval.\n2. **Regulatoir risico PBM**: Politieke druk op drug pricing en PBM-transparantie in de VS kan Evernorth's marges verder uithollen.\n3. **Hoge schuld bij lage marges**: D/E van 0.73 is beheersbaar maar kwetsbaar als rentevoeten hoog blijven en winsten niet herstellen.\n\n## VERDICT\n\n**ACTIE:** HOUD  \n**CONVICTION:** 5/10  \n**KOERSDOEL 18mnd:** $320 (11.6% van huidig)  \n**SENTIMENT SCORE:** NEUTRAAL  \n**INSTAPMOMENT:** Wacht op dip tot $260 \u2014 bewijs van margineherstel vereist eerst",
-                "sentiment_score": "NEUTRAAL",
-                "last_run": "2026-05-19T10:55:35.300377+00:00",
                 "model": "claude-sonnet-4-6",
                 "news_used": true,
                 "filing_used": true,
@@ -352,6 +296,56 @@
             }
         },
         {
+            "ticker": "CI",
+            "name": "The Cigna Group",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "price": 286.24,
+            "roe": 16.27,
+            "pe_ratio": 2.52,
+            "debt_to_equity": 0.73,
+            "revenue_growth": 4.6,
+            "profit_margin": 2.3,
+            "fcf_positive": true,
+            "beta": 0.31,
+            "roic": null,
+            "roce": null,
+            "pfcf": 10.9,
+            "rev_cagr_5yr": 15.3,
+            "ni_cagr_5yr": -3.9,
+            "analyst_target": 341.75,
+            "analyst_upside": 19.4,
+            "analyst_count": 24,
+            "dcf": {
+                "dcf_per_share": 592.49,
+                "dcf_upside": 107.0,
+                "mos_price": 444.37,
+                "wacc": 7.5,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 37878.2,
+                "pv_terminal_m": 149754.6
+            },
+            "dividend": {
+                "yield": 218.0,
+                "eps_payout": 5.5,
+                "fcf_payout": 23.8,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 7.4,
+            "penalty_applied": false,
+            "tier2": {
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nCigna opereert als een ge\u00efntegreerde zorgverzekeraar met Evernorth (PBM/apotheekcyclus) als kernmotor. De switching costs zijn re\u00ebel \u2014 werkgevers stappen zelden over vanuit ge\u00efntegreerde health management platforms \u2014 maar de moat is structureel zwakker dan UnitedHealth of CVS. De winstmarge van slechts **2.3%** is alarmerend voor een bedrijf van deze schaal: dit is een razorsmal profitabiliteitsprofiel dat weinig foutmarge laat. De 5-jaar winst CAGR van **-3.9%** terwijl omzet met 15.1% groeide, suggereert dat groei niet naar aandeelhouders doorstroomt \u2014 een fundamenteel waarschuwingssignaal. ROIC ontbreekt in de data, maar op basis van de marges is echte compounding twijfelachtig.\n\n## DCF & WAARDERING\n\nDe P/E van **2.52** lijkt spectaculair goedkoop, maar bij 2.3% nettomarge is de absolute winstbasis fragiel. Een DCF met 15% groei fase-1 levert $592.49 intrinsieke waarde \u2014 maar die aanname is agressief gezien de negatieve winstgroeitrend. De **dividend yield van 218%** is evident een datafout of tijdelijke anomalie; de FCF payout van 23.8% en positieve FCF zijn echter solide. P/FCF van **11x** is de meest betrouwbare waarderingsmetric hier en wijst op echte onderwaardering. Value trap-risico bestaat als marges verder comprimeren door regulatoire druk of wegvallende PBM-volumes.\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Structurele onderwaardering via FCF**: P/FCF van 11x combineert met positieve kasstromen en een FCF payout van slechts 23.8% \u2014 kapitaaldiscipline die ruimte laat voor buybacks en dividendgroei.\n2. **Evernorth-vliegwiel**: PBM-integratie cre\u00ebert cross-selling synergie\u00ebn en sticky B2B-relaties; 5-jaar omzetgroei van 15.1% CAGR bewijst commerci\u00eble executiekracht.\n3. **Defensief profiel**: Beta van 0.31 bij 18.8% analistconsensus upside en 24 analisten die $340 zien \u2014 laag neerwaarts risico in recessiescenario's.\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Margecompressie is structureel**: Winst-CAGR van -3.9% over 5 jaar bij sterke omzetgroei = omzet zonder winstcreatie. Dit is een effici\u00ebntieval.\n2. **Regulatoir risico PBM**: Politieke druk op drug pricing en PBM-transparantie in de VS kan Evernorth's marges verder uithollen.\n3. **Hoge schuld bij lage marges**: D/E van 0.73 is beheersbaar maar kwetsbaar als rentevoeten hoog blijven en winsten niet herstellen.\n\n## VERDICT\n\n**ACTIE:** HOUD  \n**CONVICTION:** 5/10  \n**KOERSDOEL 18mnd:** $320 (11.6% van huidig)  \n**SENTIMENT SCORE:** NEUTRAAL  \n**INSTAPMOMENT:** Wacht op dip tot $260 \u2014 bewijs van margineherstel vereist eerst",
+                "sentiment_score": "NEUTRAAL",
+                "last_run": "2026-05-19T10:55:35.300377+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
             "ticker": "CINF",
             "name": "Cincinnati Financial Corporatio",
             "sector": "Financial Services",
@@ -395,56 +389,6 @@
                 "analysis": "# CINF \u2014 Cincinnati Financial Corporation\n## Bull vs Bear Analyse | $168.37 | NEXUS 7.3/10\n\n---\n\n## MOAT & BUSINESS KWALITEIT\n\nCincinnati Financial is een saaie verzekeraar in de beste Buffett-traditie: conservatief, gedisciplineerd en consistent. De moat rust op drie pijlers: een 60+ jaar ononderbroken dividendverhogingshistorie (Dividend King), een onafhankelijk agentschapsnetwerk dat echte switching costs cre\u00ebert, en een gedisciplineerde combined ratio die systemisch beter presteert dan peers. ROE van 18,7% bij slechts 6% D/E is indrukwekkend clean. De 5-jaar omzetgroei-CAGR van 24,4% suggereert premiegroei + beleggingsopbrengsten die structureel positief zijn. Geen spectaculaire compounding machine, maar een betrouwbare, laaggeprijsde kwaliteitsverzekeraar.\n\n---\n\n## DCF & WAARDERING\n\nHier knipperen alarmlichten. De DCF geeft $402,66 \u2014 139% upside bij WACC 7,59% en groei fase-1 van 8,3%. Dat klinkt verleidelijk, maar verzekeraars modelleer je met embedded value en combined ratio, niet met standaard DCF. De intrinsieke waarde is vermoedelijk fors overschat door modelaannames. Wat w\u00e9l klopt: P/E van 9,6x en P/FCF van 9,5x zijn objectief goedkoop. Analistenconsensus $179 = slechts 6,4% upside. **Let op: dividend yield van 223% is een data-error** \u2014 werkelijke yield ligt rond 2,8-3,0%. FCF payout van 21,2% bevestigt houdbaarheid.\n\n---\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Structureel ondergeprijsd** \u2014 P/E 9,6x voor een Dividend King met 18,7% ROE en nagenoeg geen schuld is historisch aantrekkelijk in een sector die gemiddeld 13-15x handelt.\n2. **Defensief kompas bij volatiliteit** \u2014 Beta 0,6 gecombineerd met stabiele premie-inkomsten maakt CINF een uitstekende buffer in recessiescenario's.\n3. **Compounding via dividend herinvestering** \u2014 60+ jaar dividendgroei en een FCF payout van slechts 21% geeft management enorme ruimte om dit voort te zetten.\n\n---\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Catastroferisico** \u2014 Klimaatverandering verhoogt claimfrequentie structureel. \u00c9\u00e9n slecht jaar (denk Midwest-tornado's) drukt resultaten hard.\n2. **DCF-misleiding** \u2014 De enorme DCF-upside is modelruis, geen realiteit. Analisten zien nauwelijks upside. Koers kan jarenlang zijwaarts bewegen.\n3. **Beperkte groeikatalysatoren** \u2014 Geen prijszettingsinnovatie, geen tech-transformatie. Organische groei is afhankelijk van verzekeringsmarktcyclus.\n\n---\n\n## VERDICT\n\n**ACTIE:** KOOP (selectief)\n**CONVICTION:** 6/10\n**KOERSDOEL 18mnd:** $185 (+9,9%)\n**SENTIMENT SCORE:** NEUTRAAL-BULLISH\n**INSTAPMOMENT:** Nu \u2014 lage waardering, maar verwacht geen raket",
                 "sentiment_score": "BULLISH",
                 "last_run": "2026-05-22T10:43:54.022079+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true
-            }
-        },
-        {
-            "ticker": "CF",
-            "name": "CF Industries Holdings, Inc.",
-            "sector": "Basic Materials",
-            "industry_group": "Materials",
-            "price": 121.7,
-            "roe": 27.3,
-            "pe_ratio": 10.96,
-            "debt_to_equity": 0.44,
-            "revenue_growth": 19.4,
-            "profit_margin": 23.7,
-            "fcf_positive": true,
-            "beta": 0.42,
-            "roic": null,
-            "roce": null,
-            "pfcf": 17.4,
-            "rev_cagr_5yr": -14.1,
-            "ni_cagr_5yr": -24.2,
-            "analyst_target": 125.47368,
-            "analyst_upside": 3.1,
-            "analyst_count": 19,
-            "dcf": {
-                "dcf_per_share": 166.32,
-                "dcf_upside": 36.7,
-                "mos_price": 124.74,
-                "wacc": 7.5,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 5888.9,
-                "pv_terminal_m": 23282.3
-            },
-            "dividend": {
-                "yield": 164.0,
-                "eps_payout": 18.0,
-                "fcf_payout": 28.5,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 7.1,
-            "penalty_applied": false,
-            "tier2": {
-                "analysis": "# CF Industries Holdings (CF) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nCF Industries is de grootste stikstofmestproducent van Noord-Amerika met significante kostenvoordelen via goedkoop Amerikaans aardgas. Dit is de kern van hun moat: structureel lage inputkosten versus Europese concurrenten die veel hogere energieprijzen betalen. Pricing power is echter cyclisch en commodity-gedreven \u2014 geen echte switchingkosten of netwerkeffecten. ROE van 27.3% imponert, maar de 5-jaar CAGR's (-14.1% omzet, -24.2% winst) onthullen dat dit een bedrijf is dat rendeert op cyclustoppen, niet op structurele kwaliteit. ROIC ontbreekt in de data, maar het earnings-profiel screamt cyclical commodity \u2014 geen compounder.\n\n## DCF & WAARDERING\nP/E van 10.96 lijkt spotgoedkoop, maar dit is het gevaar van cyclische bedrijven: je koopt de piek-earnings. De DCF-upside van 36.7% naar $166 is gebaseerd op 15% groei in fase-1 \u2014 terwijl de historische 5-jaar CAGR -24% is. Dit is een aggressieve aanname die ik niet vertrouw. P/FCF van 17.4 is eerlijker geprijsd. **Let op de dividend yield van 164%** \u2014 dit is \u00f3f een datafout \u00f3f tijdelijk via buybacks/specials, want een FCF payout van 28.5% is niet in lijn. Waarschijnlijk een datacorruptie. Beta van 0.42 weerspiegelt de lage marktcorrelatie, niet het operationele risico.\n\n## \ud83d\udfe2 BULL CASE\n1. **Energiearbitrage duurzaam**: VS aardgas blijft structureel goedkoper dan Europa/Azi\u00eb \u2014 CF profiteert zolang dit spread bestaat\n2. **Aandeelhouderswaarde**: Agressieve buybacks hebben aandelental sterk verminderd; management alloceerst kapitaal disciplineerd\n3. **Voedselzekerheid megatrend**: Mondiale bevolkingsgroei + verminderde Russische/Oekra\u00efense mestexport = structureel hogere stikstofvraag\n\n## \ud83d\udd34 BEAR CASE\n1. **Cyclische val**: Stikstofprijzen zijn al significant gedaald van 2022-piek; huidige earnings zijn geen normalisatie \u2014 ze zijn nivellerend omlaag\n2. **Groeivloek**: -14.1% omzet CAGR over 5 jaar \u2014 de DCF-aanname van 15% groei is fantasie tenzij nieuwe prijscyclus aanbreekt\n3. **Geopolitiek/energietransitie**: Hernieuwbare energie kan stikstofproductiekosten mondiaal nivelleren, waardoor CF's kostenvoordeel verdampt\n\n## VERDICT\n**ACTIE:** HOUD\n**CONVICTION:** 5/10\n**KOERSDOEL 18mnd:** $118 (-3% van huidig)\n**SENTIMENT SCORE:** NEUTRAAL\n**INSTAPMOMENT:** Wacht op dip tot $105 voor echte margin of safety\n\n*Aantrekkelijk bij cyclusbodem, maar nu in mid-cyclus onzekerheid \u2014 geen overtuigende entry.*",
-                "sentiment_score": "NEUTRAAL",
-                "last_run": "2026-05-25T11:44:16.566328+00:00",
                 "model": "claude-sonnet-4-6",
                 "news_used": true,
                 "filing_used": true,
@@ -502,49 +446,49 @@
             }
         },
         {
-            "ticker": "GL",
-            "name": "Globe Life Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "price": 156.28,
-            "roe": 20.46,
-            "pe_ratio": 10.81,
-            "debt_to_equity": 0.54,
-            "revenue_growth": 5.4,
-            "profit_margin": 19.4,
+            "ticker": "CF",
+            "name": "CF Industries Holdings, Inc.",
+            "sector": "Basic Materials",
+            "industry_group": "Materials",
+            "price": 121.7,
+            "roe": 27.3,
+            "pe_ratio": 10.96,
+            "debt_to_equity": 0.44,
+            "revenue_growth": 19.4,
+            "profit_margin": 23.7,
             "fcf_positive": true,
-            "beta": 0.5,
+            "beta": 0.42,
             "roic": null,
             "roce": null,
-            "pfcf": 9.2,
-            "rev_cagr_5yr": 4.7,
-            "ni_cagr_5yr": 9.1,
-            "analyst_target": 175.18182,
-            "analyst_upside": 12.1,
-            "analyst_count": 11,
+            "pfcf": 17.4,
+            "rev_cagr_5yr": -14.1,
+            "ni_cagr_5yr": -24.2,
+            "analyst_target": 125.47368,
+            "analyst_upside": 3.1,
+            "analyst_count": 19,
             "dcf": {
-                "dcf_per_share": 361.27,
-                "dcf_upside": 131.2,
-                "mos_price": 270.95,
+                "dcf_per_share": 166.32,
+                "dcf_upside": 36.7,
+                "mos_price": 124.74,
                 "wacc": 7.5,
-                "growth_phase1": 9.0,
+                "growth_phase1": 15.0,
                 "terminal_growth": 2.5,
-                "pv_fcf": 6465.1,
-                "pv_terminal_m": 24846.2
+                "pv_fcf": 5888.9,
+                "pv_terminal_m": 23282.3
             },
             "dividend": {
-                "yield": 84.0,
-                "eps_payout": 9.1,
-                "fcf_payout": 7.8,
+                "yield": 164.0,
+                "eps_payout": 18.0,
+                "fcf_payout": 28.5,
                 "sustainable": true,
                 "risk_flag": null
             },
             "score": 7.1,
             "penalty_applied": false,
             "tier2": {
-                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nGlobe Life verkoopt leven- en aanvullende zorgverzekeringen via directe marketingkanalen aan een lagere middenklasse. De moat is bescheiden maar re\u00ebel: hoge switching costs door de aard van levensverzekeringen (klanten stappen zelden over), een herhalende premiestroom en een decennialange relatie met een specifiek, underserved klantsegment. De ROE van 20.46% is solide voor een verzekeraar, maar zonder ROIC-data is het onduidelijk of het gedeeltelijk leverage-gedreven is (D/E van 0.54 is acceptabel). De 5-jaar winst CAGR van 9.1% bij een omzetgroei van slechts 4.7% wijst op echte operationele hefboom en kostenbeheersing \u2014 dat is bemoedigend. Geen world-class compounder, maar een gedegen, voorspelbaar verzekeringsbedrijf met sticky cashflows.\n\n## DCF & WAARDERING\n\nOp P/E 10.4x en P/FCF 8.8x is GL spotgoedkoop voor een winstgevende verzekeraar met positieve FCF en 9% winstgroei. De DCF-waarde van $361 met 9% groeiassumptie verdient scepticisme \u2014 DCF's zijn modelleerbaar naar elke gewenste uitkomst \u2014 maar zelfs bij conservatievere aannames van 5-6% groei blijft GL significant ondergewaardeerd. Het analistendoel van $174.73 impliceert 16.6% upside en is het meest geloofwaardige ankerpunt. De lage beta (0.5) bevestigt defensieve cashflowkwaliteit. Geen value trap: winst, FCF en dividenddekking zijn solide.\n\n*Kanttekening: het dividend yield van 88% in de data lijkt een datakwaliteitsfout \u2014 FCF payout van 7.8% suggereert een laag maar duurzaam dividend.*\n\n## \ud83d\udfe2 BULL CASE\n1. **Extreme goedkoopheid**: P/E 10.4x en P/FCF 8.8x voor een winstgroeiende verzekeraar is bijna vulgair laag \u2014 de markt heeft dit aandeel overduidelijk afgestraft.\n2. **Defensieve cashflows**: Lage beta, hoge winstmarges, sticky polissen \u2014 dit is precies het soort bedrijf dat Buffett zou beminnen in turbulente markten.\n3. **Operationele hefboom**: Winstgroei van 9.1% bij slechts 4.7% omzetgroei toont structurele margeverbetering.\n\n## \ud83d\udd34 BEAR CASE\n1. **Reputatierisico/fraude-allegations**: GL werd in 2023-2024 aangevallen door short sellers (Fuzzy Panda) over verzekeringsfraude en misleiding van klanten \u2014 vertrouwen is beschadigd en rechtszaken lopen nog.\n2. **Beperkte groeihorizon**: Lage-inkomensklanten onder druk door inflatie; churn en wanbetaling kunnen premie-inkomsten aantasten.\n3. **DCF-gevaar**: De gemodelleerde intrinsieke waarde van $361 is gevaarlijk optimistisch en kan beleggers misleiden over de werkelijke marge of veiligheid.\n\n## VERDICT\n**ACTIE:** KOOP (selectief, na due diligence op lopende rechtszaken)\n**CONVICTION:** 6/10\n**KOERSDOEL 18mnd:** $175 (+16.8% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu, met beperkte positiegrootte gezien juridisch restrisico",
-                "sentiment_score": "BULLISH",
-                "last_run": "2026-05-20T10:42:50.990042+00:00",
+                "analysis": "# CF Industries Holdings (CF) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nCF Industries is de grootste stikstofmestproducent van Noord-Amerika met significante kostenvoordelen via goedkoop Amerikaans aardgas. Dit is de kern van hun moat: structureel lage inputkosten versus Europese concurrenten die veel hogere energieprijzen betalen. Pricing power is echter cyclisch en commodity-gedreven \u2014 geen echte switchingkosten of netwerkeffecten. ROE van 27.3% imponert, maar de 5-jaar CAGR's (-14.1% omzet, -24.2% winst) onthullen dat dit een bedrijf is dat rendeert op cyclustoppen, niet op structurele kwaliteit. ROIC ontbreekt in de data, maar het earnings-profiel screamt cyclical commodity \u2014 geen compounder.\n\n## DCF & WAARDERING\nP/E van 10.96 lijkt spotgoedkoop, maar dit is het gevaar van cyclische bedrijven: je koopt de piek-earnings. De DCF-upside van 36.7% naar $166 is gebaseerd op 15% groei in fase-1 \u2014 terwijl de historische 5-jaar CAGR -24% is. Dit is een aggressieve aanname die ik niet vertrouw. P/FCF van 17.4 is eerlijker geprijsd. **Let op de dividend yield van 164%** \u2014 dit is \u00f3f een datafout \u00f3f tijdelijk via buybacks/specials, want een FCF payout van 28.5% is niet in lijn. Waarschijnlijk een datacorruptie. Beta van 0.42 weerspiegelt de lage marktcorrelatie, niet het operationele risico.\n\n## \ud83d\udfe2 BULL CASE\n1. **Energiearbitrage duurzaam**: VS aardgas blijft structureel goedkoper dan Europa/Azi\u00eb \u2014 CF profiteert zolang dit spread bestaat\n2. **Aandeelhouderswaarde**: Agressieve buybacks hebben aandelental sterk verminderd; management alloceerst kapitaal disciplineerd\n3. **Voedselzekerheid megatrend**: Mondiale bevolkingsgroei + verminderde Russische/Oekra\u00efense mestexport = structureel hogere stikstofvraag\n\n## \ud83d\udd34 BEAR CASE\n1. **Cyclische val**: Stikstofprijzen zijn al significant gedaald van 2022-piek; huidige earnings zijn geen normalisatie \u2014 ze zijn nivellerend omlaag\n2. **Groeivloek**: -14.1% omzet CAGR over 5 jaar \u2014 de DCF-aanname van 15% groei is fantasie tenzij nieuwe prijscyclus aanbreekt\n3. **Geopolitiek/energietransitie**: Hernieuwbare energie kan stikstofproductiekosten mondiaal nivelleren, waardoor CF's kostenvoordeel verdampt\n\n## VERDICT\n**ACTIE:** HOUD\n**CONVICTION:** 5/10\n**KOERSDOEL 18mnd:** $118 (-3% van huidig)\n**SENTIMENT SCORE:** NEUTRAAL\n**INSTAPMOMENT:** Wacht op dip tot $105 voor echte margin of safety\n\n*Aantrekkelijk bij cyclusbodem, maar nu in mid-cyclus onzekerheid \u2014 geen overtuigende entry.*",
+                "sentiment_score": "NEUTRAAL",
+                "last_run": "2026-05-25T11:44:16.566328+00:00",
                 "model": "claude-sonnet-4-6",
                 "news_used": true,
                 "filing_used": true,
@@ -584,6 +528,76 @@
             },
             "dividend": null,
             "score": 7.0,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "CPAY",
+            "name": "Corpay, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "price": 347.9,
+            "roe": 32.12,
+            "pe_ratio": 20.83,
+            "debt_to_equity": 2.71,
+            "revenue_growth": 25.4,
+            "profit_margin": 24.6,
+            "fcf_positive": true,
+            "beta": 0.82,
+            "roic": null,
+            "roce": null,
+            "pfcf": 10.9,
+            "rev_cagr_5yr": 9.7,
+            "ni_cagr_5yr": 3.9,
+            "analyst_target": 389.7857,
+            "analyst_upside": 12.0,
+            "analyst_count": 14,
+            "dcf": {
+                "dcf_per_share": 422.85,
+                "dcf_upside": 21.5,
+                "mos_price": 317.14,
+                "wacc": 7.5,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 7695.8,
+                "pv_terminal_m": 30426.1
+            },
+            "dividend": null,
+            "score": 6.9,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "DECK",
+            "name": "Deckers Outdoor Corporation",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Consumer Cyclical",
+            "price": 106.67,
+            "roe": 40.86,
+            "pe_ratio": 15.2,
+            "debt_to_equity": 0.15,
+            "revenue_growth": 9.6,
+            "profit_margin": 18.7,
+            "fcf_positive": true,
+            "beta": 1.14,
+            "roic": null,
+            "roce": null,
+            "pfcf": 17.6,
+            "rev_cagr_5yr": 14.7,
+            "ni_cagr_5yr": 25.6,
+            "analyst_target": 126.61905,
+            "analyst_upside": 18.7,
+            "analyst_count": 21,
+            "dcf": {
+                "dcf_per_share": 74.21,
+                "dcf_upside": -30.4,
+                "mos_price": 55.66,
+                "wacc": 10.55,
+                "growth_phase1": 2.4,
+                "terminal_growth": 2.5,
+                "pv_fcf": 3435.4,
+                "pv_terminal_m": 7473.9
+            },
+            "dividend": null,
+            "score": 6.9,
             "penalty_applied": false
         },
         {
@@ -637,6 +651,47 @@
             }
         },
         {
+            "ticker": "BMY",
+            "name": "Bristol-Myers Squibb Company",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "price": 59.46,
+            "roe": 38.73,
+            "pe_ratio": 16.66,
+            "debt_to_equity": 2.31,
+            "revenue_growth": 2.6,
+            "profit_margin": 15.0,
+            "fcf_positive": true,
+            "beta": 0.26,
+            "roic": null,
+            "roce": null,
+            "pfcf": 12.3,
+            "rev_cagr_5yr": 1.4,
+            "ni_cagr_5yr": 3.7,
+            "analyst_target": 62.96,
+            "analyst_upside": 5.9,
+            "analyst_count": 25,
+            "dcf": {
+                "dcf_per_share": 72.04,
+                "dcf_upside": 21.1,
+                "mos_price": 54.03,
+                "wacc": 7.5,
+                "growth_phase1": 5.9,
+                "terminal_growth": 2.5,
+                "pv_fcf": 40449.1,
+                "pv_terminal_m": 153080.5
+            },
+            "dividend": {
+                "yield": 424.0,
+                "eps_payout": 70.6,
+                "fcf_payout": 52.2,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 6.8,
+            "penalty_applied": false
+        },
+        {
             "ticker": "GILD",
             "name": "Gilead Sciences, Inc.",
             "sector": "Healthcare",
@@ -687,88 +742,6 @@
             }
         },
         {
-            "ticker": "BMY",
-            "name": "Bristol-Myers Squibb Company",
-            "sector": "Healthcare",
-            "industry_group": "Healthcare",
-            "price": 59.46,
-            "roe": 38.73,
-            "pe_ratio": 16.66,
-            "debt_to_equity": 2.31,
-            "revenue_growth": 2.6,
-            "profit_margin": 15.0,
-            "fcf_positive": true,
-            "beta": 0.26,
-            "roic": null,
-            "roce": null,
-            "pfcf": 12.3,
-            "rev_cagr_5yr": 1.4,
-            "ni_cagr_5yr": 3.7,
-            "analyst_target": 62.96,
-            "analyst_upside": 5.9,
-            "analyst_count": 25,
-            "dcf": {
-                "dcf_per_share": 72.04,
-                "dcf_upside": 21.1,
-                "mos_price": 54.03,
-                "wacc": 7.5,
-                "growth_phase1": 5.9,
-                "terminal_growth": 2.5,
-                "pv_fcf": 40449.1,
-                "pv_terminal_m": 153080.5
-            },
-            "dividend": {
-                "yield": 424.0,
-                "eps_payout": 70.6,
-                "fcf_payout": 52.2,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 6.8,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "FIS",
-            "name": "Fidelity National Information S",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "price": 43.56,
-            "roe": 17.22,
-            "pe_ratio": 8.44,
-            "debt_to_equity": 1.32,
-            "revenue_growth": 30.1,
-            "profit_margin": 23.3,
-            "fcf_positive": true,
-            "beta": 0.83,
-            "roic": null,
-            "roce": null,
-            "pfcf": 9.2,
-            "rev_cagr_5yr": 3.2,
-            "ni_cagr_5yr": -12.6,
-            "analyst_target": 59.0,
-            "analyst_upside": 35.4,
-            "analyst_count": 21,
-            "dcf": {
-                "dcf_per_share": 87.39,
-                "dcf_upside": 100.6,
-                "mos_price": 65.54,
-                "wacc": 7.5,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 13387.0,
-                "pv_terminal_m": 52926.6
-            },
-            "dividend": {
-                "yield": 386.0,
-                "eps_payout": 32.6,
-                "fcf_payout": 35.5,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 6.7,
-            "penalty_applied": false
-        },
-        {
             "ticker": "CB",
             "name": "Chubb Limited",
             "sector": "Financial Services",
@@ -807,6 +780,47 @@
                 "risk_flag": null
             },
             "score": 6.7,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "ADP",
+            "name": "Automatic Data Processing, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "price": 225.31,
+            "roe": 71.21,
+            "pe_ratio": 21.02,
+            "debt_to_equity": 0.69,
+            "revenue_growth": 7.0,
+            "profit_margin": 20.1,
+            "fcf_positive": true,
+            "beta": 0.84,
+            "roic": null,
+            "roce": null,
+            "pfcf": 19.0,
+            "rev_cagr_5yr": 7.6,
+            "ni_cagr_5yr": 11.4,
+            "analyst_target": 246.33333,
+            "analyst_upside": 9.3,
+            "analyst_count": 15,
+            "dcf": {
+                "dcf_per_share": 212.62,
+                "dcf_upside": -5.6,
+                "mos_price": 159.47,
+                "wacc": 8.77,
+                "growth_phase1": 8.8,
+                "terminal_growth": 2.5,
+                "pv_fcf": 22416.4,
+                "pv_terminal_m": 66974.0
+            },
+            "dividend": {
+                "yield": 302.0,
+                "eps_payout": 63.4,
+                "fcf_payout": 57.2,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 6.5,
             "penalty_applied": false
         },
         {
@@ -933,47 +947,6 @@
             "penalty_applied": false
         },
         {
-            "ticker": "GOOG",
-            "name": "Alphabet Inc.",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "price": 379.38,
-            "roe": 38.88,
-            "pe_ratio": 28.89,
-            "debt_to_equity": 0.2,
-            "revenue_growth": 21.8,
-            "profit_margin": 37.9,
-            "fcf_positive": true,
-            "beta": 1.27,
-            "roic": null,
-            "roce": null,
-            "pfcf": 164.6,
-            "rev_cagr_5yr": 12.5,
-            "ni_cagr_5yr": 30.1,
-            "analyst_target": 417.94,
-            "analyst_upside": 10.2,
-            "analyst_count": 16,
-            "dcf": {
-                "dcf_per_share": 60.83,
-                "dcf_upside": -84.0,
-                "mos_price": 45.62,
-                "wacc": 11.27,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 137946.0,
-                "pv_terminal_m": 289819.2
-            },
-            "dividend": {
-                "yield": 23.0,
-                "eps_payout": 6.7,
-                "fcf_payout": 17.2,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 6.3,
-            "penalty_applied": false
-        },
-        {
             "ticker": "ACN",
             "name": "Accenture plc",
             "sector": "Technology",
@@ -1015,41 +988,6 @@
             "penalty_applied": false
         },
         {
-            "ticker": "NFLX",
-            "name": "Netflix, Inc.",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "price": 88.6,
-            "roe": 48.49,
-            "pe_ratio": 28.58,
-            "debt_to_equity": 0.54,
-            "revenue_growth": 16.2,
-            "profit_margin": 28.5,
-            "fcf_positive": true,
-            "beta": 1.55,
-            "roic": null,
-            "roce": null,
-            "pfcf": 14.4,
-            "rev_cagr_5yr": 12.6,
-            "ni_cagr_5yr": 34.7,
-            "analyst_target": 114.555,
-            "analyst_upside": 29.3,
-            "analyst_count": 44,
-            "dcf": {
-                "dcf_per_share": 46.99,
-                "dcf_upside": -47.0,
-                "mos_price": 35.25,
-                "wacc": 12.52,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 76745.9,
-                "pv_terminal_m": 137876.2
-            },
-            "dividend": null,
-            "score": 6.2,
-            "penalty_applied": false
-        },
-        {
             "ticker": "SOLV",
             "name": "Solventum Corporation",
             "sector": "Healthcare",
@@ -1079,6 +1017,41 @@
                 "terminal_growth": 2.5,
                 "pv_fcf": 1566.7,
                 "pv_terminal_m": 5750.0
+            },
+            "dividend": null,
+            "score": 6.2,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "NFLX",
+            "name": "Netflix, Inc.",
+            "sector": "Communication Services",
+            "industry_group": "Tech & AI",
+            "price": 88.6,
+            "roe": 48.49,
+            "pe_ratio": 28.58,
+            "debt_to_equity": 0.54,
+            "revenue_growth": 16.2,
+            "profit_margin": 28.5,
+            "fcf_positive": true,
+            "beta": 1.55,
+            "roic": null,
+            "roce": null,
+            "pfcf": 14.4,
+            "rev_cagr_5yr": 12.6,
+            "ni_cagr_5yr": 34.7,
+            "analyst_target": 114.555,
+            "analyst_upside": 29.3,
+            "analyst_count": 44,
+            "dcf": {
+                "dcf_per_share": 46.99,
+                "dcf_upside": -47.0,
+                "mos_price": 35.25,
+                "wacc": 12.52,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 76745.9,
+                "pv_terminal_m": 137876.2
             },
             "dividend": null,
             "score": 6.2,
@@ -1167,6 +1140,76 @@
             "penalty_applied": false
         },
         {
+            "ticker": "UBER",
+            "name": "Uber Technologies, Inc.",
+            "sector": "Technology",
+            "industry_group": "Tech & AI",
+            "price": 71.82,
+            "roe": 35.31,
+            "pe_ratio": 17.82,
+            "debt_to_equity": 0.48,
+            "revenue_growth": 14.5,
+            "profit_margin": 15.9,
+            "fcf_positive": true,
+            "beta": 1.16,
+            "roic": null,
+            "roce": null,
+            "pfcf": 22.4,
+            "rev_cagr_5yr": 17.7,
+            "ni_cagr_5yr": null,
+            "analyst_target": 104.4512,
+            "analyst_upside": 45.4,
+            "analyst_count": 50,
+            "dcf": {
+                "dcf_per_share": 34.58,
+                "dcf_upside": -51.9,
+                "mos_price": 25.93,
+                "wacc": 10.14,
+                "growth_phase1": 0.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 25242.5,
+                "pv_terminal_m": 57564.0
+            },
+            "dividend": null,
+            "score": 6.0,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "INCY",
+            "name": "Incyte Corporation",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "price": 97.16,
+            "roe": 30.82,
+            "pe_ratio": 13.72,
+            "debt_to_equity": 0.7,
+            "revenue_growth": 20.9,
+            "profit_margin": 26.7,
+            "fcf_positive": true,
+            "beta": 0.8,
+            "roic": null,
+            "roce": null,
+            "pfcf": 34.7,
+            "rev_cagr_5yr": 14.8,
+            "ni_cagr_5yr": 55.7,
+            "analyst_target": 107.95833,
+            "analyst_upside": 11.1,
+            "analyst_count": 24,
+            "dcf": {
+                "dcf_per_share": 59.12,
+                "dcf_upside": -39.2,
+                "mos_price": 44.34,
+                "wacc": 8.87,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 2944.3,
+                "pv_terminal_m": 8906.4
+            },
+            "dividend": null,
+            "score": 6.0,
+            "penalty_applied": false
+        },
+        {
             "ticker": "GIS",
             "name": "General Mills, Inc.",
             "sector": "Consumer Defensive",
@@ -1208,73 +1251,44 @@
             "penalty_applied": false
         },
         {
-            "ticker": "INCY",
-            "name": "Incyte Corporation",
-            "sector": "Healthcare",
-            "industry_group": "Healthcare",
-            "price": 97.16,
-            "roe": 30.82,
-            "pe_ratio": 13.72,
-            "debt_to_equity": 0.7,
-            "revenue_growth": 20.9,
-            "profit_margin": 26.7,
-            "fcf_positive": true,
-            "beta": 0.8,
-            "roic": null,
-            "roce": null,
-            "pfcf": 34.7,
-            "rev_cagr_5yr": 14.8,
-            "ni_cagr_5yr": 55.7,
-            "analyst_target": 107.95833,
-            "analyst_upside": 11.1,
-            "analyst_count": 24,
-            "dcf": {
-                "dcf_per_share": 59.12,
-                "dcf_upside": -39.2,
-                "mos_price": 44.34,
-                "wacc": 8.87,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 2944.3,
-                "pv_terminal_m": 8906.4
-            },
-            "dividend": null,
-            "score": 6.0,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "UBER",
-            "name": "Uber Technologies, Inc.",
-            "sector": "Technology",
+            "ticker": "FOXA",
+            "name": "Fox Corporation",
+            "sector": "Communication Services",
             "industry_group": "Tech & AI",
-            "price": 71.82,
-            "roe": 35.31,
-            "pe_ratio": 17.82,
-            "debt_to_equity": 0.48,
-            "revenue_growth": 14.5,
-            "profit_margin": 15.9,
+            "price": 63.98,
+            "roe": 15.2,
+            "pe_ratio": 16.84,
+            "debt_to_equity": 0.68,
+            "revenue_growth": -8.6,
+            "profit_margin": 10.6,
             "fcf_positive": true,
-            "beta": 1.16,
+            "beta": 0.53,
             "roic": null,
             "roce": null,
-            "pfcf": 22.4,
-            "rev_cagr_5yr": 17.7,
-            "ni_cagr_5yr": null,
-            "analyst_target": 104.4512,
-            "analyst_upside": 45.4,
-            "analyst_count": 50,
+            "pfcf": 19.1,
+            "rev_cagr_5yr": 5.3,
+            "ni_cagr_5yr": 23.4,
+            "analyst_target": 73.88235,
+            "analyst_upside": 15.5,
+            "analyst_count": 17,
             "dcf": {
-                "dcf_per_share": 34.58,
-                "dcf_upside": -51.9,
-                "mos_price": 25.93,
-                "wacc": 10.14,
+                "dcf_per_share": 98.33,
+                "dcf_upside": 53.7,
+                "mos_price": 73.75,
+                "wacc": 7.5,
                 "growth_phase1": 0.0,
                 "terminal_growth": 2.5,
-                "pv_fcf": 25242.5,
-                "pv_terminal_m": 57564.0
+                "pv_fcf": 5822.0,
+                "pv_terminal_m": 21367.0
             },
-            "dividend": null,
-            "score": 6.0,
+            "dividend": {
+                "yield": 88.0,
+                "eps_payout": 14.7,
+                "fcf_payout": 7.9,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 5.9,
             "penalty_applied": false
         },
         {
@@ -1312,88 +1326,6 @@
                 "yield": 149.0,
                 "eps_payout": 34.9,
                 "fcf_payout": 36.8,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 5.9,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "FOX",
-            "name": "Fox Corporation",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "price": 57.24,
-            "roe": 15.2,
-            "pe_ratio": 15.06,
-            "debt_to_equity": 0.68,
-            "revenue_growth": -8.6,
-            "profit_margin": 10.6,
-            "fcf_positive": true,
-            "beta": 0.53,
-            "roic": null,
-            "roce": null,
-            "pfcf": 17.1,
-            "rev_cagr_5yr": 5.3,
-            "ni_cagr_5yr": 23.4,
-            "analyst_target": null,
-            "analyst_upside": null,
-            "analyst_count": 0,
-            "dcf": {
-                "dcf_per_share": 88.87,
-                "dcf_upside": 55.3,
-                "mos_price": 66.66,
-                "wacc": 7.5,
-                "growth_phase1": 0.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 5822.0,
-                "pv_terminal_m": 21367.0
-            },
-            "dividend": {
-                "yield": 98.0,
-                "eps_payout": 14.7,
-                "fcf_payout": 8.8,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 5.9,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "FOXA",
-            "name": "Fox Corporation",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "price": 63.98,
-            "roe": 15.2,
-            "pe_ratio": 16.84,
-            "debt_to_equity": 0.68,
-            "revenue_growth": -8.6,
-            "profit_margin": 10.6,
-            "fcf_positive": true,
-            "beta": 0.53,
-            "roic": null,
-            "roce": null,
-            "pfcf": 19.1,
-            "rev_cagr_5yr": 5.3,
-            "ni_cagr_5yr": 23.4,
-            "analyst_target": 73.88235,
-            "analyst_upside": 15.5,
-            "analyst_count": 17,
-            "dcf": {
-                "dcf_per_share": 98.33,
-                "dcf_upside": 53.7,
-                "mos_price": 73.75,
-                "wacc": 7.5,
-                "growth_phase1": 0.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 5822.0,
-                "pv_terminal_m": 21367.0
-            },
-            "dividend": {
-                "yield": 88.0,
-                "eps_payout": 14.7,
-                "fcf_payout": 7.9,
                 "sustainable": true,
                 "risk_flag": null
             },
@@ -1442,44 +1374,70 @@
             "penalty_applied": false
         },
         {
-            "ticker": "WTW",
-            "name": "Willis Towers Watson Public Lim",
+            "ticker": "SYF",
+            "name": "Synchrony Financial",
             "sector": "Financial Services",
             "industry_group": "Financials",
-            "price": 257.4,
-            "roe": 20.61,
-            "pe_ratio": 15.11,
-            "debt_to_equity": 0.86,
-            "revenue_growth": 8.5,
-            "profit_margin": 16.8,
+            "price": 71.83,
+            "roe": 21.78,
+            "pe_ratio": 7.44,
+            "debt_to_equity": 0,
+            "revenue_growth": 6.1,
+            "profit_margin": 36.4,
             "fcf_positive": true,
-            "beta": 0.45,
+            "beta": 1.36,
             "roic": null,
             "roce": null,
-            "pfcf": 11.8,
-            "rev_cagr_5yr": 3.1,
-            "ni_cagr_5yr": 15.2,
-            "analyst_target": 334.3158,
-            "analyst_upside": 29.9,
-            "analyst_count": 19,
-            "dcf": {
-                "dcf_per_share": 500.88,
-                "dcf_upside": 94.6,
-                "mos_price": 375.66,
-                "wacc": 7.5,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 10944.3,
-                "pv_terminal_m": 43269.2
-            },
+            "pfcf": null,
+            "rev_cagr_5yr": 8.7,
+            "ni_cagr_5yr": 5.6,
+            "analyst_target": 89.21739,
+            "analyst_upside": 24.2,
+            "analyst_count": 23,
+            "dcf": null,
             "dividend": {
-                "yield": 149.0,
-                "eps_payout": 22.5,
-                "fcf_payout": 17.7,
+                "yield": 167.0,
+                "eps_payout": 12.4,
+                "fcf_payout": null,
                 "sustainable": true,
                 "risk_flag": null
             },
-            "score": 5.7,
+            "score": 5.8,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "UAL",
+            "name": "United Airlines Holdings, Inc.",
+            "sector": "Industrials",
+            "industry_group": "Industrials",
+            "price": 99.96,
+            "roe": 25.73,
+            "pe_ratio": 8.94,
+            "debt_to_equity": 1.95,
+            "revenue_growth": 10.6,
+            "profit_margin": 6.1,
+            "fcf_positive": true,
+            "beta": 1.21,
+            "roic": null,
+            "roce": null,
+            "pfcf": 19.7,
+            "rev_cagr_5yr": 9.5,
+            "ni_cagr_5yr": 65.7,
+            "analyst_target": 130.04167,
+            "analyst_upside": 30.1,
+            "analyst_count": 24,
+            "dcf": {
+                "dcf_per_share": 42.1,
+                "dcf_upside": -57.9,
+                "mos_price": 31.58,
+                "wacc": 7.5,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 9010.8,
+                "pv_terminal_m": 35625.1
+            },
+            "dividend": null,
+            "score": 5.8,
             "penalty_applied": false
         },
         {
@@ -1524,44 +1482,85 @@
             "penalty_applied": false
         },
         {
-            "ticker": "VZ",
-            "name": "Verizon Communications Inc.",
-            "sector": "Communication Services",
-            "industry_group": "Tech & AI",
-            "price": 48.35,
-            "roe": 17.2,
-            "pe_ratio": 11.79,
-            "debt_to_equity": 1.92,
-            "revenue_growth": 2.9,
-            "profit_margin": 12.5,
+            "ticker": "WTW",
+            "name": "Willis Towers Watson Public Lim",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "price": 257.4,
+            "roe": 20.61,
+            "pe_ratio": 15.11,
+            "debt_to_equity": 0.86,
+            "revenue_growth": 8.5,
+            "profit_margin": 16.8,
             "fcf_positive": true,
-            "beta": 0.22,
+            "beta": 0.45,
             "roic": null,
             "roce": null,
-            "pfcf": 10.3,
-            "rev_cagr_5yr": 0.3,
-            "ni_cagr_5yr": -6.9,
-            "analyst_target": 51.85455,
-            "analyst_upside": 7.2,
-            "analyst_count": 22,
+            "pfcf": 11.8,
+            "rev_cagr_5yr": 3.1,
+            "ni_cagr_5yr": 15.2,
+            "analyst_target": 334.3158,
+            "analyst_upside": 29.9,
+            "analyst_count": 19,
             "dcf": {
-                "dcf_per_share": 50.64,
-                "dcf_upside": 4.7,
-                "mos_price": 37.98,
+                "dcf_per_share": 500.88,
+                "dcf_upside": 94.6,
+                "mos_price": 375.66,
                 "wacc": 7.5,
-                "growth_phase1": 3.6,
+                "growth_phase1": 15.0,
                 "terminal_growth": 2.5,
-                "pv_fcf": 86989.5,
-                "pv_terminal_m": 325372.2
+                "pv_fcf": 10944.3,
+                "pv_terminal_m": 43269.2
             },
             "dividend": {
-                "yield": 585.0,
-                "eps_payout": 69.0,
-                "fcf_payout": 60.3,
+                "yield": 149.0,
+                "eps_payout": 22.5,
+                "fcf_payout": 17.7,
                 "sustainable": true,
                 "risk_flag": null
             },
-            "score": 5.6,
+            "score": 5.7,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "FDS",
+            "name": "FactSet Research Systems Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "price": 232.0,
+            "roe": 28.08,
+            "pe_ratio": 14.93,
+            "debt_to_equity": 0.73,
+            "revenue_growth": 7.1,
+            "profit_margin": 24.5,
+            "fcf_positive": true,
+            "beta": 0.69,
+            "roic": null,
+            "roce": null,
+            "pfcf": 14.3,
+            "rev_cagr_5yr": 8.0,
+            "ni_cagr_5yr": 14.6,
+            "analyst_target": 252.4375,
+            "analyst_upside": 8.8,
+            "analyst_count": 16,
+            "dcf": {
+                "dcf_per_share": 280.3,
+                "dcf_upside": 20.8,
+                "mos_price": 210.23,
+                "wacc": 7.5,
+                "growth_phase1": 1.3,
+                "terminal_growth": 2.5,
+                "pv_fcf": 2505.6,
+                "pv_terminal_m": 9259.7
+            },
+            "dividend": {
+                "yield": 200.0,
+                "eps_payout": 29.9,
+                "fcf_payout": 28.6,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "score": 5.7,
             "penalty_applied": false
         },
         {
@@ -1606,126 +1605,79 @@
             "penalty_applied": false
         },
         {
-            "ticker": "EOG",
-            "name": "EOG Resources, Inc.",
-            "sector": "Energy",
-            "industry_group": "Energy",
-            "price": 141.22,
-            "roe": 18.2,
-            "pe_ratio": 13.89,
-            "debt_to_equity": 0.27,
-            "revenue_growth": 15.6,
-            "profit_margin": 23.3,
+            "ticker": "NVR",
+            "name": "NVR, Inc.",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Consumer Cyclical",
+            "price": 6036.99,
+            "roe": 33.26,
+            "pe_ratio": 14.75,
+            "debt_to_equity": 0.31,
+            "revenue_growth": -21.4,
+            "profit_margin": 12.5,
             "fcf_positive": true,
-            "beta": 0.28,
+            "beta": 0.95,
             "roic": null,
             "roce": null,
-            "pfcf": 26.3,
-            "rev_cagr_5yr": -8.5,
-            "ni_cagr_5yr": -13.7,
-            "analyst_target": 159.32143,
-            "analyst_upside": 12.8,
-            "analyst_count": 28,
+            "pfcf": 13.0,
+            "rev_cagr_5yr": -0.6,
+            "ni_cagr_5yr": -8.1,
+            "analyst_target": 7070.0,
+            "analyst_upside": 17.1,
+            "analyst_count": 6,
             "dcf": {
-                "dcf_per_share": 130.15,
-                "dcf_upside": -7.8,
-                "mos_price": 97.61,
-                "wacc": 7.5,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 15670.5,
-                "pv_terminal_m": 61954.6
-            },
-            "dividend": {
-                "yield": 289.0,
-                "eps_payout": 40.1,
-                "fcf_payout": 75.9,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 5.5,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "AAPL",
-            "name": "Apple Inc.",
-            "sector": "Technology",
-            "industry_group": "Tech & AI",
-            "price": 308.82,
-            "roe": 141.47,
-            "pe_ratio": 37.43,
-            "debt_to_equity": 0.8,
-            "revenue_growth": 16.6,
-            "profit_margin": 27.2,
-            "fcf_positive": true,
-            "beta": 1.06,
-            "roic": null,
-            "roce": null,
-            "pfcf": 44.9,
-            "rev_cagr_5yr": 1.8,
-            "ni_cagr_5yr": 3.9,
-            "analyst_target": 308.6465,
-            "analyst_upside": -0.1,
-            "analyst_count": 43,
-            "dcf": {
-                "dcf_per_share": 114.61,
-                "dcf_upside": -62.9,
-                "mos_price": 85.96,
-                "wacc": 10.2,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 513802.7,
-                "pv_terminal_m": 1254259.2
-            },
-            "dividend": {
-                "yield": 35.0,
-                "eps_payout": 13.1,
-                "fcf_payout": 15.7,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "score": 5.5,
-            "penalty_applied": false
-        },
-        {
-            "ticker": "STZ",
-            "name": "Constellation Brands, Inc.",
-            "sector": "Consumer Defensive",
-            "industry_group": "Consumer Defensive",
-            "price": 149.5,
-            "roe": 22.64,
-            "pe_ratio": 15.56,
-            "debt_to_equity": 1.34,
-            "revenue_growth": -11.3,
-            "profit_margin": 18.5,
-            "fcf_positive": true,
-            "beta": 0.42,
-            "roic": null,
-            "roce": null,
-            "pfcf": 12.6,
-            "rev_cagr_5yr": -1.1,
-            "ni_cagr_5yr": null,
-            "analyst_target": 177.54546,
-            "analyst_upside": 18.8,
-            "analyst_count": 22,
-            "dcf": {
-                "dcf_per_share": 162.19,
-                "dcf_upside": 8.5,
-                "mos_price": 121.64,
-                "wacc": 7.5,
+                "dcf_per_share": 6266.06,
+                "dcf_upside": 3.8,
+                "mos_price": 4699.54,
+                "wacc": 9.22,
                 "growth_phase1": 0.0,
                 "terminal_growth": 2.5,
-                "pv_fcf": 8378.2,
-                "pv_terminal_m": 30748.4
+                "pv_fcf": 4946.5,
+                "pv_terminal_m": 13058.3
+            },
+            "dividend": null,
+            "score": 5.6,
+            "penalty_applied": false
+        },
+        {
+            "ticker": "EXPE",
+            "name": "Expedia Group, Inc.",
+            "sector": "Consumer Cyclical",
+            "industry_group": "Consumer Cyclical",
+            "price": 214.65,
+            "roe": 71.49,
+            "pe_ratio": 18.95,
+            "debt_to_equity": 2.57,
+            "revenue_growth": 14.7,
+            "profit_margin": 9.8,
+            "fcf_positive": true,
+            "beta": 1.3,
+            "roic": null,
+            "roce": null,
+            "pfcf": 7.4,
+            "rev_cagr_5yr": 8.1,
+            "ni_cagr_5yr": 54.3,
+            "analyst_target": 286.32352,
+            "analyst_upside": 33.4,
+            "analyst_count": 34,
+            "dcf": {
+                "dcf_per_share": 206.83,
+                "dcf_upside": -3.6,
+                "mos_price": 155.12,
+                "wacc": 10.09,
+                "growth_phase1": 9.8,
+                "terminal_growth": 2.5,
+                "pv_fcf": 8301.2,
+                "pv_terminal_m": 20090.4
             },
             "dividend": {
-                "yield": 276.0,
-                "eps_payout": 42.9,
-                "fcf_payout": 34.6,
+                "yield": 82.0,
+                "eps_payout": 15.5,
+                "fcf_payout": 5.8,
                 "sustainable": true,
                 "risk_flag": null
             },
-            "score": 5.4,
+            "score": 5.6,
             "penalty_applied": false
         }
     ],
@@ -1773,7 +1725,7 @@
             "position_value": 1000.0,
             "shares": 2.207,
             "pl_percent": -0.17,
-            "tp_target": 26.3
+            "tp_target": 30.0
         },
         {
             "ticker": "PGR",
@@ -2093,17 +2045,21 @@
         {
             "date": "05-25 11:44",
             "value": 10247.38
+        },
+        {
+            "date": "05-25 20:20",
+            "value": 10247.38
         }
     ],
     "memory": {
         "lessons": [],
         "positive_sectors": [],
-        "last_update": "2026-05-25T11:44:19.382413+00:00",
+        "last_update": "2026-05-25T20:20:13.659533+00:00",
         "version": "nexus-v3-kelly",
         "vix_threshold": 6.5
     },
     "macro": {
-        "vix": 16.61,
+        "vix": 16.59,
         "treasury_10y": 4.56
     },
     "portfolio": {
@@ -2146,40 +2102,53 @@
                 }
             ],
             "cik": "0000899051",
-            "retrieved_at": "2026-05-25T11:42:53.087786+00:00"
+            "retrieved_at": "2026-05-25T20:19:10.061725+00:00"
         },
-        "NEM": {
+        "ADBE": {
             "filings": [
                 {
                     "form": "8-K",
-                    "date": "2026-05-13",
-                    "accession": "0001104659-26-060260",
+                    "date": "2026-04-21",
+                    "accession": "0000796343-26-000101",
+                    "description": "8-K",
+                    "excerpt": "adbe-20260415 0000796343 false 0000796343 2026-04-15 2026-04-15 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 _________________________ FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (date of earliest event reported): April 15, 2026 ADOBE INC. (Exact name of registrant as specified in its charter) Delaware 000-15175 77-0019522 (State or other jurisdiction of incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 345 Park Avenue San Jose , California 95110-2704 (Address of principal executive offices and zip code) Registrant&#8217;s telephone number, including area code: ( 408 ) 536-6000 Not Applicable (Former name or former address, if changed since last report) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of Each Class Trading Symbol Nam"
+                }
+            ],
+            "cik": "0000796343",
+            "retrieved_at": "2026-05-25T20:19:11.136436+00:00"
+        },
+        "TRV": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-05-22",
+                    "accession": "0001104659-26-065727",
                     "description": "FORM 8-K",
-                    "excerpt": "false 0001164727 0001164727 2026-05-12 2026-05-12 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 &#160; &#160; FORM 8-K &#160; &#160; Current Report PURSUANT TO SECTION 13 OR 15(d) of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): May 12, 2026 &#160; Newmont Corporation (Exact name of Registrant as Specified in Its Charter) &#160; &#160; &#160; &#160; Delaware (State or Other Jurisdiction of Incorporation) &#160; &#160; 001-31240 (Commission File Number) &#160; &#160; 84-1611629 (I.R.S. Employer Identification No.) &#160; &#160; 6900 E. Layton Avenue , Denver , CO 80237 (Address of principal executive offices) (zip code) &#160; &#160; ( 303 ) 863-7414 (Registrant&#8217;s telephone number, including area code) &#160; Not Applicable (Former Name or Former Address, if Changed Since Last Report) &#160; &#160; &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#160; &#168; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#160; &#160; &#168; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#160; &#168; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#160; &#168; Pre-comme"
+                    "excerpt": "false 0000086312 0000086312 2026-05-20 2026-05-20 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160;&#160; &#160; &#160; FORM 8-K &#160;&#160; &#160; &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): May 20, 2026 &#160; &#160; &#160; The Travelers Companies, Inc. (Exact name of registrant as specified in its charter ) &#160; &#160; &#160; Minnesota (State or other jurisdiction of incorporation) &#160; &#160; 001-10898 (Commission File Number) &#160; 41-0518860 (IRS Employer Identification No.) &#160; 485 Lexington Avenue New York , New York 10017 (Address of principal executive offices) (Zip code) &#160; ( 917 ) 778-6000 (Registrant&#8217;s telephone number, including area code) &#160; Not Applicable (Former name or former address, if changed since last report) &#160; &#160; &#160; Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions ( see General Instruction A.2. below): &#160; &#168; &#160;&#160;&#160;&#160;&#160;Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#168; &#160;&#160;&#160;&#160;&#160;Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#168; &#160;&#160;&#160;&#160;&#160"
                 },
                 {
                     "form": "8-K",
-                    "date": "2026-04-28",
-                    "accession": "0001104659-26-050355",
+                    "date": "2026-05-21",
+                    "accession": "0001104659-26-065156",
                     "description": "FORM 8-K",
-                    "excerpt": "false 0001164727 0001164727 2026-04-24 2026-04-24 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 &#160; &#160; FORM 8-K &#160; &#160; Current Report PURSUANT TO SECTION 13 OR 15(d) of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): April 24, 2026 &#160; Newmont Corporation (Exact name of Registrant as Specified in Its Charter) &#160; &#160; &#160; &#160; Delaware (State or Other Jurisdiction of Incorporation) &#160; &#160; 001-31240 (Commission File Number) &#160; &#160; 84-1611629 (I.R.S. Employer Identification No.) &#160; &#160; 6900 E. Layton Avenue , Denver , CO 80237 (Address of principal executive offices) (zip code) &#160; &#160; ( 303 ) 863-7414 (Registrant&#8217;s telephone number, including area code) &#160; Not Applicable (Former Name or Former Address, if Changed Since Last Report) &#160; &#160; &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#160; &#168; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#160; &#160; &#168; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#160; &#168; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#160; &#168; Pre-com"
+                    "excerpt": "false 0000086312 0000086312 2026-05-15 2026-05-15 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160;&#160; &#160; &#160; FORM 8-K &#160;&#160; &#160; &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): May 15, 2026 &#160; &#160; &#160; The Travelers Companies, Inc. (Exact name of registrant as specified in its charter ) &#160; &#160; &#160; Minnesota (State or other jurisdiction of incorporation) &#160; &#160; 001-10898 (Commission File Number) &#160; 41-0518860 (IRS Employer Identification No.) &#160; 485 Lexington Avenue New York , New York 10017 (Address of principal executive offices) (Zip code) &#160; ( 917 ) 778-6000 (Registrant&#8217;s telephone number, including area code) &#160; Not Applicable (Former name or former address, if changed since last report) &#160; &#160; &#160; Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions ( see General Instruction A.2. below): &#160; &#168; &#160;&#160;&#160;&#160;&#160;Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#168; &#160;&#160;&#160;&#160;&#160;Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#168; &#160;&#160;&#160;&#160;&#160"
                 },
                 {
                     "form": "10-Q",
-                    "date": "2026-04-23",
-                    "accession": "0001164727-26-000019",
+                    "date": "2026-04-16",
+                    "accession": "0000086312-26-000111",
                     "description": "10-Q"
                 },
                 {
                     "form": "8-K",
-                    "date": "2026-04-23",
-                    "accession": "0001164727-26-000017",
+                    "date": "2026-04-16",
+                    "accession": "0000086312-26-000110",
                     "description": "8-K",
-                    "excerpt": "ITEM 2.02. RESULTS OF OPERATIONS AND FINANCIAL CONDITION. On April&#160;23, 2026, Newmont Corporation, a Delaware corporation, issued a news release announcing its results and related information for its first quarter ended March&#160;31, 2026. A copy of the news release is attached hereto as Exhibit 99.1 and is incorporated by reference in its entirety into this Item 2.02. The information furnished in this Item 2.02 shall not be deemed &#8220;filed&#8221; for purposes of Section 18 of the Securities Exchange Act of 1934, as amended, or otherwise subject to the liabilities of that section, nor shall such information be deemed incorporated by reference in any filing under the Securities Act of 1933, as amended, except as shall be expressly set forth by specific reference in such filing. ITEM 9.01. FINANCIAL STATEMENTS AND EXHIBITS. (d) Exhibits Exhibit Number&#160;&#160;&#160;&#160;Description of Exhibit 99.1 &#160;&#160;&#160;&#160; News Release, dated April 23, 2026, related to the Company's results and related information for the first quarter ended March 31, 2026 104&#160;&#160;&#160;&#160;Cover Page Interactive Data File (embedded within the Inline XBRL document) SIGNATURE Pursuant to the requirements of the Securities and Exchange Act of 1934, as amended, the Registrant has duly caused this report to be signed on its behalf by the undersigned hereunto duly authorized. NEWMONT CORPORATION Date: April&#160;23, 2026 By: /s/ Peter I. Wexler Peter I. Wexler Executive Vice Pre"
+                    "excerpt": "trv-20260416 0000086312 false 0000086312 2026-04-16 2026-04-16 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160;_______________________________________ &#160; FORM&#160; 8-K &#160;______________________________________ CURRENT REPORT Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): &#160; April&#160;16, 2026 &#160;_______________________________________________ The Travelers Companies,&#160;Inc. (Exact name of registrant as specified in its charter) &#160;_______________________________________________ &#160; Minnesota &#160; 001-10898 &#160; 41-0518860 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (I.R.S. Employer Identification No.) 485 Lexington Avenue New York , New York 10017 (Address of principal executive offices) (Zip Code) &#160; ( 917 ) 778-6000 (Registrant&#8217;s telephone number, including area code) &#160; Not Applicable (Former name or former address, if changed since last report) &#160;_________________________________________________ Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions ( see General Instruction A.2. below): &#160; &#9744; &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CF"
                 }
             ],
-            "cik": "0001164727",
-            "retrieved_at": "2026-05-25T11:42:54.758629+00:00"
+            "cik": "0000086312",
+            "retrieved_at": "2026-05-25T20:19:12.940727+00:00"
         },
         "BR": {
             "filings": [
@@ -2213,40 +2182,7 @@
                 }
             ],
             "cik": "0001383312",
-            "retrieved_at": "2026-05-25T11:42:56.835144+00:00"
-        },
-        "AMP": {
-            "filings": [
-                {
-                    "form": "8-K",
-                    "date": "2026-05-20",
-                    "accession": "0001104659-26-064493",
-                    "description": "FORM 8-K",
-                    "excerpt": "false 0000820027 AMERIPRISE FINANCIAL INC 0000820027 2026-05-15 2026-05-15 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; _________________________________________________________________________________ &#160; FORM&#160; 8-K &#160; CURRENT REPORT &#160; Pursuant to Section 13 OR 15(d) of The Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): May 15, 2026 &#160; AMERIPRISE FINANCIAL,&#160;INC. (Exact name of Registrant as specified in its charter) &#160; Delaware &#160; 001-32525 &#160; 13-3180631 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (IRS Employer Identification No.) &#160; 1099 Ameriprise Financial Center Minneapolis , Minnesota &#160; 55474 (Address of principal executive offices) &#160; (Zip Code) &#160; Registrant&#8217;s telephone number, including area code: ( 612 ) 671-3131 &#160; Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#168; &#160; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#168; &#160;Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#168; &#160;Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CF"
-                },
-                {
-                    "form": "10-Q",
-                    "date": "2026-05-07",
-                    "accession": "0000820027-26-000027",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-30",
-                    "accession": "0001104659-26-052928",
-                    "description": "FORM 8-K",
-                    "excerpt": "false 0000820027 AMERIPRISE FINANCIAL INC 0000820027 2026-04-29 2026-04-29 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, DC 20549 &#160; FORM&#160; 8-K &#160; CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): April 29, 2026 &#160; AMERIPRISE FINANCIAL,&#160;INC. (Exact name of registrant as specified in its charter) &#160; Delaware &#160; 001-32525 &#160; 13-3180631 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (IRS Employer Identification No.) &#160; 1099 Ameriprise Financial Center Minneapolis , Minnesota &#160; 55474 (Address of principal executive offices) &#160; (Zip Code) &#160; Registrant&#8217;s telephone number, including area code: ( 612 ) 671-3131 &#160; Former name or former address, if changed since last report: Not Applicable &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#160; &#168; &#160; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#168; &#160;Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#168; &#160;Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;und"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-23",
-                    "accession": "0000820027-26-000020",
-                    "description": "8-K",
-                    "excerpt": "amp-20260423 0000820027 false 0000820027 2026-04-23 2026-04-23 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section&#160;13 OR 15(d)&#160;of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 23, 2026 AMERIPRISE FINANCIAL,&#160;INC. (Exact name of registrant as specified in its charter) Delaware &#160; 001-32525 13-3180631 (State or other jurisdiction of incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 1099 Ameriprise Financial Center Minneapolis Minnesota 55474 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code 612 671-3131 Former name or former address, if changed since last report: Not Applicable Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions ( see General Instruction A.2. below): &#9744; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule&#160;13e-4(c)&#160;under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b)"
-                }
-            ],
-            "cik": "0000820027",
-            "retrieved_at": "2026-05-25T11:42:58.507843+00:00"
+            "retrieved_at": "2026-05-25T20:19:15.122298+00:00"
         },
         "PGR": {
             "filings": [
@@ -2279,7 +2215,33 @@
                 }
             ],
             "cik": "0000080661",
-            "retrieved_at": "2026-05-25T11:43:00.448443+00:00"
+            "retrieved_at": "2026-05-25T20:19:16.943308+00:00"
+        },
+        "APA": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-05-07",
+                    "accession": "0001841666-26-000034",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-06",
+                    "accession": "0001841666-26-000027",
+                    "description": "8-K",
+                    "excerpt": "apa8k-20260506 false 0001841666 0001841666 2026-05-06 2026-05-06 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 OR 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 6, 2026 APA CORPORATION (Exact name of registrant as specified in its charter) Delaware 001-40144 86-1430562 (State or other jurisdiction of incorporation) (Commission File Number) (IRS Employer Identification No.) 2000 W Sam Houston Pkwy S, Suite 200 Houston , Texas 77042-3643 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 713 ) 296-6000 Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Trading Name of each exchange Title of each class Symbol(s) on wh"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-14",
+                    "accession": "0001841666-26-000021",
+                    "description": "8-K",
+                    "excerpt": "apa8k-20260414 false 0001841666 0001841666 2026-04-14 2026-04-14 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 OR 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 14, 2026 APA CORPORATION (Exact name of registrant as specified in its charter) Delaware 001-40144 86-1430562 (State or other jurisdiction of incorporation) (Commission File Number) (IRS Employer Identification No.) 2000 W Sam Houston Pkwy S, Suite 200 Houston , Texas 77042-3643 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 713 ) 296-6000 Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Name of each exchange Title of each class Trading Symbol(s) on"
+                }
+            ],
+            "cik": "0001841666",
+            "retrieved_at": "2026-05-25T20:19:18.517285+00:00"
         },
         "CI": {
             "filings": [
@@ -2312,33 +2274,7 @@
                 }
             ],
             "cik": "0001739940",
-            "retrieved_at": "2026-05-25T11:43:02.147443+00:00"
-        },
-        "APA": {
-            "filings": [
-                {
-                    "form": "10-Q",
-                    "date": "2026-05-07",
-                    "accession": "0001841666-26-000034",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-05-06",
-                    "accession": "0001841666-26-000027",
-                    "description": "8-K",
-                    "excerpt": "apa8k-20260506 false 0001841666 0001841666 2026-05-06 2026-05-06 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 OR 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 6, 2026 APA CORPORATION (Exact name of registrant as specified in its charter) Delaware 001-40144 86-1430562 (State or other jurisdiction of incorporation) (Commission File Number) (IRS Employer Identification No.) 2000 W Sam Houston Pkwy S, Suite 200 Houston , Texas 77042-3643 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 713 ) 296-6000 Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Trading Name of each exchange Title of each class Symbol(s) on wh"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-14",
-                    "accession": "0001841666-26-000021",
-                    "description": "8-K",
-                    "excerpt": "apa8k-20260414 false 0001841666 0001841666 2026-04-14 2026-04-14 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 OR 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 14, 2026 APA CORPORATION (Exact name of registrant as specified in its charter) Delaware 001-40144 86-1430562 (State or other jurisdiction of incorporation) (Commission File Number) (IRS Employer Identification No.) 2000 W Sam Houston Pkwy S, Suite 200 Houston , Texas 77042-3643 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 713 ) 296-6000 Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; &#160;&#160;&#160;&#160; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Name of each exchange Title of each class Trading Symbol(s) on"
-                }
-            ],
-            "cik": "0001841666",
-            "retrieved_at": "2026-05-25T11:43:03.557089+00:00"
+            "retrieved_at": "2026-05-25T20:19:20.193351+00:00"
         },
         "CINF": {
             "filings": [
@@ -2371,7 +2307,33 @@
                 }
             ],
             "cik": "0000020286",
-            "retrieved_at": "2026-05-25T11:43:05.415644+00:00"
+            "retrieved_at": "2026-05-25T20:19:22.075682+00:00"
+        },
+        "HIG": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-05-21",
+                    "accession": "0000874766-26-000041",
+                    "description": "8-K",
+                    "excerpt": "hig-20260520 0000874766 false 0000874766 2026-05-20 2026-05-20 0000874766 us-gaap:CommonStockMember 2026-05-20 2026-05-20 0000874766 us-gaap:DeferrableNotesMember 2026-05-20 2026-05-20 0000874766 us-gaap:NoncumulativePreferredStockMember 2026-05-20 2026-05-20 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM 8-K &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 20, 2026 &#160; The Hartford Insurance Group, Inc. (Exact name of registrant as specified in its charter) &#160; Delaware 001-13958 13-3317783 (State or Other Jurisdiction of Incorporation) (Commission File Number) (IRS Employer Identification No.) The Hartford Insurance Group, Inc. One Hartford Plaza , Hartford , Connecticut 06155 (Address of Principal Executive Offices) (Zip Code) Registrant&#8217;s telephone number, including area code: (860) &#160; 547-5000 &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rul"
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-04-23",
+                    "accession": "0000874766-26-000037",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-23",
+                    "accession": "0000874766-26-000036",
+                    "description": "8-K",
+                    "excerpt": "hig-20260423 0000874766 false 0000874766 2026-04-23 2026-04-23 0000874766 us-gaap:CommonStockMember 2026-04-23 2026-04-23 0000874766 us-gaap:DeferrableNotesMember 2026-04-23 2026-04-23 0000874766 us-gaap:NoncumulativePreferredStockMember 2026-04-23 2026-04-23 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM 8-K &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April&#160;23, 2026 &#160; The Hartford Insurance Group, Inc. (Exact name of registrant as specified in its charter) &#160; Delaware 001-13958 13-3317783 (State or Other Jurisdiction of Incorporation) (Commission File Number) (IRS Employer Identification No.) The Hartford Insurance Group, Inc. One Hartford Plaza , Hartford , Connecticut 06155 (Address of Principal Executive Offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 860 ) &#160; 547-5000 &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursua"
+                }
+            ],
+            "cik": "0000874766",
+            "retrieved_at": "2026-05-25T20:19:23.515876+00:00"
         },
         "CF": {
             "filings": [
@@ -2404,59 +2366,7 @@
                 }
             ],
             "cik": "0001324404",
-            "retrieved_at": "2026-05-25T11:43:07.127060+00:00"
-        },
-        "HIG": {
-            "filings": [
-                {
-                    "form": "8-K",
-                    "date": "2026-05-21",
-                    "accession": "0000874766-26-000041",
-                    "description": "8-K",
-                    "excerpt": "hig-20260520 0000874766 false 0000874766 2026-05-20 2026-05-20 0000874766 us-gaap:CommonStockMember 2026-05-20 2026-05-20 0000874766 us-gaap:DeferrableNotesMember 2026-05-20 2026-05-20 0000874766 us-gaap:NoncumulativePreferredStockMember 2026-05-20 2026-05-20 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM 8-K &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 20, 2026 &#160; The Hartford Insurance Group, Inc. (Exact name of registrant as specified in its charter) &#160; Delaware 001-13958 13-3317783 (State or Other Jurisdiction of Incorporation) (Commission File Number) (IRS Employer Identification No.) The Hartford Insurance Group, Inc. One Hartford Plaza , Hartford , Connecticut 06155 (Address of Principal Executive Offices) (Zip Code) Registrant&#8217;s telephone number, including area code: (860) &#160; 547-5000 &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rul"
-                },
-                {
-                    "form": "10-Q",
-                    "date": "2026-04-23",
-                    "accession": "0000874766-26-000037",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-23",
-                    "accession": "0000874766-26-000036",
-                    "description": "8-K",
-                    "excerpt": "hig-20260423 0000874766 false 0000874766 2026-04-23 2026-04-23 0000874766 us-gaap:CommonStockMember 2026-04-23 2026-04-23 0000874766 us-gaap:DeferrableNotesMember 2026-04-23 2026-04-23 0000874766 us-gaap:NoncumulativePreferredStockMember 2026-04-23 2026-04-23 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; FORM 8-K &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April&#160;23, 2026 &#160; The Hartford Insurance Group, Inc. (Exact name of registrant as specified in its charter) &#160; Delaware 001-13958 13-3317783 (State or Other Jurisdiction of Incorporation) (Commission File Number) (IRS Employer Identification No.) The Hartford Insurance Group, Inc. One Hartford Plaza , Hartford , Connecticut 06155 (Address of Principal Executive Offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 860 ) &#160; 547-5000 &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursua"
-                }
-            ],
-            "cik": "0000874766",
-            "retrieved_at": "2026-05-25T11:43:08.644258+00:00"
-        },
-        "GL": {
-            "filings": [
-                {
-                    "form": "10-Q",
-                    "date": "2026-05-07",
-                    "accession": "0000320335-26-000169",
-                    "description": "10-Q (Q1 2026)"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-05-04",
-                    "accession": "0000320335-26-000160",
-                    "description": "8-K (ANNUAL MEETING RESULTS 2026)",
-                    "excerpt": "gl-20260504 0000320335 false Chicago Stock Exchange, Inc. 0000320335 2026-05-04 2026-05-04 0000320335 us-gaap:CommonStockMember exch:XNYS 2026-05-04 2026-05-04 0000320335 us-gaap:CommonStockMember exch:XCHI 2026-05-04 2026-05-04 0000320335 us-gaap:SubordinatedDebtMember 2026-05-04 2026-05-04 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 4, 2026 (April 30, 2026) GLOBE LIFE INC. (Exact name of registrant as specified in its charter) Delaware &#160; 001-08052 63-0780404 (State or other jurisdiction of incorporation) &#160; (Commission File No.) (I.R.S. Employer ID No.) 7677 Henneman Way , McKinney , Texas 75070 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 972 )&#160; 569-4000 N/A (Former name or former address, if changed since last report) &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a.-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement "
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-22",
-                    "accession": "0000320335-26-000143",
-                    "description": "8-K (Q1 2026 EARNINGS RELEASE)",
-                    "excerpt": "gl-20260422 0000320335 false Chicago Stock Exchange, Inc. 0000320335 2026-04-22 2026-04-22 0000320335 us-gaap:CommonStockMember exch:XNYS 2026-04-22 2026-04-22 0000320335 us-gaap:CommonStockMember exch:XCHI 2026-04-22 2026-04-22 0000320335 us-gaap:SubordinatedDebtMember 2026-04-22 2026-04-22 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 22, 2026 GLOBE LIFE INC. (Exact name of registrant as specified in its charter) Delaware &#160; 001-08052 63-0780404 (State or other jurisdiction of incorporation) &#160; (Commission File No.) (I.R.S. Employer ID No.) 7677 Henneman Way , McKinney , Texas 75070 (Address of principal executive offices) (Zip Code) Registrant&#8217;s telephone number, including area code: ( 972 )&#160; 569-4000 (Former name or former address, if changed since last report) &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a.-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pur"
-                }
-            ],
-            "cik": "0000320335",
-            "retrieved_at": "2026-05-25T11:43:10.002538+00:00"
+            "retrieved_at": "2026-05-25T20:19:25.189094+00:00"
         },
         "PTC": {
             "filings": [
@@ -2475,8 +2385,41 @@
                 }
             ],
             "cik": "0000857005",
-            "retrieved_at": "2026-05-25T11:43:11.002446+00:00"
+            "retrieved_at": "2026-05-25T20:19:26.390941+00:00"
+        },
+        "CPAY": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-05-22",
+                    "accession": "0001175454-26-000040",
+                    "description": "8-K",
+                    "excerpt": "flt-20260521 0001175454 false 0001175454 2026-05-21 2026-05-21 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 ________________________________________________________&#160; FORM 8-K ________________________________________________________&#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of Earliest Event Reported): May 21, 2026 ________________________________________________________&#160; Corpay, Inc. ________________________________________________________&#160; (Exact name of registrant as specified in its charter) &#160; &#160;_______________________________________________________ Delaware 001-35004 72-1074903 (State or other jurisdiction of incorporation or organization) (Commission File Number) (I.R.S. Employer Identification No.) 3280 Peachtree Road, Suite 2400 Atlanta 30305 (Address of principal executive offices) GA (Zip Code) Registrant&#8217;s telephone number, including area code: ( 770 ) 449-0479 Not Applicable Former name or former address, if changed since last report Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursua"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-12",
+                    "accession": "0001175454-26-000036",
+                    "description": "8-K",
+                    "excerpt": "flt-20260512 0001175454 false 0001175454 2026-05-12 2026-05-12 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 ________________________________________________________&#160; FORM 8-K ________________________________________________________&#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of Earliest Event Reported): May 12, 2026 ________________________________________________________&#160; Corpay, Inc. ________________________________________________________&#160; (Exact name of registrant as specified in its charter) &#160; &#160;_______________________________________________________ Delaware 001-35004 72-1074903 (State or other jurisdiction of incorporation or organization) (Commission File Number) (I.R.S. Employer Identification No.) 3280 Peachtree Road, Suite 2400 Atlanta 30305 (Address of principal executive offices) GA (Zip Code) Registrant&#8217;s telephone number, including area code: ( 770 ) 449-0479 Not Applicable Former name or former address, if changed since last report Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursua"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-12",
+                    "accession": "0001175454-26-000034",
+                    "description": "8-K",
+                    "excerpt": "flt-20260507 0001175454 false 0001175454 2026-05-07 2026-05-07 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 ________________________________________________________&#160; FORM 8-K ________________________________________________________&#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of Earliest Event Reported): May 7, 2026 ________________________________________________________&#160; Corpay, Inc. ________________________________________________________&#160; (Exact name of registrant as specified in its charter) &#160; &#160;_______________________________________________________ Delaware 001-35004 72-1074903 (State or other jurisdiction of incorporation or organization) (Commission File Number) (I.R.S. Employer Identification No.) 3280 Peachtree Road, Suite 2400 Atlanta 30305 (Address of principal executive offices) GA (Zip Code) Registrant&#8217;s telephone number, including area code: ( 770 ) 449-0479 Not Applicable Former name or former address, if changed since last report Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuan"
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-05-08",
+                    "accession": "0001175454-26-000032",
+                    "description": "10-Q"
+                }
+            ],
+            "cik": "0001175454",
+            "retrieved_at": "2026-05-25T20:19:28.249541+00:00"
         }
     },
-    "filings_at": "2026-05-25T11:43:11.502581+00:00"
+    "filings_at": "2026-05-25T20:19:28.749719+00:00"
 }
