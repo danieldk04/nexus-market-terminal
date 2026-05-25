@@ -1,6 +1,12 @@
 {
   "portfolio_history": [
     {
+      "date": "2026-05-25",
+      "degiro": 16379.45,
+      "tr": 7454.62,
+      "nexus": 2547.85
+    },
+    {
       "date": "2026-05-24",
       "degiro": 16293.3,
       "tr": 7424.79,
@@ -26,36 +32,36 @@
     }
   ],
   "last_news": [
-    "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
     "SpaceX-beursgang dreigt Bitcoin koers en tech-aandelen te raken",
+    "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
     "Unilever grootste daler op lager gesloten beurs",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
     "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran",
     "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
-    "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten"
+    "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten",
+    "CEO en CFO van Brunel kopen aandelen in na dip op de beurs"
   ],
   "news_summary": [
     {
-      "theme": "Technologie en AI-volatiliteit",
-      "summary": "Tech-aandelen tonen sterke winsten (AEX boven 1000 punten, Philips stijger) maar beleggers maken zich zorgen over AI-oververwachtingen en een mogelijke tweedeling in de markt. Dit be\u00efnvloedt direct S&P500 en World ETFs waar tech zwaar gewogen is."
+      "theme": "Tech-sector stuwt indexen omhoog",
+      "summary": "ASML en tech-aandelen duwen de AEX door de 1000-puntgrens, met ASML zelf boven \u20ac1000. Dit suggereert sterke vraag naar halfgeleiders en ondersteunt posities in tech-heavy ETFs zoals World en S&P500."
     },
     {
-      "theme": "Geopolitieke onrust en defensie",
-      "summary": "Spanningen met Iran en oorlogsdreiging stuwen defensie-aandelen omhoog, terwijl Aziatische markten dalen en Air France-KLM onder druk staat door Midden-Oosten-annuleringen. Geopolitieke risico's veroorzaken volatiliteit in brede portefeuilles."
+      "theme": "Geopolitieke onzekerheid drukt luchtvaart",
+      "summary": "Air France-KLM zwakt af door Iran-gerelateerde annuleringen in het Midden-Oosten, terwijl Aziatische aandelen verder dalen. Dit illustreert heersende geopolitieke risico's die sectoren en regio's ongelijk treffen."
     },
     {
-      "theme": "Sectorale noodgebeurtenissen",
-      "summary": "Novo Nordisk zakt op teleurstelling afslankmedicijn, Unilever is grootste daler, en Brunel-insiders kopen aandelen na een dip. Deze bedrijfsspecifieke gebeurtenissen zorgen voor selectieve druk in diverseportfolio's."
+      "theme": "Tweedeling in markt: groei versus defensie",
+      "summary": "Farmaceut Novo Nordisk staat onder druk na tegenvallers, terwijl Unilever (defensief) onderuit gaat. Beleggers in diversificeerde ETFs worden geconfronteerd met volatiliteit door ongelijk sentiment in groei versus stability-plays."
     },
     {
-      "theme": "Marktvolatiliteit en sentiment",
-      "summary": "Beurzen schommelen fors met wisselende signalen (herstel Europees, dalende Aziatische markten, Bitcoin onder druk). Consumentenvertrouwen blijft zwak ondanks rijkdom door beurs, wat wijst op bredere onzekerheid in economisch sentiment."
+      "theme": "M&A-activiteit en vertrouwen management",
+      "summary": "CSG's succesvolle beursgang, OCI's aandelen-verkoop van Methanex, en insider-aankopen bij Brunel signaleren herstellend vertrouwen. Dit duidt op hernieuwde strategische activiteit en stabielere marktverwachtingen."
     }
   ],
   "bux_summary": {
-    "total": 369.79,
-    "total_pl_pct": -28.05,
+    "total": 369.76,
+    "total_pl_pct": -28.06,
     "total_invested": 513.99,
     "positions": [
       {
@@ -79,39 +85,39 @@
       {
         "name": "KPN.AS",
         "ticker": "KPN.AS",
-        "value": 4.62,
-        "price": 4.62,
-        "pl_pct": 40.88,
-        "pl_eur": 1.34,
+        "value": 4.59,
+        "price": 4.59,
+        "pl_pct": 39.94,
+        "pl_eur": 1.31,
         "weight": 1.2
       }
     ]
   },
   "degiro_summary": {
-    "total": 16293.3,
-    "total_pl_pct": 32.23,
+    "total": 16379.45,
+    "total_pl_pct": 32.93,
     "total_invested": 12321.87,
     "positions": [
       {
         "name": "VWRL.AS",
-        "value": 6136.26,
-        "pl_pct": 31.87,
-        "pl_eur": 1483.17,
+        "value": 6175.26,
+        "pl_pct": 32.71,
+        "pl_eur": 1522.17,
         "weight": 37.7
       },
       {
         "name": "VUSA.AS",
-        "value": 5145.84,
-        "pl_pct": 37.66,
-        "pl_eur": 1407.84,
-        "weight": 31.6
+        "value": 5162.64,
+        "pl_pct": 38.11,
+        "pl_eur": 1424.64,
+        "weight": 31.5
       },
       {
         "name": "VHYL.AS",
-        "value": 4353.44,
-        "pl_pct": 23.44,
-        "pl_eur": 826.56,
-        "weight": 26.7
+        "value": 4383.79,
+        "pl_pct": 24.3,
+        "pl_eur": 856.91,
+        "weight": 26.8
       },
       {
         "name": "V",
@@ -123,41 +129,41 @@
     ]
   },
   "tr_summary": {
-    "total": 7424.79,
-    "total_pl_pct": 10.89,
+    "total": 7454.62,
+    "total_pl_pct": 11.34,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4652.17,
-        "pl_pct": 10.33,
-        "weight": 62.7
+        "value": 4669.85,
+        "pl_pct": 10.75,
+        "weight": 62.6
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
-        "value": 943.04,
-        "pl_pct": 34.72,
+        "value": 945.86,
+        "pl_pct": 35.12,
         "weight": 12.7
       },
       {
         "name": "VWCE (All-World Acc)",
-        "value": 838.08,
-        "pl_pct": 7.62,
+        "value": 843.26,
+        "pl_pct": 8.28,
         "weight": 11.3
       },
       {
         "name": "TDIV (Dev Div Leaders)",
-        "value": 812.19,
-        "pl_pct": 1.52,
+        "value": 815.09,
+        "pl_pct": 1.88,
         "weight": 10.9
       },
       {
         "name": "VHYL (High Div Yield)",
-        "value": 179.31,
-        "pl_pct": -10.34,
+        "value": 180.56,
+        "pl_pct": -9.72,
         "weight": 2.4
       }
     ]
   },
-  "dashboard_updated": "2026-05-24T09:18:28.237416+00:00",
+  "dashboard_updated": "2026-05-25T11:07:00.766107+00:00",
   "lessons": []
 }
