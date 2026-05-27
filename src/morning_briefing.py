@@ -294,23 +294,36 @@ def generate_news_summary(client: anthropic.Anthropic, headlines: list[str]) -> 
 # ─── NEXUS PORTFOLIO ──────────────────────────────────────────────────────────
 
 def fetch_nexus_portfolio() -> dict:
-    data = _load_json(DATA_PATH, {})
+    data   = _load_json(DATA_PATH, {})
     trades = data.get("active_trades", [])
     port   = data.get("portfolio", {})
     cash   = port.get("cash", 0)
+    total  = port.get("total_value", 0)
 
     positions, total_pl = [], 0.0
     for t in trades:
         pl = t.get("pl_percent", 0)
         total_pl += pl
-        positions.append({"ticker": t["ticker"], "sector": t.get("sector", "?"), "pl": round(pl, 2)})
+        positions.append({
+            "ticker": t["ticker"],
+            "sector": t.get("sector", "?"),
+            "pl":     round(pl, 2),
+            "value":  round(t.get("current_value", t.get("position_value", 0)), 2),
+            "tp":     t.get("tp_target", 30),
+        })
 
     positions.sort(key=lambda p: p["pl"], reverse=True)
     return {
-        "positions": positions,
-        "cash":      round(cash, 2),
-        "avg_pl":    round(total_pl / len(trades), 2) if trades else 0,
-        "n":         len(trades),
+        "positions":  positions,
+        "cash":       round(cash, 2),
+        "total":      round(total, 2),
+        "avg_pl":     round(total_pl / len(trades), 2) if trades else 0,
+        "n":          len(trades),
+        "top_cands":  [
+            {"ticker": c["ticker"], "score": c.get("score", 0),
+             "dcf": (c.get("dcf") or {}).get("dcf_upside")}
+            for c in data.get("top_candidates", [])[:3]
+        ],
     }
 
 
@@ -658,7 +671,7 @@ def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> st
 
 def build_telegram_message(market, news, nexus, degiro, tr,
                             degiro_perf, tr_perf, ai_text,
-                            news_summary=None) -> str:
+                            news_summary=None, bux=None) -> str:
     now    = datetime.now(timezone.utc)
     dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
     mnd_nl = ["jan","feb","mrt","apr","mei","jun",
@@ -698,17 +711,39 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     # ── 4. NEXUS BOT (papier) ────────────────────────────────────────────────
     nexus_block = ""
     if nexus.get("positions"):
-        pos      = nexus["positions"]
-        winners  = [p for p in pos if p["pl"] >= 0]
-        losers   = [p for p in pos if p["pl"] < 0]
-        win_s    = "  ".join(f"{_arrow(p['pl'])} `{p['ticker']}` {p['pl']:+.1f}%" for p in winners[:4])
-        lose_s   = "  ".join(f"{_arrow(p['pl'])} `{p['ticker']}` {p['pl']:+.1f}%" for p in losers[:2])
-        nexus_block = (
+        pos   = nexus["positions"]
+        lines = [
             f"🤖 *NEXUS BOT* _(papier trading)_\n"
-            f"  {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
-            + (f"  {win_s}\n" if win_s else "")
-            + (f"  {lose_s}" if lose_s else "")
-        ).rstrip()
+            f"  💼 `€{nexus['total']:,.0f}` · {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
+            f"  💵 Cash: `€{nexus['cash']:,.0f}`"
+        ]
+        for p in pos:
+            dot = "🟢" if p["pl"] >= 0 else "🔴"
+            lines.append(f"  {dot} `{p['ticker']:<6}` `{p['pl']:+5.1f}%`  `€{p['value']:>6,.0f}`  TP `{p['tp']:.0f}%`")
+        # Top scan-kandidaten
+        cands = nexus.get("top_cands", [])
+        if cands:
+            cand_s = "  ".join(
+                f"`{c['ticker']}` {c['score']}" + (f" DCF`{c['dcf']:+.0f}%`" if c['dcf'] else "")
+                for c in cands
+            )
+            lines.append(f"\n  🔍 *Top kandidaten:* {cand_s}")
+        nexus_block = "\n".join(lines)
+
+    # ── 4b. BUX ─────────────────────────────────────────────────────────────
+    bux_block = ""
+    if bux and bux.get("positions"):
+        bux_total = bux.get("total", 0)
+        bux_pl    = bux.get("total_pl_pct")
+        pl_s      = f"  _{'+' if (bux_pl or 0) >= 0 else ''}{bux_pl:.1f}%_" if bux_pl is not None else ""
+        lines = [f"📲 *BUX*  `€{bux_total:,.0f}`{pl_s}"]
+        for p in bux.get("positions", []):
+            if not p.get("value", 0):
+                continue
+            dot  = "🟢" if (p.get("pl_pct") or 0) >= 0 else "🔴"
+            pl_s = f"`{p['pl_pct']:+.1f}%`" if p.get("pl_pct") is not None else "`n/b`"
+            lines.append(f"  {dot} `{p['name']:<8}` {pl_s}  `€{p['value']:>7,.0f}`")
+        bux_block = "\n".join(lines)
 
     # ── 5. NIEUWS ────────────────────────────────────────────────────────────
     nieuws = ""
@@ -725,9 +760,10 @@ def build_telegram_message(market, news, nexus, degiro, tr,
 
     # ── SAMENSTELLEN ─────────────────────────────────────────────────────────
     sections = [header, markten]
-    if eigen:      sections.append(eigen)
+    if eigen:       sections.append(eigen)
+    if bux_block:   sections.append(bux_block)
     if nexus_block: sections.append(nexus_block)
-    if nieuws:     sections.append(nieuws)
+    if nieuws:      sections.append(nieuws)
     sections.append(ai_block)
     sections.append(f"🌐 [Open Dashboard]({DASHBOARD_URL})")
 
@@ -1037,7 +1073,7 @@ def run_morning_briefing():
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
 
-    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text, news_summary)
+    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text, news_summary, bux)
 
     log.info("Telegram verzenden...")
     ok = send(msg)

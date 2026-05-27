@@ -101,8 +101,13 @@ def _load_portfolio_snapshot() -> dict | None:
 
 # ─── Kant-en-klare berichten ─────────────────────────────────────────────────
 
+def _silent() -> bool:
+    """Geeft True als SILENT_RUN gezet is — onderdruk dan alle losse meldingen."""
+    return bool(os.environ.get("SILENT_RUN"))
+
+
 def notify_scan_complete(candidates, scanned):
-    if not candidates:
+    if _silent() or not candidates:
         return
     top = candidates[:5]
     lines = []
@@ -137,6 +142,7 @@ def notify_scan_complete(candidates, scanned):
 
 
 def notify_trade_opened(ticker, price, score, sector):
+    if _silent(): return
     ts = _now()
     msg = (
         "🟢 *TRADE GEOPEND*\n"
@@ -150,6 +156,7 @@ def notify_trade_opened(ticker, price, score, sector):
 
 
 def notify_stop_loss(ticker, pl_pct, sector):
+    if _silent(): return
     ts = _now()
     msg = (
         "🔴 *STOP-LOSS GERAAKT*\n"
@@ -163,6 +170,7 @@ def notify_stop_loss(ticker, pl_pct, sector):
 
 
 def notify_take_profit(ticker, pl_pct, sector):
+    if _silent(): return
     ts = _now()
     msg = (
         "💰 *TAKE-PROFIT!*\n"
@@ -176,6 +184,7 @@ def notify_take_profit(ticker, pl_pct, sector):
 
 
 def notify_warning(ticker, pl_pct, sector):
+    if _silent(): return
     msg = (
         "⚠️ *WAARSCHUWING*\n"
         "`{ticker}` nadert stop-loss grens\n"
@@ -187,6 +196,7 @@ def notify_warning(ticker, pl_pct, sector):
 
 
 def notify_evolution_summary(active_trades, closed_count, new_count, equity_value):
+    if _silent(): return
     n = len(active_trades)
     if n > 0:
         avg_pl = sum(t.get("pl_percent", 0) for t in active_trades) / n

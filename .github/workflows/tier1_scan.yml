@@ -2,7 +2,7 @@ name: NEXUS AUTONOMOUS INVESTMENT ENGINE
 
 on:
   schedule:
-    - cron: "0 8,19 * * 1-5"   # Werkdagen 08:00 + 19:00 UTC
+    - cron: "0 6,17 * * 1-5"   # Werkdagen 06:00 UTC (vóór briefing) + 17:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -31,6 +31,7 @@ jobs:
       - name: Tier 1 — Deep Value Scanner (ROIC + DCF + ROCE)
         env:
           PYTHONPATH: src
+          SILENT_RUN: "true"
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -39,11 +40,13 @@ jobs:
       - name: Tier 1.5 — SEC EDGAR Filing Agent (8-K / 10-K)
         env:
           PYTHONPATH: src
+          SILENT_RUN: "true"
         run: python src/filing_agent.py || echo "Filing agent mislukt — doorgaan"
 
       - name: Tier 2 — Bull vs Bear AI Analyser (Sonnet + DCF + Nieuws)
         env:
           PYTHONPATH: src
+          SILENT_RUN: "true"
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -52,6 +55,7 @@ jobs:
       - name: Tier 3 — Evolution Engine (Kelly Criterion + DCF Exits)
         env:
           PYTHONPATH: src
+          SILENT_RUN: "true"
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python src/evolution_engine.py
@@ -59,13 +63,15 @@ jobs:
       - name: Tier 4 — Post-Mortem Analyser (Self-Learning)
         env:
           PYTHONPATH: src
+          SILENT_RUN: "true"
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python src/post_mortem.py || echo "Post-mortem overgeslagen"
 
       - name: Tier 5 — Weekly Evaluator (vrijdag — backtesting van voorspellingen)
-        if: ${{ github.event_name == 'workflow_dispatch' || startsWith(github.event.schedule, '0 19') }}
+        if: ${{ github.event_name == 'workflow_dispatch' || startsWith(github.event.schedule, '0 17') }}
         env:
           PYTHONPATH: src
+          SILENT_RUN: "true"
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           WEEKDAY=$(date -u +%u)
