@@ -828,29 +828,37 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
     for h in holdings:
         ticker = h["ticker"]
         shares = h["shares"]
+        price = None
+        # Stap 1: fast_info (snel, werkt goed voor US-tickers)
         try:
-            t_obj = yf.Ticker(ticker)
-            price = getattr(t_obj.fast_info, "last_price", None)
-            if not price or float(price) <= 0:
-                full  = t_obj.info
-                price = (full.get("currentPrice") or
+            p = getattr(yf.Ticker(ticker).fast_info, "last_price", None)
+            if p and float(p) > 0:
+                price = float(p)
+        except Exception:
+            pass
+        # Stap 2: volledige info (meer velden, maar trager en soms fragiel)
+        if not price:
+            try:
+                full  = yf.Ticker(ticker).info
+                p     = (full.get("currentPrice") or
                          full.get("regularMarketPrice") or
                          full.get("previousClose"))
-            # Frankfurt .DE tickers hebben soms geen data — probeer US-equivalent
-            if (not price or float(price) <= 0) and ticker.endswith(".DE"):
-                us_ticker = ticker[:-3]
-                us_info   = yf.Ticker(us_ticker).fast_info
-                usd_price = getattr(us_info, "last_price", None)
+                if p and float(p) > 0:
+                    price = float(p)
+            except Exception:
+                pass
+        # Stap 3: .DE-tickers ophalen als US-ticker + USD→EUR conversie
+        if not price and ticker.endswith(".DE"):
+            try:
+                us_ticker = ticker[:-3]          # "TSLA.DE" → "TSLA"
+                usd_price = getattr(yf.Ticker(us_ticker).fast_info, "last_price", None)
                 if usd_price and float(usd_price) > 0:
-                    # Converteer USD → EUR via ECB-koers (yfinance)
                     eur_usd = getattr(yf.Ticker("EURUSD=X").fast_info, "last_price", None) or 1.08
-                    price   = float(usd_price) / float(eur_usd)
-            if not price or float(price) <= 0:
-                log.warning(f"{label}: geen prijs voor {ticker}")
-                continue
-            price = float(price)
-        except Exception as e:
-            log.warning(f"{label} {ticker}: {e}")
+                    price   = round(float(usd_price) / float(eur_usd), 4)
+            except Exception:
+                pass
+        if not price:
+            log.warning(f"{label}: geen prijs voor {ticker} — overgeslagen")
             continue
         value     = shares * price
         total    += value
