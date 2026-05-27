@@ -79,13 +79,22 @@ def run_post_mortem():
 
     print(f"Win rate: {stats['win_rate']}% | Verliezen: {stats['total_losses']} | Wins: {stats['total_wins']}")
 
+    # Sector-aanpassingen altijd berekenen (ongeacht API-key)
+    sector_adjustments = {}
+    for sector, count in stats["worst_sectors"]:
+        sector_adjustments[sector] = -0.5 * min(count, 3)
+    for sector, count in stats["best_sectors"]:
+        sector_adjustments[sector] = sector_adjustments.get(sector, 0) + 0.3 * min(count, 3)
+
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         print("Geen ANTHROPIC_API_KEY — statistische summary opgeslagen zonder AI.")
         memory["post_mortem"] = {
-            "win_rate":      stats["win_rate"],
-            "worst_sectors": stats["worst_sectors"],
-            "run_at":        datetime.now(timezone.utc).isoformat(),
+            "win_rate":           stats["win_rate"],
+            "worst_sectors":      stats["worst_sectors"],
+            "best_sectors":       stats["best_sectors"],
+            "sector_adjustments": sector_adjustments,
+            "run_at":             datetime.now(timezone.utc).isoformat(),
         }
         with open(MEMORY_PATH, "w") as f:
             json.dump(memory, f, indent=4)
@@ -133,20 +142,13 @@ def run_post_mortem():
         )
         analysis = msg.content[0].text
 
-        # Genereer ook concrete score-aanpassingen per sector
-        sector_adjustments = {}
-        for sector, count in stats["worst_sectors"]:
-            sector_adjustments[sector] = -0.5 * min(count, 3)  # max -1.5 straf
-        for sector, count in stats["best_sectors"]:
-            sector_adjustments[sector] = sector_adjustments.get(sector, 0) + 0.3 * min(count, 3)
-
         memory["post_mortem"] = {
             "analysis":           analysis,
             "win_rate":           stats["win_rate"],
             "worst_sectors":      stats["worst_sectors"],
             "best_sectors":       stats["best_sectors"],
             "repeat_losers":      stats["repeat_losers"],
-            "sector_adjustments": sector_adjustments,
+            "sector_adjustments": sector_adjustments,  # computed above, before API call
             "run_at":             datetime.now(timezone.utc).isoformat(),
         }
 

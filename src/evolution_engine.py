@@ -226,10 +226,11 @@ def run_evolution():
                     held    = (today_dt - date.fromisoformat(worst.get("buy_date", today))).days
 
                     cash += cur_val
+                    lesson_type = "POSITIVE_LEARNING" if pl >= 0 else "NEGATIVE_LEARNING"
                     add_lesson(ticker, sector,
-                               f"Rotatie: {ticker} (score={worst.get('score_at_entry')}, {pl:+.1f}%, {held}d) "
+                               f"Rotatie ({lesson_type}): {ticker} (score={worst.get('score_at_entry')}, {pl:+.1f}%, {held}d) "
                                f"→ {best_new_cand['ticker']} (score={best_new_cand['score']}).",
-                               "ROTATION")
+                               lesson_type)
                     memory.setdefault("cooldowns", {})[ticker] = today
                     updated_trades = [t for t in updated_trades if t["ticker"] != ticker]
                     print(
