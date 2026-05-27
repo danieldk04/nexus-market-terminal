@@ -756,6 +756,8 @@ def _parse_holdings_secret(env_key: str, label: str) -> list[dict]:
     raw = os.environ.get(env_key, "").strip()
     if not raw:
         return []
+    # Ondersteun zowel newline- als '/' -scheiding (BUX_HOLDINGS gebruikt ' / ')
+    raw = raw.replace(" / ", "\n").replace("/", "\n")
     holdings = []
     for line in raw.splitlines():
         line = line.strip()
@@ -954,16 +956,37 @@ def fetch_bux_manual() -> dict | None:
     """
     # 1. Auto via CSV-export
     csv_result = _parse_bux_transactions_csv()
+    manual_holdings = _parse_holdings_secret("BUX_HOLDINGS", "BUX")
+
+    if csv_result and manual_holdings:
+        # Vul CSV-resultaat aan met tickers uit BUX_HOLDINGS die de CSV mist (bijv. TSLA)
+        csv_tickers = {p.get("name") for p in csv_result.get("positions", [])}
+        extra = [h for h in manual_holdings if h["ticker"] not in csv_tickers]
+        if extra:
+            log.info(f"BUX: CSV mist {[h['ticker'] for h in extra]} — ophalen via BUX_HOLDINGS aanvulling")
+            extra_port = _holdings_to_portfolio(extra, "BUX aanvulling")
+            if extra_port and extra_port.get("positions"):
+                merged = csv_result["positions"] + extra_port["positions"]
+                merged_total = round(csv_result["total"] + extra_port["total"], 2)
+                inv_csv  = csv_result.get("total_invested") or 0
+                inv_ext  = extra_port.get("total_invested") or 0
+                merged_invested = round(inv_csv + inv_ext, 2) if (inv_csv + inv_ext) > 0 else None
+                csv_result["positions"]     = sorted(merged, key=lambda p: p["value"], reverse=True)
+                csv_result["total"]         = merged_total
+                csv_result["total_invested"] = merged_invested
+                if merged_total > 0 and merged_invested:
+                    csv_result["total_pl_pct"] = round((merged_total / merged_invested - 1) * 100, 2)
+        return csv_result
+
     if csv_result:
         return csv_result
 
-    # 2. Handmatige fallback
-    holdings = _parse_holdings_secret("BUX_HOLDINGS", "BUX")
-    if not holdings:
+    # Handmatige fallback (geen CSV beschikbaar)
+    if not manual_holdings:
         log.info("BUX_HOLDINGS niet ingesteld — BUX wordt overgeslagen.")
         return None
-    log.info(f"BUX_HOLDINGS: {len(holdings)} posities geladen — prijzen ophalen via yfinance...")
-    return _holdings_to_portfolio(holdings, "BUX manual")
+    log.info(f"BUX_HOLDINGS: {len(manual_holdings)} posities geladen — prijzen ophalen via yfinance...")
+    return _holdings_to_portfolio(manual_holdings, "BUX manual")
 
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
