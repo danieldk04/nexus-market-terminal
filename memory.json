@@ -1,169 +1,175 @@
 {
-    "portfolio_history": [
-        {
-            "date": "2026-05-25",
-            "degiro": 16379.45,
-            "tr": 7454.62,
-            "nexus": 2547.85
-        },
-        {
-            "date": "2026-05-24",
-            "degiro": 16293.3,
-            "tr": 7424.79,
-            "nexus": 2547.85
-        },
-        {
-            "date": "2026-05-23",
-            "degiro": 16293.3,
-            "tr": 7292.93,
-            "nexus": 2547.85
-        },
-        {
-            "date": "2026-05-22",
-            "degiro": 16234.0,
-            "tr": 7442.58,
-            "nexus": 2547.85
-        },
-        {
-            "date": "2026-05-21",
-            "degiro": 16145.17,
-            "tr": 7460.86,
-            "nexus": 2547.85
-        }
-    ],
-    "last_news": [
-        "SpaceX-beursgang dreigt Bitcoin koers en tech-aandelen te raken",
-        "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
-        "Unilever grootste daler op lager gesloten beurs",
-        "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-        "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran",
-        "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
-        "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten",
-        "CEO en CFO van Brunel kopen aandelen in na dip op de beurs"
-    ],
-    "news_summary": [
-        {
-            "theme": "Tech-sector stuwt indexen omhoog",
-            "summary": "ASML en tech-aandelen duwen de AEX door de 1000-puntgrens, met ASML zelf boven \u20ac1000. Dit suggereert sterke vraag naar halfgeleiders en ondersteunt posities in tech-heavy ETFs zoals World en S&P500."
-        },
-        {
-            "theme": "Geopolitieke onzekerheid drukt luchtvaart",
-            "summary": "Air France-KLM zwakt af door Iran-gerelateerde annuleringen in het Midden-Oosten, terwijl Aziatische aandelen verder dalen. Dit illustreert heersende geopolitieke risico's die sectoren en regio's ongelijk treffen."
-        },
-        {
-            "theme": "Tweedeling in markt: groei versus defensie",
-            "summary": "Farmaceut Novo Nordisk staat onder druk na tegenvallers, terwijl Unilever (defensief) onderuit gaat. Beleggers in diversificeerde ETFs worden geconfronteerd met volatiliteit door ongelijk sentiment in groei versus stability-plays."
-        },
-        {
-            "theme": "M&A-activiteit en vertrouwen management",
-            "summary": "CSG's succesvolle beursgang, OCI's aandelen-verkoop van Methanex, en insider-aankopen bij Brunel signaleren herstellend vertrouwen. Dit duidt op hernieuwde strategische activiteit en stabielere marktverwachtingen."
-        }
-    ],
-    "bux_summary": {
-        "total": 369.76,
-        "total_pl_pct": -28.06,
-        "total_invested": 513.99,
-        "positions": [
-            {
-                "name": "PEP",
-                "ticker": "PEP",
-                "value": 301.14,
-                "price": 150.57,
-                "pl_pct": -9.06,
-                "pl_eur": -30.0,
-                "weight": 81.4
-            },
-            {
-                "name": "ENPH",
-                "ticker": "ENPH",
-                "value": 64.03,
-                "price": 64.03,
-                "pl_pct": -64.34,
-                "pl_eur": -115.54,
-                "weight": 17.3
-            },
-            {
-                "name": "KPN.AS",
-                "ticker": "KPN.AS",
-                "value": 4.59,
-                "price": 4.59,
-                "pl_pct": 39.94,
-                "pl_eur": 1.31,
-                "weight": 1.2
-            }
-        ]
+  "portfolio_history": [
+    {
+      "date": "2026-05-27",
+      "degiro": 16369.81,
+      "tr": 7357.08,
+      "nexus": 2547.85
     },
-    "degiro_summary": {
-        "total": 16379.45,
-        "total_pl_pct": 32.93,
-        "total_invested": 12321.87,
-        "positions": [
-            {
-                "name": "VWRL.AS",
-                "value": 6175.26,
-                "pl_pct": 32.71,
-                "pl_eur": 1522.17,
-                "weight": 37.7
-            },
-            {
-                "name": "VUSA.AS",
-                "value": 5162.64,
-                "pl_pct": 38.11,
-                "pl_eur": 1424.64,
-                "weight": 31.5
-            },
-            {
-                "name": "VHYL.AS",
-                "value": 4383.79,
-                "pl_pct": 24.3,
-                "pl_eur": 856.91,
-                "weight": 26.8
-            },
-            {
-                "name": "V",
-                "value": 657.76,
-                "pl_pct": 62.85,
-                "pl_eur": 253.86,
-                "weight": 4.0
-            }
-        ]
+    {
+      "date": "2026-05-25",
+      "degiro": 16379.45,
+      "tr": 7454.62,
+      "nexus": 2547.85
     },
-    "tr_summary": {
-        "total": 7454.62,
-        "total_pl_pct": 11.34,
-        "positions": [
-            {
-                "name": "Bitcoin",
-                "value": 4669.85,
-                "pl_pct": 10.75,
-                "weight": 62.6
-            },
-            {
-                "name": "CSP1 (S&P 500 EUR)",
-                "value": 945.86,
-                "pl_pct": 35.12,
-                "weight": 12.7
-            },
-            {
-                "name": "VWCE (All-World Acc)",
-                "value": 843.26,
-                "pl_pct": 8.28,
-                "weight": 11.3
-            },
-            {
-                "name": "TDIV (Dev Div Leaders)",
-                "value": 815.09,
-                "pl_pct": 1.88,
-                "weight": 10.9
-            },
-            {
-                "name": "VHYL (High Div Yield)",
-                "value": 180.56,
-                "pl_pct": -9.72,
-                "weight": 2.4
-            }
-        ]
+    {
+      "date": "2026-05-24",
+      "degiro": 16293.3,
+      "tr": 7424.79,
+      "nexus": 2547.85
     },
-    "dashboard_updated": "2026-05-25T11:07:00.766107+00:00",
-    "lessons": []
+    {
+      "date": "2026-05-23",
+      "degiro": 16293.3,
+      "tr": 7292.93,
+      "nexus": 2547.85
+    },
+    {
+      "date": "2026-05-22",
+      "degiro": 16234.0,
+      "tr": 7442.58,
+      "nexus": 2547.85
+    },
+    {
+      "date": "2026-05-21",
+      "degiro": 16145.17,
+      "tr": 7460.86,
+      "nexus": 2547.85
+    }
+  ],
+  "last_news": [
+    "Ferrari incasseert harde klappen op de beurs",
+    "Aandeel Ferrari scheurt omlaag: volledig elektrische sportauto lanceert golf aan verkopen",
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
+    "Unilever grootste daler op lager gesloten beurs",
+    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
+    "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
+    "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
+  ],
+  "news_summary": [
+    {
+      "theme": "Geopolitieke risico's be\u00efnvloeden markten",
+      "summary": "Oorlogen in het Midden-Oosten (Iran) en andere regio's zorgen voor volatiliteit op Europese beurzen, waarbij luchtvaart- en logistieke bedrijven getroffen worden terwijl defensie-aandelen juist stijgen. Dit illustreert hoe geopolitieke spanningen portefeuilles kunnen reshuffelen en bepaalde sectoren onvoorspelbaar be\u00efnvloeden."
+    },
+    {
+      "theme": "Tech en defensie als winnende sectoren",
+      "summary": "Tech-aandelen (ASML boven 1000 euro, Philips sterk) en defensiebedrijven (CSG naar beurs, defensie-aandelen stijgen) profileren zich als grote motoren achter de stijging van de AEX. Voor ETF-beleggers met technologie-exposure betekent dit aantrekkelijke kansen, maar ook concentratierisico."
+    },
+    {
+      "theme": "Specifieke aandelen onder druk door bedrijfsnieuws",
+      "summary": "Ferrari, Novo Nordisk en Unilever verliezen fors vanwege productteleurstellingen (elektrische auto, afslankpil) en operationele uitdagingen, terwijl Air France-KLM tegen Iran-gerelateerde annuleringen aanloopt. Dit toont dat individuele stockpicking risico's groot blijven ondanks bredere markeraalgang."
+    },
+    {
+      "theme": "Marktonzekerheid vs. optimisme beleggers",
+      "summary": "Ondanks oorlogen, volatiliteit en gefragmenteerde koersperformance ('tweedeling door AI-vrees') blijven beleggers geld in aandelen pompen en duurde de AEX sterker uit dan verwacht; insiders zoals Brunel-bestuurders kopen juist bij dips. Dit duidt op onderliggende vertrouwen in lange-termijn groei ondanks korte-termijn chaos."
+    }
+  ],
+  "bux_summary": {
+    "total": 362.77,
+    "total_pl_pct": -29.42,
+    "total_invested": 513.99,
+    "positions": [
+      {
+        "name": "PEP",
+        "ticker": "PEP",
+        "value": 291.36,
+        "price": 145.68,
+        "pl_pct": -12.01,
+        "pl_eur": -39.78,
+        "weight": 80.3
+      },
+      {
+        "name": "ENPH",
+        "ticker": "ENPH",
+        "value": 66.9,
+        "price": 66.9,
+        "pl_pct": -62.74,
+        "pl_eur": -112.67,
+        "weight": 18.4
+      },
+      {
+        "name": "KPN.AS",
+        "ticker": "KPN.AS",
+        "value": 4.51,
+        "price": 4.51,
+        "pl_pct": 37.38,
+        "pl_eur": 1.23,
+        "weight": 1.2
+      }
+    ]
+  },
+  "degiro_summary": {
+    "total": 16369.81,
+    "total_pl_pct": 32.85,
+    "total_invested": 12321.87,
+    "positions": [
+      {
+        "name": "VWRL.AS",
+        "value": 6187.74,
+        "pl_pct": 32.98,
+        "pl_eur": 1534.65,
+        "weight": 37.8
+      },
+      {
+        "name": "VUSA.AS",
+        "value": 5165.03,
+        "pl_pct": 38.18,
+        "pl_eur": 1427.03,
+        "weight": 31.6
+      },
+      {
+        "name": "VHYL.AS",
+        "value": 4364.08,
+        "pl_pct": 23.74,
+        "pl_eur": 837.2,
+        "weight": 26.7
+      },
+      {
+        "name": "V",
+        "value": 652.96,
+        "pl_pct": 61.66,
+        "pl_eur": 249.06,
+        "weight": 4.0
+      }
+    ]
+  },
+  "tr_summary": {
+    "total": 7357.08,
+    "total_pl_pct": 9.88,
+    "positions": [
+      {
+        "name": "Bitcoin",
+        "value": 4579.8,
+        "pl_pct": 8.61,
+        "weight": 62.3
+      },
+      {
+        "name": "CSP1 (S&P 500 EUR)",
+        "value": 946.21,
+        "pl_pct": 35.18,
+        "weight": 12.9
+      },
+      {
+        "name": "VWCE (All-World Acc)",
+        "value": 844.92,
+        "pl_pct": 8.5,
+        "weight": 11.5
+      },
+      {
+        "name": "TDIV (Dev Div Leaders)",
+        "value": 806.4,
+        "pl_pct": 0.8,
+        "weight": 11.0
+      },
+      {
+        "name": "VHYL (High Div Yield)",
+        "value": 179.75,
+        "pl_pct": -10.13,
+        "weight": 2.4
+      }
+    ]
+  },
+  "dashboard_updated": "2026-05-27T10:53:20.043511+00:00",
+  "lessons": []
 }
