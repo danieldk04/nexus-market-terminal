@@ -829,8 +829,22 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
         ticker = h["ticker"]
         shares = h["shares"]
         try:
-            info  = yf.Ticker(ticker).fast_info
-            price = getattr(info, "last_price", None)
+            t_obj = yf.Ticker(ticker)
+            price = getattr(t_obj.fast_info, "last_price", None)
+            if not price or float(price) <= 0:
+                full  = t_obj.info
+                price = (full.get("currentPrice") or
+                         full.get("regularMarketPrice") or
+                         full.get("previousClose"))
+            # Frankfurt .DE tickers hebben soms geen data — probeer US-equivalent
+            if (not price or float(price) <= 0) and ticker.endswith(".DE"):
+                us_ticker = ticker[:-3]
+                us_info   = yf.Ticker(us_ticker).fast_info
+                usd_price = getattr(us_info, "last_price", None)
+                if usd_price and float(usd_price) > 0:
+                    # Converteer USD → EUR via ECB-koers (yfinance)
+                    eur_usd = getattr(yf.Ticker("EURUSD=X").fast_info, "last_price", None) or 1.08
+                    price   = float(usd_price) / float(eur_usd)
             if not price or float(price) <= 0:
                 log.warning(f"{label}: geen prijs voor {ticker}")
                 continue
