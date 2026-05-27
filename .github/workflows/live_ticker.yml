@@ -1,1 +1,43 @@
-bmFtZTogTkVYVVMgTElWRSBUSUNLRVIKCm9uOgogIHNjaGVkdWxlOgogICAgLSBjcm9uOiAiKi8xNSAqICogKiAqIgogIHdvcmtmbG93X2Rpc3BhdGNoOgoKcGVybWlzc2lvbnM6CiAgY29udGVudHM6IHdyaXRlCgpqb2JzOgogIHVwZGF0ZV90aWNrZXI6CiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0CiAgICB0aW1lb3V0LW1pbnV0ZXM6IDUKCiAgICBzdGVwczoKICAgICAgLSBuYW1lOiBDaGVja291dAogICAgICAgIHVzZXM6IGFjdGlvbnMvY2hlY2tvdXRAdjQKICAgICAgICB3aXRoOgogICAgICAgICAgdG9rZW46ICR7eyBzZWNyZXRzLkdJVEhVQl9UT0tFTiB9fQoKICAgICAgLSBuYW1lOiBQeXRob24gMy4xMSBzZXR1cAogICAgICAgIHVzZXM6IGFjdGlvbnMvc2V0dXAtcHl0aG9uQHY1CiAgICAgICAgd2l0aDoKICAgICAgICAgIHB5dGhvbi12ZXJzaW9uOiAiMy4xMSIKICAgICAgICAgIGNhY2hlOiBwaXAKCiAgICAgIC0gbmFtZTogSW5zdGFsbGVlciBkZXBlbmRlbmNpZXMKICAgICAgICBydW46IHBpcCBpbnN0YWxsIHlmaW5hbmNlIHBhbmRhcyByZXF1ZXN0cwoKICAgICAgLSBuYW1lOiBLb2Vyc2VuIHVwZGF0ZW4KICAgICAgICBlbnY6CiAgICAgICAgICBQWVRIT05QQVRIOiBzcmMKICAgICAgICBydW46IHB5dGhvbiBzcmMvdGlja2VyX3VwZGF0ZS5weQoKICAgICAgLSBuYW1lOiBDb21taXQgZGF0YS5qc29uCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBnaXQgY29uZmlnIHVzZXIubmFtZSAgIm5leHVzLXRpY2tlci1ib3QiCiAgICAgICAgICBnaXQgY29uZmlnIHVzZXIuZW1haWwgIm5leHVzQGJvdC5sb2NhbCIKICAgICAgICAgIGdpdCBhZGQgZGF0YS5qc29uCiAgICAgICAgICBnaXQgZGlmZiAtLWNhY2hlZCAtLXF1aWV0IHx8IGdpdCBjb21taXQgLW0gIkF1dG8tdXBkYXRlOiBUaWNrZXIgJChkYXRlIC11ICsnJUg6JU0gVVRDJykiCiAgICAgICAgICBnaXQgcHVsbCAtLXJlYmFzZSBvcmlnaW4gbWFpbgogICAgICAgICAgZ2l0IHB1c2gK
+name: NEXUS LIVE TICKER
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update_ticker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installeer dependencies
+        run: pip install yfinance pandas requests
+
+      - name: Koersen updaten
+        env:
+          PYTHONPATH: src
+        run: python src/ticker_update.py
+
+      - name: Commit data.json
+        run: |
+          git config user.name  "nexus-ticker-bot"
+          git config user.email "nexus@bot.local"
+          git add data.json
+          git diff --cached --quiet || git commit -m "Auto-update: Ticker $(date -u +'%H:%M UTC')"
+          git pull --rebase origin main
+          git push

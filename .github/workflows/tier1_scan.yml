@@ -62,10 +62,24 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python src/post_mortem.py || echo "Post-mortem overgeslagen"
 
+      - name: Tier 5 — Weekly Evaluator (vrijdag — backtesting van voorspellingen)
+        if: ${{ github.event_name == 'workflow_dispatch' || startsWith(github.event.schedule, '0 19') }}
+        env:
+          PYTHONPATH: src
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          WEEKDAY=$(date -u +%u)
+          if [ "$WEEKDAY" = "5" ]; then
+            python src/weekly_evaluator.py || echo "Weekly evaluator overgeslagen"
+          else
+            echo "Niet vrijdag ($WEEKDAY) — weekly evaluator overgeslagen"
+          fi
+
       - name: Commit & Push resultaten
         run: |
           git config user.name  "NEXUS-InvestBot"
           git config user.email "nexus@bot.local"
           git add data.json memory.json
           git diff --cached --quiet || git commit -m "Auto-update: Deep Value Scan $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
           git push
