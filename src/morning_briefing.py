@@ -1,7 +1,7 @@
 """
 NEXUS Morning Briefing — Dagelijkse marktupdate (07:00 UTC)
 ─────────────────────────────────────────────────────────────
-Marktdata   : yfinance — AEX, S&P 500, NASDAQ, BTC, goud
+Marktdata   : yfinance — AEX, S&P 500, NASDAQ, BTC/EUR, goud
 Nieuws      : Google News RSS — actueel, Nederlandstalig, gratis
 Portfolio   : DEGIRO REST + Trade Republic via TR_HOLDINGS secret
 Snapshots   : dagelijkse opslag in memory.json → dag/week/maand/YTD
@@ -35,7 +35,7 @@ MAX_HISTORY  = 400   # dagen bewaren (~13 maanden)
 INDICES = [
     ("S&P 500", "^GSPC"), ("NASDAQ",  "^IXIC"),
     ("AEX",     "^AEX"),  ("DAX",     "^GDAXI"),
-    ("BTC/USD", "BTC-USD"),("Goud",   "GC=F"),
+    ("BTC/EUR", "BTC-EUR"),("Goud",   "GC=F"),
 ]
 
 DEGIRO_LOGIN_URL   = "https://trader.degiro.nl/login/secure/login"
