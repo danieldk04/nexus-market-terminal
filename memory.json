@@ -62,9 +62,9 @@
   "portfolio_history": [
     {
       "date": "2026-05-29",
-      "degiro": 16370.95,
-      "tr": 7180.37,
-      "bux": 2218.44
+      "degiro": 16371.03,
+      "tr": 7179.32,
+      "bux": 2211.09
     },
     {
       "date": "2026-05-28",
@@ -132,16 +132,17 @@
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
   ],
   "tr_summary": {
-    "total": 7180.37,
-    "total_pl_pct": 7.24,
+    "total": 7179.32,
+    "total_pl_pct": 7.23,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4409.3,
-        "pl_pct": 4.57,
+        "value": 4408.25,
+        "pl_pct": 4.54,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 61.4
       },
       {
@@ -151,6 +152,7 @@
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 13.2
       },
       {
@@ -160,6 +162,7 @@
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 11.8
       },
       {
@@ -169,6 +172,7 @@
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 11.1
       },
       {
@@ -178,13 +182,14 @@
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 2.5
       }
     ]
   },
-  "dashboard_updated": "2026-05-29T18:55:32.106300+00:00",
+  "dashboard_updated": "2026-05-29T19:21:33.473258+00:00",
   "degiro_summary": {
-    "total": 16370.95,
+    "total": 16371.03,
     "total_pl_pct": 32.86,
     "total_invested": 12321.87,
     "positions": [
@@ -196,6 +201,7 @@
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 37.8
       },
       {
@@ -206,6 +212,7 @@
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 31.6
       },
       {
@@ -216,77 +223,82 @@
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 26.5
       },
       {
         "name": "V",
-        "value": 659.24,
-        "pl_pct": 63.22,
-        "pl_eur": 255.34,
+        "value": 659.32,
+        "pl_pct": 63.24,
+        "pl_eur": 255.42,
         "div_yield": 0.82,
-        "annual_div_eur": 540.58,
+        "annual_div_eur": 540.64,
         "first_buy_date": null,
+        "sector": "Financial Services",
         "weight": 4.0
       }
     ]
   },
   "news_summary": [
     {
-      "theme": "Geopolitieke spanningen be\u00efnvloeden sectoren",
-      "summary": "Oorlogsdreiging met Iran en aanhoudende conflicten zorgen voor sectorbrede effecten: defensie-aandelen stijgen, maar reisaandelen (Air France-KLM) en Aziatische markten lijden onder de onzekerheid. Dit raakt brede portefeuilles via sector-rotatie en geografische blootstelling."
+      "theme": "Sectorselectiviteit en volatiliteit",
+      "summary": "De markt vertoont een tweedeling met sterke techndelen (AEX +1%, doorbraak 1000 punten) versus zwakke defensieve aandelen (Unilever, Ferrari, Novo Nordisk). Voor beleggers in brede ETFs betekent dit dat winsten in tech-heavy indices kunnen worden gedempt door onderperformance in consumer- en farmacasectoren, wat vraagt om attentie voor positie-weging."
     },
     {
-      "theme": "Volatiliteit en tweedeling in AEX-handel",
-      "summary": "De AEX stijgt 1% en doorbreekt de 1000-puntgrens, maar verschillende sectoren vertonen extreme swings: tech-aandelen (X-Fab) exploderen door speculatie, terwijl consumer staples (Unilever) en farmaceuten (Novo Nordisk) hard dalen. Dit weerspiegelt beleggersonzekerheid en kan ETF-samenstelling sterk be\u00efnvloeden."
+      "theme": "Geopolitieke risico's drukken markten",
+      "summary": "Oorlogen (Iran-Israel) en geopolitieke spanningen veroorzaken onrust en zorgen voor divergentie tussen markten: Europese aandelen herstellen terwijl Aziatische aandelen dalen. Dit cre\u00ebert wisselende rendementen in wereldwijde portefeuilles en onderstreept dat geografische diversificatie niet altijd beschermt tegen gelijktijdige schokken."
     },
     {
-      "theme": "Insiders kopen, deals reshuffelen portfolios",
-      "summary": "Brunel-management stapelt aandelen in na prijsdaling, terwijl Prosus Just Eat Takeaway van de beurs haalt met positieve gevolgen voor koers. Deze signalen suggereren selectieve waardevinning en herstructurering, relevant voor wie in deze bedrijven of hun sectoren belegd is."
+      "theme": "M&A-activiteit be\u00efnvloedt koersen",
+      "summary": "Prosus haalt Just Eat Takeaway van de beurs (positief voor koers) en Air France-KLM lijdt onder geopolitieke impact. Deze transacties en operationele schokken be\u00efnvloeden individuele aandelen aanzienlijk, terwijl breed ge\u00efndexeerde beleggers via ETFs minder direct worden geraakt maar wel blootgesteld aan herbalanceringseffecten."
     },
     {
-      "theme": "Tech-hype en AI-angst splitsen markt",
-      "summary": "Tech-aandelen drijven de AEX omhoog en laten extreme volatiliteit zien, maar beleggers tonen tegelijk onrust over AI en economische risico's\u2014bitcoin daalt, waarschuwingen klinken. Deze tweedeling tussen groei- en waarde-posities vereist portefeuille-herbalancering en risicobeheersing."
+      "theme": "Insiderkoopjes signaleren bodemvorming",
+      "summary": "CEO en CFO van Brunel kopen aandelen in na een dip, wat doorgaans een bullish signaal is van management-vertrouwen. Dit type insider-activiteit contrasteert met brede marktvolatiliteit en kan voor actieve beleggers en ETF-beleggers een indicatie zijn dat bepaalde sectoren misschien oververkocht zijn en herstel aankondigen."
     }
   ],
   "bux_summary": {
-    "total": 2218.44,
-    "total_pl_pct": -14.25,
+    "total": 2211.09,
+    "total_pl_pct": -14.53,
     "total_invested": 2587.08,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1854.21,
-        "price": 373.81,
-        "pl_pct": -10.56,
-        "pl_eur": -218.87,
+        "value": 1847.92,
+        "price": 372.54,
+        "pl_pct": -10.86,
+        "pl_eur": -225.17,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": null,
         "weight": 83.6
       },
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 289.97,
-        "price": 144.99,
-        "pl_pct": -12.43,
-        "pl_eur": -41.17,
+        "value": 289.54,
+        "price": 144.77,
+        "pl_pct": -12.56,
+        "pl_eur": -41.6,
         "div_yield": 4.05,
-        "annual_div_eur": 1174.38,
+        "annual_div_eur": 1172.64,
         "first_buy_date": null,
+        "sector": "Consumer Defensive",
         "weight": 13.1
       },
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 69.79,
-        "price": 69.79,
-        "pl_pct": -61.13,
-        "pl_eur": -109.78,
+        "value": 69.17,
+        "price": 69.17,
+        "pl_pct": -61.48,
+        "pl_eur": -110.4,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
+        "sector": "Technology",
         "weight": 3.1
       },
       {
@@ -299,6 +311,7 @@
         "div_yield": 4.83,
         "annual_div_eur": 21.57,
         "first_buy_date": null,
+        "sector": "Communication Services",
         "weight": 0.2
       }
     ]
@@ -486,7 +499,7 @@
     },
     {
       "date": "2022-04",
-      "value": 785.09
+      "value": 785.08
     },
     {
       "date": "2022-05",
@@ -630,7 +643,7 @@
     },
     {
       "date": "2025-04",
-      "value": 7426.69
+      "value": 7426.7
     },
     {
       "date": "2025-05",
@@ -682,7 +695,13 @@
     },
     {
       "date": "2026-05",
-      "value": 25769.76
+      "value": 25761.44
     }
-  ]
+  ],
+  "first_buy_dates_by_isin": {
+    "IE00B3RBWM25": "2022-03-29",
+    "IE00B3XXRP09": "2022-03-29",
+    "IE00B8GKDB10": "2022-04-22",
+    "US92826C8394": "2022-05-03"
+  }
 }
