@@ -569,7 +569,7 @@ const TV_MAP={
     'TDIV':'EURONEXT:TDIV',
     // Eigen portfolio — aandelen
     'KPN.AS':'EURONEXT:KPN','TSLA.DE':'XETRA:TSLA',
-    'Bitcoin':'BITSTAMP:BTCUSD',
+    'Bitcoin':'BITSTAMP:BTCEUR',
     'V':'NYSE:V','PEP':'NASDAQ:PEP','ENPH':'NASDAQ:ENPH',
     // Bot-portfolio — US aandelen
     'ALL':'NYSE:ALL','UBER':'NYSE:UBER','PGR':'NYSE:PGR',
@@ -580,13 +580,15 @@ function tvSym(t){return TV_MAP[t]||t;}
 
 /* ── Yahoo Finance ticker map (kan afwijken van dashboard-ticker) ── */
 const YF_MAP={
-    'Bitcoin':'BTC-USD',
-    'CSP1':'SXR8.DE',      // Xetra-equivalent voor CSP1
+    'Bitcoin':'BTC-EUR',
+    'CSP1':'SXR8.DE',
     'VWCE':'VWCE.DE',
+    'VUSA.AS':'VUSA.DE',   // .AS geblokkeerd door CORS; Xetra werkt wel
     'TDIV':'TDIV.AS',
     'VHYL':'VHYL.AS',
-    'Tesla':'TSLA',        // BUX gebruikt "Tesla" als naam
-    'KPN.AS':'KPN.AS',     // blijft hetzelfde
+    'VHYL.AS':'VHYL.DE',   // fallback naar Xetra
+    'Tesla':'TSLA',
+    'KPN.AS':'KPN.AS',
 };
 
 /* ── sector colors for bot ── */
