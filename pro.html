@@ -100,6 +100,12 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .div-ticker{font-weight:700;min-width:80px}
 .div-yield{color:var(--green);font-family:var(--mono);font-size:.75rem}
 .div-annual{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+/* ─── HEATMAP ─── */
+.heat-tbl{width:100%;border-collapse:collapse;font-size:.65rem}
+.heat-tbl th{padding:4px 5px;text-align:center;color:var(--muted);font-weight:600;font-size:.58rem;letter-spacing:.04em}
+.heat-tbl td{padding:5px 4px;text-align:center;border-radius:4px;font-family:var(--mono);font-size:.62rem;font-weight:600;cursor:default;transition:opacity .15s}
+.heat-tbl td:hover{opacity:.8}
+.heat-yr{font-weight:700;color:var(--text);text-align:left !important;font-family:'Inter',sans-serif;padding-right:8px !important}
 /* ─── REBALANCING ─── */
 .rebal-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
 .rebal-row:last-child{border-bottom:none}
@@ -259,6 +265,7 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     <div class="logo">NEXUS<span> PRO</span></div>
     <div class="hdr-r">
         <span class="upd" id="upd-lbl"></span>
+        <span class="upd" id="refresh-lbl" style="display:none;color:var(--accent)">↻ vernieuwen...</span>
         <span id="clock"></span>
         <div class="live-b"><div class="ldot"></div>LIVE</div>
     </div>
@@ -403,7 +410,7 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
-    <div class="col2">
+    <div class="col3">
         <!-- Broker allocation -->
         <div class="panel">
             <div class="ph"><span class="pt">Verdeling per Broker</span><span class="ptag" id="alloc-tag">—</span></div>
@@ -413,6 +420,11 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         <div class="panel">
             <div class="ph"><span class="pt">Verdeling per Type</span><span class="ptag">ETF / Aandelen / Crypto</span></div>
             <div class="donut-wrap" id="type-wrap"><div class="loading"><div class="spin"></div></div></div>
+        </div>
+        <!-- Sector allocation -->
+        <div class="panel">
+            <div class="ph"><span class="pt">Verdeling per Sector</span><span class="ptag" id="sector-tag">—</span></div>
+            <div class="donut-wrap" id="sector-wrap"><div class="loading"><div class="spin"></div></div></div>
         </div>
     </div>
 
@@ -426,6 +438,12 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
             <div class="ph"><span class="pt">Rebalancing</span><span class="ptag">target vs actueel</span></div>
             <div style="padding:12px 16px" id="rebal-panel"></div>
         </div>
+    </div>
+
+    <!-- Maandelijks rendement heatmap -->
+    <div class="panel">
+        <div class="ph"><span class="pt">Maandelijks Rendement</span><span class="ptag" id="heatmap-tag">op basis van dagelijkse snapshots</span></div>
+        <div style="padding:12px 16px;overflow-x:auto" id="heatmap-wrap"></div>
     </div>
 
     <!-- Positions table -->
@@ -730,6 +748,10 @@ function buildPositions(){
                 weight_broker:p.weight||0,
                 weight_total:grand?(p.value/grand)*100:0,
                 type:TYPE_MAP[ticker]||TYPE_MAP[p.name]||'Aandeel',
+                sector:p.sector||null,
+                first_buy_date:p.first_buy_date||null,
+                div_yield:p.div_yield||null,
+                annual_div_eur:p.annual_div_eur||null,
             });
         });
     }
@@ -979,11 +1001,71 @@ function renderPortfolioTab(){
     allPos.forEach(p=>typs[p.type]=(typs[p.type]||0)+p.value);
     renderDonut('type-wrap','donut-type',Object.keys(typs),Object.values(typs),Object.keys(typs).map(k=>TYPE_COLORS[k]||'#64748b'),grand,'alloc-leg-type');
 
+    /* sector donut */
+    const SECTOR_COLORS={'Technology':'#2563eb','Financial Services':'#d97706','Financials':'#d97706',
+        'Healthcare':'#7c3aed','Consumer Cyclical':'#ea580c','Energy':'#dc2626',
+        'Basic Materials':'#65a30d','Communication Services':'#1d4ed8','Utilities':'#0891b2',
+        'Consumer Defensive':'#059669','Industrials':'#6366f1','Real Estate':'#c2410c',
+        'ETF':'#94a3b8','Crypto':'#f59e0b'};
+    const secs={};
+    allPos.forEach(p=>{
+        const s=p.sector||(p.type==='Crypto'?'Crypto':p.type==='ETF'?'ETF':null);
+        if(s) secs[s]=(secs[s]||0)+p.value;
+    });
+    const secKeys=Object.keys(secs),secVals=secKeys.map(k=>secs[k]),secColors=secKeys.map(k=>SECTOR_COLORS[k]||'#64748b');
+    if(secKeys.length){
+        document.getElementById('sector-tag').textContent=`${secKeys.length} sectoren`;
+        renderDonut('sector-wrap','donut-sector',secKeys,secVals,secColors,grand,'sector-leg');
+    } else {
+        document.getElementById('sector-wrap').innerHTML='<div class="empty" style="font-size:.75rem">Sectordata beschikbaar na volgende briefing</div>';
+    }
+
+    renderHeatmap();
     renderPosFilter();
     renderPosTable();
     renderDividendPanel('div-panel');
     renderRebalancingPanel();
     renderInvestmentTimeline();
+}
+
+function renderHeatmap(){
+    const el=document.getElementById('heatmap-wrap');
+    if(!el) return;
+    const ph=(M?.portfolio_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    if(ph.length<2){el.innerHTML='<div class="empty" style="font-size:.75rem">Beschikbaar na meerdere dagelijkse snapshots</div>';return;}
+
+    // Groepeer per jaar-maand: {ym: {first, last}}
+    const byMonth={};
+    ph.forEach(h=>{
+        const ym=h.date.slice(0,7);
+        const tot=(h.degiro||0)+(h.tr||0)+(h.bux||0);
+        if(tot<=0) return;
+        if(!byMonth[ym]||h.date<byMonth[ym].firstDate){byMonth[ym]={firstDate:h.date,first:tot};}
+        if(!byMonth[ym].lastDate||h.date>byMonth[ym].lastDate){byMonth[ym].lastDate=h.date;byMonth[ym].last=tot;}
+    });
+
+    const years=[...new Set(Object.keys(byMonth).map(ym=>ym.slice(0,4)))].sort();
+    const MONTHS=['Jan','Feb','Mrt','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
+
+    const rows=years.map(y=>{
+        const cells=MONTHS.map((_,mi)=>{
+            const ym=`${y}-${String(mi+1).padStart(2,'0')}`;
+            const d=byMonth[ym];
+            if(!d||!d.first||!d.last) return `<td title="${ym}">—</td>`;
+            const ret=(d.last/d.first-1)*100;
+            const abs=Math.min(Math.abs(ret),10);
+            const alpha=0.15+abs/10*0.7;
+            const bg=ret>=0?`rgba(5,150,105,${alpha})`:`rgba(220,38,38,${alpha})`;
+            const fg=abs>5?'#fff':(ret>=0?'#065f46':'#991b1b');
+            return `<td style="background:${bg};color:${fg}" title="${ym}: ${ret>=0?'+':''}${ret.toFixed(2)}%">${ret>=0?'+':''}${ret.toFixed(1)}%</td>`;
+        }).join('');
+        return `<tr><td class="heat-yr">${y}</td>${cells}</tr>`;
+    }).join('');
+
+    el.innerHTML=`<table class="heat-tbl">
+        <thead><tr><th></th>${MONTHS.map(m=>`<th>${m}</th>`).join('')}</tr></thead>
+        <tbody>${rows}</tbody>
+    </table>`;
 }
 
 function renderRebalancingPanel(){
@@ -1536,8 +1618,13 @@ function renderAll(){
 async function init(){
     [M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);
     renderAll();
-    /* refresh every 5 min */
-    setInterval(async()=>{[M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);renderAll();},300000);
+    setInterval(async()=>{
+        const rl=document.getElementById('refresh-lbl');
+        if(rl) rl.style.display='inline';
+        [M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);
+        renderAll();
+        if(rl) rl.style.display='none';
+    },300000);
 }
 init();
 </script>
