@@ -39,13 +39,34 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .upd{font-size:.62rem;color:var(--muted2)}
 
 /* ─── TAB NAV ─── */
-.tnav{position:sticky;top:var(--hh);z-index:290;background:var(--surface);border-bottom:1px solid var(--border);display:flex;padding:0 20px;box-shadow:var(--sh)}
-.tbtn{padding:12px 16px;border:none;background:none;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:6px}
-.tbtn:hover{color:var(--text)}
-.tbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tnav{position:sticky;top:var(--hh);z-index:290;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:8px 20px;gap:2px;box-shadow:var(--sh);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tnav-sep{width:1px;height:22px;background:var(--border2);margin:0 8px;flex-shrink:0}
+.tnav-grp{display:flex;align-items:center;gap:2px}
+.tbtn{padding:7px 13px;border:none;background:none;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:500;color:var(--muted);cursor:pointer;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:6px;flex-shrink:0;line-height:1}
+.tbtn:hover{background:var(--bg);color:var(--text)}
+.tbtn.active{background:var(--accent);color:#fff;font-weight:600;box-shadow:0 1px 4px rgba(37,99,235,.25)}
+.tbtn.active-bot{background:var(--bot);color:#fff;font-weight:600;box-shadow:0 1px 4px rgba(124,58,237,.25)}
 .tbtn svg{width:14px;height:14px;opacity:.7;flex-shrink:0}
-.tbtn.active svg{opacity:1}
+.tbtn.active svg,.tbtn.active-bot svg{opacity:1}
 .tc{display:none}.tc.active{display:block}
+/* ─── LEARN TAB ─── */
+.cand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.cand-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 15px;box-shadow:var(--sh)}
+.cand-score{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:700;background:var(--accent);color:#fff;margin-bottom:8px}
+.cand-ticker{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--text)}
+.cand-sector{font-size:.65rem;color:var(--muted);margin-top:2px}
+.cand-meta{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.cand-m{font-size:.65rem;color:var(--muted2)}
+.learn-sect-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.learn-sect-row:last-child{border-bottom:none}
+.learn-sect-name{font-size:.75rem;font-weight:600;width:160px;flex-shrink:0}
+.learn-sect-bar{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.learn-sect-fill{height:100%;border-radius:3px;background:var(--accent);transition:width .4s}
+.learn-sect-meta{font-size:.65rem;color:var(--muted);width:90px;text-align:right;flex-shrink:0}
+.wl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.wl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 15px;box-shadow:var(--sh);text-align:center}
+.wl-lbl{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.wl-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--text)}
 
 /* ─── PAGE WRAP ─── */
 .pw{max-width:1600px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:14px}
@@ -188,11 +209,13 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     .kgrid{grid-template-columns:1fr 1fr}
     .bcrow{grid-template-columns:1fr 1fr}
     .b-val{font-size:1.5rem}
-    .tnav{position:fixed;top:auto;bottom:0;width:100%;border-top:1px solid var(--border);border-bottom:none;box-shadow:0 -2px 8px rgba(0,0,0,.06);padding:0;z-index:300}
-    .tbtn{flex:1;padding:8px 2px 10px;font-size:.58rem;text-align:center;border-bottom:none;border-top:2px solid transparent;flex-direction:column;gap:2px;justify-content:center}
-    .tbtn.active{border-bottom:none;border-top-color:var(--accent)}
+    .tnav{position:fixed;top:auto;bottom:0;width:100%;border-top:1px solid var(--border);border-bottom:none;box-shadow:0 -2px 8px rgba(0,0,0,.06);padding:0;gap:0;overflow-x:hidden;z-index:300}
+    .tnav-sep,.tnav-grp{display:contents}
+    .tbtn{flex:1;padding:8px 2px 10px;font-size:.58rem;text-align:center;border-radius:0;background:none !important;color:var(--muted) !important;box-shadow:none !important;flex-direction:column;gap:2px;justify-content:center;border-top:2px solid transparent}
+    .tbtn.active,.tbtn.active-bot{color:var(--accent) !important;border-top-color:var(--accent)}
     .tbtn svg{display:block}
     .tbtn-lbl{display:block}
+    .tbtn-mobile-hide{display:none}
     body{padding-bottom:62px}
     .col3{grid-template-columns:1fr}
 }
@@ -220,26 +243,38 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 
 <!-- ═══ TAB NAV ═══ -->
 <nav class="tnav" id="tnav">
-    <button class="tbtn active" data-tab="dashboard">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
-        <span class="tbtn-lbl">Dashboard</span>
-    </button>
-    <button class="tbtn" data-tab="portfolio">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>
-        <span class="tbtn-lbl">Portfolio</span>
-    </button>
-    <button class="tbtn" data-tab="bot">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 3v2M8 11v2M3 8h2M11 8h2"/></svg>
-        <span class="tbtn-lbl">Bot</span>
-    </button>
-    <button class="tbtn" data-tab="nieuws">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><path d="M4 6h8M4 9h6"/></svg>
-        <span class="tbtn-lbl">Nieuws</span>
-    </button>
-    <button class="tbtn" data-tab="charts">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1,12 5,7 9,9 15,3"/></svg>
-        <span class="tbtn-lbl">Charts</span>
-    </button>
+    <div class="tnav-grp">
+        <button class="tbtn active" data-tab="dashboard">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+            <span class="tbtn-lbl">Dashboard</span>
+        </button>
+        <button class="tbtn" data-tab="portfolio">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>
+            <span class="tbtn-lbl">Portfolio</span>
+        </button>
+    </div>
+    <div class="tnav-sep"></div>
+    <div class="tnav-grp">
+        <button class="tbtn" data-tab="bot" data-bot="1">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 3v2M8 11v2M3 8h2M11 8h2"/></svg>
+            <span class="tbtn-lbl">Bot</span>
+        </button>
+        <button class="tbtn tbtn-mobile-hide" data-tab="learn" data-bot="1">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2L2 5v4c0 3 2.5 5.5 6 6 3.5-.5 6-3 6-6V5L8 2z"/></svg>
+            <span class="tbtn-lbl">Leermemory</span>
+        </button>
+    </div>
+    <div class="tnav-sep"></div>
+    <div class="tnav-grp">
+        <button class="tbtn" data-tab="nieuws">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><path d="M4 6h8M4 9h6"/></svg>
+            <span class="tbtn-lbl">Nieuws</span>
+        </button>
+        <button class="tbtn" data-tab="analyse">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1,12 5,7 9,9 15,3"/></svg>
+            <span class="tbtn-lbl">Analyse</span>
+        </button>
+    </div>
 </nav>
 
 <!-- ═══════════════════════════════════════
@@ -438,9 +473,48 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 </div></div>
 
 <!-- ═══════════════════════════════════════
-     TAB: CHARTS
+     TAB: LEERMEMORY
 ═══════════════════════════════════════ -->
-<div id="tab-charts" class="tc"><div class="pw">
+<div id="tab-learn" class="tc"><div class="pw">
+
+    <!-- Win/Loss stats -->
+    <div class="wl-grid" id="learn-wl-grid">
+        <div class="wl-card"><div class="wl-lbl">Win Rate</div><div class="wl-val" id="lrn-winrate">—</div></div>
+        <div class="wl-card"><div class="wl-lbl">Gem. Score</div><div class="wl-val" id="lrn-avgscore">—</div></div>
+        <div class="wl-card"><div class="wl-lbl">Gem. Win</div><div class="wl-val pc" id="lrn-avgwin">—</div></div>
+        <div class="wl-card"><div class="wl-lbl">Gem. Verlies</div><div class="wl-val nc" id="lrn-avgloss">—</div></div>
+    </div>
+
+    <!-- Top kandidaten -->
+    <div class="panel">
+        <div class="ph"><span class="pt">Top Scan Kandidaten</span><span class="ptag" id="lrn-cand-tag"></span></div>
+        <div style="padding:16px"><div class="cand-grid" id="lrn-cand-grid"><div class="loading"><div class="spin"></div></div></div></div>
+    </div>
+
+    <!-- Sector blootstelling -->
+    <div class="panel">
+        <div class="ph"><span class="pt">Sector Blootstelling</span><span class="ptag">Gesloten trades</span></div>
+        <div style="padding:16px" id="lrn-sector-list"></div>
+    </div>
+
+    <!-- Beste / slechtste posities -->
+    <div class="col2">
+        <div class="panel">
+            <div class="ph"><span class="pt">Beste Posities</span><span class="ptag">Top 5</span></div>
+            <div style="padding:0 16px 16px" id="lrn-best"></div>
+        </div>
+        <div class="panel">
+            <div class="ph"><span class="pt">Slechtste Posities</span><span class="ptag">Worst 5</span></div>
+            <div style="padding:0 16px 16px" id="lrn-worst"></div>
+        </div>
+    </div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════
+     TAB: ANALYSE
+═══════════════════════════════════════ -->
+<div id="tab-analyse" class="tc"><div class="pw">
 
     <div class="panel">
         <div class="ph"><span class="pt" id="tv-title">Selecteer een aandeel</span><span class="ptag">TradingView</span></div>
@@ -1018,6 +1092,91 @@ function renderNieuwsTab(){
 }
 
 /* ══════════════════════════════════════════════════════
+   LEARN TAB
+══════════════════════════════════════════════════════ */
+function renderLearnTab(){
+    const trades=B?.portfolio||[];
+    const closed=trades.filter(t=>t.status==='closed'||t.closed);
+    const wins=closed.filter(t=>(t.pl_percent||0)>0);
+    const losses=closed.filter(t=>(t.pl_percent||0)<=0);
+    const winRate=closed.length?Math.round(wins.length/closed.length*100):null;
+    const avgWin=wins.length?wins.reduce((s,t)=>s+(t.pl_percent||0),0)/wins.length:null;
+    const avgLoss=losses.length?losses.reduce((s,t)=>s+(t.pl_percent||0),0)/losses.length:null;
+    const active=B?.active_trades||[];
+    const allScored=[...active,...closed].filter(t=>t.score);
+    const avgScore=allScored.length?allScored.reduce((s,t)=>s+(t.score||0),0)/allScored.length:null;
+
+    document.getElementById('lrn-winrate').textContent=winRate!==null?winRate+'%':'—';
+    document.getElementById('lrn-avgscore').textContent=avgScore!==null?avgScore.toFixed(1):'—';
+    document.getElementById('lrn-avgwin').textContent=avgWin!==null?'+'+avgWin.toFixed(1)+'%':'—';
+    document.getElementById('lrn-avgloss').textContent=avgLoss!==null?avgLoss.toFixed(1)+'%':'—';
+
+    /* Top kandidaten */
+    const cands=B?.top_candidates||[];
+    const candTag=document.getElementById('lrn-cand-tag');
+    if(candTag) candTag.textContent=cands.length+' kandidaten';
+    const cg=document.getElementById('lrn-cand-grid');
+    if(cg){
+        if(!cands.length){cg.innerHTML='<div class="empty">Geen kandidaten</div>';}
+        else{
+            cg.innerHTML=cands.slice(0,12).map(c=>{
+                const dcf=c.dcf||{};
+                const upside=dcf.dcf_upside!=null?`<span class="cand-m">DCF ${dcf.dcf_upside>=0?'+':''}${dcf.dcf_upside.toFixed(0)}%</span>`:'';
+                const pe=c.pe?`<span class="cand-m">P/E ${c.pe.toFixed(1)}</span>`:'';
+                const mcap=c.market_cap_b?`<span class="cand-m">$${c.market_cap_b.toFixed(1)}B</span>`:'';
+                return `<div class="cand-card">
+                    <span class="cand-score">${c.score||'?'}/10</span>
+                    <div class="cand-ticker">${c.ticker}</div>
+                    <div class="cand-sector">${c.industry_group||c.sector||'—'}</div>
+                    <div class="cand-meta">${upside}${pe}${mcap}</div>
+                </div>`;
+            }).join('');
+        }
+    }
+
+    /* Sector blootstelling */
+    const sectorMap={};
+    [...active,...closed].forEach(t=>{
+        const s=t.sector||t.industry_group||'Overig';
+        if(!sectorMap[s])sectorMap[s]={n:0,w:0,l:0};
+        sectorMap[s].n++;
+        if((t.pl_percent||0)>0)sectorMap[s].w++;
+        else sectorMap[s].l++;
+    });
+    const sectors=Object.entries(sectorMap).sort((a,b)=>b[1].n-a[1].n);
+    const maxN=sectors.length?sectors[0][1].n:1;
+    const sl=document.getElementById('lrn-sector-list');
+    if(sl){
+        if(!sectors.length){sl.innerHTML='<div class="empty">Geen trades</div>';}
+        else{
+            sl.innerHTML=sectors.map(([name,d])=>`
+                <div class="learn-sect-row">
+                    <div class="learn-sect-name">${name}</div>
+                    <div class="learn-sect-bar"><div class="learn-sect-fill" style="width:${Math.round(d.n/maxN*100)}%"></div></div>
+                    <div class="learn-sect-meta">${d.n} trades · ${d.w}W/${d.l}L</div>
+                </div>`).join('');
+        }
+    }
+
+    /* Beste / slechtste posities */
+    const posTable=(arr,id)=>{
+        const el=document.getElementById(id);
+        if(!el) return;
+        if(!arr.length){el.innerHTML='<div class="empty" style="padding:12px 0">Geen data</div>';return;}
+        el.innerHTML=`<table class="pos-table" style="width:100%">
+            <thead><tr><th>Ticker</th><th>P&L</th><th>Sector</th></tr></thead>
+            <tbody>${arr.map(t=>{
+                const pl=t.pl_percent||0;
+                return `<tr><td><strong>${t.ticker}</strong></td><td class="${pl>=0?'pc':'nc'}">${pl>=0?'+':''}${pl.toFixed(1)}%</td><td style="font-size:.7rem;color:var(--muted)">${t.sector||'—'}</td></tr>`;
+            }).join('')}</tbody>
+        </table>`;
+    };
+    const sorted=[...closed].sort((a,b)=>(b.pl_percent||0)-(a.pl_percent||0));
+    posTable(sorted.slice(0,5),'lrn-best');
+    posTable(sorted.slice(-5).reverse(),'lrn-worst');
+}
+
+/* ══════════════════════════════════════════════════════
    CHARTS TAB
 ══════════════════════════════════════════════════════ */
 function renderChartsTab(){
@@ -1034,7 +1193,7 @@ function renderChartsTab(){
 function openChart(ticker){
     activeTick=ticker;
     /* go to charts tab */
-    switchTab('charts');
+    switchTab('analyse');
     document.getElementById('tv-title').textContent=ticker;
     document.getElementById('price-tag').textContent=ticker;
     /* update chips */
@@ -1083,13 +1242,19 @@ function renderPriceChart(ticker){
 ══════════════════════════════════════════════════════ */
 function switchTab(name,skipRender=false){
     activeTab=name;
-    document.querySelectorAll('.tbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
+    document.querySelectorAll('.tbtn').forEach(b=>{
+        const isActive=b.dataset.tab===name;
+        const isBot=b.dataset.bot==='1';
+        b.classList.toggle('active',isActive&&!isBot);
+        b.classList.toggle('active-bot',isActive&&isBot);
+    });
     document.querySelectorAll('.tc').forEach(t=>t.classList.toggle('active',t.id==='tab-'+name));
     if(skipRender) return;
     if(name==='portfolio'&&needRender.has('portfolio')){renderPortfolioTab();needRender.delete('portfolio');}
     if(name==='bot'&&needRender.has('bot')){renderBotTab();needRender.delete('bot');}
     if(name==='nieuws'&&needRender.has('nieuws')){renderNieuwsTab();needRender.delete('nieuws');}
-    if(name==='charts'){renderChartsTab();}
+    if(name==='learn'&&needRender.has('learn')){renderLearnTab();needRender.delete('learn');}
+    if(name==='analyse'){renderChartsTab();}
 }
 document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
 
@@ -1102,11 +1267,13 @@ function renderAll(){
     needRender.add('portfolio');
     needRender.add('bot');
     needRender.add('nieuws');
+    needRender.add('learn');
     /* render active tab's content immediately */
     if(activeTab==='portfolio'){renderPortfolioTab();needRender.delete('portfolio');}
     else if(activeTab==='bot'){renderBotTab();needRender.delete('bot');}
     else if(activeTab==='nieuws'){renderNieuwsTab();needRender.delete('nieuws');}
-    else if(activeTab==='charts'){renderChartsTab();}
+    else if(activeTab==='learn'){renderLearnTab();needRender.delete('learn');}
+    else if(activeTab==='analyse'){renderChartsTab();}
 }
 
 async function init(){
