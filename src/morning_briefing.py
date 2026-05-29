@@ -1,7 +1,7 @@
 """
 NEXUS Morning Briefing — Dagelijkse marktupdate (07:00 UTC)
 ─────────────────────────────────────────────────────────────
-Marktdata   : yfinance — AEX, S&P 500, NASDAQ, BTC/EUR, goud
+Marktdata   : yfinance — AEX, S&P 500, NASDAQ, BTC, goud
 Nieuws      : Google News RSS — actueel, Nederlandstalig, gratis
 Portfolio   : DEGIRO REST + Trade Republic via TR_HOLDINGS secret
 Snapshots   : dagelijkse opslag in memory.json → dag/week/maand/YTD
@@ -35,7 +35,7 @@ MAX_HISTORY  = 400   # dagen bewaren (~13 maanden)
 INDICES = [
     ("S&P 500", "^GSPC"), ("NASDAQ",  "^IXIC"),
     ("AEX",     "^AEX"),  ("DAX",     "^GDAXI"),
-    ("BTC/EUR", "BTC-EUR"),("Goud",   "GC=F"),
+    ("BTC/USD", "BTC-USD"),("Goud",   "GC=F"),
 ]
 
 DEGIRO_LOGIN_URL   = "https://trader.degiro.nl/login/secure/login"
@@ -186,21 +186,38 @@ def _compute_investment_timeline(transactions: list[dict]) -> tuple[list[dict], 
 def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
     """
     Verwerk DEGIRO_TRANSACTIONS_CSV (CSV-export van DEGIRO website).
-    Ondersteunt zowel Nederlandse (Datum/Totaal, DD-MM-YYYY) als Engelse (Date/Total) kolomnamen.
-    Geeft (timeline, eerste_datum) terug — zelfde formaat als _compute_investment_timeline.
+
+    Ondersteunde kolomnamen:
+      Datum / Date          — datum van de transactie
+      Mutatie / Mutation    — bedrag (standaard DEGIRO-export, negatief = koop)
+      Totaal / Total        — alternatief bedrag (oudere exports)
+      Beschrijving / Description — voor koop/verkoop-detectie
+
+    Filtert automatisch dividenden, kosten en stortingen eruit.
+    Geeft (timeline, eerste_datum) terug.
     """
     import csv as _csv, io as _io
     raw = os.environ.get("DEGIRO_TRANSACTIONS_CSV", "").strip()
     if not raw:
         return [], None
 
+    # Strip BOM (komt voor bij DEGIRO-exports op Windows)
+    if raw.startswith("﻿"):
+        raw = raw[1:]
+
     def _parse_num(s: str) -> float:
-        s = s.strip().strip('"').replace(" ", "")
+        s = s.strip().strip('"').replace(" ", "").replace("\xa0", "")
+        if not s or s in ("-", "+"):
+            return 0.0
         if "," in s and "." in s:
+            # Nederlands: 1.234,56 → punt = duizendtal, komma = decimaal
             s = s.replace(".", "").replace(",", ".")
         elif "," in s:
             s = s.replace(",", ".")
-        return float(s)
+        try:
+            return float(s)
+        except ValueError:
+            return 0.0
 
     monthly_net: dict[str, float] = {}
     first_date: str | None = None
@@ -209,14 +226,30 @@ def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
         first_line = raw.split("\n")[0]
         delim = ";" if first_line.count(";") > first_line.count(",") else ","
         reader = _csv.DictReader(_io.StringIO(raw), delimiter=delim)
+        fieldnames = reader.fieldnames or []
+        log.info(f"DEGIRO CSV kolommen: {[f for f in fieldnames if f][:12]}")
+
         rows_ok = 0
         for row in reader:
-            date_str  = (row.get("Datum") or row.get("Date") or "").strip().strip('"')
-            total_str = (row.get("Totaal") or row.get("Total") or "").strip()
+            # Datum
+            date_str = (row.get("Datum") or row.get("Date") or "").strip().strip('"')
+
+            # Bedrag: Mutatie/Mutation is standaard in huidige DEGIRO-exports;
+            # Totaal/Total is een fallback voor oudere/alternatieve exports.
+            total_str = (
+                row.get("Totaal") or row.get("Total") or
+                row.get("Mutatie") or row.get("Mutation") or ""
+            ).strip()
+
+            # Beschrijving voor koop/verkoop-detectie
+            desc = (row.get("Beschrijving") or row.get("Description") or "").strip().lower()
+
             if not date_str or not total_str:
                 continue
+
             try:
                 if len(date_str.split("-")[0]) == 2:
+                    # DD-MM-YYYY (Nederlands)
                     d, m, y = date_str.split("-")
                     date_iso   = f"{y}-{m}-{d}"
                     year_month = f"{y}-{m}"
@@ -226,17 +259,35 @@ def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
                 total = _parse_num(total_str)
             except Exception:
                 continue
+
             if total == 0:
                 continue
+
+            # Detecteer koop/verkoop op basis van beschrijving
+            # DEGIRO formaat: "Koop 10 VWRL@90.00 EUR" / "Verkoop 5 VWRL@95.00 EUR"
+            is_buy  = "koop" in desc or desc.startswith("buy ")
+            is_sell = "verkoop" in desc or desc.startswith("sell ")
+
+            # Fallback als er geen beschrijving is: negatief = koop, positief = verkoop
+            if not desc:
+                is_buy  = total < 0
+                is_sell = total > 0
+
+            if not (is_buy or is_sell):
+                # Sla dividenden, kosten, stortingen en overboekingen over
+                continue
+
             if first_date is None or date_iso < first_date:
                 first_date = date_iso
+
             monthly_net.setdefault(year_month, 0.0)
-            if total < 0:
+            if is_buy:
                 monthly_net[year_month] += abs(total)
             else:
-                monthly_net[year_month] -= total
+                monthly_net[year_month] -= abs(total)
             rows_ok += 1
-        log.info(f"DEGIRO CSV: {rows_ok} regels, eerste datum {first_date}")
+
+        log.info(f"DEGIRO CSV: {rows_ok} koop/verkoop-regels verwerkt, eerste datum {first_date}")
     except Exception as e:
         log.warning(f"DEGIRO CSV parse fout: {e}")
         return [], None
@@ -262,13 +313,13 @@ def save_snapshot(degiro_total: float | None, tr_total: float | None, bux_total:
         "date":   today,
         "degiro": degiro_total,
         "tr":     tr_total,
-        "bux":    bux_total,
+        "nexus":  nexus_total,
     })
     # Bewaar max MAX_HISTORY dagen, nieuwste eerst
     history  = sorted(history, key=lambda h: h["date"], reverse=True)[:MAX_HISTORY]
     mem[HISTORY_KEY] = history
     _save_json(MEMORY_PATH, mem)
-    log.info(f"Snapshot opgeslagen: DEGIRO={degiro_total} TR={tr_total} BUX={bux_total}")
+    log.info(f"Snapshot opgeslagen: DEGIRO={degiro_total} TR={tr_total} NEXUS={nexus_total}")
 
 
 def _find_snapshot(history: list[dict], days_ago: int) -> dict | None:
@@ -371,8 +422,8 @@ def generate_news_summary(client: anthropic.Anthropic, headlines: list[str]) -> 
         "- summary: 2-3 zinnen die uitleggen WAT er precies speelt en WAAROM het relevant is "
         "voor iemand met posities in ETFs (AEX, S&P500, World) en aandelen\n\n"
         "Antwoord ALLEEN in dit JSON-formaat, geen uitleg eromheen:\n"
-        '[{"theme":"...","summary":"..."},  {"theme":"...","summary":"..."},'
-        '{"theme":"...","summary":"..."},  {"theme":"...","summary":"..."}]'
+        '[{"theme":"...","summary":"..."},{"theme":"...","summary":"..."},'
+        '{"theme":"...","summary":"..."},{"theme":"...","summary":"..."}]'
     )
 
     try:
@@ -403,36 +454,23 @@ def generate_news_summary(client: anthropic.Anthropic, headlines: list[str]) -> 
 # ─── NEXUS PORTFOLIO ──────────────────────────────────────────────────────────
 
 def fetch_nexus_portfolio() -> dict:
-    data   = _load_json(DATA_PATH, {})
+    data = _load_json(DATA_PATH, {})
     trades = data.get("active_trades", [])
     port   = data.get("portfolio", {})
     cash   = port.get("cash", 0)
-    total  = port.get("total_value", 0)
 
     positions, total_pl = [], 0.0
     for t in trades:
         pl = t.get("pl_percent", 0)
         total_pl += pl
-        positions.append({
-            "ticker": t["ticker"],
-            "sector": t.get("sector", "?"),
-            "pl":     round(pl, 2),
-            "value":  round(t.get("current_value", t.get("position_value", 0)), 2),
-            "tp":     t.get("tp_target", 30),
-        })
+        positions.append({"ticker": t["ticker"], "sector": t.get("sector", "?"), "pl": round(pl, 2)})
 
     positions.sort(key=lambda p: p["pl"], reverse=True)
     return {
-        "positions":  positions,
-        "cash":       round(cash, 2),
-        "total":      round(total, 2),
-        "avg_pl":     round(total_pl / len(trades), 2) if trades else 0,
-        "n":          len(trades),
-        "top_cands":  [
-            {"ticker": c["ticker"], "score": c.get("score", 0),
-             "dcf": (c.get("dcf") or {}).get("dcf_upside")}
-            for c in data.get("top_candidates", [])[:3]
-        ],
+        "positions": positions,
+        "cash":      round(cash, 2),
+        "avg_pl":    round(total_pl / len(trades), 2) if trades else 0,
+        "n":         len(trades),
     }
 
 
@@ -671,15 +709,12 @@ def fetch_degiro_portfolio() -> dict | None:
 
         total_pl_pct = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
         items.sort(key=lambda i: i["value"], reverse=True)
-        timeline, first_date = _compute_investment_timeline(transactions)
-        log.info(f"DEGIRO: {len(items)} posities, totaal €{total:.2f}, totaal P&L {total_pl_pct}%, timeline {len(timeline)} maanden")
+        log.info(f"DEGIRO: {len(items)} posities, totaal €{total:.2f}, totaal P&L {total_pl_pct}%")
         return {
-            "positions":            items,
-            "total":                round(total, 2),
-            "total_invested":       round(total_invested, 2),
-            "total_pl_pct":         total_pl_pct,
-            "investment_timeline":  timeline,
-            "first_investment_date": first_date,
+            "positions":       items,
+            "total":           round(total, 2),
+            "total_invested":  round(total_invested, 2),
+            "total_pl_pct":    total_pl_pct,
         }
     except Exception as e:
         log.warning(f"DEGIRO portfolio fout: {e}")
@@ -792,9 +827,9 @@ def build_telegram_message(market, news, nexus, degiro, tr,
 
     # ── 1. HEADER ────────────────────────────────────────────────────────────
     total_portfolio = (
-        (degiro.get("total") if degiro else 0) +
-        (tr.get("total") if tr else 0) +
-        (bux.get("total") if bux else 0)
+        (degiro.get("total") or 0 if degiro else 0) +
+        (tr.get("total") or 0 if tr else 0) +
+        (bux.get("total") or 0 if bux else 0)
     )
     portfolio_line = f"\n💰 Portfolio totaal: `€{total_portfolio:,.0f}`" if total_portfolio else ""
     header = (
@@ -827,29 +862,7 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     if eigen_parts:
         eigen = "💼 *EIGEN PORTFOLIO*\n\n" + f"\n{SEP}\n".join(eigen_parts)
 
-    # ── 4. NEXUS BOT (papier) ────────────────────────────────────────────────
-    nexus_block = ""
-    if nexus.get("positions"):
-        pos   = nexus["positions"]
-        lines = [
-            f"🤖 *NEXUS BOT* _(papier trading)_\n"
-            f"  💼 `€{nexus['total']:,.0f}` · {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
-            f"  💵 Cash: `€{nexus['cash']:,.0f}`"
-        ]
-        for p in pos:
-            dot = "🟢" if p["pl"] >= 0 else "🔴"
-            lines.append(f"  {dot} `{p['ticker']:<6}` `{p['pl']:+5.1f}%`  `€{p['value']:>6,.0f}`  TP `{p['tp']:.0f}%`")
-        # Top scan-kandidaten
-        cands = nexus.get("top_cands", [])
-        if cands:
-            cand_s = "  ".join(
-                f"`{c['ticker']}` {c['score']}" + (f" DCF`{c['dcf']:+.0f}%`" if c['dcf'] else "")
-                for c in cands
-            )
-            lines.append(f"\n  🔍 *Top kandidaten:* {cand_s}")
-        nexus_block = "\n".join(lines)
-
-    # ── 4b. BUX ─────────────────────────────────────────────────────────────
+    # ── 4. BUX ───────────────────────────────────────────────────────────────
     bux_block = ""
     if bux and bux.get("positions"):
         bux_total = bux.get("total", 0)
@@ -863,11 +876,25 @@ def build_telegram_message(market, news, nexus, degiro, tr,
             if not p.get("value", 0):
                 continue
             dot  = "🟢" if (p.get("pl_pct") or 0) >= 0 else "🔴"
-            pl_s = f"`{p['pl_pct']:+.1f}%`" if p.get("pl_pct") is not None else "`n/b`"
-            lines.append(f"  {dot} `{p['name']:<8}` {pl_s}  `€{p['value']:>7,.0f}`")
+            pl_s2 = f"`{p['pl_pct']:+.1f}%`" if p.get("pl_pct") is not None else "`n/b`"
+            lines.append(f"  {dot} `{p['name']:<8}` {pl_s2}  `€{p['value']:>7,.0f}`")
         bux_block = "\n".join(lines)
 
-    # ── 5. NIEUWS ────────────────────────────────────────────────────────────
+    # ── 5. NEXUS BOT (papier) ────────────────────────────────────────────────
+    nexus_block = ""
+    if nexus.get("positions"):
+        pos   = nexus["positions"]
+        lines = [
+            f"🤖 *NEXUS BOT* _(papier trading)_\n"
+            f"  💼 `€{nexus['total']:,.0f}` · {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
+            f"  💵 Cash: `€{nexus['cash']:,.0f}`"
+        ]
+        for p in pos[:6]:
+            dot = "🟢" if p["pl"] >= 0 else "🔴"
+            lines.append(f"  {dot} `{p['ticker']:<6}` `{p['pl']:+5.1f}%`  `€{p['value']:>6,.0f}`")
+        nexus_block = "\n".join(lines)
+
+    # ── 6. NIEUWS ────────────────────────────────────────────────────────────
     nieuws = ""
     if news_summary:
         parts = []
@@ -877,7 +904,7 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     elif news:
         nieuws = "📰 *NIEUWS*\n" + "\n".join(f"  • {h}" for h in news[:6])
 
-    # ── 6. AI ANALYSE ────────────────────────────────────────────────────────
+    # ── 7. AI ANALYSE ────────────────────────────────────────────────────────
     ai_block = f"🧠 *AI ANALYSE*\n{ai_text}"
 
     # ── SAMENSTELLEN ─────────────────────────────────────────────────────────
@@ -914,8 +941,6 @@ def _parse_holdings_secret(env_key: str, label: str) -> list[dict]:
     raw = os.environ.get(env_key, "").strip()
     if not raw:
         return []
-    # Ondersteun zowel newline- als '/' -scheiding (BUX_HOLDINGS gebruikt ' / ')
-    raw = raw.replace(" / ", "\n").replace("/", "\n")
     holdings = []
     for line in raw.splitlines():
         line = line.strip()
@@ -950,37 +975,15 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
     for h in holdings:
         ticker = h["ticker"]
         shares = h["shares"]
-        price = None
-        # Stap 1: fast_info (snel, werkt goed voor US-tickers)
         try:
-            p = getattr(yf.Ticker(ticker).fast_info, "last_price", None)
-            if p and float(p) > 0:
-                price = float(p)
-        except Exception:
-            pass
-        # Stap 2: volledige info (meer velden, maar trager en soms fragiel)
-        if not price:
-            try:
-                full  = yf.Ticker(ticker).info
-                p     = (full.get("currentPrice") or
-                         full.get("regularMarketPrice") or
-                         full.get("previousClose"))
-                if p and float(p) > 0:
-                    price = float(p)
-            except Exception:
-                pass
-        # Stap 3: .DE-tickers ophalen als US-ticker + USD→EUR conversie
-        if not price and ticker.endswith(".DE"):
-            try:
-                us_ticker = ticker[:-3]          # "TSLA.DE" → "TSLA"
-                usd_price = getattr(yf.Ticker(us_ticker).fast_info, "last_price", None)
-                if usd_price and float(usd_price) > 0:
-                    eur_usd = getattr(yf.Ticker("EURUSD=X").fast_info, "last_price", None) or 1.08
-                    price   = round(float(usd_price) / float(eur_usd), 4)
-            except Exception:
-                pass
-        if not price:
-            log.warning(f"{label}: geen prijs voor {ticker} — overgeslagen")
+            info  = yf.Ticker(ticker).fast_info
+            price = getattr(info, "last_price", None)
+            if not price or float(price) <= 0:
+                log.warning(f"{label}: geen prijs voor {ticker}")
+                continue
+            price = float(price)
+        except Exception as e:
+            log.warning(f"{label} {ticker}: {e}")
             continue
         value     = shares * price
         total    += value
@@ -1070,7 +1073,7 @@ def _parse_bux_transactions_csv() -> dict | None:
             qty_str   = (row.get("Asset Quantity")       or "").strip()
             amt_str   = (row.get("Transaction Amount")   or "").strip()
 
-            if not isin or not qty_str:
+            if not isin or not qty_str or currency != "EUR":
                 continue
 
             try:
@@ -1136,37 +1139,16 @@ def fetch_bux_manual() -> dict | None:
     """
     # 1. Auto via CSV-export
     csv_result = _parse_bux_transactions_csv()
-    manual_holdings = _parse_holdings_secret("BUX_HOLDINGS", "BUX")
-
-    if csv_result and manual_holdings:
-        # Vul CSV-resultaat aan met tickers uit BUX_HOLDINGS die de CSV mist (bijv. TSLA)
-        csv_tickers = {p.get("name") for p in csv_result.get("positions", [])}
-        extra = [h for h in manual_holdings if h["ticker"] not in csv_tickers]
-        if extra:
-            log.info(f"BUX: CSV mist {[h['ticker'] for h in extra]} — ophalen via BUX_HOLDINGS aanvulling")
-            extra_port = _holdings_to_portfolio(extra, "BUX aanvulling")
-            if extra_port and extra_port.get("positions"):
-                merged = csv_result["positions"] + extra_port["positions"]
-                merged_total = round(csv_result["total"] + extra_port["total"], 2)
-                inv_csv  = csv_result.get("total_invested") or 0
-                inv_ext  = extra_port.get("total_invested") or 0
-                merged_invested = round(inv_csv + inv_ext, 2) if (inv_csv + inv_ext) > 0 else None
-                csv_result["positions"]     = sorted(merged, key=lambda p: p["value"], reverse=True)
-                csv_result["total"]         = merged_total
-                csv_result["total_invested"] = merged_invested
-                if merged_total > 0 and merged_invested:
-                    csv_result["total_pl_pct"] = round((merged_total / merged_invested - 1) * 100, 2)
-        return csv_result
-
     if csv_result:
         return csv_result
 
-    # Handmatige fallback (geen CSV beschikbaar)
-    if not manual_holdings:
+    # 2. Handmatige fallback
+    holdings = _parse_holdings_secret("BUX_HOLDINGS", "BUX")
+    if not holdings:
         log.info("BUX_HOLDINGS niet ingesteld — BUX wordt overgeslagen.")
         return None
-    log.info(f"BUX_HOLDINGS: {len(manual_holdings)} posities geladen — prijzen ophalen via yfinance...")
-    return _holdings_to_portfolio(manual_holdings, "BUX manual")
+    log.info(f"BUX_HOLDINGS: {len(holdings)} posities geladen — prijzen ophalen via yfinance...")
+    return _holdings_to_portfolio(holdings, "BUX manual")
 
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
@@ -1226,7 +1208,8 @@ def run_morning_briefing():
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
 
-    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text, news_summary, bux, bux_perf)
+    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text,
+                                  news_summary, bux, bux_perf)
 
     log.info("Telegram verzenden...")
     ok = send(msg)
