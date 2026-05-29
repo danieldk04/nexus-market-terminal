@@ -138,6 +138,12 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .fbtn:hover{background:var(--bg);color:var(--text)}
 .fbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 
+/* ─── RANGE BUTTONS ─── */
+.rbtn-row{display:flex;gap:3px;align-items:center}
+.rbtn{padding:2px 7px;border-radius:4px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.6rem;font-weight:700;cursor:pointer;font-family:var(--mono);letter-spacing:.03em;transition:all .12s}
+.rbtn:hover{background:var(--bg);color:var(--text)}
+.rbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
 /* ─── BOT EQUITY BADGE ─── */
 .bot-header{background:var(--bot-bg);border-bottom:1px solid var(--bot-border)}
 .bot-header .pt{color:var(--bot)}
@@ -285,7 +291,13 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     <div class="col2-wide">
         <!-- Portfolio history -->
         <div class="panel">
-            <div class="ph"><span class="pt">Portfolio Verloop</span><span class="ptag" id="hist-tag"></span></div>
+            <div class="ph">
+                <span class="pt">Portfolio Verloop</span>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <span class="ptag" id="hist-tag"></span>
+                    <div class="rbtn-row" id="hist-rbtn-row"></div>
+                </div>
+            </div>
             <div class="chart-area"><canvas id="hist-chart"></canvas></div>
         </div>
         <!-- Latest news -->
@@ -339,15 +351,18 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     <div class="panel">
         <div class="ph">
             <span class="pt">Investering Tijdlijn</span>
-            <span class="ptag" id="inv-meta">—</span>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span class="ptag" id="inv-meta">—</span>
+                <div class="rbtn-row" id="inv-rbtn-row"></div>
+            </div>
         </div>
         <div id="inv-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px 0;border-bottom:1px solid var(--border)"></div>
         <div style="padding:16px;height:280px;position:relative"><canvas id="inv-chart"></canvas></div>
         <div id="inv-empty" style="display:none" class="empty">
-            <strong>Geen historische data</strong>
-            Exporteer je transacties op DEGIRO → <em>Account → Transacties → Export</em><br>
-            Sla de CSV op als GitHub Secret <code>DEGIRO_TRANSACTIONS_CSV</code><br>
-            Dan verschijnt hier je volledige beleggingsgeschiedenis.
+            <strong>Data verschijnt na volgende Morning Briefing run</strong>
+            Je hebt <code>DEGIRO_TRANSACTIONS_CSV</code> als secret opgeslagen ✓<br>
+            Trigger de workflow handmatig: GitHub → Actions → NEXUS Morning Briefing → Run workflow<br>
+            Of wacht tot 09:00 — dan verschijnt hier je volledige beleggingsgeschiedenis.
         </div>
     </div>
 
@@ -445,11 +460,12 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 /* ══════════════════════════════════════════════════════
    STATE
 ══════════════════════════════════════════════════════ */
-let M=null,B=null;   // memory.json, data.json (bot)
-let allPos=[];        // unified real positions
+let M=null,B=null;
+let allPos=[];
 let priceCache={};
 let charts={};
 let activeTick=null,activeFilter='all',activeTab='dashboard';
+let histRange='max',invRange='max';
 const needRender=new Set();
 
 /* ── broker config ── */
@@ -471,14 +487,33 @@ const TYPE_COLORS={'ETF':'#2563eb','Aandeel':'#059669','Crypto':'#f59e0b'};
 
 /* ── TradingView symbol map ── */
 const TV_MAP={
+    // Eigen portfolio — Europese ETFs
     'VWRL.AS':'EURONEXT:VWRL','VUSA.AS':'EURONEXT:VUSA',
     'VHYL.AS':'EURONEXT:VHYL','VHYL':'EURONEXT:VHYL',
-    'VWCE':'XETRA:VWCE','CSP1':'LSE:CSP1','TDIV':'EURONEXT:TDIV',
+    'VWCE':'XETRA:VWCE','VWCE.DE':'XETRA:VWCE',
+    'CSP1':'XETRA:SXR8',      // iShares S&P500 — SXR8 breder beschikbaar dan LSE:CSP1
+    'TDIV':'EURONEXT:TDIV',
+    // Eigen portfolio — aandelen
     'KPN.AS':'EURONEXT:KPN','TSLA.DE':'XETRA:TSLA',
-    'Bitcoin':'BITSTAMP:BTCUSD','V':'NYSE:V',
-    'PEP':'NASDAQ:PEP','ENPH':'NASDAQ:ENPH',
+    'Bitcoin':'BITSTAMP:BTCUSD',
+    'V':'NYSE:V','PEP':'NASDAQ:PEP','ENPH':'NASDAQ:ENPH',
+    // Bot-portfolio — US aandelen
+    'ALL':'NYSE:ALL','UBER':'NYSE:UBER','PGR':'NYSE:PGR',
+    'BR':'NYSE:BR','GILD':'NASDAQ:GILD','DECK':'NYSE:DECK',
+    'APA':'NASDAQ:APA','CF':'NYSE:CF','EXE':'NASDAQ:EXE','TRV':'NYSE:TRV',
 };
 function tvSym(t){return TV_MAP[t]||t;}
+
+/* ── Yahoo Finance ticker map (kan afwijken van dashboard-ticker) ── */
+const YF_MAP={
+    'Bitcoin':'BTC-USD',
+    'CSP1':'SXR8.DE',      // Xetra-equivalent voor CSP1
+    'VWCE':'VWCE.DE',
+    'TDIV':'TDIV.AS',
+    'VHYL':'VHYL.AS',
+    'Tesla':'TSLA',        // BUX gebruikt "Tesla" als naam
+    'KPN.AS':'KPN.AS',     // blijft hetzelfde
+};
 
 /* ── sector colors for bot ── */
 const BOT_SECTORS={
@@ -518,10 +553,12 @@ async function fetchJSON(path){
 /* ── live price (Yahoo Finance) ── */
 async function fetchPrice(ticker){
     if(priceCache[ticker]?.ts>Date.now()-90000) return priceCache[ticker];
-    const yt=ticker.replace(/\./g,'-');
-    for(const base of['https://query1.finance.yahoo.com','https://query2.finance.yahoo.com']){
+    // Gebruik YF_MAP voor correcte Yahoo Finance ticker (bijv. Bitcoin→BTC-USD, VWCE→VWCE.DE)
+    const yt=YF_MAP[ticker]||ticker;
+    for(const base of['https://query2.finance.yahoo.com','https://query1.finance.yahoo.com']){
         try{
-            const r=await fetch(`${base}/v8/finance/chart/${encodeURIComponent(yt)}?interval=1d&range=1mo`);
+            const r=await fetch(`${base}/v8/finance/chart/${encodeURIComponent(yt)}?interval=1d&range=1mo`,
+                {headers:{'Accept':'application/json'}});
             if(!r.ok) continue;
             const j=await r.json();
             const meta=j?.chart?.result?.[0]?.meta;
@@ -529,11 +566,11 @@ async function fetchPrice(ticker){
             const closes=j?.chart?.result?.[0]?.indicators?.quote?.[0]?.close||[];
             const price=meta.regularMarketPrice||meta.previousClose||0;
             const prev=meta.previousClose||price;
-            priceCache[ticker]={price,change:prev?((price-prev)/prev)*100:0,hist:closes.filter(Boolean).slice(-30),ts:Date.now()};
+            priceCache[ticker]={price,change:prev?((price-prev)/prev)*100:0,hist:closes.filter(Boolean).slice(-30),ts:Date.now(),yfTicker:yt};
             return priceCache[ticker];
         }catch{}
     }
-    priceCache[ticker]={price:0,change:0,hist:[],ts:Date.now()};
+    priceCache[ticker]={price:0,change:0,hist:[],ts:Date.now(),failed:true};
     return priceCache[ticker];
 }
 
@@ -637,25 +674,59 @@ function renderDashboard(){
     renderDashNews();
 }
 
+/* ── Range filter helper ── */
+function filterRange(data,range,monthly=false){
+    if(range==='max') return data;
+    const now=new Date(),cut=new Date(now);
+    if(range==='1w')  cut.setDate(now.getDate()-7);
+    else if(range==='1m') cut.setMonth(now.getMonth()-1);
+    else if(range==='3m') cut.setMonth(now.getMonth()-3);
+    else if(range==='6m') cut.setMonth(now.getMonth()-6);
+    else if(range==='ytd'){cut.setMonth(0);cut.setDate(1);}
+    else if(range==='1y') cut.setFullYear(now.getFullYear()-1);
+    else if(range==='2y') cut.setFullYear(now.getFullYear()-2);
+    else if(range==='3y') cut.setFullYear(now.getFullYear()-3);
+    else if(range==='5y') cut.setFullYear(now.getFullYear()-5);
+    const cutStr=monthly?cut.toISOString().slice(0,7):cut.toISOString().slice(0,10);
+    return data.filter(d=>(d.date||'').slice(0,cutStr.length)>=cutStr);
+}
+
+function makeRangeBtns(containerId,ranges,current,onSelect){
+    const row=document.getElementById(containerId);
+    if(!row) return;
+    row.innerHTML=ranges.map(([r,lbl])=>
+        `<button class="rbtn${current===r?' active':''}" data-r="${r}">${lbl}</button>`
+    ).join('');
+    row.querySelectorAll('.rbtn').forEach(b=>b.addEventListener('click',()=>{
+        row.querySelectorAll('.rbtn').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        onSelect(b.dataset.r);
+    }));
+}
+
 function renderHistoryChart(){
-    const hist=(M?.portfolio_history||[]);
-    let labels,data;
-    if(hist.length<2){
+    const fullHist=(M?.portfolio_history||[]).sort((a,b)=>a.date.localeCompare(b.date));
+    const RANGES=[['1w','1W'],['1m','1M'],['3m','3M'],['ytd','YTD'],['1y','1J'],['max','Max']];
+    makeRangeBtns('hist-rbtn-row',RANGES,histRange,r=>{histRange=r;renderHistoryChart();});
+
+    if(fullHist.length<2){
         const D=M?.degiro_summary?.total||0,T=M?.tr_summary?.total||0,BX=M?.bux_summary?.total||0;
-        labels=['DEGIRO','Trade Republic','BUX'];data=[D,T,BX];
         document.getElementById('hist-tag').textContent='per broker';
+        document.getElementById('hist-rbtn-row').innerHTML='';
         dc('hist');
-        charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'bar',data:{labels,datasets:[{data,backgroundColor:['#ea580cbb','#7c3aedbb','#d97706bb'],borderColor:['#ea580c','#7c3aed','#d97706'],borderWidth:1,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${eur(c.raw)}`}}},scales:{x:{grid:{display:false},ticks:{color:'#0f172a',font:{weight:'600'}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
+        charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'bar',data:{labels:['DEGIRO','Trade Republic','BUX'],datasets:[{data:[D,T,BX],backgroundColor:['#ea580cbb','#7c3aedbb','#d97706bb'],borderColor:['#ea580c','#7c3aed','#d97706'],borderWidth:1,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${eur(c.raw)}`}}},scales:{x:{grid:{display:false},ticks:{color:'#0f172a',font:{weight:'600'}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
         return;
     }
-    const sorted=[...hist].sort((a,b)=>a.date.localeCompare(b.date));
-    labels=sorted.map(h=>h.date.slice(5));
-    data=sorted.map(h=>(h.degiro||0)+(h.tr||0)+(h.bux||0));
+    const filtered=filterRange(fullHist,histRange);
+    const slice=filtered.length>=2?filtered:fullHist.slice(-Math.max(2,filtered.length));
+    const labels=slice.map(h=>h.date.slice(5));
+    const data=slice.map(h=>(h.degiro||0)+(h.tr||0)+(h.bux||0));
     const isP=data[data.length-1]>=data[0];
-    const delta=data[data.length-1]-data[0],deltaPct=(delta/data[0]*100).toFixed(1);
+    const delta=data[data.length-1]-data[0];
+    const deltaPct=data[0]?(delta/data[0]*100).toFixed(1):'0.0';
     document.getElementById('hist-tag').textContent=`${labels[0]} – ${labels[labels.length-1]} · ${delta>=0?'+':''}${deltaPct}%`;
     dc('hist');
-    charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'line',data:{labels,datasets:[{data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2,pointRadius:2,pointHoverRadius:5,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${eur(c.raw)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
+    charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'line',data:{labels,datasets:[{data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2,pointRadius:slice.length<=30?3:0,pointHoverRadius:5,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${eur(c.raw)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:10,font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
 }
 
 function renderDashNews(){
@@ -730,40 +801,52 @@ function renderPosTable(){
    INVESTMENT TIMELINE
 ══════════════════════════════════════════════════════ */
 function renderInvestmentTimeline(){
-    const tl=M?.investment_timeline||[];
+    const fullTl=(M?.investment_timeline||[]);
     const firstDate=M?.first_investment_date;
     const emptyEl=document.getElementById('inv-empty');
     const kpisEl=document.getElementById('inv-kpis');
     const canvasWrap=document.querySelector('#inv-chart')?.parentElement;
 
-    if(!tl.length){
+    const INV_RANGES=[['6m','6M'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
+    // Kies standaard startrange op basis van beschikbare data
+    if(invRange==='max'&&fullTl.length>0){
+        const months=fullTl.length;
+        if(months<=12) invRange='max';
+        else if(months<=24) invRange='1y';
+    }
+    makeRangeBtns('inv-rbtn-row',INV_RANGES,invRange,r=>{invRange=r;renderInvestmentTimeline();});
+
+    if(!fullTl.length){
         if(emptyEl) emptyEl.style.display='block';
         if(canvasWrap) canvasWrap.style.display='none';
         kpisEl.innerHTML='';
-        document.getElementById('inv-meta').textContent='Geen data';
+        document.getElementById('inv-meta').textContent='Nog geen data';
         return;
     }
     if(emptyEl) emptyEl.style.display='none';
     if(canvasWrap) canvasWrap.style.display='block';
 
-    const totalInvested=tl[tl.length-1]?.invested||0;
+    const tl=filterRange(fullTl,invRange,true).length>=2?filterRange(fullTl,invRange,true):fullTl;
+
+    // KPIs altijd op basis van VOLLEDIGE tijdlijn (niet gefilterd)
+    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
     const currentPortfolio=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
     const gain=currentPortfolio-totalInvested;
     const gainPct=totalInvested?(gain/totalInvested*100):0;
-    const months=tl.length;
-    const years=Math.floor(months/12);
-    const remMonths=months%12;
-    const duurStr=years>0?(years+'j'+(remMonths?` ${remMonths}m`:'')):(months+'m');
+    const totalMonths=fullTl.length;
+    const years=Math.floor(totalMonths/12);
+    const remMonths=totalMonths%12;
+    const duurStr=years>0?(years+'j'+(remMonths?` ${remMonths}m`:'')):(totalMonths+'m');
 
     // KPI strip
     const kpiColor=gain>=0?'var(--green)':'var(--red)';
     kpisEl.innerHTML=`
         <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
             <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Eerste aankoop</div>
-            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${firstDate||tl[0].date}</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${firstDate||fullTl[0].date}</div>
         </div>
         <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
-            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Belegd kapitaal</div>
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Totaal geïnvesteerd</div>
             <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${eur(totalInvested)}</div>
         </div>
         <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
@@ -772,10 +855,10 @@ function renderInvestmentTimeline(){
         </div>
         <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
             <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Beleggingsduur</div>
-            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${duurStr} <span style="font-size:.72rem;color:var(--muted)">(${months} mnd)</span></div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${duurStr} <span style="font-size:.72rem;color:var(--muted)">(${totalMonths} mnd)</span></div>
         </div>`;
 
-    document.getElementById('inv-meta').textContent=`${tl[0].date} – ${tl[tl.length-1].date} · ${months} maanden`;
+    document.getElementById('inv-meta').textContent=`${tl[0].date} – ${tl[tl.length-1].date} · ${tl.length} mnd getoond`;
 
     // Build chart: invested capital area + current portfolio value reference line
     const labels=tl.map(t=>t.date);
@@ -969,15 +1052,30 @@ function openChart(ticker){
 }
 
 function renderPriceChart(ticker){
-    const h=priceCache[ticker]?.hist||[];
+    const cached=priceCache[ticker];
+    const h=cached?.hist||[];
+    const wrap=document.getElementById('price-chart')?.parentElement;
+    if(!wrap) return;
+    if(!h.length){
+        const yfTicker=cached?.yfTicker||YF_MAP[ticker]||ticker;
+        const isCors=cached?.failed;
+        wrap.innerHTML=`<div class="empty" style="height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px">
+            <strong>Geen koersdata voor ${ticker}</strong>
+            <span style="font-size:.72rem;color:var(--muted)">Yahoo Finance ticker geprobeerd: <code>${yfTicker}</code></span>
+            ${isCors?`<span style="font-size:.72rem;color:var(--muted)">Mogelijk geblokkeerd door CORS — gebruik TradingView chart hierboven.</span>`:''}
+        </div>`;
+        return;
+    }
+    // Herstel canvas als het vervangen was door error
+    if(!document.getElementById('price-chart')){
+        wrap.innerHTML='<canvas id="price-chart"></canvas>';
+    }
     const el=document.getElementById('price-chart');
-    if(!el) return;
-    if(!h.length){el.parentElement.innerHTML='<div class="empty" style="height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column"><strong>Geen koersdata</strong>Yahoo Finance geeft geen historische data terug voor dit instrument.</div>';return;}
     const isP=h[h.length-1]>=h[0];
     const lc=isP?'#059669':'#dc2626',fc=isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)';
     const labels=h.map((_,i)=>{const d=h.length-1-i;return d===0?'Vandaag':`-${d}d`;});
     dc('price');
-    charts['price']=new Chart(el,{type:'line',data:{labels,datasets:[{data:h,borderColor:lc,backgroundColor:fc,borderWidth:2,pointRadius:0,pointHoverRadius:4,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` $${c.raw.toFixed(2)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:8,font:{family:'JetBrains Mono',size:10}}},y:{position:'right',grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>'$'+v.toFixed(0)}}}}});
+    charts['price']=new Chart(el,{type:'line',data:{labels,datasets:[{data:h,borderColor:lc,backgroundColor:fc,borderWidth:2,pointRadius:0,pointHoverRadius:4,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${c.raw.toFixed(2)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:8,font:{family:'JetBrains Mono',size:10}}},y:{position:'right',grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>v.toFixed(2)}}}}});
 }
 
 /* ══════════════════════════════════════════════════════
