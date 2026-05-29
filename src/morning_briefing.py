@@ -84,7 +84,8 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                         news_summary: list[dict] | None = None,
                         bux: dict | None = None,
                         investment_timeline: list[dict] | None = None,
-                        first_investment_date: str | None = None):
+                        first_investment_date: str | None = None,
+                        portfolio_value_history: list[dict] | None = None):
     """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
     mem = _load_json(MEMORY_PATH, {})
     mem["last_news"] = news[:8]
@@ -143,6 +144,9 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
         log.info(f"Investment timeline opgeslagen: {len(investment_timeline)} maanden")
     if first_investment_date:
         mem["first_investment_date"] = first_investment_date
+    if portfolio_value_history:
+        mem["portfolio_value_history"] = portfolio_value_history
+        log.info(f"Portfolio waarde geschiedenis opgeslagen: {len(portfolio_value_history)} maanden")
     mem["dashboard_updated"] = datetime.now(timezone.utc).isoformat()
     _save_json(MEMORY_PATH, mem)
     log.info("Dashboard data opgeslagen in memory.json")
@@ -1196,6 +1200,250 @@ def fetch_bux_manual() -> dict | None:
     return _holdings_to_portfolio(holdings, "BUX manual")
 
 
+# ─── PORTFOLIO WAARDE GESCHIEDENIS ──────────────────────────────────────────────
+
+# ISIN → yfinance ticker voor historische prijzen
+_ISIN_TO_YF: dict[str, str] = {
+    # Vanguard ETFs — Euronext Amsterdam
+    "IE00B3RBWM25": "VWRL.AS",   # FTSE All-World Distributing
+    "IE00B3XXRP09": "VUSA.AS",   # S&P 500 UCITS
+    "IE00B8GKDB10": "VHYL.AS",   # High Dividend Yield
+    # Vanguard ETFs — Xetra (ACC varianten)
+    "IE00BK5BQT80": "VWCE.DE",   # FTSE All-World Accumulating
+    "IE00BK5BR626": "VHYL.DE",   # High Dividend Yield ACC
+    # iShares / Amundi S&P 500
+    "IE00B5BMR087": "SXR8.DE",   # iShares Core S&P 500
+    "LU1681048804": "SXR8.DE",   # Amundi S&P 500 (proxy via iShares)
+    # VanEck
+    "NL0011683594": "TDIV.AS",   # Morningstar Developed Markets Dividend Leaders
+    # US aandelen (prijs in USD → EUR-conversie via EURUSD=X)
+    "US92826C8394": "V",          # Visa
+    "NL0009538784": "KPN.AS",    # KPN (EUR)
+    "US7134481081": "PEP",        # PepsiCo
+    "US29355A1079": "ENPH",       # Enphase
+    "US88160R1014": "TSLA",       # Tesla
+    "US02079K3059": "GOOGL",      # Alphabet
+    "US0378331005": "AAPL",       # Apple
+    "US5949181045": "MSFT",       # Microsoft
+    "US67066G1040": "NVDA",       # Nvidia
+}
+
+# ISINs waarvan de prijs in USD is (conversie naar EUR nodig)
+_USD_ISINS = {
+    "US92826C8394",  # Visa
+    "US7134481081",  # PepsiCo
+    "US29355A1079",  # Enphase
+    "US88160R1014",  # Tesla
+    "US02079K3059",  # Alphabet
+    "US0378331005",  # Apple
+    "US5949181045",  # Microsoft
+    "US67066G1040",  # Nvidia
+}
+
+
+def _build_portfolio_value_history() -> list[dict]:
+    """
+    Reconstrueer maandelijkse DEGIRO-portfoliowaarde vanuit transactie-CSV + yfinance.
+
+    Algoritme:
+      1. DEGIRO CSV → shares per ISIN per maand (cumulatief)
+      2. yfinance monthly close prices per ISIN/ticker
+      3. Maandelijkse waarde = sum(shares × prijs_EUR)
+      4. Blend met portfolio_history (dagelijkse snapshots, incl. TR+BUX) voor recente maanden
+
+    Opgeslagen in memory.json als 'portfolio_value_history'.
+    """
+    import csv as _csv, io as _io
+
+    raw = os.environ.get("DEGIRO_TRANSACTIONS_CSV", "").strip()
+    if not raw:
+        log.info("_build_portfolio_value_history: DEGIRO_TRANSACTIONS_CSV niet beschikbaar.")
+        return []
+
+    if raw.startswith("﻿"):
+        raw = raw[1:]
+
+    # ── Hulpfuncties ────────────────────────────────────────────────────────────
+    def _pn(s: str) -> float:
+        s = s.strip().strip('"').replace(" ", "").replace("\xa0", "")
+        if not s or s in ("-", "+"):
+            return 0.0
+        if "," in s and "." in s:
+            s = s.replace(".", "").replace(",", ".")
+        elif "," in s:
+            s = s.replace(",", ".")
+        try:
+            return float(s)
+        except ValueError:
+            return 0.0
+
+    def _parse_date(d: str):
+        d = d.strip().strip('"')
+        try:
+            if len(d.split("-")[0]) == 2:
+                dd, mm, yyyy = d.split("-")
+                return f"{yyyy}-{mm}-{dd}"
+            return d[:10]
+        except Exception:
+            return None
+
+    # ── Stap 1: lees transacties uit CSV ────────────────────────────────────────
+    first_line = raw.split("\n")[0]
+    delim = ";" if first_line.count(";") > first_line.count(",") else ","
+    txns = []
+
+    try:
+        reader = _csv.DictReader(_io.StringIO(raw), delimiter=delim)
+        for row in reader:
+            date_iso = _parse_date(row.get("Datum") or row.get("Date") or "")
+            isin     = (row.get("ISIN") or "").strip()
+            if not date_iso or not isin or isin not in _ISIN_TO_YF:
+                continue
+
+            shares_str = (row.get("Aantal") or row.get("Shares") or row.get("Quantity") or "").strip()
+            amount_str = (
+                row.get("Waarde EUR") or row.get("Value EUR") or
+                row.get("Mutatie")    or row.get("Mutation") or ""
+            ).strip()
+            desc = (row.get("Beschrijving") or row.get("Description") or "").strip().lower()
+
+            shares = abs(_pn(shares_str))
+            if shares < 0.00001:
+                continue
+
+            if desc:
+                is_buy  = "koop" in desc or desc.startswith("buy ")
+                is_sell = "verkoop" in desc or desc.startswith("sell ")
+            else:
+                amt = _pn(amount_str)
+                is_buy  = amt < 0
+                is_sell = amt > 0
+
+            if is_buy:
+                txns.append({"date": date_iso, "isin": isin, "delta": +shares})
+            elif is_sell:
+                txns.append({"date": date_iso, "isin": isin, "delta": -shares})
+
+    except Exception as e:
+        log.warning(f"portfolio_value_history: CSV parse fout: {e}")
+        return []
+
+    if not txns:
+        log.info("portfolio_value_history: geen transacties gevonden (Aantal kolom ontbreekt?).")
+        return []
+
+    txns.sort(key=lambda t: t["date"])
+    log.info(f"portfolio_value_history: {len(txns)} transacties geladen.")
+
+    # ── Stap 2: bouw cumulatieve maandelijkse holdings ───────────────────────────
+    start_ym = txns[0]["date"][:7]
+    now      = date.today()
+    end_ym   = now.strftime("%Y-%m")
+
+    months: list[str] = []
+    y, m = int(start_ym[:4]), int(start_ym[5:7])
+    while f"{y:04d}-{m:02d}" <= end_ym:
+        months.append(f"{y:04d}-{m:02d}")
+        m += 1
+        if m > 12:
+            m, y = 1, y + 1
+
+    txn_by_month: dict[str, list] = {}
+    for t in txns:
+        txn_by_month.setdefault(t["date"][:7], []).append(t)
+
+    cumulative: dict[str, float] = {}
+    holdings_by_month: dict[str, dict[str, float]] = {}
+    for mo in months:
+        for t in txn_by_month.get(mo, []):
+            cumulative[t["isin"]] = cumulative.get(t["isin"], 0.0) + t["delta"]
+            if cumulative[t["isin"]] < 0.00001:
+                cumulative.pop(t["isin"], None)
+        holdings_by_month[mo] = {k: v for k, v in cumulative.items() if v > 0}
+
+    # ── Stap 3: yfinance maandelijkse closing prices ──────────────────────────────
+    all_isins = {isin for h in holdings_by_month.values() for isin in h}
+    price_hist: dict[str, dict[str, float]] = {}   # isin → {month → prijs_eur}
+
+    # EUR/USD wisselkoers voor USD-aandelen
+    eurusd_hist: dict[str, float] = {}
+    try:
+        eu = yf.Ticker("EURUSD=X").history(period="max", interval="1mo")
+        for idx, row in eu.iterrows():
+            eurusd_hist[idx.strftime("%Y-%m")] = float(row["Close"])
+        log.info(f"EUR/USD history: {len(eurusd_hist)} maanden geladen.")
+    except Exception as e:
+        log.warning(f"EUR/USD history mislukt: {e}")
+
+    for isin in sorted(all_isins):
+        ticker = _ISIN_TO_YF.get(isin)
+        if not ticker:
+            continue
+        try:
+            hist = yf.Ticker(ticker).history(period="max", interval="1mo")
+            if hist.empty:
+                log.warning(f"Geen history voor {ticker} ({isin})")
+                continue
+            monthly: dict[str, float] = {}
+            is_usd = isin in _USD_ISINS
+            for idx, row in hist.iterrows():
+                ym    = idx.strftime("%Y-%m")
+                price = float(row["Close"])
+                if is_usd:
+                    rate  = eurusd_hist.get(ym, 1.08)
+                    price = round(price / rate, 4)
+                monthly[ym] = price
+            price_hist[isin] = monthly
+            log.info(f"Prijs history: {isin} → {ticker} ({len(monthly)} maanden)")
+            time.sleep(0.25)
+        except Exception as e:
+            log.warning(f"yfinance {ticker}: {e}")
+
+    # ── Stap 4: bereken maandelijkse portfoliowaarde ─────────────────────────────
+    degiro_monthly: list[dict] = []
+    for mo in months:
+        holdings = holdings_by_month.get(mo, {})
+        value    = 0.0
+        for isin, shares in holdings.items():
+            ph = price_hist.get(isin, {})
+            # Gebruik exacte maand, of meest recente beschikbare prijs daarvoor
+            price = ph.get(mo)
+            if price is None:
+                prior = sorted(k for k in ph if k <= mo)
+                if prior:
+                    price = ph[prior[-1]]
+            if price:
+                value += shares * price
+        if value > 0:
+            degiro_monthly.append({"date": mo, "value": round(value, 2)})
+
+    if not degiro_monthly:
+        log.warning("portfolio_value_history: geen waarden berekend (prijzen ontbreken?).")
+        return []
+
+    # ── Stap 5: blend met portfolio_history (incl. TR+BUX) voor recente maanden ──
+    mem     = _load_json(MEMORY_PATH, {})
+    ph_list = mem.get(HISTORY_KEY, [])  # dagelijkse snapshots (nieuwste eerst)
+
+    # Groepeer portfolio_history per maand: gebruik de laatste snapshot van die maand
+    ph_by_month: dict[str, float] = {}
+    for snap in ph_list:
+        ym  = snap["date"][:7]
+        tot = (snap.get("degiro") or 0) + (snap.get("tr") or 0) + (snap.get("bux") or 0)
+        if tot > 0 and ym not in ph_by_month:
+            ph_by_month[ym] = tot   # eerste match = meest recente dag in die maand
+
+    result: list[dict] = []
+    for item in degiro_monthly:
+        mo    = item["date"]
+        value = ph_by_month.get(mo, item["value"])   # portfolio_history wint als beschikbaar
+        result.append({"date": mo, "value": value})
+
+    log.info(f"portfolio_value_history: {len(result)} maanden berekend "
+             f"({result[0]['date']} → {result[-1]['date']})")
+    return result
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def run_morning_briefing():
@@ -1246,9 +1494,13 @@ def run_morning_briefing():
     if not inv_timeline:
         inv_timeline, inv_first = _parse_degiro_transactions_csv()
 
+    log.info("Portfolio waarde geschiedenis berekenen...")
+    pv_history = _build_portfolio_value_history()
+
     save_dashboard_data(news, degiro, tr, news_summary, bux,
                         investment_timeline=inv_timeline,
-                        first_investment_date=inv_first)
+                        first_investment_date=inv_first,
+                        portfolio_value_history=pv_history if pv_history else None)
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."

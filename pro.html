@@ -936,65 +936,71 @@ function renderInvestmentTimeline(){
 
     document.getElementById('inv-meta').textContent=`${tl[0].date} – ${tl[tl.length-1].date} · ${tl.length} mnd getoond`;
 
-    const labels=tl.map(t=>t.date);
-    // Maandelijkse DEGIRO-inleg als bars
-    const deltaData=tl.map((t,i)=>i===0?t.invested:Math.max(0,t.invested-(tl[i-1]?.invested||0)));
+    // Gebruik portfolio_value_history als die beschikbaar is — anders fallback naar investment timeline
+    const pvh = (M?.portfolio_value_history||[]);
+    const useValueHistory = pvh.length >= 2;
+
+    let chartLabels, chartLine, chartBars;
+
+    if(useValueHistory){
+        // Filter op hetzelfde bereik als de investment timeline
+        const tlDates = new Set(tl.map(t=>t.date));
+        // Gebruik portfolio_value_history gefilterd op geselecteerde range
+        const pvhFiltered = filterRange(pvh, invRange, true).length>=2
+            ? filterRange(pvh, invRange, true)
+            : pvh;
+        chartLabels = pvhFiltered.map(p=>p.date);
+        chartLine   = pvhFiltered.map(p=>p.value);
+        // Maandelijkse delta als bars (posi=groen, neg=rood)
+        chartBars   = pvhFiltered.map((p,i)=>i===0?0:p.value-(pvhFiltered[i-1]?.value||p.value));
+    } else {
+        chartLabels = tl.map(t=>t.date);
+        chartLine   = tl.map(t=>t.invested);
+        chartBars   = tl.map((t,i)=>i===0?t.invested:Math.max(0,t.invested-(tl[i-1]?.invested||0)));
+    }
+
+    const barColors = chartBars.map(v=>v>=0?'rgba(5,150,105,.5)':'rgba(220,38,38,.5)');
+    const lineColor = gain>=0?'#059669':'#dc2626';
+    const lineFill  = gain>=0?'rgba(5,150,105,.08)':'rgba(220,38,38,.06)';
+    const lineLabel = useValueHistory?'Portfoliowaarde':'Cumulatief geïnvesteerd (DEGIRO)';
 
     const datasets=[
         {
             type:'bar',
-            label:'Maandelijkse inleg (DEGIRO)',
-            data:deltaData,
-            backgroundColor:'rgba(37,99,235,.45)',
-            borderRadius:3,
+            label:'Maandelijkse verandering',
+            data:chartBars,
+            backgroundColor:barColors,
+            borderRadius:2,
             borderSkipped:false,
             yAxisID:'yBar',
-            order:3
+            order:2
         },
         {
             type:'line',
-            label:'DEGIRO inleg (cumulatief)',
-            data:tl.map(t=>t.invested),
-            borderColor:'#2563eb',
-            backgroundColor:'rgba(37,99,235,.07)',
-            borderWidth:2,
+            label:lineLabel,
+            data:chartLine,
+            borderColor:lineColor,
+            backgroundColor:lineFill,
+            borderWidth:2.5,
             pointRadius:0,
             pointHoverRadius:4,
             fill:true,
             tension:.35,
             yAxisID:'y',
-            order:2
+            order:1
         }
     ];
 
-    // Totale kostprijs (alle brokers) — horizontale referentielijn
-    if(allInvested>0){
+    // Kostprijs totaal als referentielijn (alleen als we de waarde-lijn tonen)
+    if(useValueHistory && allInvested>0){
         datasets.push({
             type:'line',
             label:'Kostprijs totaal',
-            data:tl.map(()=>allInvested),
-            borderColor:'rgba(100,116,139,.8)',
+            data:chartLabels.map(()=>allInvested),
+            borderColor:'rgba(100,116,139,.7)',
             backgroundColor:'transparent',
             borderWidth:1.5,
             borderDash:[3,3],
-            pointRadius:0,
-            fill:false,
-            tension:0,
-            yAxisID:'y',
-            order:1
-        });
-    }
-
-    // Huidige portfolio waarde (alle brokers)
-    if(currentPortfolio>0){
-        datasets.push({
-            type:'line',
-            label:'Portfolio nu',
-            data:tl.map(()=>currentPortfolio),
-            borderColor:gain>=0?'rgba(5,150,105,.8)':'rgba(220,38,38,.8)',
-            backgroundColor:'transparent',
-            borderWidth:2,
-            borderDash:[5,4],
             pointRadius:0,
             fill:false,
             tension:0,
@@ -1004,24 +1010,27 @@ function renderInvestmentTimeline(){
     }
 
     dc('inv-chart');
-    const maxBar=Math.max(...deltaData,1);
+    const maxAbsBar = Math.max(...chartBars.map(Math.abs), 1);
     charts['inv-chart']=new Chart(document.getElementById('inv-chart'),{
         type:'bar',
-        data:{labels,datasets},
+        data:{labels:chartLabels, datasets},
         options:{
-            responsive:true,maintainAspectRatio:false,
-            interaction:{mode:'index',intersect:false},
+            responsive:true, maintainAspectRatio:false,
+            interaction:{mode:'index', intersect:false},
             plugins:{
-                legend:{display:true,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true,filter:i=>i.datasetIndex!==0}},
-                tooltip:{...TT,callbacks:{label:c=>{
-                    if(c.datasetIndex===0) return ` Inleg: ${eur(c.raw||0)}`;
+                legend:{display:true, position:'top', labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true,filter:i=>i.datasetIndex!==0}},
+                tooltip:{...TT, callbacks:{label:c=>{
+                    if(c.datasetIndex===0){
+                        const v=c.raw||0;
+                        return ` ${v>=0?'+':''}${eur(v)}`;
+                    }
                     return ` ${c.dataset.label}: ${eur(c.raw||0)}`;
                 }}}
             },
             scales:{
-                x:{grid:{display:false},ticks:{color:'#94a3b8',maxTicksLimit:14,font:{family:'JetBrains Mono',size:10}}},
-                y:{position:'left',grid:{color:'rgba(226,232,240,.5)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}},
-                yBar:{position:'right',display:false,max:maxBar*6,min:0,grid:{display:false}}
+                x:{grid:{display:false}, ticks:{color:'#94a3b8', maxTicksLimit:14, font:{family:'JetBrains Mono',size:10}}},
+                y:{position:'left', grid:{color:'rgba(226,232,240,.5)'}, ticks:{color:'#94a3b8', font:{family:'JetBrains Mono',size:10}, callback:v=>eur(v)}},
+                yBar:{position:'right', display:false, max:maxAbsBar*8, min:-maxAbsBar*8, grid:{display:false}}
             }
         }
     });
