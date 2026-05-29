@@ -936,51 +936,64 @@ function renderInvestmentTimeline(){
 
     document.getElementById('inv-meta').textContent=`${tl[0].date} – ${tl[tl.length-1].date} · ${tl.length} mnd getoond`;
 
-    // Build chart: invested capital area + current portfolio value reference line
     const labels=tl.map(t=>t.date);
-    // Bereken maandelijkse inleg (delta) voor bars
+    // Maandelijkse DEGIRO-inleg als bars
     const deltaData=tl.map((t,i)=>i===0?t.invested:Math.max(0,t.invested-(tl[i-1]?.invested||0)));
-    const barColors=deltaData.map(()=>'rgba(37,99,235,.55)');
-    const lineColor=gain>=0?'#059669':'#dc2626';
-    const lineFill=gain>=0?'rgba(5,150,105,.08)':'rgba(220,38,38,.06)';
 
-    // Lijn = cumulatief geïnvesteerd
     const datasets=[
         {
             type:'bar',
-            label:'Maandelijkse inleg',
+            label:'Maandelijkse inleg (DEGIRO)',
             data:deltaData,
-            backgroundColor:barColors,
+            backgroundColor:'rgba(37,99,235,.45)',
             borderRadius:3,
             borderSkipped:false,
             yAxisID:'yBar',
-            order:2
+            order:3
         },
         {
             type:'line',
-            label:'Cumulatief geïnvesteerd',
+            label:'DEGIRO inleg (cumulatief)',
             data:tl.map(t=>t.invested),
             borderColor:'#2563eb',
             backgroundColor:'rgba(37,99,235,.07)',
-            borderWidth:2.5,
+            borderWidth:2,
             pointRadius:0,
             pointHoverRadius:4,
             fill:true,
             tension:.35,
             yAxisID:'y',
-            order:1
+            order:2
         }
     ];
 
-    // Huidige portfolio waarde als referentielijn
+    // Totale kostprijs (alle brokers) — horizontale referentielijn
+    if(allInvested>0){
+        datasets.push({
+            type:'line',
+            label:'Kostprijs totaal',
+            data:tl.map(()=>allInvested),
+            borderColor:'rgba(100,116,139,.8)',
+            backgroundColor:'transparent',
+            borderWidth:1.5,
+            borderDash:[3,3],
+            pointRadius:0,
+            fill:false,
+            tension:0,
+            yAxisID:'y',
+            order:1
+        });
+    }
+
+    // Huidige portfolio waarde (alle brokers)
     if(currentPortfolio>0){
         datasets.push({
             type:'line',
             label:'Portfolio nu',
             data:tl.map(()=>currentPortfolio),
-            borderColor:gain>=0?'rgba(5,150,105,.7)':'rgba(220,38,38,.7)',
+            borderColor:gain>=0?'rgba(5,150,105,.8)':'rgba(220,38,38,.8)',
             backgroundColor:'transparent',
-            borderWidth:1.5,
+            borderWidth:2,
             borderDash:[5,4],
             pointRadius:0,
             fill:false,
