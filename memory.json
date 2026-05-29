@@ -25,7 +25,7 @@
   "initialized_at": "2026-04-04T00:00:00+00:00",
   "version": "nexus-v2",
   "post_mortem": {
-    "analysis": "# POST-MORTEM RAPPORT | Autonome Beleggingsbot\n\n## PATROON\n**Extreme volatiliteit in ADBE (Tech & AI):** Twee opeenvolgende verliezen van -4.2% op 9-10 april, gevolgd door +9.9% winst op 15 mei. Dit suggereert niet-optimale entry/exit-timing in een volatiele aandeel, niet fundamentele selectie.\n\n## ROOT CAUSE\n**Timing & volatiliteitsbeheer, niet selectie.** Win rate 33.3% is kritiek laag. ADBE genereert +9.9% rendement, maar twee identieke verliezen voorafgaand duiden op:\n- Suboptimale entry-niveaus (tegen trend)\n- Ontbrekende volatiliteit-filters\n- Geen dynamische positiegrootte op basis van IV\n\n## CONCRETE AANBEVELINGEN\n1. **Implementeer ATR-gebaseerde positiegrootte:** Reduceer exposure bij ADBE 40% wanneer volatiliteit >80e percentiel ligt. Dit zou de -4.2% verliezen naar ~-2.5% hebben gereduceerd.\n\n2. **Entry-filter toevoegen:** Blokkeer long-entries gedurende 5 dagen na stop-loss in dezelfde ticker. De twee ADBE-verliezen (dag 1-2) passen dit patroon.\n\n## SECTOR BIAS\n**Tech & AI: MIJDEN of isoleren.** \n- 2 verliezen / 1 winst = 67% verliesratio in deze sector\n- Herhaalde ADBE-exposure wijst op inadequate diversificatie\n- Aanbeveling: Max. 20% van portfolio in Tech/AI, stop sector-clustering\n\n**Urgentie: HOOG** – Win rate <35% vereist systeemreset vóór verdere deployment.",
+    "analysis": "# POST-MORTEM RAPPORT | Autonome Beleggingsbot\n\n## PATROON\n**Extreme volatiliteit in ADBE (Tech & AI):** Twee opeenvolgende verliezen van -4.2% op 9-10 april, gevolgd door +9.9% winst op 15 mei. Dit suggereert niet-optimale entry/exit-timing in een volatiele aandeel, niet fundamentele selectie.\n\n## ROOT CAUSE\n**Timing & volatiliteitsbeheer, niet selectie.** Win rate 33.3% is kritiek laag. ADBE genereert +9.9% rendement, maar twee identieke verliezen voorafgaand duiden op:\n- Suboptimale entry-niveaus (tegen trend)\n- Ontbrekende volatiliteit-filters\n- Geen dynamische positiegrootte op basis van IV\n\n## CONCRETE AANBEVELINGEN\n1. **Implementeer ATR-gebaseerde positiegrootte:** Reduceer exposure bij ADBE 40% wanneer volatiliteit >80e percentiel ligt. Dit zou de -4.2% verliezen naar ~-2.5% hebben gereduceerd.\n\n2. **Entry-filter toevoegen:** Blokkeer long-entries gedurende 5 dagen na stop-loss in dezelfde ticker. De twee ADBE-verliezen (dag 1-2) passen dit patroon.\n\n## SECTOR BIAS\n**Tech & AI: MIJDEN of isoleren.** \n- 2 verliezen / 1 winst = 67% verliesratio in deze sector\n- Herhaalde ADBE-exposure wijst op inadequate diversificatie\n- Aanbeveling: Max. 20% van portfolio in Tech/AI, stop sector-clustering\n\n**Urgentie: HOOG** \u2013 Win rate <35% vereist systeemreset v\u00f3\u00f3r verdere deployment.",
     "win_rate": 33.3,
     "worst_sectors": [
       [
@@ -48,6 +48,12 @@
     "run_at": "2026-05-20T10:43:00.082871+00:00"
   },
   "portfolio_history": [
+    {
+      "date": "2026-05-29",
+      "degiro": 16392.42,
+      "tr": 7206.21,
+      "bux": 2249.93
+    },
     {
       "date": "2026-05-28",
       "degiro": 16313.53,
@@ -104,144 +110,144 @@
     }
   ],
   "last_news": [
+    "Ferrari incasseert harde klappen op de beurs",
+    "X-Fab ontploft op beurs door hype op X, handel meermaals stilgelegd",
+    "Aandeel Ferrari scheurt omlaag: volledig elektrische sportauto lanceert golf aan verkopen",
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
     "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
     "Unilever grootste daler op lager gesloten beurs",
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: ‘Het is code oranje’",
-    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-    "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
-    "Koers Europese aandelen herstelt, maar die in Azië blijven dalen door de oorlog met Iran",
-    "Air France-KLM maakt een smak op de beurs na annuleringen Midden-Oosten",
-    "AEX koers opent lager door Iran, maar Shell en defensie-aandelen profiteren"
+    "AEX koers stijgt 1% en volgt voorbeeld van de Amerikaanse beurs"
   ],
   "tr_summary": {
-    "total": 7428.36,
-    "total_pl_pct": 10.95,
+    "total": 7206.21,
+    "total_pl_pct": 7.63,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4688.01,
-        "pl_pct": 11.18,
-        "weight": 63.1
+        "value": 4429.38,
+        "pl_pct": 5.04,
+        "weight": 61.5
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
-        "value": 928.62,
-        "pl_pct": 32.66,
-        "weight": 12.5
+        "value": 948.95,
+        "pl_pct": 35.57,
+        "weight": 13.2
       },
       {
         "name": "VWCE (All-World Acc)",
-        "value": 823.46,
-        "pl_pct": 5.74,
-        "weight": 11.1
+        "value": 847.1,
+        "pl_pct": 8.78,
+        "weight": 11.8
       },
       {
         "name": "TDIV (Dev Div Leaders)",
-        "value": 811.58,
-        "pl_pct": 1.45,
-        "weight": 10.9
+        "value": 801.22,
+        "pl_pct": 0.15,
+        "weight": 11.1
       },
       {
         "name": "VHYL (High Div Yield)",
-        "value": 176.69,
-        "pl_pct": -11.65,
-        "weight": 2.4
+        "value": 179.55,
+        "pl_pct": -10.22,
+        "weight": 2.5
       }
     ]
   },
-  "dashboard_updated": "2026-05-20T12:10:26.249789+00:00",
+  "dashboard_updated": "2026-05-29T07:38:55.231331+00:00",
   "degiro_summary": {
-    "total": 16048.38,
-    "total_pl_pct": 30.24,
+    "total": 16392.42,
+    "total_pl_pct": 33.04,
     "total_invested": 12321.87,
     "positions": [
       {
         "name": "VWRL.AS",
-        "value": 6030.96,
-        "pl_pct": 29.61,
-        "pl_eur": 1377.87,
-        "weight": 37.6
+        "value": 6203.34,
+        "pl_pct": 33.32,
+        "pl_eur": 1550.25,
+        "weight": 37.8
       },
       {
         "name": "VUSA.AS",
-        "value": 5067.72,
-        "pl_pct": 35.57,
-        "pl_eur": 1329.72,
+        "value": 5179.86,
+        "pl_pct": 38.57,
+        "pl_eur": 1441.86,
         "weight": 31.6
       },
       {
         "name": "VHYL.AS",
-        "value": 4289.88,
-        "pl_pct": 21.63,
-        "pl_eur": 763.0,
-        "weight": 26.7
+        "value": 4359.32,
+        "pl_pct": 23.6,
+        "pl_eur": 832.44,
+        "weight": 26.6
       },
       {
         "name": "V",
-        "value": 659.82,
-        "pl_pct": 63.36,
-        "pl_eur": 255.92,
-        "weight": 4.1
+        "value": 649.9,
+        "pl_pct": 60.91,
+        "pl_eur": 246.0,
+        "weight": 4.0
       }
     ]
   },
   "news_summary": [
     {
-      "theme": "Geopolitieke spanningen beïnvloeden markten",
-      "summary": "Iran-gerelateerde spanningen zorgen voor vluchtigheid in Europese en Aziatische markten, met name voor reissector (Air France-KLM) en luchtvaart. Defensie- en energiebedrijven (Shell) profiteren echter van deze onrust, wat zorgt voor ongelijke sectorbewegingen in uw AEX-posities."
+      "theme": "Technologie drijft markten omhoog",
+      "summary": "De AEX steeg 1% en doorbreekt de 1000-puntgrens, vooral dankzij tech-aandelen als driver. Dit signaal volgt het Amerikaanse voorbeeld en ondersteunt World- en S&P500-posities, hoewel AI-volatiliteit blijft bestaan met beleggers die tussen optimisme en voorzichtigheid wisselen."
     },
     {
-      "theme": "Tech-sector leidt AEX-rally aan",
-      "summary": "De AEX verbreekt de 1000-puntgrens met tech-aandelen als grote drijvende kracht, terwijl Philips positief bijdraagt aan het Amsterdamse herstel. Dit geeft momentum aan World en S&P500-indices waar tech zwaar vertegenwoordigd is."
+      "theme": "Sectoren kampen met uitdagingen",
+      "summary": "Ferrari, Unilever, Novo Nordisk en Air France-KLM ondervinden klappen door productlanceringen, vraagval, medicijntegenslag en geopolitieke verstoringen. Deze dalers wegen op de AEX en raken beleggers met breed gespreid aandelen- en ETF-portefeuilles."
     },
     {
-      "theme": "Selectiefe bedrijfsacties en consolidatie",
-      "summary": "Prosus haalt Just Eat Takeaway van de beurs met positieve koersreactie, terwijl insiders bij Brunel aankopen na dips. Deze corporate actions wijzen op waarde-opportuniteiten, maar beleggers moeten alert blijven op volatiliteit rond dergelijke aankondigingen."
+      "theme": "Geopolitieke spanningen be\u00efnvloeden sentiment",
+      "summary": "Aziatische aandelen dalen door Iran-vrees en oorlogsrisico's, terwijl Europese markten voorzichtig herstellen. Dit cre\u00ebert onzekerheid (code oranje) voor wie in World- of internationale ETFs belegd is en benadrukt het belang van risicospreiding."
     },
     {
-      "theme": "Gemengde signalen en AEX-tweedeling",
-      "summary": "Unilever daalt fors terwijl Adyen positief wordt ontvangen na kwartaalcijfers; AI-angst veroorzaakt selectieve verkopen tegenover herstelende Europese aandelen. Dit duidt op een moeilijk navigeerbare markt waar selectiviteit en sector-timing kritisch zijn voor ETF-beleggers."
+      "theme": "M&A en insidertransacties geven signalen",
+      "summary": "Prosus haalt Just Eat Takeaway van de beurs met positieve koersreactie, terwijl Brunel-topmanagement aandelen bijkoopt na een dip. Deze moves suggereren vertrouwen in groeikansen en kunnen trendveranderingen signaleren voor aandeleninvesteerders."
     }
   ],
   "bux_summary": {
-    "total": 2700.0,
-    "total_pl_pct": 3.53,
-    "total_invested": 2607.83,
+    "total": 2249.93,
+    "total_pl_pct": -13.03,
+    "total_invested": 2587.08,
     "positions": [
       {
-        "name": "Tesla",
+        "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 2347.82,
-        "price": 473.32,
-        "pl_pct": 13.25,
-        "pl_eur": 274.75,
-        "weight": 87.0
+        "value": 1883.33,
+        "price": 379.68,
+        "pl_pct": -9.15,
+        "pl_eur": -189.76,
+        "weight": 83.7
       },
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 300.74,
-        "price": 150.37,
-        "pl_pct": -9.18,
-        "pl_eur": -30.4,
-        "weight": 11.1
+        "value": 292.58,
+        "price": 146.29,
+        "pl_pct": -11.64,
+        "pl_eur": -38.56,
+        "weight": 13.0
       },
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 46.76,
-        "price": 46.76,
-        "pl_pct": -73.96,
-        "pl_eur": -132.81,
-        "weight": 1.7
+        "value": 69.5,
+        "price": 69.5,
+        "pl_pct": -61.3,
+        "pl_eur": -110.07,
+        "weight": 3.1
       },
       {
         "name": "KPN.AS",
         "ticker": "KPN.AS",
-        "value": 4.68,
-        "price": 4.68,
-        "pl_pct": 42.71,
-        "pl_eur": 1.4,
+        "value": 4.52,
+        "price": 4.52,
+        "pl_pct": 37.93,
+        "pl_eur": 1.24,
         "weight": 0.2
       }
     ]
