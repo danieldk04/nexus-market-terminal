@@ -82,7 +82,9 @@ def load_history() -> list[dict]:
 
 def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                         news_summary: list[dict] | None = None,
-                        bux: dict | None = None):
+                        bux: dict | None = None,
+                        investment_timeline: list[dict] | None = None,
+                        first_investment_date: str | None = None):
     """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
     mem = _load_json(MEMORY_PATH, {})
     mem["last_news"] = news[:8]
@@ -136,12 +138,170 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                 for p in tr.get("positions", []) if p.get("value", 0) > 0
             ],
         }
+    if investment_timeline:
+        mem["investment_timeline"] = investment_timeline
+        log.info(f"Investment timeline opgeslagen: {len(investment_timeline)} maanden")
+    if first_investment_date:
+        mem["first_investment_date"] = first_investment_date
     mem["dashboard_updated"] = datetime.now(timezone.utc).isoformat()
     _save_json(MEMORY_PATH, mem)
     log.info("Dashboard data opgeslagen in memory.json")
 
 
-def save_snapshot(degiro_total: float | None, tr_total: float | None, nexus_total: float | None):
+def _compute_investment_timeline(transactions: list[dict]) -> tuple[list[dict], str | None]:
+    """
+    Bereken cumulatief geïnvesteerd kapitaal per maand vanuit DEGIRO API-transacties.
+    Geeft (timeline, eerste_datum) terug.
+    timeline = [{date: "YYYY-MM", invested: float}, ...]
+    """
+    monthly_net: dict[str, float] = {}
+    first_date: str | None = None
+
+    for txn in transactions:
+        date_str = (txn.get("date") or "")[:10]
+        if not date_str:
+            continue
+        year_month = date_str[:7]
+        action = txn.get("buysell", "").upper()
+        total  = abs(float(txn.get("totalInBaseCurrency", 0) or 0))
+
+        if first_date is None or date_str < first_date:
+            first_date = date_str
+
+        monthly_net.setdefault(year_month, 0.0)
+        if action == "B":
+            monthly_net[year_month] += total
+        elif action == "S":
+            monthly_net[year_month] -= total
+
+    timeline: list[dict] = []
+    cumulative = 0.0
+    for ym in sorted(monthly_net.keys()):
+        cumulative = max(0.0, cumulative + monthly_net[ym])
+        timeline.append({"date": ym, "invested": round(cumulative, 2)})
+
+    return timeline, first_date
+
+
+def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
+    """
+    Verwerk DEGIRO_TRANSACTIONS_CSV (CSV-export van DEGIRO website).
+
+    Ondersteunde kolomnamen:
+      Datum / Date          — datum van de transactie
+      Mutatie / Mutation    — bedrag (standaard DEGIRO-export, negatief = koop)
+      Totaal / Total        — alternatief bedrag (oudere exports)
+      Beschrijving / Description — voor koop/verkoop-detectie
+
+    Filtert automatisch dividenden, kosten en stortingen eruit.
+    Geeft (timeline, eerste_datum) terug.
+    """
+    import csv as _csv, io as _io
+    raw = os.environ.get("DEGIRO_TRANSACTIONS_CSV", "").strip()
+    if not raw:
+        return [], None
+
+    # Strip BOM (komt voor bij DEGIRO-exports op Windows)
+    if raw.startswith("﻿"):
+        raw = raw[1:]
+
+    def _parse_num(s: str) -> float:
+        s = s.strip().strip('"').replace(" ", "").replace("\xa0", "")
+        if not s or s in ("-", "+"):
+            return 0.0
+        if "," in s and "." in s:
+            # Nederlands: 1.234,56 → punt = duizendtal, komma = decimaal
+            s = s.replace(".", "").replace(",", ".")
+        elif "," in s:
+            s = s.replace(",", ".")
+        try:
+            return float(s)
+        except ValueError:
+            return 0.0
+
+    monthly_net: dict[str, float] = {}
+    first_date: str | None = None
+
+    try:
+        first_line = raw.split("\n")[0]
+        delim = ";" if first_line.count(";") > first_line.count(",") else ","
+        reader = _csv.DictReader(_io.StringIO(raw), delimiter=delim)
+        fieldnames = reader.fieldnames or []
+        log.info(f"DEGIRO CSV kolommen: {[f for f in fieldnames if f][:12]}")
+
+        rows_ok = 0
+        for row in reader:
+            # Datum
+            date_str = (row.get("Datum") or row.get("Date") or "").strip().strip('"')
+
+            # Bedrag: Mutatie/Mutation is standaard in huidige DEGIRO-exports;
+            # Totaal/Total is een fallback voor oudere/alternatieve exports.
+            total_str = (
+                row.get("Totaal") or row.get("Total") or
+                row.get("Mutatie") or row.get("Mutation") or ""
+            ).strip()
+
+            # Beschrijving voor koop/verkoop-detectie
+            desc = (row.get("Beschrijving") or row.get("Description") or "").strip().lower()
+
+            if not date_str or not total_str:
+                continue
+
+            try:
+                if len(date_str.split("-")[0]) == 2:
+                    # DD-MM-YYYY (Nederlands)
+                    d, m, y = date_str.split("-")
+                    date_iso   = f"{y}-{m}-{d}"
+                    year_month = f"{y}-{m}"
+                else:
+                    date_iso   = date_str[:10]
+                    year_month = date_str[:7]
+                total = _parse_num(total_str)
+            except Exception:
+                continue
+
+            if total == 0:
+                continue
+
+            # Detecteer koop/verkoop op basis van beschrijving
+            # DEGIRO formaat: "Koop 10 VWRL@90.00 EUR" / "Verkoop 5 VWRL@95.00 EUR"
+            is_buy  = "koop" in desc or desc.startswith("buy ")
+            is_sell = "verkoop" in desc or desc.startswith("sell ")
+
+            # Fallback als er geen beschrijving is: negatief = koop, positief = verkoop
+            if not desc:
+                is_buy  = total < 0
+                is_sell = total > 0
+
+            if not (is_buy or is_sell):
+                # Sla dividenden, kosten, stortingen en overboekingen over
+                continue
+
+            if first_date is None or date_iso < first_date:
+                first_date = date_iso
+
+            monthly_net.setdefault(year_month, 0.0)
+            if is_buy:
+                monthly_net[year_month] += abs(total)
+            else:
+                monthly_net[year_month] -= abs(total)
+            rows_ok += 1
+
+        log.info(f"DEGIRO CSV: {rows_ok} koop/verkoop-regels verwerkt, eerste datum {first_date}")
+    except Exception as e:
+        log.warning(f"DEGIRO CSV parse fout: {e}")
+        return [], None
+
+    timeline: list[dict] = []
+    cumulative = 0.0
+    for ym in sorted(monthly_net.keys()):
+        cumulative = max(0.0, cumulative + monthly_net[ym])
+        timeline.append({"date": ym, "invested": round(cumulative, 2)})
+
+    return timeline, first_date
+
+
+def save_snapshot(degiro_total: float | None, tr_total: float | None, bux_total: float | None):
     """Sla dagelijkse portfoliowaarden op in memory.json."""
     mem      = _load_json(MEMORY_PATH, {})
     history  = mem.get(HISTORY_KEY, [])
@@ -657,7 +817,8 @@ def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> st
 
 
 def build_telegram_message(market, news, nexus, degiro, tr,
-                            degiro_perf, tr_perf, ai_text) -> str:
+                            degiro_perf, tr_perf, ai_text,
+                            news_summary=None, bux=None, bux_perf=None) -> str:
     now    = datetime.now(timezone.utc)
     dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
     mnd_nl = ["jan","feb","mrt","apr","mei","jun",
@@ -665,9 +826,16 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     date_s = f"{dag_nl} {now.day} {mnd_nl} {now.year}"
 
     # ── 1. HEADER ────────────────────────────────────────────────────────────
+    total_portfolio = (
+        (degiro.get("total") or 0 if degiro else 0) +
+        (tr.get("total") or 0 if tr else 0) +
+        (bux.get("total") or 0 if bux else 0)
+    )
+    portfolio_line = f"\n💰 Portfolio totaal: `€{total_portfolio:,.0f}`" if total_portfolio else ""
     header = (
         f"🌅 *NEXUS MORNING BRIEFING*\n"
         f"_{date_s} · {now.strftime('%H:%M')} UTC_"
+        f"{portfolio_line}"
     )
 
     # ── 2. MARKTEN ───────────────────────────────────────────────────────────
@@ -694,34 +862,57 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     if eigen_parts:
         eigen = "💼 *EIGEN PORTFOLIO*\n\n" + f"\n{SEP}\n".join(eigen_parts)
 
-    # ── 4. NEXUS BOT (papier) ────────────────────────────────────────────────
+    # ── 4. BUX ───────────────────────────────────────────────────────────────
+    bux_block = ""
+    if bux and bux.get("positions"):
+        bux_total = bux.get("total", 0)
+        bux_pl    = bux.get("total_pl_pct")
+        pl_s      = f"  _{'+' if (bux_pl or 0) >= 0 else ''}{bux_pl:.1f}%_" if bux_pl is not None else ""
+        lines = [f"📲 *BUX*  `€{bux_total:,.0f}`{pl_s}"]
+        if bux_perf:
+            lines.append(_perf_line(bux_perf))
+        lines.append("")
+        for p in bux.get("positions", []):
+            if not p.get("value", 0):
+                continue
+            dot  = "🟢" if (p.get("pl_pct") or 0) >= 0 else "🔴"
+            pl_s2 = f"`{p['pl_pct']:+.1f}%`" if p.get("pl_pct") is not None else "`n/b`"
+            lines.append(f"  {dot} `{p['name']:<8}` {pl_s2}  `€{p['value']:>7,.0f}`")
+        bux_block = "\n".join(lines)
+
+    # ── 5. NEXUS BOT (papier) ────────────────────────────────────────────────
     nexus_block = ""
     if nexus.get("positions"):
-        pos      = nexus["positions"]
-        winners  = [p for p in pos if p["pl"] >= 0]
-        losers   = [p for p in pos if p["pl"] < 0]
-        win_s    = "  ".join(f"{_arrow(p['pl'])} `{p['ticker']}` {p['pl']:+.1f}%" for p in winners[:4])
-        lose_s   = "  ".join(f"{_arrow(p['pl'])} `{p['ticker']}` {p['pl']:+.1f}%" for p in losers[:2])
-        nexus_block = (
+        pos   = nexus["positions"]
+        lines = [
             f"🤖 *NEXUS BOT* _(papier trading)_\n"
-            f"  {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
-            + (f"  {win_s}\n" if win_s else "")
-            + (f"  {lose_s}" if lose_s else "")
-        ).rstrip()
+            f"  💼 `€{nexus['total']:,.0f}` · {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
+            f"  💵 Cash: `€{nexus['cash']:,.0f}`"
+        ]
+        for p in pos[:6]:
+            dot = "🟢" if p["pl"] >= 0 else "🔴"
+            lines.append(f"  {dot} `{p['ticker']:<6}` `{p['pl']:+5.1f}%`  `€{p['value']:>6,.0f}`")
+        nexus_block = "\n".join(lines)
 
-    # ── 5. NIEUWS ────────────────────────────────────────────────────────────
+    # ── 6. NIEUWS ────────────────────────────────────────────────────────────
     nieuws = ""
-    if news:
+    if news_summary:
+        parts = []
+        for seg in news_summary[:4]:
+            parts.append(f"  📌 *{seg['theme']}*\n  {seg['summary']}")
+        nieuws = "📰 *NIEUWS*\n\n" + "\n\n".join(parts)
+    elif news:
         nieuws = "📰 *NIEUWS*\n" + "\n".join(f"  • {h}" for h in news[:6])
 
-    # ── 6. AI ANALYSE ────────────────────────────────────────────────────────
+    # ── 7. AI ANALYSE ────────────────────────────────────────────────────────
     ai_block = f"🧠 *AI ANALYSE*\n{ai_text}"
 
     # ── SAMENSTELLEN ─────────────────────────────────────────────────────────
     sections = [header, markten]
-    if eigen:      sections.append(eigen)
+    if eigen:       sections.append(eigen)
+    if bux_block:   sections.append(bux_block)
     if nexus_block: sections.append(nexus_block)
-    if nieuws:     sections.append(nieuws)
+    if nieuws:      sections.append(nieuws)
     sections.append(ai_block)
     sections.append(f"🌐 [Open Dashboard]({DASHBOARD_URL})")
 
@@ -992,23 +1183,33 @@ def run_morning_briefing():
     history     = load_history()
     degiro_perf = compute_perf(history, degiro.get("total") if degiro else None, "degiro")
     tr_perf     = compute_perf(history, tr.get("total") if tr else None, "tr")
+    bux_perf    = compute_perf(history, bux.get("total") if bux else None, "bux")
 
     # Snapshot + dashboard data opslaan
     save_snapshot(
         degiro_total=degiro.get("total") if degiro else None,
         tr_total=tr.get("total") if tr else None,
-        nexus_total=nexus.get("cash"),
+        bux_total=bux.get("total") if bux else None,
     )
 
     log.info("AI nieuws-samenvatting genereren...")
     news_summary = generate_news_summary(client, news) if client else []
 
-    save_dashboard_data(news, degiro, tr, news_summary, bux)
+    # Investment timeline: probeer API (degiro), anders CSV-export secret
+    inv_timeline = degiro.get("investment_timeline") if degiro else []
+    inv_first    = degiro.get("first_investment_date") if degiro else None
+    if not inv_timeline:
+        inv_timeline, inv_first = _parse_degiro_transactions_csv()
+
+    save_dashboard_data(news, degiro, tr, news_summary, bux,
+                        investment_timeline=inv_timeline,
+                        first_investment_date=inv_first)
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
 
-    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text)
+    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text,
+                                  news_summary, bux, bux_perf)
 
     log.info("Telegram verzenden...")
     ok = send(msg)

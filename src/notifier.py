@@ -34,8 +34,8 @@ def _now_long():
     return datetime.now(timezone.utc).strftime("%d-%m-%Y %H:%M UTC")
 
 
-def send(message, parse_mode="Markdown"):
-    """Stuur een bericht naar Nexus_Quant_Bot. Geeft True terug bij succes."""
+def _send_single(message: str, parse_mode: str) -> bool:
+    """Verstuur één Telegram-bericht (max 4096 tekens)."""
     token = _token()
     if not token:
         log.warning("TELEGRAM_BOT_TOKEN niet gevonden — melding overgeslagen.")
@@ -58,6 +58,20 @@ def send(message, parse_mode="Markdown"):
     except Exception as e:
         log.error("Telegram verbindingsfout: %s", e)
         return False
+
+
+def send(message, parse_mode="Markdown"):
+    """Stuur een bericht naar Nexus_Quant_Bot. Splitst automatisch bij > 4000 tekens."""
+    if len(message) <= 4000:
+        return _send_single(message, parse_mode)
+    # Splits op laatste newline vóór de grens zodat opmaakblokken heel blijven
+    split = message.rfind("\n", 0, 4000)
+    if split == -1:
+        split = 4000
+    ok1 = _send_single(message[:split], parse_mode)
+    ok2 = send(message[split:].lstrip("\n"), parse_mode)
+    log.info("Lang bericht gesplitst in 2 delen (totaal %d tekens)", len(message))
+    return ok1 and ok2
 
 
 # ─── Helpers ─────────────────────────────────────────────────────────────────
