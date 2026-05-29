@@ -82,10 +82,33 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .banner{background:linear-gradient(135deg,#eff6ff,#f0f7ff 50%,#fafbff);border:1px solid #bfdbfe;border-radius:var(--r);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;box-shadow:var(--sh)}
 .b-lbl{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
 .b-val{font-family:var(--mono);font-size:2rem;font-weight:700;color:var(--text);line-height:1}
+.b-day{font-size:.8rem;font-weight:600;margin-top:4px}
 .b-stats{display:flex;gap:20px;flex-wrap:wrap}
 .bstat-l{font-size:.6rem;color:var(--muted);margin-bottom:2px}
 .bstat-v{font-family:var(--mono);font-size:.88rem;font-weight:600}
 .pc{color:var(--green)}.nc{color:var(--red)}
+/* ─── BENCHMARK ─── */
+.bmark-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.bmark-row:last-child{border-bottom:none}
+.bmark-name{font-size:.75rem;font-weight:600;min-width:100px}
+.bmark-bar-wrap{flex:1;height:6px;background:var(--bg);border-radius:3px;margin:0 10px;overflow:hidden}
+.bmark-bar{height:100%;border-radius:3px;transition:width .5s}
+.bmark-val{font-family:var(--mono);font-size:.8rem;font-weight:700;min-width:60px;text-align:right}
+/* ─── DIVIDEND ─── */
+.div-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:.78rem}
+.div-row:last-child{border-bottom:none}
+.div-ticker{font-weight:700;min-width:80px}
+.div-yield{color:var(--green);font-family:var(--mono);font-size:.75rem}
+.div-annual{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+/* ─── REBALANCING ─── */
+.rebal-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.rebal-row:last-child{border-bottom:none}
+.rebal-name{font-size:.75rem;font-weight:600;min-width:80px}
+.rebal-bar-wrap{flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;position:relative}
+.rebal-bar-actual{height:100%;border-radius:4px;transition:width .4s;position:absolute;top:0;left:0}
+.rebal-bar-target{width:2px;height:100%;background:var(--text);opacity:.4;position:absolute;top:0}
+.rebal-pct{font-family:var(--mono);font-size:.78rem;font-weight:700;min-width:42px;text-align:right}
+.rebal-diff{font-size:.68rem;min-width:52px;text-align:right}
 
 /* ─── KPI GRID ─── */
 .kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
@@ -342,6 +365,18 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
+    <!-- Benchmark vergelijking -->
+    <div class="col2">
+        <div class="panel">
+            <div class="ph"><span class="pt">Benchmark YTD</span><span class="ptag">portfolio vs indices</span></div>
+            <div style="padding:12px 16px" id="bmark-panel"></div>
+        </div>
+        <div class="panel">
+            <div class="ph"><span class="pt">Dividend Inkomen</span><span class="ptag">geschat per jaar</span></div>
+            <div style="padding:12px 16px" id="div-panel-dash"></div>
+        </div>
+    </div>
+
 </div></div>
 
 <!-- ═══════════════════════════════════════
@@ -381,6 +416,18 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
+    <!-- Dividend + Rebalancing -->
+    <div class="col2">
+        <div class="panel">
+            <div class="ph"><span class="pt">Dividend Inkomen</span><span class="ptag">geschat per jaar</span></div>
+            <div style="padding:12px 16px" id="div-panel"></div>
+        </div>
+        <div class="panel">
+            <div class="ph"><span class="pt">Rebalancing</span><span class="ptag">target vs actueel</span></div>
+            <div style="padding:12px 16px" id="rebal-panel"></div>
+        </div>
+    </div>
+
     <!-- Positions table -->
     <div class="panel">
         <div class="ph"><span class="pt">Posities</span><span class="ptag" id="pos-tag">—</span></div>
@@ -394,9 +441,10 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
                     <th class="r">Waarde (€)</th>
                     <th class="r">P&amp;L %</th>
                     <th class="r">P&amp;L (€)</th>
+                    <th class="r">Leeftijd</th>
                     <th class="r">Gewicht</th>
                 </tr></thead>
-                <tbody id="pos-body"><tr><td colspan="7" class="loading"><div class="spin"></div></td></tr></tbody>
+                <tbody id="pos-body"><tr><td colspan="8" class="loading"><div class="spin"></div></td></tr></tbody>
             </table>
         </div>
     </div>
@@ -441,6 +489,22 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
                     <th class="r">Datum</th>
                 </tr></thead>
                 <tbody id="bot-body"><tr><td colspan="9" class="loading"><div class="spin"></div></td></tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Gesloten trades -->
+    <div class="panel">
+        <div class="ph bot-header"><span class="pt">Gesloten Trades</span><span class="ptag" id="bot-closed-tag">—</span></div>
+        <div style="overflow-x:auto" id="bot-closed-wrap">
+            <table class="tbl">
+                <thead><tr>
+                    <th>Ticker</th><th>Sector</th>
+                    <th class="r">Aankoop</th><th class="r">Verkoop</th>
+                    <th class="r">P&amp;L %</th><th class="r">P&amp;L ($)</th>
+                    <th class="r">Duur</th><th class="r">Score</th>
+                </tr></thead>
+                <tbody id="bot-closed-body"></tbody>
             </table>
         </div>
     </div>
@@ -687,8 +751,27 @@ function renderDashboard(){
     const ti=(D.total_invested||0)+trInv+(BX.total_invested||0);
     const pl=ti?tv-ti:null,plp=ti&&pl!=null?(pl/ti)*100:null;
     document.getElementById('b-val').textContent=eur(tv);
+
+    // Vandaag's verandering in € vanuit portfolio_history
+    const ph=M?.portfolio_history||[];
+    const snap0=ph[0],snap1=ph.find((_,i)=>i>0);
+    const tot0=snap0?((snap0.degiro||0)+(snap0.tr||0)+(snap0.bux||0)):0;
+    const tot1=snap1?((snap1.degiro||0)+(snap1.tr||0)+(snap1.bux||0)):0;
+    const dayChg=tot0>0&&tot1>0?tot0-tot1:null;
+    const dayPct=dayChg!=null&&tot1>0?(dayChg/tot1*100):null;
+
+    let bValEl=document.getElementById('b-val');
+    const existBDay=document.getElementById('b-day');
+    if(existBDay) existBDay.remove();
+    if(dayChg!=null){
+        const sign=dayChg>=0?'+':'';
+        const cls=dayChg>=0?'pc':'nc';
+        bValEl.insertAdjacentHTML('afterend',
+            `<div class="b-day ${cls}" id="b-day">${sign}${eur(Math.abs(dayChg),2)} (${sign}${dayPct.toFixed(2)}%) vandaag</div>`);
+    }
+
     let stats='';
-    if(pl!=null) stats+=`<div><div class="bstat-l">P&L</div><div class="bstat-v ${pl>=0?'pc':'nc'}">${pl>=0?'+':''}${eur(Math.abs(pl),2)}</div></div>`;
+    if(pl!=null) stats+=`<div><div class="bstat-l">P&L totaal</div><div class="bstat-v ${pl>=0?'pc':'nc'}">${pl>=0?'+':''}${eur(Math.abs(pl),2)}</div></div>`;
     if(plp!=null) stats+=`<div><div class="bstat-l">Rendement</div><div class="bstat-v ${plp>=0?'pc':'nc'}">${pct(plp)}</div></div>`;
     stats+=`<div><div class="bstat-l">DEGIRO</div><div class="bstat-v">${eur(D.total||0)}</div></div>`;
     stats+=`<div><div class="bstat-l">Trade Republic</div><div class="bstat-v">${eur(T.total||0)}</div></div>`;
@@ -748,6 +831,69 @@ function renderDashboard(){
 
     /* news */
     renderDashNews();
+
+    /* benchmark + dividend */
+    renderBenchmarkPanel();
+    renderDividendPanel('div-panel-dash');
+}
+
+function renderBenchmarkPanel(){
+    const el=document.getElementById('bmark-panel');
+    if(!el) return;
+    const ph=M?.portfolio_history||[];
+    if(ph.length<2){el.innerHTML='<div class="empty">Beschikbaar na meerdere briefing runs</div>';return;}
+
+    // Portfolio YTD: vergelijk huidige waarde met begin van het jaar
+    const ytdStart=`${new Date().getFullYear()}-01-01`;
+    const ytdSnap=ph.slice().reverse().find(h=>h.date>=ytdStart)||(ph[ph.length-1]);
+    const now=(ph[0].degiro||0)+(ph[0].tr||0)+(ph[0].bux||0);
+    const ytdBase=(ytdSnap.degiro||0)+(ytdSnap.tr||0)+(ytdSnap.bux||0);
+    const portYtd=ytdBase>0?((now/ytdBase-1)*100):null;
+
+    const bh=M?.benchmark_history||{};
+    const rows=[
+        {name:'Mijn Portfolio', ytd:portYtd, color:'#2563eb'},
+        {name:'S&P 500',        ytd:bh.sp500_ytd||null, color:'#059669'},
+        {name:'AEX',            ytd:bh.aex_ytd||null,   color:'#d97706'},
+        {name:'MSCI World',     ytd:bh.msci_ytd||null,  color:'#7c3aed'},
+    ];
+
+    const maxAbs=Math.max(...rows.map(r=>Math.abs(r.ytd||0)),1);
+    el.innerHTML=rows.map(r=>{
+        if(r.ytd==null) return `<div class="bmark-row"><div class="bmark-name">${r.name}</div><div style="flex:1;font-size:.7rem;color:var(--muted)">n/b na briefing</div></div>`;
+        const barW=Math.abs(r.ytd)/maxAbs*100;
+        const cls=r.ytd>=0?'pc':'nc';
+        return `<div class="bmark-row">
+            <div class="bmark-name">${r.name}</div>
+            <div class="bmark-bar-wrap"><div class="bmark-bar" style="width:${barW}%;background:${r.color};opacity:${r.ytd>=0?'.8':'.5'}"></div></div>
+            <div class="bmark-val ${cls}">${r.ytd>=0?'+':''}${r.ytd.toFixed(2)}%</div>
+        </div>`;
+    }).join('');
+}
+
+function renderDividendPanel(elId){
+    const el=document.getElementById(elId);
+    if(!el) return;
+    const rows=[];
+    const addPos=(positions,broker)=>(positions||[]).forEach(p=>{
+        if(p.div_yield>0) rows.push({...p,broker});
+    });
+    addPos(M?.degiro_summary?.positions,'DEGIRO');
+    addPos(M?.tr_summary?.positions,'TR');
+    addPos(M?.bux_summary?.positions,'BUX');
+    if(!rows.length){el.innerHTML='<div class="empty" style="padding:8px 0;font-size:.75rem">Dividend data beschikbaar na volgende briefing run</div>';return;}
+    const total=rows.reduce((s,r)=>s+(r.annual_div_eur||0),0);
+    el.innerHTML=`
+        ${rows.map(r=>`<div class="div-row">
+            <div><span class="div-ticker">${r.name||r.ticker}</span><span style="font-size:.6rem;color:var(--muted);margin-left:4px">${r.broker}</span></div>
+            <div style="display:flex;gap:16px;align-items:center">
+                <span class="div-yield">${(r.div_yield*100).toFixed(2)}%</span>
+                <span class="div-annual">${eur(r.annual_div_eur||0)}/jr</span>
+            </div>
+        </div>`).join('')}
+        <div style="padding:8px 0 2px;display:flex;justify-content:space-between;font-size:.75rem;font-weight:700;border-top:1px solid var(--border);margin-top:4px">
+            <span>Totaal dividend</span><span class="pc">${eur(total)}/jr</span>
+        </div>`;
 }
 
 /* ── Range filter helper ── */
@@ -835,7 +981,41 @@ function renderPortfolioTab(){
 
     renderPosFilter();
     renderPosTable();
+    renderDividendPanel('div-panel');
+    renderRebalancingPanel();
     renderInvestmentTimeline();
+}
+
+function renderRebalancingPanel(){
+    const el=document.getElementById('rebal-panel');
+    if(!el) return;
+    const grand=allPos.reduce((s,p)=>s+p.value,0);
+    if(!grand){el.innerHTML='<div class="empty">Geen data</div>';return;}
+
+    // Target allocaties (aanpasbaar)
+    const targets=[
+        {name:'ETF',     target:70, color:'#2563eb'},
+        {name:'Aandeel', target:20, color:'#059669'},
+        {name:'Crypto',  target:10, color:'#f59e0b'},
+    ];
+    const actuals={};
+    allPos.forEach(p=>actuals[p.type]=(actuals[p.type]||0)+p.value);
+
+    el.innerHTML=targets.map(t=>{
+        const act=actuals[t.name]?((actuals[t.name]/grand)*100):0;
+        const diff=act-t.target;
+        const cls=Math.abs(diff)<3?'':diff>0?'pc':'nc';
+        const sign=diff>=0?'+':'';
+        return `<div class="rebal-row">
+            <div class="rebal-name">${t.name}</div>
+            <div class="rebal-bar-wrap">
+                <div class="rebal-bar-actual" style="width:${Math.min(act,100)}%;background:${t.color};opacity:.7"></div>
+                <div class="rebal-bar-target" style="left:${t.target}%"></div>
+            </div>
+            <div class="rebal-pct" style="color:${t.color}">${act.toFixed(1)}%</div>
+            <div class="rebal-diff ${cls}">${sign}${diff.toFixed(1)}%</div>
+        </div>`;
+    }).join('')+`<div style="font-size:.62rem;color:var(--muted);margin-top:8px">Streepje = target · gekleurde balk = actueel</div>`;
 }
 
 function renderDonut(wrapId,chartId,labels,values,colors,total,legId){
@@ -868,6 +1048,7 @@ function renderPosTable(){
             <td class="r">${eur(p.value,2)}</td>
             <td class="r" style="color:${plc}">${p.pl_pct!=null?pct(p.pl_pct):'n/b'}</td>
             <td class="r" style="color:${plc}">${p.pl_eur!=null?(p.pl_eur>=0?'+':'')+eur(Math.abs(p.pl_eur),2):'n/b'}</td>
+            <td class="r" style="color:var(--muted);font-size:.72rem">${p.first_buy_date?Math.floor((Date.now()-new Date(p.first_buy_date))/(1000*60*60*24*30))+'m':'—'}</td>
             <td class="r"><div style="display:flex;align-items:center;justify-content:flex-end;gap:3px"><div class="wbar-bg"><div class="wbar-f" style="width:${Math.min(p.weight_total*4,100)}%;background:${BROKERS[p.broker]?.color||'#64748b'}"></div></div>${p.weight_total.toFixed(1)}%</div></td>
         </tr>`;
     }).join('');
@@ -1108,6 +1289,28 @@ function renderBotTab(){
             <td class="r" style="font-size:.68rem;color:var(--muted)">${t.buy_date||'—'}</td>
         </tr>`;
     }).join('');
+
+    /* gesloten trades */
+    const closed=B?.portfolio?.closed_trades||B?.closed_trades||[];
+    document.getElementById('bot-closed-tag').textContent=closed.length?`${closed.length} trades`:'geen data';
+    document.getElementById('bot-closed-body').innerHTML=closed.length
+        ?[...closed].sort((a,b)=>(b.close_date||'').localeCompare(a.close_date||'')).map(t=>{
+            const plc=(t.pl_percent||0)>=0?'var(--green)':'var(--red)';
+            const sc=t.score_at_entry||t.score||0;
+            const sColor=sc>=8?'var(--green)':sc>=7?'var(--yellow)':'var(--muted)';
+            const days=t.buy_date&&t.close_date?Math.round((new Date(t.close_date)-new Date(t.buy_date))/864e5):null;
+            return `<tr>
+                <td><div class="ticker-cell">${t.ticker}</div><div class="name-cell">${t.name||''}</div></td>
+                <td style="font-size:.7rem;color:var(--muted)">${t.sector||'—'}</td>
+                <td class="r">${usd(t.buy_price||0)}</td>
+                <td class="r">${usd(t.sell_price||t.close_price||0)}</td>
+                <td class="r" style="color:${plc};font-weight:700">${pct(t.pl_percent||0)}</td>
+                <td class="r" style="color:${plc}">${t.pl_dollar!=null?(t.pl_dollar>=0?'+':'')+usd(Math.abs(t.pl_dollar)):'—'}</td>
+                <td class="r" style="color:var(--muted)">${days!=null?days+'d':'—'}</td>
+                <td class="r"><span class="score-pill" style="background:${sColor}18;color:${sColor};border:1px solid ${sColor}44">${sc?sc.toFixed(1):'—'}</span></td>
+            </tr>`;
+        }).join('')
+        :'<tr><td colspan="8" class="empty">Nog geen gesloten trades</td></tr>';
 }
 
 /* ══════════════════════════════════════════════════════

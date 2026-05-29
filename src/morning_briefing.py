@@ -85,7 +85,8 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                         bux: dict | None = None,
                         investment_timeline: list[dict] | None = None,
                         first_investment_date: str | None = None,
-                        portfolio_value_history: list[dict] | None = None):
+                        portfolio_value_history: list[dict] | None = None,
+                        benchmark_history: dict | None = None):
     """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
     mem = _load_json(MEMORY_PATH, {})
     mem["last_news"] = news[:8]
@@ -98,13 +99,16 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
             "total_invested": bux.get("total_invested"),
             "positions": [
                 {
-                    "name":   p.get("name", "?"),
-                    "ticker": p.get("pid", p.get("name", "?")),
-                    "value":  p.get("value", 0),
-                    "price":  p.get("price"),
-                    "pl_pct": p.get("pl_pct"),
-                    "pl_eur": p.get("pl_eur"),
-                    "weight": round(p["value"] / bux["total"] * 100, 1) if bux.get("total") else None,
+                    "name":          p.get("name", "?"),
+                    "ticker":        p.get("pid", p.get("name", "?")),
+                    "value":         p.get("value", 0),
+                    "price":         p.get("price"),
+                    "pl_pct":        p.get("pl_pct"),
+                    "pl_eur":        p.get("pl_eur"),
+                    "div_yield":     p.get("div_yield"),
+                    "annual_div_eur":p.get("annual_div_eur"),
+                    "first_buy_date":p.get("first_buy_date"),
+                    "weight":        round(p["value"] / bux["total"] * 100, 1) if bux.get("total") else None,
                 }
                 for p in bux.get("positions", []) if p.get("value", 0) > 0
             ],
@@ -116,11 +120,14 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
             "total_invested": degiro.get("total_invested"),
             "positions": [
                 {
-                    "name":    p.get("name", "?"),
-                    "value":   p.get("value", 0),
-                    "pl_pct":  p.get("pl_pct"),
-                    "pl_eur":  p.get("pl_eur"),
-                    "weight":  round(p["value"] / degiro["total"] * 100, 1) if degiro.get("total") else None,
+                    "name":          p.get("name", "?"),
+                    "value":         p.get("value", 0),
+                    "pl_pct":        p.get("pl_pct"),
+                    "pl_eur":        p.get("pl_eur"),
+                    "div_yield":     p.get("div_yield"),
+                    "annual_div_eur":p.get("annual_div_eur"),
+                    "first_buy_date":p.get("first_buy_date"),
+                    "weight":        round(p["value"] / degiro["total"] * 100, 1) if degiro.get("total") else None,
                 }
                 for p in degiro.get("positions", []) if p.get("value", 0) > 0
             ],
@@ -131,10 +138,13 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
             "total_pl_pct":  tr.get("total_pl_pct"),
             "positions": [
                 {
-                    "name":   p.get("name", "?"),
-                    "value":  p.get("value", 0),
-                    "pl_pct": p.get("pl_pct"),
-                    "weight": round(p["value"] / tr["total"] * 100, 1) if tr.get("total") else None,
+                    "name":          p.get("name", "?"),
+                    "value":         p.get("value", 0),
+                    "pl_pct":        p.get("pl_pct"),
+                    "div_yield":     p.get("div_yield"),
+                    "annual_div_eur":p.get("annual_div_eur"),
+                    "first_buy_date":p.get("first_buy_date"),
+                    "weight":        round(p["value"] / tr["total"] * 100, 1) if tr.get("total") else None,
                 }
                 for p in tr.get("positions", []) if p.get("value", 0) > 0
             ],
@@ -147,6 +157,9 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
     if portfolio_value_history:
         mem["portfolio_value_history"] = portfolio_value_history
         log.info(f"Portfolio waarde geschiedenis opgeslagen: {len(portfolio_value_history)} maanden")
+    if benchmark_history:
+        mem["benchmark_history"] = benchmark_history
+        log.info(f"Benchmark geschiedenis opgeslagen: {benchmark_history}")
     mem["dashboard_updated"] = datetime.now(timezone.utc).isoformat()
     _save_json(MEMORY_PATH, mem)
     log.info("Dashboard data opgeslagen in memory.json")
@@ -1043,16 +1056,33 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
             pl_eur   = round(value - cost_eur, 2)
         else:
             cost_eur = pl_pct = pl_eur = None
+
+        # Dividend yield ophalen (alleen voor niet-crypto tickers)
+        div_yield = None
+        annual_div_eur = None
+        if not any(c in ticker.upper() for c in ("BTC", "ETH", "XRP", "SOL")):
+            try:
+                di = yf.Ticker(ticker).info
+                dy = di.get("dividendYield")
+                if dy and float(dy) > 0:
+                    div_yield      = round(float(dy), 4)
+                    annual_div_eur = round(value * float(dy), 2)
+            except Exception:
+                pass
+
         positions.append({
-            "name":      ticker,
-            "pid":       ticker,
-            "size":      round(shares, 4),
-            "price":     round(price, 2),
-            "value":     round(value, 2),
-            "avg_price": avg_price,
-            "cost_eur":  round(cost_eur, 2) if cost_eur else None,
-            "pl_pct":    pl_pct,
-            "pl_eur":    pl_eur,
+            "name":          h.get("name", ticker),
+            "pid":           ticker,
+            "size":          round(shares, 4),
+            "price":         round(price, 2),
+            "value":         round(value, 2),
+            "avg_price":     avg_price,
+            "cost_eur":      round(cost_eur, 2) if cost_eur else None,
+            "pl_pct":        pl_pct,
+            "pl_eur":        pl_eur,
+            "div_yield":     div_yield,
+            "annual_div_eur":annual_div_eur,
+            "first_buy_date":h.get("first_buy_date"),
         })
         time.sleep(0.15)
     if not positions:
@@ -1444,6 +1474,32 @@ def _build_portfolio_value_history() -> list[dict]:
     return result
 
 
+def _build_benchmark_history() -> dict:
+    """Haal YTD-rendementen op voor S&P 500, AEX en MSCI World (proxy: IWDA.AS)."""
+    today     = date.today()
+    ytd_start = f"{today.year}-01-01"
+    result    = {}
+
+    benchmarks = [
+        ("sp500_ytd", "^GSPC"),
+        ("aex_ytd",   "^AEX"),
+        ("msci_ytd",  "IWDA.AS"),
+    ]
+    for key, symbol in benchmarks:
+        try:
+            hist = yf.Ticker(symbol).history(start=ytd_start, period="ytd")
+            if hist is not None and not hist.empty and len(hist) >= 2:
+                start_px = float(hist["Close"].iloc[0])
+                end_px   = float(hist["Close"].iloc[-1])
+                if start_px > 0:
+                    result[key] = round((end_px / start_px - 1) * 100, 2)
+                    log.info(f"Benchmark {symbol}: YTD {result[key]:+.2f}%")
+        except Exception as e:
+            log.warning(f"Benchmark {symbol} mislukt: {e}")
+
+    return result
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def run_morning_briefing():
@@ -1497,10 +1553,14 @@ def run_morning_briefing():
     log.info("Portfolio waarde geschiedenis berekenen...")
     pv_history = _build_portfolio_value_history()
 
+    log.info("Benchmark rendementen ophalen...")
+    bm_history = _build_benchmark_history()
+
     save_dashboard_data(news, degiro, tr, news_summary, bux,
                         investment_timeline=inv_timeline,
                         first_investment_date=inv_first,
-                        portfolio_value_history=pv_history if pv_history else None)
+                        portfolio_value_history=pv_history if pv_history else None,
+                        benchmark_history=bm_history if bm_history else None)
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
