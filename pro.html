@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXUS PRO | Portfolio Dashboard</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="NEXUS PRO">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
@@ -215,6 +222,16 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .b-bux   {background:#fffbeb;color:#92400e;border:1px solid #fde68a}
 .b-bot   {background:var(--bot-bg);color:var(--bot);border:1px solid var(--bot-border)}
 
+/* ─── PWA INSTALL BANNER ─── */
+#pwa-banner{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh-md);padding:12px 16px;display:flex;align-items:center;gap:12px;z-index:400;max-width:340px;width:calc(100% - 32px);animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateX(-50%) translateY(20px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+#pwa-banner .pwa-icon{width:36px;height:36px;border-radius:8px;flex-shrink:0}
+#pwa-banner .pwa-txt{flex:1}
+#pwa-banner .pwa-ttl{font-size:.78rem;font-weight:700;color:var(--text)}
+#pwa-banner .pwa-sub{font-size:.65rem;color:var(--muted);margin-top:1px}
+#pwa-banner .pwa-btn{padding:6px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:.72rem;font-weight:600;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif}
+#pwa-banner .pwa-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;padding:4px;line-height:1}
+@media(min-width:769px){#pwa-banner{bottom:24px}}
 /* ─── LOADING / EMPTY ─── */
 .loading{display:flex;align-items:center;justify-content:center;padding:28px;color:var(--muted);font-size:.78rem;gap:7px}
 .spin{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
@@ -1627,6 +1644,52 @@ async function init(){
     },300000);
 }
 init();
+
+/* ── PWA: Service Worker registratie ── */
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js').then(reg=>{
+        console.log('SW geregistreerd:', reg.scope);
+    }).catch(err=>console.warn('SW mislukt:', err));
+}
+
+/* ── PWA: Install-banner ── */
+let _deferredPrompt=null;
+window.addEventListener('beforeinstallprompt', e=>{
+    e.preventDefault();
+    _deferredPrompt=e;
+    // Toon banner niet als al als app geïnstalleerd
+    if(window.matchMedia('(display-mode: standalone)').matches) return;
+    if(localStorage.getItem('pwa-dismissed')) return;
+    document.getElementById('pwa-banner').style.display='flex';
+});
+window.addEventListener('appinstalled',()=>{
+    document.getElementById('pwa-banner').style.display='none';
+    _deferredPrompt=null;
+});
+function _pwaInstall(){
+    if(!_deferredPrompt) return;
+    _deferredPrompt.prompt();
+    _deferredPrompt.userChoice.then(()=>{
+        _deferredPrompt=null;
+        document.getElementById('pwa-banner').style.display='none';
+    });
+}
+function _pwaDismiss(){
+    document.getElementById('pwa-banner').style.display='none';
+    localStorage.setItem('pwa-dismissed','1');
+}
 </script>
+
+<!-- PWA install banner (verborgen tot beforeinstallprompt event) -->
+<div id="pwa-banner" style="display:none">
+    <img class="pwa-icon" src="icons/icon-192.png" alt="">
+    <div class="pwa-txt">
+        <div class="pwa-ttl">Installeer NEXUS PRO</div>
+        <div class="pwa-sub">Voeg toe aan je homescreen</div>
+    </div>
+    <button class="pwa-btn" onclick="_pwaInstall()">Installeren</button>
+    <button class="pwa-close" onclick="_pwaDismiss()" aria-label="Sluiten">✕</button>
+</div>
+
 </body>
 </html>
