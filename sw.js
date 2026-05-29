@@ -1,7 +1,7 @@
 /* NEXUS PRO — Service Worker */
-const CACHE = 'nexus-pro-v1';
+const CACHE = 'nexus-pro-v2';
 
-/* App-shell: bestanden die gecached worden bij installatie */
+/* App-shell: gecached bij installatie voor offline fallback */
 const SHELL = [
   './pro.html',
   './icons/icon-192.png',
@@ -24,48 +24,43 @@ self.addEventListener('activate', e => {
   );
 });
 
-/* Fetch strategie:
-   - JSON data (memory.json / data.json): network-first zodat data altijd actueel is,
-     fallback op cache als offline
-   - Externe resources (CDN, fonts): network-first, fallback cache
-   - App-shell (pro.html, icons): cache-first voor snelle laadtijd
-*/
+/* Herbruikbare network-first helper: haal van netwerk, sla op in cache,
+   val terug op cache als offline. */
+function networkFirst(request) {
+  return fetch(request)
+    .then(res => {
+      if (res.ok) {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(request, clone));
+      }
+      return res;
+    })
+    .catch(() => caches.match(request));
+}
+
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  /* Externe CDN / fonts — network-first, cache als fallback */
-  if (!url.hostname.includes('danieldk04.github.io') && url.hostname !== location.hostname) {
-    e.respondWith(
-      fetch(e.request)
-        .then(res => {
-          if (res.ok) {
-            const clone = res.clone();
-            caches.open(CACHE).then(c => c.put(e.request, clone));
-          }
-          return res;
-        })
-        .catch(() => caches.match(e.request))
-    );
+  /* pro.html: network-first zodat dashboard-updates altijd doorkomen.
+     Cache dient als offline fallback. */
+  if (url.pathname.endsWith('pro.html') || url.pathname.endsWith('/nexus-market-terminal/')) {
+    e.respondWith(networkFirst(e.request));
     return;
   }
 
-  /* Data-bestanden (JSON): network-first — altijd verse data, cache als offline */
+  /* JSON data (memory.json / data.json): network-first — altijd verse koersen */
   if (url.pathname.endsWith('.json')) {
-    e.respondWith(
-      fetch(e.request)
-        .then(res => {
-          if (res.ok) {
-            const clone = res.clone();
-            caches.open(CACHE).then(c => c.put(e.request, clone));
-          }
-          return res;
-        })
-        .catch(() => caches.match(e.request))
-    );
+    e.respondWith(networkFirst(e.request));
     return;
   }
 
-  /* App-shell: cache-first voor instant laadtijd */
+  /* Externe CDN / fonts: network-first, fallback cache */
+  if (!url.hostname.includes('danieldk04.github.io') && url.hostname !== location.hostname) {
+    e.respondWith(networkFirst(e.request));
+    return;
+  }
+
+  /* Statische assets (icons, sw.js): cache-first — veranderen zelden */
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
