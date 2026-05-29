@@ -234,15 +234,23 @@ def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
             # Datum
             date_str = (row.get("Datum") or row.get("Date") or "").strip().strip('"')
 
-            # Bedrag: Mutatie/Mutation is standaard in huidige DEGIRO-exports;
-            # Totaal/Total is een fallback voor oudere/alternatieve exports.
+            # Bedrag — vier mogelijke kolomnamen afhankelijk van exporttype:
+            #   Rekeningoverzicht (NL): Mutatie
+            #   Rekeningoverzicht (EN): Mutation
+            #   Transactie-export (NL): Waarde EUR
+            #   Transactie-export (EN): Value EUR  / Total
+            #   Oud formaat:            Totaal
             total_str = (
                 row.get("Totaal") or row.get("Total") or
-                row.get("Mutatie") or row.get("Mutation") or ""
+                row.get("Mutatie") or row.get("Mutation") or
+                row.get("Waarde EUR") or row.get("Value EUR") or ""
             ).strip()
 
-            # Beschrijving voor koop/verkoop-detectie
+            # Beschrijving aanwezig? (rekeningoverzicht-export)
             desc = (row.get("Beschrijving") or row.get("Description") or "").strip().lower()
+
+            # ISIN aanwezig? (transactie-export — alle rijen zijn koop/verkoop)
+            isin = (row.get("ISIN") or "").strip()
 
             if not date_str or not total_str:
                 continue
@@ -263,18 +271,19 @@ def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
             if total == 0:
                 continue
 
-            # Detecteer koop/verkoop op basis van beschrijving
-            # DEGIRO formaat: "Koop 10 VWRL@90.00 EUR" / "Verkoop 5 VWRL@95.00 EUR"
-            is_buy  = "koop" in desc or desc.startswith("buy ")
-            is_sell = "verkoop" in desc or desc.startswith("sell ")
-
-            # Fallback als er geen beschrijving is: negatief = koop, positief = verkoop
-            if not desc:
+            if desc:
+                # Rekeningoverzicht: filter op koop/verkoop via beschrijving
+                is_buy  = "koop" in desc or desc.startswith("buy ")
+                is_sell = "verkoop" in desc or desc.startswith("sell ")
+                if not (is_buy or is_sell):
+                    continue
+            elif isin:
+                # Transactie-export: elke rij met ISIN is een effectentransactie
+                # Waarde EUR negatief = koop (geld betaald), positief = verkoop
                 is_buy  = total < 0
                 is_sell = total > 0
-
-            if not (is_buy or is_sell):
-                # Sla dividenden, kosten, stortingen en overboekingen over
+            else:
+                # Geen beschrijving en geen ISIN → geen effectentransactie
                 continue
 
             if first_date is None or date_iso < first_date:
@@ -454,23 +463,36 @@ def generate_news_summary(client: anthropic.Anthropic, headlines: list[str]) -> 
 # ─── NEXUS PORTFOLIO ──────────────────────────────────────────────────────────
 
 def fetch_nexus_portfolio() -> dict:
-    data = _load_json(DATA_PATH, {})
+    data   = _load_json(DATA_PATH, {})
     trades = data.get("active_trades", [])
     port   = data.get("portfolio", {})
     cash   = port.get("cash", 0)
+    total  = port.get("total_value", 0)
 
     positions, total_pl = [], 0.0
     for t in trades:
         pl = t.get("pl_percent", 0)
         total_pl += pl
-        positions.append({"ticker": t["ticker"], "sector": t.get("sector", "?"), "pl": round(pl, 2)})
+        positions.append({
+            "ticker": t["ticker"],
+            "sector": t.get("sector", "?"),
+            "pl":     round(pl, 2),
+            "value":  round(t.get("current_value", t.get("position_value", 0)), 2),
+            "tp":     t.get("tp_target", 30),
+        })
 
     positions.sort(key=lambda p: p["pl"], reverse=True)
     return {
-        "positions": positions,
-        "cash":      round(cash, 2),
-        "avg_pl":    round(total_pl / len(trades), 2) if trades else 0,
-        "n":         len(trades),
+        "positions":  positions,
+        "cash":       round(cash, 2),
+        "total":      round(total, 2),
+        "avg_pl":     round(total_pl / len(trades), 2) if trades else 0,
+        "n":          len(trades),
+        "top_cands":  [
+            {"ticker": c["ticker"], "score": c.get("score", 0),
+             "dcf": (c.get("dcf") or {}).get("dcf_upside")}
+            for c in data.get("top_candidates", [])[:3]
+        ],
     }
 
 
