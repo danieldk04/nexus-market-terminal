@@ -86,7 +86,8 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                         investment_timeline: list[dict] | None = None,
                         first_investment_date: str | None = None,
                         portfolio_value_history: list[dict] | None = None,
-                        benchmark_history: dict | None = None):
+                        benchmark_history: dict | None = None,
+                        first_buy_dates_by_isin: dict | None = None):
     """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
     mem = _load_json(MEMORY_PATH, {})
     mem["last_news"] = news[:8]
@@ -108,6 +109,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                     "div_yield":     p.get("div_yield"),
                     "annual_div_eur":p.get("annual_div_eur"),
                     "first_buy_date":p.get("first_buy_date"),
+                    "sector":        p.get("sector"),
                     "weight":        round(p["value"] / bux["total"] * 100, 1) if bux.get("total") else None,
                 }
                 for p in bux.get("positions", []) if p.get("value", 0) > 0
@@ -127,6 +129,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                     "div_yield":     p.get("div_yield"),
                     "annual_div_eur":p.get("annual_div_eur"),
                     "first_buy_date":p.get("first_buy_date"),
+                    "sector":        p.get("sector"),
                     "weight":        round(p["value"] / degiro["total"] * 100, 1) if degiro.get("total") else None,
                 }
                 for p in degiro.get("positions", []) if p.get("value", 0) > 0
@@ -144,6 +147,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                     "div_yield":     p.get("div_yield"),
                     "annual_div_eur":p.get("annual_div_eur"),
                     "first_buy_date":p.get("first_buy_date"),
+                    "sector":        p.get("sector"),
                     "weight":        round(p["value"] / tr["total"] * 100, 1) if tr.get("total") else None,
                 }
                 for p in tr.get("positions", []) if p.get("value", 0) > 0
@@ -160,6 +164,9 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
     if benchmark_history:
         mem["benchmark_history"] = benchmark_history
         log.info(f"Benchmark geschiedenis opgeslagen: {benchmark_history}")
+    if first_buy_dates_by_isin:
+        mem["first_buy_dates_by_isin"] = first_buy_dates_by_isin
+        log.info(f"Eerste aankoopdatums opgeslagen: {len(first_buy_dates_by_isin)} ISINs")
     mem["dashboard_updated"] = datetime.now(timezone.utc).isoformat()
     _save_json(MEMORY_PATH, mem)
     log.info("Dashboard data opgeslagen in memory.json")
@@ -238,6 +245,7 @@ def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
 
     monthly_net: dict[str, float] = {}
     first_date: str | None = None
+    first_buy_by_isin: dict[str, str] = {}
 
     try:
         first_line = raw.split("\n")[0]
@@ -309,6 +317,8 @@ def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
             monthly_net.setdefault(year_month, 0.0)
             if is_buy:
                 monthly_net[year_month] += abs(total)
+                if isin and (isin not in first_buy_by_isin or date_iso < first_buy_by_isin[isin]):
+                    first_buy_by_isin[isin] = date_iso
             else:
                 monthly_net[year_month] -= abs(total)
             rows_ok += 1
@@ -324,7 +334,7 @@ def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
         cumulative = max(0.0, cumulative + monthly_net[ym])
         timeline.append({"date": ym, "invested": round(cumulative, 2)})
 
-    return timeline, first_date
+    return timeline, first_date, first_buy_by_isin
 
 
 def save_snapshot(degiro_total: float | None, tr_total: float | None, bux_total: float | None):
@@ -624,6 +634,19 @@ def _compute_avg_costs(transactions: list[dict]) -> dict[str, dict]:
     }
 
 
+def _compute_first_buy_dates(transactions: list[dict]) -> dict[str, str]:
+    """Eerste aankoopdatum per productId uit DEGIRO transactiehistorie."""
+    first: dict[str, str] = {}
+    for txn in transactions:
+        pid      = str(txn.get("productId", ""))
+        action   = txn.get("buysell", "").upper()
+        date_str = (txn.get("date") or "")[:10]
+        if pid and action == "B" and date_str:
+            if pid not in first or date_str < first[pid]:
+                first[pid] = date_str
+    return first
+
+
 def _degiro_resolve_names(session: requests.Session, session_id: str,
                            int_account, product_ids: list[str]) -> dict[str, str]:
     """Vertaal DEGIRO product-ID's naar aandelennamen."""
@@ -645,6 +668,29 @@ def _degiro_resolve_names(session: requests.Session, session_id: str,
                 for pid in product_ids if pid in data}
     except Exception as e:
         log.warning(f"DEGIRO naameresolutie mislukt: {e}")
+        return {}
+
+
+def _degiro_resolve_product_info(session: requests.Session, session_id: str,
+                                  int_account, product_ids: list[str]) -> dict[str, dict]:
+    """Vertaal DEGIRO product-ID's naar naam + ISIN."""
+    if not product_ids:
+        return {}
+    try:
+        r = session.get(DEGIRO_PROD_URL,
+                        params=[("sessionId", session_id), ("intAccount", int_account)]
+                                + [("ids", pid) for pid in product_ids[:20]],
+                        timeout=10)
+        data = r.json().get("data", {})
+        return {
+            pid: {
+                "name": data[pid].get("symbol") or data[pid].get("name", pid),
+                "isin": data[pid].get("isin"),
+            }
+            for pid in product_ids if pid in data
+        }
+    except Exception as e:
+        log.warning(f"DEGIRO product info mislukt: {e}")
         return {}
 
 
@@ -723,18 +769,22 @@ def fetch_degiro_portfolio() -> dict | None:
                                "value": round(value, 2), "name": pid})
                 pids.append(pid)
 
-        # Vertaal product-ID's naar aandelennamen
-        names = _degiro_resolve_names(session, session_id, int_account, pids)
+        # Vertaal product-ID's naar naam + ISIN
+        prod_info = _degiro_resolve_product_info(session, session_id, int_account, pids)
         for item in items:
-            item["name"] = names.get(item["pid"], item["pid"])
+            info = prod_info.get(item["pid"], {})
+            item["name"] = info.get("name", item["pid"])
+            item["isin"] = info.get("isin")
 
         total = sum(i["value"] for i in items)
 
-        # Transactiehistorie → gemiddelde aankoopkosten → P&L per positie
-        transactions = _fetch_degiro_transactions(session, session_id, int_account)
-        avg_costs    = _compute_avg_costs(transactions)
+        # Transactiehistorie → gemiddelde aankoopkosten + eerste aankoopdatum
+        transactions  = _fetch_degiro_transactions(session, session_id, int_account)
+        avg_costs     = _compute_avg_costs(transactions)
+        first_buy_map = _compute_first_buy_dates(transactions)
         total_invested = 0.0
         for item in items:
+            item["first_buy_date"] = first_buy_map.get(item["pid"])
             h = avg_costs.get(item["pid"])
             if h and h["cost_eur"] > 0 and item["value"] > 0:
                 item["cost_eur"]   = h["cost_eur"]
@@ -745,6 +795,20 @@ def fetch_degiro_portfolio() -> dict | None:
                 item["cost_eur"]   = None
                 item["pl_pct"]     = None
                 item["pl_eur"]     = None
+
+        # Dividend yield + sector via yfinance (ISIN → yfinance ticker mapping)
+        for item in items:
+            isin   = item.get("isin") or ""
+            ticker = _ISIN_TO_YF.get(isin, item["name"])
+            try:
+                yf_info = yf.Ticker(ticker).info
+                dy = yf_info.get("dividendYield")
+                item["div_yield"]      = round(float(dy), 4) if dy and float(dy) > 0 else None
+                item["annual_div_eur"] = round(item["value"] * float(dy), 2) if dy and float(dy) > 0 else None
+                item["sector"]         = yf_info.get("sector")
+            except Exception:
+                item["div_yield"] = item["annual_div_eur"] = item["sector"] = None
+            time.sleep(0.1)
 
         total_pl_pct = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
         items.sort(key=lambda i: i["value"], reverse=True)
@@ -857,7 +921,8 @@ def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> st
 
 def build_telegram_message(market, news, nexus, degiro, tr,
                             degiro_perf, tr_perf, ai_text,
-                            news_summary=None, bux=None, bux_perf=None) -> str:
+                            news_summary=None, bux=None, bux_perf=None,
+                            alerts: list[str] | None = None) -> str:
     now    = datetime.now(timezone.utc)
     dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
     mnd_nl = ["jan","feb","mrt","apr","mei","jun",
@@ -946,12 +1011,18 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     # ── 7. AI ANALYSE ────────────────────────────────────────────────────────
     ai_block = f"🧠 *AI ANALYSE*\n{ai_text}"
 
+    # ── 8. PRIJS ALERTS ──────────────────────────────────────────────────────
+    alerts_block = ""
+    if alerts:
+        alerts_block = "🔔 *PORTFOLIO SIGNALEN*\n\n" + "\n".join(alerts)
+
     # ── SAMENSTELLEN ─────────────────────────────────────────────────────────
     sections = [header, markten]
-    if eigen:       sections.append(eigen)
-    if bux_block:   sections.append(bux_block)
-    if nexus_block: sections.append(nexus_block)
-    if nieuws:      sections.append(nieuws)
+    if eigen:         sections.append(eigen)
+    if bux_block:     sections.append(bux_block)
+    if nexus_block:   sections.append(nexus_block)
+    if alerts_block:  sections.append(alerts_block)
+    if nieuws:        sections.append(nieuws)
     sections.append(ai_block)
     sections.append(f"🌐 [Open Dashboard]({DASHBOARD_URL})")
 
@@ -1057,9 +1128,10 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
         else:
             cost_eur = pl_pct = pl_eur = None
 
-        # Dividend yield ophalen (alleen voor niet-crypto tickers)
+        # Dividend yield + sector ophalen (niet voor crypto)
         div_yield = None
         annual_div_eur = None
+        sector = None
         if not any(c in ticker.upper() for c in ("BTC", "ETH", "XRP", "SOL")):
             try:
                 di = yf.Ticker(ticker).info
@@ -1067,6 +1139,7 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
                 if dy and float(dy) > 0:
                     div_yield      = round(float(dy), 4)
                     annual_div_eur = round(value * float(dy), 2)
+                sector = di.get("sector")
             except Exception:
                 pass
 
@@ -1083,6 +1156,7 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
             "div_yield":     div_yield,
             "annual_div_eur":annual_div_eur,
             "first_buy_date":h.get("first_buy_date"),
+            "sector":        sector,
         })
         time.sleep(0.15)
     if not positions:
@@ -1547,8 +1621,9 @@ def run_morning_briefing():
     # Investment timeline: probeer API (degiro), anders CSV-export secret
     inv_timeline = degiro.get("investment_timeline") if degiro else []
     inv_first    = degiro.get("first_investment_date") if degiro else None
+    first_buy_by_isin: dict[str, str] = {}
     if not inv_timeline:
-        inv_timeline, inv_first = _parse_degiro_transactions_csv()
+        inv_timeline, inv_first, first_buy_by_isin = _parse_degiro_transactions_csv()
 
     log.info("Portfolio waarde geschiedenis berekenen...")
     pv_history = _build_portfolio_value_history()
@@ -1560,13 +1635,31 @@ def run_morning_briefing():
                         investment_timeline=inv_timeline,
                         first_investment_date=inv_first,
                         portfolio_value_history=pv_history if pv_history else None,
-                        benchmark_history=bm_history if bm_history else None)
+                        benchmark_history=bm_history if bm_history else None,
+                        first_buy_dates_by_isin=first_buy_by_isin if first_buy_by_isin else None)
+
+    # Prijs alerts genereren (>+15% of <-10% P&L)
+    alert_lines: list[str] = []
+    all_positions = (
+        (degiro or {}).get("positions", []) +
+        (tr or {}).get("positions", []) +
+        (bux or {}).get("positions", [])
+    )
+    for p in all_positions:
+        pl  = p.get("pl_pct")
+        nm  = p.get("name", p.get("ticker", "?"))
+        if pl is not None:
+            if pl > 15.0:
+                alert_lines.append(f"  🎯 *{nm}*: `+{pl:.1f}%` — overweeg gedeeltelijke winstneming")
+            elif pl < -10.0:
+                alert_lines.append(f"  ⚠️ *{nm}*: `{pl:.1f}%` — controleer positie / stoploss")
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
 
     msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text,
-                                  news_summary, bux, bux_perf)
+                                  news_summary, bux, bux_perf,
+                                  alerts=alert_lines if alert_lines else None)
 
     log.info("Telegram verzenden...")
     ok = send(msg)
