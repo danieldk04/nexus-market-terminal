@@ -313,13 +313,13 @@ def save_snapshot(degiro_total: float | None, tr_total: float | None, bux_total:
         "date":   today,
         "degiro": degiro_total,
         "tr":     tr_total,
-        "nexus":  nexus_total,
+        "bux":    bux_total,
     })
     # Bewaar max MAX_HISTORY dagen, nieuwste eerst
     history  = sorted(history, key=lambda h: h["date"], reverse=True)[:MAX_HISTORY]
     mem[HISTORY_KEY] = history
     _save_json(MEMORY_PATH, mem)
-    log.info(f"Snapshot opgeslagen: DEGIRO={degiro_total} TR={tr_total} NEXUS={nexus_total}")
+    log.info(f"Snapshot opgeslagen: DEGIRO={degiro_total} TR={tr_total} BUX={bux_total}")
 
 
 def _find_snapshot(history: list[dict], days_ago: int) -> dict | None:
@@ -975,15 +975,38 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
     for h in holdings:
         ticker = h["ticker"]
         shares = h["shares"]
+        price = None
+        # Stap 1: fast_info (snel, werkt goed voor US-tickers en Europese ETFs)
         try:
-            info  = yf.Ticker(ticker).fast_info
-            price = getattr(info, "last_price", None)
-            if not price or float(price) <= 0:
-                log.warning(f"{label}: geen prijs voor {ticker}")
-                continue
-            price = float(price)
-        except Exception as e:
-            log.warning(f"{label} {ticker}: {e}")
+            p = getattr(yf.Ticker(ticker).fast_info, "last_price", None)
+            if p and float(p) > 0:
+                price = float(p)
+        except Exception:
+            pass
+        # Stap 2: volledige info (meer velden, maar trager)
+        if not price:
+            try:
+                full = yf.Ticker(ticker).info
+                p    = (full.get("currentPrice") or
+                        full.get("regularMarketPrice") or
+                        full.get("previousClose"))
+                if p and float(p) > 0:
+                    price = float(p)
+            except Exception:
+                pass
+        # Stap 3: .DE-ticker niet beschikbaar → probeer US-ticker + USD→EUR conversie
+        if not price and ticker.endswith(".DE"):
+            try:
+                us_ticker = ticker[:-3]
+                usd_price = getattr(yf.Ticker(us_ticker).fast_info, "last_price", None)
+                if usd_price and float(usd_price) > 0:
+                    eur_usd = getattr(yf.Ticker("EURUSD=X").fast_info, "last_price", None) or 1.08
+                    price   = round(float(usd_price) / float(eur_usd), 4)
+                    log.info(f"{ticker} via {us_ticker} (USD→EUR /{eur_usd:.4f}): €{price:.2f}")
+            except Exception:
+                pass
+        if not price:
+            log.warning(f"{label}: geen prijs voor {ticker} — overgeslagen")
             continue
         value     = shares * price
         total    += value
