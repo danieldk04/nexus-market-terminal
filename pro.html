@@ -901,8 +901,14 @@ function renderInvestmentTimeline(){
     // KPIs altijd op basis van VOLLEDIGE tijdlijn (niet gefilterd)
     const totalInvested=fullTl[fullTl.length-1]?.invested||0;
     const currentPortfolio=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
-    const gain=currentPortfolio-totalInvested;
-    const gainPct=totalInvested?(gain/totalInvested*100):0;
+
+    // Gebruik kostprijs van ALLE brokers — zelfde logica als dashboard banner
+    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
+    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
+    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
+    const gain=currentPortfolio-allInvested;
+    const gainPct=allInvested?(gain/allInvested*100):0;
     const totalMonths=fullTl.length;
     const years=Math.floor(totalMonths/12);
     const remMonths=totalMonths%12;
@@ -917,7 +923,7 @@ function renderInvestmentTimeline(){
         </div>
         <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
             <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Totaal geïnvesteerd</div>
-            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${eur(totalInvested)}</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${eur(allInvested||totalInvested)}</div>
         </div>
         <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
             <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Ongerealiseerde winst</div>
