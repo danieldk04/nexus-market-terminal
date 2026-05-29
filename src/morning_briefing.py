@@ -141,7 +141,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
     log.info("Dashboard data opgeslagen in memory.json")
 
 
-def save_snapshot(degiro_total: float | None, tr_total: float | None, nexus_total: float | None):
+def save_snapshot(degiro_total: float | None, tr_total: float | None, bux_total: float | None):
     """Sla dagelijkse portfoliowaarden op in memory.json."""
     mem      = _load_json(MEMORY_PATH, {})
     history  = mem.get(HISTORY_KEY, [])
@@ -153,13 +153,13 @@ def save_snapshot(degiro_total: float | None, tr_total: float | None, nexus_tota
         "date":   today,
         "degiro": degiro_total,
         "tr":     tr_total,
-        "nexus":  nexus_total,
+        "bux":    bux_total,
     })
     # Bewaar max MAX_HISTORY dagen, nieuwste eerst
     history  = sorted(history, key=lambda h: h["date"], reverse=True)[:MAX_HISTORY]
     mem[HISTORY_KEY] = history
     _save_json(MEMORY_PATH, mem)
-    log.info(f"Snapshot opgeslagen: DEGIRO={degiro_total} TR={tr_total} NEXUS={nexus_total}")
+    log.info(f"Snapshot opgeslagen: DEGIRO={degiro_total} TR={tr_total} BUX={bux_total}")
 
 
 def _find_snapshot(history: list[dict], days_ago: int) -> dict | None:
@@ -671,7 +671,7 @@ def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> st
 
 def build_telegram_message(market, news, nexus, degiro, tr,
                             degiro_perf, tr_perf, ai_text,
-                            news_summary=None, bux=None) -> str:
+                            news_summary=None, bux=None, bux_perf=None) -> str:
     now    = datetime.now(timezone.utc)
     dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
     mnd_nl = ["jan","feb","mrt","apr","mei","jun",
@@ -679,9 +679,16 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     date_s = f"{dag_nl} {now.day} {mnd_nl} {now.year}"
 
     # ── 1. HEADER ────────────────────────────────────────────────────────────
+    total_portfolio = (
+        (degiro.get("total") if degiro else 0) +
+        (tr.get("total") if tr else 0) +
+        (bux.get("total") if bux else 0)
+    )
+    portfolio_line = f"\n💰 Portfolio totaal: `€{total_portfolio:,.0f}`" if total_portfolio else ""
     header = (
         f"🌅 *NEXUS MORNING BRIEFING*\n"
         f"_{date_s} · {now.strftime('%H:%M')} UTC_"
+        f"{portfolio_line}"
     )
 
     # ── 2. MARKTEN ───────────────────────────────────────────────────────────
@@ -737,6 +744,9 @@ def build_telegram_message(market, news, nexus, degiro, tr,
         bux_pl    = bux.get("total_pl_pct")
         pl_s      = f"  _{'+' if (bux_pl or 0) >= 0 else ''}{bux_pl:.1f}%_" if bux_pl is not None else ""
         lines = [f"📲 *BUX*  `€{bux_total:,.0f}`{pl_s}"]
+        if bux_perf:
+            lines.append(_perf_line(bux_perf))
+        lines.append("")
         for p in bux.get("positions", []):
             if not p.get("value", 0):
                 continue
@@ -1079,12 +1089,13 @@ def run_morning_briefing():
     history     = load_history()
     degiro_perf = compute_perf(history, degiro.get("total") if degiro else None, "degiro")
     tr_perf     = compute_perf(history, tr.get("total") if tr else None, "tr")
+    bux_perf    = compute_perf(history, bux.get("total") if bux else None, "bux")
 
     # Snapshot + dashboard data opslaan
     save_snapshot(
         degiro_total=degiro.get("total") if degiro else None,
         tr_total=tr.get("total") if tr else None,
-        nexus_total=nexus.get("cash"),
+        bux_total=bux.get("total") if bux else None,
     )
 
     log.info("AI nieuws-samenvatting genereren...")
@@ -1095,7 +1106,7 @@ def run_morning_briefing():
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
 
-    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text, news_summary, bux)
+    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text, news_summary, bux, bux_perf)
 
     log.info("Telegram verzenden...")
     ok = send(msg)

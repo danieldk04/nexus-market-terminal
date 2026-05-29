@@ -634,9 +634,10 @@ function renderHistoryChart(){
     }
     const sorted=[...hist].sort((a,b)=>a.date.localeCompare(b.date));
     labels=sorted.map(h=>h.date.slice(5));
-    data=sorted.map(h=>(h.degiro||0)+(h.tr||0)+(h.nexus||0));
+    data=sorted.map(h=>(h.degiro||0)+(h.tr||0)+(h.bux||0));
     const isP=data[data.length-1]>=data[0];
-    document.getElementById('hist-tag').textContent=`${labels[0]} – ${labels[labels.length-1]}`;
+    const delta=data[data.length-1]-data[0],deltaPct=(delta/data[0]*100).toFixed(1);
+    document.getElementById('hist-tag').textContent=`${labels[0]} – ${labels[labels.length-1]} · ${delta>=0?'+':''}${deltaPct}%`;
     dc('hist');
     charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'line',data:{labels,datasets:[{data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2,pointRadius:2,pointHoverRadius:5,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${eur(c.raw)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
 }
