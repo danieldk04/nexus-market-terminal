@@ -881,13 +881,7 @@ function renderInvestmentTimeline(){
     const kpisEl=document.getElementById('inv-kpis');
     const canvasWrap=document.querySelector('#inv-chart')?.parentElement;
 
-    const INV_RANGES=[['6m','6M'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
-    // Kies standaard startrange op basis van beschikbare data
-    if(invRange==='max'&&fullTl.length>0){
-        const months=fullTl.length;
-        if(months<=12) invRange='max';
-        else if(months<=24) invRange='1y';
-    }
+    const INV_RANGES=[['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
     makeRangeBtns('inv-rbtn-row',INV_RANGES,invRange,r=>{invRange=r;renderInvestmentTimeline();});
 
     if(!fullTl.length){
