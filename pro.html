@@ -445,7 +445,7 @@ const BROKERS={
 
 /* ── asset type map ── */
 const TYPE_MAP={
-    'VWRL.AS':'ETF','VUSA.AS':'ETF','VHYL.AS':'ETF',
+    'VWRL.AS':'ETF','VUSA.AS':'ETF','VHYL.AS':'ETF','VHYL':'ETF',
     'VWCE':'ETF','VWCE.DE':'ETF','CSP1':'ETF','TDIV':'ETF',
     'Bitcoin':'Crypto','BTC-USD':'Crypto',
     'V':'Aandeel','PEP':'Aandeel','ENPH':'Aandeel',
@@ -533,7 +533,7 @@ function buildPositions(){
                 ticker,name:p.name,broker,
                 value:p.value||0,
                 pl_pct:p.pl_pct??null,
-                pl_eur:p.pl_eur??null,
+                pl_eur:p.pl_eur??(p.pl_pct!=null?+(p.value-p.value/(1+p.pl_pct/100)).toFixed(2):null),
                 weight_broker:p.weight||0,
                 weight_total:grand?(p.value/grand)*100:0,
                 type:TYPE_MAP[ticker]||TYPE_MAP[p.name]||'Aandeel',
@@ -553,7 +553,9 @@ function renderDashboard(){
     /* banner */
     const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
     const tv=(D.total||0)+(T.total||0)+(BX.total||0);
-    const ti=(D.total_invested||0)+(BX.total_invested||0);
+    // TR has no total_invested; estimate it back from total_pl_pct
+    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):0;
+    const ti=(D.total_invested||0)+trInv+(BX.total_invested||0);
     const pl=ti?tv-ti:null,plp=ti&&pl!=null?(pl/ti)*100:null;
     document.getElementById('b-val').textContent=eur(tv);
     let stats='';
@@ -896,7 +898,7 @@ async function init(){
     [M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);
     renderAll();
     /* refresh every 5 min */
-    setTimeout(async()=>{[M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);renderAll();},300000);
+    setInterval(async()=>{[M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);renderAll();},300000);
 }
 init();
 </script>
