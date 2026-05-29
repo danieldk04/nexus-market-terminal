@@ -62,9 +62,9 @@
   "portfolio_history": [
     {
       "date": "2026-05-29",
-      "degiro": 16371.14,
-      "tr": 7192.96,
-      "bux": 2220.05
+      "degiro": 16370.95,
+      "tr": 7180.37,
+      "bux": 2218.44
     },
     {
       "date": "2026-05-28",
@@ -132,44 +132,59 @@
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
   ],
   "tr_summary": {
-    "total": 7192.96,
-    "total_pl_pct": 7.43,
+    "total": 7180.37,
+    "total_pl_pct": 7.24,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4421.88,
-        "pl_pct": 4.87,
-        "weight": 61.5
+        "value": 4409.3,
+        "pl_pct": 4.57,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
+        "weight": 61.4
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
         "value": 948.57,
         "pl_pct": 35.51,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 13.2
       },
       {
         "name": "VWCE (All-World Acc)",
         "value": 846.06,
         "pl_pct": 8.64,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 11.8
       },
       {
         "name": "TDIV (Dev Div Leaders)",
         "value": 797.57,
         "pl_pct": -0.3,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 11.1
       },
       {
         "name": "VHYL (High Div Yield)",
         "value": 178.87,
         "pl_pct": -10.57,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 2.5
       }
     ]
   },
-  "dashboard_updated": "2026-05-29T18:51:56.424877+00:00",
+  "dashboard_updated": "2026-05-29T18:55:32.106300+00:00",
   "degiro_summary": {
-    "total": 16371.14,
+    "total": 16370.95,
     "total_pl_pct": 32.86,
     "total_invested": 12321.87,
     "positions": [
@@ -178,6 +193,9 @@
         "value": 6193.98,
         "pl_pct": 33.12,
         "pl_eur": 1540.89,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 37.8
       },
       {
@@ -185,6 +203,9 @@
         "value": 5174.99,
         "pl_pct": 38.44,
         "pl_eur": 1436.99,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 31.6
       },
       {
@@ -192,65 +213,80 @@
         "value": 4342.74,
         "pl_pct": 23.13,
         "pl_eur": 815.86,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 26.5
       },
       {
         "name": "V",
-        "value": 659.43,
-        "pl_pct": 63.27,
-        "pl_eur": 255.53,
+        "value": 659.24,
+        "pl_pct": 63.22,
+        "pl_eur": 255.34,
+        "div_yield": 0.82,
+        "annual_div_eur": 540.58,
+        "first_buy_date": null,
         "weight": 4.0
       }
     ]
   },
   "news_summary": [
     {
-      "theme": "Sectorale volatiliteit en bedrijfskeuzes",
-      "summary": "Ferrari, Unilever, Air France-KLM en Novo Nordisk ondervinden aanzienlijke koersdalingen door sector-specifieke uitdagingen (vraaguitval, operationele verstoringen, teleurstellende producten). Voor AEX-beleggers is dit relevant omdat deze blue chips een significant gewicht hebben in brede indices, wat directe impact op portefeuillekeuzes vereist."
+      "theme": "Geopolitieke spanningen be\u00efnvloeden sectoren",
+      "summary": "Oorlogsdreiging met Iran en aanhoudende conflicten zorgen voor sectorbrede effecten: defensie-aandelen stijgen, maar reisaandelen (Air France-KLM) en Aziatische markten lijden onder de onzekerheid. Dit raakt brede portefeuilles via sector-rotatie en geografische blootstelling."
     },
     {
-      "theme": "Technologie drijft markt hoger, AI wekt twijfels",
-      "summary": "Tech-aandelen (X-Fab) en de AEX-stijging (+1%, doorbraak 1000 punten) worden grotendeels gedragen door AI-gerelateerde enthousiasme, maar cre\u00ebren tegelijk een tweedeling waarbij beleggers overdrijven. Dit duidt op volatiliteit en risico in growth-segmenten waar veel ETF-exposure in zit."
+      "theme": "Volatiliteit en tweedeling in AEX-handel",
+      "summary": "De AEX stijgt 1% en doorbreekt de 1000-puntgrens, maar verschillende sectoren vertonen extreme swings: tech-aandelen (X-Fab) exploderen door speculatie, terwijl consumer staples (Unilever) en farmaceuten (Novo Nordisk) hard dalen. Dit weerspiegelt beleggersonzekerheid en kan ETF-samenstelling sterk be\u00efnvloeden."
     },
     {
-      "theme": "Geopolitieke onrust verstoort sentiment",
-      "summary": "Oorlogen, Iran-spanning en Midden-Oosten-annuleringen veroorzaken koersdaling in Azi\u00eb en luchtvaartgroepen ondanks overall markherstel elders. Voor wereldwijde ETF-beleggers (S&P500, World) betekent dit geografische diversiteit biedt enige bescherming, maar cyclische sectoren blijven kwetsbaar."
+      "theme": "Insiders kopen, deals reshuffelen portfolios",
+      "summary": "Brunel-management stapelt aandelen in na prijsdaling, terwijl Prosus Just Eat Takeaway van de beurs haalt met positieve gevolgen voor koers. Deze signalen suggereren selectieve waardevinning en herstructurering, relevant voor wie in deze bedrijven of hun sectoren belegd is."
     },
     {
-      "theme": "Marktcorrectie met teken voor lange termijn",
-      "summary": "Insiders (Brunel CEO/CFO) kopen na dip, Philips wordt smaakmaker op hoger slotkoers, en ondanks 'code oranje'-waarschuwingen stijgt AEX-1% en volgt Amerikaanse beurs. Dit suggereert tussentijdse volatiliteit maar onderliggende steun, relevant voor beleggers die overwegen bij dips in te stappen."
+      "theme": "Tech-hype en AI-angst splitsen markt",
+      "summary": "Tech-aandelen drijven de AEX omhoog en laten extreme volatiliteit zien, maar beleggers tonen tegelijk onrust over AI en economische risico's\u2014bitcoin daalt, waarschuwingen klinken. Deze tweedeling tussen groei- en waarde-posities vereist portefeuille-herbalancering en risicobeheersing."
     }
   ],
   "bux_summary": {
-    "total": 2220.05,
-    "total_pl_pct": -14.19,
+    "total": 2218.44,
+    "total_pl_pct": -14.25,
     "total_invested": 2587.08,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1856.0,
-        "price": 374.17,
-        "pl_pct": -10.47,
-        "pl_eur": -217.08,
+        "value": 1854.21,
+        "price": 373.81,
+        "pl_pct": -10.56,
+        "pl_eur": -218.87,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 83.6
       },
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 289.83,
-        "price": 144.92,
-        "pl_pct": -12.47,
-        "pl_eur": -41.31,
+        "value": 289.97,
+        "price": 144.99,
+        "pl_pct": -12.43,
+        "pl_eur": -41.17,
+        "div_yield": 4.05,
+        "annual_div_eur": 1174.38,
+        "first_buy_date": null,
         "weight": 13.1
       },
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 69.75,
-        "price": 69.75,
-        "pl_pct": -61.16,
-        "pl_eur": -109.82,
+        "value": 69.79,
+        "price": 69.79,
+        "pl_pct": -61.13,
+        "pl_eur": -109.78,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
         "weight": 3.1
       },
       {
@@ -260,6 +296,9 @@
         "price": 4.47,
         "pl_pct": 36.16,
         "pl_eur": 1.19,
+        "div_yield": 4.83,
+        "annual_div_eur": 21.57,
+        "first_buy_date": null,
         "weight": 0.2
       }
     ]
@@ -643,7 +682,7 @@
     },
     {
       "date": "2026-05",
-      "value": 25784.149999999998
+      "value": 25769.76
     }
   ]
 }
