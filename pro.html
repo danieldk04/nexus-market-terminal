@@ -349,6 +349,25 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 ═══════════════════════════════════════ -->
 <div id="tab-portfolio" class="tc"><div class="pw">
 
+    <!-- Investment timeline — bovenaan -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Investering Tijdlijn</span>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span class="ptag" id="inv-meta">—</span>
+                <div class="rbtn-row" id="inv-rbtn-row"></div>
+            </div>
+        </div>
+        <div id="inv-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px 0;border-bottom:1px solid var(--border)"></div>
+        <div style="padding:16px;height:320px;position:relative"><canvas id="inv-chart"></canvas></div>
+        <div id="inv-empty" style="display:none" class="empty">
+            <strong>Data verschijnt na volgende Morning Briefing run</strong>
+            Je hebt <code>DEGIRO_TRANSACTIONS_CSV</code> als secret opgeslagen ✓<br>
+            Trigger de workflow handmatig: GitHub → Actions → NEXUS Morning Briefing → Run workflow<br>
+            Of wacht tot 09:00 — dan verschijnt hier je volledige beleggingsgeschiedenis.
+        </div>
+    </div>
+
     <div class="col2">
         <!-- Broker allocation -->
         <div class="panel">
@@ -379,25 +398,6 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
                 </tr></thead>
                 <tbody id="pos-body"><tr><td colspan="7" class="loading"><div class="spin"></div></td></tr></tbody>
             </table>
-        </div>
-    </div>
-
-    <!-- Investment timeline -->
-    <div class="panel">
-        <div class="ph">
-            <span class="pt">Investering Tijdlijn</span>
-            <div style="display:flex;align-items:center;gap:8px">
-                <span class="ptag" id="inv-meta">—</span>
-                <div class="rbtn-row" id="inv-rbtn-row"></div>
-            </div>
-        </div>
-        <div id="inv-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px 0;border-bottom:1px solid var(--border)"></div>
-        <div style="padding:16px;height:280px;position:relative"><canvas id="inv-chart"></canvas></div>
-        <div id="inv-empty" style="display:none" class="empty">
-            <strong>Data verschijnt na volgende Morning Briefing run</strong>
-            Je hebt <code>DEGIRO_TRANSACTIONS_CSV</code> als secret opgeslagen ✓<br>
-            Trigger de workflow handmatig: GitHub → Actions → NEXUS Morning Briefing → Run workflow<br>
-            Of wacht tot 09:00 — dan verschijnt hier je volledige beleggingsgeschiedenis.
         </div>
     </div>
 
@@ -881,7 +881,7 @@ function renderInvestmentTimeline(){
     const kpisEl=document.getElementById('inv-kpis');
     const canvasWrap=document.querySelector('#inv-chart')?.parentElement;
 
-    const INV_RANGES=[['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
+    const INV_RANGES=[['ytd','YTD'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
     makeRangeBtns('inv-rbtn-row',INV_RANGES,invRange,r=>{invRange=r;renderInvestmentTimeline();});
 
     if(!fullTl.length){
@@ -930,47 +930,77 @@ function renderInvestmentTimeline(){
 
     // Build chart: invested capital area + current portfolio value reference line
     const labels=tl.map(t=>t.date);
-    const investedData=tl.map(t=>t.invested);
-    const datasets=[{
-        label:'Geïnvesteerd',
-        data:investedData,
-        borderColor:'#2563eb',
-        backgroundColor:'rgba(37,99,235,.1)',
-        borderWidth:2,
-        pointRadius:0,
-        pointHoverRadius:4,
-        fill:true,
-        tension:.3
-    }];
-    // If we have a current portfolio value, add as a reference line (last point only for annotation)
+    // Bereken maandelijkse inleg (delta) voor bars
+    const deltaData=tl.map((t,i)=>i===0?t.invested:Math.max(0,t.invested-(tl[i-1]?.invested||0)));
+    const barColors=deltaData.map(()=>'rgba(37,99,235,.55)');
+    const lineColor=gain>=0?'#059669':'#dc2626';
+    const lineFill=gain>=0?'rgba(5,150,105,.08)':'rgba(220,38,38,.06)';
+
+    // Lijn = cumulatief geïnvesteerd
+    const datasets=[
+        {
+            type:'bar',
+            label:'Maandelijkse inleg',
+            data:deltaData,
+            backgroundColor:barColors,
+            borderRadius:3,
+            borderSkipped:false,
+            yAxisID:'yBar',
+            order:2
+        },
+        {
+            type:'line',
+            label:'Cumulatief geïnvesteerd',
+            data:tl.map(t=>t.invested),
+            borderColor:'#2563eb',
+            backgroundColor:'rgba(37,99,235,.07)',
+            borderWidth:2.5,
+            pointRadius:0,
+            pointHoverRadius:4,
+            fill:true,
+            tension:.35,
+            yAxisID:'y',
+            order:1
+        }
+    ];
+
+    // Huidige portfolio waarde als referentielijn
     if(currentPortfolio>0){
-        const portfolioRef=labels.map(()=>null);
-        portfolioRef[portfolioRef.length-1]=currentPortfolio;
         datasets.push({
+            type:'line',
             label:'Portfolio nu',
             data:tl.map(()=>currentPortfolio),
-            borderColor:gain>=0?'rgba(5,150,105,.5)':'rgba(220,38,38,.5)',
+            borderColor:gain>=0?'rgba(5,150,105,.7)':'rgba(220,38,38,.7)',
+            backgroundColor:'transparent',
             borderWidth:1.5,
-            borderDash:[4,4],
+            borderDash:[5,4],
             pointRadius:0,
             fill:false,
-            tension:0
+            tension:0,
+            yAxisID:'y',
+            order:0
         });
     }
+
     dc('inv-chart');
+    const maxBar=Math.max(...deltaData,1);
     charts['inv-chart']=new Chart(document.getElementById('inv-chart'),{
-        type:'line',
+        type:'bar',
         data:{labels,datasets},
         options:{
             responsive:true,maintainAspectRatio:false,
             interaction:{mode:'index',intersect:false},
             plugins:{
-                legend:{display:currentPortfolio>0,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true}},
-                tooltip:{...TT,callbacks:{label:c=>` ${c.dataset.label}: ${eur(c.raw||0)}`}}
+                legend:{display:true,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true,filter:i=>i.datasetIndex!==0}},
+                tooltip:{...TT,callbacks:{label:c=>{
+                    if(c.datasetIndex===0) return ` Inleg: ${eur(c.raw||0)}`;
+                    return ` ${c.dataset.label}: ${eur(c.raw||0)}`;
+                }}}
             },
             scales:{
-                x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:14,font:{family:'JetBrains Mono',size:10}}},
-                y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}
+                x:{grid:{display:false},ticks:{color:'#94a3b8',maxTicksLimit:14,font:{family:'JetBrains Mono',size:10}}},
+                y:{position:'left',grid:{color:'rgba(226,232,240,.5)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}},
+                yBar:{position:'right',display:false,max:maxBar*6,min:0,grid:{display:false}}
             }
         }
     });
