@@ -35,12 +35,13 @@ jobs:
           ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
-          DEGIRO:               ${{ secrets.DEGIRO }}
-          DEGIRO_HOLDINGS:      ${{ secrets.DEGIRO_HOLDINGS }}
-          TR_HOLDINGS:          ${{ secrets.TR_HOLDINGS }}
-          TR_TRANSACTIONS_CSV:  ${{ secrets.TR_TRANSACTIONS_CSV }}
-          BUX_HOLDINGS:         ${{ secrets.BUX_HOLDINGS }}
-          BUX_TRANSACTIONS_CSV: ${{ secrets.BUX_TRANSACTIONS_CSV }}
+          DEGIRO:                    ${{ secrets.DEGIRO }}
+          DEGIRO_HOLDINGS:           ${{ secrets.DEGIRO_HOLDINGS }}
+          DEGIRO_TRANSACTIONS_CSV:   ${{ secrets.DEGIRO_TRANSACTIONS_CSV }}
+          TR_HOLDINGS:               ${{ secrets.TR_HOLDINGS }}
+          TR_TRANSACTIONS_CSV:       ${{ secrets.TR_TRANSACTIONS_CSV }}
+          BUX_HOLDINGS:              ${{ secrets.BUX_HOLDINGS }}
+          BUX_TRANSACTIONS_CSV:      ${{ secrets.BUX_TRANSACTIONS_CSV }}
         run: python src/morning_briefing.py
 
       - name: Sla portfolio-snapshot op (memory.json)

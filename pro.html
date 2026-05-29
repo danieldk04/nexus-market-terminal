@@ -335,6 +335,22 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
+    <!-- Investment timeline -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Investering Tijdlijn</span>
+            <span class="ptag" id="inv-meta">—</span>
+        </div>
+        <div id="inv-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px 0;border-bottom:1px solid var(--border)"></div>
+        <div style="padding:16px;height:280px;position:relative"><canvas id="inv-chart"></canvas></div>
+        <div id="inv-empty" style="display:none" class="empty">
+            <strong>Geen historische data</strong>
+            Exporteer je transacties op DEGIRO → <em>Account → Transacties → Export</em><br>
+            Sla de CSV op als GitHub Secret <code>DEGIRO_TRANSACTIONS_CSV</code><br>
+            Dan verschijnt hier je volledige beleggingsgeschiedenis.
+        </div>
+    </div>
+
 </div></div>
 
 <!-- ═══════════════════════════════════════
@@ -672,6 +688,7 @@ function renderPortfolioTab(){
 
     renderPosFilter();
     renderPosTable();
+    renderInvestmentTimeline();
 }
 
 function renderDonut(wrapId,chartId,labels,values,colors,total,legId){
@@ -707,6 +724,105 @@ function renderPosTable(){
             <td class="r"><div style="display:flex;align-items:center;justify-content:flex-end;gap:3px"><div class="wbar-bg"><div class="wbar-f" style="width:${Math.min(p.weight_total*4,100)}%;background:${BROKERS[p.broker]?.color||'#64748b'}"></div></div>${p.weight_total.toFixed(1)}%</div></td>
         </tr>`;
     }).join('');
+}
+
+/* ══════════════════════════════════════════════════════
+   INVESTMENT TIMELINE
+══════════════════════════════════════════════════════ */
+function renderInvestmentTimeline(){
+    const tl=M?.investment_timeline||[];
+    const firstDate=M?.first_investment_date;
+    const emptyEl=document.getElementById('inv-empty');
+    const kpisEl=document.getElementById('inv-kpis');
+    const canvasWrap=document.querySelector('#inv-chart')?.parentElement;
+
+    if(!tl.length){
+        if(emptyEl) emptyEl.style.display='block';
+        if(canvasWrap) canvasWrap.style.display='none';
+        kpisEl.innerHTML='';
+        document.getElementById('inv-meta').textContent='Geen data';
+        return;
+    }
+    if(emptyEl) emptyEl.style.display='none';
+    if(canvasWrap) canvasWrap.style.display='block';
+
+    const totalInvested=tl[tl.length-1]?.invested||0;
+    const currentPortfolio=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
+    const gain=currentPortfolio-totalInvested;
+    const gainPct=totalInvested?(gain/totalInvested*100):0;
+    const months=tl.length;
+    const years=Math.floor(months/12);
+    const remMonths=months%12;
+    const duurStr=years>0?(years+'j'+(remMonths?` ${remMonths}m`:'')):(months+'m');
+
+    // KPI strip
+    const kpiColor=gain>=0?'var(--green)':'var(--red)';
+    kpisEl.innerHTML=`
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Eerste aankoop</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${firstDate||tl[0].date}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Belegd kapitaal</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${eur(totalInvested)}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Ongerealiseerde winst</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;color:${kpiColor}">${gain>=0?'+':''}${eur(Math.abs(gain))} <span style="font-size:.78rem">(${gain>=0?'+':''}${gainPct.toFixed(1)}%)</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Beleggingsduur</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${duurStr} <span style="font-size:.72rem;color:var(--muted)">(${months} mnd)</span></div>
+        </div>`;
+
+    document.getElementById('inv-meta').textContent=`${tl[0].date} – ${tl[tl.length-1].date} · ${months} maanden`;
+
+    // Build chart: invested capital area + current portfolio value reference line
+    const labels=tl.map(t=>t.date);
+    const investedData=tl.map(t=>t.invested);
+    const datasets=[{
+        label:'Geïnvesteerd',
+        data:investedData,
+        borderColor:'#2563eb',
+        backgroundColor:'rgba(37,99,235,.1)',
+        borderWidth:2,
+        pointRadius:0,
+        pointHoverRadius:4,
+        fill:true,
+        tension:.3
+    }];
+    // If we have a current portfolio value, add as a reference line (last point only for annotation)
+    if(currentPortfolio>0){
+        const portfolioRef=labels.map(()=>null);
+        portfolioRef[portfolioRef.length-1]=currentPortfolio;
+        datasets.push({
+            label:'Portfolio nu',
+            data:tl.map(()=>currentPortfolio),
+            borderColor:gain>=0?'rgba(5,150,105,.5)':'rgba(220,38,38,.5)',
+            borderWidth:1.5,
+            borderDash:[4,4],
+            pointRadius:0,
+            fill:false,
+            tension:0
+        });
+    }
+    dc('inv-chart');
+    charts['inv-chart']=new Chart(document.getElementById('inv-chart'),{
+        type:'line',
+        data:{labels,datasets},
+        options:{
+            responsive:true,maintainAspectRatio:false,
+            interaction:{mode:'index',intersect:false},
+            plugins:{
+                legend:{display:currentPortfolio>0,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true}},
+                tooltip:{...TT,callbacks:{label:c=>` ${c.dataset.label}: ${eur(c.raw||0)}`}}
+            },
+            scales:{
+                x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:14,font:{family:'JetBrains Mono',size:10}}},
+                y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}
+            }
+        }
+    });
 }
 
 /* ══════════════════════════════════════════════════════

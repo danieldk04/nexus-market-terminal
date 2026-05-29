@@ -82,7 +82,9 @@ def load_history() -> list[dict]:
 
 def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                         news_summary: list[dict] | None = None,
-                        bux: dict | None = None):
+                        bux: dict | None = None,
+                        investment_timeline: list[dict] | None = None,
+                        first_investment_date: str | None = None):
     """Sla nieuws + portfolio-samenvatting op in memory.json voor het dashboard."""
     mem = _load_json(MEMORY_PATH, {})
     mem["last_news"] = news[:8]
@@ -136,9 +138,116 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
                 for p in tr.get("positions", []) if p.get("value", 0) > 0
             ],
         }
+    if investment_timeline:
+        mem["investment_timeline"] = investment_timeline
+        log.info(f"Investment timeline opgeslagen: {len(investment_timeline)} maanden")
+    if first_investment_date:
+        mem["first_investment_date"] = first_investment_date
     mem["dashboard_updated"] = datetime.now(timezone.utc).isoformat()
     _save_json(MEMORY_PATH, mem)
     log.info("Dashboard data opgeslagen in memory.json")
+
+
+def _compute_investment_timeline(transactions: list[dict]) -> tuple[list[dict], str | None]:
+    """
+    Bereken cumulatief geïnvesteerd kapitaal per maand vanuit DEGIRO API-transacties.
+    Geeft (timeline, eerste_datum) terug.
+    timeline = [{date: "YYYY-MM", invested: float}, ...]
+    """
+    monthly_net: dict[str, float] = {}
+    first_date: str | None = None
+
+    for txn in transactions:
+        date_str = (txn.get("date") or "")[:10]
+        if not date_str:
+            continue
+        year_month = date_str[:7]
+        action = txn.get("buysell", "").upper()
+        total  = abs(float(txn.get("totalInBaseCurrency", 0) or 0))
+
+        if first_date is None or date_str < first_date:
+            first_date = date_str
+
+        monthly_net.setdefault(year_month, 0.0)
+        if action == "B":
+            monthly_net[year_month] += total
+        elif action == "S":
+            monthly_net[year_month] -= total
+
+    timeline: list[dict] = []
+    cumulative = 0.0
+    for ym in sorted(monthly_net.keys()):
+        cumulative = max(0.0, cumulative + monthly_net[ym])
+        timeline.append({"date": ym, "invested": round(cumulative, 2)})
+
+    return timeline, first_date
+
+
+def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None]:
+    """
+    Verwerk DEGIRO_TRANSACTIONS_CSV (CSV-export van DEGIRO website).
+    Ondersteunt zowel Nederlandse (Datum/Totaal, DD-MM-YYYY) als Engelse (Date/Total) kolomnamen.
+    Geeft (timeline, eerste_datum) terug — zelfde formaat als _compute_investment_timeline.
+    """
+    import csv as _csv, io as _io
+    raw = os.environ.get("DEGIRO_TRANSACTIONS_CSV", "").strip()
+    if not raw:
+        return [], None
+
+    def _parse_num(s: str) -> float:
+        s = s.strip().strip('"').replace(" ", "")
+        if "," in s and "." in s:
+            s = s.replace(".", "").replace(",", ".")
+        elif "," in s:
+            s = s.replace(",", ".")
+        return float(s)
+
+    monthly_net: dict[str, float] = {}
+    first_date: str | None = None
+
+    try:
+        first_line = raw.split("\n")[0]
+        delim = ";" if first_line.count(";") > first_line.count(",") else ","
+        reader = _csv.DictReader(_io.StringIO(raw), delimiter=delim)
+        rows_ok = 0
+        for row in reader:
+            date_str  = (row.get("Datum") or row.get("Date") or "").strip().strip('"')
+            total_str = (row.get("Totaal") or row.get("Total") or "").strip()
+            if not date_str or not total_str:
+                continue
+            try:
+                if len(date_str.split("-")[0]) == 2:
+                    d, m, y = date_str.split("-")
+                    date_iso   = f"{y}-{m}-{d}"
+                    year_month = f"{y}-{m}"
+                else:
+                    date_iso   = date_str[:10]
+                    year_month = date_str[:7]
+                total = _parse_num(total_str)
+            except Exception:
+                continue
+            if total == 0:
+                continue
+            if first_date is None or date_iso < first_date:
+                first_date = date_iso
+            monthly_net.setdefault(year_month, 0.0)
+            if total < 0:
+                monthly_net[year_month] += abs(total)
+            else:
+                monthly_net[year_month] -= total
+            rows_ok += 1
+        log.info(f"DEGIRO CSV: {rows_ok} regels, eerste datum {first_date}")
+    except Exception as e:
+        log.warning(f"DEGIRO CSV parse fout: {e}")
+        return [], None
+
+    timeline: list[dict] = []
+    cumulative = 0.0
+    for ym in sorted(monthly_net.keys()):
+        cumulative = max(0.0, cumulative + monthly_net[ym])
+        timeline.append({"date": ym, "invested": round(cumulative, 2)})
+
+    return timeline, first_date
 
 
 def save_snapshot(degiro_total: float | None, tr_total: float | None, bux_total: float | None):
@@ -562,12 +671,15 @@ def fetch_degiro_portfolio() -> dict | None:
 
         total_pl_pct = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
         items.sort(key=lambda i: i["value"], reverse=True)
-        log.info(f"DEGIRO: {len(items)} posities, totaal €{total:.2f}, totaal P&L {total_pl_pct}%")
+        timeline, first_date = _compute_investment_timeline(transactions)
+        log.info(f"DEGIRO: {len(items)} posities, totaal €{total:.2f}, totaal P&L {total_pl_pct}%, timeline {len(timeline)} maanden")
         return {
-            "positions":       items,
-            "total":           round(total, 2),
-            "total_invested":  round(total_invested, 2),
-            "total_pl_pct":    total_pl_pct,
+            "positions":            items,
+            "total":                round(total, 2),
+            "total_invested":       round(total_invested, 2),
+            "total_pl_pct":         total_pl_pct,
+            "investment_timeline":  timeline,
+            "first_investment_date": first_date,
         }
     except Exception as e:
         log.warning(f"DEGIRO portfolio fout: {e}")
@@ -1101,7 +1213,15 @@ def run_morning_briefing():
     log.info("AI nieuws-samenvatting genereren...")
     news_summary = generate_news_summary(client, news) if client else []
 
-    save_dashboard_data(news, degiro, tr, news_summary, bux)
+    # Investment timeline: probeer API (degiro), anders CSV-export secret
+    inv_timeline = degiro.get("investment_timeline") if degiro else []
+    inv_first    = degiro.get("first_investment_date") if degiro else None
+    if not inv_timeline:
+        inv_timeline, inv_first = _parse_degiro_transactions_csv()
+
+    save_dashboard_data(news, degiro, tr, news_summary, bux,
+                        investment_timeline=inv_timeline,
+                        first_investment_date=inv_first)
 
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
