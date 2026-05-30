@@ -2,7 +2,7 @@ name: NEXUS Morning Briefing
 
 on:
   schedule:
-    - cron: "0 7 * * *"   # Elke dag 07:00 UTC = 09:00 CEST / 08:00 CET
+    - cron: "45 6 * * *"   # 06:45 UTC → aankomst Telegram ~09:00 CEST (rekening met GitHub Actions vertraging + script ~10 min)
   workflow_dispatch:
 
 permissions:
