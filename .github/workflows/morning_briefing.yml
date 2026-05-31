@@ -2,16 +2,16 @@ name: NEXUS Morning Briefing
 
 on:
   schedule:
-    - cron: "45 6 * * *"   # 06:45 UTC → aankomst Telegram ~09:00 CEST (rekening met GitHub Actions vertraging + script ~10 min)
+    - cron: "45 6 * * *"   # 06:45 UTC → aankomst Telegram ~09:00 CEST
   workflow_dispatch:
 
 permissions:
-  contents: write           # Nodig om portfolio-snapshots in memory.json te committen
+  contents: write
 
 jobs:
   morning_briefing:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -32,9 +32,9 @@ jobs:
       - name: Morning Briefing verzenden
         env:
           PYTHONPATH: src
-          ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          ANTHROPIC_API_KEY:         ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN:        ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:          ${{ secrets.TELEGRAM_CHAT_ID }}
           DEGIRO:                    ${{ secrets.DEGIRO }}
           DEGIRO_HOLDINGS:           ${{ secrets.DEGIRO_HOLDINGS }}
           DEGIRO_TRANSACTIONS_CSV:   ${{ secrets.DEGIRO_TRANSACTIONS_CSV }}
