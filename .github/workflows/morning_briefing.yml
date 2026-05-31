@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: "45 6 * * *"   # 06:45 UTC → aankomst Telegram ~09:00 CEST
   workflow_dispatch:
+    inputs:
+      reden:
+        description: 'Reden voor handmatige run (optioneel)'
+        required: false
+        default: 'handmatige test'
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/morning_briefing.yml
 
 permissions:
   contents: write
