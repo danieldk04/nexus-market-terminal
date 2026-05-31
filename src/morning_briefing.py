@@ -778,10 +778,11 @@ def fetch_degiro_portfolio() -> dict | None:
 
         total = sum(i["value"] for i in items)
 
-        # Transactiehistorie → gemiddelde aankoopkosten + eerste aankoopdatum
+        # Transactiehistorie → gemiddelde aankoopkosten + eerste aankoopdatum + timeline
         transactions  = _fetch_degiro_transactions(session, session_id, int_account)
         avg_costs     = _compute_avg_costs(transactions)
         first_buy_map = _compute_first_buy_dates(transactions)
+        inv_timeline, inv_first = _compute_investment_timeline(transactions)
         total_invested = 0.0
         for item in items:
             item["first_buy_date"] = first_buy_map.get(item["pid"])
@@ -814,10 +815,12 @@ def fetch_degiro_portfolio() -> dict | None:
         items.sort(key=lambda i: i["value"], reverse=True)
         log.info(f"DEGIRO: {len(items)} posities, totaal €{total:.2f}, totaal P&L {total_pl_pct}%")
         return {
-            "positions":       items,
-            "total":           round(total, 2),
-            "total_invested":  round(total_invested, 2),
-            "total_pl_pct":    total_pl_pct,
+            "positions":             items,
+            "total":                 round(total, 2),
+            "total_invested":        round(total_invested, 2),
+            "total_pl_pct":         total_pl_pct,
+            "investment_timeline":   inv_timeline,
+            "first_investment_date": inv_first,
         }
     except Exception as e:
         log.warning(f"DEGIRO portfolio fout: {e}")

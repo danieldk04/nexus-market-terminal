@@ -1147,7 +1147,7 @@ function renderPosTable(){
             <td class="r">${eur(p.value,2)}</td>
             <td class="r" style="color:${plc}">${p.pl_pct!=null?pct(p.pl_pct):'n/b'}</td>
             <td class="r" style="color:${plc}">${p.pl_eur!=null?(p.pl_eur>=0?'+':'')+eur(Math.abs(p.pl_eur),2):'n/b'}</td>
-            <td class="r" style="color:var(--muted);font-size:.72rem">${p.first_buy_date?Math.floor((Date.now()-new Date(p.first_buy_date))/(1000*60*60*24*30))+'m':'—'}</td>
+            <td class="r" style="color:var(--muted);font-size:.72rem">${p.first_buy_date?(()=>{const s=new Date(p.first_buy_date),n=new Date();const m=(n.getFullYear()-s.getFullYear())*12+(n.getMonth()-s.getMonth());const y=Math.floor(m/12);const rm=m%12;return y>0?`${y}j${rm>0?' '+rm+'m':''}`:m+'m';})():'—'}</td>
             <td class="r"><div style="display:flex;align-items:center;justify-content:flex-end;gap:3px"><div class="wbar-bg"><div class="wbar-f" style="width:${Math.min(p.weight_total*4,100)}%;background:${BROKERS[p.broker]?.color||'#64748b'}"></div></div>${p.weight_total.toFixed(1)}%</div></td>
         </tr>`;
     }).join('');
@@ -1189,7 +1189,11 @@ function renderInvestmentTimeline(){
     const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
     const gain=currentPortfolio-allInvested;
     const gainPct=allInvested?(gain/allInvested*100):0;
-    const totalMonths=fullTl.length;
+    // Beleggingsduur = werkelijke kalendermaanden van eerste aankoop tot vandaag
+    const firstDateStr=firstDate||fullTl[0].date;
+    const _sd=new Date(firstDateStr.length<=7?firstDateStr+'-01':firstDateStr);
+    const _nd=new Date();
+    const totalMonths=Math.max(0,(_nd.getFullYear()-_sd.getFullYear())*12+(_nd.getMonth()-_sd.getMonth()));
     const years=Math.floor(totalMonths/12);
     const remMonths=totalMonths%12;
     const duurStr=years>0?(years+'j'+(remMonths?` ${remMonths}m`:'')):(totalMonths+'m');
