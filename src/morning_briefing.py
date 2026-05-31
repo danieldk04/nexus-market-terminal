@@ -1086,6 +1086,7 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
         ticker = h["ticker"]
         shares = h["shares"]
         price = None
+        _full_info = None
         # Stap 1: fast_info (snel, werkt goed voor US-tickers en Europese ETFs)
         try:
             p = getattr(yf.Ticker(ticker).fast_info, "last_price", None)
@@ -1096,10 +1097,10 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
         # Stap 2: volledige info (meer velden, maar trager)
         if not price:
             try:
-                full = yf.Ticker(ticker).info
-                p    = (full.get("currentPrice") or
-                        full.get("regularMarketPrice") or
-                        full.get("previousClose"))
+                _full_info = yf.Ticker(ticker).info
+                p    = (_full_info.get("currentPrice") or
+                        _full_info.get("regularMarketPrice") or
+                        _full_info.get("previousClose"))
                 if p and float(p) > 0:
                     price = float(p)
             except Exception:
@@ -1134,7 +1135,7 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
         sector = None
         if not any(c in ticker.upper() for c in ("BTC", "ETH", "XRP", "SOL")):
             try:
-                di = yf.Ticker(ticker).info
+                di = _full_info or yf.Ticker(ticker).info
                 dy = di.get("dividendYield")
                 if dy and float(dy) > 0:
                     div_yield      = round(float(dy), 4)
@@ -1363,6 +1364,13 @@ def _build_portfolio_value_history() -> list[dict]:
     if not raw:
         log.info("_build_portfolio_value_history: DEGIRO_TRANSACTIONS_CSV niet beschikbaar.")
         return []
+
+    # Skip de zware yfinance-rebuild als de huidige maand al berekend is (~60-120s bespaard)
+    _mem_check = _load_json(MEMORY_PATH, {})
+    _existing  = _mem_check.get("portfolio_value_history", [])
+    if _existing and _existing[-1]["date"] >= date.today().strftime("%Y-%m"):
+        log.info(f"portfolio_value_history: al actueel ({_existing[-1]['date']}), skip rebuild.")
+        return _existing
 
     if raw.startswith("﻿"):
         raw = raw[1:]
