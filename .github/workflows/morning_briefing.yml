@@ -1,18 +1,16 @@
 name: NEXUS Morning Briefing
 
 on:
+  # Backup: GitHub Actions schedule (vertraagd maar gratis fallback)
   schedule:
-    - cron: "45 6 * * *"   # 06:45 UTC → aankomst Telegram ~09:00 CEST
+    - cron: "15 7 * * *"   # 07:15 UTC fallback als cron-job.org faalt
+  # Primair: getriggerd door cron-job.org via GitHub API om 07:00 UTC
   workflow_dispatch:
     inputs:
       reden:
         description: 'Reden voor handmatige run (optioneel)'
         required: false
         default: 'handmatige test'
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/morning_briefing.yml
 
 permissions:
   contents: write
