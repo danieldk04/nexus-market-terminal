@@ -1585,6 +1585,46 @@ def _build_benchmark_history() -> dict:
     return result
 
 
+# ─── EXPORT HERINNERINGEN ─────────────────────────────────────────────────────
+
+def _send_export_reminder(broker: str):
+    """Stuur een aparte Telegram-herinnering om de portfolio-export bij te werken."""
+    today_str = date.today().strftime("%-d %B %Y")
+    if broker == "TR":
+        msg = (
+            f"📋 *TRADE REPUBLIC — EXPORT BIJWERKEN*\n"
+            f"_{today_str}_\n\n"
+            f"{SEP}\n\n"
+            f"Gisteren (de 2e) zijn er automatische aankopen gedaan op Trade Republic. "
+            f"Update de export zodat het dashboard je actuele portfolio toont.\n\n"
+            f"*Te doen:*\n"
+            f"  1️⃣ Open Trade Republic → Profiel → Documenten\n"
+            f"  2️⃣ Download de volledige transactiegeschiedenis als CSV\n"
+            f"  3️⃣ Ga naar GitHub → nexus\\-market\\-terminal → Settings → Secrets\n"
+            f"  4️⃣ Update `TR\\_TRANSACTIONS\\_CSV` met de complete export\n"
+            f"  5️⃣ Update `TR\\_HOLDINGS` als je aandelen\\/ETF aantallen zijn gewijzigd\n\n"
+            f"De volgende morning briefing verwerkt de nieuwe data automatisch."
+        )
+    elif broker == "BUX":
+        msg = (
+            f"📋 *BUX — EXPORT BIJWERKEN*\n"
+            f"_{today_str}_\n\n"
+            f"{SEP}\n\n"
+            f"Gisteren (de 24e) zijn er automatische aankopen gedaan op BUX. "
+            f"Update de export zodat het dashboard je actuele portfolio toont.\n\n"
+            f"*Te doen:*\n"
+            f"  1️⃣ Open BUX → Profiel → Transacties → Exporteer\n"
+            f"  2️⃣ Download de volledige transactiegeschiedenis als CSV\n"
+            f"  3️⃣ Ga naar GitHub → nexus\\-market\\-terminal → Settings → Secrets\n"
+            f"  4️⃣ Update `BUX\\_TRANSACTIONS\\_CSV` met de complete export\n\n"
+            f"De volgende morning briefing verwerkt de nieuwe data automatisch."
+        )
+    else:
+        return
+    ok = send(msg)
+    log.info(f"Export herinnering {broker}: {'✓ verzonden' if ok else '✗ mislukt'}")
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def run_morning_briefing():
@@ -1671,6 +1711,13 @@ def run_morning_briefing():
     msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text,
                                   news_summary, bux, bux_perf,
                                   alerts=alert_lines if alert_lines else None)
+
+    # Export herinneringen: dag ná automatische aankopen
+    dag = date.today().day
+    if dag == 3:
+        _send_export_reminder("TR")   # aankopen op de 2e van de maand
+    elif dag == 25:
+        _send_export_reminder("BUX")  # aankopen op de 24e van de maand
 
     log.info("Telegram verzenden...")
     ok = send(msg)
