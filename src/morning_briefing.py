@@ -807,36 +807,21 @@ def build_telegram_message(market, news, nexus, degiro, tr,
     if eigen_parts:
         eigen = "💼 *EIGEN PORTFOLIO*\n\n" + f"\n{SEP}\n".join(eigen_parts)
 
-    # ── 4. BUX ───────────────────────────────────────────────────────────────
-    bux_block = ""
-    if bux and bux.get("positions"):
-        bux_total = bux.get("total", 0)
-        bux_pl    = bux.get("total_pl_pct")
-        pl_s      = f"  _{'+' if (bux_pl or 0) >= 0 else ''}{bux_pl:.1f}%_" if bux_pl is not None else ""
-        lines = [f"📲 *BUX*  `€{bux_total:,.0f}`{pl_s}"]
-        if bux_perf:
-            lines.append(_perf_line(bux_perf))
-        lines.append("")
-        for p in bux.get("positions", []):
-            if not p.get("value", 0):
-                continue
-            dot  = "🟢" if (p.get("pl_pct") or 0) >= 0 else "🔴"
-            pl_s2 = f"`{p['pl_pct']:+.1f}%`" if p.get("pl_pct") is not None else "`n/b`"
-            lines.append(f"  {dot} `{p['name']:<8}` {pl_s2}  `€{p['value']:>7,.0f}`")
-        bux_block = "\n".join(lines)
-
-    # ── 5. NEXUS BOT (papier) ────────────────────────────────────────────────
+    # ── 4. NEXUS BOT (papier) ────────────────────────────────────────────────
     nexus_block = ""
     if nexus.get("positions"):
-        pos   = nexus["positions"]
+        pos        = nexus["positions"]
+        nexus_cash = nexus.get("cash", 0)
+        nexus_n    = nexus.get("n", len(pos))
+        nexus_avg  = nexus.get("avg_pl", 0)
         lines = [
             f"🤖 *NEXUS BOT* _(papier trading)_\n"
-            f"  💼 `€{nexus['total']:,.0f}` · {nexus['n']} posities · gem. `{nexus['avg_pl']:+.1f}%`\n"
-            f"  💵 Cash: `€{nexus['cash']:,.0f}`"
+            f"  {nexus_n} posities · gem. `{nexus_avg:+.1f}%`\n"
+            f"  💵 Cash: `€{nexus_cash:,.0f}`"
         ]
         for p in pos[:6]:
-            dot = "🟢" if p["pl"] >= 0 else "🔴"
-            lines.append(f"  {dot} `{p['ticker']:<6}` `{p['pl']:+5.1f}%`  `€{p['value']:>6,.0f}`")
+            dot = "🟢" if p.get("pl", 0) >= 0 else "🔴"
+            lines.append(f"  {dot} `{p['ticker']:<6}` `{p.get('pl', 0):+5.1f}%`")
         nexus_block = "\n".join(lines)
 
     # ── 6. NIEUWS ────────────────────────────────────────────────────────────
