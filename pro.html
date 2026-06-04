@@ -1348,28 +1348,15 @@ async function yfFetchJson(yfUrl) {
         () => fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(yfUrl)}`, { signal: AbortSignal.timeout(9000) }),
         () => fetch(`https://corsproxy.io/?${encodeURIComponent(yfUrl)}`, { signal: AbortSignal.timeout(9000) }),
     ];
-    document.getElementById('bcrow').innerHTML=brokers.map(({k,data,color,isBot})=>{
-        if(!data?.total&&!isBot) return '';
-        const val=isBot?usd(data?.total_value||0):eur(data.total||0);
-        const plp=data?.total_pl_pct;
-        const npos=isBot?(data?.npos||0):(data?.positions?.length||0);
-        const lbl=isBot?'AI Bot':(k==='TR'?'Trade Republic':k);
-        return `<div class="bcard" style="border-top:2px solid ${color}">
-            <div class="bc-hd"><div class="bc-nm" style="color:${color}">${lbl}</div><div class="bc-np">${npos} posities</div></div>
-            <div class="bc-tv">${val}</div>
-            <div class="bc-pl ${plp!=null&&plp>=0?'pc':'nc'}">${plp!=null?pct(plp):''}</div>
-        </div>`;
-    }).join('');
-
-    /* history chart */
-    renderHistoryChart();
-
-    /* news */
-    renderDashNews();
-
-    /* benchmark + dividend */
-    renderBenchmarkPanel();
-    renderDividendPanel('div-panel-dash');
+    for(const src of sources){
+        try{
+            const r=await src();
+            if(!r.ok) continue;
+            const txt=await r.text();
+            try{const j=JSON.parse(txt);if(j?.chart||j?.quoteSummary) return j;}catch{}
+        }catch{}
+    }
+    throw new Error('yfFetchJson: alle bronnen mislukt');
 }
 
 function renderBenchmarkPanel(){
