@@ -9,8 +9,9 @@ from pathlib import Path
 import yfinance as yf
 import anthropic
 
-BASE_DIR  = Path(__file__).parent.parent
-DATA_PATH = BASE_DIR / "data.json"
+BASE_DIR    = Path(__file__).parent.parent
+DATA_PATH   = BASE_DIR / "data.json"
+MEMORY_PATH = BASE_DIR / "memory.json"
 
 REFRESH_DAYS  = 7
 TOP_N_ANALYSE = 10
@@ -163,6 +164,22 @@ def run_smart_analysis():
     filings     = data.get("filings", {})
     updated     = False
 
+    # Lees geleerde regels uit memory voor injectie in systeem-prompt
+    memory = {}
+    if MEMORY_PATH.exists():
+        with open(MEMORY_PATH) as f:
+            try:
+                memory = json.load(f)
+            except Exception:
+                pass
+    adjustments = memory.get("prompt_adjustments", [])
+    system_prompt = SYSTEM_PROMPT
+    if adjustments:
+        rules_text = "\n".join(f"- {r['rule']}" for r in adjustments[:10])
+        system_prompt = SYSTEM_PROMPT + (
+            f"\n\nGELEERDE REGELS UIT EERDER ONDERZOEK (pas toe bij je analyse):\n{rules_text}"
+        )
+
     for c in candidates[:TOP_N_ANALYSE]:
         ticker    = c["ticker"]
         tier2     = c.get("tier2", {})
@@ -193,7 +210,7 @@ def run_smart_analysis():
                 max_tokens=1100,
                 system=[{
                     "type": "text",
-                    "text": SYSTEM_PROMPT,
+                    "text": system_prompt,
                     "cache_control": {"type": "ephemeral"},
                 }],
                 messages=[{"role": "user", "content": prompt}],
@@ -220,6 +237,36 @@ def run_smart_analysis():
         with open(DATA_PATH, "w") as f:
             json.dump(data, f, indent=4)
         print("Analyses bijgewerkt in data.json.")
+
+        # Sla een prediction-batch op voor de weekly evaluator
+        prediction_batch = {
+            "date":      datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "macro_snapshot": data.get("macro", {}),
+            "candidates": [
+                {
+                    "ticker":             c["ticker"],
+                    "price":              c.get("price"),
+                    "score":              c.get("score"),
+                    "recommended_action": (
+                        "buy"   if c.get("tier2", {}).get("sentiment_score") == "BULLISH" else
+                        "avoid" if c.get("tier2", {}).get("sentiment_score") == "BEARISH" else
+                        "watch"
+                    ),
+                    "conviction": None,
+                }
+                for c in candidates[:TOP_N_ANALYSE]
+                if c.get("tier2", {}).get("sentiment_score")
+            ],
+        }
+        predictions = memory.setdefault("predictions", [])
+        # Vervang bestaande batch van vandaag als die er al is
+        today = prediction_batch["date"]
+        memory["predictions"] = [p for p in predictions if p.get("date") != today]
+        memory["predictions"].append(prediction_batch)
+        memory["predictions"] = memory["predictions"][-12:]  # bewaar max 12 weken
+        with open(MEMORY_PATH, "w") as f:
+            json.dump(memory, f, indent=4)
+        print(f"Prediction batch opgeslagen ({len(prediction_batch['candidates'])} tickers).")
     else:
         print("Geen nieuwe analyses nodig.")
 

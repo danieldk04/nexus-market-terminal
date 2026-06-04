@@ -355,6 +355,15 @@ def main():
     for c in candidates:
         if c["ticker"] in old_tier2:
             c["tier2"] = old_tier2[c["ticker"]]
+            # Pas score aan op basis van Tier-2 AI-sentiment (eerder berekend maar nooit gebruikt)
+            sentiment = old_tier2[c["ticker"]].get("sentiment_score", "")
+            if sentiment == "BULLISH":
+                c["score"] = round(min(10.0, c["score"] + 0.3), 1)
+            elif sentiment == "BEARISH":
+                c["score"] = round(max(1.0, c["score"] - 0.5), 1)
+
+    # Hersorteren na sentiment-aanpassingen
+    candidates = sorted(candidates, key=lambda x: x["score"], reverse=True)
 
     output = {
         "generated_at":   datetime.now(timezone.utc).isoformat(),

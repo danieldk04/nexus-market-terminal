@@ -1,17 +1,24 @@
 name: NEXUS Morning Briefing
 
 on:
+  # Backup: GitHub Actions schedule (vertraagd maar gratis fallback)
   schedule:
-    - cron: "0 7 * * *"   # Elke dag 07:00 UTC = 09:00 CEST / 08:00 CET
+    - cron: "15 7 * * *"   # 07:15 UTC fallback als cron-job.org faalt
+  # Primair: getriggerd door cron-job.org via GitHub API om 07:00 UTC
   workflow_dispatch:
+    inputs:
+      reden:
+        description: 'Reden voor handmatige run (optioneel)'
+        required: false
+        default: 'handmatige test'
 
 permissions:
-  contents: write           # Nodig om portfolio-snapshots in memory.json te committen
+  contents: write
 
 jobs:
   morning_briefing:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -32,15 +39,16 @@ jobs:
       - name: Morning Briefing verzenden
         env:
           PYTHONPATH: src
-          ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
-          DEGIRO:               ${{ secrets.DEGIRO }}
-          DEGIRO_HOLDINGS:      ${{ secrets.DEGIRO_HOLDINGS }}
-          TR_HOLDINGS:          ${{ secrets.TR_HOLDINGS }}
-          TR_TRANSACTIONS_CSV:  ${{ secrets.TR_TRANSACTIONS_CSV }}
-          BUX_HOLDINGS:         ${{ secrets.BUX_HOLDINGS }}
-          BUX_TRANSACTIONS_CSV: ${{ secrets.BUX_TRANSACTIONS_CSV }}
+          ANTHROPIC_API_KEY:         ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN:        ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:          ${{ secrets.TELEGRAM_CHAT_ID }}
+          DEGIRO:                    ${{ secrets.DEGIRO }}
+          DEGIRO_HOLDINGS:           ${{ secrets.DEGIRO_HOLDINGS }}
+          DEGIRO_TRANSACTIONS_CSV:   ${{ secrets.DEGIRO_TRANSACTIONS_CSV }}
+          TR_HOLDINGS:               ${{ secrets.TR_HOLDINGS }}
+          TR_TRANSACTIONS_CSV:       ${{ secrets.TR_TRANSACTIONS_CSV }}
+          BUX_HOLDINGS:              ${{ secrets.BUX_HOLDINGS }}
+          BUX_TRANSACTIONS_CSV:      ${{ secrets.BUX_TRANSACTIONS_CSV }}
         run: python src/morning_briefing.py
 
       - name: Sla portfolio-snapshot op (memory.json)
@@ -49,5 +57,5 @@ jobs:
           git config user.email "nexus@bot.local"
           git add memory.json
           git diff --cached --quiet || git commit -m "Snapshot: portfolio $(date -u +'%Y-%m-%d')"
+          git pull --rebase origin main
           git push
-

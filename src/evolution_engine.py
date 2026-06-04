@@ -30,6 +30,10 @@ VIX_BLOCK         = 42.0    # Blokkeer alleen bij extreme paniek
 VIX_CAUTION       = 36.0    # Alleen high-conviction bij hoge VIX
 MAX_KELLY_PCT     = 0.20    # Maximaal 20% per positie (Kelly-cap)
 COOLDOWN_DAYS     = 2       # Geen herinstap binnen 2 dagen na sluiten
+ROTATION_MIN_DAYS   = 21    # Positie moet minstens 21 dagen oud zijn voor rotatie
+ROTATION_MAX_PL_PCT = 5.0   # Roteer alleen stagnerende posities (< 5% winst)
+ROTATION_SCORE_GAP  = 1.5   # Nieuwe kandidaat moet minstens 1.5 punt beter scoren
+DCF_TP_MAX          = 35.0  # Cap op DCF-gebaseerde take-profit (voorkomt 130%+ doelen)
 
 
 def _is_in_cooldown(ticker: str, cooldowns: dict, today: str) -> bool:
@@ -69,8 +73,8 @@ def get_dcf_take_profit(trade: dict, c_data: dict | None) -> float:
     if c_data and c_data.get("dcf"):
         dcf_upside = c_data["dcf"].get("dcf_upside")
         if dcf_upside is not None and dcf_upside > 10:
-            # Take-profit bij 80% van de DCF upside (veiligheidsmarge)
-            return round(dcf_upside * 0.80, 1)
+            # Take-profit bij 80% van de DCF upside, maar max DCF_TP_MAX
+            return min(round(dcf_upside * 0.80, 1), DCF_TP_MAX)
     return TAKE_PROFIT_PCT
 
 
@@ -189,9 +193,55 @@ def run_evolution():
     else:
         print(f"MARKT: {vix_str} — dynamische drempel = {vix_threshold}")
 
+    # ── 3b. Score-rotatie: vervang stagnerende positie door betere kandidaat ──
+    cooldowns = memory.get("cooldowns", {})
+    if len(updated_trades) >= MAX_TRADES and candidates:
+        today_dt  = date.fromisoformat(today)
+        occupied  = {t["ticker"] for t in updated_trades}
+
+        best_new_cand = next(
+            (c for c in candidates
+             if c["ticker"] not in occupied
+             and not _is_in_cooldown(c["ticker"], cooldowns, today)),
+            None
+        )
+        if best_new_cand:
+            stagnant = []
+            for t in updated_trades:
+                try:
+                    held = (today_dt - date.fromisoformat(t.get("buy_date", today))).days
+                except Exception:
+                    held = 0
+                if held >= ROTATION_MIN_DAYS and t.get("pl_percent", 0) < ROTATION_MAX_PL_PCT:
+                    stagnant.append(t)
+
+            if stagnant:
+                worst = min(stagnant, key=lambda t: t.get("score_at_entry", 10))
+                gap   = best_new_cand["score"] - worst.get("score_at_entry", 10)
+                if gap >= ROTATION_SCORE_GAP:
+                    ticker  = worst["ticker"]
+                    cur_val = worst.get("current_value", worst.get("position_value", 0))
+                    sector  = worst.get("industry_group", "Unknown")
+                    pl      = worst.get("pl_percent", 0)
+                    held    = (today_dt - date.fromisoformat(worst.get("buy_date", today))).days
+
+                    cash += cur_val
+                    lesson_type = "POSITIVE_LEARNING" if pl >= 0 else "NEGATIVE_LEARNING"
+                    add_lesson(ticker, sector,
+                               f"Rotatie ({lesson_type}): {ticker} (score={worst.get('score_at_entry')}, {pl:+.1f}%, {held}d) "
+                               f"→ {best_new_cand['ticker']} (score={best_new_cand['score']}).",
+                               lesson_type)
+                    memory.setdefault("cooldowns", {})[ticker] = today
+                    updated_trades = [t for t in updated_trades if t["ticker"] != ticker]
+                    print(
+                        f"ROTATIE: {ticker} (score={worst.get('score_at_entry')}, {pl:+.1f}%, {held}d) "
+                        f"→ {best_new_cand['ticker']} (score={best_new_cand['score']}, gap={gap:+.1f})"
+                    )
+
     # ── 4. Nieuwe posities openen — Kelly Criterion sizing ───────────────────
     positive_sectors = {l["sector"] for l in memory["lessons"] if l.get("type") == "POSITIVE_LEARNING"}
     pm_sector_adj    = post_mortem.get("sector_adjustments", {})
+    # cooldowns already set in 3b (or here if rotation block was skipped)
     cooldowns        = memory.get("cooldowns", {})
 
     current_tickers = {t["ticker"] for t in updated_trades}

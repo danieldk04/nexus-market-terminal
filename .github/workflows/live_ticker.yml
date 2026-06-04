@@ -39,4 +39,5 @@ jobs:
           git config user.email "nexus@bot.local"
           git add data.json
           git diff --cached --quiet || git commit -m "Auto-update: Ticker $(date -u +'%H:%M UTC')"
+          git pull --rebase origin main
           git push

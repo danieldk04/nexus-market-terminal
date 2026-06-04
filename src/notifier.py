@@ -34,8 +34,8 @@ def _now_long():
     return datetime.now(timezone.utc).strftime("%d-%m-%Y %H:%M UTC")
 
 
-def send(message, parse_mode="Markdown"):
-    """Stuur een bericht naar Nexus_Quant_Bot. Geeft True terug bij succes."""
+def _send_single(message: str, parse_mode: str) -> bool:
+    """Verstuur één Telegram-bericht (max 4096 tekens)."""
     token = _token()
     if not token:
         log.warning("TELEGRAM_BOT_TOKEN niet gevonden — melding overgeslagen.")
@@ -58,6 +58,20 @@ def send(message, parse_mode="Markdown"):
     except Exception as e:
         log.error("Telegram verbindingsfout: %s", e)
         return False
+
+
+def send(message, parse_mode="Markdown"):
+    """Stuur een bericht naar Nexus_Quant_Bot. Splitst automatisch bij > 4000 tekens."""
+    if len(message) <= 4000:
+        return _send_single(message, parse_mode)
+    # Splits op laatste newline vóór de grens zodat opmaakblokken heel blijven
+    split = message.rfind("\n", 0, 4000)
+    if split == -1:
+        split = 4000
+    ok1 = _send_single(message[:split], parse_mode)
+    ok2 = send(message[split:].lstrip("\n"), parse_mode)
+    log.info("Lang bericht gesplitst in 2 delen (totaal %d tekens)", len(message))
+    return ok1 and ok2
 
 
 # ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -101,8 +115,13 @@ def _load_portfolio_snapshot() -> dict | None:
 
 # ─── Kant-en-klare berichten ─────────────────────────────────────────────────
 
+def _silent() -> bool:
+    """Geeft True als SILENT_RUN gezet is — onderdruk dan alle losse meldingen."""
+    return bool(os.environ.get("SILENT_RUN"))
+
+
 def notify_scan_complete(candidates, scanned):
-    if not candidates:
+    if _silent() or not candidates:
         return
     top = candidates[:5]
     lines = []
@@ -137,6 +156,7 @@ def notify_scan_complete(candidates, scanned):
 
 
 def notify_trade_opened(ticker, price, score, sector):
+    if _silent(): return
     ts = _now()
     msg = (
         "🟢 *TRADE GEOPEND*\n"
@@ -150,6 +170,7 @@ def notify_trade_opened(ticker, price, score, sector):
 
 
 def notify_stop_loss(ticker, pl_pct, sector):
+    if _silent(): return
     ts = _now()
     msg = (
         "🔴 *STOP-LOSS GERAAKT*\n"
@@ -163,6 +184,7 @@ def notify_stop_loss(ticker, pl_pct, sector):
 
 
 def notify_take_profit(ticker, pl_pct, sector):
+    if _silent(): return
     ts = _now()
     msg = (
         "💰 *TAKE-PROFIT!*\n"
@@ -176,6 +198,7 @@ def notify_take_profit(ticker, pl_pct, sector):
 
 
 def notify_warning(ticker, pl_pct, sector):
+    if _silent(): return
     msg = (
         "⚠️ *WAARSCHUWING*\n"
         "`{ticker}` nadert stop-loss grens\n"
@@ -187,6 +210,7 @@ def notify_warning(ticker, pl_pct, sector):
 
 
 def notify_evolution_summary(active_trades, closed_count, new_count, equity_value):
+    if _silent(): return
     n = len(active_trades)
     if n > 0:
         avg_pl = sum(t.get("pl_percent", 0) for t in active_trades) / n
