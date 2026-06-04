@@ -1617,7 +1617,9 @@ def run_morning_briefing():
 
     msg = build_telegram_message(market, news, nexus, degiro, tr,
                                  degiro_perf, tr_perf, ai_text,
-                                 bux=bux, bux_perf=bux_perf)
+                                 bux=bux, bux_perf=bux_perf,
+                                 news_summary=news_summary,
+                                 alerts=alert_lines)
 
     log.info("Telegram verzenden...")
     ok = send(msg)
