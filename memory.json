@@ -82,9 +82,10 @@
   "portfolio_history": [
     {
       "date": "2026-06-04",
-      "degiro": 16420.31,
-      "tr": 8402.73,
-      "bux": 2168.07
+      "degiro": 16229.11,
+      "tr": 8312.99,
+      "nexus": 2754.98,
+      "bux": 2116.89
     },
     {
       "date": "2026-06-03",
@@ -188,186 +189,177 @@
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
   ],
   "tr_summary": {
-    "total": 8402.73,
-    "total_pl_pct": -0.83,
+    "total": 8312.99,
+    "total_pl_pct": -1.89,
+    "total_invested": 8473.03,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4554.56,
-        "pl_pct": -8.52,
-        "div_yield": null,
-        "annual_div_eur": null,
-        "first_buy_date": null,
-        "sector": null,
-        "weight": 54.2
+        "value": 4483.86,
+        "price": 54299.8516,
+        "pl_pct": -9.94,
+        "pl_eur": -494.73,
+        "weight": 53.9
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
-        "value": 1321.26,
-        "pl_pct": 32.12,
-        "div_yield": null,
-        "annual_div_eur": null,
-        "first_buy_date": null,
-        "sector": null,
-        "weight": 15.7
+        "value": 1312.0,
+        "price": 158.8795,
+        "pl_pct": 31.2,
+        "pl_eur": 311.98,
+        "weight": 15.8
       },
       {
         "name": "TDIV (Dev Div Leaders)",
-        "value": 1181.17,
-        "pl_pct": -1.56,
-        "div_yield": null,
-        "annual_div_eur": null,
-        "first_buy_date": null,
-        "sector": null,
-        "weight": 14.1
+        "value": 1182.08,
+        "price": 51.64,
+        "pl_pct": -1.49,
+        "pl_eur": -17.85,
+        "weight": 14.2
       },
       {
         "name": "VWCE (All-World Acc)",
-        "value": 1165.94,
-        "pl_pct": 6.53,
-        "div_yield": null,
-        "annual_div_eur": null,
-        "first_buy_date": null,
-        "sector": null,
+        "value": 1155.85,
+        "price": 162.72,
+        "pl_pct": 5.61,
+        "pl_eur": 61.37,
         "weight": 13.9
       },
       {
         "name": "VHYL (High Div Yield)",
-        "value": 179.8,
-        "pl_pct": -10.1,
-        "div_yield": null,
-        "annual_div_eur": null,
-        "first_buy_date": null,
-        "sector": null,
-        "weight": 2.1
+        "value": 179.2,
+        "price": 77.691,
+        "pl_pct": -10.4,
+        "pl_eur": -20.8,
+        "weight": 2.2
       }
     ]
   },
-  "dashboard_updated": "2026-06-04T07:01:07.692052+00:00",
+  "dashboard_updated": "2026-06-04T09:21:48.829950+00:00",
   "degiro_summary": {
-    "total": 16420.31,
-    "total_pl_pct": 33.26,
-    "total_invested": 12321.87,
+    "total": 16229.11,
+    "total_pl_pct": 32.32,
+    "total_invested": 12265.4,
     "positions": [
       {
         "name": "VWRL.AS",
-        "value": 6232.98,
-        "pl_pct": 33.95,
-        "pl_eur": 1579.89,
+        "value": 6179.16,
+        "pl_pct": 32.8,
+        "pl_eur": 1526.07,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 38.0
+        "weight": 38.1
       },
       {
         "name": "VUSA.AS",
-        "value": 5197.16,
-        "pl_pct": 39.04,
-        "pl_eur": 1459.16,
+        "value": 5161.8,
+        "pl_pct": 38.09,
+        "pl_eur": 1423.8,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 31.7
+        "weight": 31.8
       },
       {
         "name": "VHYL.AS",
-        "value": 4365.37,
-        "pl_pct": 23.77,
-        "pl_eur": 838.49,
+        "value": 4350.7,
+        "pl_pct": 23.36,
+        "pl_eur": 823.82,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 26.6
+        "weight": 26.8
       },
       {
         "name": "V",
-        "value": 624.8,
+        "value": 537.45,
         "pl_pct": 54.69,
-        "pl_eur": 220.9,
-        "div_yield": 0.86,
-        "annual_div_eur": 537.33,
+        "pl_eur": 190.02,
+        "div_yield": null,
+        "annual_div_eur": null,
         "first_buy_date": null,
-        "sector": "Financial Services",
-        "weight": 3.8
+        "sector": null,
+        "weight": 3.3
       }
     ]
   },
   "news_summary": [
     {
-      "theme": "Volatiliteit en markttweedeling",
-      "summary": "De markt vertoont sterke volatiliteit met forse dagelijkse schommelingen, waarbij slechts 20 aandelen de stijging dragen - een teken van smalle marktbreedte vergelijkbaar met de dotcombubbel. Dit cre\u00ebert risico voor gediversificeerde ETFs die exposure hebben aan veel minder performante aandelen naast de AI-toppers."
+      "theme": "Sterke tech-rally domineert markt",
+      "summary": "Tech-aandelen als Prosus (+10%) en X-Fab drijven de AEX naar record 1000+ punten, maar slechts 20 aandelen dragen deze stijging. Dit concentratierisico doet denken aan de dotcombubbel en vormt een waarschuwing voor gediversifieerde beleggers die te veel exposure hebben naar technologie."
     },
     {
-      "theme": "Geopolitieke onrust en sectorgevolgen",
-      "summary": "Oorlogen in het Midden-Oosten en Iran veroorzaken ongelijkmatige marktreacties: Europese aandelen herstellen, maar Azi\u00eb daalt en luchtvaart (Air France-KLM) krijgt klappen door annuleringen. Voor wereldwijde beleggers leidt geopolitieke instabiliteit tot sector-selectieve impact op hun portefeuilles."
+      "theme": "Geopolitieke onrust veroorzaakt volatiliteit",
+      "summary": "Oorlogen in het Midden-Oosten (Iran) en andere conflicten zorgen voor wildebeurstdagen met wisselende signalen: Europese aandelen herstellen, maar Azi\u00eb blijft dalen en Air France-KLM krijgt klappen. Dit illustreert hoe geopolitieke risico's ETF-portefeuilles destabiliseren."
     },
     {
-      "theme": "Sterke herstellers en koopmoment",
-      "summary": "Victoria's Secret, Prosus en Philips tonen forse stijgingen, terwijl insiders bij Brunel aandelen kopen na dips - signalen van herstellende bedrijven en vertrouwen op hoger niveau. Dit suggereert selectieve kansen na recente dalingen in bepaalde sectoren."
+      "theme": "Brede markt verdeeld: winnaars en verliezers",
+      "summary": "Terwijl Philips, Victoria's Secret en sommige aandelen stijgen, leiden Ferrari, Unilever en financi\u00eble angst (bitcoin onderuit) tot twijfel bij beleggers. De tweedeling toont dat selectiviteit cruciaal is en dat marktbrede indexen risico van onderprestatie lopen wanneer sentiment wisselvallig is."
     },
     {
-      "theme": "Indices bereiken recordniveaus",
-      "summary": "De AEX breekt door 1000 punten en de Amsterdamse beurs sluit hoger, aangestuwd door technologiebedrijven, terwijl CSG succesvolle IPO doorgaat. Deze indexgroei maskeert echter de onderliggende markttweedeling en kan valse veiligheid geven aan beleggers met brede ETF-exposure."
+      "theme": "Beleggers voorzichtig ondanks koersstijging",
+      "summary": "De beurs stijgt (AEX hoger, Nederlanders rijker op papier), maar beleggers durven niet te stoppen met sparen, insiders van Brunel kopen na dips, en analisten waarschuwen voor overdrijving in AI-hype. Dit wijst op onderliggende onzekerheid en voorzichtigheid ondanks positieve koersbeweging."
     }
   ],
   "bux_summary": {
-    "total": 2168.07,
-    "total_pl_pct": -16.2,
-    "total_invested": 2587.08,
+    "total": 2116.89,
+    "total_pl_pct": -4.9,
+    "total_invested": 2225.87,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1809.57,
-        "price": 364.81,
-        "pl_pct": -12.71,
-        "pl_eur": -263.52,
+        "value": 1807.89,
+        "price": 364.47,
+        "pl_pct": 1.38,
+        "pl_eur": 24.62,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 83.5
+        "weight": 85.4
       },
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 285.08,
-        "price": 142.54,
+        "value": 245.23,
+        "price": 122.61,
         "pl_pct": -13.91,
-        "pl_eur": -46.06,
-        "div_yield": 4.15,
-        "annual_div_eur": 1183.08,
+        "pl_eur": -39.62,
+        "div_yield": null,
+        "annual_div_eur": null,
         "first_buy_date": null,
-        "sector": "Consumer Defensive",
-        "weight": 13.1
+        "sector": null,
+        "weight": 11.6
       },
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 69.02,
-        "price": 69.02,
+        "value": 59.37,
+        "price": 59.37,
         "pl_pct": -61.56,
-        "pl_eur": -110.55,
+        "pl_eur": -95.1,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
-        "sector": "Technology",
-        "weight": 3.2
+        "sector": null,
+        "weight": 2.8
       },
       {
         "name": "KPN.AS",
         "ticker": "KPN.AS",
         "value": 4.4,
         "price": 4.4,
-        "pl_pct": 34.12,
+        "pl_pct": 34.09,
         "pl_eur": 1.12,
-        "div_yield": 4.96,
-        "annual_div_eur": 21.82,
+        "div_yield": null,
+        "annual_div_eur": null,
         "first_buy_date": null,
-        "sector": "Communication Services",
+        "sector": null,
         "weight": 0.2
       }
     ]
