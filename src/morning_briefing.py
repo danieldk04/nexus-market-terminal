@@ -1219,6 +1219,57 @@ _USD_ISINS = {
 }
 
 
+def _parse_degiro_transactions_csv() -> tuple[list[dict], str | None, dict]:
+    """
+    Stub: DEGIRO CSV-transacties voor investment timeline.
+    Geeft lege data terug als DEGIRO_TRANSACTIONS_CSV niet beschikbaar is.
+    (Volledige implementatie vereist DEGIRO_TRANSACTIONS_CSV secret.)
+    """
+    import csv as _csv, io as _io
+    raw = os.environ.get("DEGIRO_TRANSACTIONS_CSV", "").strip()
+    if not raw:
+        log.info("_parse_degiro_transactions_csv: DEGIRO_TRANSACTIONS_CSV niet ingesteld.")
+        return [], None, {}
+
+    monthly_net: dict[str, float] = {}
+    first_date: str | None = None
+    first_buy_by_isin: dict[str, str] = {}
+
+    try:
+        reader = _csv.DictReader(_io.StringIO(raw))
+        for row in reader:
+            date_str = (row.get("Date") or row.get("date") or "")[:10]
+            if not date_str:
+                continue
+            isin   = (row.get("ISIN") or "").strip()
+            action = (row.get("Type") or row.get("buysell") or "").upper()
+            amount = row.get("Total") or row.get("totalInBaseCurrency") or "0"
+            try:
+                eur = abs(float(str(amount).replace(",", ".")))
+            except ValueError:
+                continue
+            if "B" in action:
+                month = date_str[:7]
+                monthly_net[month] = monthly_net.get(month, 0) + eur
+                if first_date is None or date_str < first_date:
+                    first_date = date_str
+                if isin and isin not in first_buy_by_isin:
+                    first_buy_by_isin[isin] = date_str
+    except Exception as e:
+        log.warning(f"_parse_degiro_transactions_csv: {e}")
+        return [], None, {}
+
+    if not monthly_net:
+        return [], None, {}
+
+    cumulative, total = [], 0.0
+    for month in sorted(monthly_net):
+        total += monthly_net[month]
+        cumulative.append({"date": month, "invested": round(total, 2)})
+
+    return cumulative, first_date, first_buy_by_isin
+
+
 def _build_portfolio_value_history() -> list[dict]:
     """
     Reconstrueer maandelijkse DEGIRO-portfoliowaarde vanuit transactie-CSV + yfinance.
