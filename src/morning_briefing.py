@@ -844,11 +844,10 @@ def build_telegram_message(market, news, nexus, degiro, tr,
 
     # ── SAMENSTELLEN ─────────────────────────────────────────────────────────
     sections = [header, markten]
-    if eigen:         sections.append(eigen)
-    if bux_block:     sections.append(bux_block)
-    if nexus_block:   sections.append(nexus_block)
-    if alerts_block:  sections.append(alerts_block)
-    if nieuws:        sections.append(nieuws)
+    if eigen:        sections.append(eigen)
+    if nexus_block:  sections.append(nexus_block)
+    if alerts_block: sections.append(alerts_block)
+    if nieuws:       sections.append(nieuws)
     sections.append(ai_block)
     sections.append(f"🌐 [Open Dashboard]({DASHBOARD_URL})")
 
