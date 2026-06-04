@@ -286,6 +286,25 @@
         .port-pl     { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; text-align: right; }
         .port-val    { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); text-align: right; }
 
+        /* ─── CAGR BENCHMARK ─── */
+        .cagr-section     { padding: 10px 12px 12px; border-bottom: 1px solid var(--border); }
+        .cagr-title       { font-family: var(--mono); font-size: 0.62rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .cagr-grid        { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+        .cagr-stat        { background: var(--panel); border: 1px solid var(--border); border-radius: 5px; padding: 6px 8px; }
+        .cagr-stat-label  { font-size: 0.52rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+        .cagr-stat-val    { font-family: var(--mono); font-size: 0.82rem; font-weight: 700; color: var(--text); margin-top: 1px; }
+        .cagr-stat-val.green { color: var(--green); }
+        .cagr-calc        { background: rgba(34,211,238,0.04); border: 1px solid rgba(34,211,238,0.15); border-radius: 6px; padding: 8px 10px; }
+        .cagr-calc-title  { font-size: 0.58rem; color: var(--accent); font-weight: 600; margin-bottom: 8px; letter-spacing: 0.05em; }
+        .cagr-input-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+        .cagr-input-wrap  { display: flex; flex-direction: column; gap: 2px; }
+        .cagr-input-label { font-size: 0.52rem; color: var(--muted); }
+        .cagr-input       { background: var(--surface); border: 1px solid var(--border2); border-radius: 4px; padding: 4px 7px; color: var(--text); font-family: var(--mono); font-size: 0.7rem; width: 100%; outline: none; }
+        .cagr-input:focus { border-color: var(--accent); }
+        .cagr-result      { background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 5px; padding: 7px 10px; margin-top: 6px; display: flex; justify-content: space-between; align-items: center; }
+        .cagr-result-label { font-size: 0.6rem; color: var(--muted); }
+        .cagr-result-val  { font-family: var(--mono); font-size: 0.9rem; font-weight: 700; color: var(--green); }
+
         /* ─── POST-MORTEM ─── */
         .pm-stat { display: flex; justify-content: space-between; padding: 7px 12px; border-bottom: 1px solid var(--border); font-size: 0.7rem; }
         .pm-label { color: var(--muted); }
