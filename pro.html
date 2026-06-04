@@ -901,7 +901,121 @@ function renderPortfolioRight() {
         </div>`;
     }
 
-    container.innerHTML = html;
+    // ── CAGR BENCHMARK + COMPOUND CALCULATOR ────────────────────────────────
+    const history = memoryData?.portfolio_history || [];
+    // Portfolio-only totals (excl. bot papier-trading)
+    const invTotal = totalInv;   // degiro + tr + bux cost basis
+    const curTotal = totalPos;   // degiro + tr + bux current value
+
+    // Oudste snapshot met echte portefeuille-data
+    let firstDate = null;
+    for (let i = history.length - 1; i >= 0; i--) {
+        const h = history[i];
+        if ((h.degiro || 0) + (h.tr || 0) + (h.bux || 0) > 0) {
+            firstDate = new Date(h.date);
+            break;
+        }
+    }
+
+    let cagrHtml = '';
+    if (invTotal > 0 && curTotal > 0 && firstDate) {
+        const now        = new Date();
+        const years      = (now - firstDate) / (365.25 * 24 * 3600 * 1000);
+        const totalRetPct = ((curTotal / invTotal) - 1) * 100;
+        // Geld-gewogen rendement als benadering CAGR
+        const cagr       = years > 0.08 ? (Math.pow(curTotal / invTotal, 1 / years) - 1) * 100 : totalRetPct;
+        const cagrRound  = Math.round(cagr * 10) / 10;
+        const yearsStr   = years >= 1 ? years.toFixed(1) + ' jaar' : Math.round(years * 12) + ' mnd';
+
+        const startMnd = firstDate.toLocaleDateString('nl-NL', {month:'short', year:'numeric'});
+        const retC     = totalRetPct >= 0 ? 'green' : 'style="color:var(--red)"';
+
+        cagrHtml = `
+        <div class="cagr-section">
+            <div class="cagr-title">📈 Rendement Benchmark</div>
+            <div class="cagr-grid">
+                <div class="cagr-stat">
+                    <div class="cagr-stat-label">Periode</div>
+                    <div class="cagr-stat-val">${yearsStr}</div>
+                    <div style="font-size:0.5rem;color:var(--muted);margin-top:1px">${startMnd} → nu</div>
+                </div>
+                <div class="cagr-stat">
+                    <div class="cagr-stat-label">Jaarl. rendement (CAGR)</div>
+                    <div class="cagr-stat-val green">${cagrRound >= 0 ? '+' : ''}${cagrRound.toFixed(1)}% / jr</div>
+                </div>
+                <div class="cagr-stat">
+                    <div class="cagr-stat-label">Totaal ingelegd</div>
+                    <div class="cagr-stat-val">€${invTotal.toLocaleString('nl-NL',{maximumFractionDigits:0})}</div>
+                </div>
+                <div class="cagr-stat">
+                    <div class="cagr-stat-label">Totaal rendement</div>
+                    <div class="cagr-stat-val ${totalRetPct >= 0 ? 'green' : ''}">${totalRetPct >= 0 ? '+' : ''}${totalRetPct.toFixed(1)}%</div>
+                </div>
+            </div>
+            <div class="cagr-calc">
+                <div class="cagr-calc-title">⚡ Compound Interest Calculator</div>
+                <div class="cagr-input-row">
+                    <div class="cagr-input-wrap">
+                        <span class="cagr-input-label">Startbedrag (€)</span>
+                        <input class="cagr-input" id="ci-start" type="number" value="${Math.round(invTotal)}" min="0">
+                    </div>
+                    <div class="cagr-input-wrap">
+                        <span class="cagr-input-label">Mnd. inleg (€)</span>
+                        <input class="cagr-input" id="ci-monthly" type="number" value="300" min="0">
+                    </div>
+                </div>
+                <div class="cagr-input-row">
+                    <div class="cagr-input-wrap">
+                        <span class="cagr-input-label">Jaren</span>
+                        <input class="cagr-input" id="ci-years" type="number" value="10" min="1" max="50">
+                    </div>
+                    <div class="cagr-input-wrap">
+                        <span class="cagr-input-label">CAGR (%) — jouw benchmark</span>
+                        <input class="cagr-input" id="ci-rate" type="number" value="${cagrRound.toFixed(1)}" step="0.1">
+                    </div>
+                </div>
+                <div class="cagr-result" id="ci-result">
+                    <div>
+                        <div class="cagr-result-label">Verwachte waarde</div>
+                        <div style="font-size:0.52rem;color:var(--muted)" id="ci-breakdown">—</div>
+                    </div>
+                    <div class="cagr-result-val" id="ci-output">€—</div>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    container.innerHTML = html + cagrHtml;
+
+    // Calculator live updaten
+    const ciIds = ['ci-start','ci-monthly','ci-years','ci-rate'];
+    function calcCI() {
+        const P   = parseFloat(document.getElementById('ci-start')?.value)   || 0;
+        const mnd = parseFloat(document.getElementById('ci-monthly')?.value) || 0;
+        const n   = parseFloat(document.getElementById('ci-years')?.value)   || 10;
+        const r   = parseFloat(document.getElementById('ci-rate')?.value)    || 0;
+        if (r === 0) {
+            const total = P + mnd * 12 * n;
+            document.getElementById('ci-output').textContent = '€' + Math.round(total).toLocaleString('nl-NL');
+            document.getElementById('ci-breakdown').textContent = 'geen rente';
+            return;
+        }
+        const rm    = r / 100 / 12;           // maandelijkse rente
+        const months = n * 12;
+        // FV = P*(1+r)^n + PMT * [((1+r)^n - 1) / r]
+        const fvStart = P * Math.pow(1 + rm, months);
+        const fvDCA   = mnd * (Math.pow(1 + rm, months) - 1) / rm;
+        const total   = fvStart + fvDCA;
+        const invested = P + mnd * months;
+        const profit   = total - invested;
+        document.getElementById('ci-output').textContent    = '€' + Math.round(total).toLocaleString('nl-NL');
+        document.getElementById('ci-breakdown').textContent = `inleg €${Math.round(invested).toLocaleString('nl-NL')} · rente €${Math.round(profit).toLocaleString('nl-NL')}`;
+    }
+    ciIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calcCI);
+    });
+    calcCI();  // direct berekenen bij laden
 }
 
 // ─── DATA LOAD ────────────────────────────────────────────────────────────────
