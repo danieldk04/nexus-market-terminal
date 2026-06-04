@@ -124,13 +124,16 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
         }
     if tr:
         mem["tr_summary"] = {
-            "total":         tr.get("total"),
-            "total_pl_pct":  tr.get("total_pl_pct"),
+            "total":          tr.get("total"),
+            "total_pl_pct":   tr.get("total_pl_pct"),
+            "total_invested": tr.get("total_invested"),
             "positions": [
                 {
                     "name":   p.get("name", "?"),
                     "value":  p.get("value", 0),
+                    "price":  p.get("price"),
                     "pl_pct": p.get("pl_pct"),
+                    "pl_eur": p.get("pl_eur"),
                     "weight": round(p["value"] / tr["total"] * 100, 1) if tr.get("total") else None,
                 }
                 for p in tr.get("positions", []) if p.get("value", 0) > 0
@@ -141,7 +144,8 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
     log.info("Dashboard data opgeslagen in memory.json")
 
 
-def save_snapshot(degiro_total: float | None, tr_total: float | None, nexus_total: float | None):
+def save_snapshot(degiro_total: float | None, tr_total: float | None,
+                  nexus_total: float | None, bux_total: float | None = None):
     """Sla dagelijkse portfoliowaarden op in memory.json."""
     mem      = _load_json(MEMORY_PATH, {})
     history  = mem.get(HISTORY_KEY, [])
@@ -154,6 +158,7 @@ def save_snapshot(degiro_total: float | None, tr_total: float | None, nexus_tota
         "degiro": degiro_total,
         "tr":     tr_total,
         "nexus":  nexus_total,
+        "bux":    bux_total,
     })
     # Bewaar max MAX_HISTORY dagen, nieuwste eerst
     history  = sorted(history, key=lambda h: h["date"], reverse=True)[:MAX_HISTORY]
@@ -657,7 +662,8 @@ def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> st
 
 
 def build_telegram_message(market, news, nexus, degiro, tr,
-                            degiro_perf, tr_perf, ai_text) -> str:
+                            degiro_perf, tr_perf, ai_text,
+                            bux=None, bux_perf=None) -> str:
     now    = datetime.now(timezone.utc)
     dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
     mnd_nl = ["jan","feb","mrt","apr","mei","jun",
@@ -683,12 +689,14 @@ def build_telegram_message(market, news, nexus, degiro, tr,
         )
     markten = "📊 *MARKTEN*\n" + "\n".join(mkt_lines)
 
-    # ── 3. EIGEN PORTFOLIO (DEGIRO + TR) ─────────────────────────────────────
+    # ── 3. EIGEN PORTFOLIO (DEGIRO + TR + BUX) ───────────────────────────────
     eigen_parts = []
     db = _portfolio_block("🏦", "DEGIRO", degiro, degiro_perf)
     tb = _portfolio_block("📱", "Trade Republic", tr, tr_perf)
+    bb = _portfolio_block("🟠", "BUX", bux, bux_perf or {})
     if db: eigen_parts.append(db)
     if tb: eigen_parts.append(tb)
+    if bb: eigen_parts.append(bb)
 
     eigen = ""
     if eigen_parts:
@@ -775,46 +783,118 @@ def _parse_holdings_secret(env_key: str, label: str) -> list[dict]:
     return holdings
 
 
+# Fallback-tickers voor Europese noteringen die moeite hebben met yfinance.
+# Als de primaire ticker (bijv. TSLA.DE) geen prijs geeft, wordt de US-ticker
+# geprobeerd en omgerekend naar EUR via de EUR/USD-koers.
+TICKER_FALLBACKS: dict[str, str] = {
+    "TSLA.DE":  "TSLA",
+    "AAPL.DE":  "AAPL",
+    "MSFT.DE":  "MSFT",
+    "AMZN.DE":  "AMZN",
+    "NVDA.DE":  "NVDA",
+    "GOOGL.DE": "GOOGL",
+    "META.DE":  "META",
+    "AMZN.AS":  "AMZN",
+    "AAPL.AS":  "AAPL",
+    "MSFT.AS":  "MSFT",
+}
+
+
 def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
-    """Haal yfinance-prijzen op voor een lijst holdings en bereken totaalwaarde + P&L."""
+    """Haal yfinance-prijzen op voor een lijst holdings en bereken totaalwaarde + P&L.
+
+    Alle waarden worden in EUR uitgedrukt:
+    - EUR-tickers (.AS .DE .MI .PA .L .BR -EUR): prijs direct in EUR
+    - USD-tickers (NYSE/NASDAQ): prijs gedeeld door EUR/USD-koers
+    avg_price in holdings kan in de native valuta zijn (handmatig) of EUR (BUX CSV).
+    Gebruik avg_in_eur=True in holdings-dict om aan te geven dat avg_price al in EUR is.
+    """
     if not holdings:
         return None
+
+    # ── EUR/USD ophalen voor valuta-conversie ────────────────────────────────
+    eur_usd = 1.10  # fallback
+    try:
+        fx = yf.Ticker("EURUSD=X").fast_info
+        rate = getattr(fx, "last_price", None) or getattr(fx, "previous_close", None)
+        if rate and float(rate) > 0.5:
+            eur_usd = float(rate)
+        log.info(f"EUR/USD: {eur_usd:.4f}")
+    except Exception:
+        log.warning(f"{label}: EUR/USD ophalen mislukt, gebruik fallback {eur_usd}")
+
+    def _is_eur_ticker(t: str) -> bool:
+        u = t.upper()
+        return any(u.endswith(s) for s in ('.AS', '.DE', '.MI', '.PA', '.L', '.BR', '-EUR'))
+
     positions = []
     total     = 0.0
     for h in holdings:
         ticker = h["ticker"]
         shares = h["shares"]
-        try:
-            info  = yf.Ticker(ticker).fast_info
-            price = getattr(info, "last_price", None)
-            if not price or float(price) <= 0:
-                log.warning(f"{label}: geen prijs voor {ticker}")
-                continue
-            price = float(price)
-        except Exception as e:
-            log.warning(f"{label} {ticker}: {e}")
+
+        def _fetch_price(sym: str) -> float | None:
+            try:
+                info = yf.Ticker(sym).fast_info
+                p = getattr(info, "last_price", None)
+                if not p or float(p) <= 0:
+                    p = getattr(info, "previous_close", None)
+                return float(p) if p and float(p) > 0 else None
+            except Exception as e:
+                log.warning(f"{label} {sym}: {e}")
+                return None
+
+        price = _fetch_price(ticker)
+        is_eur = _is_eur_ticker(ticker)
+
+        if price is None:
+            # Probeer fallback-ticker (bijv. TSLA.DE → TSLA)
+            fallback = TICKER_FALLBACKS.get(ticker)
+            if fallback:
+                log.info(f"{label}: {ticker} geeft geen prijs, probeer fallback {fallback}")
+                price = _fetch_price(fallback)
+                if price is not None:
+                    # Fallback is altijd een USD-ticker → forceer EUR-conversie
+                    is_eur = False
+                    log.info(f"{label}: {ticker} via {fallback} → ${price:.2f} → €{price/eur_usd:.2f}")
+
+        if price is None:
+            log.warning(f"{label}: geen prijs voor {ticker} (ook fallback mislukt)")
             continue
-        value     = shares * price
-        total    += value
+
+        # Converteer USD-prijs naar EUR voor waarde-berekening
+        price_eur = price if is_eur else round(price / eur_usd, 4)
+
+        value  = round(shares * price_eur, 2)
+        total += value
+
         avg_price = h.get("avg_price")
         if avg_price and avg_price > 0:
-            cost_eur = shares * avg_price
-            pl_pct   = round((price / avg_price - 1) * 100, 2)
+            # avg_in_eur=True: avg_price is al in EUR (BUX CSV-pad)
+            # anders: avg_price is in native valuta (handmatig ingevoerd)
+            if h.get("avg_in_eur", False) or is_eur:
+                avg_price_eur = avg_price
+            else:
+                avg_price_eur = round(avg_price / eur_usd, 4)
+            cost_eur = round(shares * avg_price_eur, 2)
+            pl_pct   = round((price_eur / avg_price_eur - 1) * 100, 2)
             pl_eur   = round(value - cost_eur, 2)
         else:
             cost_eur = pl_pct = pl_eur = None
+
         positions.append({
             "name":      ticker,
             "pid":       ticker,
             "size":      round(shares, 4),
-            "price":     round(price, 2),
-            "value":     round(value, 2),
-            "avg_price": avg_price,
-            "cost_eur":  round(cost_eur, 2) if cost_eur else None,
+            "price":     round(price_eur, 2),
+            "value":     value,
+            "avg_price": round(avg_price, 4) if avg_price else None,
+            "cost_eur":  cost_eur,
             "pl_pct":    pl_pct,
             "pl_eur":    pl_eur,
         })
         time.sleep(0.15)
+
     if not positions:
         log.warning(f"{label}: geen posities met prijs.")
         return None
@@ -930,7 +1010,12 @@ def _parse_bux_transactions_csv() -> dict | None:
             continue
 
         avg_eur = round(h["cost_eur"] / h["shares"], 4)
-        holdings.append({"ticker": ticker, "shares": round(h["shares"], 6), "avg_price": avg_eur})
+        holdings.append({
+            "ticker":      ticker,
+            "shares":      round(h["shares"], 6),
+            "avg_price":   avg_eur,
+            "avg_in_eur":  True,   # BUX CSV: cost_eur / shares is altijd in EUR
+        })
         log.info(f"BUX CSV: {ticker} ({isin}) — {h['shares']:.4f} aandelen, avg €{avg_eur:.2f}")
 
     if not holdings:
@@ -992,12 +1077,14 @@ def run_morning_briefing():
     history     = load_history()
     degiro_perf = compute_perf(history, degiro.get("total") if degiro else None, "degiro")
     tr_perf     = compute_perf(history, tr.get("total") if tr else None, "tr")
+    bux_perf    = compute_perf(history, bux.get("total") if bux else None, "bux")
 
     # Snapshot + dashboard data opslaan
     save_snapshot(
         degiro_total=degiro.get("total") if degiro else None,
         tr_total=tr.get("total") if tr else None,
         nexus_total=nexus.get("cash"),
+        bux_total=bux.get("total") if bux else None,
     )
 
     log.info("AI nieuws-samenvatting genereren...")
@@ -1008,7 +1095,9 @@ def run_morning_briefing():
     log.info("AI-briefing genereren...")
     ai_text = generate_ai_briefing(client, market, news, nexus) if client else "API key niet beschikbaar."
 
-    msg = build_telegram_message(market, news, nexus, degiro, tr, degiro_perf, tr_perf, ai_text)
+    msg = build_telegram_message(market, news, nexus, degiro, tr,
+                                 degiro_perf, tr_perf, ai_text,
+                                 bux=bux, bux_perf=bux_perf)
 
     log.info("Telegram verzenden...")
     ok = send(msg)
