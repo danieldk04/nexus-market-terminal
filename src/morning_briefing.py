@@ -760,7 +760,8 @@ def _portfolio_block(icon: str, label: str, data: dict | None, perf: dict) -> st
 
 def build_telegram_message(market, news, nexus, degiro, tr,
                             degiro_perf, tr_perf, ai_text,
-                            bux=None, bux_perf=None) -> str:
+                            bux=None, bux_perf=None,
+                            news_summary=None, alerts=None) -> str:
     now    = datetime.now(timezone.utc)
     dag_nl = ["ma","di","wo","do","vr","za","zo"][now.weekday()]
     mnd_nl = ["jan","feb","mrt","apr","mei","jun",
