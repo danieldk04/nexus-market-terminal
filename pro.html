@@ -428,8 +428,8 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
-    <!-- Dividend + Rebalancing -->
-    <div class="col2">
+    <!-- Dividend + Rebalancing + Rente -->
+    <div class="col3">
         <div class="panel">
             <div class="ph"><span class="pt">Dividend Inkomen</span><span class="ptag">geschat per jaar</span></div>
             <div style="padding:12px 16px" id="div-panel"></div>
@@ -437,6 +437,10 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         <div class="panel">
             <div class="ph"><span class="pt">Rebalancing</span><span class="ptag">target vs actueel</span></div>
             <div style="padding:12px 16px" id="rebal-panel"></div>
+        </div>
+        <div class="panel">
+            <div class="ph"><span class="pt">Rente Ontvangen</span><span class="ptag" id="interest-tag">cumulatief totaal</span></div>
+            <div style="padding:12px 16px" id="interest-panel"></div>
         </div>
     </div>
 
@@ -918,6 +922,30 @@ function renderDividendPanel(elId){
         </div>`;
 }
 
+function renderInterestPanel(){
+    const el=document.getElementById('interest-panel');
+    if(!el) return;
+    const trInt=(M?.tr_summary?.interest_total)||0;
+    const buxInt=(M?.bux_summary?.interest_total)||0;
+    const total=trInt+buxInt;
+    if(total<=0){
+        el.innerHTML='<div class="empty" style="padding:8px 0;font-size:.75rem">Rente data beschikbaar na volgende briefing run</div>';
+        return;
+    }
+    const rows=[];
+    if(trInt>0) rows.push({broker:'Trade Republic',icon:'📱',amount:trInt});
+    if(buxInt>0) rows.push({broker:'BUX',icon:'🟠',amount:buxInt});
+    document.getElementById('interest-tag').textContent=eur(total);
+    el.innerHTML=`
+        ${rows.map(r=>`<div class="div-row">
+            <div><span class="div-ticker">${r.icon} ${r.broker}</span></div>
+            <span class="div-annual">${eur(r.amount)}</span>
+        </div>`).join('')}
+        <div style="padding:8px 0 2px;display:flex;justify-content:space-between;font-size:.75rem;font-weight:700;border-top:1px solid var(--border);margin-top:4px">
+            <span>Totaal rente</span><span class="pc">${eur(total)}</span>
+        </div>`;
+}
+
 /* ── Range filter helper ── */
 function filterRange(data,range,monthly=false){
     if(range==='max') return data;
@@ -1025,6 +1053,7 @@ function renderPortfolioTab(){
     renderPosTable();
     renderDividendPanel('div-panel');
     renderRebalancingPanel();
+    renderInterestPanel();
     renderInvestmentTimeline();
 }
 

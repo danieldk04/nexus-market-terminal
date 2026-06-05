@@ -98,6 +98,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
             "total":          bux.get("total"),
             "total_pl_pct":   bux.get("total_pl_pct"),
             "total_invested": bux.get("total_invested"),
+            "interest_total": bux.get("interest_total", 0),
             "positions": [
                 {
                     "name":          p.get("name", "?"),
@@ -137,8 +138,10 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
         }
     if tr:
         mem["tr_summary"] = {
-            "total":         tr.get("total"),
-            "total_pl_pct":  tr.get("total_pl_pct"),
+            "total":          tr.get("total"),
+            "total_pl_pct":   tr.get("total_pl_pct"),
+            "total_invested": tr.get("total_invested"),
+            "interest_total": tr.get("interest_total", 0),
             "positions": [
                 {
                     "name":          p.get("name", "?"),
@@ -1213,6 +1216,7 @@ def _parse_bux_transactions_csv() -> dict | None:
         return None
 
     acc: dict[str, dict] = {}   # ISIN → {name, shares, cost_eur}
+    interest_total = 0.0
 
     try:
         reader = _csv.DictReader(_io.StringIO(raw))
@@ -1225,6 +1229,18 @@ def _parse_bux_transactions_csv() -> dict | None:
             currency  = (row.get("Transaction Currency") or "").strip()
             qty_str   = (row.get("Asset Quantity")       or "").strip()
             amt_str   = (row.get("Transaction Amount")   or "").strip()
+
+            # Rente-ontvangsten hebben geen ISIN/asset
+            if not isin and xfer_type == "CASH_CREDIT" and currency == "EUR":
+                tx_lower = tx_type.lower()
+                if "interest" in tx_lower or "rente" in tx_lower or "saving" in tx_lower:
+                    try:
+                        amt = abs(float(amt_str))
+                        if amt > 0:
+                            interest_total += amt
+                    except ValueError:
+                        pass
+                    continue
 
             if not isin or not qty_str or currency != "EUR":
                 continue
@@ -1253,6 +1269,8 @@ def _parse_bux_transactions_csv() -> dict | None:
                     h["shares"]    = max(0.0, h["shares"] - qty)
                     rows_ok += 1
 
+        if interest_total > 0:
+            log.info(f"BUX CSV: rente ontvangen = €{interest_total:.2f}")
         log.info(f"BUX CSV: {rows_ok} regels verwerkt, {len(acc)} ISINs gevonden")
 
     except Exception as e:
@@ -1281,7 +1299,10 @@ def _parse_bux_transactions_csv() -> dict | None:
         log.warning("BUX CSV: geen open posities gevonden na verwerking.")
         return None
 
-    return _holdings_to_portfolio(holdings, "BUX CSV")
+    result = _holdings_to_portfolio(holdings, "BUX CSV")
+    if result and interest_total > 0:
+        result["interest_total"] = interest_total
+    return result
 
 
 def fetch_bux_manual() -> dict | None:
