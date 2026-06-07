@@ -1286,6 +1286,122 @@ function chip(label, value, colorHex, colorClass) {
     </div>`;
 }
 
+function renderEngineSection(data) {
+    const sg = data.s_growth, sm = data.s_momentum;
+    if (sg == null && sm == null) return '';
+
+    const fbar = (val, color) => {
+        const pct = Math.min(100, (val || 0) * 100);
+        return `<div class="factor-bar-bg"><div class="factor-bar-fill" style="width:${pct}%;background:${color}"></div></div>`;
+    };
+    const fc = v => (v >= 0.7 ? '#4ade80' : v >= 0.4 ? '#fbbf24' : '#f87171');
+
+    const convBox = data.convergence_trigger ? `
+        <div class="conv-trigger-box">
+            <span style="font-size:1.1rem">⚡</span>
+            <div>
+                <div style="font-size:.7rem;font-weight:800;color:#92400e">CONVERGENCE ZONE ACTIEF</div>
+                <div style="font-size:.6rem;color:#a16207;margin-top:1px">Fundamenteel én technisch aligned — hoogste overtuiging setup</div>
+            </div>
+        </div>` : '';
+
+    const growthSection = sg != null ? `
+        <div class="eng-section">
+            <div class="eng-title">
+                <span>📈 Long-Term Growth Engine</span>
+                <span style="font-family:var(--mono);font-size:.66rem;color:${scoreColor(sg)};font-weight:800">${sg.toFixed(2)}/10</span>
+            </div>
+            ${convBox}
+            <div class="factor-row">
+                <span class="factor-lbl">A: Acceleratie</span>
+                ${fbar(data.A_factor, data.A_factor >= 1 ? '#4ade80' : '#f87171')}
+                <span class="factor-val" style="color:${data.A_factor >= 1 ? '#4ade80' : '#f87171'}">${data.A_factor >= 1 ? '✓ Bevestigd' : '✗ Niet'}</span>
+            </div>
+            <div class="factor-row">
+                <span class="factor-lbl">E: Efficiëntie</span>
+                ${fbar(data.E_factor, fc(data.E_factor||0))}
+                <span class="factor-val" style="color:${fc(data.E_factor||0)}">${Math.round((data.E_factor||0)*100)}%</span>
+            </div>
+            <div class="factor-row">
+                <span class="factor-lbl">L: Op.leverage</span>
+                ${fbar(data.L_factor, fc(data.L_factor||0))}
+                <span class="factor-val" style="color:${fc(data.L_factor||0)}">${Math.round((data.L_factor||0)*100)}%</span>
+            </div>
+            <div class="factor-row">
+                <span class="factor-lbl">U: Waardering</span>
+                ${fbar(data.U_factor, fc(data.U_factor||0))}
+                <span class="factor-val" style="color:${fc(data.U_factor||0)}">${Math.round((data.U_factor||0)*100)}%</span>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:7px;flex-wrap:wrap">
+                ${data.dol != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">DOL <b>${data.dol}×</b></span>` : ''}
+                ${data.peg_ratio != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">PEG <b style="color:${data.peg_ratio < 1.5 ? '#4ade80' : '#f87171'}">${data.peg_ratio}</b></span>` : ''}
+                ${data.pe_z_score != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">PE Z-score <b style="color:${data.pe_z_score <= 1 ? '#4ade80' : data.pe_z_score <= 2 ? '#fbbf24' : '#f87171'}">${data.pe_z_score}</b></span>` : ''}
+                ${data.fcf_margin_pct != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">FCF margin <b>${data.fcf_margin_pct}%</b></span>` : ''}
+            </div>
+            ${data.rev_q1_yoy != null ? `
+            <div style="margin-top:9px">
+                <div style="font-size:.53rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Kwartaalversnelling (Q1=meest recent)</div>
+                <div class="q-accel-row">
+                    ${['rev_q1_yoy','rev_q2_yoy','rev_q3_yoy'].map((k,i) => {
+                        const v = data[k];
+                        const col = v != null ? (v >= 25 ? '#4ade80' : v >= 10 ? '#fbbf24' : '#f87171') : '#9ca3af';
+                        return `<div class="q-cell"><div class="q-cell-lbl">Omzet Q${i+1}</div><div class="q-cell-val" style="color:${col}">${v != null ? (v > 0 ? '+' : '') + v + '%' : '–'}</div></div>`;
+                    }).join('')}
+                </div>
+                <div class="q-accel-row" style="margin-top:4px">
+                    ${['eps_q1_yoy','eps_q2_yoy','eps_q3_yoy'].map((k,i) => {
+                        const v = data[k];
+                        const col = v != null ? (v >= 30 ? '#4ade80' : v >= 15 ? '#fbbf24' : '#f87171') : '#9ca3af';
+                        return `<div class="q-cell"><div class="q-cell-lbl">EPS Q${i+1}</div><div class="q-cell-val" style="color:${col}">${v != null ? (v > 0 ? '+' : '') + v + '%' : '–'}</div></div>`;
+                    }).join('')}
+                </div>
+                <div style="font-size:.54rem;color:var(--muted);margin-top:5px;line-height:1.6">
+                    ${data.rev_accel ? '✅ Omzetversnelling ≥25% bevestigd' : '❌ Geen omzetversnelling'}
+                    &nbsp;·&nbsp;
+                    ${data.eps_accel ? '✅ EPS-versnelling ≥30% bevestigd' : '❌ Geen EPS-versnelling'}
+                </div>
+            </div>` : ''}
+        </div>` : '';
+
+    const momSection = sm != null ? `
+        <div class="eng-section">
+            <div class="eng-title">
+                <span>⚡ Short-Term Momentum Engine</span>
+                <span style="font-family:var(--mono);font-size:.66rem;color:${scoreColor(sm)};font-weight:800">${sm.toFixed(2)}/10</span>
+            </div>
+            <div class="factor-row">
+                <span class="factor-lbl">M: MA alignment</span>
+                ${fbar(data.m_factor, data.m_factor >= 1 ? '#4ade80' : '#9ca3af')}
+                <span class="factor-val" style="color:${data.m_factor >= 1 ? '#4ade80' : '#9ca3af'}">${data.stage2 ? '✓ Stage 2' : '✗ Niet'}</span>
+            </div>
+            <div class="factor-row">
+                <span class="factor-lbl">C: VCP squeeze</span>
+                ${fbar(data.c_factor, fc(data.c_factor||0))}
+                <span class="factor-val" style="color:${fc(data.c_factor||0)}">${data.vcp_active ? '⋯ VCP' : '✗'}</span>
+            </div>
+            <div class="factor-row">
+                <span class="factor-lbl">V: Volume buzz</span>
+                ${fbar(data.v_factor, fc(data.v_factor||0))}
+                <span class="factor-val" style="color:${fc(data.v_factor||0)}">${data.vol_buzz_pct != null ? (data.vol_buzz_pct > 0 ? '+' : '') + Math.round(data.vol_buzz_pct) + '%' : '–'}</span>
+            </div>
+            <div class="factor-row">
+                <span class="factor-lbl">O: RSI + MACD</span>
+                ${fbar(data.o_factor, data.o_factor >= 1 ? '#4ade80' : '#9ca3af')}
+                <span class="factor-val" style="color:${data.o_factor >= 1 ? '#4ade80' : '#9ca3af'}">${data.rsi14 != null ? 'RSI ' + data.rsi14 : '–'}</span>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:7px;flex-wrap:wrap">
+                ${data.rvol != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">RVol <b style="color:${data.rvol >= 2 ? '#4ade80' : '#fbbf24'}">${data.rvol}×</b></span>` : ''}
+                ${data.macd_bullish != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">MACD <b style="color:${data.macd_bullish ? '#4ade80' : '#f87171'}">${data.macd_bullish ? 'Bullish ↑' : 'Bearish ↓'}</b></span>` : ''}
+                ${data.atr14 != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">ATR(14) <b>$${data.atr14}</b></span>` : ''}
+                ${data.stop_loss_atr != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">Stop-loss ATR <b style="color:#f87171">$${data.stop_loss_atr}</b></span>` : ''}
+                ${data.sma50 != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">SMA50 <b>$${data.sma50}</b></span>` : ''}
+                ${data.sma200 != null ? `<span style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">SMA200 <b>$${data.sma200}</b></span>` : ''}
+            </div>
+        </div>` : '';
+
+    return growthSection + momSection;
+}
+
 function renderAnalysis(data) {
     const meta = sectorMeta(data.industry_group, data.sector);
     const box  = document.getElementById('analysis-content');
