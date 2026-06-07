@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-06-07T18:47:01.388003+00:00",
+    "generated_at": "2026-06-07T19:08:50.933529+00:00",
     "top_candidates": [
         {
             "ticker": "JNJ",
@@ -67,7 +67,7 @@
             "rsi14": 61.8,
             "macd_bullish": true,
             "stop_loss_atr": 226.45,
-            "score": 5.14,
+            "score": 4.6,
             "penalty_applied": false,
             "atr14": 4.21,
             "atr_ratio_pct": 1.81,
@@ -153,7 +153,7 @@
             "rsi14": 63.0,
             "macd_bullish": true,
             "stop_loss_atr": 208.94,
-            "score": 4.96,
+            "score": 4.5,
             "penalty_applied": false,
             "atr14": 4.27,
             "atr_ratio_pct": 1.98,
@@ -239,7 +239,7 @@
             "rsi14": 64.9,
             "macd_bullish": true,
             "stop_loss_atr": 59.33,
-            "score": 4.65,
+            "score": 4.2,
             "penalty_applied": true,
             "atr14": 1.3,
             "atr_ratio_pct": 2.13,
@@ -325,7 +325,7 @@
             "rsi14": 60.3,
             "macd_bullish": false,
             "stop_loss_atr": 1049.81,
-            "score": 4.48,
+            "score": 4.0,
             "penalty_applied": false,
             "atr14": 20.76,
             "atr_ratio_pct": 1.92,
@@ -411,7 +411,7 @@
             "rsi14": 45.9,
             "macd_bullish": false,
             "stop_loss_atr": 70.0,
-            "score": 4.3,
+            "score": 3.8,
             "penalty_applied": false,
             "atr14": 1.46,
             "atr_ratio_pct": 2.03,
@@ -497,7 +497,7 @@
             "rsi14": 66.1,
             "macd_bullish": true,
             "stop_loss_atr": 115.76,
-            "score": 4.24,
+            "score": 3.7,
             "penalty_applied": false,
             "atr14": 3.35,
             "atr_ratio_pct": 2.78,
@@ -583,7 +583,7 @@
             "rsi14": 50.7,
             "macd_bullish": true,
             "stop_loss_atr": 136.92,
-            "score": 4.02,
+            "score": 3.5,
             "penalty_applied": false,
             "atr14": 4.48,
             "atr_ratio_pct": 3.12,
@@ -597,178 +597,6 @@
                 "analysis": "## MOAT & BUSINESS KWALITEIT\n\nJohnson Controls is een gevestigde speler in gebouwautomatisering, HVAC en brandbeveiliging. De switchingkosten zijn re\u00ebel \u2014 ge\u00efnstalleerde systemen zijn diep verweven in gebouwinfrastructuur en onderhoud genereert terugkerende servicerevenues. De AI/datacenter-tailwind (koeling voor datacenters) is een legitieme groeikatalysator. Echter: ROIC en ROCE zijn niet beschikbaar, wat bij een P/E van 43.8x een ernstige rode vlag is. Met een winstmarge van 14.5% en een 5-jaar omzetgroei van slechts 4.6% CAGR is dit geen echte compounding-machine. Graham zou hier wegrennen.\n\n## DCF & WAARDERING\n\nDe DCF-analyse is vernietigend: intrinsieke waarde $49.3 versus marktprijs $143.65 \u2014 een premie van 191% boven fair value. Zelfs met een agressieve groeifase van 15% verdisconteert de markt een toekomst die JCI historisch gezien nooit heeft bewezen. De margin of safety prijs ligt op $36.97. Een P/E van 43.8x voor een industrieel bedrijf met bescheiden organische groei is puur speculatieve premie. P/FCF van 30.5x is ook niet goedkoop. **Dit is een klassieke value trap-kandidaat.** Het dividendrendement van 111% is duidelijk een datafout, maar de FCF payout van 34% suggereert wel een houdbaar dividend.\n\n## \ud83d\udfe2 BULL CASE\n1. **Datacenter/AI-koeling tailwind:** Explosieve vraag naar thermisch beheer in datacenters is een structurele meevaller voor JCI's HVAC-divisie\n2. **Terugkerende servicerevenues:** Langlopende servicecontracten cre\u00ebren omzetvisibiliteit en beschermen marges in recessies\n3. **Winstgroei boven omzetgroei:** 10.8% winst-CAGR vs. 4.6% omzet-CAGR toont margeverbeterend vermogen\n\n## \ud83d\udd34 BEAR CASE\n1. **Absurde waardering:** P/E 43.8x voor een lage-groei industrieel bedrijf is onverdedigbaar \u2014 65% downside naar intrinsieke waarde\n2. **Ontbrekende ROIC-data:** Geen zichtbare ROIC/ROCE maakt kwalitatieve moat-beoordeling onmogelijk \u2014 dit wekt wantrouwen\n3. **Macro-kwetsbaarheid:** Beta 1.34 + hoge schulden + hoge waardering = triple-risico bij rentestijging of bouwsector-vertraging\n\n## VERDICT\n\n**ACTIE:** MIJDEN\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $95 (-34% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Niet \u2014 wacht op dip richting $70-80 voor herbeoordeling\n\n> *\"De prijs die je betaalt bepaalt je rendement. Bij $143 koop je een industrieel bedrijf aan softwaremultiples.\"*",
                 "sentiment_score": "BEARISH",
                 "last_run": "2026-06-07T18:49:44.422453+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true
-            }
-        },
-        {
-            "ticker": "AOS",
-            "name": "A.O. Smith Corporation",
-            "sector": "Industrials",
-            "industry_group": "Industrials",
-            "price": 57.2,
-            "roe": 28.27,
-            "pe_ratio": 15.25,
-            "debt_to_equity": 0.35,
-            "revenue_growth": -1.9,
-            "gross_margin": 38.8,
-            "profit_margin": 13.8,
-            "fcf_positive": true,
-            "beta": 1.18,
-            "roic": null,
-            "roce": null,
-            "pfcf": 15.9,
-            "rev_cagr_5yr": 0.7,
-            "ni_cagr_5yr": 32.3,
-            "analyst_target": 70.90909,
-            "analyst_upside": 24.0,
-            "analyst_count": 11,
-            "dcf": {
-                "dcf_per_share": 49.49,
-                "dcf_upside": -13.5,
-                "mos_price": 37.11,
-                "wacc": 10.24,
-                "growth_phase1": 0.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 1909.0,
-                "pv_terminal_m": 4288.7
-            },
-            "dividend": {
-                "yield": 248.0,
-                "eps_payout": 37.9,
-                "fcf_payout": 32.1,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "s_growth": 3.9,
-            "A_factor": 0.0,
-            "E_factor": 0.5,
-            "L_factor": 1.0,
-            "U_factor": 1.0,
-            "dol": 2479.0,
-            "pe_z_score": -0.97,
-            "peg_ratio": 1.48,
-            "fcf_margin_pct": 13.0,
-            "rev_accel": false,
-            "eps_accel": false,
-            "rev_q1_yoy": null,
-            "rev_q2_yoy": null,
-            "rev_q3_yoy": null,
-            "eps_q1_yoy": null,
-            "eps_q2_yoy": null,
-            "eps_q3_yoy": null,
-            "s_momentum": 3.46,
-            "convergence_score": 3.68,
-            "convergence_trigger": false,
-            "stage2": false,
-            "vcp_active": true,
-            "rvol": 1.2,
-            "vol_buzz_pct": 20.3,
-            "rsi14": 57.6,
-            "macd_bullish": true,
-            "stop_loss_atr": 55.11,
-            "score": 3.68,
-            "penalty_applied": false,
-            "atr14": 1.39,
-            "atr_ratio_pct": 2.43,
-            "m_factor": 0.0,
-            "c_factor": 0.513,
-            "v_factor": 0.203,
-            "o_factor": 1.0,
-            "sma50": 61.14,
-            "sma200": 67.52,
-            "tier2": {
-                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nA.O. Smith domineert de Noord-Amerikaanse waterverwarmer markt met ~40% marktaandeel, ondersteund door merkvertrouwen, distributienetwerk en installateursloyaliteit. Dit cre\u00ebert bescheiden switching costs via installateurstraining en onderdelenprogramma's. De ROE van 28% oogt indrukwekkend, maar zonder ROIC-data is de echte kapitaalkwaliteit moeilijk te beoordelen. Waarschuwingssignaal: omzetgroei van -1.9% en een 5-jaar CAGR van slechts 0.7% suggereert een volwassen, nagenoeg stagnerend bedrijf. De winstmarge van 13.8% is solide maar niet uitzonderlijk voor een industrieel bedrijf. Echte compounders groeien organisch \u2014 AOS bewijst dit onvoldoende.\n\n## DCF & WAARDERING\n\nOp $57.20 noteert AOS boven de DCF-intrinsieke waarde van $49.49 (-13.5% overgewaardeerd) en ver boven de margin-of-safety prijs van $37.11. De DCF gebruikt 0% groei fase-1, wat realistisch is gezien de stagnerende omzet. P/E van 15.25 en P/FCF van 15.9 klinken redelijk, maar bij nulgroei is dit geen koopje. De dividendyield van 248% in de data is evident een datafout \u2014 vermoedelijk ~2.48%. FCF payout van 32.1% bevestigt dividend is houdbaar. **Value trap risico is re\u00ebel**: markt betaalt groeipremie die historisch niet gerealiseerd wordt.\n\n## \ud83d\udfe2 BULL CASE\n1. **China-turnaround**: AOS China is jarenlang een blok aan het been geweest; enig herstel hier levert disproportioneel winstgroei op\n2. **Prijszettingsmacht**: In een vervangingsgedreven markt (water heaters gaan 10-12 jaar mee) kan AOS prijzen doorberekenen zonder volumeverlies\n3. **Analistenconsensus**: 11 analisten zien $70.90 koersdoel (+24%), duidt op onderschatte operationele leverage bij marginaal herstel\n\n## \ud83d\udd34 BEAR CASE\n1. **Structurele stagnatie**: 0.7% omzetgroei over 5 jaar in een inflatoire omgeving betekent volumeverlies \u2014 dit is geen groeibedrijf\n2. **Overgewaardeerd vs. DCF**: Huidige prijs biedt geen margin of safety; elke groeidisappointment kan fors afstraffen\n3. **China-blootstelling**: Geopolitieke spanningen en dalende Chinese consumentenvraag blijven structurele druk uitoefenen op ~20% van de omzet\n\n## VERDICT\n**ACTIE:** MIJDEN\n**CONVICTION:** 4/10\n**KOERSDOEL 18mnd:** $52 (-9% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot $40-42 (margin of safety zone)\n\n*Geen groei, boven intrinsieke waarde, China-risico \u2014 Buffett koopt geen stilstaande rivieren.*",
-                "sentiment_score": "BEARISH",
-                "last_run": "2026-06-07T18:50:03.964241+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true
-            }
-        },
-        {
-            "ticker": "ITW",
-            "name": "Illinois Tool Works Inc.",
-            "sector": "Industrials",
-            "industry_group": "Industrials",
-            "price": 252.72,
-            "roe": 96.85,
-            "pe_ratio": 23.47,
-            "debt_to_equity": 2.83,
-            "revenue_growth": 4.6,
-            "gross_margin": 44.1,
-            "profit_margin": 19.3,
-            "fcf_positive": true,
-            "beta": 1.03,
-            "roic": null,
-            "roce": null,
-            "pfcf": 32.8,
-            "rev_cagr_5yr": 0.2,
-            "ni_cagr_5yr": 0.4,
-            "analyst_target": 274.54187,
-            "analyst_upside": 8.6,
-            "analyst_count": 16,
-            "dcf": {
-                "dcf_per_share": 101.95,
-                "dcf_upside": -59.7,
-                "mos_price": 76.46,
-                "wacc": 9.21,
-                "growth_phase1": 8.2,
-                "terminal_growth": 2.5,
-                "pv_fcf": 10231.5,
-                "pv_terminal_m": 28247.8
-            },
-            "dividend": {
-                "yield": 255.0,
-                "eps_payout": 59.8,
-                "fcf_payout": 83.6,
-                "sustainable": false,
-                "risk_flag": "FCF payout 83.6% \u2014 risico op dividendverlaging"
-            },
-            "s_growth": 3.03,
-            "A_factor": 0.0,
-            "E_factor": 0.5,
-            "L_factor": 0.764,
-            "U_factor": 0.0,
-            "dol": 1.68,
-            "pe_z_score": 0.06,
-            "peg_ratio": 2.48,
-            "fcf_margin_pct": 13.7,
-            "rev_accel": false,
-            "eps_accel": false,
-            "rev_q1_yoy": null,
-            "rev_q2_yoy": null,
-            "rev_q3_yoy": null,
-            "eps_q1_yoy": null,
-            "eps_q2_yoy": null,
-            "eps_q3_yoy": null,
-            "s_momentum": 4.04,
-            "convergence_score": 3.54,
-            "convergence_trigger": false,
-            "stage2": false,
-            "vcp_active": true,
-            "rvol": 1.2,
-            "vol_buzz_pct": 19.6,
-            "rsi14": 60.6,
-            "macd_bullish": true,
-            "stop_loss_atr": 246.3,
-            "score": 3.54,
-            "penalty_applied": false,
-            "atr14": 4.28,
-            "atr_ratio_pct": 1.69,
-            "m_factor": 0.0,
-            "c_factor": 0.661,
-            "v_factor": 0.196,
-            "o_factor": 1.0,
-            "sma50": 258.52,
-            "sma200": 258.14,
-            "tier2": {
-                "analysis": "# ITW \u2014 Illinois Tool Works Inc. | Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\n\nITW is een klassieke industri\u00eble compounder met een gedecentraliseerd bedrijfsmodel en sterke nichepositie in gesegmenteerde markten. De **80/20-strategie** \u2014 focus op de 20% klanten die 80% van de omzet genereren \u2014 cre\u00ebert echte operationele discipline en prijsmacht. Switching costs zijn re\u00ebel: ITW levert ge\u00efntegreerde systemen waarbij klanten afhankelijk worden van maatspecifieke componenten.\n\nDe ROE van 97% klinkt indrukwekkend, maar is **sterk vertekend door negatief eigen vermogen** door agressieve buybacks \u2014 een boekhoudkundige illusie, geen bewijs van superieure kapitaalallocatie. ROIC ontbreekt in de data, maar historisch lag dit rond 30%+. De groeicijfers zijn echter alarmerend: 5-jaar omzet CAGR van slechts **0.2%** en winst CAGR van **0.4%** \u2014 dit is stagnatie, geen compounding.\n\n## DCF & WAARDERING\n\nDe DCF spreekt boekdelen: intrinsieke waarde **$101.95** tegen een marktprijs van $252.72 impliceert een **negatieve margin of safety van 60%**. Zelfs met optimistische groeiaannames (fase-1: 8.2%) is de huidige prijs moeilijk te rechtvaardigen. Een P/FCF van 32.8x voor een bedrijf met quasi-nulgroei is een waarschuwingssignaal. Analisten zien slechts 8.6% upside \u2014 bescheiden voor het risico. De dividendyield van 255% in de data is evident een datafout, maar de FCF payout van 83.6% is re\u00ebel en problematisch bij omzetdruk.\n\n## \ud83d\udfe2 BULL CASE\n1. **Prijsmacht & Moat**: ITW kan prijsverhogingen doorvoeren in niche-markten; operationele marge van 19%+ bewijst structurele discipline.\n2. **Dividendtrack record**: Decennialange dividendgroei maakt ITW aantrekkelijk voor inkomstenbeleggers \u2014 management heeft skin in the game.\n3. **Cyclisch herstel**: Bij economisch herstel profiteert ITW van exposure aan auto, bouw en industrie; analistenconsensus redelijk positief.\n\n## \ud83d\udd34 BEAR CASE\n1. **Schrikbarend overgewaardeerd**: $252 vs. DCF-waarde $102 \u2014 de markt prijst perfectie in bij een bedrijf met nulgroei.\n2. **Stagnerende groei**: 0.2% omzet CAGR over 5 jaar is structureel, niet cyclisch. Geen groeiverhaal.\n3. **Hoge schulden + FCF druk**: D/E van 2.83 gecombineerd met 83.6% FCF payout laat weinig buffer bij een recessie of rentestijging.\n\n## VERDICT\n\n**ACTIE:** MIJDEN\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $210 (-17% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot $140\u2013$160\n\n> *\"Prijs is wat je betaalt, waarde is wat je krijgt. Bij ITW betaal je voor een Rolls-Royce en krijgt u een goed onderhouden Volvo.\"*",
-                "sentiment_score": "BEARISH",
-                "last_run": "2026-06-07T18:50:24.691857+00:00",
                 "model": "claude-sonnet-4-6",
                 "news_used": true,
                 "filing_used": true,
@@ -930,7 +758,16 @@
             "v_factor": 0.689,
             "o_factor": 1.0,
             "sma50": 96.51,
-            "sma200": 96.0
+            "sma200": 96.0,
+            "tier2": {
+                "analysis": "# INCY (Incyte Corporation) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nIncyte's moat rust primair op patentbescherming rond Jakafi (ruxolitinib) \u2014 een bewezen blockbuster voor myelofibrose en polycythemia vera. De 30.8% ROE is indrukwekkend, maar zonder ROIC-data is het moeilijk te beoordelen of dit kapitaaleffici\u00ebnt wordt gegenereerd of door schuldhefboom. De P/FCF van 36.6x bij een P/E van 14.5x wijst op een significante discrepantie: boekhoudkundige winst flatteert de kasstroomgeneratie. Jakafi-patenten lopen richting 2028 af, wat de duurzaamheid van de pricing power ernstig onder druk zet. De pijplijn (parsaclisib, povorcitinib) is veelbelovend maar nog niet bewezen. Echte compounding? Onvoldoende bewijsmateriaal.\n\n## DCF & WAARDERING\nHier knippert het rode licht. De DCF-intrinsieke waarde van $59.50 impliceert **42% neerwaarts risico** bij huidige koers van $102.38. De margin of safety-prijs van $44.63 maakt duidelijk: dit is geen Buffett-achtige \"wonderlijke bedrijf voor redelijke prijs\" situatie. De P/E van 14.5x oogt optisch goedkoop voor healthcare, maar de P/FCF van 36.6x onthult de werkelijkheid. Met slechts 5.4% analistenupside richting $108 is het opwaarts potentieel asymmetrisch ongunstig versus het DCF-risico. **Value trap signalen aanwezig.**\n\n## \ud83d\udfe2 BULL CASE\n1. **Winstmomentum is indrukwekkend:** 5-jaar winst CAGR van 55.7% en omzetgroei van 20.9% tonen operationele executiekracht die de kasstroom achternaloopt.\n2. **Optisch aantrekkelijke P/E:** Bij 14.5x is er ruimte voor herwaardering als pijplijn-catalysatoren (povorcitinib goedkeuring?) positief verrassen.\n3. **Lage beta (0.79):** Defensieve koersdynamiek biedt relatieve bescherming in risicomijdende markten; stabiel voor healthcare-exposure.\n\n## \ud83d\udd34 BEAR CASE\n1. **Jakafi patent cliff:** Core revenue-motor verliest exclusiviteit ~2028. Generieke concurrentie vernietigt marges structureel zonder volwaardige opvolger.\n2. **DCF screamt overgewaardeerd:** $42% premie boven intrinsieke waarde met geen margin of safety is onverteerbaar vanuit Graham-perspectief.\n3. **FCF-kwaliteitskloof:** P/FCF van 36.6x versus P/E van 14.5x suggereert agressieve boekhoudkundige aannames of capex/R&D-verplichtingen die kasstromen chronisch drukken.\n\n## VERDICT\n**ACTIE:** MIJDEN\n**CONVICTION:** 3/10\n**KOERSDOEL 18mnd:** $82 (-20% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot $55\u201360 (nabij DCF-waarde)\n\n> *\"De prijs die je betaalt bepaalt je rendement. Bij 42% boven intrinsieke waarde koop je andermans winst.\"* \u2014 Graham-principe",
+                "sentiment_score": "BEARISH",
+                "last_run": "2026-06-07T19:09:31.474718+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
         },
         {
             "ticker": "HST",
@@ -1007,7 +844,16 @@
             "v_factor": 0.147,
             "o_factor": 0.0,
             "sma50": 21.3,
-            "sma200": 18.47
+            "sma200": 18.47,
+            "tier2": {
+                "analysis": "# HST \u2013 Host Hotels & Resorts: Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nHost is 's werelds grootste beursgenoteerde hotelreit, met een portefeuille van premium full-service hotels (Marriott, Hilton, Hyatt-merken). De moat is smal maar re\u00ebel: schaarse locaties in topmarkten, langetermijnbeheercontracten en schaalvoordelen in kapitaalonderhandelingen. Echter, Host bezit de muren, niet het merk \u2014 pricing power lekt weg naar franchisegevers. ROIC is niet beschikbaar, wat bij een reit structureel verklaarbaar is, maar het maakt compounding-kwaliteit moeilijk te valideren. ROE van 14.87% oogt acceptabel, maar vraagt relativering door leverage. Geen echte compounding-machine: groei is cyclisch en capex-intensief.\n\n## DCF & WAARDERING\nDCF-intrinsieke waarde van $31,4 suggereert 27,6% upside, maar de 15% groei in fase 1 is agressief voor een reit met 2,8% omzetgroei. Verlaag die aanname naar 6-8% en de marge of safety verdampt. Huidige koers ($24,62) ligt b\u00f3ven de margin-of-safety prijs ($23,55). Analisten mikken op $23,64 \u2014 dus de consensus ziet neerwaarts risico. P/FCF van 14,3x is eerlijk geprijsd, niet goedkoop. **Opgelet:** het gerapporteerde dividendrendement van 325% is een datafout \u2014 werkelijk yield ligt vermoedelijk rond 4-5%. FCF payout van 46% bevestigt houdbaarheid.\n\n## \ud83d\udfe2 BULL CASE\n1. **Kwaliteitsportefeuille in herstel** \u2013 Premium stadhotels en resorts profiteren van aanhoudende zakelijke reishervatting en groeiende groepssegmenten post-COVID.\n2. **Solide FCF-generatie** \u2013 P/FCF van 14,3x met positieve cashflow biedt stabiele dividenddekking en ruimte voor aandeleninkoop of acquisities.\n3. **5-jaar CAGR van 7,6%** \u2013 Historisch bewezen vermogen om bovengemiddeld te groeien versus bredere reit-sector bij gunstige hotelbezettingscycli.\n\n## \ud83d\udd34 BEAR CASE\n1. **Cyclisch bedrijfsmodel** \u2013 Hoge operationele hefboom: bij recessie of reisschok kelderen RevPAR en winst disproportioneel (Beta 1,13 onderschat sectorrisico).\n2. **Capex-tredmolen** \u2013 Hotels verouderen snel. Renovatiedruk vreet FCF structureel aan; geen asset-light model zoals concurrerende platformspelers.\n3. **Consensusdoelstelling is negatief** \u2013 20 analisten zien gemiddeld -4% koerspotentieel. Geen katalysator zichtbaar; waardering biedt geen veiligheidsmarge bij huidige prijs.\n\n## VERDICT\n**ACTIE:** HOUD\n**CONVICTION:** 4/10\n**KOERSDOEL 18mnd:** $24.00 (-2.5% van huidig)\n**SENTIMENT SCORE:** NEUTRAAL\n**INSTAPMOMENT:** Wacht op dip tot $21-22 voor echte margin of safety",
+                "sentiment_score": "NEUTRAAL",
+                "last_run": "2026-06-07T19:09:54.144225+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
         },
         {
             "ticker": "DOV",
@@ -1602,6 +1448,92 @@
             "sma200": 64.01
         },
         {
+            "ticker": "AOS",
+            "name": "A.O. Smith Corporation",
+            "sector": "Industrials",
+            "industry_group": "Industrials",
+            "price": 57.2,
+            "roe": 28.27,
+            "pe_ratio": 15.25,
+            "debt_to_equity": 0.35,
+            "revenue_growth": -1.9,
+            "gross_margin": 38.8,
+            "profit_margin": 13.8,
+            "fcf_positive": true,
+            "beta": 1.18,
+            "roic": null,
+            "roce": null,
+            "pfcf": 15.9,
+            "rev_cagr_5yr": 0.7,
+            "ni_cagr_5yr": 32.3,
+            "analyst_target": 70.90909,
+            "analyst_upside": 24.0,
+            "analyst_count": 11,
+            "dcf": {
+                "dcf_per_share": 49.49,
+                "dcf_upside": -13.5,
+                "mos_price": 37.11,
+                "wacc": 10.24,
+                "growth_phase1": 0.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 1909.0,
+                "pv_terminal_m": 4288.7
+            },
+            "dividend": {
+                "yield": 248.0,
+                "eps_payout": 37.9,
+                "fcf_payout": 32.1,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "s_growth": 3.9,
+            "A_factor": 0.0,
+            "E_factor": 0.5,
+            "L_factor": 1.0,
+            "U_factor": 1.0,
+            "dol": 2479.0,
+            "pe_z_score": -0.97,
+            "peg_ratio": 1.48,
+            "fcf_margin_pct": 13.0,
+            "rev_accel": false,
+            "eps_accel": false,
+            "rev_q1_yoy": null,
+            "rev_q2_yoy": null,
+            "rev_q3_yoy": null,
+            "eps_q1_yoy": null,
+            "eps_q2_yoy": null,
+            "eps_q3_yoy": null,
+            "s_momentum": 3.46,
+            "convergence_score": 3.68,
+            "convergence_trigger": false,
+            "stage2": false,
+            "vcp_active": true,
+            "rvol": 1.2,
+            "vol_buzz_pct": 20.3,
+            "rsi14": 57.6,
+            "macd_bullish": true,
+            "stop_loss_atr": 55.11,
+            "score": 3.2,
+            "penalty_applied": false,
+            "atr14": 1.39,
+            "atr_ratio_pct": 2.43,
+            "m_factor": 0.0,
+            "c_factor": 0.513,
+            "v_factor": 0.203,
+            "o_factor": 1.0,
+            "sma50": 61.14,
+            "sma200": 67.52,
+            "tier2": {
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nA.O. Smith domineert de Noord-Amerikaanse waterverwarmer markt met ~40% marktaandeel, ondersteund door merkvertrouwen, distributienetwerk en installateursloyaliteit. Dit cre\u00ebert bescheiden switching costs via installateurstraining en onderdelenprogramma's. De ROE van 28% oogt indrukwekkend, maar zonder ROIC-data is de echte kapitaalkwaliteit moeilijk te beoordelen. Waarschuwingssignaal: omzetgroei van -1.9% en een 5-jaar CAGR van slechts 0.7% suggereert een volwassen, nagenoeg stagnerend bedrijf. De winstmarge van 13.8% is solide maar niet uitzonderlijk voor een industrieel bedrijf. Echte compounders groeien organisch \u2014 AOS bewijst dit onvoldoende.\n\n## DCF & WAARDERING\n\nOp $57.20 noteert AOS boven de DCF-intrinsieke waarde van $49.49 (-13.5% overgewaardeerd) en ver boven de margin-of-safety prijs van $37.11. De DCF gebruikt 0% groei fase-1, wat realistisch is gezien de stagnerende omzet. P/E van 15.25 en P/FCF van 15.9 klinken redelijk, maar bij nulgroei is dit geen koopje. De dividendyield van 248% in de data is evident een datafout \u2014 vermoedelijk ~2.48%. FCF payout van 32.1% bevestigt dividend is houdbaar. **Value trap risico is re\u00ebel**: markt betaalt groeipremie die historisch niet gerealiseerd wordt.\n\n## \ud83d\udfe2 BULL CASE\n1. **China-turnaround**: AOS China is jarenlang een blok aan het been geweest; enig herstel hier levert disproportioneel winstgroei op\n2. **Prijszettingsmacht**: In een vervangingsgedreven markt (water heaters gaan 10-12 jaar mee) kan AOS prijzen doorberekenen zonder volumeverlies\n3. **Analistenconsensus**: 11 analisten zien $70.90 koersdoel (+24%), duidt op onderschatte operationele leverage bij marginaal herstel\n\n## \ud83d\udd34 BEAR CASE\n1. **Structurele stagnatie**: 0.7% omzetgroei over 5 jaar in een inflatoire omgeving betekent volumeverlies \u2014 dit is geen groeibedrijf\n2. **Overgewaardeerd vs. DCF**: Huidige prijs biedt geen margin of safety; elke groeidisappointment kan fors afstraffen\n3. **China-blootstelling**: Geopolitieke spanningen en dalende Chinese consumentenvraag blijven structurele druk uitoefenen op ~20% van de omzet\n\n## VERDICT\n**ACTIE:** MIJDEN\n**CONVICTION:** 4/10\n**KOERSDOEL 18mnd:** $52 (-9% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot $40-42 (margin of safety zone)\n\n*Geen groei, boven intrinsieke waarde, China-risico \u2014 Buffett koopt geen stilstaande rivieren.*",
+                "sentiment_score": "BEARISH",
+                "last_run": "2026-06-07T18:50:03.964241+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
+        },
+        {
             "ticker": "LH",
             "name": "Labcorp Holdings Inc.",
             "sector": "Healthcare",
@@ -1985,6 +1917,92 @@
             "o_factor": 0.0,
             "sma50": 1744.71,
             "sma200": 1199.58
+        },
+        {
+            "ticker": "ITW",
+            "name": "Illinois Tool Works Inc.",
+            "sector": "Industrials",
+            "industry_group": "Industrials",
+            "price": 252.72,
+            "roe": 96.85,
+            "pe_ratio": 23.47,
+            "debt_to_equity": 2.83,
+            "revenue_growth": 4.6,
+            "gross_margin": 44.1,
+            "profit_margin": 19.3,
+            "fcf_positive": true,
+            "beta": 1.03,
+            "roic": null,
+            "roce": null,
+            "pfcf": 32.8,
+            "rev_cagr_5yr": 0.2,
+            "ni_cagr_5yr": 0.4,
+            "analyst_target": 274.54187,
+            "analyst_upside": 8.6,
+            "analyst_count": 16,
+            "dcf": {
+                "dcf_per_share": 101.95,
+                "dcf_upside": -59.7,
+                "mos_price": 76.46,
+                "wacc": 9.21,
+                "growth_phase1": 8.2,
+                "terminal_growth": 2.5,
+                "pv_fcf": 10231.5,
+                "pv_terminal_m": 28247.8
+            },
+            "dividend": {
+                "yield": 255.0,
+                "eps_payout": 59.8,
+                "fcf_payout": 83.6,
+                "sustainable": false,
+                "risk_flag": "FCF payout 83.6% \u2014 risico op dividendverlaging"
+            },
+            "s_growth": 3.03,
+            "A_factor": 0.0,
+            "E_factor": 0.5,
+            "L_factor": 0.764,
+            "U_factor": 0.0,
+            "dol": 1.68,
+            "pe_z_score": 0.06,
+            "peg_ratio": 2.48,
+            "fcf_margin_pct": 13.7,
+            "rev_accel": false,
+            "eps_accel": false,
+            "rev_q1_yoy": null,
+            "rev_q2_yoy": null,
+            "rev_q3_yoy": null,
+            "eps_q1_yoy": null,
+            "eps_q2_yoy": null,
+            "eps_q3_yoy": null,
+            "s_momentum": 4.04,
+            "convergence_score": 3.54,
+            "convergence_trigger": false,
+            "stage2": false,
+            "vcp_active": true,
+            "rvol": 1.2,
+            "vol_buzz_pct": 19.6,
+            "rsi14": 60.6,
+            "macd_bullish": true,
+            "stop_loss_atr": 246.3,
+            "score": 3.0,
+            "penalty_applied": false,
+            "atr14": 4.28,
+            "atr_ratio_pct": 1.69,
+            "m_factor": 0.0,
+            "c_factor": 0.661,
+            "v_factor": 0.196,
+            "o_factor": 1.0,
+            "sma50": 258.52,
+            "sma200": 258.14,
+            "tier2": {
+                "analysis": "# ITW \u2014 Illinois Tool Works Inc. | Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\n\nITW is een klassieke industri\u00eble compounder met een gedecentraliseerd bedrijfsmodel en sterke nichepositie in gesegmenteerde markten. De **80/20-strategie** \u2014 focus op de 20% klanten die 80% van de omzet genereren \u2014 cre\u00ebert echte operationele discipline en prijsmacht. Switching costs zijn re\u00ebel: ITW levert ge\u00efntegreerde systemen waarbij klanten afhankelijk worden van maatspecifieke componenten.\n\nDe ROE van 97% klinkt indrukwekkend, maar is **sterk vertekend door negatief eigen vermogen** door agressieve buybacks \u2014 een boekhoudkundige illusie, geen bewijs van superieure kapitaalallocatie. ROIC ontbreekt in de data, maar historisch lag dit rond 30%+. De groeicijfers zijn echter alarmerend: 5-jaar omzet CAGR van slechts **0.2%** en winst CAGR van **0.4%** \u2014 dit is stagnatie, geen compounding.\n\n## DCF & WAARDERING\n\nDe DCF spreekt boekdelen: intrinsieke waarde **$101.95** tegen een marktprijs van $252.72 impliceert een **negatieve margin of safety van 60%**. Zelfs met optimistische groeiaannames (fase-1: 8.2%) is de huidige prijs moeilijk te rechtvaardigen. Een P/FCF van 32.8x voor een bedrijf met quasi-nulgroei is een waarschuwingssignaal. Analisten zien slechts 8.6% upside \u2014 bescheiden voor het risico. De dividendyield van 255% in de data is evident een datafout, maar de FCF payout van 83.6% is re\u00ebel en problematisch bij omzetdruk.\n\n## \ud83d\udfe2 BULL CASE\n1. **Prijsmacht & Moat**: ITW kan prijsverhogingen doorvoeren in niche-markten; operationele marge van 19%+ bewijst structurele discipline.\n2. **Dividendtrack record**: Decennialange dividendgroei maakt ITW aantrekkelijk voor inkomstenbeleggers \u2014 management heeft skin in the game.\n3. **Cyclisch herstel**: Bij economisch herstel profiteert ITW van exposure aan auto, bouw en industrie; analistenconsensus redelijk positief.\n\n## \ud83d\udd34 BEAR CASE\n1. **Schrikbarend overgewaardeerd**: $252 vs. DCF-waarde $102 \u2014 de markt prijst perfectie in bij een bedrijf met nulgroei.\n2. **Stagnerende groei**: 0.2% omzet CAGR over 5 jaar is structureel, niet cyclisch. Geen groeiverhaal.\n3. **Hoge schulden + FCF druk**: D/E van 2.83 gecombineerd met 83.6% FCF payout laat weinig buffer bij een recessie of rentestijging.\n\n## VERDICT\n\n**ACTIE:** MIJDEN\n**CONVICTION:** 8/10\n**KOERSDOEL 18mnd:** $210 (-17% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot $140\u2013$160\n\n> *\"Prijs is wat je betaalt, waarde is wat je krijgt. Bij ITW betaal je voor een Rolls-Royce en krijgt u een goed onderhouden Volvo.\"*",
+                "sentiment_score": "BEARISH",
+                "last_run": "2026-06-07T18:50:24.691857+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
         },
         {
             "ticker": "LULU",
@@ -3252,10 +3270,6 @@
     ],
     "equity_history": [
         {
-            "date": "05-01 11:45",
-            "value": 10194.41
-        },
-        {
             "date": "05-01 22:08",
             "value": 10200.66
         },
@@ -3490,6 +3504,10 @@
         {
             "date": "06-07 18:50",
             "value": 10086.61
+        },
+        {
+            "date": "06-07 19:09",
+            "value": 10086.61
         }
     ],
     "memory": {
@@ -3561,7 +3579,7 @@
         "positive_sectors": [
             "Tech & AI"
         ],
-        "last_update": "2026-06-07T18:50:50.357603+00:00",
+        "last_update": "2026-06-07T19:09:56.620283+00:00",
         "version": "nexus-v3-kelly",
         "vix_threshold": 6.0
     },
@@ -3589,7 +3607,7 @@
                 }
             ],
             "cik": "0000200406",
-            "retrieved_at": "2026-06-07T18:47:02.541073+00:00"
+            "retrieved_at": "2026-06-07T19:08:52.492369+00:00"
         },
         "IEX": {
             "filings": [
@@ -3615,7 +3633,7 @@
                 }
             ],
             "cik": "0000832101",
-            "retrieved_at": "2026-06-07T18:47:03.873048+00:00"
+            "retrieved_at": "2026-06-07T19:08:53.851398+00:00"
         },
         "FTV": {
             "filings": [
@@ -3641,7 +3659,7 @@
                 }
             ],
             "cik": "0001659166",
-            "retrieved_at": "2026-06-07T18:47:05.168597+00:00"
+            "retrieved_at": "2026-06-07T19:08:55.213105+00:00"
         },
         "EQIX": {
             "filings": [
@@ -3674,7 +3692,7 @@
                 }
             ],
             "cik": "0001101239",
-            "retrieved_at": "2026-06-07T18:47:06.941322+00:00"
+            "retrieved_at": "2026-06-07T19:08:57.041483+00:00"
         },
         "MO": {
             "filings": [
@@ -3700,7 +3718,7 @@
                 }
             ],
             "cik": "0000764180",
-            "retrieved_at": "2026-06-07T18:47:08.256808+00:00"
+            "retrieved_at": "2026-06-07T19:08:58.392540+00:00"
         },
         "MRK": {
             "filings": [
@@ -3733,7 +3751,7 @@
                 }
             ],
             "cik": "0000310158",
-            "retrieved_at": "2026-06-07T18:47:09.889720+00:00"
+            "retrieved_at": "2026-06-07T19:09:00.102245+00:00"
         },
         "JCI": {
             "filings": [
@@ -3766,66 +3784,7 @@
                 }
             ],
             "cik": "0000833444",
-            "retrieved_at": "2026-06-07T18:47:11.739428+00:00"
-        },
-        "AOS": {
-            "filings": [
-                {
-                    "form": "8-K",
-                    "date": "2026-05-19",
-                    "accession": "0000091142-26-000086",
-                    "description": "8-K",
-                    "excerpt": "aos-20260519 0000091142 FALSE 0000091142 2026-05-19 2026-05-19 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; FORM 8-K &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May 19, 2026 &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; A. O. Smith Corporation (Exact name of registrant as specified in its charter) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; Delaware &#160; 1-475 &#160; 39-0619790 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (IRS Employer Identification No.) 11270 West Park Place , Milwaukee , Wisconsin 53224 (Address of principal executive offices, including zip code) ( 414 ) 359-4000 (Registrant&#8217;s telephone number) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#"
-                },
-                {
-                    "form": "10-Q",
-                    "date": "2026-04-30",
-                    "accession": "0000091142-26-000084",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-30",
-                    "accession": "0000091142-26-000082",
-                    "description": "8-K",
-                    "excerpt": "aos-20260430 0000091142 FALSE 0000091142 2026-04-30 2026-04-30 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; FORM 8-K &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April 30, 2026 &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; A. O. Smith Corporation (Exact name of registrant as specified in its charter) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; Delaware &#160; 1-475 &#160; 39-0619790 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (IRS Employer Identification No.) 11270 West Park Place , Milwaukee , Wisconsin 53224 (Address of principal executive offices, including zip code) ( 414 ) 359-4000 (Registrant&#8217;s telephone number) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) "
-                }
-            ],
-            "cik": "0000091142",
-            "retrieved_at": "2026-06-07T18:47:13.034401+00:00"
-        },
-        "ITW": {
-            "filings": [
-                {
-                    "form": "8-K",
-                    "date": "2026-05-22",
-                    "accession": "0000049826-26-000033",
-                    "description": "8-K",
-                    "excerpt": "itw-20260519 0000049826 false 0000049826 2026-05-19 2026-05-19 0000049826 exch:XNYS us-gaap:CommonStockMember 2026-05-19 2026-05-19 0000049826 exch:XNYS itw:A0.625EuroNotesdue2027Member 2026-05-19 2026-05-19 0000049826 exch:XNYS itw:A3.250EuroNotesDue2028Member 2026-05-19 2026-05-19 0000049826 exch:XNYS itw:A2.125EuroNotesdue2030Member 2026-05-19 2026-05-19 0000049826 exch:XNYS itw:A1.00EuroNotesdue2031Member 2026-05-19 2026-05-19 0000049826 exch:XNYS itw:A3.375EuroNotesDue2032Member 2026-05-19 2026-05-19 0000049826 exch:XNYS itw:A3.00EuroNotesdue2034Member 2026-05-19 2026-05-19 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 ___________________________________________________________ FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of Earliest Event Reported): May 19, 2026 _________________________ ILLINOIS TOOL WORKS INC. (Exact name of registrant as specified in its charter) Delaware 1-4797 36-1258310 (State or other jurisdiction of incorporation) (Commission File No.) (I.R.S. Employer Identification No.) 155 Harlem Avenue Glenview IL 60025 (Address of principal executive offices) (Zip Code) Registrant's telephone number, including area code: 847 - 724-7500 Not Applicable (Former name or former address, if changed since last report.) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the fo"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-05-12",
-                    "accession": "0000049826-26-000030",
-                    "description": "8-K",
-                    "excerpt": "itw-20260508 0000049826 false 0000049826 2026-05-08 2026-05-08 0000049826 us-gaap:CommonStockMember exch:XNYS 2026-05-08 2026-05-08 0000049826 itw:A0.625EuroNotesdue2027Member exch:XNYS 2026-05-08 2026-05-08 0000049826 itw:A3.250EuroNotesDue2028Member exch:XNYS 2026-05-08 2026-05-08 0000049826 itw:A2.125EuroNotesdue2030Member exch:XNYS 2026-05-08 2026-05-08 0000049826 itw:A1.00EuroNotesdue2031Member exch:XNYS 2026-05-08 2026-05-08 0000049826 itw:A3.375EuroNotesDue2032Member exch:XNYS 2026-05-08 2026-05-08 0000049826 itw:A3.00EuroNotesdue2034Member exch:XNYS 2026-05-08 2026-05-08 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 ___________________________________________________________ FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of Earliest Event Reported): May 8, 2026 _________________________ ILLINOIS TOOL WORKS INC. (Exact name of registrant as specified in its charter) Delaware 1-4797 36-1258310 (State or other jurisdiction of incorporation) (Commission File No.) (I.R.S. Employer Identification No.) 155 Harlem Avenue Glenview IL 60025 (Address of principal executive offices) (Zip Code) Registrant's telephone number, including area code: 847 - 724-7500 Not Applicable (Former name or former address, if changed since last report.) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the fol"
-                },
-                {
-                    "form": "10-Q",
-                    "date": "2026-05-07",
-                    "accession": "0000049826-26-000028",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-30",
-                    "accession": "0000049826-26-000025",
-                    "description": "8-K",
-                    "excerpt": "itw-20260430 0000049826 false 0000049826 2026-04-30 2026-04-30 0000049826 us-gaap:CommonStockMember exch:XNYS 2026-04-30 2026-04-30 0000049826 itw:A0.625EuroNotesdue2027Member exch:XNYS 2026-04-30 2026-04-30 0000049826 itw:A3.250EuroNotesDue2028Member exch:XNYS 2026-04-30 2026-04-30 0000049826 itw:A2.125EuroNotesdue2030Member exch:XNYS 2026-04-30 2026-04-30 0000049826 itw:A1.00EuroNotesdue2031Member exch:XNYS 2026-04-30 2026-04-30 0000049826 itw:A3.375EuroNotesDue2032Member exch:XNYS 2026-04-30 2026-04-30 0000049826 itw:A3.00EuroNotesdue2034Member exch:XNYS 2026-04-30 2026-04-30 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 ___________________________________________________________ FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of Earliest Event Reported): April&#160;30, 2026 _________________________ ILLINOIS TOOL WORKS INC. (Exact name of registrant as specified in its charter) Delaware 1-4797 36-1258310 (State or other jurisdiction of incorporation) (Commission File No.) (I.R.S. Employer Identification No.) 155 Harlem Avenue Glenview IL 60025 (Address of principal executive offices) (Zip Code) Registrant's telephone number, including area code: 847 - 724-7500 Not Applicable (Former name or former address, if changed since last report.) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of"
-                }
-            ],
-            "cik": "0000049826",
-            "retrieved_at": "2026-06-07T18:47:14.741157+00:00"
+            "retrieved_at": "2026-06-07T19:09:01.814230+00:00"
         },
         "GILD": {
             "filings": [
@@ -3858,7 +3817,7 @@
                 }
             ],
             "cik": "0000882095",
-            "retrieved_at": "2026-06-07T18:47:16.489258+00:00"
+            "retrieved_at": "2026-06-07T19:09:03.551234+00:00"
         },
         "INCY": {
             "filings": [
@@ -3877,7 +3836,7 @@
                 }
             ],
             "cik": "0000879169",
-            "retrieved_at": "2026-06-07T18:47:17.499240+00:00"
+            "retrieved_at": "2026-06-07T19:09:04.566650+00:00"
         },
         "HST": {
             "filings": [
@@ -3910,8 +3869,34 @@
                 }
             ],
             "cik": "0001070750",
-            "retrieved_at": "2026-06-07T18:47:19.232512+00:00"
+            "retrieved_at": "2026-06-07T19:09:06.266069+00:00"
+        },
+        "DOV": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-05-12",
+                    "accession": "0001193125-26-219689",
+                    "description": "8-K",
+                    "excerpt": "8-K DOVER Corp false 0000029905 0000029905 2026-05-08 2026-05-08 0000029905 us-gaap:CommonStockMember 2026-05-08 2026-05-08 0000029905 dov:A1250NotesDue2026Member 2026-05-08 2026-05-08 0000029905 dov:A0750NotesDue2027Member 2026-05-08 2026-05-08 0000029905 dov:A3.500NotesDue2033Member 2026-05-08 2026-05-08 &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; &#160; FORM 8-K &#160; &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May&#160;8, 2026 &#160; &#160; &#160; Dover Corporation (Exact name of registrant as specified in its charter) &#160; &#160; &#160; Delaware &#160; 1-4018 &#160; 53-0257888 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (I.R.S. Employer Identification No.) 3005 Highland Parkway &#160; Downers Grove , Illinois &#160; 60515 (Address of Principal Executive Offices) &#160; (Zip Code) (630) 541-1540 (Registrant&#8217;s telephone number, including area code) &#160; &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#160; &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#160; &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#9744"
+                },
+                {
+                    "form": "10-Q",
+                    "date": "2026-04-23",
+                    "accession": "0000029905-26-000015",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-04-23",
+                    "accession": "0000029905-26-000014",
+                    "description": "8-K",
+                    "excerpt": "dov-20260423 0000029905 false DOVER Corp 0000029905 2026-04-23 2026-04-23 0000029905 us-gaap:CommonStockMember 2026-04-23 2026-04-23 0000029905 dov:A1250NotesDue2026Member 2026-04-23 2026-04-23 0000029905 dov:A0750NotesDue2027Member 2026-04-23 2026-04-23 0000029905 dov:A3.500NotesDue2033Member 2026-04-23 2026-04-23 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 ______________________________________ &#160; FORM 8-K _______________________________ &#160; CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported):&#160; April&#160;23, 2026 _______________________________ DOVER CORPORATION (Exact name of registrant as specified in its charter) ______________________________________________ Delaware 1-4018 53-0257888 (State or other jurisdiction&#160;of incorporation) &#160;(Commission File Number) (I.R.S. Employer Identification No.) &#160; &#160; &#160; 3005 Highland Parkway &#160; Downers Grove, Illinois 60515 (Address of Principal Executive Offices) (Zip Code) (630) 541-1540 (Registrant&#8217;s telephone number, including area code) &#160; ______________________________________________ Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 23"
+                }
+            ],
+            "cik": "0000029905",
+            "retrieved_at": "2026-06-07T19:09:07.606361+00:00"
         }
     },
-    "filings_at": "2026-06-07T18:47:19.732679+00:00"
+    "filings_at": "2026-06-07T19:09:08.253104+00:00"
 }
