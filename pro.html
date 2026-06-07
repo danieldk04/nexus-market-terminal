@@ -1194,6 +1194,9 @@ function selectStock(ticker, source) {
     const card   = document.getElementById(cardId);
     if (card) card.classList.add('active');
 
+    // Switch naar analyse-tab zodat de content zichtbaar is
+    switchTab('analyse');
+
     // TradingView chart
     const symbol = ticker.includes('.AS') ? 'EURONEXT:' + ticker.split('.')[0] : ticker;
     document.getElementById('tv-container').innerHTML = '';
