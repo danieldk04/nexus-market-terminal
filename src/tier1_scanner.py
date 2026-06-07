@@ -120,8 +120,14 @@ def fetch_global_universe():
         log.warning("Scraping laag — fallback actief")
         tickers.extend(FALLBACK_TICKERS)
 
-    unique = list(set(tickers))
-    log.info(f"Universe: {len(unique)} unieke tickers")
+    # Altijd de high-growth universe toevoegen (prioriteit bij sortering)
+    tickers.extend(GROWTH_UNIVERSE)
+
+    # Groei-universe vooraan zetten zodat ze altijd binnen MAX_SCAN vallen
+    growth_set = set(GROWTH_UNIVERSE)
+    others = [t for t in tickers if t not in growth_set]
+    unique = list(dict.fromkeys(GROWTH_UNIVERSE + others))  # dedup, volgorde bewaren
+    log.info(f"Universe: {len(unique)} unieke tickers ({len(GROWTH_UNIVERSE)} growth-priority)")
     return unique
 
 
