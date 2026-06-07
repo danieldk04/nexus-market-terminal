@@ -840,12 +840,14 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
    STATE
 ══════════════════════════════════════════════════════ */
 let M=null,B=null;
+let globalData=null;
 let allPos=[];
 let priceCache={};
 let charts={};
-let activeTick=null,activeFilter='all',activeTab='dashboard';
+let activeTick=null,activeFilter='ALL',activeTab='dashboard';
 let histRange='max',invRange='max';
 const needRender=new Set();
+const seenSectors=new Set();
 
 /* ── broker config ── */
 const BROKERS={
