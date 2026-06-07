@@ -2366,17 +2366,17 @@ document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>swi
 ══════════════════════════════════════════════════════ */
 function renderAll(){
     allPos=buildPositions();
-    renderDashboard();
+    try{renderDashboard();}catch(e){console.error('renderDashboard fout:',e);}
     needRender.add('portfolio');
     needRender.add('bot');
     needRender.add('nieuws');
     needRender.add('learn');
     /* render active tab's content immediately */
-    if(activeTab==='portfolio'){renderPortfolioTab();needRender.delete('portfolio');}
-    else if(activeTab==='bot'){renderBotTab();needRender.delete('bot');}
-    else if(activeTab==='nieuws'){renderNieuwsTab();needRender.delete('nieuws');}
-    else if(activeTab==='learn'){renderLearnTab();needRender.delete('learn');}
-    else if(activeTab==='analyse'){renderChartsTab();}
+    if(activeTab==='portfolio'){try{renderPortfolioTab();needRender.delete('portfolio');}catch(e){console.error(e);}}
+    else if(activeTab==='bot'){try{renderBotTab();needRender.delete('bot');}catch(e){console.error(e);}}
+    else if(activeTab==='nieuws'){try{renderNieuwsTab();needRender.delete('nieuws');}catch(e){console.error(e);}}
+    else if(activeTab==='learn'){try{renderLearnTab();needRender.delete('learn');}catch(e){console.error(e);}}
+    else if(activeTab==='analyse'){try{renderChartsTab();}catch(e){console.error(e);}}
 }
 
 async function init(){
