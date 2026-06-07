@@ -647,6 +647,10 @@ def fetch_degiro_portfolio() -> dict | None:
                 yf_info = _tk.info
                 sector  = yf_info.get("sector")
                 dy      = yf_info.get("dividendYield")
+                # yfinance geeft dividendYield soms als percentage (bijv. 4.17 i.p.v. 0.0417)
+                # Normaliseer: alles > 0.5 wordt gedeeld door 100 (geen reëel div-yield > 50%)
+                if dy and float(dy) > 0.5:
+                    dy = float(dy) / 100
                 if not dy or float(dy) <= 0:
                     # Fallback: bereken yield via dividends history (EU ETFs)
                     fi = _tk.fast_info
