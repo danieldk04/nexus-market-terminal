@@ -1317,20 +1317,30 @@ function stockCard(c, source) {
 // ─── SELECT STOCK ─────────────────────────────────────────────────────────────
 function selectStock(ticker, source) {
     activeTicker = ticker;
+    activeTick   = ticker;  // sync met openChart zodat renderChartsTab klopt
 
     // Zoek in candidates of watchlist
     let data = (globalData.top_candidates || []).find(x => x.ticker === ticker);
     if (!data) data = (globalData.watchlist || []).find(x => x.ticker === ticker);
     if (!data) return;
 
+    // Update header titels
+    const tvTitle = document.getElementById('tv-title');
+    if (tvTitle) tvTitle.textContent = data.name || ticker;
+    const priceTag = document.getElementById('price-tag');
+    if (priceTag) priceTag.textContent = ticker;
+
     // Update active card styling
-    document.querySelectorAll('.stock-card').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.sc2-card').forEach(el => el.classList.remove('active'));
     const cardId = 'card-' + ticker.replace('.', '_');
     const card   = document.getElementById(cardId);
     if (card) card.classList.add('active');
 
     // Switch naar analyse-tab zodat de content zichtbaar is
     switchTab('analyse');
+
+    // 30-dagen koers voor dit aandeel
+    fetchPrice(ticker).then(() => renderPriceChart(ticker));
 
     // TradingView chart
     const symbol = ticker.includes('.AS') ? 'EURONEXT:' + ticker.split('.')[0] : ticker;
