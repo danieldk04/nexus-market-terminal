@@ -2361,7 +2361,7 @@ function renderLearnTab(){
         }
     }
 
-    /* Beste / slechtste posities */
+    /* Beste / slechtste posities — uit closed_trades of post_mortem sectoren */
     const posTable=(arr,id)=>{
         const el=document.getElementById(id);
         if(!el) return;
@@ -2377,6 +2377,24 @@ function renderLearnTab(){
     const sorted=[...closed].sort((a,b)=>(b.pl_percent||0)-(a.pl_percent||0));
     posTable(sorted.slice(0,5),'lrn-best');
     posTable(sorted.slice(-5).reverse(),'lrn-worst');
+
+    /* Post-mortem analyse uit memory.json tonen als closed_trades leeg zijn */
+    const pmEl=document.getElementById('lrn-pm-analysis');
+    if(pmEl){
+        if(pm.analysis){
+            pmEl.style.display='block';
+            pmEl.innerHTML=`<div style="font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Post-Mortem Analyse (AI)</div>`
+                +`<div style="font-size:.75rem;color:var(--text);line-height:1.6">${mdToHtml(pm.analysis)}</div>`;
+            if(pm.best_sectors?.length){
+                pmEl.innerHTML+=`<div style="margin-top:10px;font-size:.6rem;font-weight:700;color:#4ade80">✅ Beste sectoren: ${pm.best_sectors.join(', ')}</div>`;
+            }
+            if(pm.worst_sectors?.length){
+                pmEl.innerHTML+=`<div style="margin-top:4px;font-size:.6rem;font-weight:700;color:#f87171">❌ Slechtste sectoren: ${pm.worst_sectors.join(', ')}</div>`;
+            }
+        } else {
+            pmEl.style.display='none';
+        }
+    }
 }
 
 /* ══════════════════════════════════════════════════════
