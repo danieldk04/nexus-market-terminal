@@ -411,6 +411,23 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 
             /* Verberg desktop-only elementen */
             .status-label { display: none; }
+
+            /* Responsive grids op mobiel */
+            .kgrid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .bcrow { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .col2, .col2-wide { grid-template-columns: 1fr; }
+            .col3 { grid-template-columns: 1fr; }
+            .wl-grid { grid-template-columns: 1fr 1fr; }
+            .banner { flex-direction: column; gap: 8px; }
+            .b-stats { gap: 10px; flex-wrap: wrap; }
+            .b-val { font-size: 1.5rem; }
+
+            /* Tab-nav op mobiel: toon alleen iconen */
+            .tnav { padding: 6px 8px; gap: 0; }
+            .tbtn { padding: 7px 10px; }
+            .tbtn-lbl { display: none; }
+            .tbtn svg { opacity: 1; width: 16px; height: 16px; }
+            .tnav-sep { margin: 0 4px; }
         }
     </style>
 </head>
