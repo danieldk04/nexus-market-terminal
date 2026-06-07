@@ -548,6 +548,21 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     <!-- Broker + macro cards -->
     <div class="bcrow" id="bcrow"></div>
 
+    <!-- Scanner Candidates -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt" id="left-panel-title">Scanner Candidates</span>
+            <span class="ptag" id="scan-badge"></span>
+        </div>
+        <div id="filter-bar" style="display:flex;flex-wrap:wrap;gap:6px;padding:8px 16px;border-bottom:1px solid var(--border)">
+            <button class="filter-btn active" data-sector="ALL" onclick="filterSector('ALL',this)">Alle</button>
+            <button class="filter-btn" data-sector="WATCHLIST" onclick="filterSector('WATCHLIST',this)">Watchlist ★</button>
+        </div>
+        <div id="list-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;padding:12px 16px">
+            <div class="loading"><div class="spin"></div></div>
+        </div>
+    </div>
+
     <!-- Charts row + News -->
     <div class="col2-wide">
         <!-- Portfolio history -->
