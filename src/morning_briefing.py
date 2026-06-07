@@ -1597,7 +1597,7 @@ def run_morning_briefing():
                         investment_timeline=inv_timeline,
                         first_investment_date=inv_first,
                         portfolio_value_history=pv_history if pv_history else None,
-                        benchmark_history=bm_history if bm_history else None,
+                        benchmark_history=bm_history or None,
                         first_buy_dates_by_isin=first_buy_by_isin if first_buy_by_isin else None)
 
     # Prijs alerts genereren (>+15% of <-10% P&L)
