@@ -2305,7 +2305,11 @@ function renderLearnTab(){
     const allScored=[...active,...closed].filter(t=>t.score_at_entry||t.score);
     const avgScore=allScored.length?allScored.reduce((s,t)=>s+(t.score_at_entry||t.score||0),0)/allScored.length:null;
 
-    document.getElementById('lrn-winrate').textContent=winRate!==null?winRate+'%':'—';
+    // Gebruik post_mortem als fallback voor win_rate wanneer geen closed_trades in data.json
+    const pm=M?.post_mortem||{};
+    const displayWinRate=winRate!==null?winRate+'%':(pm.win_rate!=null?pm.win_rate.toFixed(1)+'%':'—');
+
+    document.getElementById('lrn-winrate').textContent=displayWinRate;
     document.getElementById('lrn-avgscore').textContent=avgScore!==null?avgScore.toFixed(1):'—';
     document.getElementById('lrn-avgwin').textContent=avgWin!==null?'+'+avgWin.toFixed(1)+'%':'—';
     document.getElementById('lrn-avgloss').textContent=avgLoss!==null?avgLoss.toFixed(1)+'%':'—';
