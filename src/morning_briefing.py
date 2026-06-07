@@ -1478,7 +1478,11 @@ def _build_benchmark_history() -> dict:
     ]
     for key, symbol in benchmarks:
         try:
-            hist = yf.Ticker(symbol).history(start=ytd_start, period="ytd")
+            # Gebruik alleen start= (geen period=) om conflicten te vermijden
+            hist = yf.Ticker(symbol).history(start=ytd_start)
+            if hist is None or hist.empty:
+                # Fallback: probeer met period
+                hist = yf.Ticker(symbol).history(period="ytd")
             if hist is not None and not hist.empty and len(hist) >= 2:
                 start_px = float(hist["Close"].iloc[0])
                 end_px   = float(hist["Close"].iloc[-1])
