@@ -1139,18 +1139,31 @@ function stockCard(c, source) {
                 <span class="sector-badge ${meta.cls}">${meta.label}</span>
             </div>
         </div>
+        ${(c.s_growth != null || c.s_momentum != null) ? `
+        <div class="engine-row">
+            <span class="engine-lbl">G</span>
+            <div class="engine-bar-bg"><div class="engine-bar-fill" style="width:${Math.min(100,(c.s_growth||0)*10)}%;background:${scoreColor(c.s_growth||0)}"></div></div>
+            <span class="engine-val">${c.s_growth != null ? c.s_growth.toFixed(1) : '–'}</span>
+        </div>
+        <div class="engine-row">
+            <span class="engine-lbl">M</span>
+            <div class="engine-bar-bg"><div class="engine-bar-fill" style="width:${Math.min(100,(c.s_momentum||0)*10)}%;background:${scoreColor(c.s_momentum||0)}"></div></div>
+            <span class="engine-val">${c.s_momentum != null ? c.s_momentum.toFixed(1) : '–'}</span>
+        </div>` : `
         <div class="score-bar-wrap">
             <div class="score-bar" style="width:${pct}%;background:${scoreColor(sc)}"></div>
-        </div>
-        <div class="card-metrics">
+        </div>`}
+        <div class="card-metrics" style="margin-top:5px">
             ${roicStr}
             <span class="metric">P/E <b>${fmt(c.pe_ratio)}</b></span>
-            ${dcfStr || `<span class="metric">Score <b style="color:${scoreColor(sc)}">${sc}</b></span>`}
+            ${dcfStr || `<span class="metric">Groei <b style="color:${scoreColor(c.revenue_growth/10||0)}">${c.revenue_growth != null ? (c.revenue_growth > 0 ? '+' : '') + c.revenue_growth + '%' : '--'}</b></span>`}
         </div>
-        ${hasAI ? `<div style="margin-top:4px;display:flex;gap:4px;align-items:center">
-            <span style="font-size:0.55rem;color:#22d3ee;font-family:var(--mono)">AI ✓</span>
-            ${sentimentBadge(sentiment)}
-        </div>` : ''}
+        <div style="margin-top:4px;display:flex;gap:3px;flex-wrap:wrap;align-items:center">
+            ${c.convergence_trigger ? `<span class="conv-zone-badge">⚡ ZONE</span>` : ''}
+            ${c.stage2 ? `<span class="tag-chip tag-stage2">Stage 2</span>` : ''}
+            ${c.vcp_active ? `<span class="tag-chip tag-vcp">VCP</span>` : ''}
+            ${hasAI ? `<span style="font-size:0.54rem;color:#22d3ee;font-family:var(--mono)">AI ✓</span>${sentimentBadge(sentiment)}` : ''}
+        </div>
     </div>`;
 }
 
