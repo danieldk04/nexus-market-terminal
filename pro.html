@@ -1433,7 +1433,8 @@ function renderAnalysis(data) {
             </div>
             <div style="border-top:1px solid var(--border);padding-top:10px;color:#cbd5e1">
                 ${mdToHtml(data.tier2.analysis)}
-            </div>`;
+            </div>
+            ${renderEngineSection(data)}`;
     } else {
         box.innerHTML = `
             <div style="font-family:var(--mono);font-weight:700;font-size:0.9rem;color:var(--accent);margin-bottom:10px">${data.name || data.ticker}</div>
