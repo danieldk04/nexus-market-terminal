@@ -1671,8 +1671,10 @@ function selectFromSearch(ticker, source) {
 
 // Close search on outside click
 document.addEventListener('click', e => {
-    if (!document.getElementById('search-wrap').contains(e.target)) {
-        document.getElementById('search-results').classList.remove('open');
+    const sw = document.getElementById('search-wrap');
+    if (sw && !sw.contains(e.target)) {
+        const sr = document.getElementById('search-results');
+        if (sr) sr.classList.remove('open');
     }
 });
 
