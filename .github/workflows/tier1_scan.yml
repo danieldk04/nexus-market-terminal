@@ -26,9 +26,9 @@ jobs:
           cache: pip
 
       - name: Installeer dependencies
-        run: pip install yfinance pandas requests anthropic lxml
+        run: pip install yfinance pandas numpy requests anthropic lxml
 
-      - name: Tier 1 — Deep Value Scanner (ROIC + DCF + ROCE)
+      - name: Tier 1 — Dual-Engine Scanner (S_Growth + S_Momentum + Convergence Zone)
         env:
           PYTHONPATH: src
           SILENT_RUN: "true"
