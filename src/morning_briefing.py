@@ -160,7 +160,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
     if portfolio_value_history:
         mem["portfolio_value_history"] = portfolio_value_history
         log.info(f"Portfolio waarde geschiedenis opgeslagen: {len(portfolio_value_history)} maanden")
-    if benchmark_history:
+    if benchmark_history is not None:
         mem["benchmark_history"] = benchmark_history
         log.info(f"Benchmark geschiedenis opgeslagen: {benchmark_history}")
     if first_buy_dates_by_isin:
