@@ -41,16 +41,33 @@ SECTOR_MAP = {
 }
 
 FALLBACK_TICKERS = [
-    "AAPL","MSFT","GOOGL","AMZN","META","NVDA","BRK-B","JPM","V","MA",
-    "UNH","JNJ","PG","KO","WMT","HD","CVX","MRK","ABBV","PEP",
-    "TMO","COST","ACN","LLY","TXN","AVGO","QCOM","INTU","AMAT","ADP",
-    "CB","CME","ICE","SPGI","MCO","BLK","GS","MS","AXP","C",
-    "ISRG","SYK","MDT","EW","BSX","DHR","A","IDXX","BIO","MTD",
-    "EOG","COP","PSX","MPC","VLO","XOM","SLB","HAL","BKR","DVN",
-    "NKE","SBUX","MCD","YUM","DPZ","CMG","DRI","EL","CL","CHD",
-    "AMT","PLD","EQIX","CCI","PSA","SPG","O","WELL","DLR","AVB",
-    "ALL","PGR","CB","TRV","MET","PRU","AFL","AIG","HIG","UNM",
-    "ASML","SHOP","TSM","NVO","SAP",
+    "AAPL","MSFT","GOOGL","AMZN","META","NVDA","JPM","V","MA","LLY",
+    "AVGO","COST","INTU","ISRG","TMO","ACN","NOW","AMAT","AMD","ARM",
+    "CRWD","ZS","PANW","NET","DDOG","SNOW","MDB","GTLB","APP","TTD",
+    "PLTR","AXON","MELI","ASML","TSM","NVO","SHOP","MRVL","SMCI","UBER",
+]
+
+# High-growth universe: always scanned regardless of scraping success
+# AI / Semiconductors / Cyber / Defense / Cloud / Fintech / Energy
+GROWTH_UNIVERSE = [
+    # Semiconductors & AI Infrastructure
+    "NVDA","AMD","ARM","SMCI","MRVL","AVGO","AMAT","LRCX","KLAC","ONTO","ACMR",
+    # Cybersecurity
+    "CRWD","ZS","PANW","NET","DDOG","FTNT","S","CYBR","OKTA","QLYS",
+    # Cloud & Enterprise Software
+    "NOW","HUBS","SNOW","MDB","GTLB","APP","TTD","MNDY","BILL","AXON",
+    # Defense & Space
+    "PLTR","RKLB","LDOS","LHX","NOC",
+    # Fintech & Payments
+    "NU","SOFI","AFRM","UPST","ADYEN.AS",
+    # Healthcare Innovation
+    "MRNA","VRTX","REGN","EXAS",
+    # Energy Transition
+    "CEG","VST","FSLR","ENPH",
+    # Global growth leaders
+    "ASML","ASML.AS","TSM","NVO","MELI","SEA","SHOP","UBER","TSLA",
+    # Netherlands
+    "BESI.AS","TKWY.AS",
 ]
 
 
