@@ -1017,16 +1017,38 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
         else:
             cost_eur = pl_pct = pl_eur = None
 
+        # Dividend yield + sector via yfinance
+        _dy = None
+        _sector = None
+        try:
+            _tk      = yf.Ticker(ticker)
+            _info    = _tk.info
+            _sector  = _info.get("sector")
+            _dy      = _info.get("dividendYield")
+            if not _dy or float(_dy) <= 0:
+                # Fallback: bereken yield via dividends history (werkt voor EU ETFs)
+                _one_yr = (date.today() - timedelta(days=365)).isoformat()
+                _divs   = _tk.dividends
+                _recent = _divs[_divs.index >= _one_yr] if len(_divs) > 0 else _divs.iloc[0:0]
+                _annual = float(_recent.sum())
+                _dy     = _annual / price if _annual > 0 and price > 0 else None
+        except Exception:
+            pass
+        _dy_rounded = round(float(_dy), 4) if _dy and float(_dy) > 0 else None
+
         positions.append({
-            "name":      ticker,
-            "pid":       ticker,
-            "size":      round(shares, 4),
-            "price":     round(price_eur, 2),
-            "value":     value,
-            "avg_price": round(avg_price, 4) if avg_price else None,
-            "cost_eur":  cost_eur,
-            "pl_pct":    pl_pct,
-            "pl_eur":    pl_eur,
+            "name":           ticker,
+            "pid":            ticker,
+            "size":           round(shares, 4),
+            "price":          round(price_eur, 2),
+            "value":          value,
+            "avg_price":      round(avg_price, 4) if avg_price else None,
+            "cost_eur":       cost_eur,
+            "pl_pct":         pl_pct,
+            "pl_eur":         pl_eur,
+            "div_yield":      _dy_rounded,
+            "annual_div_eur": round(value * float(_dy), 2) if _dy_rounded else None,
+            "sector":         _sector,
         })
         time.sleep(0.15)
 
