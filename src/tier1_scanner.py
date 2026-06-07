@@ -382,7 +382,7 @@ TOP_N    = 40
 
 
 def main():
-    log.info("=== NEXUS DEEP VALUE SCAN STARTING ===")
+    log.info("=== NEXUS HIGH-GROWTH SCAN STARTING ===")
     memory     = load_memory()
     post_mortem = memory.get("post_mortem", {})
     universe   = fetch_global_universe()
