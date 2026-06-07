@@ -97,7 +97,7 @@
     {
       "date": "2026-06-07",
       "degiro": 16272.36,
-      "tr": 8294.85,
+      "tr": 8290.83,
       "nexus": 2754.98,
       "bux": 1981.73
     },
@@ -224,17 +224,17 @@
     "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
   ],
   "tr_summary": {
-    "total": 8294.85,
-    "total_pl_pct": -2.1,
+    "total": 8290.83,
+    "total_pl_pct": -2.15,
     "total_invested": 8473.03,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4458.56,
-        "price": 53993.3906,
-        "pl_pct": -10.45,
-        "pl_eur": -520.03,
-        "weight": 53.8
+        "value": 4454.54,
+        "price": 53944.7383,
+        "pl_pct": -10.53,
+        "pl_eur": -524.05,
+        "weight": 53.7
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -270,7 +270,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-06-07T15:56:52.954756+00:00",
+  "dashboard_updated": "2026-06-07T16:06:33.986880+00:00",
   "degiro_summary": {
     "total": 16272.36,
     "total_pl_pct": 32.64,
@@ -314,8 +314,8 @@
         "value": 561.39,
         "pl_pct": 60.22,
         "pl_eur": 211.01,
-        "div_yield": 0.83,
-        "annual_div_eur": 465.95,
+        "div_yield": 0.0083,
+        "annual_div_eur": 4.66,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.4
@@ -324,20 +324,20 @@
   },
   "news_summary": [
     {
-      "theme": "Brede marktvolatiliteit en sentiment",
-      "summary": "De beurs vertoont sterke wisselingen met rode dagen afgewisseld door technische herstel, gedreven door onzekerheid over geopolitieke spanningen (Iran, oorlogen) en macro-economische factoren. Dit be\u00efnvloedt brede indexen zoals de AEX direct en raakt diversified ETF-beleggers die blootgesteld zijn aan deze volatiliteit."
+      "theme": "Volatiliteit en marktbrede onzekerheid",
+      "summary": "De markten vertonen flinke schommelingen met rode dagen en onrust door geopolitieke spanningen (Iran-oorlog) en economische signalen. Dit raakt direct je AEX- en World-ETF-posities, die aan deze volatiliteit worden blootgesteld."
     },
     {
-      "theme": "Sectorale divergentie: Tech en Defensie",
-      "summary": "Terwijl tech-aandelen (AI-gerelateerd) de AEX-grens van 1000 punten doorbreken, geldt dit niet voor alle sectoren; defensie profiteert van oorlogsdreiging terwijl luxe-merken als Ferrari en Victoria's Secret sterk uiteenlopen. Beleggers in thematische ETFs moeten rekening houden met ongelijke sectorspreiding."
+      "theme": "Sector-rotatie: Tech versus defensie",
+      "summary": "Terwijl tech-aandelen (Adyen, X-Fab) volatiel zijn en soms crashen, profiteren defensie- en luxe-aandelen (Ferrari onderuit, Victoria's Secret stijgt) van marktdynamica. Dit illustreert de tweedeling waar beleggers mee worstelen bij diversificatie."
     },
     {
-      "theme": "Individuele aandelen onder druk",
-      "summary": "Grote delers zoals Unilever, Adyen (-12%) en Ferrari krijgen harde klappen, soms door kritische rapporten of marktomstandigheden, terwijl selectieve aandelen zoals Philips en Brunel (insider-buying signaal) beter presteren. Dit onderstreept het belang van stockpicking naast index-exposure."
+      "theme": "Individuele bedrijfsnieuws en kansen",
+      "summary": "Specifieke aandelen zoals Philips, Unilever, en Brunel (insiders kopen in) bieden handelskansen of waarschuwen voor risico's. Dit benadrukt het belang van selectiviteit naast ETF-beleggingen."
     },
     {
-      "theme": "Recordstanden ondanks brede onrust",
-      "summary": "De AEX bereikt nieuwe records, maar dit wordt gedragen door slechts een handjevol aandelen in plaats van brede marktdeelname, wat wijst op fragiele rally. Dit adviseert beleggers tegen overconfidentie en pleit voor gediversifieerde posities in plaats van concentratie."
+      "theme": "AEX-index doet het relatief goed ondanks onrust",
+      "summary": "De AEX doorbreekt 1000 punten en herstelt gedeeltelijk, wat aangeeft dat Nederlandse aandelen qua fundamentals robuust blijven ondanks externe risico's. Dit is cruciaal voor wie op lokale ETF's vertrouwt."
     }
   ],
   "bux_summary": {
@@ -365,8 +365,8 @@
         "price": 123.12,
         "pl_pct": -14.28,
         "pl_eur": -41.03,
-        "div_yield": 4.17,
-        "annual_div_eur": 1026.78,
+        "div_yield": 0.0417,
+        "annual_div_eur": 10.27,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 12.4
@@ -391,8 +391,8 @@
         "price": 4.34,
         "pl_pct": 32.44,
         "pl_eur": 1.06,
-        "div_yield": 5.02,
-        "annual_div_eur": 21.79,
+        "div_yield": 0.0502,
+        "annual_div_eur": 0.22,
         "first_buy_date": null,
         "sector": "Communication Services",
         "weight": 0.2
