@@ -177,127 +177,171 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
         t    = yf.Ticker(ticker_symbol)
         info = t.info
 
-        # Basisfilters
-        roic = compute_roic(info)
-        roce = compute_roce(info)
-
-        # Minimale kwaliteitsdrempel: ROIC > 10% OF ROE > 15%
-        roe = info.get("returnOnEquity", 0) or 0
-        if roe < 0.15 and (roic is None or roic < 10):
+        # Minimum marktkapitalisatie: $500M — vermijd micro-caps
+        market_cap = info.get("marketCap", 0) or 0
+        if market_cap > 0 and market_cap < 500_000_000:
             return None
 
         sector = info.get("sector", "Unknown")
         group  = get_industry_group(sector)
         pe     = info.get("trailingPE", 0) or 0
-        max_pe = 45 if group == "Tech & AI" else 28
-        if pe <= 0 or pe > max_pe:
-            return None
 
+        # Schuldenfilter — te veel schuld = structureel risico
         de_raw   = info.get("debtToEquity", 0) or 0
         de_ratio = (de_raw / 100) if de_raw > 5 else de_raw
         if de_ratio > 3.0:
             return None
 
         rev_growth    = info.get("revenueGrowth", 0) or 0
+        gross_margin  = info.get("grossMargins", 0) or 0
         fcf           = info.get("freeCashflow")
         profit_margin = info.get("profitMargins", 0) or 0
         beta          = info.get("beta", 1.0) or 1.0
         price         = info.get("currentPrice") or info.get("regularMarketPrice") or 0
+        roe           = info.get("returnOnEquity", 0) or 0
+        total_revenue = info.get("totalRevenue", 0) or 0
 
-        # Trend-filter: prijs vs. 50- en 200-daags gemiddelde
+        # Hard filter: dalende omzet + verlieslatend = geen groeikans
+        if rev_growth < -0.10 and profit_margin < 0:
+            return None
+
+        # Trend-filter (versoepeld: groeiaandelen mogen correctie-fase doorstaan)
         ma50  = info.get("fiftyDayAverage") or 0
         ma200 = info.get("twoHundredDayAverage") or 0
         trend_penalty = 0.0
-        if ma50 > 0 and price < ma50 * 0.97:       # >3% onder MA50
-            trend_penalty = 0.5
-        if ma200 > 0 and price < ma200 * 0.97:     # ook onder MA200 → dubbele downtrend
-            trend_penalty = max(trend_penalty, 0.9)
-        # Hard filter: skip als prijs >10% onder beide MA's (sterke dalende trend)
-        if ma50 > 0 and ma200 > 0 and price < ma50 * 0.90 and price < ma200 * 0.90:
+        if ma50 > 0 and price < ma50 * 0.97:
+            trend_penalty = 0.3
+        if ma200 > 0 and price < ma200 * 0.97:
+            trend_penalty = max(trend_penalty, 0.6)
+        # Hard filter alleen bij diepe downtrend + omzetdaling
+        if ma50 > 0 and ma200 > 0 and price < ma50 * 0.88 and price < ma200 * 0.88 and rev_growth < 0:
             return None
 
-        # P/FCF
-        market_cap = info.get("marketCap", 0) or 0
+        # Hulpberekeningen
+        roic = compute_roic(info)
+        roce = compute_roce(info)
         pfcf = round(market_cap / fcf, 1) if fcf and fcf > 0 and market_cap > 0 else None
 
-        # Analist targets
         analyst_target = info.get("targetMeanPrice")
         analyst_count  = info.get("numberOfAnalystOpinions", 0) or 0
         analyst_upside = None
         if analyst_target and price and price > 0:
             analyst_upside = round(((analyst_target / price) - 1) * 100, 1)
 
-        # 5-jaars data
-        five_yr = compute_5yr_data(t)
-
-        # DCF berekening
-        dcf = compute_dcf(info)
-
-        # Dividend sustainability
+        five_yr   = compute_5yr_data(t)
+        dcf       = compute_dcf(info)
         div_check = check_dividend_sustainability(info)
 
-        # ── SCORE LOGICA ─────────────────────────────────────────────────────
-        base         = 5.0
-        max_pe_norm  = max_pe
-        pe_penalty   = (pe / max_pe_norm) * 3.5
-        roe_bonus    = min(3.5, (roe / 0.30) * 2.5)
-        debt_penalty = min(1.2, de_ratio / 3.0)
-        growth_bonus = 0.4 if rev_growth > 0.10 else (0.2 if rev_growth > 0 else 0)
-        fcf_penalty  = 0.5 if (fcf is not None and fcf < 0) else 0
-        margin_bonus = 0.3 if profit_margin > 0.15 else 0
-        beta_penalty = 0.3 if beta > 2.2 else 0
+        # ── HIGH-GROWTH SCORE LOGICA ──────────────────────────────────────────
+        base  = 5.0
+        rg_pct = rev_growth * 100
+        gm_pct = gross_margin * 100
 
-        # ROIC bonus
-        roic_bonus = 0.0
-        if roic is not None:
-            if roic > 25:   roic_bonus = 0.7
-            elif roic > 15: roic_bonus = 0.4
+        # 1. Omzetgroei — primair signaal (max +2.5, min -1.0)
+        if rg_pct >= 50:     growth_bonus = 2.5
+        elif rg_pct >= 30:   growth_bonus = 2.0
+        elif rg_pct >= 20:   growth_bonus = 1.5
+        elif rg_pct >= 10:   growth_bonus = 0.8
+        elif rg_pct >= 0:    growth_bonus = 0.2
+        else:                growth_bonus = max(-1.0, rg_pct * 0.04)
 
-        # ROCE bonus
-        roce_bonus = 0.0
-        if roce is not None:
-            if roce > 20:   roce_bonus = 0.4
-            elif roce > 12: roce_bonus = 0.2
+        # 2. Bruto-marge — kwaliteit van het businessmodel (max +1.0, min -0.3)
+        if gm_pct >= 70:     margin_bonus = 1.0
+        elif gm_pct >= 50:   margin_bonus = 0.6
+        elif gm_pct >= 30:   margin_bonus = 0.2
+        elif gm_pct > 0:     margin_bonus = max(-0.3, (gm_pct - 30) * 0.01)
+        else:                margin_bonus = 0.0
 
-        # P/FCF bonus
-        pfcf_bonus = 0.0
-        if pfcf is not None:
-            if pfcf < 15:   pfcf_bonus = 0.5
-            elif pfcf < 22: pfcf_bonus = 0.25
+        # 3. Omzet-CAGR 5 jaar — aanhoudende compounding (max +0.8)
+        rev_cagr = five_yr.get("rev_cagr_5yr")
+        cagr_bonus = 0.0
+        if rev_cagr is not None:
+            if rev_cagr >= 25:   cagr_bonus = 0.8
+            elif rev_cagr >= 15: cagr_bonus = 0.5
+            elif rev_cagr >= 10: cagr_bonus = 0.2
 
-        # DCF upside bonus
+        # 4. PEG-ratio (P/E ÷ groeipercentage) — slimmer dan kale P/E
+        peg_bonus = 0.0
+        if pe > 0 and rg_pct > 2:
+            peg = pe / rg_pct
+            if peg < 1.0:    peg_bonus = 0.8
+            elif peg < 2.0:  peg_bonus = 0.4
+            elif peg < 3.5:  peg_bonus = 0.1
+            elif peg > 7.0:  peg_bonus = -0.5
+        elif pe <= 0 and rg_pct < 20:
+            # Verlieslatend én niet snel genoeg groeiend
+            peg_bonus = -0.3
+
+        # 5. Free Cash Flow — toont of het model al werkt op schaal
+        fcf_bonus = 0.0
+        if fcf is not None and fcf > 0 and total_revenue > 0:
+            fcf_margin = fcf / total_revenue
+            if fcf_margin > 0.20:   fcf_bonus = 0.5
+            elif fcf_margin > 0.10: fcf_bonus = 0.3
+            else:                   fcf_bonus = 0.1
+        elif fcf is not None and fcf < 0:
+            # Negatieve FCF acceptabel voor snelle groeiers
+            fcf_bonus = -0.1 if rg_pct >= 30 else -0.5
+
+        # 6. Momentum — koers bevestigt de groeiverhaal
+        momentum_bonus = 0.0
+        if ma50 > 0 and ma200 > 0:
+            if price > ma50 and ma50 > ma200:
+                momentum_bonus = 0.5    # Golden cross, opgaande trend
+            elif price > ma200:
+                momentum_bonus = 0.2
+
+        # 7. Analisten-upside
+        analyst_bonus = 0.0
+        if analyst_upside is not None and analyst_count >= 5:
+            if analyst_upside > 30:   analyst_bonus = 0.5
+            elif analyst_upside > 20: analyst_bonus = 0.3
+            elif analyst_upside > 10: analyst_bonus = 0.15
+
+        # 8. DCF-opwaarts potentieel (ondersteunend, niet dominant)
         dcf_bonus = 0.0
         if dcf is not None and dcf.get("dcf_upside") is not None:
             upside = dcf["dcf_upside"]
-            if upside > 40:   dcf_bonus = 0.8
-            elif upside > 20: dcf_bonus = 0.4
-            elif upside < -15: dcf_bonus = -0.5   # Overgewaardeerd
+            if upside > 40:    dcf_bonus = 0.6
+            elif upside > 20:  dcf_bonus = 0.3
+            elif upside < -20: dcf_bonus = -0.4
 
-        # Analyst upside bonus
-        analyst_bonus = 0.0
-        if analyst_upside is not None and analyst_count >= 5:
-            if analyst_upside > 20:   analyst_bonus = 0.3
-            elif analyst_upside > 10: analyst_bonus = 0.15
+        # 9. Thematische bonus: AI / Semiconductors / Cyber / Defense / Space
+        GROWTH_THEMES = {
+            "NVDA","AMD","ARM","SMCI","MRVL","AVGO","TSM","AMAT","LRCX","KLAC","ACMR","ONTO",
+            "CRWD","ZS","PANW","NET","DDOG","SNOW","S","FTNT","CYBR","OKTA","QLYS",
+            "PLTR","RKLB","AXON","LHX","NOC","LDOS",
+            "NOW","HUBS","GTLB","APP","TTD","MDB","MNDY","BILL",
+            "NU","SOFI","AFRM","UPST","ADYEN.AS",
+            "CEG","VST","FSLR","ENPH",
+            "ASML","ASML.AS","NVO","MELI","SEA","SHOP","TSLA",
+        }
+        thematic_bonus = 0.3 if ticker_symbol in GROWTH_THEMES else 0.0
 
-        # Dividend risico straf
+        # 10. Schulden-straf (behouden)
+        debt_penalty = min(1.2, de_ratio / 3.0)
+
+        # 11. Beta-straf (alleen bij extreme volatiliteit)
+        beta_penalty = 0.3 if beta > 2.5 else 0.0
+
+        # 12. Dividend-risico (kleiner gewicht — minder relevant voor groeiaandelen)
         div_penalty = 0.0
         if div_check is not None and not div_check["sustainable"]:
-            div_penalty = 0.5
+            div_penalty = 0.3
 
-        # Memory-penalty: lessen uit post-mortem sector-adjustments
+        # 13. Memory-lessen en post-mortem sectoraanpassingen
         memory_penalty = 0.0
         for lesson in memory.get("lessons", []):
             if lesson.get("sector") == group and lesson.get("type") == "NEGATIVE_LEARNING":
                 memory_penalty += 0.4
-        # Post-mortem sector adjustments
         pm_adjustments = post_mortem.get("sector_adjustments", {})
         pm_adj = pm_adjustments.get(group, 0)
         memory_penalty = min(2.0, memory_penalty)
 
         raw_score = (
-            base - pe_penalty + roe_bonus - debt_penalty + growth_bonus
-            - fcf_penalty + margin_bonus - beta_penalty + roic_bonus
-            + roce_bonus + pfcf_bonus + dcf_bonus + analyst_bonus
+            base + growth_bonus + margin_bonus + cagr_bonus + peg_bonus
+            + fcf_bonus + momentum_bonus + analyst_bonus + dcf_bonus
+            + thematic_bonus - debt_penalty - beta_penalty
             - div_penalty - memory_penalty + pm_adj - trend_penalty
         )
         score = round(max(1.0, min(10.0, raw_score)), 1)
@@ -312,6 +356,7 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
             "pe_ratio":        round(pe, 2),
             "debt_to_equity":  round(de_ratio, 2),
             "revenue_growth":  round(rev_growth * 100, 1),
+            "gross_margin":    round(gross_margin * 100, 1),
             "profit_margin":   round(profit_margin * 100, 1),
             "fcf_positive":    fcf is None or fcf >= 0,
             "beta":            round(beta, 2),
