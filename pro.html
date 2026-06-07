@@ -1107,10 +1107,16 @@ function renderDashboard(){
     renderDividendPanel('div-panel-dash');
 
     /* Scanner candidates */
-    const cands = B?.top_candidates || [];
-    document.getElementById('scan-badge').textContent = cands.length + ' kandidaten';
-    buildFilterBar(cands);
-    renderCurrentView();
+    try {
+        const cands = B?.top_candidates || [];
+        document.getElementById('scan-badge').textContent = cands.length + ' kandidaten';
+        buildFilterBar(cands);
+        renderCurrentView();
+    } catch(e) {
+        const lc = document.getElementById('list-container');
+        if(lc) lc.innerHTML = `<div style="color:#f87171;font-size:.75rem;padding:12px">JS-fout: ${e.message}</div>`;
+        console.error('Scanner render fout:', e);
+    }
 }
 
 // ─── FILTER / TAB BAR ─────────────────────────────────────────────────────────
