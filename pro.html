@@ -1251,6 +1251,24 @@ function renderDcfStrip(data) {
         chips.push(chip('Div Yield', div.yield + '%', null, c));
     }
 
+    // S_Growth / S_Momentum / convergence
+    if (data.s_growth != null)
+        chips.push(chip('S_Growth', data.s_growth.toFixed(1) + '/10', scoreColor(data.s_growth)));
+    if (data.s_momentum != null)
+        chips.push(chip('S_Momentum', data.s_momentum.toFixed(1) + '/10', scoreColor(data.s_momentum)));
+    if (data.convergence_trigger)
+        chips.push(chip('⚡ Zone', 'Actief', null, 'chip-green'));
+    if (data.stage2)
+        chips.push(chip('Stage 2', '✓', null, 'chip-green'));
+    if (data.vcp_active)
+        chips.push(chip('VCP', '⋯', null, 'chip-purple'));
+    if (data.rsi14 != null) {
+        const rc = (data.rsi14 >= 50 && data.rsi14 <= 70) ? 'chip-green' : 'chip-yellow';
+        chips.push(chip('RSI14', data.rsi14, null, rc));
+    }
+    if (data.stop_loss_atr != null)
+        chips.push(chip('Stop ATR', '$' + data.stop_loss_atr, '#f87171'));
+
     if (chips.length === 0) {
         strip.style.display = 'none';
     } else {
