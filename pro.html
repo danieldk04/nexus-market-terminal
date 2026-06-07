@@ -1437,17 +1437,19 @@ function renderAnalysis(data) {
             ${renderEngineSection(data)}`;
     } else {
         box.innerHTML = `
-            <div style="font-family:var(--mono);font-weight:700;font-size:0.9rem;color:var(--accent);margin-bottom:10px">${data.name || data.ticker}</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+            <div style="font-family:var(--mono);font-weight:700;font-size:0.9rem;color:var(--accent);margin-bottom:6px">${data.name || data.ticker}</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center">
                 <span class="sector-badge ${meta.cls}">${meta.label}</span>
-                <span style="font-family:var(--mono);font-size:0.65rem;color:var(--muted)">ROIC ${fmt(data.roic,'%')}</span>
-                <span style="font-family:var(--mono);font-size:0.65rem;color:var(--muted)">P/E ${fmt(data.pe_ratio)}</span>
-                ${dcf.dcf_upside != null ? `<span style="font-family:var(--mono);font-size:0.65rem;color:var(--muted)">DCF ${dcf.dcf_upside > 0 ? '+' : ''}${dcf.dcf_upside}%</span>` : ''}
+                ${data.convergence_trigger ? `<span class="conv-zone-badge">⚡ ZONE</span>` : ''}
+                ${data.stage2 ? `<span class="tag-chip tag-stage2">Stage 2</span>` : ''}
+                ${data.vcp_active ? `<span class="tag-chip tag-vcp">VCP</span>` : ''}
+                <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted)">ROIC ${fmt(data.roic,'%')} · P/E ${fmt(data.pe_ratio)}${dcf.dcf_upside != null ? ' · DCF ' + (dcf.dcf_upside > 0 ? '+' : '') + dcf.dcf_upside + '%' : ''}</span>
             </div>
-            <div class="no-analysis">
+            ${renderEngineSection(data)}
+            ${(data.s_growth == null && data.s_momentum == null) ? `<div class="no-analysis">
                 <div style="font-size:1.5rem;opacity:0.2;margin-bottom:8px">⏳</div>
                 Geen AI-analyse. Tier-2 genereert Bull vs Bear rapporten voor de top 10 bij de volgende scan-run.
-            </div>`;
+            </div>` : ''}`;
     }
 }
 
