@@ -55,24 +55,31 @@
       "sector": "Materials",
       "insight": "Verlies NEM (-7.8%). Bewaken.",
       "type": "NEGATIVE_LEARNING"
+    },
+    {
+      "date": "2026-06-07",
+      "ticker": "NEM",
+      "sector": "Materials",
+      "insight": "Stop-loss NEM (-9.1%). Sector Materials voorzichtig.",
+      "type": "NEGATIVE_LEARNING"
     }
   ],
   "initialized_at": "2026-04-04T00:00:00+00:00",
   "version": "nexus-v2",
   "post_mortem": {
-    "analysis": "# POST-MORTEM RAPPORT: AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Seri\u00eble verliezen in Energy (3x in 48 uur)** domineert dataset. EXE verliest consistent (-5.3% tot -5.8%) op 2026-06-02 tot -06-04. Win rate van 12.5% (1:7) is kritiek. Tech & AI vertoont paradox: 1 overtuigende win (+9.9%), maar 2 verliezen.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: EXE-positie niet afgesloten na eerste verlies; bot voegde toe in dalende trend\n- **Sectorblindheid**: Geen dynamische sectorfiltering; Energy-volatiliteit wordt genegeerd\n- **Survivorship bias**: Succes op ADBE verhult systematisch onderprestatiepatroon\n\n## 3. AANBEVELINGEN\n1. **Implementeer \"Three-Strike Rule\"**: Sluit positie onmiddellijk na 3 opeenvolgende dagverliezen in dezelfde aandeel (zou EXE-cascade van -15.4% naar -5.3% beperkt hebben)\n2. **Sectorfilter Energy**: Verhoog stop-loss van 5% naar 3% in Energy; verhoog naar 7% in Tech & AI (lagere volatiliteit hier)\n\n## 4. SECTOR BIAS\n- **Vermijden**: Energy (3 verliezen, 100% fail rate)\n- **Ondergewichten**: Materials (2 verliezen, hoog drawdown)\n- **Overgewichten**: Tech & AI alleen met strikte take-profit targets (ADBE-model werkt)\n\n**Urgentie**: Bot is momenteel *verlies-generatief*. Pauzeer tot aanpassingen live zijn.",
-    "win_rate": 12.5,
+    "analysis": "# POST-MORTEM RAPPORT: AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\nSystematisch falen in Materials & Energy (6 van 8 verliezen; 75%). Herhaalde posities in EXE en NEM genereren cumulatieve verliezen (-26.5% gezamenlijk). Win rate van 11.1% is onhoudbaar; break-even vereist minimaal 33% bij gelijke wins/verliezen.\n\n## 2. ROOT CAUSE\n**Timing-fout**: Bot voert herhaalde intra-sessie trades uit (EXE 3x binnen 3 dagen) zonder positiecorrectie. Dit suggereert ontbreken van mean-reversion filter of sentiment-check. **Scorelogica**: Tech & AI (1 win vs. 2 verliezen) presteert slechts marginaal beter; Materials (0 wins vs. 3 verliezen) is systematisch fout.\n\n## 3. AANBEVELINGEN\n1. **Intraday-deduplicatie**: Geen nieuwe positie in dezelfde ticker binnen 5 handelsdagen na verlies. Voorkomt EXE-scenario.\n2. **Sector-drawdown limiet**: Materials & Energy: max. 2% AUM; Tech & AI: verhoog naar 4% tot betere validatie. Rebalanceer dagelijks.\n\n## 4. SECTOR BIAS\n- **Mijden**: Materials & Energy (100% verliesratio)\n- **Herbekijken**: Tech & AI signalen (enkel 33% win rate)\n- **Aanbeveling**: Pauzeer bot tot Win rate > 25% in backtesting.",
+    "win_rate": 11.1,
     "worst_sectors": [
+      [
+        "Materials",
+        3
+      ],
       [
         "Energy",
         3
       ],
       [
         "Tech & AI",
-        2
-      ],
-      [
-        "Materials",
         2
       ]
     ],
@@ -84,21 +91,22 @@
     ],
     "repeat_losers": [
       "ADBE",
-      "EXE"
+      "EXE",
+      "NEM"
     ],
     "sector_adjustments": {
+      "Materials": -1.5,
       "Energy": -1.5,
-      "Tech & AI": -0.7,
-      "Materials": -1.0
+      "Tech & AI": -0.7
     },
-    "run_at": "2026-06-05T18:59:00.994939+00:00"
+    "run_at": "2026-06-07T18:50:56.244807+00:00"
   },
   "portfolio_history": [
     {
       "date": "2026-06-07",
       "degiro": 16272.36,
-      "tr": 8290.83,
-      "nexus": 2754.98,
+      "tr": 8290.15,
+      "nexus": 3231.86,
       "bux": 1981.73
     },
     {
@@ -218,22 +226,22 @@
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "Ferrari incasseert harde klappen op de beurs",
     "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
-    "Adyen crasht plotseling op beurs: aandeel verliest bijna 12 procent na kritisch rapport",
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
+    "Adyen crasht plotseling op beurs: aandeel verliest bijna 12 procent na kritisch rapport",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
     "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
   ],
   "tr_summary": {
-    "total": 8290.83,
-    "total_pl_pct": -2.15,
+    "total": 8290.15,
+    "total_pl_pct": -2.16,
     "total_invested": 8473.03,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4454.54,
-        "price": 53944.7383,
-        "pl_pct": -10.53,
-        "pl_eur": -524.05,
+        "value": 4453.86,
+        "price": 53936.4609,
+        "pl_pct": -10.54,
+        "pl_eur": -524.73,
         "weight": 53.7
       },
       {
@@ -270,7 +278,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-06-07T16:06:33.986880+00:00",
+  "dashboard_updated": "2026-06-07T19:01:00.565114+00:00",
   "degiro_summary": {
     "total": 16272.36,
     "total_pl_pct": 32.64,
@@ -324,20 +332,20 @@
   },
   "news_summary": [
     {
-      "theme": "Volatiliteit en marktbrede onzekerheid",
-      "summary": "De markten vertonen flinke schommelingen met rode dagen en onrust door geopolitieke spanningen (Iran-oorlog) en economische signalen. Dit raakt direct je AEX- en World-ETF-posities, die aan deze volatiliteit worden blootgesteld."
+      "theme": "Volatiliteit en markttweedeling",
+      "summary": "De markt vertoont sterke schommelingen met een tweedeling tussen AI-profiters en andere sectoren, wat leidt tot onrust en code oranje-signalen. Voor ETF-beleggers betekent dit dat concentratie in techaandelen risico's met zich meebrengt en diversificatie cruciaal blijft."
     },
     {
-      "theme": "Sector-rotatie: Tech versus defensie",
-      "summary": "Terwijl tech-aandelen (Adyen, X-Fab) volatiel zijn en soms crashen, profiteren defensie- en luxe-aandelen (Ferrari onderuit, Victoria's Secret stijgt) van marktdynamica. Dit illustreert de tweedeling waar beleggers mee worstelen bij diversificatie."
+      "theme": "Geopolitieke spanningen be\u00efnvloeden sectoren",
+      "summary": "Oorlogsdreiging (Iran) en internationale onrust zorgen voor divergentie: Europese aandelen herstellen maar Azi\u00eb daalt, terwijl defensiebedrijven profiteren. Dit be\u00efnvloedt de geografische allocatie en sectorweging in ETFs aanzienlijk."
     },
     {
-      "theme": "Individuele bedrijfsnieuws en kansen",
-      "summary": "Specifieke aandelen zoals Philips, Unilever, en Brunel (insiders kopen in) bieden handelskansen of waarschuwen voor risico's. Dit benadrukt het belang van selectiviteit naast ETF-beleggingen."
+      "theme": "Sterke en zwakke individuele aandelen",
+      "summary": "Grote verschillen tussen winnaars (Victoria's Secret, Philips, AEX doorbreekt 1000 punten) en verliezers (Adyen -12%, Ferrari, Unilever), waarbij slechts een handjevol aandelen de indexstijging drijft. Dit duidt op selectiviteit in stockpicking en warns voor valse indexprestaties."
     },
     {
-      "theme": "AEX-index doet het relatief goed ondanks onrust",
-      "summary": "De AEX doorbreekt 1000 punten en herstelt gedeeltelijk, wat aangeeft dat Nederlandse aandelen qua fundamentals robuust blijven ondanks externe risico's. Dit is cruciaal voor wie op lokale ETF's vertrouwt."
+      "theme": "Insiders kopen in dips, spaarparadox",
+      "summary": "Brunel-directeuren kopen aandelen na koersdaling, wat vertrouwen signaleert, maar beleggers houden zich in vanwege angst ondanks gestegen vermogen. Dit suggereert onderwaardering en psychologische weerstand die beleggingskansen kan cre\u00ebren."
     }
   ],
   "bux_summary": {
@@ -889,6 +897,85 @@
           "conviction": null
         }
       ]
+    },
+    {
+      "date": "2026-06-07",
+      "macro_snapshot": {
+        "vix": 21.51,
+        "treasury_10y": 4.54
+      },
+      "candidates": [
+        {
+          "ticker": "JNJ",
+          "price": 232.77,
+          "score": 5.14,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "IEX",
+          "price": 215.35,
+          "score": 4.96,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "FTV",
+          "price": 61.28,
+          "score": 4.65,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "EQIX",
+          "price": 1080.95,
+          "score": 4.48,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MO",
+          "price": 72.19,
+          "score": 4.3,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MRK",
+          "price": 120.79,
+          "score": 4.24,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "JCI",
+          "price": 143.65,
+          "score": 4.02,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "AOS",
+          "price": 57.2,
+          "score": 3.68,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "ITW",
+          "price": 252.72,
+          "score": 3.54,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "GILD",
+          "price": 129.16,
+          "score": 3.49,
+          "recommended_action": "watch",
+          "conviction": null
+        }
+      ]
     }
   ],
   "portfolio_value_history": [
@@ -1108,7 +1195,8 @@
     "US92826C8394": "2022-05-03"
   },
   "cooldowns": {
-    "CF": "2026-05-29"
+    "CF": "2026-05-29",
+    "NEM": "2026-06-07"
   },
   "benchmark_history": {
     "sp500_ytd": 7.66,
