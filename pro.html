@@ -1938,16 +1938,15 @@ function renderNieuwsTab(){
    LEARN TAB
 ══════════════════════════════════════════════════════ */
 function renderLearnTab(){
-    const trades=B?.portfolio||[];
-    const closed=trades.filter(t=>t.status==='closed'||t.closed);
+    const active=B?.active_trades||[];
+    const closed=B?.portfolio?.closed_trades||B?.closed_trades||[];
     const wins=closed.filter(t=>(t.pl_percent||0)>0);
     const losses=closed.filter(t=>(t.pl_percent||0)<=0);
     const winRate=closed.length?Math.round(wins.length/closed.length*100):null;
     const avgWin=wins.length?wins.reduce((s,t)=>s+(t.pl_percent||0),0)/wins.length:null;
     const avgLoss=losses.length?losses.reduce((s,t)=>s+(t.pl_percent||0),0)/losses.length:null;
-    const active=B?.active_trades||[];
-    const allScored=[...active,...closed].filter(t=>t.score);
-    const avgScore=allScored.length?allScored.reduce((s,t)=>s+(t.score||0),0)/allScored.length:null;
+    const allScored=[...active,...closed].filter(t=>t.score_at_entry||t.score);
+    const avgScore=allScored.length?allScored.reduce((s,t)=>s+(t.score_at_entry||t.score||0),0)/allScored.length:null;
 
     document.getElementById('lrn-winrate').textContent=winRate!==null?winRate+'%':'—';
     document.getElementById('lrn-avgscore').textContent=avgScore!==null?avgScore.toFixed(1):'—';
