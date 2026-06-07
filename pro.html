@@ -2344,11 +2344,13 @@ function renderAll(){
 
 async function init(){
     [M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);
+    globalData=B;
     renderAll();
     setInterval(async()=>{
         const rl=document.getElementById('refresh-lbl');
         if(rl) rl.style.display='inline';
         [M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);
+        globalData=B;
         renderAll();
         if(rl) rl.style.display='none';
     },300000);
