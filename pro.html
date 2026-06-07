@@ -1185,62 +1185,94 @@ function renderWatchlist() {
 }
 
 function stockCard(c, source) {
-    const meta     = sectorMeta(c.industry_group, c.sector);
-    const sc       = c.score || 0;
-    const pct      = Math.min(100, sc * 10);
-    const hasAI    = !!(c.tier2?.analysis);
+    const meta      = sectorMeta(c.industry_group, c.sector);
+    const sc        = c.score || 0;
+    const sg        = c.s_growth;
+    const sm        = c.s_momentum;
+    const dcf       = c.dcf || {};
+    const upside    = dcf.dcf_upside;
     const sentiment = c.tier2?.sentiment_score || '';
 
-    // DCF upside chip
-    const dcf    = c.dcf || {};
-    const upside = dcf.dcf_upside;
-    const dcfStr = upside != null
-        ? `<span class="metric">DCF <b style="color:${upside > 15 ? '#4ade80' : upside > 0 ? '#fbbf24' : '#f87171'}">${upside > 0 ? '+' : ''}${upside}%</b></span>`
-        : '';
+    // Score kleur + label
+    const scColor  = sc >= 7 ? '#4ade80' : sc >= 5 ? '#fbbf24' : '#f87171';
+    const scBg     = sc >= 7 ? 'rgba(74,222,128,.12)' : sc >= 5 ? 'rgba(251,191,36,.12)' : 'rgba(248,113,113,.12)';
+    const scLabel  = sc >= 7 ? 'STERK' : sc >= 5 ? 'NEUTRAAL' : 'ZWAK';
 
-    const roicStr = c.roic != null
-        ? `<span class="metric">ROIC <b>${c.roic}%</b></span>`
-        : `<span class="metric">ROE <b>${c.roe}%</b></span>`;
+    // DCF upside
+    const dcfColor = upside > 20 ? '#4ade80' : upside > 0 ? '#fbbf24' : '#f87171';
+    const dcfStr   = upside != null ? `${upside > 0 ? '+' : ''}${upside}%` : '–';
+
+    // ROIC of ROE
+    const roicVal   = c.roic != null ? c.roic + '%' : (c.roe != null ? c.roe + '%' : '–');
+    const roicLabel = c.roic != null ? 'ROIC' : 'ROE';
+
+    // Sentiment badge
+    const sentColor = sentiment === 'BULLISH' ? '#4ade80' : sentiment === 'BEARISH' ? '#f87171' : '#fbbf24';
+    const sentArrow = sentiment === 'BULLISH' ? '▲' : sentiment === 'BEARISH' ? '▼' : '';
+    const sentHtml  = sentiment ? `<span style="font-family:var(--mono);font-size:.52rem;font-weight:700;color:${sentColor}">${sentArrow} ${sentiment}</span>` : '';
 
     return `
-    <div class="stock-card ${c.ticker === activeTicker ? 'active' : ''}"
+    <div class="sc2-card ${c.ticker === activeTicker ? 'active' : ''}"
          id="card-${c.ticker.replace('.','_')}"
          style="border-left-color:${meta.color}"
          onclick="selectStock('${c.ticker}','${source}')">
-        <div class="card-top">
-            <div class="ticker-block">
-                <span class="ticker-sym">${c.ticker}</span>
-                <span class="ticker-name">${c.name || c.ticker}</span>
+
+        <!-- Bovenste rij: ticker + score-cirkel -->
+        <div class="sc2-head">
+            <div style="min-width:0;flex:1">
+                <div class="sc2-ticker">${c.ticker}</div>
+                <div class="sc2-name">${(c.name || c.ticker).slice(0, 30)}</div>
+                <span class="sector-badge ${meta.cls}" style="margin-top:5px;display:inline-block">${meta.label}</span>
             </div>
-            <div class="card-right">
-                ${signalBadge(sc, sentiment)}
-                <span class="sector-badge ${meta.cls}">${meta.label}</span>
+            <div class="sc2-score-circle" style="background:${scBg};border-color:${scColor}">
+                <div class="sc2-score-num" style="color:${scColor}">${sc.toFixed(1)}</div>
+                <div class="sc2-score-lbl" style="color:${scColor}">${scLabel}</div>
             </div>
         </div>
-        ${(c.s_growth != null || c.s_momentum != null) ? `
-        <div class="engine-row">
-            <span class="engine-lbl">G</span>
-            <div class="engine-bar-bg"><div class="engine-bar-fill" style="width:${Math.min(100,(c.s_growth||0)*10)}%;background:${scoreColor(c.s_growth||0)}"></div></div>
-            <span class="engine-val">${c.s_growth != null ? c.s_growth.toFixed(1) : '–'}</span>
+
+        <!-- Engine balken -->
+        <div class="sc2-bars">
+            ${sg != null ? `
+            <div class="sc2-bar-row">
+                <span class="sc2-bar-lbl">Groei</span>
+                <div class="sc2-bar-bg"><div class="sc2-bar-fill" style="width:${Math.min(100,(sg||0)*10)}%;background:${scoreColor(sg||0)}"></div></div>
+                <span class="sc2-bar-val" style="color:${scoreColor(sg||0)}">${sg.toFixed(1)}</span>
+            </div>` : ''}
+            ${sm != null ? `
+            <div class="sc2-bar-row">
+                <span class="sc2-bar-lbl">Momentum</span>
+                <div class="sc2-bar-bg"><div class="sc2-bar-fill" style="width:${Math.min(100,(sm||0)*10)}%;background:${scoreColor(sm||0)}"></div></div>
+                <span class="sc2-bar-val" style="color:${scoreColor(sm||0)}">${sm.toFixed(1)}</span>
+            </div>` : `
+            <div class="sc2-bar-row">
+                <span class="sc2-bar-lbl">Score</span>
+                <div class="sc2-bar-bg"><div class="sc2-bar-fill" style="width:${Math.min(100,sc*10)}%;background:${scColor}"></div></div>
+                <span class="sc2-bar-val" style="color:${scColor}">${sc.toFixed(1)}</span>
+            </div>`}
         </div>
-        <div class="engine-row">
-            <span class="engine-lbl">M</span>
-            <div class="engine-bar-bg"><div class="engine-bar-fill" style="width:${Math.min(100,(c.s_momentum||0)*10)}%;background:${scoreColor(c.s_momentum||0)}"></div></div>
-            <span class="engine-val">${c.s_momentum != null ? c.s_momentum.toFixed(1) : '–'}</span>
-        </div>` : `
-        <div class="score-bar-wrap">
-            <div class="score-bar" style="width:${pct}%;background:${scoreColor(sc)}"></div>
-        </div>`}
-        <div class="card-metrics" style="margin-top:5px">
-            ${roicStr}
-            <span class="metric">P/E <b>${fmt(c.pe_ratio)}</b></span>
-            ${dcfStr || `<span class="metric">Groei <b style="color:${scoreColor(c.revenue_growth/10||0)}">${c.revenue_growth != null ? (c.revenue_growth > 0 ? '+' : '') + c.revenue_growth + '%' : '--'}</b></span>`}
+
+        <!-- Kerncijfers -->
+        <div class="sc2-metrics">
+            <div class="sc2-metric">
+                <span class="sc2-m-lbl">DCF upside</span>
+                <span class="sc2-m-val" style="color:${upside != null ? dcfColor : 'var(--muted)'}">${dcfStr}</span>
+            </div>
+            <div class="sc2-metric">
+                <span class="sc2-m-lbl">${roicLabel}</span>
+                <span class="sc2-m-val">${roicVal}</span>
+            </div>
+            <div class="sc2-metric">
+                <span class="sc2-m-lbl">P/E</span>
+                <span class="sc2-m-val">${fmt(c.pe_ratio)}</span>
+            </div>
         </div>
-        <div style="margin-top:4px;display:flex;gap:3px;flex-wrap:wrap;align-items:center">
+
+        <!-- Tags -->
+        <div class="sc2-tags">
             ${c.convergence_trigger ? `<span class="conv-zone-badge">⚡ ZONE</span>` : ''}
             ${c.stage2 ? `<span class="tag-chip tag-stage2">Stage 2</span>` : ''}
             ${c.vcp_active ? `<span class="tag-chip tag-vcp">VCP</span>` : ''}
-            ${hasAI ? `<span style="font-size:0.54rem;color:#22d3ee;font-family:var(--mono)">AI ✓</span>${sentimentBadge(sentiment)}` : ''}
+            ${sentHtml}
         </div>
     </div>`;
 }
