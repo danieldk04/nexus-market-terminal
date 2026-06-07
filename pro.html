@@ -1395,10 +1395,11 @@ function renderDcfStrip(data) {
         chips.push(chip('P/FCF', data.pfcf, null, c));
     }
 
-    // Dividend
+    // Dividend (opgeslagen als basispunten bijv. 230 = 2.30%)
     if (div.yield) {
+        const yPct = div.yield > 30 ? (div.yield / 100).toFixed(2) : div.yield.toFixed(2);
         const c = div.sustainable ? 'chip-green' : 'chip-red';
-        chips.push(chip('Div Yield', div.yield + '%', null, c));
+        chips.push(chip('Div Yield', yPct + '%', null, c));
     }
 
     // S_Growth / S_Momentum / convergence
