@@ -1029,6 +1029,9 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
             _info    = _tk.info
             _sector  = _info.get("sector")
             _dy      = _info.get("dividendYield")
+            # yfinance geeft dividendYield soms als percentage (bijv. 4.17 i.p.v. 0.0417)
+            if _dy and float(_dy) > 0.5:
+                _dy = float(_dy) / 100
             if not _dy or float(_dy) <= 0:
                 # Fallback: bereken yield via dividends history (werkt voor EU ETFs)
                 _one_yr = (date.today() - timedelta(days=365)).isoformat()
