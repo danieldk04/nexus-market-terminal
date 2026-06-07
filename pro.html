@@ -1074,6 +1074,12 @@ function renderDashboard(){
     renderDashNews();
     renderBenchmarkPanel();
     renderDividendPanel('div-panel-dash');
+
+    /* Scanner candidates */
+    const cands = B?.top_candidates || [];
+    document.getElementById('scan-badge').textContent = cands.length + ' kandidaten';
+    buildFilterBar(cands);
+    renderCurrentView();
 }
 
 // ─── FILTER / TAB BAR ─────────────────────────────────────────────────────────
