@@ -947,6 +947,20 @@ function pct(n,sign=true){return(sign&&n>=0?'+':'')+n.toFixed(1)+'%';}
 function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
 function fmt(v,suffix=''){if(v==null||v===''||isNaN(v)) return'--';return Number(v).toFixed(typeof v==='number'&&v%1!==0?1:0)+suffix;}
 function scoreColor(s){return s>=7.5?'#4ade80':s>=5?'#fbbf24':'#f87171';}
+function mdToHtml(md){
+    if(!md) return '';
+    return md
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g,'<em>$1</em>')
+        .replace(/`(.+?)`/g,'<code style="font-family:var(--mono);background:#1e293b;padding:1px 4px;border-radius:3px;font-size:.85em">$1</code>')
+        .replace(/^### (.+)$/gm,'<div style="font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:12px 0 5px">$1</div>')
+        .replace(/^## (.+)$/gm,'<div style="font-size:.78rem;font-weight:700;color:var(--text);margin:10px 0 4px">$1</div>')
+        .replace(/^# (.+)$/gm,'<div style="font-size:.85rem;font-weight:800;color:var(--text);margin:10px 0 4px">$1</div>')
+        .replace(/^[-*] (.+)$/gm,'<div style="display:flex;gap:6px;margin-bottom:3px"><span style="color:var(--accent);flex-shrink:0">•</span><span>$1</span></div>')
+        .replace(/\n{2,}/g,'<br><br>')
+        .replace(/\n/g,' ');
+}
 function sectorMeta(group,sector){
     const MAP={
         'Tech & AI':         {color:'#2563eb',cls:'sector-tech',   label:'Tech & AI'},
