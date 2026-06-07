@@ -2309,6 +2309,7 @@ function renderChartsTab(){
 
 function openChart(ticker){
     activeTick=ticker;
+    activeTicker=ticker;
     /* go to charts tab */
     switchTab('analyse');
     document.getElementById('tv-title').textContent=ticker;
@@ -2321,7 +2322,25 @@ function openChart(ticker){
     const frame=document.getElementById('tv-container');
     frame.innerHTML='';
     if(typeof TradingView!=='undefined'){
-        new TradingView.widget({container_id:'tv-container',symbol:tvSym(ticker),interval:'D',timezone:'Europe/Amsterdam',theme:'light',backgroundColor:'#ffffff',gridColor:'rgba(226,232,240,0.8)',style:'1',locale:'nl',toolbar_bg:'#f8fafc',enable_publishing:false,hide_side_toolbar:false,allow_symbol_change:true,save_image:false,width:'100%',height:'420'});
+        new TradingView.widget({container_id:'tv-container',symbol:tvSym(ticker),interval:'D',timezone:'Europe/Amsterdam',theme:'dark',backgroundColor:'#0d1117',gridColor:'rgba(31,41,55,0.5)',style:'1',locale:'nl',toolbar_bg:'#0d1117',enable_publishing:false,hide_side_toolbar:false,allow_symbol_change:true,save_image:false,width:'100%',height:'420'});
+    }
+    /* Analysis panels — zoek data in candidates en watchlist */
+    const badge = document.getElementById('analysis-badge');
+    if (badge) { badge.style.display='inline'; badge.textContent=ticker; }
+    let data = null;
+    if (globalData) {
+        data = (globalData.top_candidates||[]).find(x=>x.ticker===ticker)
+            || (globalData.watchlist||[]).find(x=>x.ticker===ticker);
+    }
+    if (data) {
+        try { renderDcfStrip(data); } catch(e){ console.error('dcf-strip fout:',e); }
+        try { renderAnalysis(data); } catch(e){ console.error('renderAnalysis fout:',e); }
+    } else {
+        /* Geen scandata — toon alleen TV chart, leeg analyse-vak */
+        const strip = document.getElementById('dcf-strip');
+        if (strip) strip.innerHTML='';
+        const box = document.getElementById('analysis-content');
+        if (box) box.innerHTML=`<div style="color:var(--muted);font-size:.75rem;text-align:center;padding:24px 0">Geen scan-data voor ${ticker} — klik een kandidaat in de scanlijst voor volledige analyse.</div>`;
     }
     /* Yahoo price chart */
     fetchPrice(ticker).then(()=>renderPriceChart(ticker));
