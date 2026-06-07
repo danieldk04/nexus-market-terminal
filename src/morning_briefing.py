@@ -634,17 +634,34 @@ def fetch_degiro_portfolio() -> dict | None:
                 item["pl_eur"]     = None
 
         # Dividend yield + sector via yfinance (ISIN → yfinance ticker mapping)
+        # Probeert eerst .info.dividendYield; valt terug op .dividends (laatste 12 mnd)
+        # voor Europese ETFs die dividendYield niet via info retourneren.
+        one_yr_ago = (date.today() - timedelta(days=365)).isoformat()
         for item in items:
             isin   = item.get("isin") or ""
             ticker = _ISIN_TO_YF.get(isin, item["name"])
+            dy = None
+            sector = None
             try:
-                yf_info = yf.Ticker(ticker).info
-                dy = yf_info.get("dividendYield")
-                item["div_yield"]      = round(float(dy), 4) if dy and float(dy) > 0 else None
-                item["annual_div_eur"] = round(item["value"] * float(dy), 2) if dy and float(dy) > 0 else None
-                item["sector"]         = yf_info.get("sector")
-            except Exception:
-                item["div_yield"] = item["annual_div_eur"] = item["sector"] = None
+                _tk     = yf.Ticker(ticker)
+                yf_info = _tk.info
+                sector  = yf_info.get("sector")
+                dy      = yf_info.get("dividendYield")
+                if not dy or float(dy) <= 0:
+                    # Fallback: bereken yield via dividends history (EU ETFs)
+                    fi = _tk.fast_info
+                    px = getattr(fi, "last_price", None) or getattr(fi, "previous_close", None)
+                    px = float(px) if px and float(px) > 0 else None
+                    if px:
+                        divs   = _tk.dividends
+                        recent = divs[divs.index >= one_yr_ago] if len(divs) > 0 else divs.iloc[0:0]
+                        annual = float(recent.sum())
+                        dy     = annual / px if annual > 0 else None
+            except Exception as e:
+                log.warning(f"div_yield {ticker}: {e}")
+            item["div_yield"]      = round(float(dy), 4) if dy and float(dy) > 0 else None
+            item["annual_div_eur"] = round(item["value"] * float(dy), 2) if dy and float(dy) > 0 else None
+            item["sector"]         = sector
             time.sleep(0.1)
 
         total_pl_pct = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
