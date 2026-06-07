@@ -914,6 +914,35 @@ function eur(n,dec=0){return'€'+n.toLocaleString('nl-NL',{minimumFractionDigit
 function usd(n){return'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function pct(n,sign=true){return(sign&&n>=0?'+':'')+n.toFixed(1)+'%';}
 function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+function fmt(v,suffix=''){if(v==null||v===''||isNaN(v)) return'--';return Number(v).toFixed(typeof v==='number'&&v%1!==0?1:0)+suffix;}
+function scoreColor(s){return s>=7.5?'#4ade80':s>=5?'#fbbf24':'#f87171';}
+function sectorMeta(group,sector){
+    const MAP={
+        'Tech & AI':         {color:'#2563eb',cls:'sector-tech',   label:'Tech & AI'},
+        'Technology':        {color:'#2563eb',cls:'sector-tech',   label:'Tech & AI'},
+        'Healthcare':        {color:'#7c3aed',cls:'sector-health', label:'Healthcare'},
+        'Financials':        {color:'#d97706',cls:'sector-fin',    label:'Financials'},
+        'Financial Services':{color:'#d97706',cls:'sector-fin',    label:'Financials'},
+        'Consumer Cyclical': {color:'#ea580c',cls:'sector-cons',   label:'Cons.Cycl'},
+        'Consumer Defensive':{color:'#65a30d',cls:'sector-def',    label:'Cons.Def'},
+        'Industrials':       {color:'#0891b2',cls:'sector-ind',    label:'Industrials'},
+        'Energy':            {color:'#dc2626',cls:'sector-energy', label:'Energy'},
+        'Materials':         {color:'#65a30d',cls:'sector-mat',    label:'Materials'},
+        'Utilities':         {color:'#059669',cls:'sector-util',   label:'Utilities'},
+        'Real Estate':       {color:'#8b5cf6',cls:'sector-re',     label:'Real Estate'},
+        'Others':            {color:'#64748b',cls:'sector-other',  label:'Others'},
+    };
+    return MAP[group]||MAP[sector]||MAP['Others'];
+}
+function signalBadge(score,sentiment){
+    const col=scoreColor(score);
+    return`<span style="font-family:var(--mono);font-size:.65rem;font-weight:800;color:${col}">${score.toFixed(1)}</span>`;
+}
+function sentimentBadge(sentiment){
+    if(!sentiment) return'';
+    const col=sentiment==='BULLISH'?'#4ade80':sentiment==='BEARISH'?'#f87171':'#fbbf24';
+    return`<span style="font-size:.55rem;font-weight:700;color:${col};font-family:var(--mono)">${sentiment}</span>`;
+}
 
 const TT={backgroundColor:'#fff',borderColor:'#e2e8f0',borderWidth:1,titleColor:'#64748b',bodyColor:'#0f172a'};
 
