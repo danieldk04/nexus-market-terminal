@@ -121,7 +121,7 @@ def _silent() -> bool:
 
 
 def notify_scan_complete(candidates, scanned):
-    if _silent() or not candidates:
+    if not candidates:
         return
     top = candidates[:5]
     lines = []
