@@ -97,7 +97,7 @@
     {
       "date": "2026-06-07",
       "degiro": 16272.36,
-      "tr": 8321.51,
+      "tr": 8294.81,
       "nexus": 2754.98,
       "bux": 1981.73
     },
@@ -224,17 +224,17 @@
     "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
   ],
   "tr_summary": {
-    "total": 8321.51,
-    "total_pl_pct": -1.79,
+    "total": 8294.81,
+    "total_pl_pct": -2.1,
     "total_invested": 8473.03,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4485.22,
-        "price": 54316.2383,
-        "pl_pct": -9.91,
-        "pl_eur": -493.37,
-        "weight": 53.9
+        "value": 4458.52,
+        "price": 53992.9219,
+        "pl_pct": -10.45,
+        "pl_eur": -520.07,
+        "weight": 53.8
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -242,7 +242,7 @@
         "price": 159.2124,
         "pl_pct": 31.47,
         "pl_eur": 314.73,
-        "weight": 15.8
+        "weight": 15.9
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -270,7 +270,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-06-07T10:09:44.657063+00:00",
+  "dashboard_updated": "2026-06-07T15:46:00.002151+00:00",
   "degiro_summary": {
     "total": 16272.36,
     "total_pl_pct": 32.64,
@@ -324,20 +324,20 @@
   },
   "news_summary": [
     {
-      "theme": "Volatiliteit en marktschommelingen",
-      "summary": "De beurs vertoont grote dagelijks schommelingen met forse dalingen in Azi\u00eb en onrust in Europa, terwijl de AEX juist doorbreekt naar recordhoogtes. Dit zorgt voor onzekerheid in brede indices zoals AEX en World-ETFs, waarbij beleggers moeten anticiperen op voortdurende prijsfluctuaties."
+      "theme": "Volatiliteit en marktbewegingen",
+      "summary": "De beurzen vertonen grote schommelingen met zowel sterke dalingen (AEX duikt omlaag, bitcoins onderuit) als herstel (Europese aandelen herstellen). Deze onrust wordt veroorzaakt door geopolitieke spanningen (Iran-oorlog) en macro-economische onzekerheid, wat direct impact heeft op brede indices zoals AEX en World-ETFs."
     },
     {
-      "theme": "Sterke Tech-rally en winnaar-verliezer dynamiek",
-      "summary": "Tech-aandelen zoals Prosus (+10%) en X-Fab ontploffen, terwijl traditionele waarden als Unilever fors dalen en Ferrari crasht. Dit illustreert een scherpe tweedeling in de markt die S&P500 en World-ETF-beleggers treft, met asymmetrische winsten in tech versus defensieve sectoren."
+      "theme": "Individuele aandelen in het nauw",
+      "summary": "Enkele grote namen krijgen harde klappen: Adyen daalt 12% na kritisch rapport, Ferrari verliest terrein, Unilever sluit lager, terwijl anderen juist stijgen (Victoria's Secret, Philips, X-Fab). Deze sterke volatiliteit op single-stock niveau toont selectieve druk ondanks AEX die 1000 punten doorbreekt."
     },
     {
-      "theme": "Defensie en oorlogsgeopolitiek",
-      "summary": "Door toenemende geopolitieke spanningen (Iran-oorlog) stijgen defensie-aandelen sterk, terwijl dit alleen bepaalde marktsegmenten be\u00efnvloedt. Voor ETF-beleggers is dit relevant omdat defensiesectoren weinig wegingspunten hebben in bredere indices, maar wel signaleren dat risicovolatiliteit hoog blijft."
+      "theme": "AI-hype en technologie-tweespalt",
+      "summary": "Tech-aandelen drijven de AEX omhoog, maar tegelijk zorgt AI-vrees voor markttweedeling: beleggers overdrijven risico's. Dit leidt tot ongelijkheidige koersenbewegingen en kan S&P500-beleggingen (met zware tech-weging) sterker be\u00efnvloeden dan Europese posities."
     },
     {
-      "theme": "Bedrijfs-specifieke schokken en insider-optimisme",
-      "summary": "Adyen crasht 12% na kritisch rapport terwijl Brunel-insiders aandelen kopen na de dip, en Victoria's Secret herstelt explosief. Deze micro-bewegingen tonen aan dat individual stock picking risico's oplevert, wat pleit voor het vasthouden van diversifieerde ETF-posities ondanks kortstondige upsets."
+      "theme": "Defensief beleggen en insideractiviteit",
+      "summary": "Defensie-aandelen stijgen door oorlogsdreiging, terwijl insiders (Brunel CEO/CFO) aandelen kopen na dipjes, wat signaleert dat ondergewaardeerde posities ontstaan. Dit geeft beleggers mogelijke insteekpunten maar vraagt voorzichtigheid gezien de geopolitieke onzekerheden."
     }
   ],
   "bux_summary": {
@@ -1109,5 +1109,10 @@
   },
   "cooldowns": {
     "CF": "2026-05-29"
+  },
+  "benchmark_history": {
+    "sp500_ytd": 7.66,
+    "aex_ytd": 7.6,
+    "msci_ytd": 10.77
   }
 }
