@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-06-07T19:08:50.933529+00:00",
+    "generated_at": "2026-06-08T10:26:39.752341+00:00",
     "top_candidates": [
         {
             "ticker": "JNJ",
@@ -305,7 +305,7 @@
             "U_factor": 0.0,
             "dol": 2.55,
             "pe_z_score": 3.05,
-            "peg_ratio": 3.57,
+            "peg_ratio": 3.55,
             "fcf_margin_pct": 28.6,
             "rev_accel": false,
             "eps_accel": false,
@@ -477,7 +477,7 @@
             "U_factor": 0.0,
             "dol": 59.45,
             "pe_z_score": 0.73,
-            "peg_ratio": 5.59,
+            "peg_ratio": 5.62,
             "fcf_margin_pct": 21.4,
             "rev_accel": false,
             "eps_accel": false,
@@ -690,86 +690,6 @@
             }
         },
         {
-            "ticker": "INCY",
-            "name": "Incyte Corporation",
-            "sector": "Healthcare",
-            "industry_group": "Healthcare",
-            "price": 102.38,
-            "roe": 30.82,
-            "pe_ratio": 14.46,
-            "debt_to_equity": 0.7,
-            "revenue_growth": 20.9,
-            "gross_margin": 52.8,
-            "profit_margin": 26.7,
-            "fcf_positive": true,
-            "beta": 0.79,
-            "roic": null,
-            "roce": null,
-            "pfcf": 36.6,
-            "rev_cagr_5yr": 14.8,
-            "ni_cagr_5yr": 55.7,
-            "analyst_target": 107.95833,
-            "analyst_upside": 5.4,
-            "analyst_count": 24,
-            "dcf": {
-                "dcf_per_share": 59.5,
-                "dcf_upside": -41.9,
-                "mos_price": 44.63,
-                "wacc": 8.83,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 2947.5,
-                "pv_terminal_m": 8979.2
-            },
-            "dividend": null,
-            "s_growth": 4.5,
-            "A_factor": 0.0,
-            "E_factor": 0.5,
-            "L_factor": 1.0,
-            "U_factor": 1.0,
-            "dol": 3.15,
-            "pe_z_score": -1.05,
-            "peg_ratio": 0.36,
-            "fcf_margin_pct": 10.4,
-            "rev_accel": false,
-            "eps_accel": false,
-            "rev_q1_yoy": null,
-            "rev_q2_yoy": null,
-            "rev_q3_yoy": null,
-            "eps_q1_yoy": null,
-            "eps_q2_yoy": null,
-            "eps_q3_yoy": null,
-            "s_momentum": 2.38,
-            "convergence_score": 3.44,
-            "convergence_trigger": false,
-            "stage2": false,
-            "vcp_active": false,
-            "rvol": 1.69,
-            "vol_buzz_pct": 68.9,
-            "rsi14": 69.2,
-            "macd_bullish": true,
-            "stop_loss_atr": 98.11,
-            "score": 3.44,
-            "penalty_applied": false,
-            "atr14": 2.85,
-            "atr_ratio_pct": 2.78,
-            "m_factor": 0.0,
-            "c_factor": 0.0,
-            "v_factor": 0.689,
-            "o_factor": 1.0,
-            "sma50": 96.51,
-            "sma200": 96.0,
-            "tier2": {
-                "analysis": "# INCY (Incyte Corporation) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nIncyte's moat rust primair op patentbescherming rond Jakafi (ruxolitinib) \u2014 een bewezen blockbuster voor myelofibrose en polycythemia vera. De 30.8% ROE is indrukwekkend, maar zonder ROIC-data is het moeilijk te beoordelen of dit kapitaaleffici\u00ebnt wordt gegenereerd of door schuldhefboom. De P/FCF van 36.6x bij een P/E van 14.5x wijst op een significante discrepantie: boekhoudkundige winst flatteert de kasstroomgeneratie. Jakafi-patenten lopen richting 2028 af, wat de duurzaamheid van de pricing power ernstig onder druk zet. De pijplijn (parsaclisib, povorcitinib) is veelbelovend maar nog niet bewezen. Echte compounding? Onvoldoende bewijsmateriaal.\n\n## DCF & WAARDERING\nHier knippert het rode licht. De DCF-intrinsieke waarde van $59.50 impliceert **42% neerwaarts risico** bij huidige koers van $102.38. De margin of safety-prijs van $44.63 maakt duidelijk: dit is geen Buffett-achtige \"wonderlijke bedrijf voor redelijke prijs\" situatie. De P/E van 14.5x oogt optisch goedkoop voor healthcare, maar de P/FCF van 36.6x onthult de werkelijkheid. Met slechts 5.4% analistenupside richting $108 is het opwaarts potentieel asymmetrisch ongunstig versus het DCF-risico. **Value trap signalen aanwezig.**\n\n## \ud83d\udfe2 BULL CASE\n1. **Winstmomentum is indrukwekkend:** 5-jaar winst CAGR van 55.7% en omzetgroei van 20.9% tonen operationele executiekracht die de kasstroom achternaloopt.\n2. **Optisch aantrekkelijke P/E:** Bij 14.5x is er ruimte voor herwaardering als pijplijn-catalysatoren (povorcitinib goedkeuring?) positief verrassen.\n3. **Lage beta (0.79):** Defensieve koersdynamiek biedt relatieve bescherming in risicomijdende markten; stabiel voor healthcare-exposure.\n\n## \ud83d\udd34 BEAR CASE\n1. **Jakafi patent cliff:** Core revenue-motor verliest exclusiviteit ~2028. Generieke concurrentie vernietigt marges structureel zonder volwaardige opvolger.\n2. **DCF screamt overgewaardeerd:** $42% premie boven intrinsieke waarde met geen margin of safety is onverteerbaar vanuit Graham-perspectief.\n3. **FCF-kwaliteitskloof:** P/FCF van 36.6x versus P/E van 14.5x suggereert agressieve boekhoudkundige aannames of capex/R&D-verplichtingen die kasstromen chronisch drukken.\n\n## VERDICT\n**ACTIE:** MIJDEN\n**CONVICTION:** 3/10\n**KOERSDOEL 18mnd:** $82 (-20% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot $55\u201360 (nabij DCF-waarde)\n\n> *\"De prijs die je betaalt bepaalt je rendement. Bij 42% boven intrinsieke waarde koop je andermans winst.\"* \u2014 Graham-principe",
-                "sentiment_score": "BEARISH",
-                "last_run": "2026-06-07T19:09:31.474718+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true
-            }
-        },
-        {
             "ticker": "HST",
             "name": "Host Hotels & Resorts, Inc.",
             "sector": "Real Estate",
@@ -901,7 +821,7 @@
             "U_factor": 0.0,
             "dol": 2.34,
             "pe_z_score": 0.48,
-            "peg_ratio": 1.78,
+            "peg_ratio": 1.79,
             "fcf_margin_pct": 10.2,
             "rev_accel": false,
             "eps_accel": false,
@@ -930,7 +850,16 @@
             "v_factor": 0.0,
             "o_factor": 1.0,
             "sma50": 215.11,
-            "sma200": 197.63
+            "sma200": 197.63,
+            "tier2": {
+                "analysis": "# Dover Corporation (DOV) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nDover is een gediversifieerd industrieel conglomeraat met vijf segmenten: Engineered Products, Clean Energy & Fueling, Imaging & ID, Pumps & Process Solutions en Climate & Sustainability. De moat is **smal maar re\u00ebel**: nichepositie in gespecialiseerde componenten cre\u00ebert bescheiden switching costs bij OEM-klanten. Echter, de 5-jaar omzet CAGR van slechts 1,0% en winst CAGR van 3,5% onthullen een business die meer slijpt dan compoundt. ROE van 15% klinkt acceptabel, maar zonder ROIC-data is het onduidelijk of dit organisch is of via leverage en acquisities wordt opgeblazen. Echte compounding-machines scoren consistent >15% ROIC door de cyclus heen \u2014 dat bewijs ontbreekt hier.\n\n## DCF & WAARDERING\nDe DCF-klap is vernietigend: intrinsieke waarde van **$71,56** tegenover een marktprijs van $214,76 impliceert **66,7% overwaarde**. Zelfs met een genereuze groeiassumptie van 7,7% in fase-1 (ver boven de historische 1% omzetgroei) rechtvaardigt de WACC van 9,99% de huidige koers niet. P/E van 26,8x en P/FCF van 34,4x zijn premium multiples voor een low-single-digit groeier. De analistendoelstelling van $250,85 is gebaseerd op sentiment, niet op fundamenten. Dit ruikt sterk naar een **value trap** met marktmomentum als enige drijfveer.\n\n## \ud83d\udfe2 BULL CASE\n1. **Dividend Aristocrat** met decennialange uitkeringshistorie, FCF payout van 33,3% is solide en houdbaar \u2014 defensief anker voor inkomensgerichte beleggers.\n2. **Clean Energy & Fueling exposure** biedt optionaliteit in waterstof- en EV-infrastructuur; cyclisch herstel kan omzetgroei structureel optillen boven historisch gemiddelde.\n3. **Conservatieve balans** (D/E 0,44) geeft Dover acquisitieruimte in een buyer's market voor industrials wanneer rentes pieken.\n\n## \ud83d\udd34 BEAR CASE\n1. **Ernstige overwaardering**: DCF-kloof van ~67% laat nagenoeg geen foutmarge toe. Bij meervalscontractie richting 18-20x P/E daalt de koers met 30-40%.\n2. **An\u00e9mische groei**: 1% omzet-CAGR over 5 jaar is ondermaats. Inflatie vreet re\u00eble groei volledig op \u2014 geen echte compoundingmachine.\n3. **Cyclisch risico**: Beta 1,17 + industrials exposure maakt DOV kwetsbaar bij economische vertraging, precies wanneer premium multiples implosief corrigeren.\n\n## VERDICT\n**ACTIE:** MIJDEN\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $155 (-27,8% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot maximaal $120-130",
+                "sentiment_score": "BEARISH",
+                "last_run": "2026-06-08T10:27:18.041438+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
         },
         {
             "ticker": "DAL",
@@ -1049,7 +978,7 @@
             "U_factor": 0.0,
             "dol": 1.91,
             "pe_z_score": 3.71,
-            "peg_ratio": 2.57,
+            "peg_ratio": 2.6,
             "fcf_margin_pct": 19.2,
             "rev_accel": false,
             "eps_accel": false,
@@ -1194,7 +1123,7 @@
             "U_factor": 0.0,
             "dol": 3.48,
             "pe_z_score": 0.25,
-            "peg_ratio": 1.7,
+            "peg_ratio": 1.71,
             "fcf_margin_pct": 10.3,
             "rev_accel": false,
             "eps_accel": false,
@@ -1348,7 +1277,7 @@
             "U_factor": 1.0,
             "dol": 25.71,
             "pe_z_score": -1.04,
-            "peg_ratio": 1.22,
+            "peg_ratio": 1.21,
             "fcf_margin_pct": 8.6,
             "rev_accel": false,
             "eps_accel": false,
@@ -1416,7 +1345,7 @@
             "U_factor": 0.0,
             "dol": 318.78,
             "pe_z_score": -0.05,
-            "peg_ratio": 2.38,
+            "peg_ratio": 2.39,
             "fcf_margin_pct": 29.8,
             "rev_accel": false,
             "eps_accel": false,
@@ -1493,7 +1422,7 @@
             "U_factor": 1.0,
             "dol": 2479.0,
             "pe_z_score": -0.97,
-            "peg_ratio": 1.48,
+            "peg_ratio": 1.49,
             "fcf_margin_pct": 13.0,
             "rev_accel": false,
             "eps_accel": false,
@@ -1579,7 +1508,7 @@
             "U_factor": 1.0,
             "dol": 2.9,
             "pe_z_score": -0.23,
-            "peg_ratio": 1.1,
+            "peg_ratio": 1.12,
             "fcf_margin_pct": 8.1,
             "rev_accel": false,
             "eps_accel": false,
@@ -1964,7 +1893,7 @@
             "U_factor": 0.0,
             "dol": 1.68,
             "pe_z_score": 0.06,
-            "peg_ratio": 2.48,
+            "peg_ratio": 2.5,
             "fcf_margin_pct": 13.7,
             "rev_accel": false,
             "eps_accel": false,
@@ -2023,8 +1952,8 @@
             "pfcf": 11.4,
             "rev_cagr_5yr": 11.0,
             "ni_cagr_5yr": 22.7,
-            "analyst_target": 144.2036,
-            "analyst_upside": 26.2,
+            "analyst_target": 140.656,
+            "analyst_upside": 23.1,
             "analyst_count": 25,
             "dcf": {
                 "dcf_per_share": 159.25,
@@ -2044,7 +1973,7 @@
             "U_factor": 1.0,
             "dol": 2.84,
             "pe_z_score": -1.53,
-            "peg_ratio": 0.6,
+            "peg_ratio": 0.54,
             "fcf_margin_pct": 10.1,
             "rev_accel": false,
             "eps_accel": false,
@@ -2121,7 +2050,7 @@
             "U_factor": 0.0,
             "dol": 2.23,
             "pe_z_score": 2.3,
-            "peg_ratio": 3.4,
+            "peg_ratio": 3.37,
             "fcf_margin_pct": 10.7,
             "rev_accel": false,
             "eps_accel": false,
@@ -2189,7 +2118,7 @@
             "U_factor": 0.0,
             "dol": 1.52,
             "pe_z_score": 0.56,
-            "peg_ratio": 1.53,
+            "peg_ratio": 1.54,
             "fcf_margin_pct": 28.6,
             "rev_accel": false,
             "eps_accel": false,
@@ -2219,6 +2148,86 @@
             "o_factor": 0.0,
             "sma50": 87.81,
             "sma200": 88.74
+        },
+        {
+            "ticker": "INCY",
+            "name": "Incyte Corporation",
+            "sector": "Healthcare",
+            "industry_group": "Healthcare",
+            "price": 102.38,
+            "roe": 30.82,
+            "pe_ratio": 14.46,
+            "debt_to_equity": 0.7,
+            "revenue_growth": 20.9,
+            "gross_margin": 52.8,
+            "profit_margin": 26.7,
+            "fcf_positive": true,
+            "beta": 0.79,
+            "roic": null,
+            "roce": null,
+            "pfcf": 36.6,
+            "rev_cagr_5yr": 14.8,
+            "ni_cagr_5yr": 55.7,
+            "analyst_target": 107.95833,
+            "analyst_upside": 5.4,
+            "analyst_count": 24,
+            "dcf": {
+                "dcf_per_share": 59.5,
+                "dcf_upside": -41.9,
+                "mos_price": 44.63,
+                "wacc": 8.83,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 2947.5,
+                "pv_terminal_m": 8979.2
+            },
+            "dividend": null,
+            "s_growth": 4.5,
+            "A_factor": 0.0,
+            "E_factor": 0.5,
+            "L_factor": 1.0,
+            "U_factor": 1.0,
+            "dol": 3.15,
+            "pe_z_score": -1.05,
+            "peg_ratio": 0.36,
+            "fcf_margin_pct": 10.4,
+            "rev_accel": false,
+            "eps_accel": false,
+            "rev_q1_yoy": null,
+            "rev_q2_yoy": null,
+            "rev_q3_yoy": null,
+            "eps_q1_yoy": null,
+            "eps_q2_yoy": null,
+            "eps_q3_yoy": null,
+            "s_momentum": 2.38,
+            "convergence_score": 3.44,
+            "convergence_trigger": false,
+            "stage2": false,
+            "vcp_active": false,
+            "rvol": 1.69,
+            "vol_buzz_pct": 68.9,
+            "rsi14": 69.2,
+            "macd_bullish": true,
+            "stop_loss_atr": 98.11,
+            "score": 2.9,
+            "penalty_applied": false,
+            "atr14": 2.85,
+            "atr_ratio_pct": 2.78,
+            "m_factor": 0.0,
+            "c_factor": 0.0,
+            "v_factor": 0.689,
+            "o_factor": 1.0,
+            "sma50": 96.51,
+            "sma200": 96.0,
+            "tier2": {
+                "analysis": "# INCY (Incyte Corporation) \u2014 Bull vs Bear Analyse\n\n## MOAT & BUSINESS KWALITEIT\nIncyte's moat rust primair op patentbescherming rond Jakafi (ruxolitinib) \u2014 een bewezen blockbuster voor myelofibrose en polycythemia vera. De 30.8% ROE is indrukwekkend, maar zonder ROIC-data is het moeilijk te beoordelen of dit kapitaaleffici\u00ebnt wordt gegenereerd of door schuldhefboom. De P/FCF van 36.6x bij een P/E van 14.5x wijst op een significante discrepantie: boekhoudkundige winst flatteert de kasstroomgeneratie. Jakafi-patenten lopen richting 2028 af, wat de duurzaamheid van de pricing power ernstig onder druk zet. De pijplijn (parsaclisib, povorcitinib) is veelbelovend maar nog niet bewezen. Echte compounding? Onvoldoende bewijsmateriaal.\n\n## DCF & WAARDERING\nHier knippert het rode licht. De DCF-intrinsieke waarde van $59.50 impliceert **42% neerwaarts risico** bij huidige koers van $102.38. De margin of safety-prijs van $44.63 maakt duidelijk: dit is geen Buffett-achtige \"wonderlijke bedrijf voor redelijke prijs\" situatie. De P/E van 14.5x oogt optisch goedkoop voor healthcare, maar de P/FCF van 36.6x onthult de werkelijkheid. Met slechts 5.4% analistenupside richting $108 is het opwaarts potentieel asymmetrisch ongunstig versus het DCF-risico. **Value trap signalen aanwezig.**\n\n## \ud83d\udfe2 BULL CASE\n1. **Winstmomentum is indrukwekkend:** 5-jaar winst CAGR van 55.7% en omzetgroei van 20.9% tonen operationele executiekracht die de kasstroom achternaloopt.\n2. **Optisch aantrekkelijke P/E:** Bij 14.5x is er ruimte voor herwaardering als pijplijn-catalysatoren (povorcitinib goedkeuring?) positief verrassen.\n3. **Lage beta (0.79):** Defensieve koersdynamiek biedt relatieve bescherming in risicomijdende markten; stabiel voor healthcare-exposure.\n\n## \ud83d\udd34 BEAR CASE\n1. **Jakafi patent cliff:** Core revenue-motor verliest exclusiviteit ~2028. Generieke concurrentie vernietigt marges structureel zonder volwaardige opvolger.\n2. **DCF screamt overgewaardeerd:** $42% premie boven intrinsieke waarde met geen margin of safety is onverteerbaar vanuit Graham-perspectief.\n3. **FCF-kwaliteitskloof:** P/FCF van 36.6x versus P/E van 14.5x suggereert agressieve boekhoudkundige aannames of capex/R&D-verplichtingen die kasstromen chronisch drukken.\n\n## VERDICT\n**ACTIE:** MIJDEN\n**CONVICTION:** 3/10\n**KOERSDOEL 18mnd:** $82 (-20% van huidig)\n**SENTIMENT SCORE:** BEARISH\n**INSTAPMOMENT:** Wacht op dip tot $55\u201360 (nabij DCF-waarde)\n\n> *\"De prijs die je betaalt bepaalt je rendement. Bij 42% boven intrinsieke waarde koop je andermans winst.\"* \u2014 Graham-principe",
+                "sentiment_score": "BEARISH",
+                "last_run": "2026-06-07T19:09:31.474718+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true
+            }
         },
         {
             "ticker": "DLR",
@@ -2266,7 +2275,7 @@
             "U_factor": 0.0,
             "dol": 5.14,
             "pe_z_score": 1.25,
-            "peg_ratio": 12.72,
+            "peg_ratio": 12.6,
             "fcf_margin_pct": 51.9,
             "rev_accel": false,
             "eps_accel": false,
@@ -2343,7 +2352,7 @@
             "U_factor": 0.0,
             "dol": 2.57,
             "pe_z_score": 1.8,
-            "peg_ratio": 2.94,
+            "peg_ratio": 3.02,
             "fcf_margin_pct": 18.2,
             "rev_accel": false,
             "eps_accel": false,
@@ -2642,7 +2651,7 @@
             "U_factor": 1.0,
             "dol": 7.1,
             "pe_z_score": -0.31,
-            "peg_ratio": 0.74,
+            "peg_ratio": 0.75,
             "fcf_margin_pct": 22.9,
             "rev_accel": false,
             "eps_accel": false,
@@ -2861,7 +2870,7 @@
             "U_factor": 0.0,
             "dol": 2.48,
             "pe_z_score": 0.05,
-            "peg_ratio": 1.66,
+            "peg_ratio": 1.68,
             "fcf_margin_pct": 22.8,
             "rev_accel": false,
             "eps_accel": false,
@@ -3000,7 +3009,7 @@
             "U_factor": 0.615,
             "dol": 3.99,
             "pe_z_score": 0.77,
-            "peg_ratio": 0.37,
+            "peg_ratio": 0.36,
             "fcf_margin_pct": 12.2,
             "rev_accel": false,
             "eps_accel": false,
@@ -3071,7 +3080,7 @@
             "U_factor": 0.9,
             "dol": 4.97,
             "pe_z_score": 0.2,
-            "peg_ratio": 0.89,
+            "peg_ratio": 0.88,
             "fcf_margin_pct": 13.2,
             "rev_accel": false,
             "eps_accel": false,
@@ -3269,10 +3278,6 @@
         }
     ],
     "equity_history": [
-        {
-            "date": "05-01 22:08",
-            "value": 10200.66
-        },
         {
             "date": "05-02 10:38",
             "value": 10200.66
@@ -3508,6 +3513,10 @@
         {
             "date": "06-07 19:09",
             "value": 10086.61
+        },
+        {
+            "date": "06-08 10:27",
+            "value": 10086.61
         }
     ],
     "memory": {
@@ -3579,12 +3588,12 @@
         "positive_sectors": [
             "Tech & AI"
         ],
-        "last_update": "2026-06-07T19:09:56.620283+00:00",
+        "last_update": "2026-06-08T10:27:19.839913+00:00",
         "version": "nexus-v3-kelly",
-        "vix_threshold": 6.0
+        "vix_threshold": 6.5
     },
     "macro": {
-        "vix": 21.51,
+        "vix": 19.6,
         "treasury_10y": 4.54
     },
     "portfolio": {
@@ -3639,7 +3648,7 @@
                 }
             ],
             "cik": "0000200406",
-            "retrieved_at": "2026-06-07T19:08:52.492369+00:00"
+            "retrieved_at": "2026-06-08T10:26:41.582780+00:00"
         },
         "IEX": {
             "filings": [
@@ -3665,7 +3674,7 @@
                 }
             ],
             "cik": "0000832101",
-            "retrieved_at": "2026-06-07T19:08:53.851398+00:00"
+            "retrieved_at": "2026-06-08T10:26:42.910367+00:00"
         },
         "FTV": {
             "filings": [
@@ -3691,7 +3700,7 @@
                 }
             ],
             "cik": "0001659166",
-            "retrieved_at": "2026-06-07T19:08:55.213105+00:00"
+            "retrieved_at": "2026-06-08T10:26:44.262636+00:00"
         },
         "EQIX": {
             "filings": [
@@ -3724,7 +3733,7 @@
                 }
             ],
             "cik": "0001101239",
-            "retrieved_at": "2026-06-07T19:08:57.041483+00:00"
+            "retrieved_at": "2026-06-08T10:26:45.928958+00:00"
         },
         "MO": {
             "filings": [
@@ -3750,7 +3759,7 @@
                 }
             ],
             "cik": "0000764180",
-            "retrieved_at": "2026-06-07T19:08:58.392540+00:00"
+            "retrieved_at": "2026-06-08T10:26:47.262297+00:00"
         },
         "MRK": {
             "filings": [
@@ -3783,7 +3792,7 @@
                 }
             ],
             "cik": "0000310158",
-            "retrieved_at": "2026-06-07T19:09:00.102245+00:00"
+            "retrieved_at": "2026-06-08T10:26:48.956461+00:00"
         },
         "JCI": {
             "filings": [
@@ -3816,7 +3825,7 @@
                 }
             ],
             "cik": "0000833444",
-            "retrieved_at": "2026-06-07T19:09:01.814230+00:00"
+            "retrieved_at": "2026-06-08T10:26:50.618558+00:00"
         },
         "GILD": {
             "filings": [
@@ -3849,26 +3858,7 @@
                 }
             ],
             "cik": "0000882095",
-            "retrieved_at": "2026-06-07T19:09:03.551234+00:00"
-        },
-        "INCY": {
-            "filings": [
-                {
-                    "form": "10-Q",
-                    "date": "2026-04-28",
-                    "accession": "0000879169-26-000026",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-04-28",
-                    "accession": "0000879169-26-000023",
-                    "description": "8-K",
-                    "excerpt": "incy-20260428 FALSE 0000879169 0000879169 2026-04-28 2026-04-28 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 FORM 8-K CURRENT REPORT Pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): April&#160;28, 2026 INCYTE CORPORATION (Exact name of registrant as specified in its charter) Delaware 001-12400 94-3136539 (State or Other Jurisdiction of Incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 1801 Augustine Cut-Off Wilmington , DE 19803 (Address of principal executive offices) (Zip Code) ( 302 ) 498-6700 (Registrant&#8217;s telephone number, including area code) N/A (Former name or former address, if changed since last report.) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligations of the registrant under any of the following provisions (see General Instruction A.2. below): &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240-13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of each class Trading Symbol Name of exchange on which regi"
-                }
-            ],
-            "cik": "0000879169",
-            "retrieved_at": "2026-06-07T19:09:04.566650+00:00"
+            "retrieved_at": "2026-06-08T10:26:52.270370+00:00"
         },
         "HST": {
             "filings": [
@@ -3901,7 +3891,7 @@
                 }
             ],
             "cik": "0001070750",
-            "retrieved_at": "2026-06-07T19:09:06.266069+00:00"
+            "retrieved_at": "2026-06-08T10:26:53.923446+00:00"
         },
         "DOV": {
             "filings": [
@@ -3911,25 +3901,44 @@
                     "accession": "0001193125-26-219689",
                     "description": "8-K",
                     "excerpt": "8-K DOVER Corp false 0000029905 0000029905 2026-05-08 2026-05-08 0000029905 us-gaap:CommonStockMember 2026-05-08 2026-05-08 0000029905 dov:A1250NotesDue2026Member 2026-05-08 2026-05-08 0000029905 dov:A0750NotesDue2027Member 2026-05-08 2026-05-08 0000029905 dov:A3.500NotesDue2033Member 2026-05-08 2026-05-08 &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160; &#160; FORM 8-K &#160; &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): May&#160;8, 2026 &#160; &#160; &#160; Dover Corporation (Exact name of registrant as specified in its charter) &#160; &#160; &#160; Delaware &#160; 1-4018 &#160; 53-0257888 (State or other jurisdiction of incorporation) &#160; (Commission File Number) &#160; (I.R.S. Employer Identification No.) 3005 Highland Parkway &#160; Downers Grove , Illinois &#160; 60515 (Address of Principal Executive Offices) &#160; (Zip Code) (630) 541-1540 (Registrant&#8217;s telephone number, including area code) &#160; &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#160; &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#160; &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#9744"
+                }
+            ],
+            "cik": "0000029905",
+            "retrieved_at": "2026-06-08T10:26:54.910405+00:00"
+        },
+        "MNST": {
+            "filings": [
+                {
+                    "form": "8-K",
+                    "date": "2026-06-04",
+                    "accession": "0001104659-26-070506",
+                    "description": "FORM 8-K",
+                    "excerpt": "false 0000865752 0000865752 2026-06-01 2026-06-01 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C.&#160; 20549 &#160; FORM&#160; 8-K &#160; CURRENT REPORT &#160; Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): June 1, 2026 &#160; Monster Beverage Corporation (Exact name of registrant as specified in its charter) &#160; Delaware (State or other jurisdiction of incorporation) &#160; 001-18761 &#160; 47-1809393 (Commission File Number) &#160; (IRS Employer Identification No.) &#160; 1 Monster Way Corona , California 92879 (Address of principal executive offices and zip code) &#160; ( 951 ) 739 - 6200 (Registrant&#8217;s telephone number, including area code) &#160; N/A (Former name or former address, if changed since last report) &#160; Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#168; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#168; Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#168; Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#168; Pre-commencement communications pursuant to Rule&#160;13"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-05-15",
+                    "accession": "0001104659-26-062567",
+                    "description": "FORM 8-K",
+                    "excerpt": "false 0000865752 0000865752 2026-05-14 2026-05-14 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C.&#160; 20549 &#160; FORM&#160; 8-K &#160; CURRENT REPORT &#160; Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): May 14, 2026 &#160; Monster Beverage Corporation (Exact name of registrant as specified in its charter) &#160; Delaware (State or other jurisdiction of incorporation) &#160; 001-18761 &#160; 47-1809393 (Commission File Number) &#160; (IRS Employer Identification No.) &#160; 1 Monster Way Corona , California 92879 (Address of principal executive offices and zip code) &#160; ( 951 ) 739 - 6200 (Registrant&#8217;s telephone number, including area code) &#160; N/A (Former name or former address, if changed since last report) &#160; Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions ( see General Instruction A.2 below): &#160; &#168; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#168; Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#168; Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#168; Pre-commencement co"
                 },
                 {
                     "form": "10-Q",
-                    "date": "2026-04-23",
-                    "accession": "0000029905-26-000015",
+                    "date": "2026-05-08",
+                    "accession": "0001104659-26-057398",
                     "description": "10-Q"
                 },
                 {
                     "form": "8-K",
-                    "date": "2026-04-23",
-                    "accession": "0000029905-26-000014",
-                    "description": "8-K",
-                    "excerpt": "dov-20260423 0000029905 false DOVER Corp 0000029905 2026-04-23 2026-04-23 0000029905 us-gaap:CommonStockMember 2026-04-23 2026-04-23 0000029905 dov:A1250NotesDue2026Member 2026-04-23 2026-04-23 0000029905 dov:A0750NotesDue2027Member 2026-04-23 2026-04-23 0000029905 dov:A3.500NotesDue2033Member 2026-04-23 2026-04-23 UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 ______________________________________ &#160; FORM 8-K _______________________________ &#160; CURRENT REPORT Pursuant to Section 13 or 15(d) of The Securities Exchange Act of 1934 Date of Report (Date of earliest event reported):&#160; April&#160;23, 2026 _______________________________ DOVER CORPORATION (Exact name of registrant as specified in its charter) ______________________________________________ Delaware 1-4018 53-0257888 (State or other jurisdiction&#160;of incorporation) &#160;(Commission File Number) (I.R.S. Employer Identification No.) &#160; &#160; &#160; 3005 Highland Parkway &#160; Downers Grove, Illinois 60515 (Address of Principal Executive Offices) (Zip Code) (630) 541-1540 (Registrant&#8217;s telephone number, including area code) &#160; ______________________________________________ Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (see General Instruction A.2. below): &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 23"
+                    "date": "2026-05-07",
+                    "accession": "0001104659-26-057188",
+                    "description": "FORM 8-K",
+                    "excerpt": "false 0000865752 0000865752 2026-05-07 2026-05-07 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C.&#160; 20549 &#160; FORM&#160; 8-K &#160; CURRENT REPORT &#160; Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): May 7, 2026 &#160; Monster Beverage Corporation (Exact name of registrant as specified in its charter) &#160; Delaware (State or other jurisdiction of incorporation) &#160; 001-18761 &#160; 47-1809393 (Commission File Number) &#160; (IRS Employer Identification No.) &#160; 1 Monster Way Corona , California 92879 (Address of principal executive offices and zip code) &#160; ( 951 ) 739 - 6200 (Registrant&#8217;s telephone number, including area code) &#160; N/A (Former name or former address, if changed since last report) &#160; Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#168; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#168; Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#168; Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#168; Pre-commencement communications pursuant to Rule&#160;13e"
                 }
             ],
-            "cik": "0000029905",
-            "retrieved_at": "2026-06-07T19:09:07.606361+00:00"
+            "cik": "0000865752",
+            "retrieved_at": "2026-06-08T10:26:56.741472+00:00"
         }
     },
-    "filings_at": "2026-06-07T19:09:08.253104+00:00",
-    "ticker_updated_at": "2026-06-08T09:21:34.957243+00:00"
+    "filings_at": "2026-06-08T10:26:57.241626+00:00"
 }
