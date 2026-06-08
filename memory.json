@@ -1,1292 +1,1292 @@
 {
-    "lessons": [
-        {
-            "date": "2026-04-09",
-            "ticker": "ADBE",
-            "sector": "Tech & AI",
-            "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-04-10",
-            "ticker": "ADBE",
-            "sector": "Tech & AI",
-            "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-05-15",
-            "ticker": "ADBE",
-            "sector": "Tech & AI",
-            "insight": "Take-profit ADBE (+9.9%, doel was 9.4%). Tech & AI werkt.",
-            "type": "POSITIVE_LEARNING"
-        },
-        {
-            "date": "2026-05-29",
-            "ticker": "CF",
-            "sector": "Materials",
-            "insight": "Verlies CF (-5.3%). Bewaken.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-06-02",
-            "ticker": "EXE",
-            "sector": "Energy",
-            "insight": "Verlies EXE (-5.3%). Bewaken.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-06-03",
-            "ticker": "EXE",
-            "sector": "Energy",
-            "insight": "Verlies EXE (-5.3%). Bewaken.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-06-04",
-            "ticker": "EXE",
-            "sector": "Energy",
-            "insight": "Verlies EXE (-5.8%). Bewaken.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-06-05",
-            "ticker": "NEM",
-            "sector": "Materials",
-            "insight": "Verlies NEM (-7.8%). Bewaken.",
-            "type": "NEGATIVE_LEARNING"
-        },
-        {
-            "date": "2026-06-07",
-            "ticker": "NEM",
-            "sector": "Materials",
-            "insight": "Stop-loss NEM (-9.1%). Sector Materials voorzichtig.",
-            "type": "NEGATIVE_LEARNING"
-        }
-    ],
-    "initialized_at": "2026-04-04T00:00:00+00:00",
-    "version": "nexus-v2",
-    "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT - AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Serie\u00eble verliezen in cyclische sectoren.** Materials en Energy domineren verlieslijst (6 van 8 trades). Kritiek: EXE drie opeenvolgende dagen verloren (-5.3%, -5.3%, -5.8%) zonder exit-discipline.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: Bot oppikt cyclische aandelen zonder trendbevestiging\n- **Exit-discipline ontbreekt**: EXE-positie niet gesloten na eerste verlies (-5.3%), resulterend in cascade\n- **Win/loss ratio**: 1:8 suggereert selectie- \u00e1ltijd en/of positionsizing-probleem\n- Enige succesvolle trade (ADBE +9.9%) was in Tech & AI met gedefinieerd doel\n\n## 3. AANBEVELINGEN\n1. **Implementeer hard stop-loss op -4%** (niet -9.1%). Voork\u00f3m EXE-achtige cascades. Regel: max 2 trades/aandeel per week.\n2. **Sector-rotatie filter**: Ban Materials/Energy-trades gedurende 5 dagen na verlies in sector. Herbalanceer naar Tech & AI waar track record +9.9% toont.\n\n## 4. SECTOR BIAS\n- **Mijden**: Materials (-16.9%), Energy (-16.4% in 3 trades)\n- **Zwaarder wegen**: Tech & AI (enige +9.9% trade, maar slechts 1 win)\n\n**Conclusie**: Bot heeft selectie- \u00e9n discipline-probleem. Adresseer eerst.",
-        "win_rate": 11.1,
-        "worst_sectors": [
-            [
-                "Materials",
-                3
-            ],
-            [
-                "Energy",
-                3
-            ],
-            [
-                "Tech & AI",
-                2
-            ]
-        ],
-        "best_sectors": [
-            [
-                "Tech & AI",
-                1
-            ]
-        ],
-        "repeat_losers": [
-            "ADBE",
-            "EXE",
-            "NEM"
-        ],
-        "sector_adjustments": {
-            "Materials": -1.5,
-            "Energy": -1.5,
-            "Tech & AI": -0.7
-        },
-        "run_at": "2026-06-08T10:27:26.137077+00:00"
+  "lessons": [
+    {
+      "date": "2026-04-09",
+      "ticker": "ADBE",
+      "sector": "Tech & AI",
+      "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
+      "type": "NEGATIVE_LEARNING"
     },
-    "portfolio_history": [
-        {
-            "date": "2026-06-08",
-            "degiro": 16272.75,
-            "tr": 8354.59,
-            "nexus": 3231.86,
-            "bux": 1983.09
-        },
-        {
-            "date": "2026-06-07",
-            "degiro": 16272.36,
-            "tr": 8290.15,
-            "nexus": 3231.86,
-            "bux": 1981.73
-        },
-        {
-            "date": "2026-06-06",
-            "degiro": 16272.36,
-            "tr": 8187.03,
-            "nexus": 2754.98,
-            "bux": 1981.73
-        },
-        {
-            "date": "2026-06-05",
-            "degiro": 16272.98,
-            "tr": 8086.37,
-            "nexus": 2754.98,
-            "bux": 1983.51
-        },
-        {
-            "date": "2026-06-04",
-            "degiro": 16337.29,
-            "tr": 8377.08,
-            "nexus": 2754.98,
-            "bux": 2094.54
-        },
-        {
-            "date": "2026-06-03",
-            "degiro": 16424.72,
-            "tr": 8545.55,
-            "bux": 2165.19
-        },
-        {
-            "date": "2026-06-02",
-            "degiro": 16475.06,
-            "tr": 6854.18,
-            "bux": 2159.02
-        },
-        {
-            "date": "2026-06-01",
-            "degiro": 16414.45,
-            "tr": 7091.95,
-            "bux": 2137.8
-        },
-        {
-            "date": "2026-05-31",
-            "degiro": 16364.43,
-            "tr": 7224.06,
-            "bux": 2215.28
-        },
-        {
-            "date": "2026-05-30",
-            "degiro": 16364.43,
-            "tr": 7211.3,
-            "bux": 2215.28
-        },
-        {
-            "date": "2026-05-29",
-            "degiro": 16371.03,
-            "tr": 7179.32,
-            "bux": 2211.09
-        },
-        {
-            "date": "2026-05-28",
-            "degiro": 16313.53,
-            "tr": 7207.76,
-            "bux": 2700.0
-        },
-        {
-            "date": "2026-05-27",
-            "degiro": 16320.46,
-            "tr": 7302.32,
-            "bux": 2700.0
-        },
-        {
-            "date": "2026-05-25",
-            "degiro": 16379.45,
-            "tr": 7454.62,
-            "bux": null
-        },
-        {
-            "date": "2026-05-24",
-            "degiro": 16293.3,
-            "tr": 7424.79,
-            "bux": null
-        },
-        {
-            "date": "2026-05-23",
-            "degiro": 16293.3,
-            "tr": 7292.93,
-            "bux": null
-        },
-        {
-            "date": "2026-05-22",
-            "degiro": 16234.0,
-            "tr": 7442.58,
-            "bux": null
-        },
-        {
-            "date": "2026-05-21",
-            "degiro": 16145.17,
-            "tr": 7460.86,
-            "bux": null
-        },
-        {
-            "date": "2026-05-20",
-            "degiro": 16048.38,
-            "tr": 7428.36,
-            "bux": null
-        },
-        {
-            "date": "2026-05-19",
-            "degiro": 15997.2,
-            "tr": 7392.52,
-            "bux": null
-        }
-    ],
-    "last_news": [
-        "Victoria\u2019s Secret is weer sexy, aandeel lingeriemerk stijgt explosief",
-        "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-        "Ferrari incasseert harde klappen op de beurs",
-        "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
-        "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
-        "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-        "Adyen crasht plotseling op beurs: aandeel verliest bijna 12 procent na kritisch rapport",
-        "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
-    ],
-    "tr_summary": {
-        "total": 8354.59,
-        "total_pl_pct": -1.4,
-        "total_invested": 8473.03,
-        "positions": [
-            {
-                "name": "Bitcoin",
-                "value": 4518.3,
-                "price": 54716.8281,
-                "pl_pct": -9.25,
-                "pl_eur": -460.29,
-                "weight": 54.1
-            },
-            {
-                "name": "CSP1 (S&P 500 EUR)",
-                "value": 1314.75,
-                "price": 159.2124,
-                "pl_pct": 31.47,
-                "pl_eur": 314.73,
-                "weight": 15.7
-            },
-            {
-                "name": "TDIV (Dev Div Leaders)",
-                "value": 1188.03,
-                "price": 51.9,
-                "pl_pct": -0.99,
-                "pl_eur": -11.9,
-                "weight": 14.2
-            },
-            {
-                "name": "VWCE (All-World Acc)",
-                "value": 1153.29,
-                "price": 162.36,
-                "pl_pct": 5.37,
-                "pl_eur": 58.82,
-                "weight": 13.8
-            },
-            {
-                "name": "VHYL (High Div Yield)",
-                "value": 180.22,
-                "price": 78.133,
-                "pl_pct": -9.89,
-                "pl_eur": -19.78,
-                "weight": 2.2
-            }
-        ]
+    {
+      "date": "2026-04-10",
+      "ticker": "ADBE",
+      "sector": "Tech & AI",
+      "insight": "Verlies op ADBE (-4.2%). Monitor Tech & AI nauwlettend.",
+      "type": "NEGATIVE_LEARNING"
     },
-    "dashboard_updated": "2026-06-08T07:01:06.393674+00:00",
-    "degiro_summary": {
-        "total": 16272.75,
-        "total_pl_pct": 32.64,
-        "total_invested": 12268.6,
-        "positions": [
-            {
-                "name": "VWRL.AS",
-                "value": 6163.56,
-                "pl_pct": 32.46,
-                "pl_eur": 1510.47,
-                "div_yield": 0.0125,
-                "annual_div_eur": 77.19,
-                "first_buy_date": null,
-                "sector": null,
-                "weight": 37.9
-            },
-            {
-                "name": "VUSA.AS",
-                "value": 5171.96,
-                "pl_pct": 38.36,
-                "pl_eur": 1433.96,
-                "div_yield": 0.0087,
-                "annual_div_eur": 44.94,
-                "first_buy_date": null,
-                "sector": null,
-                "weight": 31.8
-            },
-            {
-                "name": "VHYL.AS",
-                "value": 4375.45,
-                "pl_pct": 24.06,
-                "pl_eur": 848.57,
-                "div_yield": 0.0249,
-                "annual_div_eur": 108.82,
-                "first_buy_date": null,
-                "sector": null,
-                "weight": 26.9
-            },
-            {
-                "name": "V",
-                "value": 561.78,
-                "pl_pct": 60.22,
-                "pl_eur": 211.15,
-                "div_yield": 0.0083,
-                "annual_div_eur": 4.66,
-                "first_buy_date": null,
-                "sector": "Financial Services",
-                "weight": 3.5
-            }
-        ]
+    {
+      "date": "2026-05-15",
+      "ticker": "ADBE",
+      "sector": "Tech & AI",
+      "insight": "Take-profit ADBE (+9.9%, doel was 9.4%). Tech & AI werkt.",
+      "type": "POSITIVE_LEARNING"
     },
-    "news_summary": [
-        {
-            "theme": "Volatiliteit en marktbewegingen",
-            "summary": "De AEX schommelt wild met dagen van aanzienlijke dalingen en herstel (duik omlaag vs. doorbraak 1000 punten). Deze volatiliteit be\u00efnvloedt brede indexfondsen direct, vooral omdat tech-aandelen grote bewegingen vertonen en sentiment snel kan omslaan tussen risk-on en risk-off stemmingen."
-        },
-        {
-            "theme": "Sector-specifieke kansen en risico's",
-            "summary": "Individuele aandelen zoals Adyen, Ferrari, X-Fab en Victoria's Secret vertonen extreme bewegingen (crashes en explosieve stijgingen), terwijl defensie-aandelen profiteren van geopolitieke spanningen. Deze sectordiversiteit biedt beleggers mogelijkheden om posities aan te passen, maar vereist selectiviteit buiten pure indexbelegging."
-        },
-        {
-            "theme": "Geopolitieke risico's en onrust",
-            "summary": "Oorlogsdreiging (Iran, lopende conflicten) zorgt voor marktonrust en Aziatische dalingen, maar defensie-aandelen stijgen. Dit duidt op selectieve risicovoorkeur: beleggers kiezen nu voor verdediging in plaats van groei, wat ETF-samenstelling en rotatie-strategie\u00ebn rechtvaardigt."
-        },
-        {
-            "theme": "Vertrouwen en insider-activiteit",
-            "summary": "Ondanks marktbewegingen tonen CEO's (Brunel) vertrouwen door aandelen te kopen in dips, en blijven beleggers sparen ondanks eerdere winsten. Dit duidt op onderliggende fundamentele steun onder de markt ondanks kortetermijn-volatiliteit en headlines."
-        }
-    ],
-    "bux_summary": {
-        "total": 1983.09,
-        "total_pl_pct": -11.72,
-        "total_invested": 2246.27,
-        "positions": [
-            {
-                "name": "TSLA.DE",
-                "ticker": "TSLA.DE",
-                "value": 1683.68,
-                "price": 339.43,
-                "pl_pct": -6.44,
-                "pl_eur": -115.97,
-                "div_yield": null,
-                "annual_div_eur": null,
-                "first_buy_date": null,
-                "sector": null,
-                "weight": 84.9
-            },
-            {
-                "name": "PEP",
-                "ticker": "PEP",
-                "value": 246.4,
-                "price": 123.2,
-                "pl_pct": -14.28,
-                "pl_eur": -41.06,
-                "div_yield": 0.0417,
-                "annual_div_eur": 10.27,
-                "first_buy_date": null,
-                "sector": "Consumer Defensive",
-                "weight": 12.4
-            },
-            {
-                "name": "ENPH",
-                "ticker": "ENPH",
-                "value": 48.67,
-                "price": 48.67,
-                "pl_pct": -68.78,
-                "pl_eur": -107.21,
-                "div_yield": null,
-                "annual_div_eur": null,
-                "first_buy_date": null,
-                "sector": "Technology",
-                "weight": 2.5
-            },
-            {
-                "name": "KPN.AS",
-                "ticker": "KPN.AS",
-                "value": 4.34,
-                "price": 4.34,
-                "pl_pct": 32.44,
-                "pl_eur": 1.06,
-                "div_yield": 0.0502,
-                "annual_div_eur": 0.22,
-                "first_buy_date": null,
-                "sector": "Communication Services",
-                "weight": 0.2
-            }
-        ]
+    {
+      "date": "2026-05-29",
+      "ticker": "CF",
+      "sector": "Materials",
+      "insight": "Verlies CF (-5.3%). Bewaken.",
+      "type": "NEGATIVE_LEARNING"
     },
-    "investment_timeline": [
-        {
-            "date": "2022-03",
-            "invested": 451.06
-        },
-        {
-            "date": "2022-04",
-            "invested": 866.08
-        },
-        {
-            "date": "2022-05",
-            "invested": 1715.74
-        },
-        {
-            "date": "2022-06",
-            "invested": 1947.64
-        },
-        {
-            "date": "2022-07",
-            "invested": 2236.94
-        },
-        {
-            "date": "2022-08",
-            "invested": 2473.0
-        },
-        {
-            "date": "2022-09",
-            "invested": 2988.87
-        },
-        {
-            "date": "2022-10",
-            "invested": 3482.64
-        },
-        {
-            "date": "2022-11",
-            "invested": 3987.91
-        },
-        {
-            "date": "2022-12",
-            "invested": 4509.17
-        },
-        {
-            "date": "2023-01",
-            "invested": 5001.15
-        },
-        {
-            "date": "2023-02",
-            "invested": 5417.59
-        },
-        {
-            "date": "2023-04",
-            "invested": 5639.24
-        },
-        {
-            "date": "2023-05",
-            "invested": 5748.88
-        },
-        {
-            "date": "2025-01",
-            "invested": 5922.21
-        },
-        {
-            "date": "2025-02",
-            "invested": 6233.67
-        },
-        {
-            "date": "2025-03",
-            "invested": 6361.25
-        },
-        {
-            "date": "2025-05",
-            "invested": 6517.59
-        },
-        {
-            "date": "2025-06",
-            "invested": 6901.11
-        },
-        {
-            "date": "2025-08",
-            "invested": 7484.31
-        },
-        {
-            "date": "2025-10",
-            "invested": 8055.83
-        },
-        {
-            "date": "2025-12",
-            "invested": 8737.92
-        },
-        {
-            "date": "2026-01",
-            "invested": 12289.15
-        }
-    ],
-    "first_investment_date": "2022-03-29",
-    "predictions": [
-        {
-            "date": "2026-05-29",
-            "macro_snapshot": {
-                "vix": 15.41,
-                "treasury_10y": 4.45
-            },
-            "candidates": [
-                {
-                    "ticker": "ALL",
-                    "price": 207.24,
-                    "score": 10.0,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CINF",
-                    "price": 158.4,
-                    "score": 7.9,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "AMP",
-                    "price": 447.81,
-                    "score": 7.7,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GL",
-                    "price": 154.63,
-                    "score": 7.4,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "APA",
-                    "price": 36.08,
-                    "score": 7.3,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "ACGL",
-                    "price": 89.82,
-                    "score": 7.2,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "NEM",
-                    "price": 109.72,
-                    "score": 7.0,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GILD",
-                    "price": 134.04,
-                    "score": 6.8,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "DECK",
-                    "price": 114.16,
-                    "score": 6.7,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "HIG",
-                    "price": 127.77,
-                    "score": 6.7,
-                    "recommended_action": "buy",
-                    "conviction": null
-                }
-            ]
-        },
-        {
-            "date": "2026-06-01",
-            "macro_snapshot": {
-                "vix": 16.05,
-                "treasury_10y": 4.47
-            },
-            "candidates": [
-                {
-                    "ticker": "PGR",
-                    "price": 192.67,
-                    "score": 7.9,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "AMP",
-                    "price": 447.15,
-                    "score": 7.7,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CI",
-                    "price": 274.19,
-                    "score": 7.6,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GL",
-                    "price": 152.12,
-                    "score": 7.5,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "TRV",
-                    "price": 288.93,
-                    "score": 7.5,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "ACGL",
-                    "price": 88.74,
-                    "score": 7.2,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "APA",
-                    "price": 37.75,
-                    "score": 7.1,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CINF",
-                    "price": 156.83,
-                    "score": 7.1,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GILD",
-                    "price": 131.1,
-                    "score": 7.0,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "NEM",
-                    "price": 108.19,
-                    "score": 7.0,
-                    "recommended_action": "buy",
-                    "conviction": null
-                }
-            ]
-        },
-        {
-            "date": "2026-06-02",
-            "macro_snapshot": {
-                "vix": 15.88,
-                "treasury_10y": 4.46
-            },
-            "candidates": [
-                {
-                    "ticker": "ALL",
-                    "price": 210.48,
-                    "score": 10.0,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "PGR",
-                    "price": 196.82,
-                    "score": 7.9,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "TRV",
-                    "price": 291.93,
-                    "score": 7.7,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CINF",
-                    "price": 158.0,
-                    "score": 7.6,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GL",
-                    "price": 151.07,
-                    "score": 7.2,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "ACGL",
-                    "price": 87.62,
-                    "score": 7.2,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GILD",
-                    "price": 127.57,
-                    "score": 7.0,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "EXE",
-                    "price": 91.54,
-                    "score": 6.9,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "DECK",
-                    "price": 110.78,
-                    "score": 6.8,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CI",
-                    "price": 272.7,
-                    "score": 6.7,
-                    "recommended_action": "watch",
-                    "conviction": null
-                }
-            ]
-        },
-        {
-            "date": "2026-06-03",
-            "macro_snapshot": {
-                "vix": 16.05,
-                "treasury_10y": 4.49
-            },
-            "candidates": [
-                {
-                    "ticker": "ALL",
-                    "price": 209.34,
-                    "score": 10.0,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "PGR",
-                    "price": 193.49,
-                    "score": 7.9,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "TRV",
-                    "price": 289.96,
-                    "score": 7.2,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GILD",
-                    "price": 128.99,
-                    "score": 6.9,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "ACGL",
-                    "price": 87.89,
-                    "score": 6.9,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "DECK",
-                    "price": 107.37,
-                    "score": 6.8,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CI",
-                    "price": 270.87,
-                    "score": 6.7,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "AFL",
-                    "price": 114.51,
-                    "score": 6.6,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "HIG",
-                    "price": 125.97,
-                    "score": 6.5,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CB",
-                    "price": 312.75,
-                    "score": 6.4,
-                    "recommended_action": "buy",
-                    "conviction": null
-                }
-            ]
-        },
-        {
-            "date": "2026-06-04",
-            "macro_snapshot": {
-                "vix": 15.36,
-                "treasury_10y": 4.48
-            },
-            "candidates": [
-                {
-                    "ticker": "ALL",
-                    "price": 210.63,
-                    "score": 9.8,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "TRV",
-                    "price": 293.03,
-                    "score": 8.0,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "PGR",
-                    "price": 195.53,
-                    "score": 7.9,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CINF",
-                    "price": 160.45,
-                    "score": 7.8,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "AMP",
-                    "price": 454.86,
-                    "score": 7.8,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CI",
-                    "price": 282.32,
-                    "score": 7.6,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GL",
-                    "price": 154.06,
-                    "score": 7.4,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CB",
-                    "price": 315.51,
-                    "score": 7.1,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "ACGL",
-                    "price": 88.61,
-                    "score": 6.9,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "DECK",
-                    "price": 108.18,
-                    "score": 6.8,
-                    "recommended_action": "watch",
-                    "conviction": null
-                }
-            ]
-        },
-        {
-            "date": "2026-06-07",
-            "macro_snapshot": {
-                "vix": 21.51,
-                "treasury_10y": 4.54
-            },
-            "candidates": [
-                {
-                    "ticker": "JNJ",
-                    "price": 232.77,
-                    "score": 4.6,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "IEX",
-                    "price": 215.35,
-                    "score": 4.5,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "FTV",
-                    "price": 61.28,
-                    "score": 4.2,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "EQIX",
-                    "price": 1080.95,
-                    "score": 4.0,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MO",
-                    "price": 72.19,
-                    "score": 3.8,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MRK",
-                    "price": 120.79,
-                    "score": 3.7,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "JCI",
-                    "price": 143.65,
-                    "score": 3.5,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GILD",
-                    "price": 129.16,
-                    "score": 3.49,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "INCY",
-                    "price": 102.38,
-                    "score": 3.44,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "HST",
-                    "price": 24.62,
-                    "score": 3.4,
-                    "recommended_action": "watch",
-                    "conviction": null
-                }
-            ]
-        },
-        {
-            "date": "2026-06-08",
-            "macro_snapshot": {
-                "vix": 19.6,
-                "treasury_10y": 4.54
-            },
-            "candidates": [
-                {
-                    "ticker": "JNJ",
-                    "price": 232.77,
-                    "score": 4.6,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "IEX",
-                    "price": 215.35,
-                    "score": 4.5,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "FTV",
-                    "price": 61.28,
-                    "score": 4.2,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "EQIX",
-                    "price": 1080.95,
-                    "score": 4.0,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MO",
-                    "price": 72.19,
-                    "score": 3.8,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MRK",
-                    "price": 120.79,
-                    "score": 3.7,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "JCI",
-                    "price": 143.65,
-                    "score": 3.5,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GILD",
-                    "price": 129.16,
-                    "score": 3.49,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "HST",
-                    "price": 24.62,
-                    "score": 3.4,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "DOV",
-                    "price": 214.76,
-                    "score": 3.37,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                }
-            ]
-        }
-    ],
-    "portfolio_value_history": [
-        {
-            "date": "2022-03",
-            "value": 421.15
-        },
-        {
-            "date": "2022-04",
-            "value": 785.09
-        },
-        {
-            "date": "2022-05",
-            "value": 1574.55
-        },
-        {
-            "date": "2022-06",
-            "value": 1695.18
-        },
-        {
-            "date": "2022-07",
-            "value": 2155.62
-        },
-        {
-            "date": "2022-08",
-            "value": 2331.07
-        },
-        {
-            "date": "2022-09",
-            "value": 2631.11
-        },
-        {
-            "date": "2022-10",
-            "value": 3277.63
-        },
-        {
-            "date": "2022-11",
-            "value": 3777.78
-        },
-        {
-            "date": "2022-12",
-            "value": 3994.5
-        },
-        {
-            "date": "2023-01",
-            "value": 4672.72
-        },
-        {
-            "date": "2023-02",
-            "value": 5058.07
-        },
-        {
-            "date": "2023-03",
-            "value": 5009.74
-        },
-        {
-            "date": "2023-04",
-            "value": 5262.93
-        },
-        {
-            "date": "2023-05",
-            "value": 5446.86
-        },
-        {
-            "date": "2023-06",
-            "value": 5614.19
-        },
-        {
-            "date": "2023-07",
-            "value": 5778.73
-        },
-        {
-            "date": "2023-08",
-            "value": 5763.1
-        },
-        {
-            "date": "2023-09",
-            "value": 5661.74
-        },
-        {
-            "date": "2023-10",
-            "value": 5513.96
-        },
-        {
-            "date": "2023-11",
-            "value": 5797.35
-        },
-        {
-            "date": "2023-12",
-            "value": 5959.36
-        },
-        {
-            "date": "2024-01",
-            "value": 6215.96
-        },
-        {
-            "date": "2024-02",
-            "value": 6423.9
-        },
-        {
-            "date": "2024-03",
-            "value": 6623.15
-        },
-        {
-            "date": "2024-04",
-            "value": 6530.89
-        },
-        {
-            "date": "2024-05",
-            "value": 6590.7
-        },
-        {
-            "date": "2024-06",
-            "value": 6821.16
-        },
-        {
-            "date": "2024-07",
-            "value": 6906.26
-        },
-        {
-            "date": "2024-08",
-            "value": 6881.43
-        },
-        {
-            "date": "2024-09",
-            "value": 6952.57
-        },
-        {
-            "date": "2024-10",
-            "value": 7103.66
-        },
-        {
-            "date": "2024-11",
-            "value": 7613.23
-        },
-        {
-            "date": "2024-12",
-            "value": 7530.17
-        },
-        {
-            "date": "2025-01",
-            "value": 8043.16
-        },
-        {
-            "date": "2025-02",
-            "value": 8248.62
-        },
-        {
-            "date": "2025-03",
-            "value": 7771.44
-        },
-        {
-            "date": "2025-04",
-            "value": 7426.69
-        },
-        {
-            "date": "2025-05",
-            "value": 8013.06
-        },
-        {
-            "date": "2025-06",
-            "value": 8367.23
-        },
-        {
-            "date": "2025-07",
-            "value": 8789.61
-        },
-        {
-            "date": "2025-08",
-            "value": 9350.84
-        },
-        {
-            "date": "2025-09",
-            "value": 9515.07
-        },
-        {
-            "date": "2025-10",
-            "value": 10467.75
-        },
-        {
-            "date": "2025-11",
-            "value": 10459.04
-        },
-        {
-            "date": "2025-12",
-            "value": 11153.55
-        },
-        {
-            "date": "2026-01",
-            "value": 14799.82
-        },
-        {
-            "date": "2026-02",
-            "value": 15130.23
-        },
-        {
-            "date": "2026-03",
-            "value": 14396.15
-        },
-        {
-            "date": "2026-04",
-            "value": 15514.26
-        },
-        {
-            "date": "2026-05",
-            "value": 25803.77
-        },
-        {
-            "date": "2026-06",
-            "value": 25495.43
-        }
-    ],
-    "first_buy_dates_by_isin": {
-        "IE00B3RBWM25": "2022-03-29",
-        "IE00B3XXRP09": "2022-03-29",
-        "IE00B8GKDB10": "2022-04-22",
-        "US92826C8394": "2022-05-03"
+    {
+      "date": "2026-06-02",
+      "ticker": "EXE",
+      "sector": "Energy",
+      "insight": "Verlies EXE (-5.3%). Bewaken.",
+      "type": "NEGATIVE_LEARNING"
     },
-    "cooldowns": {
-        "CF": "2026-05-29",
-        "NEM": "2026-06-07"
+    {
+      "date": "2026-06-03",
+      "ticker": "EXE",
+      "sector": "Energy",
+      "insight": "Verlies EXE (-5.3%). Bewaken.",
+      "type": "NEGATIVE_LEARNING"
     },
-    "benchmark_history": {
-        "sp500_ytd": 7.66,
-        "aex_ytd": 7.6,
-        "msci_ytd": 10.77
+    {
+      "date": "2026-06-04",
+      "ticker": "EXE",
+      "sector": "Energy",
+      "insight": "Verlies EXE (-5.8%). Bewaken.",
+      "type": "NEGATIVE_LEARNING"
+    },
+    {
+      "date": "2026-06-05",
+      "ticker": "NEM",
+      "sector": "Materials",
+      "insight": "Verlies NEM (-7.8%). Bewaken.",
+      "type": "NEGATIVE_LEARNING"
+    },
+    {
+      "date": "2026-06-07",
+      "ticker": "NEM",
+      "sector": "Materials",
+      "insight": "Stop-loss NEM (-9.1%). Sector Materials voorzichtig.",
+      "type": "NEGATIVE_LEARNING"
     }
+  ],
+  "initialized_at": "2026-04-04T00:00:00+00:00",
+  "version": "nexus-v2",
+  "post_mortem": {
+    "analysis": "# POST-MORTEM RAPPORT - AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Serie\u00eble verliezen in cyclische sectoren.** Materials en Energy domineren verlieslijst (6 van 8 trades). Kritiek: EXE drie opeenvolgende dagen verloren (-5.3%, -5.3%, -5.8%) zonder exit-discipline.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: Bot oppikt cyclische aandelen zonder trendbevestiging\n- **Exit-discipline ontbreekt**: EXE-positie niet gesloten na eerste verlies (-5.3%), resulterend in cascade\n- **Win/loss ratio**: 1:8 suggereert selectie- \u00e1ltijd en/of positionsizing-probleem\n- Enige succesvolle trade (ADBE +9.9%) was in Tech & AI met gedefinieerd doel\n\n## 3. AANBEVELINGEN\n1. **Implementeer hard stop-loss op -4%** (niet -9.1%). Voork\u00f3m EXE-achtige cascades. Regel: max 2 trades/aandeel per week.\n2. **Sector-rotatie filter**: Ban Materials/Energy-trades gedurende 5 dagen na verlies in sector. Herbalanceer naar Tech & AI waar track record +9.9% toont.\n\n## 4. SECTOR BIAS\n- **Mijden**: Materials (-16.9%), Energy (-16.4% in 3 trades)\n- **Zwaarder wegen**: Tech & AI (enige +9.9% trade, maar slechts 1 win)\n\n**Conclusie**: Bot heeft selectie- \u00e9n discipline-probleem. Adresseer eerst.",
+    "win_rate": 11.1,
+    "worst_sectors": [
+      [
+        "Materials",
+        3
+      ],
+      [
+        "Energy",
+        3
+      ],
+      [
+        "Tech & AI",
+        2
+      ]
+    ],
+    "best_sectors": [
+      [
+        "Tech & AI",
+        1
+      ]
+    ],
+    "repeat_losers": [
+      "ADBE",
+      "EXE",
+      "NEM"
+    ],
+    "sector_adjustments": {
+      "Materials": -1.5,
+      "Energy": -1.5,
+      "Tech & AI": -0.7
+    },
+    "run_at": "2026-06-08T10:27:26.137077+00:00"
+  },
+  "portfolio_history": [
+    {
+      "date": "2026-06-08",
+      "degiro": 16201.87,
+      "tr": 8327.74,
+      "nexus": 3231.86,
+      "bux": 1978.56
+    },
+    {
+      "date": "2026-06-07",
+      "degiro": 16272.36,
+      "tr": 8290.15,
+      "nexus": 3231.86,
+      "bux": 1981.73
+    },
+    {
+      "date": "2026-06-06",
+      "degiro": 16272.36,
+      "tr": 8187.03,
+      "nexus": 2754.98,
+      "bux": 1981.73
+    },
+    {
+      "date": "2026-06-05",
+      "degiro": 16272.98,
+      "tr": 8086.37,
+      "nexus": 2754.98,
+      "bux": 1983.51
+    },
+    {
+      "date": "2026-06-04",
+      "degiro": 16337.29,
+      "tr": 8377.08,
+      "nexus": 2754.98,
+      "bux": 2094.54
+    },
+    {
+      "date": "2026-06-03",
+      "degiro": 16424.72,
+      "tr": 8545.55,
+      "bux": 2165.19
+    },
+    {
+      "date": "2026-06-02",
+      "degiro": 16475.06,
+      "tr": 6854.18,
+      "bux": 2159.02
+    },
+    {
+      "date": "2026-06-01",
+      "degiro": 16414.45,
+      "tr": 7091.95,
+      "bux": 2137.8
+    },
+    {
+      "date": "2026-05-31",
+      "degiro": 16364.43,
+      "tr": 7224.06,
+      "bux": 2215.28
+    },
+    {
+      "date": "2026-05-30",
+      "degiro": 16364.43,
+      "tr": 7211.3,
+      "bux": 2215.28
+    },
+    {
+      "date": "2026-05-29",
+      "degiro": 16371.03,
+      "tr": 7179.32,
+      "bux": 2211.09
+    },
+    {
+      "date": "2026-05-28",
+      "degiro": 16313.53,
+      "tr": 7207.76,
+      "bux": 2700.0
+    },
+    {
+      "date": "2026-05-27",
+      "degiro": 16320.46,
+      "tr": 7302.32,
+      "bux": 2700.0
+    },
+    {
+      "date": "2026-05-25",
+      "degiro": 16379.45,
+      "tr": 7454.62,
+      "bux": null
+    },
+    {
+      "date": "2026-05-24",
+      "degiro": 16293.3,
+      "tr": 7424.79,
+      "bux": null
+    },
+    {
+      "date": "2026-05-23",
+      "degiro": 16293.3,
+      "tr": 7292.93,
+      "bux": null
+    },
+    {
+      "date": "2026-05-22",
+      "degiro": 16234.0,
+      "tr": 7442.58,
+      "bux": null
+    },
+    {
+      "date": "2026-05-21",
+      "degiro": 16145.17,
+      "tr": 7460.86,
+      "bux": null
+    },
+    {
+      "date": "2026-05-20",
+      "degiro": 16048.38,
+      "tr": 7428.36,
+      "bux": null
+    },
+    {
+      "date": "2026-05-19",
+      "degiro": 15997.2,
+      "tr": 7392.52,
+      "bux": null
+    }
+  ],
+  "last_news": [
+    "X-Fab ontploft op beurs door hype op X, handel meermaals stilgelegd",
+    "Victoria\u2019s Secret is weer sexy, aandeel lingeriemerk stijgt explosief",
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "Ferrari incasseert harde klappen op de beurs",
+    "Adyen crasht plotseling op beurs: aandeel verliest bijna 12 procent na kritisch rapport",
+    "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
+    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
+    "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
+  ],
+  "tr_summary": {
+    "total": 8327.74,
+    "total_pl_pct": -1.71,
+    "total_invested": 8473.03,
+    "positions": [
+      {
+        "name": "Bitcoin",
+        "value": 4506.38,
+        "price": 54572.5312,
+        "pl_pct": -9.48,
+        "pl_eur": -472.21,
+        "weight": 54.1
+      },
+      {
+        "name": "CSP1 (S&P 500 EUR)",
+        "value": 1306.09,
+        "price": 158.1636,
+        "pl_pct": 30.61,
+        "pl_eur": 306.06,
+        "weight": 15.7
+      },
+      {
+        "name": "TDIV (Dev Div Leaders)",
+        "value": 1187.35,
+        "price": 51.87,
+        "pl_pct": -1.05,
+        "pl_eur": -12.59,
+        "weight": 14.3
+      },
+      {
+        "name": "VWCE (All-World Acc)",
+        "value": 1148.18,
+        "price": 161.64,
+        "pl_pct": 4.91,
+        "pl_eur": 53.7,
+        "weight": 13.8
+      },
+      {
+        "name": "VHYL (High Div Yield)",
+        "value": 179.75,
+        "price": 77.93,
+        "pl_pct": -10.13,
+        "pl_eur": -20.25,
+        "weight": 2.2
+      }
+    ]
+  },
+  "dashboard_updated": "2026-06-08T12:08:25.659864+00:00",
+  "degiro_summary": {
+    "total": 16201.87,
+    "total_pl_pct": 32.07,
+    "total_invested": 12267.79,
+    "positions": [
+      {
+        "name": "VWRL.AS",
+        "value": 6138.6,
+        "pl_pct": 31.93,
+        "pl_eur": 1485.51,
+        "div_yield": 0.0126,
+        "annual_div_eur": 77.19,
+        "first_buy_date": null,
+        "sector": null,
+        "weight": 37.9
+      },
+      {
+        "name": "VUSA.AS",
+        "value": 5138.7,
+        "pl_pct": 37.47,
+        "pl_eur": 1400.7,
+        "div_yield": 0.0087,
+        "annual_div_eur": 44.94,
+        "first_buy_date": null,
+        "sector": null,
+        "weight": 31.7
+      },
+      {
+        "name": "VHYL.AS",
+        "value": 4364.08,
+        "pl_pct": 23.74,
+        "pl_eur": 837.2,
+        "div_yield": 0.0249,
+        "annual_div_eur": 108.82,
+        "first_buy_date": null,
+        "sector": null,
+        "weight": 26.9
+      },
+      {
+        "name": "V",
+        "value": 560.49,
+        "pl_pct": 60.22,
+        "pl_eur": 210.67,
+        "div_yield": 0.0083,
+        "annual_div_eur": 4.65,
+        "first_buy_date": null,
+        "sector": "Financial Services",
+        "weight": 3.5
+      }
+    ]
+  },
+  "news_summary": [
+    {
+      "theme": "Sterke sectorbewegingen en winnaars",
+      "summary": "Philips, Victoria's Secret en X-Fab scoren vandaag flink positief, terwijl Ferrari en Unilever onder druk staan. Deze ongelijke sectordynamiek toont dat selectiviteit cruciaal is: brede ETFs bufferen deze schommelingen, maar individuele aandelen kunnen hard uitslaan."
+    },
+    {
+      "theme": "Volatiliteit en technische stress",
+      "summary": "De beurs laat wild gedrag zien met plotse crashes (Adyen -12%) en stilgelegde handel, terwijl beleggers geplaagd worden door AI-vrees en een mogelijke dotcombubbel-situatie. Dit duidt op onderlying nervositeit die ETF-houders als heftige dalingen kunnen ervaren."
+    },
+    {
+      "theme": "Macro-onzekerheid versus marktbeweging",
+      "summary": "Ondanks oorlogen (Iran) en geopolitieke turbulentie stijgt de AEX door 1000 punten, wat aangeeft dat beleggers deze risico's prijzen in maar voorzichtig blijven. De discrepantie tussen macro-risico en beursstijging vraagt om voorzichtigheid."
+    },
+    {
+      "theme": "Marktconcentratie en insider-activiteit",
+      "summary": "Slechts 20 aandelen dragen de AEX-recordstand, tech domineert sterk, en insiders bij Brunel kopen aandelen na een dip\u2014klassieke herstellingssignalen. Maar dit concentratierisico maakt brede diversificatie via ETFs alleen maar belangrijker."
+    }
+  ],
+  "bux_summary": {
+    "total": 1978.56,
+    "total_pl_pct": -11.72,
+    "total_invested": 2241.11,
+    "positions": [
+      {
+        "name": "TSLA.DE",
+        "ticker": "TSLA.DE",
+        "value": 1679.8,
+        "price": 338.65,
+        "pl_pct": -6.44,
+        "pl_eur": -115.7,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
+        "sector": null,
+        "weight": 84.9
+      },
+      {
+        "name": "PEP",
+        "ticker": "PEP",
+        "value": 245.83,
+        "price": 122.92,
+        "pl_pct": -14.28,
+        "pl_eur": -40.97,
+        "div_yield": 0.0417,
+        "annual_div_eur": 10.25,
+        "first_buy_date": null,
+        "sector": "Consumer Defensive",
+        "weight": 12.4
+      },
+      {
+        "name": "ENPH",
+        "ticker": "ENPH",
+        "value": 48.56,
+        "price": 48.56,
+        "pl_pct": -68.78,
+        "pl_eur": -106.97,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
+        "sector": "Technology",
+        "weight": 2.5
+      },
+      {
+        "name": "KPN.AS",
+        "ticker": "KPN.AS",
+        "value": 4.37,
+        "price": 4.37,
+        "pl_pct": 33.17,
+        "pl_eur": 1.09,
+        "div_yield": 0.0502,
+        "annual_div_eur": 0.22,
+        "first_buy_date": null,
+        "sector": "Communication Services",
+        "weight": 0.2
+      }
+    ]
+  },
+  "investment_timeline": [
+    {
+      "date": "2022-03",
+      "invested": 451.06
+    },
+    {
+      "date": "2022-04",
+      "invested": 866.08
+    },
+    {
+      "date": "2022-05",
+      "invested": 1715.74
+    },
+    {
+      "date": "2022-06",
+      "invested": 1947.64
+    },
+    {
+      "date": "2022-07",
+      "invested": 2236.94
+    },
+    {
+      "date": "2022-08",
+      "invested": 2473.0
+    },
+    {
+      "date": "2022-09",
+      "invested": 2988.87
+    },
+    {
+      "date": "2022-10",
+      "invested": 3482.64
+    },
+    {
+      "date": "2022-11",
+      "invested": 3987.91
+    },
+    {
+      "date": "2022-12",
+      "invested": 4509.17
+    },
+    {
+      "date": "2023-01",
+      "invested": 5001.15
+    },
+    {
+      "date": "2023-02",
+      "invested": 5417.59
+    },
+    {
+      "date": "2023-04",
+      "invested": 5639.24
+    },
+    {
+      "date": "2023-05",
+      "invested": 5748.88
+    },
+    {
+      "date": "2025-01",
+      "invested": 5922.21
+    },
+    {
+      "date": "2025-02",
+      "invested": 6233.67
+    },
+    {
+      "date": "2025-03",
+      "invested": 6361.25
+    },
+    {
+      "date": "2025-05",
+      "invested": 6517.59
+    },
+    {
+      "date": "2025-06",
+      "invested": 6901.11
+    },
+    {
+      "date": "2025-08",
+      "invested": 7484.31
+    },
+    {
+      "date": "2025-10",
+      "invested": 8055.83
+    },
+    {
+      "date": "2025-12",
+      "invested": 8737.92
+    },
+    {
+      "date": "2026-01",
+      "invested": 12289.15
+    }
+  ],
+  "first_investment_date": "2022-03-29",
+  "predictions": [
+    {
+      "date": "2026-05-29",
+      "macro_snapshot": {
+        "vix": 15.41,
+        "treasury_10y": 4.45
+      },
+      "candidates": [
+        {
+          "ticker": "ALL",
+          "price": 207.24,
+          "score": 10.0,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "CINF",
+          "price": 158.4,
+          "score": 7.9,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "AMP",
+          "price": 447.81,
+          "score": 7.7,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "GL",
+          "price": 154.63,
+          "score": 7.4,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "APA",
+          "price": 36.08,
+          "score": 7.3,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "ACGL",
+          "price": 89.82,
+          "score": 7.2,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "NEM",
+          "price": 109.72,
+          "score": 7.0,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "GILD",
+          "price": 134.04,
+          "score": 6.8,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "DECK",
+          "price": 114.16,
+          "score": 6.7,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "HIG",
+          "price": 127.77,
+          "score": 6.7,
+          "recommended_action": "buy",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-01",
+      "macro_snapshot": {
+        "vix": 16.05,
+        "treasury_10y": 4.47
+      },
+      "candidates": [
+        {
+          "ticker": "PGR",
+          "price": 192.67,
+          "score": 7.9,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "AMP",
+          "price": 447.15,
+          "score": 7.7,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "CI",
+          "price": 274.19,
+          "score": 7.6,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "GL",
+          "price": 152.12,
+          "score": 7.5,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "TRV",
+          "price": 288.93,
+          "score": 7.5,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "ACGL",
+          "price": 88.74,
+          "score": 7.2,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "APA",
+          "price": 37.75,
+          "score": 7.1,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "CINF",
+          "price": 156.83,
+          "score": 7.1,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "GILD",
+          "price": 131.1,
+          "score": 7.0,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "NEM",
+          "price": 108.19,
+          "score": 7.0,
+          "recommended_action": "buy",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "macro_snapshot": {
+        "vix": 15.88,
+        "treasury_10y": 4.46
+      },
+      "candidates": [
+        {
+          "ticker": "ALL",
+          "price": 210.48,
+          "score": 10.0,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "PGR",
+          "price": 196.82,
+          "score": 7.9,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "TRV",
+          "price": 291.93,
+          "score": 7.7,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "CINF",
+          "price": 158.0,
+          "score": 7.6,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "GL",
+          "price": 151.07,
+          "score": 7.2,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "ACGL",
+          "price": 87.62,
+          "score": 7.2,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "GILD",
+          "price": 127.57,
+          "score": 7.0,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "EXE",
+          "price": 91.54,
+          "score": 6.9,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "DECK",
+          "price": 110.78,
+          "score": 6.8,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "CI",
+          "price": 272.7,
+          "score": 6.7,
+          "recommended_action": "watch",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-03",
+      "macro_snapshot": {
+        "vix": 16.05,
+        "treasury_10y": 4.49
+      },
+      "candidates": [
+        {
+          "ticker": "ALL",
+          "price": 209.34,
+          "score": 10.0,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "PGR",
+          "price": 193.49,
+          "score": 7.9,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "TRV",
+          "price": 289.96,
+          "score": 7.2,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "GILD",
+          "price": 128.99,
+          "score": 6.9,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "ACGL",
+          "price": 87.89,
+          "score": 6.9,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "DECK",
+          "price": 107.37,
+          "score": 6.8,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "CI",
+          "price": 270.87,
+          "score": 6.7,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "AFL",
+          "price": 114.51,
+          "score": 6.6,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "HIG",
+          "price": 125.97,
+          "score": 6.5,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "CB",
+          "price": 312.75,
+          "score": 6.4,
+          "recommended_action": "buy",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-04",
+      "macro_snapshot": {
+        "vix": 15.36,
+        "treasury_10y": 4.48
+      },
+      "candidates": [
+        {
+          "ticker": "ALL",
+          "price": 210.63,
+          "score": 9.8,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "TRV",
+          "price": 293.03,
+          "score": 8.0,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "PGR",
+          "price": 195.53,
+          "score": 7.9,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "CINF",
+          "price": 160.45,
+          "score": 7.8,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "AMP",
+          "price": 454.86,
+          "score": 7.8,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "CI",
+          "price": 282.32,
+          "score": 7.6,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "GL",
+          "price": 154.06,
+          "score": 7.4,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "CB",
+          "price": 315.51,
+          "score": 7.1,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "ACGL",
+          "price": 88.61,
+          "score": 6.9,
+          "recommended_action": "buy",
+          "conviction": null
+        },
+        {
+          "ticker": "DECK",
+          "price": 108.18,
+          "score": 6.8,
+          "recommended_action": "watch",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-07",
+      "macro_snapshot": {
+        "vix": 21.51,
+        "treasury_10y": 4.54
+      },
+      "candidates": [
+        {
+          "ticker": "JNJ",
+          "price": 232.77,
+          "score": 4.6,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "IEX",
+          "price": 215.35,
+          "score": 4.5,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "FTV",
+          "price": 61.28,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "EQIX",
+          "price": 1080.95,
+          "score": 4.0,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MO",
+          "price": 72.19,
+          "score": 3.8,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MRK",
+          "price": 120.79,
+          "score": 3.7,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "JCI",
+          "price": 143.65,
+          "score": 3.5,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "GILD",
+          "price": 129.16,
+          "score": 3.49,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "INCY",
+          "price": 102.38,
+          "score": 3.44,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HST",
+          "price": 24.62,
+          "score": 3.4,
+          "recommended_action": "watch",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-08",
+      "macro_snapshot": {
+        "vix": 19.6,
+        "treasury_10y": 4.54
+      },
+      "candidates": [
+        {
+          "ticker": "JNJ",
+          "price": 232.77,
+          "score": 4.6,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "IEX",
+          "price": 215.35,
+          "score": 4.5,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "FTV",
+          "price": 61.28,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "EQIX",
+          "price": 1080.95,
+          "score": 4.0,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MO",
+          "price": 72.19,
+          "score": 3.8,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MRK",
+          "price": 120.79,
+          "score": 3.7,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "JCI",
+          "price": 143.65,
+          "score": 3.5,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "GILD",
+          "price": 129.16,
+          "score": 3.49,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "HST",
+          "price": 24.62,
+          "score": 3.4,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "DOV",
+          "price": 214.76,
+          "score": 3.37,
+          "recommended_action": "avoid",
+          "conviction": null
+        }
+      ]
+    }
+  ],
+  "portfolio_value_history": [
+    {
+      "date": "2022-03",
+      "value": 421.15
+    },
+    {
+      "date": "2022-04",
+      "value": 785.09
+    },
+    {
+      "date": "2022-05",
+      "value": 1574.55
+    },
+    {
+      "date": "2022-06",
+      "value": 1695.18
+    },
+    {
+      "date": "2022-07",
+      "value": 2155.62
+    },
+    {
+      "date": "2022-08",
+      "value": 2331.07
+    },
+    {
+      "date": "2022-09",
+      "value": 2631.11
+    },
+    {
+      "date": "2022-10",
+      "value": 3277.63
+    },
+    {
+      "date": "2022-11",
+      "value": 3777.78
+    },
+    {
+      "date": "2022-12",
+      "value": 3994.5
+    },
+    {
+      "date": "2023-01",
+      "value": 4672.72
+    },
+    {
+      "date": "2023-02",
+      "value": 5058.07
+    },
+    {
+      "date": "2023-03",
+      "value": 5009.74
+    },
+    {
+      "date": "2023-04",
+      "value": 5262.93
+    },
+    {
+      "date": "2023-05",
+      "value": 5446.86
+    },
+    {
+      "date": "2023-06",
+      "value": 5614.19
+    },
+    {
+      "date": "2023-07",
+      "value": 5778.73
+    },
+    {
+      "date": "2023-08",
+      "value": 5763.1
+    },
+    {
+      "date": "2023-09",
+      "value": 5661.74
+    },
+    {
+      "date": "2023-10",
+      "value": 5513.96
+    },
+    {
+      "date": "2023-11",
+      "value": 5797.35
+    },
+    {
+      "date": "2023-12",
+      "value": 5959.36
+    },
+    {
+      "date": "2024-01",
+      "value": 6215.96
+    },
+    {
+      "date": "2024-02",
+      "value": 6423.9
+    },
+    {
+      "date": "2024-03",
+      "value": 6623.15
+    },
+    {
+      "date": "2024-04",
+      "value": 6530.89
+    },
+    {
+      "date": "2024-05",
+      "value": 6590.7
+    },
+    {
+      "date": "2024-06",
+      "value": 6821.16
+    },
+    {
+      "date": "2024-07",
+      "value": 6906.26
+    },
+    {
+      "date": "2024-08",
+      "value": 6881.43
+    },
+    {
+      "date": "2024-09",
+      "value": 6952.57
+    },
+    {
+      "date": "2024-10",
+      "value": 7103.66
+    },
+    {
+      "date": "2024-11",
+      "value": 7613.23
+    },
+    {
+      "date": "2024-12",
+      "value": 7530.17
+    },
+    {
+      "date": "2025-01",
+      "value": 8043.16
+    },
+    {
+      "date": "2025-02",
+      "value": 8248.62
+    },
+    {
+      "date": "2025-03",
+      "value": 7771.44
+    },
+    {
+      "date": "2025-04",
+      "value": 7426.69
+    },
+    {
+      "date": "2025-05",
+      "value": 8013.06
+    },
+    {
+      "date": "2025-06",
+      "value": 8367.23
+    },
+    {
+      "date": "2025-07",
+      "value": 8789.61
+    },
+    {
+      "date": "2025-08",
+      "value": 9350.84
+    },
+    {
+      "date": "2025-09",
+      "value": 9515.07
+    },
+    {
+      "date": "2025-10",
+      "value": 10467.75
+    },
+    {
+      "date": "2025-11",
+      "value": 10459.04
+    },
+    {
+      "date": "2025-12",
+      "value": 11153.55
+    },
+    {
+      "date": "2026-01",
+      "value": 14799.82
+    },
+    {
+      "date": "2026-02",
+      "value": 15130.23
+    },
+    {
+      "date": "2026-03",
+      "value": 14396.15
+    },
+    {
+      "date": "2026-04",
+      "value": 15514.26
+    },
+    {
+      "date": "2026-05",
+      "value": 25803.77
+    },
+    {
+      "date": "2026-06",
+      "value": 25495.43
+    }
+  ],
+  "first_buy_dates_by_isin": {
+    "IE00B3RBWM25": "2022-03-29",
+    "IE00B3XXRP09": "2022-03-29",
+    "IE00B8GKDB10": "2022-04-22",
+    "US92826C8394": "2022-05-03"
+  },
+  "cooldowns": {
+    "CF": "2026-05-29",
+    "NEM": "2026-06-07"
+  },
+  "benchmark_history": {
+    "sp500_ytd": 7.66,
+    "aex_ytd": 7.93,
+    "msci_ytd": 10.17
+  }
 }
