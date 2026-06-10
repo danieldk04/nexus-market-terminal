@@ -876,7 +876,9 @@ let globalData=null;
 let allPos=[];
 let priceCache={};
 let charts={};
-let activeTick=null,activeTicker=null,activeFilter='all',activeTab='dashboard';
+let activeTick=null,activeTicker=null,activeTab='dashboard';
+let activeFilter='ALL';   // scanner/sector filter
+let brokerFilter='all';   // portfolio broker filter
 let histRange='max',invRange='max';
 const needRender=new Set();
 const seenSectors=new Set();
