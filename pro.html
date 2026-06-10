@@ -1977,7 +1977,7 @@ function renderPosFilter(){
 }
 
 function renderPosTable(){
-    const items=allPos.filter(p=>activeFilter==='all'||p.broker===activeFilter);
+    const items=allPos.filter(p=>brokerFilter==='all'||p.broker===brokerFilter);
     document.getElementById('pos-tag').textContent=`${items.length} posities`;
     document.getElementById('pos-body').innerHTML=items.map(p=>{
         const br=BROKERS[p.broker]||{cls:'',label:p.broker};
