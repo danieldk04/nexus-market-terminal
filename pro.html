@@ -2521,6 +2521,8 @@ function renderAll(){
 
 async function init(){
     [M,B]=await Promise.all([fetchJSON('memory.json'),fetchJSON('data.json')]);
+    // Retry once if memory.json came back null (can happen if morning briefing is mid-write)
+    if(!M){await new Promise(r=>setTimeout(r,3000));M=await fetchJSON('memory.json');}
     globalData=B;
     renderAll();
     setInterval(async()=>{
