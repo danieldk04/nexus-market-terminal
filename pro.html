@@ -1004,8 +1004,10 @@ async function fetchJSON(path){
         const r=await fetch(path+'?t='+Date.now());
         const txt=(await r.text()).trim();
         if(!txt) return null;
-        try{return JSON.parse(txt);}catch{}
-        try{return JSON.parse(atob(txt));}catch{}
+        // Python's json.dump writes NaN as literal NaN which is invalid JSON — replace with null
+        const safe=txt.replace(/:\s*NaN\b/g,': null');
+        try{return JSON.parse(safe);}catch{}
+        try{return JSON.parse(atob(safe));}catch{}
     }catch{}
     return null;
 }
