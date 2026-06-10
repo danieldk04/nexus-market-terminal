@@ -1971,9 +1971,9 @@ function renderDonut(wrapId,chartId,labels,values,colors,total,legId){
 function renderPosFilter(){
     const brokers=[...new Set(allPos.map(p=>p.broker))];
     const bar=document.getElementById('pos-fbar');
-    bar.innerHTML=`<button class="fbtn ${activeFilter==='all'?'active':''}" data-f="all">Alle</button>`+
-        brokers.map(b=>`<button class="fbtn ${activeFilter===b?'active':''}" data-f="${b}">${b}</button>`).join('');
-    bar.querySelectorAll('.fbtn').forEach(btn=>btn.addEventListener('click',()=>{activeFilter=btn.dataset.f;renderPosFilter();renderPosTable();}));
+    bar.innerHTML=`<button class="fbtn ${brokerFilter==='all'?'active':''}" data-f="all">Alle</button>`+
+        brokers.map(b=>`<button class="fbtn ${brokerFilter===b?'active':''}" data-f="${b}">${b}</button>`).join('');
+    bar.querySelectorAll('.fbtn').forEach(btn=>btn.addEventListener('click',()=>{brokerFilter=btn.dataset.f;renderPosFilter();renderPosTable();}));
 }
 
 function renderPosTable(){
