@@ -69,8 +69,18 @@ def _load_json(path: Path, default):
     except Exception: return default
 
 
+def _sanitize_nan(obj):
+    """Recursively replace float NaN/Inf with None so output is valid JSON."""
+    if isinstance(obj, float) and (obj != obj or obj == float('inf') or obj == float('-inf')):
+        return None
+    if isinstance(obj, dict):
+        return {k: _sanitize_nan(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_sanitize_nan(v) for v in obj]
+    return obj
+
 def _save_json(path: Path, data):
-    with open(path, "w") as f: json.dump(data, f, indent=2)
+    with open(path, "w") as f: json.dump(_sanitize_nan(data), f, indent=2)
 
 
 # ─── PORTFOLIO HISTORY (dag/week/maand/YTD) ───────────────────────────────────
