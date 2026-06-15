@@ -1089,6 +1089,7 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
 BUX_ISIN_TO_TICKER: dict[str, str | None] = {
     "NL0000009082": "KPN.AS",       # KPN — Amsterdam (EUR)
     "US88160R1014": "TSLA.DE",      # Tesla — Frankfurt (EUR)
+    "US84615Q1031": "SPACEX",       # SpaceX — NYSE/NASDAQ (USD) — verify ticker if live price fails
     "US7134481081": "PEP",          # PepsiCo — NYSE (USD)
     "US29355A1079": "ENPH",         # Enphase Energy — NASDAQ (USD)
     "US30303M1027": "META",         # Meta Platforms — NASDAQ (USD)
