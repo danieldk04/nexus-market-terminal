@@ -735,7 +735,7 @@ def generate_ai_briefing(client: anthropic.Anthropic, market: list[dict],
         return msg.content[0].text.strip()
     except Exception as e:
         log.warning(f"Claude mislukt: {e}")
-        return "AI-samenvatting niet beschikbaar."
+        return f"AI-samenvatting mislukt: {type(e).__name__}: {str(e)[:120]}"
 
 
 # ─── TELEGRAM OPMAAK ──────────────────────────────────────────────────────────
