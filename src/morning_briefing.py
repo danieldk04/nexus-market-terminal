@@ -311,7 +311,7 @@ def generate_news_summary(client: anthropic.Anthropic, headlines: list[str]) -> 
     try:
         import json as _json
         msg = client.messages.create(
-            model="claude-haiku-4-5", max_tokens=700,
+            model="claude-haiku-4-5-20251001", max_tokens=700,
             system=(
                 "Je bent een beursanalist die headlines omzet in bruikbare marktinzichten. "
                 "Antwoord altijd als geldig JSON-array, niets anders."
