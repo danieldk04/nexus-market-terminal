@@ -948,6 +948,11 @@ TICKER_FALLBACKS: dict[str, str] = {
     "MSFT.AS":  "MSFT",
 }
 
+# Statische USD-prijzen voor private/OTC tickers die niet op Yahoo staan
+PRIVATE_TICKER_PRICES_USD: dict[str, float] = {
+    "SPAX.PVT": 135.0,  # SpaceX — IPO-prijs jun 2026; update handmatig bij nieuwe koers
+}
+
 
 def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
     """Haal yfinance-prijzen op voor een lijst holdings en bereken totaalwaarde + P&L.
@@ -1008,8 +1013,14 @@ def _holdings_to_portfolio(holdings: list[dict], label: str) -> dict | None:
                     log.info(f"{label}: {ticker} via {fallback} → ${price:.2f} → €{price/eur_usd:.2f}")
 
         if price is None:
-            log.warning(f"{label}: geen prijs voor {ticker} (ook fallback mislukt)")
-            continue
+            static = PRIVATE_TICKER_PRICES_USD.get(ticker)
+            if static:
+                price = static
+                is_eur = False
+                log.info(f"{label}: {ticker} — statische prijs ${price:.2f} (private ticker)")
+            else:
+                log.warning(f"{label}: geen prijs voor {ticker} (ook fallback mislukt)")
+                continue
 
         # Converteer USD-prijs naar EUR voor waarde-berekening
         price_eur = price if is_eur else round(price / eur_usd, 4)
