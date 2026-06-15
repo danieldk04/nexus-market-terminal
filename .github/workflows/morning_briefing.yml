@@ -1,9 +1,7 @@
 name: NEXUS Morning Briefing
 
 on:
-  schedule:
-    - cron: "0 7 * * *"   # Elke dag 07:00 UTC = 09:00 CEST / 08:00 CET
-  workflow_dispatch:
+  workflow_dispatch:   # Getriggerd door cron-job.org (09:00 + 17:00 Europe/Amsterdam)
 
 permissions:
   contents: write           # Nodig om portfolio-snapshots in memory.json te committen
