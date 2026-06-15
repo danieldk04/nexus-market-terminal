@@ -137,10 +137,10 @@
   "portfolio_history": [
     {
       "date": "2026-06-15",
-      "degiro": 16271.12,
-      "tr": 8519.63,
+      "degiro": 16411.81,
+      "tr": 8538.7,
       "nexus": 4514.55,
-      "bux": 2036.89
+      "bux": 2036.12
     },
     {
       "date": "2026-06-14",
@@ -321,75 +321,75 @@
     "Koers ASML Holding | Advies, nieuws, dividend en koersdoelen"
   ],
   "tr_summary": {
-    "total": 8519.63,
-    "total_pl_pct": 0.55,
+    "total": 8538.7,
+    "total_pl_pct": 0.78,
     "total_invested": 8473.03,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4676.7,
-        "price": 56635.0508,
-        "pl_pct": -6.06,
-        "pl_eur": -301.89,
-        "weight": 54.9
+        "value": 4677.67,
+        "price": 56646.8398,
+        "pl_pct": -6.04,
+        "pl_eur": -300.92,
+        "weight": 54.8
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
-        "value": 1302.62,
-        "price": 157.7441,
-        "pl_pct": 30.26,
-        "pl_eur": 302.6,
-        "weight": 15.3
+        "value": 1313.88,
+        "price": 159.1075,
+        "pl_pct": 31.39,
+        "pl_eur": 313.86,
+        "weight": 15.4
       },
       {
         "name": "TDIV (Dev Div Leaders)",
-        "value": 1203.83,
-        "price": 52.59,
-        "pl_pct": 0.32,
-        "pl_eur": 3.89,
-        "weight": 14.1
+        "value": 1197.19,
+        "price": 52.3,
+        "pl_pct": -0.23,
+        "pl_eur": -2.75,
+        "weight": 14.0
       },
       {
         "name": "VWCE (All-World Acc)",
-        "value": 1154.0,
-        "price": 162.46,
-        "pl_pct": 5.44,
-        "pl_eur": 59.53,
-        "weight": 13.5
+        "value": 1166.51,
+        "price": 164.22,
+        "pl_pct": 6.58,
+        "pl_eur": 72.03,
+        "weight": 13.7
       },
       {
         "name": "VHYL (High Div Yield)",
-        "value": 182.48,
-        "price": 79.114,
-        "pl_pct": -8.76,
-        "pl_eur": -17.52,
+        "value": 183.45,
+        "price": 79.536,
+        "pl_pct": -8.27,
+        "pl_eur": -16.55,
         "weight": 2.1
       }
     ]
   },
-  "dashboard_updated": "2026-06-15T07:01:09.612012+00:00",
+  "dashboard_updated": "2026-06-15T07:36:00.266920+00:00",
   "degiro_summary": {
-    "total": 16271.12,
-    "total_pl_pct": 32.65,
-    "total_invested": 12265.93,
+    "total": 16411.81,
+    "total_pl_pct": 33.8,
+    "total_invested": 12265.81,
     "positions": [
       {
         "name": "VWRL.AS",
-        "value": 6165.12,
-        "pl_pct": 32.5,
-        "pl_eur": 1512.03,
-        "div_yield": 0.0125,
+        "value": 6232.98,
+        "pl_pct": 33.95,
+        "pl_eur": 1579.89,
+        "div_yield": 0.0124,
         "annual_div_eur": 77.19,
         "first_buy_date": null,
         "sector": null,
-        "weight": 37.9
+        "weight": 38.0
       },
       {
         "name": "VUSA.AS",
-        "value": 5120.14,
-        "pl_pct": 36.98,
-        "pl_eur": 1382.14,
-        "div_yield": 0.0088,
+        "value": 5169.53,
+        "pl_pct": 38.3,
+        "pl_eur": 1431.53,
+        "div_yield": 0.0087,
         "annual_div_eur": 44.94,
         "first_buy_date": null,
         "sector": null,
@@ -397,20 +397,20 @@
       },
       {
         "name": "VHYL.AS",
-        "value": 4430.38,
-        "pl_pct": 25.62,
-        "pl_eur": 903.5,
-        "div_yield": 0.0246,
+        "value": 4454.02,
+        "pl_pct": 26.29,
+        "pl_eur": 927.14,
+        "div_yield": 0.0244,
         "annual_div_eur": 108.82,
         "first_buy_date": null,
         "sector": null,
-        "weight": 27.2
+        "weight": 27.1
       },
       {
         "name": "V",
-        "value": 555.48,
+        "value": 555.28,
         "pl_pct": 59.64,
-        "pl_eur": 207.52,
+        "pl_eur": 207.44,
         "div_yield": 0.0083,
         "annual_div_eur": 4.61,
         "first_buy_date": null,
@@ -438,17 +438,17 @@
     }
   ],
   "bux_summary": {
-    "total": 2036.89,
+    "total": 2036.12,
     "total_pl_pct": -8.63,
-    "total_invested": 2229.22,
+    "total_invested": 2228.45,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1736.82,
-        "price": 350.14,
+        "value": 1736.21,
+        "price": 350.02,
         "pl_pct": -2.75,
-        "pl_eur": -49.14,
+        "pl_eur": -49.13,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -458,10 +458,10 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 248.58,
-        "price": 124.29,
+        "value": 248.49,
+        "price": 124.25,
         "pl_pct": -12.86,
-        "pl_eur": -36.7,
+        "pl_eur": -36.69,
         "div_yield": 0.041,
         "annual_div_eur": 10.19,
         "first_buy_date": null,
@@ -471,10 +471,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 47.03,
-        "price": 47.03,
+        "value": 47.01,
+        "price": 47.01,
         "pl_pct": -69.6,
-        "pl_eur": -107.67,
+        "pl_eur": -107.64,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -484,10 +484,10 @@
       {
         "name": "KPN.AS",
         "ticker": "KPN.AS",
-        "value": 4.46,
-        "price": 4.46,
-        "pl_pct": 35.85,
-        "pl_eur": 1.18,
+        "value": 4.41,
+        "price": 4.41,
+        "pl_pct": 34.33,
+        "pl_eur": 1.13,
         "div_yield": 0.0489,
         "annual_div_eur": 0.22,
         "first_buy_date": null,
@@ -1521,7 +1521,7 @@
   },
   "benchmark_history": {
     "sp500_ytd": 8.35,
-    "aex_ytd": 11.74,
-    "msci_ytd": 10.31
+    "aex_ytd": 12.52,
+    "msci_ytd": 11.41
   }
 }
