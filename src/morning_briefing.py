@@ -1110,11 +1110,7 @@ def _parse_bux_transactions_csv() -> dict | None:
     """
     Verwerk BUX_TRANSACTIONS_CSV omgevingsvariabele (volledige BUX export).
     Berekent automatisch aandelen en gewogen gemiddelde aankoopprijs per ISIN.
-
-    BUX CSV-formaat:
-      Transaction Time, Transaction Category, Transaction Type, Transfer Type,
-      Transaction Amount, Transaction Currency, ..., Asset Id, Asset Name,
-      Asset Quantity, Asset Price, Asset Currency, ...
+    Ondersteunt zowel standaard trades als IPO-allocaties (asset deposit).
 
     Geeft een portfolio-dict terug of None als niet beschikbaar.
     """
@@ -1126,18 +1122,50 @@ def _parse_bux_transactions_csv() -> dict | None:
     acc: dict[str, dict] = {}   # ISIN → {name, shares, cost_eur}
 
     try:
-        reader = _csv.DictReader(_io.StringIO(raw))
+        # ── Pass 1: netto EUR kosten van IPO-allocaties berekenen ──
+        ipo_eur_debit = 0.0
+        ipo_eur_credit = 0.0
+        for row in _csv.DictReader(_io.StringIO(raw)):
+            cat      = (row.get("Transaction Category") or "").strip()
+            tx_type  = (row.get("Transaction Type")     or "").strip()
+            xfer     = (row.get("Transfer Type")        or "").strip()
+            currency = (row.get("Transaction Currency") or "").strip()
+            amt_str  = (row.get("Transaction Amount")   or "").strip()
+            if cat == "others" and tx_type == "Ipo" and currency == "EUR":
+                try:
+                    amt = float(amt_str)
+                    if xfer == "CASH_DEBIT":    ipo_eur_debit  += abs(amt)
+                    elif xfer == "CASH_CREDIT": ipo_eur_credit += abs(amt)
+                except ValueError:
+                    pass
+        ipo_net_eur = ipo_eur_debit - ipo_eur_credit  # bijv. 300 - 240.70 = 59.30
+
+        # ── Pass 2: totaal IPO-aandelen tellen voor proportionele kostenverdeling ──
+        ipo_total_shares = 0.0
+        for row in _csv.DictReader(_io.StringIO(raw)):
+            cat     = (row.get("Transaction Category") or "").strip()
+            tx_type = (row.get("Transaction Type")     or "").strip()
+            xfer    = (row.get("Transfer Type")        or "").strip()
+            qty_str = (row.get("Asset Quantity")       or "").strip()
+            if cat == "others" and tx_type == "Ipo Assets" and xfer == "ASSET_DEPOSIT" and qty_str:
+                try:
+                    ipo_total_shares += abs(float(qty_str))
+                except ValueError:
+                    pass
+
+        # ── Pass 3: hoofdverwerking ──
         rows_ok = 0
-        for row in reader:
-            tx_type   = (row.get("Transaction Type")    or "").strip()
-            xfer_type = (row.get("Transfer Type")       or "").strip()
+        for row in _csv.DictReader(_io.StringIO(raw)):
+            cat       = (row.get("Transaction Category") or "").strip()
+            tx_type   = (row.get("Transaction Type")     or "").strip()
+            xfer_type = (row.get("Transfer Type")        or "").strip()
             isin      = (row.get("Asset Id")             or "").strip()
             name      = (row.get("Asset Name")           or isin).strip()
             currency  = (row.get("Transaction Currency") or "").strip()
             qty_str   = (row.get("Asset Quantity")       or "").strip()
             amt_str   = (row.get("Transaction Amount")   or "").strip()
 
-            if not isin or not qty_str or currency != "EUR":
+            if not isin or not qty_str:
                 continue
 
             try:
@@ -1149,7 +1177,7 @@ def _parse_bux_transactions_csv() -> dict | None:
                 acc[isin] = {"name": name, "shares": 0.0, "cost_eur": 0.0}
             h = acc[isin]
 
-            if tx_type == "Buy Trade" and xfer_type == "CASH_DEBIT":
+            if tx_type == "Buy Trade" and xfer_type == "CASH_DEBIT" and currency == "EUR":
                 try:
                     h["shares"]   += qty
                     h["cost_eur"] += abs(float(amt_str))
@@ -1157,14 +1185,22 @@ def _parse_bux_transactions_csv() -> dict | None:
                 except ValueError:
                     pass
 
-            elif tx_type == "Sell Trade" and xfer_type == "CASH_CREDIT":
+            elif tx_type == "Sell Trade" and xfer_type == "CASH_CREDIT" and currency == "EUR":
                 if h["shares"] > 0 and qty > 0:
                     ratio = min(qty / h["shares"], 1.0)
                     h["cost_eur"] *= (1 - ratio)
                     h["shares"]    = max(0.0, h["shares"] - qty)
                     rows_ok += 1
 
-        log.info(f"BUX CSV: {rows_ok} regels verwerkt, {len(acc)} ISINs gevonden")
+            elif cat == "others" and tx_type == "Ipo Assets" and xfer_type == "ASSET_DEPOSIT":
+                # IPO-allocatie: aandelen bijschrijven, EUR kosten proportioneel verdelen
+                h["shares"] += qty
+                if ipo_total_shares > 0:
+                    h["cost_eur"] += ipo_net_eur * (qty / ipo_total_shares)
+                rows_ok += 1
+
+        log.info(f"BUX CSV: {rows_ok} regels verwerkt, {len(acc)} ISINs gevonden"
+                 + (f" (IPO netto €{ipo_net_eur:.2f})" if ipo_net_eur else ""))
 
     except Exception as e:
         log.warning(f"BUX CSV parsing fout: {e}")
