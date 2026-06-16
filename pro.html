@@ -243,7 +243,8 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .sc2-tags{display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:16px}
 
 /* ─── FILTER BAR ─── */
-.fbar{display:flex;gap:6px;padding:9px 14px;border-bottom:1px solid var(--border);flex-wrap:wrap;background:#f8fafc}
+.fbar{border-bottom:1px solid var(--border);background:#f8fafc}
+.fbar-row{display:flex;gap:6px;padding:9px 14px;flex-wrap:wrap;align-items:center}
 .fbtn{padding:3px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.67rem;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
 .fbtn:hover{background:var(--bg);color:var(--text)}
 .fbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -275,7 +276,14 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .top-picks{display:flex;gap:8px;padding:10px 14px;overflow-x:auto;border-bottom:1px solid var(--border);background:linear-gradient(135deg,#f0fdf4,#ecfdf5)}
 .tp-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:20px;border:1px solid #a7f3d0;background:#fff;white-space:nowrap;cursor:pointer;transition:box-shadow .12s}
 .tp-chip:hover{box-shadow:var(--sh-md)}
-@media(max-width:480px){.cand-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){
+    .cand-grid{grid-template-columns:1fr!important;padding:10px}
+    .cand-card{padding:14px}
+    .fbar{padding:0;gap:0;background:var(--surface)}
+    .fbar-row{display:flex;gap:6px;padding:7px 12px;overflow-x:auto;border-bottom:1px solid var(--border);flex-wrap:nowrap;scrollbar-width:none;background:#f8fafc;-webkit-overflow-scrolling:touch}
+    .fbar-row::-webkit-scrollbar{display:none}
+    .fbtn{white-space:nowrap;flex-shrink:0;font-size:.7rem;padding:4px 11px}
+}
 
 /* ─── TV CHART ─── */
 .chips{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;border-bottom:1px solid var(--border)}
@@ -2473,13 +2481,14 @@ function renderCandidatesPanel(){
     const regBtns=[['all','Alles'],['US','🇺🇸 US'],['EU','🇪🇺 EU']];
     const capBtns=[['all','Alle caps'],['mega','Mega'],['large','Large'],['mid','Mid'],['small','Small']];
     const srtBtns=[['score','↕ Value'],['verdict','↕ Verdict'],['momentum_score','↕ Momentum'],['combo','↕ Combo']];
-    fbar.innerHTML=`<div style="display:flex;gap:6px;flex-wrap:wrap;width:100%">
-        ${regBtns.map(([v,l])=>`<button class="fbtn${candRegion===v?' active':''}" data-r="${v}">${l}</button>`).join('')}
-        <span style="width:1px;background:var(--border2);margin:0 2px;align-self:stretch"></span>
-        ${capBtns.map(([v,l])=>`<button class="fbtn${candCap===v?' active':''}" data-c="${v}">${l}</button>`).join('')}
-        <span style="width:1px;background:var(--border2);margin:0 2px;align-self:stretch"></span>
-        ${srtBtns.map(([v,l])=>`<button class="fbtn${candSort===v?' active':''}" data-s="${v}">${l}</button>`).join('')}
-    </div>`;
+    fbar.innerHTML=`
+        <div class="fbar-row">
+            ${regBtns.map(([v,l])=>`<button class="fbtn${candRegion===v?' active':''}" data-r="${v}">${l}</button>`).join('')}
+            <span style="width:1px;background:var(--border2);margin:0 4px;flex-shrink:0;align-self:stretch"></span>
+            ${capBtns.map(([v,l])=>`<button class="fbtn${candCap===v?' active':''}" data-c="${v}">${l}</button>`).join('')}
+            <span style="width:1px;background:var(--border2);margin:0 4px;flex-shrink:0;align-self:stretch"></span>
+            ${srtBtns.map(([v,l])=>`<button class="fbtn${candSort===v?' active':''}" data-s="${v}">${l}</button>`).join('')}
+        </div>`;
     fbar.querySelectorAll('[data-r]').forEach(b=>b.addEventListener('click',()=>{candRegion=b.dataset.r;renderCandidatesPanel();}));
     fbar.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{candCap=b.dataset.c;renderCandidatesPanel();}));
     fbar.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{candSort=b.dataset.s;renderCandidatesPanel();}));
@@ -2543,46 +2552,46 @@ function renderCandidatesPanel(){
 
         return `<div class="cand-card" onclick="openChart('${c.ticker}')" title="${c.name||c.ticker}" style="border-top-color:${verdict.clr}">
             <!-- header -->
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
-                <div>
-                    <div style="font-family:var(--mono);font-weight:700;font-size:.92rem;color:var(--bot);line-height:1">${c.ticker.split('.')[0]}</div>
-                    <div style="font-size:.6rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px">${shortName}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px">
+                <div style="min-width:0;flex:1">
+                    <div style="font-family:var(--mono);font-weight:700;font-size:1rem;color:var(--bot);line-height:1">${c.ticker.split('.')[0]}</div>
+                    <div style="font-size:.64rem;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${shortName}</div>
                 </div>
-                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-                    <span style="font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:10px;background:${verdict.bg};color:${verdict.clr};border:1px solid ${verdict.clr}55;white-space:nowrap;letter-spacing:.02em">${verdict.lbl}</span>
-                    <div style="display:flex;gap:3px;align-items:center">
-                        <span style="font-size:.5rem;padding:1px 4px;border-radius:3px;background:${capClr}18;color:${capClr};border:1px solid ${capClr}44;font-weight:700">${CAP_LABELS[cap]}</span>
-                        <span style="font-size:.6rem">${region}</span>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+                    <span style="font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:10px;background:${verdict.bg};color:${verdict.clr};border:1px solid ${verdict.clr}55;white-space:nowrap;letter-spacing:.02em">${verdict.lbl}</span>
+                    <div style="display:flex;gap:4px;align-items:center">
+                        <span style="font-size:.55rem;padding:2px 5px;border-radius:3px;background:${capClr}18;color:${capClr};border:1px solid ${capClr}44;font-weight:700">${CAP_LABELS[cap]}</span>
+                        <span style="font-size:.7rem">${region}</span>
                     </div>
                 </div>
             </div>
 
             <!-- 3 ratings -->
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px">
-                <div style="background:${fund.clr}14;border:1px solid ${fund.clr}35;border-radius:5px;padding:5px 4px;text-align:center">
-                    <div style="font-size:.44rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">Fundament.</div>
-                    <div style="font-size:.6rem;font-weight:700;color:${fund.clr};line-height:1.2">${fund.lbl}</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:9px">
+                <div style="background:${fund.clr}14;border:1px solid ${fund.clr}35;border-radius:6px;padding:7px 4px;text-align:center">
+                    <div style="font-size:.5rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">Fundament.</div>
+                    <div style="font-size:.68rem;font-weight:700;color:${fund.clr};line-height:1.2">${fund.lbl}</div>
                 </div>
-                <div style="background:${mgmt.clr}14;border:1px solid ${mgmt.clr}35;border-radius:5px;padding:5px 4px;text-align:center">
-                    <div style="font-size:.44rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">Management</div>
-                    <div style="font-size:.6rem;font-weight:700;color:${mgmt.clr};line-height:1.2">${mgmt.lbl}</div>
-                    <div style="font-size:.46rem;color:var(--muted);font-family:var(--mono)">${mgmt.sub}</div>
+                <div style="background:${mgmt.clr}14;border:1px solid ${mgmt.clr}35;border-radius:6px;padding:7px 4px;text-align:center">
+                    <div style="font-size:.5rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">Management</div>
+                    <div style="font-size:.68rem;font-weight:700;color:${mgmt.clr};line-height:1.2">${mgmt.lbl}</div>
+                    <div style="font-size:.52rem;color:var(--muted);font-family:var(--mono);margin-top:1px">${mgmt.sub}</div>
                 </div>
-                <div style="background:${val.clr}14;border:1px solid ${val.clr}35;border-radius:5px;padding:5px 4px;text-align:center">
-                    <div style="font-size:.44rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">Waardering</div>
-                    <div style="font-size:.6rem;font-weight:700;color:${val.clr};line-height:1.2">${val.lbl}</div>
-                    <div style="font-size:.46rem;color:var(--muted);font-family:var(--mono)">${val.sub}</div>
+                <div style="background:${val.clr}14;border:1px solid ${val.clr}35;border-radius:6px;padding:7px 4px;text-align:center">
+                    <div style="font-size:.5rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">Waardering</div>
+                    <div style="font-size:.68rem;font-weight:700;color:${val.clr};line-height:1.2">${val.lbl}</div>
+                    <div style="font-size:.52rem;color:var(--muted);font-family:var(--mono);margin-top:1px">${val.sub}</div>
                 </div>
             </div>
 
             <!-- 6 key metrics -->
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:7px;background:var(--bg);border-radius:6px;padding:7px 5px">
-                <div style="text-align:center"><div style="font-size:.46rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">ROE</div><div style="font-family:var(--mono);font-size:.74rem;font-weight:700">${roe}</div></div>
-                <div style="text-align:center"><div style="font-size:.46rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">ROIC</div><div style="font-family:var(--mono);font-size:.74rem;font-weight:700;color:${mgmt.clr}">${roicStr}</div></div>
-                <div style="text-align:center"><div style="font-size:.46rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">P/E</div><div style="font-family:var(--mono);font-size:.74rem;font-weight:700">${pe}</div></div>
-                <div style="text-align:center;margin-top:4px"><div style="font-size:.46rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">FCF</div><div style="font-size:.74rem;font-weight:700">${fcfIcon}</div></div>
-                <div style="text-align:center;margin-top:4px"><div style="font-size:.46rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">Rev↑</div><div style="font-family:var(--mono);font-size:.74rem;font-weight:700;color:${(c.revenue_growth||0)>0?'var(--green)':'var(--muted)'}">${revG}</div></div>
-                <div style="text-align:center;margin-top:4px"><div style="font-size:.46rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">D/E</div><div style="font-family:var(--mono);font-size:.74rem;font-weight:700;color:${deClr}">${de}</div></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px;background:var(--bg);border-radius:6px;padding:9px 6px">
+                <div style="text-align:center"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">ROE</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700">${roe}</div></div>
+                <div style="text-align:center"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">ROIC</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700;color:${mgmt.clr}">${roicStr}</div></div>
+                <div style="text-align:center"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">P/E</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700">${pe}</div></div>
+                <div style="text-align:center;margin-top:5px"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">FCF</div><div style="font-size:.82rem;font-weight:700">${fcfIcon}</div></div>
+                <div style="text-align:center;margin-top:5px"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">Rev↑</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700;color:${(c.revenue_growth||0)>0?'var(--green)':'var(--muted)'}">${revG}</div></div>
+                <div style="text-align:center;margin-top:5px"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">D/E</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700;color:${deClr}">${de}</div></div>
             </div>
 
             <!-- Momentum bar -->
