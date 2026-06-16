@@ -68,6 +68,31 @@ SECTOR_MAP = {
     "Industrials":             "Industrials",
 }
 
+# ─── EU UNIVERSUM (AEX / DAX / CAC40 / FTSE100) ──────────────────────────────
+EU_TICKERS = [
+    # AEX — Euronext Amsterdam
+    "ASML.AS","INGA.AS","UNA.AS","PHIA.AS","ABN.AS","WKL.AS","RAND.AS",
+    "HEIA.AS","NN.AS","AKZA.AS","IMCD.AS","AD.AS","MT.AS","AALB.AS",
+    "BESI.AS","ASM.AS","ADYEN.AS","KPN.AS","EXOR.AS","RDSA.AS",
+    # DAX — Xetra Frankfurt
+    "SAP.DE","SIE.DE","ALV.DE","DTE.DE","BAS.DE","BAYN.DE","MUV2.DE",
+    "ADS.DE","BMW.DE","MBG.DE","RWE.DE","VOW3.DE","DBK.DE","EOAN.DE",
+    "IFX.DE","QIA.DE","CON.DE","HEN3.DE","SHL.DE","ZAL.DE","AIXA.DE",
+    "MTX.DE","LEG.DE","1COV.DE","HEI.DE","SRT3.DE","EVT.DE","LIN.DE",
+    # CAC40 — Euronext Paris
+    "MC.PA","OR.PA","TTE.PA","SAN.PA","RI.PA","BNP.PA","AI.PA","CAP.PA",
+    "DG.PA","SGO.PA","SU.PA","LR.PA","PUB.PA","CS.PA","ACA.PA","GLE.PA",
+    "KER.PA","ML.PA","RMS.PA","DSY.PA","HO.PA","VIV.PA","EN.PA","ENGI.PA",
+    "SW.PA","ERF.PA","STM.PA","VIE.PA",
+    # FTSE 100 — London Stock Exchange
+    "SHEL.L","AZN.L","HSBA.L","RIO.L","BP.L","ULVR.L","GSK.L","LSEG.L",
+    "DGE.L","BATS.L","PRU.L","VOD.L","IMB.L","LLOY.L","BARC.L","NWG.L",
+    "EXPN.L","NXT.L","WPP.L","IAG.L","TSCO.L","SSE.L","IHG.L","AUTO.L",
+    "AAL.L","CRH.L","MNDI.L","REL.L","III.L","RKT.L",
+]
+
+EU_TICKER_SET = set(EU_TICKERS)
+
 FALLBACK_TICKERS = [
     "AAPL","MSFT","GOOGL","AMZN","META","NVDA","JPM","V","MA","LLY",
     "AVGO","COST","INTU","ISRG","TMO","ACN","NOW","AMAT","AMD","ARM",
@@ -100,9 +125,156 @@ GROWTH_UNIVERSE = [
 
 GROWTH_THEMES = set(GROWTH_UNIVERSE)
 
-MAX_SCAN = 400   # maximum tickers in Phase 1
-MOMENTUM_TOP = 80  # top-N fundamentals that receive a Phase 2 momentum scan
-TOP_N    = 40    # final candidates saved to data.json
+MAX_SCAN     = 400   # maximum tickers in Phase 1
+MOMENTUM_TOP = 80    # top-N fundamentals that receive a Phase 2 momentum scan
+TOP_N        = 40    # final candidates saved to data.json
+
+
+def _is_eu_ticker(ticker: str) -> bool:
+    if ticker in EU_TICKER_SET:
+        return True
+    return any(ticker.endswith(s) for s in ('.AS', '.DE', '.PA', '.L', '.MI', '.BR', '.VI', '.ST', '.HE'))
+
+
+def _market_cap_cat(mc: float | None) -> str:
+    if mc is None or mc <= 0:
+        return "?"
+    if mc >= 200e9:
+        return "mega"
+    if mc >= 10e9:
+        return "large"
+    if mc >= 2e9:
+        return "mid"
+    return "small"
+
+
+def compute_momentum(info: dict, price: float) -> dict:
+    """
+    Momentum-score 0-100 op basis van yfinance .info velden (geen extra API-calls).
+
+    Signalen:
+      - 52w high proximity  (0-35 pts): dicht bij ATH = sterke uptrend
+      - MA50 / MA200 positie (0-25 pts): prijs boven voortschrijdende gemiddelden
+      - 52-week return       (0-30 pts): absolute momentum afgelopen jaar
+      - 52w range positie    (0-10 pts): hoe hoog in de 52-week bandbreedte
+
+    Geeft ook losse signaalvelden terug voor de dashboard-weergave.
+    """
+    high52  = info.get("fiftyTwoWeekHigh")      or 0
+    low52   = info.get("fiftyTwoWeekLow")        or 0
+    ma50    = info.get("fiftyDayAverage")         or 0
+    ma200   = info.get("twoHundredDayAverage")    or 0
+    ret52w  = info.get("52WeekChange")            # fractie, bijv. 0.42 = +42%
+
+    score = 0
+
+    # ── 52w high proximity (0-35 pts) ────────────────────────────────────────
+    from_high = None
+    if high52 > 0 and price > 0:
+        from_high = round((price / high52 - 1) * 100, 1)
+        if from_high >= -3:    score += 35
+        elif from_high >= -7:  score += 28
+        elif from_high >= -12: score += 20
+        elif from_high >= -20: score += 11
+        elif from_high >= -30: score += 4
+
+    # ── MA trend (0-25 pts) ───────────────────────────────────────────────────
+    above_ma50  = None
+    above_ma200 = None
+    if ma50 > 0 and price > 0:
+        above_ma50 = price > ma50
+        if price > ma50 * 1.03:   score += 13
+        elif price > ma50:         score += 9
+
+    if ma200 > 0 and price > 0:
+        above_ma200 = price > ma200
+        if price > ma200 * 1.05:  score += 12
+        elif price > ma200:        score += 8
+
+    # ── 52-week return (0-30 pts) ─────────────────────────────────────────────
+    return_52w = None
+    if ret52w is not None:
+        r = float(ret52w) * 100
+        return_52w = round(r, 1)
+        if r >= 60:    score += 30
+        elif r >= 40:  score += 24
+        elif r >= 20:  score += 16
+        elif r >= 8:   score += 9
+        elif r >= 0:   score += 3
+
+    # ── 52w range positie (0-10 pts) ─────────────────────────────────────────
+    range_pos = None
+    if high52 > low52 > 0 and price > 0:
+        range_pos = round((price - low52) / (high52 - low52) * 100, 0)
+        if range_pos >= 80:   score += 10
+        elif range_pos >= 60: score += 6
+        elif range_pos >= 40: score += 3
+
+    return {
+        "momentum_score": min(100, score),
+        "from_52w_high":  from_high,
+        "above_ma50":     above_ma50,
+        "above_ma200":    above_ma200,
+        "return_52w":     return_52w,
+        "range_pos_52w":  int(range_pos) if range_pos is not None else None,
+    }
+
+
+def _compute_insider_score(t) -> int:
+    """
+    Insider koop/verkoop score 0-10 op basis van recente Form 4 transacties (yfinance).
+    Hogere score = meer insider aankopen dan verkopen.
+    Geeft 3 (neutraal) terug als data niet beschikbaar is.
+    """
+    try:
+        txns = t.insider_transactions
+        if txns is None or (hasattr(txns, "empty") and txns.empty):
+            return 3
+        buys = sells = 0.0
+        for _, row in txns.iterrows():
+            shares = abs(float(row.get("Shares", 0) or 0))
+            txt = " ".join([
+                str(row.get("Text", "") or ""),
+                str(row.get("Transaction", "") or ""),
+            ]).lower()
+            if any(k in txt for k in ("purchase", "acquired", "acquisition")):
+                buys += shares
+            elif any(k in txt for k in ("sale", "sold", "disposition", "disposed")):
+                sells += shares
+        total = buys + sells
+        if total == 0:
+            return 3
+        ratio = buys / total
+        if ratio >= 0.75:   return 9
+        elif ratio >= 0.50: return 7
+        elif ratio >= 0.30: return 5
+        else:               return 2
+    except Exception:
+        return 3
+
+
+def _compute_earnings_momentum(info: dict, t) -> dict:
+    """Check upcoming earnings (0-28 dagen) en historische beat rate (%)."""
+    result = {"earnings_days": None, "earnings_beat_pct": None}
+    try:
+        import datetime as _dt
+        ts = info.get("earningsTimestamp") or info.get("earningsTimestampStart")
+        if ts and ts > 0:
+            days = (_dt.datetime.fromtimestamp(ts) - _dt.datetime.now()).days
+            result["earnings_days"] = int(days)
+    except Exception:
+        pass
+    try:
+        hist = t.earnings_history
+        if hist is not None and hasattr(hist, "columns") and "surprisePercent" in hist.columns:
+            recent = hist.dropna(subset=["surprisePercent"]).tail(8)
+            if len(recent) > 0:
+                result["earnings_beat_pct"] = int(round(
+                    (recent["surprisePercent"] > 0).sum() / len(recent) * 100
+                ))
+    except Exception:
+        pass
+    return result
 
 
 def get_industry_group(sector: str) -> str:
@@ -147,8 +319,9 @@ def fetch_global_universe() -> list[str]:
         except Exception:
             continue
 
-    # Dutch names
-    tickers.extend(["ASML.AS","INGA.AS","ADYEN.AS","UNA.AS","HEIA.AS","PHIA.AS","WKL.AS"])
+    # EU selectie — AEX, DAX, CAC40, FTSE100
+    tickers.extend(EU_TICKERS)
+    log.info("EU tickers: %d toegevoegd (AEX/DAX/CAC40/FTSE100)", len(EU_TICKERS))
 
     if len(tickers) < 60:
         log.warning("Scraping insufficient — using fallback list")
@@ -248,6 +421,8 @@ def analyse_ticker_fundamental(ticker_symbol: str, memory: dict, post_mortem: di
         if ma200 > 0 and price < ma200 * 0.97:
             trend_penalty = max(trend_penalty, 0.6)
 
+        market_cap_cat = _market_cap_cat(market_cap)
+
         # Standard financial metrics
         roic      = compute_roic(info)
         roce      = compute_roce(info)
@@ -281,6 +456,26 @@ def analyse_ticker_fundamental(ticker_symbol: str, memory: dict, post_mortem: di
         )
         s_growth = sg_data["s_growth"]
 
+        # Insider koop/verkoop signaal (Form 4)
+        insider_score = _compute_insider_score(t)
+
+        # Earnings momentum: komende resultaten + beat-history
+        earnings_data = _compute_earnings_momentum(info, t)
+
+        # Insider koop bonus (Form 4 signaal)
+        insider_bonus = 0.0
+        if insider_score >= 8:    insider_bonus = 0.4
+        elif insider_score >= 6:  insider_bonus = 0.2
+        elif insider_score <= 2:  insider_bonus = -0.2
+
+        # Pre-earnings bonus: komende resultaten + bewezen beat-history
+        earnings_bonus = 0.0
+        ed = earnings_data.get("earnings_days")
+        beat_pct = earnings_data.get("earnings_beat_pct")
+        if ed is not None and 7 <= ed <= 28 and beat_pct is not None:
+            if beat_pct >= 75:   earnings_bonus = 0.3
+            elif beat_pct >= 50: earnings_bonus = 0.1
+
         # Memory / post-mortem penalty applied to fundamental score
         memory_penalty = 0.0
         for lesson in memory.get("lessons", []):
@@ -289,9 +484,9 @@ def analyse_ticker_fundamental(ticker_symbol: str, memory: dict, post_mortem: di
         pm_adj = post_mortem.get("sector_adjustments", {}).get(group, 0)
         memory_penalty = min(2.0, memory_penalty)
 
-        # Adjusted S_Growth (clamp after penalties/trend)
+        # Adjusted S_Growth (clamp after penalties/trend + insider/earnings bonuses)
         adjusted_s_growth = round(
-            max(0.0, min(10.0, s_growth - memory_penalty + pm_adj - trend_penalty)), 2
+            max(0.0, min(10.0, s_growth - memory_penalty + pm_adj - trend_penalty + insider_bonus + earnings_bonus)), 2
         )
 
         return {
@@ -300,6 +495,9 @@ def analyse_ticker_fundamental(ticker_symbol: str, memory: dict, post_mortem: di
             "name":             info.get("shortName", ticker_symbol),
             "sector":           sector,
             "industry_group":   group,
+            "region":           "EU" if _is_eu_ticker(ticker_symbol) else "US",
+            "market_cap":       market_cap,
+            "market_cap_cat":   market_cap_cat,
             "price":            round(price, 2) if price else 0,
             # Core fundamentals
             "roe":              round(roe * 100, 2),
@@ -337,6 +535,10 @@ def analyse_ticker_fundamental(ticker_symbol: str, memory: dict, post_mortem: di
             # Legacy field used for dashboard sorting
             "score":            adjusted_s_growth,
             "penalty_applied":  memory_penalty > 0 or pm_adj < 0,
+            # Intelligence signals
+            "insider_score":    insider_score,
+            **earnings_data,
+            **compute_momentum(info, price),
         }
 
     except Exception:

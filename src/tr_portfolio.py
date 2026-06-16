@@ -205,6 +205,38 @@ def _parse_tr_transactions_csv() -> dict[str, float]:
     return result
 
 
+def _parse_tr_interest() -> float:
+    """
+    Haal totale rente-ontvangsten op uit TR_TRANSACTIONS_CSV.
+    TR betaalt rente op saldo (categorie INTEREST of SAVINGS_INTEREST).
+    Geeft cumulatief totaal in EUR terug.
+    """
+    raw = os.environ.get("TR_TRANSACTIONS_CSV", "").strip()
+    if not raw:
+        return 0.0
+
+    total = 0.0
+    try:
+        reader = csv.DictReader(io.StringIO(raw))
+        for row in reader:
+            category   = (row.get("category") or "").strip().upper()
+            amount_str = (row.get("amount")   or "").strip()
+            # TR exporteert rente als category=INTEREST of SAVINGS_INTEREST
+            if "INTEREST" in category or "SAVING" in category:
+                try:
+                    amt = float(amount_str)
+                    if amt > 0:
+                        total += amt
+                except ValueError:
+                    pass
+    except Exception as e:
+        log.warning(f"TR rente parsing fout: {e}")
+
+    if total > 0:
+        log.info(f"TR: totale rente ontvangen = €{total:.2f}")
+    return round(total, 2)
+
+
 def _fetch_price_eur(isin: str) -> tuple[str | None, float | None]:
     """
     Probeer tickers in volgorde tot een geldige prijs gevonden wordt.
@@ -244,8 +276,9 @@ def fetch_tr_portfolio() -> dict | None:
     if not holdings:
         return None
 
-    # Laad gemiddelde aankoopprijzen uit CSV-transactiehistorie
-    csv_avg = _parse_tr_transactions_csv()
+    # Laad gemiddelde aankoopprijzen + rente-inkomsten uit CSV-transactiehistorie
+    csv_avg       = _parse_tr_transactions_csv()
+    interest_total = _parse_tr_interest()
 
     positions = []
     total     = 0.0
@@ -312,4 +345,5 @@ def fetch_tr_portfolio() -> dict | None:
         "total":          round(total, 2),
         "total_invested": round(total_invested, 2) if total_invested else None,
         "total_pl_pct":   total_pl_pct,
+        "interest_total": interest_total,
     }

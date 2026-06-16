@@ -108,6 +108,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
             "total":          bux.get("total"),
             "total_pl_pct":   bux.get("total_pl_pct"),
             "total_invested": bux.get("total_invested"),
+            "interest_total": bux.get("interest_total", 0),
             "positions": [
                 {
                     "name":          p.get("name", "?"),
@@ -150,6 +151,7 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
             "total":          tr.get("total"),
             "total_pl_pct":   tr.get("total_pl_pct"),
             "total_invested": tr.get("total_invested"),
+            "interest_total": tr.get("interest_total", 0),
             "positions": [
                 {
                     "name":   p.get("name", "?"),
@@ -1131,6 +1133,7 @@ def _parse_bux_transactions_csv() -> dict | None:
         return None
 
     acc: dict[str, dict] = {}   # ISIN → {name, shares, cost_eur}
+    interest_total = 0.0
 
     try:
         # ── Pass 1: netto EUR kosten van IPO-allocaties berekenen ──
@@ -1176,7 +1179,19 @@ def _parse_bux_transactions_csv() -> dict | None:
             qty_str   = (row.get("Asset Quantity")       or "").strip()
             amt_str   = (row.get("Transaction Amount")   or "").strip()
 
-            if not isin or not qty_str:
+            # Rente-ontvangsten hebben geen ISIN/asset
+            if not isin and xfer_type == "CASH_CREDIT" and currency == "EUR":
+                tx_lower = tx_type.lower()
+                if "interest" in tx_lower or "rente" in tx_lower or "saving" in tx_lower:
+                    try:
+                        amt = abs(float(amt_str))
+                        if amt > 0:
+                            interest_total += amt
+                    except ValueError:
+                        pass
+                    continue
+
+            if not isin or not qty_str or currency != "EUR":
                 continue
 
             try:
@@ -1210,6 +1225,8 @@ def _parse_bux_transactions_csv() -> dict | None:
                     h["cost_eur"] += ipo_net_eur * (qty / ipo_total_shares)
                 rows_ok += 1
 
+        if interest_total > 0:
+            log.info(f"BUX CSV: rente ontvangen = €{interest_total:.2f}")
         log.info(f"BUX CSV: {rows_ok} regels verwerkt, {len(acc)} ISINs gevonden"
                  + (f" (IPO netto €{ipo_net_eur:.2f})" if ipo_net_eur else ""))
 
@@ -1244,7 +1261,10 @@ def _parse_bux_transactions_csv() -> dict | None:
         log.warning("BUX CSV: geen open posities gevonden na verwerking.")
         return None
 
-    return _holdings_to_portfolio(holdings, "BUX CSV")
+    result = _holdings_to_portfolio(holdings, "BUX CSV")
+    if result and interest_total > 0:
+        result["interest_total"] = interest_total
+    return result
 
 
 def fetch_bux_manual() -> dict | None:
