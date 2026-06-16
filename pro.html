@@ -2424,9 +2424,15 @@ function _verdictRating(c){
     const sc=c.score||0;
     const dcfUp=c.dcf?.dcf_upside;
     const sentiment=c.tier2?.sentiment_score;
-    if((sc>=8&&(dcfUp==null||dcfUp>=8))||(sc>=7.5&&dcfUp!=null&&dcfUp>=20)||sentiment==='BULLISH')
+    if(sentiment==='BULLISH') return {lbl:'KOOP',clr:'#059669',bg:'#ecfdf5',ord:0};
+    if(sentiment==='BEARISH') return {lbl:'MIJDEN',clr:'#dc2626',bg:'#fef2f2',ord:2};
+    // KOOP: convergence score decent AND DCF not massively overvalued,
+    // OR low score but significantly undervalued (DCF ≥ +20%)
+    const dcfOk=dcfUp==null||dcfUp>=-20;
+    if((sc>=3.0&&dcfOk)||(dcfUp!=null&&dcfUp>=20&&sc>=2.0))
         return {lbl:'KOOP',clr:'#059669',bg:'#ecfdf5',ord:0};
-    if(sc<6||(dcfUp!=null&&dcfUp<-20)||sentiment==='BEARISH')
+    // MIJDEN: very weak fundamentals OR massively overvalued
+    if(sc<1.8||(dcfUp!=null&&dcfUp<-50))
         return {lbl:'MIJDEN',clr:'#dc2626',bg:'#fef2f2',ord:2};
     return {lbl:'HOUD/WACHT',clr:'#d97706',bg:'#fffbeb',ord:1};
 }
@@ -2504,11 +2510,17 @@ function renderCandidatesPanel(){
     if(candSort==='verdict'){
         filtered=[...filtered].sort((a,b)=>_verdictRating(a).ord-_verdictRating(b).ord||(b.score||0)-(a.score||0));
     } else if(candSort==='momentum_score'){
-        filtered=[...filtered].sort((a,b)=>(b.momentum_score||0)-(a.momentum_score||0));
+        filtered=[...filtered].sort((a,b)=>{
+            const ma=a.momentum_score!=null?a.momentum_score:(a.convergence_score||0)*10;
+            const mb=b.momentum_score!=null?b.momentum_score:(b.convergence_score||0)*10;
+            return mb-ma;
+        });
     } else if(candSort==='combo'){
         filtered=[...filtered].sort((a,b)=>{
-            const sa=(a.score||0)/10*60+(a.momentum_score||0)*0.4;
-            const sb=(b.score||0)/10*60+(b.momentum_score||0)*0.4;
+            const ma=a.momentum_score!=null?a.momentum_score:(a.convergence_score||0)*10;
+            const mb=b.momentum_score!=null?b.momentum_score:(b.convergence_score||0)*10;
+            const sa=(a.score||0)/10*60+ma*0.4;
+            const sb=(b.score||0)/10*60+mb*0.4;
             return sb-sa;
         });
     }
@@ -2524,7 +2536,11 @@ function renderCandidatesPanel(){
         const capClr=CAP_COLORS[cap]||'#64748b';
         const region=c.region==='EU'?'🇪🇺':'🇺🇸';
         const sc=c.score||0;
-        const ms=c.momentum_score;
+        // momentum_score is 0-100; fall back to convergence_score*10 when not yet in data
+        const ms=c.momentum_score!=null?c.momentum_score:(c.convergence_score!=null?Math.round(c.convergence_score*10):null);
+        // above_ma50/200: use stored booleans when present, else derive from price vs sma
+        const _aboveMA50=c.above_ma50!=null?c.above_ma50:(c.sma50&&c.price?c.price>c.sma50:null);
+        const _aboveMA200=c.above_ma200!=null?c.above_ma200:(c.sma200&&c.price?c.price>c.sma200:null);
 
         const fund=_fundamentalRating(c);
         const mgmt=_managementRating(c);
@@ -2542,8 +2558,8 @@ function renderCandidatesPanel(){
 
         // Small badges row
         const badges=[
-            c.above_ma50?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">MA50✓</span>':'',
-            c.above_ma200?'<span style="font-size:.48rem;background:#2563eb18;color:#2563eb;border:1px solid #2563eb44;padding:1px 4px;border-radius:3px;font-weight:700">MA200✓</span>':'',
+            _aboveMA50?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">MA50✓</span>':'',
+            _aboveMA200?'<span style="font-size:.48rem;background:#2563eb18;color:#2563eb;border:1px solid #2563eb44;padding:1px 4px;border-radius:3px;font-weight:700">MA200✓</span>':'',
             c.insider_score>=7?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">INSDR↑</span>':'',
             (c.earnings_days!=null&&c.earnings_days>=0&&c.earnings_days<=28)?`<span style="font-size:.48rem;background:#7c3aed18;color:#7c3aed;border:1px solid #7c3aed44;padding:1px 4px;border-radius:3px;font-weight:700" title="Resultaten over ${c.earnings_days} dagen">📅${c.earnings_days}d</span>`:'',
         ].filter(Boolean).join('');
