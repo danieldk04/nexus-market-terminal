@@ -97,6 +97,78 @@ def _market_cap_cat(mc: float | None) -> str:
     return "small"
 
 
+def compute_momentum(info: dict, price: float) -> dict:
+    """
+    Momentum-score 0-100 op basis van yfinance .info velden (geen extra API-calls).
+
+    Signalen:
+      - 52w high proximity  (0-35 pts): dicht bij ATH = sterke uptrend
+      - MA50 / MA200 positie (0-25 pts): prijs boven voortschrijdende gemiddelden
+      - 52-week return       (0-30 pts): absolute momentum afgelopen jaar
+      - 52w range positie    (0-10 pts): hoe hoog in de 52-week bandbreedte
+
+    Geeft ook losse signaalvelden terug voor de dashboard-weergave.
+    """
+    high52  = info.get("fiftyTwoWeekHigh")      or 0
+    low52   = info.get("fiftyTwoWeekLow")        or 0
+    ma50    = info.get("fiftyDayAverage")         or 0
+    ma200   = info.get("twoHundredDayAverage")    or 0
+    ret52w  = info.get("52WeekChange")            # fractie, bijv. 0.42 = +42%
+
+    score = 0
+
+    # ── 52w high proximity (0-35 pts) ────────────────────────────────────────
+    from_high = None
+    if high52 > 0 and price > 0:
+        from_high = round((price / high52 - 1) * 100, 1)
+        if from_high >= -3:    score += 35
+        elif from_high >= -7:  score += 28
+        elif from_high >= -12: score += 20
+        elif from_high >= -20: score += 11
+        elif from_high >= -30: score += 4
+
+    # ── MA trend (0-25 pts) ───────────────────────────────────────────────────
+    above_ma50  = None
+    above_ma200 = None
+    if ma50 > 0 and price > 0:
+        above_ma50 = price > ma50
+        if price > ma50 * 1.03:   score += 13
+        elif price > ma50:         score += 9
+
+    if ma200 > 0 and price > 0:
+        above_ma200 = price > ma200
+        if price > ma200 * 1.05:  score += 12
+        elif price > ma200:        score += 8
+
+    # ── 52-week return (0-30 pts) ─────────────────────────────────────────────
+    return_52w = None
+    if ret52w is not None:
+        r = float(ret52w) * 100
+        return_52w = round(r, 1)
+        if r >= 60:    score += 30
+        elif r >= 40:  score += 24
+        elif r >= 20:  score += 16
+        elif r >= 8:   score += 9
+        elif r >= 0:   score += 3
+
+    # ── 52w range positie (0-10 pts) ─────────────────────────────────────────
+    range_pos = None
+    if high52 > low52 > 0 and price > 0:
+        range_pos = round((price - low52) / (high52 - low52) * 100, 0)
+        if range_pos >= 80:   score += 10
+        elif range_pos >= 60: score += 6
+        elif range_pos >= 40: score += 3
+
+    return {
+        "momentum_score": min(100, score),
+        "from_52w_high":  from_high,
+        "above_ma50":     above_ma50,
+        "above_ma200":    above_ma200,
+        "return_52w":     return_52w,
+        "range_pos_52w":  int(range_pos) if range_pos is not None else None,
+    }
+
+
 def get_industry_group(sector):
     return SECTOR_MAP.get(sector, "Others")
 
@@ -352,6 +424,7 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
             "dividend":        div_check,
             "score":           score,
             "penalty_applied": memory_penalty > 0 or pm_adj < 0,
+            **compute_momentum(info, price),
         }
     except Exception:
         return None
