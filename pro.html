@@ -198,6 +198,21 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .bot-header{background:var(--bot-bg);border-bottom:1px solid var(--bot-border)}
 .bot-header .pt{color:var(--bot)}
 
+/* ─── KANDIDAAT CARDS ─── */
+.cand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;padding:14px}
+.cand-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;cursor:pointer;transition:border-color .15s,transform .12s}
+.cand-card:hover{border-color:var(--bot-border);transform:translateY(-1px)}
+.cand-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3px}
+.cand-ticker{font-family:var(--mono);font-weight:700;font-size:.88rem;color:var(--bot)}
+.cand-badges{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.cand-cap{font-size:.52rem;padding:1px 5px;border-radius:4px;font-weight:700}
+.cand-name{font-size:.63rem;color:var(--muted);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cand-score{font-family:var(--mono);font-size:1.25rem;font-weight:700;margin-bottom:8px;line-height:1}
+.cand-stats{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.cs-l{font-size:.52rem;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.04em}
+.cs-v{font-family:var(--mono);font-size:.7rem;font-weight:600;color:var(--text)}
+@media(max-width:480px){.cand-grid{grid-template-columns:1fr 1fr}}
+
 /* ─── TV CHART ─── */
 .chips{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;border-bottom:1px solid var(--border)}
 .chip{padding:4px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.68rem;font-weight:600;cursor:pointer;font-family:var(--mono);transition:all .15s}
@@ -492,6 +507,16 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
             <div class="ph bot-header"><span class="pt">Bot Sector Verdeling</span></div>
             <div class="donut-wrap" id="bot-alloc-wrap"><div class="loading"><div class="spin"></div></div></div>
         </div>
+    </div>
+
+    <!-- Screener Kandidaten -->
+    <div class="panel">
+        <div class="ph bot-header">
+            <span class="pt">Screener Kandidaten</span>
+            <span class="ptag" id="cand-tag">—</span>
+        </div>
+        <div class="fbar" id="cand-fbar"></div>
+        <div class="cand-grid" id="cand-grid"></div>
     </div>
 
     <!-- Bot trades table -->
@@ -1422,6 +1447,83 @@ function renderBotTab(){
             </tr>`;
         }).join('')
         :'<tr><td colspan="8" class="empty">Nog geen gesloten trades</td></tr>';
+
+    /* screener kandidaten */
+    renderCandidatesPanel();
+}
+
+/* ══════════════════════════════════════════════════════
+   SCREENER KANDIDATEN PANEL
+══════════════════════════════════════════════════════ */
+let candRegion='all', candCap='all';
+
+const CAP_COLORS={mega:'#7c3aed',large:'#2563eb',mid:'#059669',small:'#d97706','?':'#64748b'};
+const CAP_LABELS={mega:'MEGA',large:'LARGE',mid:'MID',small:'SMALL','?':'?'};
+
+function renderCandidatesPanel(){
+    const el=document.getElementById('cand-grid');
+    const tag=document.getElementById('cand-tag');
+    const fbar=document.getElementById('cand-fbar');
+    if(!el) return;
+    const all=B?.top_candidates||[];
+    if(!all.length){
+        el.innerHTML='<div class="empty" style="padding:16px">Geen data — voer Tier 1 scan uit via GitHub Actions.</div>';
+        tag.textContent='—';
+        fbar.innerHTML='';
+        return;
+    }
+    /* filter bar */
+    const regBtns=[['all','Alles'],['US','🇺🇸 US'],['EU','🇪🇺 EU']];
+    const capBtns=[['all','Alle caps'],['mega','Mega'],['large','Large'],['mid','Mid'],['small','Small']];
+    fbar.innerHTML=`<div style="display:flex;gap:6px;flex-wrap:wrap;width:100%">
+        ${regBtns.map(([v,l])=>`<button class="fbtn${candRegion===v?' active':''}" data-r="${v}">${l}</button>`).join('')}
+        <span style="width:1px;background:var(--border2);margin:0 2px;align-self:stretch"></span>
+        ${capBtns.map(([v,l])=>`<button class="fbtn${candCap===v?' active':''}" data-c="${v}">${l}</button>`).join('')}
+    </div>`;
+    fbar.querySelectorAll('[data-r]').forEach(b=>b.addEventListener('click',()=>{candRegion=b.dataset.r;renderCandidatesPanel();}));
+    fbar.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{candCap=b.dataset.c;renderCandidatesPanel();}));
+
+    /* filter + render */
+    const filtered=all.filter(c=>{
+        if(candRegion!=='all'&&(c.region||'US')!==candRegion) return false;
+        if(candCap!=='all'&&(c.market_cap_cat||'?')!==candCap) return false;
+        return true;
+    });
+    tag.textContent=`${filtered.length} van ${all.length}`;
+    if(!filtered.length){
+        el.innerHTML='<div class="empty" style="padding:16px">Geen kandidaten voor deze filter.</div>';
+        return;
+    }
+    el.innerHTML=filtered.slice(0,30).map(c=>{
+        const cap=c.market_cap_cat||'?';
+        const capClr=CAP_COLORS[cap]||'#64748b';
+        const sc=c.score||0;
+        const scClr=sc>=8?'var(--green)':sc>=7?'var(--yellow)':'var(--muted)';
+        const roe=c.roe!=null?c.roe.toFixed(1)+'%':'—';
+        const revG=c.revenue_growth!=null?((c.revenue_growth>=0?'+':'')+c.revenue_growth.toFixed(1)+'%'):'—';
+        const roic=c.roic!=null?c.roic+'%':'—';
+        const region=c.region==='EU'?'🇪🇺':'🇺🇸';
+        const dcfUp=c.dcf?.dcf_upside;
+        const dcfStr=dcfUp!=null?((dcfUp>=0?'+':'')+dcfUp.toFixed(0)+'%'):'—';
+        const shortName=(c.name||c.ticker).replace(/ Inc\.?| Corp\.?| Ltd\.?| N\.V\.| SE$| AG$| PLC$| S\.A\./gi,'').trim().substring(0,18);
+        return `<div class="cand-card" onclick="openChart('${c.ticker}')" title="${c.name||c.ticker} — klik voor chart">
+            <div class="cand-top">
+                <span class="cand-ticker">${c.ticker.split('.')[0]}</span>
+                <span class="cand-badges">
+                    <span class="cand-cap" style="background:${capClr}18;color:${capClr};border:1px solid ${capClr}44">${CAP_LABELS[cap]}</span>
+                    <span style="font-size:.65rem">${region}</span>
+                </span>
+            </div>
+            <div class="cand-name">${shortName}</div>
+            <div class="cand-score" style="color:${scClr}">${sc.toFixed(1)}<span style="font-size:.58rem;color:var(--muted);font-weight:400">/10</span></div>
+            <div class="cand-stats">
+                <div><span class="cs-l">ROE</span><span class="cs-v">${roe}</span></div>
+                <div><span class="cs-l">Rev↑</span><span class="cs-v ${c.revenue_growth>0?'pc':'nc'}">${revG}</span></div>
+                <div><span class="cs-l">ROIC</span><span class="cs-v">${roic}</span></div>
+                <div><span class="cs-l">DCF</span><span class="cs-v ${dcfUp!=null&&dcfUp>=0?'pc':'nc'}">${dcfStr}</span></div>
+            </div>
+        </div>`;
+    }).join('');
 }
 
 /* ══════════════════════════════════════════════════════

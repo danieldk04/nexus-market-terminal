@@ -40,6 +40,31 @@ SECTOR_MAP = {
     "Industrials":            "Industrials",
 }
 
+# ─── EU UNIVERSUM (AEX / DAX / CAC40 / FTSE100) ──────────────────────────────
+EU_TICKERS = [
+    # AEX — Euronext Amsterdam
+    "ASML.AS","INGA.AS","UNA.AS","PHIA.AS","ABN.AS","WKL.AS","RAND.AS",
+    "HEIA.AS","NN.AS","AKZA.AS","IMCD.AS","AD.AS","MT.AS","AALB.AS",
+    "BESI.AS","ASM.AS","ADYEN.AS","KPN.AS","EXOR.AS","RDSA.AS",
+    # DAX — Xetra Frankfurt
+    "SAP.DE","SIE.DE","ALV.DE","DTE.DE","BAS.DE","BAYN.DE","MUV2.DE",
+    "ADS.DE","BMW.DE","MBG.DE","RWE.DE","VOW3.DE","DBK.DE","EOAN.DE",
+    "IFX.DE","QIA.DE","CON.DE","HEN3.DE","SHL.DE","ZAL.DE","AIXA.DE",
+    "MTX.DE","LEG.DE","1COV.DE","HEI.DE","SRT3.DE","EVT.DE","LIN.DE",
+    # CAC40 — Euronext Paris
+    "MC.PA","OR.PA","TTE.PA","SAN.PA","RI.PA","BNP.PA","AI.PA","CAP.PA",
+    "DG.PA","SGO.PA","SU.PA","LR.PA","PUB.PA","CS.PA","ACA.PA","GLE.PA",
+    "KER.PA","ML.PA","RMS.PA","DSY.PA","HO.PA","VIV.PA","EN.PA","ENGI.PA",
+    "SW.PA","ERF.PA","STM.PA","VIE.PA",
+    # FTSE 100 — London Stock Exchange
+    "SHEL.L","AZN.L","HSBA.L","RIO.L","BP.L","ULVR.L","GSK.L","LSEG.L",
+    "DGE.L","BATS.L","PRU.L","VOD.L","IMB.L","LLOY.L","BARC.L","NWG.L",
+    "EXPN.L","NXT.L","WPP.L","IAG.L","TSCO.L","SSE.L","IHG.L","AUTO.L",
+    "AAL.L","CRH.L","MNDI.L","REL.L","III.L","RKT.L",
+]
+
+EU_TICKER_SET = set(EU_TICKERS)
+
 FALLBACK_TICKERS = [
     "AAPL","MSFT","GOOGL","AMZN","META","NVDA","BRK-B","JPM","V","MA",
     "UNH","JNJ","PG","KO","WMT","HD","CVX","MRK","ABBV","PEP",
@@ -52,6 +77,24 @@ FALLBACK_TICKERS = [
     "ALL","PGR","CB","TRV","MET","PRU","AFL","AIG","HIG","UNM",
     "ASML","SHOP","TSM","NVO","SAP",
 ]
+
+
+def _is_eu_ticker(ticker: str) -> bool:
+    if ticker in EU_TICKER_SET:
+        return True
+    return any(ticker.endswith(s) for s in ('.AS', '.DE', '.PA', '.L', '.MI', '.BR', '.VI', '.ST', '.HE'))
+
+
+def _market_cap_cat(mc: float | None) -> str:
+    if mc is None or mc <= 0:
+        return "?"
+    if mc >= 200e9:
+        return "mega"
+    if mc >= 10e9:
+        return "large"
+    if mc >= 2e9:
+        return "mid"
+    return "small"
 
 
 def get_industry_group(sector):
@@ -96,8 +139,9 @@ def fetch_global_universe():
         except Exception:
             continue
 
-    # NL selectie
-    tickers.extend(["ASML.AS","INGA.AS","ADYEN.AS","UNA.AS","HEIA.AS","PHIA.AS","WKL.AS"])
+    # EU selectie — AEX, DAX, CAC40, FTSE100
+    tickers.extend(EU_TICKERS)
+    log.info(f"EU tickers: {len(EU_TICKERS)} toegevoegd (AEX/DAX/CAC40/FTSE100)")
 
     if len(tickers) < 60:
         log.warning("Scraping laag — fallback actief")
@@ -193,8 +237,9 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
         if ma50 > 0 and ma200 > 0 and price < ma50 * 0.90 and price < ma200 * 0.90:
             return None
 
-        # P/FCF
-        market_cap = info.get("marketCap", 0) or 0
+        # P/FCF + market cap categorisatie
+        market_cap    = info.get("marketCap", 0) or 0
+        market_cap_cat = _market_cap_cat(market_cap)
         pfcf = round(market_cap / fcf, 1) if fcf and fcf > 0 and market_cap > 0 else None
 
         # Analist targets
@@ -284,6 +329,9 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
             "name":            info.get("shortName", ticker_symbol),
             "sector":          sector,
             "industry_group":  group,
+            "region":          "EU" if _is_eu_ticker(ticker_symbol) else "US",
+            "market_cap":      market_cap,
+            "market_cap_cat":  market_cap_cat,
             "price":           round(price, 2) if price else 0,
             "roe":             round(roe * 100, 2),
             "pe_ratio":        round(pe, 2),
