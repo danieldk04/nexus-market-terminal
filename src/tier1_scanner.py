@@ -169,6 +169,63 @@ def compute_momentum(info: dict, price: float) -> dict:
     }
 
 
+def _compute_insider_score(t) -> int:
+    """
+    Insider koop/verkoop score 0-10 op basis van recente Form 4 transacties (yfinance).
+    Hogere score = meer insider aankopen dan verkopen.
+    Geeft 3 (neutraal) terug als data niet beschikbaar is.
+    """
+    try:
+        txns = t.insider_transactions
+        if txns is None or (hasattr(txns, "empty") and txns.empty):
+            return 3
+        buys = sells = 0.0
+        for _, row in txns.iterrows():
+            shares = abs(float(row.get("Shares", 0) or 0))
+            txt = " ".join([
+                str(row.get("Text", "") or ""),
+                str(row.get("Transaction", "") or ""),
+            ]).lower()
+            if any(k in txt for k in ("purchase", "acquired", "acquisition")):
+                buys += shares
+            elif any(k in txt for k in ("sale", "sold", "disposition", "disposed")):
+                sells += shares
+        total = buys + sells
+        if total == 0:
+            return 3
+        ratio = buys / total
+        if ratio >= 0.75:   return 9
+        elif ratio >= 0.50: return 7
+        elif ratio >= 0.30: return 5
+        else:               return 2
+    except Exception:
+        return 3
+
+
+def _compute_earnings_momentum(info: dict, t) -> dict:
+    """Check upcoming earnings (0-28 dagen) en historische beat rate (%)."""
+    result = {"earnings_days": None, "earnings_beat_pct": None}
+    try:
+        import datetime as _dt
+        ts = info.get("earningsTimestamp") or info.get("earningsTimestampStart")
+        if ts and ts > 0:
+            days = (_dt.datetime.fromtimestamp(ts) - _dt.datetime.now()).days
+            result["earnings_days"] = int(days)
+    except Exception:
+        pass
+    try:
+        hist = t.earnings_history
+        if hist is not None and hasattr(hist, "columns") and "surprisePercent" in hist.columns:
+            recent = hist.dropna(subset=["surprisePercent"]).tail(8)
+            if len(recent) > 0:
+                result["earnings_beat_pct"] = int(round(
+                    (recent["surprisePercent"] > 0).sum() / len(recent) * 100
+                ))
+    except Exception:
+        pass
+    return result
+
+
 def get_industry_group(sector):
     return SECTOR_MAP.get(sector, "Others")
 
@@ -330,6 +387,12 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
         # Dividend sustainability
         div_check = check_dividend_sustainability(info)
 
+        # Insider koop/verkoop signaal (Form 4)
+        insider_score = _compute_insider_score(t)
+
+        # Earnings momentum: komende resultaten + beat-history
+        earnings_data = _compute_earnings_momentum(info, t)
+
         # ── SCORE LOGICA ─────────────────────────────────────────────────────
         base         = 5.0
         max_pe_norm  = max_pe
@@ -378,6 +441,20 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
         if div_check is not None and not div_check["sustainable"]:
             div_penalty = 0.5
 
+        # Insider koop bonus (Form 4 signaal)
+        insider_bonus = 0.0
+        if insider_score >= 8:    insider_bonus = 0.4
+        elif insider_score >= 6:  insider_bonus = 0.2
+        elif insider_score <= 2:  insider_bonus = -0.2  # Insider verkoopt massaal
+
+        # Pre-earnings bonus: komende resultaten + bewezen beat-history
+        earnings_bonus = 0.0
+        ed = earnings_data.get("earnings_days")
+        beat_pct = earnings_data.get("earnings_beat_pct")
+        if ed is not None and 7 <= ed <= 28 and beat_pct is not None:
+            if beat_pct >= 75:   earnings_bonus = 0.3   # Consistent beater + nabij resultaten
+            elif beat_pct >= 50: earnings_bonus = 0.1
+
         # Memory-penalty: lessen uit post-mortem sector-adjustments
         memory_penalty = 0.0
         for lesson in memory.get("lessons", []):
@@ -392,7 +469,8 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
             base - pe_penalty + roe_bonus - debt_penalty + growth_bonus
             - fcf_penalty + margin_bonus - beta_penalty + roic_bonus
             + roce_bonus + pfcf_bonus + dcf_bonus + analyst_bonus
-            - div_penalty - memory_penalty + pm_adj - trend_penalty
+            - div_penalty + insider_bonus + earnings_bonus
+            - memory_penalty + pm_adj - trend_penalty
         )
         score = round(max(1.0, min(10.0, raw_score)), 1)
 
@@ -424,6 +502,8 @@ def analyse_ticker(ticker_symbol, memory, post_mortem):
             "dividend":        div_check,
             "score":           score,
             "penalty_applied": memory_penalty > 0 or pm_adj < 0,
+            "insider_score":   insider_score,
+            **earnings_data,
             **compute_momentum(info, price),
         }
     except Exception:

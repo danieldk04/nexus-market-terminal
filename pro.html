@@ -509,6 +509,15 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
+    <!-- Sector Rotatie -->
+    <div class="panel" id="sector-rot-panel" style="display:none">
+        <div class="ph bot-header">
+            <span class="pt">Sector Rotatie</span>
+            <span class="ptag" id="sr-tag">1 maand performance</span>
+        </div>
+        <div id="sr-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:12px"></div>
+    </div>
+
     <!-- Screener Kandidaten -->
     <div class="panel">
         <div class="ph bot-header">
@@ -532,6 +541,7 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
                     <th class="r">P&amp;L %</th>
                     <th class="r">Waarde ($)</th>
                     <th class="r">TP doel</th>
+                    <th class="r">Trail Stop</th>
                     <th class="r">Score</th>
                     <th class="r">Datum</th>
                 </tr></thead>
@@ -847,11 +857,14 @@ function renderDashboard(){
         document.getElementById('kf-bot').style.width=Math.min(Math.abs(bp.return_pct)*5,100)+'%';
     }
 
-    /* VIX */
+    /* VIX + S&P MA200 */
     const macro=B?.macro||{};
     if(macro.vix){
         document.getElementById('k-vix').textContent=macro.vix.toFixed(2);
-        document.getElementById('k-vix-s').textContent=`10Y: ${macro.treasury_10y?.toFixed(2)||'—'}%`;
+        const sp500ok=B?.memory?.sp500_above_ma200;
+        const spStr=sp500ok===false?' · S&P↓MA200':'';
+        document.getElementById('k-vix-s').textContent=`10Y: ${macro.treasury_10y?.toFixed(2)||'—'}%${spStr}`;
+        if(sp500ok===false) document.getElementById('k-vix-s').style.color='var(--red)';
         const vixPct=Math.min((macro.vix/40)*100,100);
         document.getElementById('kf-vix').style.width=vixPct+'%';
         document.getElementById('kf-vix').style.background=macro.vix>25?'var(--red)':macro.vix>18?'var(--yellow)':'var(--green)';
@@ -1413,6 +1426,8 @@ function renderBotTab(){
         const plc=t.pl_percent>=0?'var(--green)':'var(--red)';
         const sc=t.score_at_entry||0;
         const sColor=sc>=8?'var(--green)':sc>=7?'var(--yellow)':'var(--muted)';
+        const ts=t.trailing_stop_price;
+        const tsClr=ts?'var(--yellow)':'var(--muted)';
         return `<tr onclick="openChart('${t.ticker}')">
             <td><div class="ticker-cell">${t.ticker}</div><div class="name-cell">${t.name||''}</div></td>
             <td style="font-size:.7rem;color:var(--muted)">${t.sector||'—'}</td>
@@ -1421,6 +1436,7 @@ function renderBotTab(){
             <td class="r" style="color:${plc};font-weight:700">${pct(t.pl_percent)}</td>
             <td class="r">${usd(t.current_value||0)}</td>
             <td class="r" style="color:var(--accent)">+${t.tp_target?.toFixed(0)||'—'}%</td>
+            <td class="r" style="color:${tsClr};font-size:.68rem" title="${ts?'Trailing stop actief — vergrendelt winst':'Actief bij +15%'}">${ts?'$'+ts.toFixed(2):'—'}</td>
             <td class="r"><span class="score-pill" style="background:${sColor}18;color:${sColor};border:1px solid ${sColor}44">${sc.toFixed(1)}</span></td>
             <td class="r" style="font-size:.68rem;color:var(--muted)">${t.buy_date||'—'}</td>
         </tr>`;
@@ -1448,8 +1464,41 @@ function renderBotTab(){
         }).join('')
         :'<tr><td colspan="8" class="empty">Nog geen gesloten trades</td></tr>';
 
+    /* sector rotatie */
+    renderSectorRotationPanel();
+
     /* screener kandidaten */
     renderCandidatesPanel();
+}
+
+function renderSectorRotationPanel(){
+    const panel=document.getElementById('sector-rot-panel');
+    const grid=document.getElementById('sr-grid');
+    const tag=document.getElementById('sr-tag');
+    if(!panel||!grid) return;
+    const sr=M?.sector_rotation||{};
+    const srAdj=M?.sector_rotation_adj||{};
+    const date=M?.sector_rotation_date;
+    if(!Object.keys(sr).length){panel.style.display='none';return;}
+    panel.style.display='';
+    if(date) tag.textContent=`1 maand · ${new Date(date).toLocaleDateString('nl-NL',{day:'2-digit',month:'short'})}`;
+    // Sorteer op performance
+    const entries=Object.entries(sr).sort((a,b)=>b[1]-a[1]);
+    const maxAbs=Math.max(...entries.map(([,v])=>Math.abs(v)),1);
+    grid.innerHTML=entries.map(([sector,perf])=>{
+        const adj=srAdj[sector]||0;
+        const isPos=perf>=0;
+        const clr=perf>=5?'var(--green)':perf<=-5?'var(--red)':perf>=0?'#65a30d':'#f59e0b';
+        const barW=Math.min(Math.abs(perf)/maxAbs*100,100);
+        const adjBadge=adj>0?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700;margin-left:4px">+score</span>':adj<0?'<span style="font-size:.48rem;background:#dc262618;color:#dc2626;border:1px solid #dc262644;padding:1px 4px;border-radius:3px;font-weight:700;margin-left:4px">-score</span>':'';
+        return `<div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px">
+            <div style="font-size:.6rem;font-weight:700;color:var(--muted);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${sector}${adjBadge}</div>
+            <div style="font-family:var(--mono);font-size:.9rem;font-weight:700;color:${clr};margin-bottom:4px">${isPos?'+':''}${perf.toFixed(1)}%</div>
+            <div style="height:3px;background:var(--border);border-radius:2px">
+                <div style="height:100%;width:${barW}%;background:${clr};border-radius:2px;opacity:.7"></div>
+            </div>
+        </div>`;
+    }).join('');
 }
 
 /* ══════════════════════════════════════════════════════
@@ -1545,6 +1594,11 @@ function renderCandidatesPanel(){
         // Trend badges
         const ma50Badge=c.above_ma50===true?'<span style="font-size:.5rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">MA50✓</span>':'';
         const ma200Badge=c.above_ma200===true?'<span style="font-size:.5rem;background:#2563eb18;color:#2563eb;border:1px solid #2563eb44;padding:1px 4px;border-radius:3px;font-weight:700">MA200✓</span>':'';
+        // Insider badge: insiders kopen netto
+        const insiderBadge=c.insider_score>=7?'<span style="font-size:.5rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">INSDR↑</span>':'';
+        // Earnings badge: resultaten binnen 28 dagen
+        const ed=c.earnings_days;
+        const earningsBadge=(ed!=null&&ed>=0&&ed<=28)?`<span style="font-size:.5rem;background:#7c3aed18;color:#7c3aed;border:1px solid #7c3aed44;padding:1px 4px;border-radius:3px;font-weight:700" title="Resultaten over ${ed} dagen">📅${ed}d</span>`:'';
         const shortName=(c.name||c.ticker).replace(/ Inc\.?| Corp\.?| Ltd\.?| N\.V\.| SE$| AG$| PLC$| S\.A\./gi,'').trim().substring(0,18);
         return `<div class="cand-card" onclick="openChart('${c.ticker}')" title="${c.name||c.ticker}">
             <div class="cand-top">
@@ -1566,7 +1620,7 @@ function renderCandidatesPanel(){
                 <div><span class="cs-l">DCF</span><span class="cs-v ${dcfUp!=null&&dcfUp>=0?'pc':'nc'}">${dcfStr}</span></div>
             </div>
             ${_momBar(ms)}
-            ${ma50Badge||ma200Badge?`<div style="display:flex;gap:3px;margin-top:5px;flex-wrap:wrap">${ma50Badge}${ma200Badge}</div>`:''}
+            ${ma50Badge||ma200Badge||insiderBadge||earningsBadge?`<div style="display:flex;gap:3px;margin-top:5px;flex-wrap:wrap">${ma50Badge}${ma200Badge}${insiderBadge}${earningsBadge}</div>`:''}
         </div>`;
     }).join('');
 }

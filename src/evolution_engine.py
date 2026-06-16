@@ -96,6 +96,19 @@ def run_evolution():
     cash      = float(portfolio.get("cash", STARTING_CAPITAL))
     today     = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
+    # ── S&P 500 MA200 — macro filter voor berenmarkt ──────────────────────────
+    sp500_above_ma200 = True
+    try:
+        sp_info  = yf.Ticker("^GSPC").info
+        sp_price = sp_info.get("regularMarketPrice") or 0
+        sp_ma200 = sp_info.get("twoHundredDayAverage") or 0
+        if sp_price > 0 and sp_ma200 > 0:
+            sp500_above_ma200 = sp_price >= sp_ma200
+            status = "boven" if sp500_above_ma200 else "ONDER"
+            print(f"S&P 500: {sp_price:.0f} {status} MA200 ({sp_ma200:.0f})")
+    except Exception as e:
+        print(f"S&P 500 macro check fout: {e}")
+
     # Kandidaten-index voor DCF-lookup
     cand_by_ticker = {c["ticker"]: c for c in candidates}
 
@@ -126,6 +139,15 @@ def run_evolution():
             shares    = trade.get("shares", 0)
             cur_value = round(shares * cur_price, 2) if shares else trade.get("position_value", 0)
 
+            # ── Trailing stop: bij +15% vergrendel 60% van winst ────────────
+            trailing_stop = trade.get("trailing_stop_price") or 0.0
+            if pl_pct >= 15.0:
+                new_ts = round(trade["buy_price"] * (1 + 0.6 * pl_pct / 100), 4)
+                if new_ts > trailing_stop:
+                    trailing_stop = new_ts
+                    trade["trailing_stop_price"] = trailing_stop
+                    print(f"TRAIL UP: {ticker} bodem → ${trailing_stop:.2f} ({0.6*pl_pct:.1f}%+ geborgd)")
+
             # DCF-gebaseerde take-profit
             c_data   = cand_by_ticker.get(ticker)
             tp_target = get_dcf_take_profit(trade, c_data)
@@ -142,6 +164,20 @@ def run_evolution():
                     memory["cooldowns"] = {}
                 memory["cooldowns"][ticker] = today
                 print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}% | €{cur_value:.2f} | cooldown {COOLDOWN_DAYS}d")
+                closed_count += 1
+                continue
+
+            # Trailing stop check
+            if trailing_stop > 0 and cur_price <= trailing_stop:
+                cash += cur_value
+                add_lesson(ticker, sector,
+                           f"Trailing-stop {ticker}: prijs ${cur_price:.2f} ≤ bodem ${trailing_stop:.2f} (+{pl_pct:.1f}% geboekt).",
+                           "POSITIVE_LEARNING")
+                notify_take_profit(ticker, pl_pct, sector)
+                if "cooldowns" not in memory:
+                    memory["cooldowns"] = {}
+                memory["cooldowns"][ticker] = today
+                print(f"TRAIL-EXIT: {ticker} gesloten op +{pl_pct:.1f}% | €{cur_value:.2f}")
                 closed_count += 1
                 continue
 
@@ -279,9 +315,16 @@ def run_evolution():
             print(f"Overgeslagen: {ticker} — max {MAX_PER_SECTOR} posities in {sector}.")
             continue
 
-        # Sectorbonus uit post-mortem
-        sector_adj = pm_sector_adj.get(sector, 0)
-        effective_threshold = vix_threshold - (0.3 if sector in positive_sectors else 0) - sector_adj
+        # Sectorbonus uit post-mortem + sectorrotatie
+        sector_adj   = pm_sector_adj.get(sector, 0)
+        rotation_adj = memory.get("sector_rotation_adj", {}).get(sector, 0)
+        effective_threshold = (vix_threshold
+                               - (0.3 if sector in positive_sectors else 0)
+                               - sector_adj
+                               - rotation_adj)
+        # Bearmarkt (S&P onder MA200): hogere instapdrempel
+        if not sp500_above_ma200:
+            effective_threshold = max(effective_threshold, 7.5)
 
         if score < effective_threshold:
             continue
@@ -368,11 +411,12 @@ def run_evolution():
         "return_pct":       round(((portfolio_value / STARTING_CAPITAL) - 1) * 100, 2),
     }
     data["memory"] = {
-        "lessons":          sorted_lessons[-15:],
-        "positive_sectors": list(positive_sectors),
-        "last_update":      datetime.now(timezone.utc).isoformat(),
-        "version":          "nexus-v3-kelly",
-        "vix_threshold":    vix_threshold,
+        "lessons":           sorted_lessons[-15:],
+        "positive_sectors":  list(positive_sectors),
+        "last_update":       datetime.now(timezone.utc).isoformat(),
+        "version":           "nexus-v3-kelly",
+        "vix_threshold":     vix_threshold,
+        "sp500_above_ma200": sp500_above_ma200,
     }
 
     notify_evolution_summary(
