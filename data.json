@@ -3698,8 +3698,8 @@
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 221.3,
-            "current_value": 840.92,
+            "current_price": 221.66,
+            "current_value": 842.29,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3707,14 +3707,14 @@
             "allocation_pct": 0.1,
             "position_value": 800.0,
             "shares": 3.7999,
-            "pl_percent": 5.12,
+            "pl_percent": 5.29,
             "tp_target": 30.0
         },
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 71.685,
-            "current_value": 719.55,
+            "current_price": 70.91,
+            "current_value": 711.77,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -3722,15 +3722,15 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": -0.06,
+            "pl_percent": -1.14,
             "tp_target": 30.0
         },
         {
             "ticker": "PGR",
             "name": "Progressive Corporation (The)",
             "buy_price": 197.19,
-            "current_price": 204.71,
-            "current_value": 1345.42,
+            "current_price": 204.42,
+            "current_value": 1343.51,
             "buy_date": "2026-05-14",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3742,14 +3742,14 @@
             "kelly_fraction": 0.2,
             "position_value": 1296.0,
             "shares": 6.5723,
-            "pl_percent": 3.81
+            "pl_percent": 3.67
         },
         {
             "ticker": "BR",
             "name": "Broadridge Financial Solutions,",
             "buy_price": 143.72,
-            "current_price": 140.635,
-            "current_value": 1014.54,
+            "current_price": 139.63,
+            "current_value": 1007.29,
             "buy_date": "2026-05-14",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -3761,14 +3761,14 @@
             "kelly_fraction": 0.2,
             "position_value": 1036.8,
             "shares": 7.214,
-            "pl_percent": -2.15
+            "pl_percent": -2.85
         },
         {
             "ticker": "DECK",
             "name": "Deckers Outdoor Corporation",
             "buy_price": 94.45,
-            "current_price": 107.17,
-            "current_value": 188.23,
+            "current_price": 105.72,
+            "current_value": 185.69,
             "buy_date": "2026-05-14",
             "industry_group": "Consumer Cyclical",
             "sector": "Consumer Cyclical",
@@ -3780,15 +3780,15 @@
             "kelly_fraction": 0.05,
             "position_value": 165.89,
             "shares": 1.7564,
-            "pl_percent": 13.47,
+            "pl_percent": 11.93,
             "trailing_stop_price": 103.8799
         },
         {
             "ticker": "TRV",
             "name": "The Travelers Companies, Inc.",
             "buy_price": 299.94,
-            "current_price": 305.01,
-            "current_value": 717.11,
+            "current_price": 306.07,
+            "current_value": 719.6,
             "buy_date": "2026-05-27",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3800,7 +3800,7 @@
             "kelly_fraction": 0.2,
             "position_value": 705.19,
             "shares": 2.3511,
-            "pl_percent": 1.69
+            "pl_percent": 2.04
         }
     ],
     "equity_history": [
@@ -4497,5 +4497,6 @@
             "retrieved_at": "2026-06-17T19:25:43.391204+00:00"
         }
     },
-    "filings_at": "2026-06-17T19:25:43.891407+00:00"
+    "filings_at": "2026-06-17T19:25:43.891407+00:00",
+    "ticker_updated_at": "2026-06-17T20:38:13.982728+00:00"
 }
