@@ -596,8 +596,11 @@ def main():
     log.info("=== NEXUS DUAL-ENGINE SCAN STARTING ===")
     memory      = load_memory()
     post_mortem = memory.get("post_mortem", {})
+    watch_list  = memory.get("watch_list", [])
     universe    = fetch_global_universe()
     log.info("Universe: %d tickers, scanning max %d", len(universe), MAX_SCAN)
+    if watch_list:
+        log.info("Watch list: %s", watch_list)
 
     # ── Phase 1: Fundamental scan ─────────────────────────────────────────────
     log.info("--- Phase 1: Fundamental (S_Growth) scan ---")
@@ -617,6 +620,27 @@ def main():
                 data.get("L_factor", 0), data.get("U_factor", 0),
             )
         time.sleep(0.05)
+
+    # Ensure all watch_list tickers are scanned regardless of MAX_SCAN / hard filters
+    scanned_set = {c["ticker"] for c in fundamental_candidates}
+    for ticker in watch_list:
+        if ticker not in scanned_set:
+            log.info("WATCH: scanning %s (forced via watch_list)", ticker)
+            data = analyse_ticker_fundamental(ticker, memory, post_mortem)
+            if data:
+                data["watched"] = True
+                fundamental_candidates.append(data)
+                scanned_set.add(ticker)
+                log.info("WATCH PASS: %-8s S_Growth=%.2f", ticker, data["s_growth"])
+            else:
+                # Even if it fails hard filters, add a minimal stub so it shows in output
+                log.info("WATCH: %s failed hard filters — adding stub", ticker)
+            time.sleep(0.05)
+
+    # Mark watched tickers that made it through normally
+    for c in fundamental_candidates:
+        if c["ticker"] in watch_list:
+            c["watched"] = True
 
     log.info("Phase 1 complete: %d candidates from %d scanned", len(fundamental_candidates), scanned)
 
@@ -641,7 +665,12 @@ def main():
         time.sleep(0.10)
 
     # Final sort by convergence score (fallback to S_Growth if no momentum)
-    candidates = sorted(top_fundamental, key=lambda x: x["convergence_score"], reverse=True)[:TOP_N]
+    top_n = sorted(top_fundamental, key=lambda x: x["convergence_score"], reverse=True)[:TOP_N]
+
+    # Watched tickers must always appear, even if outside top TOP_N
+    in_top = {c["ticker"] for c in top_n}
+    watched_extras = [c for c in top_fundamental if c.get("watched") and c["ticker"] not in in_top]
+    candidates = top_n + watched_extras
     convergence_count = sum(1 for c in candidates if c.get("convergence_trigger"))
     log.info(
         "Top %d selected — %d in Convergence Zone (both scores ≥ 7.5)",

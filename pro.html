@@ -2531,10 +2531,12 @@ function renderCandidatesPanel(){
         return;
     }
 
-    el.innerHTML=filtered.slice(0,30).map(c=>{
+    const watchList=B?.memory?.watch_list||[];
+    el.innerHTML=filtered.slice(0,40).map(c=>{
         const cap=c.market_cap_cat||'?';
         const capClr=CAP_COLORS[cap]||'#64748b';
         const region=c.region==='EU'?'🇪🇺':'🇺🇸';
+        const isWatched=c.watched||watchList.includes(c.ticker);
         const sc=c.score||0;
         // momentum_score is 0-100; fall back to convergence_score*10 when not yet in data
         const ms=c.momentum_score!=null?c.momentum_score:(c.convergence_score!=null?Math.round(c.convergence_score*10):null);
@@ -2558,6 +2560,7 @@ function renderCandidatesPanel(){
 
         // Small badges row
         const badges=[
+            isWatched?'<span style="font-size:.52rem;background:#7c3aed18;color:#7c3aed;border:1px solid #7c3aed55;padding:2px 5px;border-radius:3px;font-weight:700">👁 BEWAAKT</span>':'',
             _aboveMA50?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">MA50✓</span>':'',
             _aboveMA200?'<span style="font-size:.48rem;background:#2563eb18;color:#2563eb;border:1px solid #2563eb44;padding:1px 4px;border-radius:3px;font-weight:700">MA200✓</span>':'',
             c.insider_score>=7?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">INSDR↑</span>':'',
@@ -2566,7 +2569,7 @@ function renderCandidatesPanel(){
 
         const shortName=(c.name||c.ticker).replace(/ Inc\.?| Corp\.?| Ltd\.?| N\.V\.| SE$| AG$| PLC$| S\.A\./gi,'').trim().substring(0,20);
 
-        return `<div class="cand-card" onclick="openChart('${c.ticker}')" title="${c.name||c.ticker}" style="border-top-color:${verdict.clr}">
+        return `<div class="cand-card" onclick="openChart('${c.ticker}')" title="${c.name||c.ticker}" style="border-top-color:${verdict.clr}${isWatched?';box-shadow:0 0 0 1.5px #7c3aed55,var(--sh)':''}">
             <!-- header -->
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px">
                 <div style="min-width:0;flex:1">

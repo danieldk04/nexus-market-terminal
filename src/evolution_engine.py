@@ -318,10 +318,12 @@ def run_evolution():
         # Sectorbonus uit post-mortem + sectorrotatie
         sector_adj   = pm_sector_adj.get(sector, 0)
         rotation_adj = memory.get("sector_rotation_adj", {}).get(sector, 0)
+        watch_adj    = 0.4 if ticker in memory.get("watch_list", []) else 0.0
         effective_threshold = (vix_threshold
                                - (0.3 if sector in positive_sectors else 0)
                                - sector_adj
-                               - rotation_adj)
+                               - rotation_adj
+                               - watch_adj)
         # Bearmarkt (S&P onder MA200): hogere instapdrempel
         if not sp500_above_ma200:
             effective_threshold = max(effective_threshold, 7.5)
