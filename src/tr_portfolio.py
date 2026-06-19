@@ -48,10 +48,10 @@ ISIN_TO_TICKER: dict[str, str] = {k: v[0] for k, v in ISIN_TO_TICKERS.items()}
 
 # Proxy-schaling voor ISINs die geen eigen Yahoo Finance ticker hebben.
 # ratio = eigen_NAV / proxy_NAV  →  pas aan als NAV sterk verschuift.
-# SXR8.DE (iShares Core S&P 500 EUR, Xetra) ≈ €540
-# Amundi S&P 500 (LU1681048804) ≈ €123  →  ratio = 123/540 ≈ 0.228
+# SXR8.DE (iShares Core S&P 500 EUR, Xetra) ≈ €590
+# Amundi S&P 500 (LU1681048804) ≈ €130  →  ratio = 130/590 ≈ 0.220
 PROXY_RATIO: dict[str, float] = {
-    "LU1681048804": 0.228,
+    "LU1681048804": 0.220,
 }
 
 DISPLAY_NAMES: dict[str, str] = {
@@ -220,9 +220,10 @@ def _parse_tr_interest() -> float:
         reader = csv.DictReader(io.StringIO(raw))
         for row in reader:
             category   = (row.get("category") or "").strip().upper()
-            amount_str = (row.get("amount")   or "").strip()
-            # TR exporteert rente als category=INTEREST of SAVINGS_INTEREST
-            if "INTEREST" in category or "SAVING" in category:
+            tx_type    = (row.get("type")      or "").strip().upper()
+            amount_str = (row.get("amount")    or "").strip()
+            # TR exporteert rente als type=INTEREST_PAYMENT of category=INTEREST/SAVING
+            if "INTEREST" in tx_type or "INTEREST" in category or "SAVING" in category:
                 try:
                     amt = float(amount_str)
                     if amt > 0:

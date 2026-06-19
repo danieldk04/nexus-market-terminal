@@ -116,7 +116,7 @@
   "initialized_at": "2026-04-04T00:00:00+00:00",
   "version": "nexus-v2",
   "post_mortem": {
-    "analysis": "# POST-MORTEM RAPPORT AUTONOME BOT\n\n## 1. PATROON\n**Systematische blootstelling aan Energy-sector verliezers (8/16 verliezen).** Herhaalde posities in dezelfde aandelen (GILD 2x, APA 3x binnen 8 dagen) suggereren falen in stop-loss discipline. Win rate van 6.2% is niet levensvatbaar.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: APA 3x hetzelfde aandeel \u2013 geen exit bij eerste verlies (-6.4%). Cascaderende verliezen duiden op broken stop-loss mechanisme.\n- **Sector-blindheid**: Energy gekozen ondanks historisch slechtste performance. Algo erkent geen sectorale momentum.\n- **Positiegrootte**: Herhaalde posities in hetzelfde aandeel suggereren geen maximum exposure-limiet.\n\n## 3. AANBEVELINGEN\n1. **Hard stop-loss op -5%** per positie; automatische exit voork\u00f3men recidive-verliezen (APA-case).\n2. **Energy-sector uitsluiten** totdat sortino ratio >0.8. Tech & AI selectief handhaven (1 win, positief signal).\n\n## 4. SECTOR BIAS\n- **Mijden**: Energy (8 verliezen, 0 winnen) \u2013 directe exit signal.\n- **Zwaarder wegen**: Tech & AI (unieke winstperformer) \u2013 60% van allocatie.\n\n**Conclusie**: Bot is niet gereed voor live trading. Implementeer bovenstaande v\u00f3\u00f3r herstart.",
+    "analysis": "# POST-MORTEM RAPPORT AUTONOME BOT\n\n## 1. PATROON\n**Systematische blootstelling aan Energy-sector verliezers (8/16 verliezen).** Herhaalde posities in dezelfde aandelen (GILD 2x, APA 3x binnen 8 dagen) suggereren falen in stop-loss discipline. Win rate van 6.2% is niet levensvatbaar.\n\n## 2. ROOT CAUSE\n- **Timing-falen**: APA 3x hetzelfde aandeel – geen exit bij eerste verlies (-6.4%). Cascaderende verliezen duiden op broken stop-loss mechanisme.\n- **Sector-blindheid**: Energy gekozen ondanks historisch slechtste performance. Algo erkent geen sectorale momentum.\n- **Positiegrootte**: Herhaalde posities in hetzelfde aandeel suggereren geen maximum exposure-limiet.\n\n## 3. AANBEVELINGEN\n1. **Hard stop-loss op -5%** per positie; automatische exit voorkómen recidive-verliezen (APA-case).\n2. **Energy-sector uitsluiten** totdat sortino ratio >0.8. Tech & AI selectief handhaven (1 win, positief signal).\n\n## 4. SECTOR BIAS\n- **Mijden**: Energy (8 verliezen, 0 winnen) – directe exit signal.\n- **Zwaarder wegen**: Tech & AI (unieke winstperformer) – 60% van allocatie.\n\n**Conclusie**: Bot is niet gereed voor live trading. Implementeer bovenstaande vóór herstart.",
     "win_rate": 6.2,
     "worst_sectors": [
       [
@@ -365,32 +365,32 @@
     "SpaceX goed door eerste dag op de beurs, Musk eerste biljonair ooit",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: ‘Het is code oranje’",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-    "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran",
+    "Koers Europese aandelen herstelt, maar die in Azië blijven dalen door de oorlog met Iran",
     "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
     "Beursgang van de eeuw: SpaceX: Meedoen of Mijden?"
   ],
   "tr_summary": {
-    "total": 8369.15,
+    "total": 8377.44,
     "total_pl_pct": -1.23,
-    "total_invested": 8473.03,
-    "interest_total": 0.0,
+    "total_invested": 8482.02,
+    "interest_total": 78.23,
     "positions": [
       {
         "name": "Bitcoin",
         "value": 4508.36,
         "price": 54596.5312,
-        "pl_pct": -9.44,
-        "pl_eur": -470.23,
-        "weight": 53.9
+        "pl_pct": -9.46,
+        "pl_eur": -470.93,
+        "weight": 53.8
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
         "value": 1320.4,
         "price": 159.8964,
         "pl_pct": 32.04,
-        "pl_eur": 320.37,
+        "pl_eur": 320.4,
         "weight": 15.8
       },
       {
@@ -398,16 +398,16 @@
         "value": 1186.89,
         "price": 51.85,
         "pl_pct": -1.09,
-        "pl_eur": -13.05,
+        "pl_eur": -13.11,
         "weight": 14.2
       },
       {
         "name": "VWCE (All-World Acc)",
-        "value": 1172.9,
+        "value": 1181.19,
         "price": 165.12,
-        "pl_pct": 7.17,
-        "pl_eur": 78.42,
-        "weight": 14.0
+        "pl_pct": 7.12,
+        "pl_eur": 78.46,
+        "weight": 14.1
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -474,7 +474,7 @@
   "news_summary": [
     {
       "theme": "Geopolitieke spanning drukt markten",
-      "summary": "Oorlogen met Iran en onrust in het Midden-Oosten zetten Europese en Aziatische beurzen onder druk, met name luchtvaartaandelen zoals Air France-KLM. Dit geopolitieke risico verklaart de volatiliteit in brede indexen zoals de AEX en be\u00efnvloedt de rotatie tussen regio's."
+      "summary": "Oorlogen met Iran en onrust in het Midden-Oosten zetten Europese en Aziatische beurzen onder druk, met name luchtvaartaandelen zoals Air France-KLM. Dit geopolitieke risico verklaart de volatiliteit in brede indexen zoals de AEX en beïnvloedt de rotatie tussen regio's."
     },
     {
       "theme": "SpaceX beursintroductie trekt aandacht",
@@ -486,43 +486,30 @@
     },
     {
       "theme": "Herstel VS, onrust elders",
-      "summary": "De Amerikaanse beurs trekt er beter uit dan Europa en Azi\u00eb, wat de AEX 1% doet stijgen. Ondanks brede bezorgdheid blijven beleggers sparen en zoeken naar rendement, maar de uiteenlopende prestaties suggereren een fragiel herstel."
+      "summary": "De Amerikaanse beurs trekt er beter uit dan Europa en Azië, wat de AEX 1% doet stijgen. Ondanks brede bezorgdheid blijven beleggers sparen en zoeken naar rendement, maar de uiteenlopende prestaties suggereren een fragiel herstel."
     }
   ],
   "bux_summary": {
-    "total": 2077.24,
-    "total_pl_pct": -21.23,
-    "total_invested": 2637.06,
+    "total": 1825.22,
+    "total_pl_pct": -20.73,
+    "total_invested": 2302.64,
     "interest_total": 0,
     "positions": [
       {
-        "name": "TSLA.DE",
+        "name": "Tesla",
         "ticker": "TSLA.DE",
-        "value": 1779.6,
+        "value": 1779.62,
         "price": 349.31,
         "pl_pct": -16.18,
-        "pl_eur": -343.47,
+        "pl_eur": -343.45,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
-        "sector": null,
-        "weight": 85.7
+        "sector": "Consumer Cyclical",
+        "weight": 97.5
       },
       {
-        "name": "PEP",
-        "ticker": "PEP",
-        "value": 247.74,
-        "price": 123.87,
-        "pl_pct": -25.19,
-        "pl_eur": -83.4,
-        "div_yield": 0.0405,
-        "annual_div_eur": 10.03,
-        "first_buy_date": null,
-        "sector": "Consumer Defensive",
-        "weight": 11.9
-      },
-      {
-        "name": "ENPH",
+        "name": "Enphase Energy",
         "ticker": "ENPH",
         "value": 45.6,
         "price": 45.6,
@@ -532,20 +519,7 @@
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": "Technology",
-        "weight": 2.2
-      },
-      {
-        "name": "KPN.AS",
-        "ticker": "KPN.AS",
-        "value": 4.3,
-        "price": 4.3,
-        "pl_pct": 31.25,
-        "pl_eur": 1.02,
-        "div_yield": 0.0506,
-        "annual_div_eur": 0.22,
-        "first_buy_date": null,
-        "sector": "Communication Services",
-        "weight": 0.2
+        "weight": 2.5
       }
     ]
   },
