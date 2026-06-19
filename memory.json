@@ -490,9 +490,9 @@
     }
   ],
   "bux_summary": {
-    "total": 1825.22,
-    "total_pl_pct": -20.73,
-    "total_invested": 2302.64,
+    "total": 1907.08,
+    "total_pl_pct": -19.29,
+    "total_invested": 2362.83,
     "interest_total": 0,
     "positions": [
       {
@@ -506,7 +506,20 @@
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": "Consumer Cyclical",
-        "weight": 97.5
+        "weight": 93.3
+      },
+      {
+        "name": "SpaceX",
+        "ticker": "SPAX.PVT",
+        "value": 81.86,
+        "price": 161.4433,
+        "pl_pct": 36.0,
+        "pl_eur": 21.67,
+        "div_yield": null,
+        "annual_div_eur": null,
+        "first_buy_date": null,
+        "sector": "Aerospace",
+        "weight": 4.3
       },
       {
         "name": "Enphase Energy",
@@ -519,7 +532,7 @@
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": "Technology",
-        "weight": 2.5
+        "weight": 2.4
       }
     ]
   },
