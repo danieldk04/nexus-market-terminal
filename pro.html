@@ -148,6 +148,14 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .macro-lbl{font-size:.58rem;color:var(--muted);margin-bottom:1px}
 .macro-val{font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--text)}
 
+/* CIC Styles */
+#cic-panel .tbtn{background:var(--surface);color:var(--muted);border:1px solid var(--border)}
+#cic-panel .tbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cic-input{width:100%;padding:6px 8px;border:1px solid var(--border2);border-radius:4px;font-size:.85rem}
+.cic-kcard{border:1px solid var(--border);border-radius:6px;padding:10px;flex:1;min-width:100px}
+.cic-klbl{font-size:.65rem;color:var(--muted);margin-bottom:3px}
+.cic-kval{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--text)}
+
 /* ─── 2 COL LAYOUT ─── */
 .col2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .col2-wide{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
@@ -676,6 +684,33 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
             Je hebt <code>DEGIRO_TRANSACTIONS_CSV</code> als secret opgeslagen ✓<br>
             Trigger de workflow handmatig: GitHub → Actions → NEXUS Morning Briefing → Run workflow<br>
             Of wacht tot 09:00 — dan verschijnt hier je volledige beleggingsgeschiedenis.
+        </div>
+    </div>
+
+    <!-- COMPOUND INTEREST CALCULATOR -->
+    <div class="panel" id="cic-panel" style="display:none">
+        <div class="ph">
+            <span class="pt">💰 Samengestelde Rente Simulator</span>
+            <span class="ptag">Projectie van toekomstig vermogen</span>
+        </div>
+        <div style="display:flex;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border)">
+            <button id="cic-tab-port" class="tbtn active" style="background:var(--accent);color:#fff" onclick="cicShowTab('portfolio')">📈 Portfolio Projectie</button>
+            <button id="cic-tab-what" class="tbtn" onclick="cicShowTab('whatif')">🎯 What-If Scenario</button>
+        </div>
+        <!-- Portfolio tab -->
+        <div id="cic-port-tab" style="display:block">
+            <div id="cic-port-info" style="padding:16px;border-bottom:1px solid var(--border)"></div>
+            <div id="cic-port-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)"></div>
+            <div style="padding:16px;height:320px;position:relative"><canvas id="cic-port-chart"></canvas></div>
+        </div>
+        <!-- What-If tab -->
+        <div id="cic-what-tab" style="display:none">
+            <div id="cic-what-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:14px 16px;border-bottom:1px solid var(--border)"></div>
+            <div id="cic-what-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)"></div>
+            <div class="col2" style="gap:0">
+                <div style="padding:16px;height:280px;position:relative;border-right:1px solid var(--border)"><canvas id="cic-what-line"></canvas></div>
+                <div style="padding:16px;height:280px;position:relative"><canvas id="cic-what-stack"></canvas></div>
+            </div>
         </div>
     </div>
 
@@ -1968,6 +2003,7 @@ function renderPortfolioTab(){
     renderRebalancingPanel();
     renderInterestPanel();
     renderInvestmentTimeline();
+    cicRender();
 }
 
 function renderHeatmap(){
@@ -2866,6 +2902,121 @@ function switchTab(name,skipRender=false){
     if(name==='analyse'){renderChartsTab();}
 }
 document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+/* ══════════════════════════════════════════════════════
+   COMPOUND INTEREST CALCULATOR
+══════════════════════════════════════════════════════ */
+const CIC={tab:'portfolio'};
+
+function cicCalc(principal,monthly,rate,years){
+    let bal=principal,inv=principal;const tl=[];
+    for(let m=1;m<=years*12;m++){
+        bal=bal*(1+rate/100/12)+monthly;inv+=monthly;
+        if(m%12===0) tl.push({y:m/12,val:bal,inv:inv});
+    }
+    return{val:bal,inv:inv,gain:bal-inv,gainPct:(bal-inv)/inv*100,tl:tl};
+}
+
+function cicShowTab(tab){
+    CIC.tab=tab;
+    document.getElementById('cic-port-tab').style.display=tab==='portfolio'?'block':'none';
+    document.getElementById('cic-what-tab').style.display=tab==='whatif'?'block':'none';
+    document.getElementById('cic-tab-port').classList.toggle('active',tab==='portfolio');
+    document.getElementById('cic-tab-what').classList.toggle('active',tab==='whatif');
+    if(tab==='portfolio') cicRenderPort();
+    else cicRenderWhat();
+}
+
+function cicRenderPort(){
+    const cur=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
+    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
+    const tl=M?.investment_timeline||[];
+    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
+    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    const invested=(D.total_invested||tl[tl.length-1]?.invested||0)+trInv+buxInv;
+    const yrs=M?.first_investment_date?((new Date()-new Date(M.first_investment_date.length<=7?M.first_investment_date+'-01':M.first_investment_date))/1e3/60/60/24/365.25):0;
+    const ret=yrs>0&&invested>0?Math.max(0,(cur-invested)/invested/yrs*100):7.5;
+
+    const r=cicCalc(cur,1850,ret,30);
+
+    const infoEl=document.getElementById('cic-port-info');
+    infoEl.textContent='Huidig: '+eur(cur)+' | Rendement: '+ret.toFixed(1)+'% | 30-jaars prognose: '+eur(r.val);
+
+    const kpisEl=document.getElementById('cic-port-kpis');
+    kpisEl.innerHTML='';
+    [
+        ['Eindwaarde (30j)',eur(r.val)],
+        ['Totaal geïnvesteerd',eur(r.inv)],
+        ['Totale winst',eur(r.gain)],
+        ['Winstpercentage',pct(r.gainPct)]
+    ].forEach(([l,v])=>{
+        const k=document.createElement('div');
+        k.className='cic-kcard';
+        k.innerHTML='<div class="cic-klbl">'+l+'</div><div class="cic-kval">'+v+'</div>';
+        kpisEl.appendChild(k);
+    });
+
+    dc('cic-port-chart');
+    charts['cic-port-chart']=new Chart(document.getElementById('cic-port-chart'),{
+        type:'line',data:{
+            labels:r.tl.map(t=>''+t.y+'j'),
+            datasets:[
+                {label:'Waarde',data:r.tl.map(t=>t.val),borderColor:'#059669',backgroundColor:'rgba(5,150,105,.08)',fill:true,tension:.3,pointRadius:0},
+                {label:'Inleg',data:r.tl.map(t=>t.inv),borderColor:'rgba(100,116,139,.6)',borderDash:[3,3],fill:false,pointRadius:0}
+            ]
+        },
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>eur(v)}}}}
+    });
+}
+
+function cicRenderWhat(){
+    const inputsEl=document.getElementById('cic-what-inputs');
+    inputsEl.innerHTML='<label style="font-size:.7rem;color:var(--muted)">Maandse inleg (€)<br><input type="number" id="ci-monthly" value="1850" class="cic-input" onchange="cicRenderWhat()"></label>'+
+    '<label style="font-size:.7rem;color:var(--muted)">Jaren<br><input type="number" id="ci-years" value="20" min="1" max="50" class="cic-input" onchange="cicRenderWhat()"></label>'+
+    '<label style="font-size:.7rem;color:var(--muted)">Rendement (%)<br><input type="number" id="ci-rate" value="7" step="0.5" class="cic-input" onchange="cicRenderWhat()"></label>'+
+    '<label style="font-size:.7rem;color:var(--muted)">Startsaldo (€)<br><input type="number" id="ci-start" value="0" class="cic-input" onchange="cicRenderWhat()"></label>';
+
+    const m=+document.getElementById('ci-monthly').value;
+    const y=+document.getElementById('ci-years').value;
+    const rt=+document.getElementById('ci-rate').value;
+    const s=+document.getElementById('ci-start').value;
+
+    const r=cicCalc(s,m,rt,y);
+
+    const kpisEl=document.getElementById('cic-what-kpis');
+    kpisEl.innerHTML='';
+    [
+        ['Eindwaarde',eur(r.val)],
+        ['Totale inleg',eur(r.inv)],
+        ['Totale winst',eur(r.gain)],
+        ['Winstpercentage',pct(r.gainPct)]
+    ].forEach(([l,v])=>{
+        const k=document.createElement('div');
+        k.className='cic-kcard';
+        k.innerHTML='<div class="cic-klbl">'+l+'</div><div class="cic-kval">'+v+'</div>';
+        kpisEl.appendChild(k);
+    });
+
+    dc('cic-what-line');
+    charts['cic-what-line']=new Chart(document.getElementById('cic-what-line'),{
+        type:'line',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Waarde',data:r.tl.map(t=>t.val),borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:0}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>eur(v)}}}}
+    });
+
+    dc('cic-what-stack');
+    charts['cic-what-stack']=new Chart(document.getElementById('cic-what-stack'),{
+        type:'bar',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Inleg',data:r.tl.map(t=>t.inv),backgroundColor:'rgba(100,116,139,.6)'},{label:'Winst',data:r.tl.map(t=>t.gain),backgroundColor:'rgba(5,150,105,.7)'}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{callback:v=>eur(v)}}}}
+    });
+}
+
+function cicRender(){
+    const cur=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
+    const panel=document.getElementById('cic-panel');
+    if(!cur||!panel) return;
+    panel.style.display='block';
+    setTimeout(()=>CIC.tab==='portfolio'?cicRenderPort():cicRenderWhat(),50);
+}
 
 /* ══════════════════════════════════════════════════════
    INIT & RENDER ALL
