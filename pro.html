@@ -3054,6 +3054,14 @@ function cicInitWhatIf(){
 function cicUpdateWhatIfScenario(){
     const p=CIC.whatIfParams;
 
+    document.getElementById('cic-years').value=p.years;
+    const yearsDisplay=document.querySelector('#cic-years')?.nextElementSibling;
+    if(yearsDisplay) yearsDisplay.textContent=p.years+'j';
+
+    document.getElementById('cic-rate').value=p.annualInterest;
+    const rateDisplay=document.querySelector('#cic-rate')?.nextElementSibling;
+    if(rateDisplay) rateDisplay.textContent=p.annualInterest.toFixed(1)+'%';
+
     const low=cicCalculateFV(p.startBalance,p.monthlyContribution*0.8,Math.max(0,p.annualInterest-2),p.years);const base=cicCalculateFV(p.startBalance,p.monthlyContribution,p.annualInterest,p.years);const high=cicCalculateFV(p.startBalance,p.monthlyContribution*1.2,Math.min(15,p.annualInterest+2),p.years);
     const realCAGR=base.cagr-p.inflationRate;
 
