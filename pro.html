@@ -148,13 +148,22 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .macro-lbl{font-size:.58rem;color:var(--muted);margin-bottom:1px}
 .macro-val{font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--text)}
 
-/* CIC Styles */
-#cic-panel .tbtn{background:var(--surface);color:var(--muted);border:1px solid var(--border)}
-#cic-panel .tbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.cic-input{width:100%;padding:6px 8px;border:1px solid var(--border2);border-radius:4px;font-size:.85rem}
-.cic-kcard{border:1px solid var(--border);border-radius:6px;padding:10px;flex:1;min-width:100px}
-.cic-klbl{font-size:.65rem;color:var(--muted);margin-bottom:3px}
-.cic-kval{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--text)}
+/* ─── COMPOUND INTEREST CALCULATOR ─── */
+.cic-tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.cic-tab-btn.active:hover{opacity:.95}
+.cic-tab-btn:hover{background:var(--bg)}
+.cic-pane{display:none}
+.cic-pane.active{display:block}
+.cic-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:block}
+.cic-input{width:100%;padding:7px 10px;border:1px solid var(--border2);border-radius:var(--r-sm);font-family:var(--mono);font-size:.85rem;background:var(--surface);color:var(--text)}
+.cic-input:focus{outline:none;border-color:var(--accent)}
+.cic-slider{width:100%;height:4px;background:var(--border);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none}
+.cic-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer}
+.cic-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
+.cic-radio-group{display:flex;gap:6px;flex-wrap:wrap}
+.cic-radio-btn{padding:6px 12px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);cursor:pointer;font-size:.75rem;font-weight:600;color:var(--muted);transition:all .15s}
+.cic-radio-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cic-radio-btn:hover{border-color:var(--accent)}
 
 /* ─── 2 COL LAYOUT ─── */
 .col2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -693,23 +702,33 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
             <span class="pt">💰 Samengestelde Rente Simulator</span>
             <span class="ptag">Projectie van toekomstig vermogen</span>
         </div>
-        <div style="display:flex;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border)">
-            <button id="cic-tab-port" class="tbtn active" style="background:var(--accent);color:#fff" onclick="cicShowTab('portfolio')">📈 Portfolio Projectie</button>
-            <button id="cic-tab-what" class="tbtn" onclick="cicShowTab('whatif')">🎯 What-If Scenario</button>
+        <div class="cic-tabs" style="display:flex;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg)">
+            <button class="cic-tab-btn active" data-cic-tab="portfolio" onclick="cicSwitchTab('portfolio')" style="padding:7px 13px;border:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;font-size:.8rem;font-weight:500;color:var(--text);transition:all .15s">
+                📈 Portfolio Projectie
+            </button>
+            <button class="cic-tab-btn" data-cic-tab="whatif" onclick="cicSwitchTab('whatif')" style="padding:7px 13px;border:none;background:none;border:1px solid transparent;border-radius:var(--r-sm);cursor:pointer;font-size:.8rem;font-weight:500;color:var(--muted);transition:all .15s">
+                🎯 What-If Scenario
+            </button>
         </div>
-        <!-- Portfolio tab -->
-        <div id="cic-port-tab" style="display:block">
-            <div id="cic-port-info" style="padding:16px;border-bottom:1px solid var(--border)"></div>
+
+        <!-- TAB 1: Portfolio Projectie -->
+        <div id="cic-port-pane" class="cic-pane">
+            <div id="cic-port-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)"></div>
             <div id="cic-port-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)"></div>
             <div style="padding:16px;height:320px;position:relative"><canvas id="cic-port-chart"></canvas></div>
         </div>
-        <!-- What-If tab -->
-        <div id="cic-what-tab" style="display:none">
+
+        <!-- TAB 2: What-If Scenario -->
+        <div id="cic-what-pane" class="cic-pane" style="display:none">
             <div id="cic-what-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:14px 16px;border-bottom:1px solid var(--border)"></div>
             <div id="cic-what-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)"></div>
             <div class="col2" style="gap:0">
-                <div style="padding:16px;height:280px;position:relative;border-right:1px solid var(--border)"><canvas id="cic-what-line"></canvas></div>
-                <div style="padding:16px;height:280px;position:relative"><canvas id="cic-what-stack"></canvas></div>
+                <div style="padding:16px;height:300px;position:relative;border-right:1px solid var(--border)"><canvas id="cic-what-line-chart"></canvas></div>
+                <div style="padding:16px;height:300px;position:relative"><canvas id="cic-what-stack-chart"></canvas></div>
+            </div>
+            <div style="padding:16px;border-top:1px solid var(--border)">
+                <div style="font-size:.65rem;font-weight:700;color:var(--muted);margin-bottom:10px;letter-spacing:.08em;text-transform:uppercase">Gevoeligheidsmatrix (eindwaarde)</div>
+                <div style="overflow-x:auto"><div id="cic-what-heatmap" style="font-size:.7rem;font-family:var(--mono)"></div></div>
             </div>
         </div>
     </div>
@@ -2003,7 +2022,7 @@ function renderPortfolioTab(){
     renderRebalancingPanel();
     renderInterestPanel();
     renderInvestmentTimeline();
-    cicRender();
+    renderCompoundInterestCalculator();
 }
 
 function renderHeatmap(){
@@ -2906,124 +2925,187 @@ document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>swi
 /* ══════════════════════════════════════════════════════
    COMPOUND INTEREST CALCULATOR
 ══════════════════════════════════════════════════════ */
-const CIC={tab:'portfolio'};
+const CIC={currentTab:'portfolio',whatIfInitialized:false,portfolioParams:{currentBalance:0,historicalReturn:7.5,monthlyContribution:1850},whatIfParams:{monthlyContribution:1850,years:10,annualInterest:7,startBalance:0,volatility:'normal',inflationRate:2}};
 
-function cicCalc(principal,monthly,rate,years){
-    let bal=principal,inv=principal;const tl=[];
-    for(let m=1;m<=years*12;m++){
-        bal=bal*(1+rate/100/12)+monthly;inv+=monthly;
-        if(m%12===0) tl.push({y:m/12,val:bal,inv:inv});
+function cicCalculateFV(principal,monthlyPayment,annualRate,years){
+    const months=years*12;const monthlyRate=annualRate/100/12;let balance=principal;const timeline=[{month:0,value:principal,invested:principal,growth:0}];let totalInvested=principal;
+    for(let m=1;m<=months;m++){balance=balance*(1+monthlyRate)+monthlyPayment;totalInvested+=monthlyPayment;const growth=balance-totalInvested;timeline.push({month:m,year:Math.ceil(m/12),value:balance,invested:totalInvested,growth:growth});}
+    const cagr=principal&&years?(Math.pow(balance/principal,1/years)-1)*100:annualRate;
+    return{finalValue:balance,totalInvested,totalGain:balance-totalInvested,gainPct:((balance-totalInvested)/totalInvested*100),cagr,timeline};
+}
+
+function cicGenerateHeatmap(principal,monthly,maxYears){
+    const rates=[1,2,3,4,5,6,7,8,10,12,15];const hm={};
+    rates.forEach(r=>{hm[r]=[];for(let y=1;y<=Math.min(maxYears,30);y++){const res=cicCalculateFV(principal,monthly,r,y);hm[r].push({year:y,value:res.finalValue,gainPct:res.gainPct});}});
+    return hm;
+}
+
+function cicSwitchTab(tab){
+    CIC.currentTab=tab;
+    document.querySelectorAll('.cic-tab-btn').forEach(b=>b.classList.toggle('active',b.dataset['cic-tab']===tab));
+    document.querySelectorAll('.cic-pane').forEach(p=>p.classList.toggle('active',p.id==='cic-'+tab+'-pane'));
+    if(tab==='portfolio') cicRenderPortfolioProjection();
+    else {
+        if(!CIC.whatIfInitialized) cicInitWhatIf();
+        cicUpdateWhatIfScenario();
     }
-    return{val:bal,inv:inv,gain:bal-inv,gainPct:(bal-inv)/inv*100,tl:tl};
 }
 
-function cicShowTab(tab){
-    CIC.tab=tab;
-    document.getElementById('cic-port-tab').style.display=tab==='portfolio'?'block':'none';
-    document.getElementById('cic-what-tab').style.display=tab==='whatif'?'block':'none';
-    document.getElementById('cic-tab-port').classList.toggle('active',tab==='portfolio');
-    document.getElementById('cic-tab-what').classList.toggle('active',tab==='whatif');
-    setTimeout(()=>{
-        if(tab==='portfolio') cicRenderPort();
-        else cicRenderWhat();
-    }, 50);
-}
-
-function cicRenderPort(){
-    const cur=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
+function cicRenderPortfolioProjection(){
+    const current=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
     const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
-    const tl=M?.investment_timeline||[];
-    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
-    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
-    const invested=(D.total_invested||tl[tl.length-1]?.invested||0)+trInv+buxInv;
-    const yrs=M?.first_investment_date?((new Date()-new Date(M.first_investment_date.length<=7?M.first_investment_date+'-01':M.first_investment_date))/1e3/60/60/24/365.25):0;
-    const ret=yrs>0&&invested>0?Math.max(0,(cur-invested)/invested/yrs*100):7.5;
+    const fullTl=(M?.investment_timeline||[]);const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);const allInvested=(D.total_invested||fullTl[fullTl.length-1]?.invested||0)+trInv+buxInv;
+    const investYears=M?.first_investment_date?((new Date()-new Date(M.first_investment_date.length<=7?M.first_investment_date+'-01':M.first_investment_date))/1000/60/60/24/365.25):0;
+    let historicalReturn=7.5;if(investYears>0&&allInvested>0) historicalReturn=Math.max(0,((current-allInvested)/allInvested/investYears)*100);
 
-    const r=cicCalc(cur,1850,ret,30);
+    CIC.portfolioParams.currentBalance=current;CIC.portfolioParams.historicalReturn=historicalReturn;
 
-    const infoEl=document.getElementById('cic-port-info');
-    infoEl.textContent='Huidig: '+eur(cur)+' | Rendement: '+ret.toFixed(1)+'% | 30-jaars prognose: '+eur(r.val);
+    const inputsEl=document.getElementById('cic-port-inputs');
+    inputsEl.innerHTML=`
+        <div style="min-width:120px">
+            <label class="cic-label">Huidig Saldo</label>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg);color:var(--muted)">${eur(current)}</div>
+        </div>
+        <div style="min-width:120px">
+            <label class="cic-label">Jaarlijks Rendement (%)</label>
+            <input type="number" id="cic-port-rate" value="${historicalReturn.toFixed(2)}" step="0.1" min="0" max="20" class="cic-input" onchange="cicRenderPortfolioProjection()">
+        </div>
+        <div style="min-width:120px">
+            <label class="cic-label">Jaarlijkse Inleg (€)</label>
+            <input type="number" id="cic-port-contrib" value="22200" step="100" min="0" class="cic-input" onchange="cicRenderPortfolioProjection()">
+        </div>
+        <div style="min-width:120px">
+            <label class="cic-label">Projectieperiode</label>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg);color:var(--text)">30 jaar</div>
+        </div>
+    `;
+
+    const rate=parseFloat(document.getElementById('cic-port-rate')?.value||historicalReturn);const monthlyContrib=parseFloat(document.getElementById('cic-port-contrib')?.value||22200)/12;const result=cicCalculateFV(current,monthlyContrib,rate,30);
 
     const kpisEl=document.getElementById('cic-port-kpis');
-    kpisEl.innerHTML='';
-    [
-        ['Eindwaarde (30j)',eur(r.val)],
-        ['Totaal geïnvesteerd',eur(r.inv)],
-        ['Totale winst',eur(r.gain)],
-        ['Winstpercentage',pct(r.gainPct)]
-    ].forEach(([l,v])=>{
-        const k=document.createElement('div');
-        k.className='cic-kcard';
-        k.innerHTML='<div class="cic-klbl">'+l+'</div><div class="cic-kval">'+v+'</div>';
-        kpisEl.appendChild(k);
-    });
+    kpisEl.innerHTML=`
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Waarde in 30 jaar</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(result.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${pct(result.gainPct)}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Totale Inleg</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--text)">${eur(result.totalInvested,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${eur(monthlyContrib*12,0)}/jaar</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Totale Winst</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(result.totalGain,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">CAGR: ${result.cagr.toFixed(2)}%</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Startwaarde vs Eindwaarde</div>
+            <div style="font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--accent)">${eur(current,0)} → ${eur(result.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">x${(result.finalValue/current).toFixed(2)}</div>
+        </div>
+    `;
 
     dc('cic-port-chart');
-    charts['cic-port-chart']=new Chart(document.getElementById('cic-port-chart'),{
-        type:'line',data:{
-            labels:r.tl.map(t=>''+t.y+'j'),
-            datasets:[
-                {label:'Waarde',data:r.tl.map(t=>t.val),borderColor:'#059669',backgroundColor:'rgba(5,150,105,.08)',fill:true,tension:.3,pointRadius:0},
-                {label:'Inleg',data:r.tl.map(t=>t.inv),borderColor:'rgba(100,116,139,.6)',borderDash:[3,3],fill:false,pointRadius:0}
-            ]
-        },
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>eur(v)}}}}
-    });
+    const labels=result.timeline.filter((_,i)=>i%12===0).map(t=>`${t.year}j`);const vals=result.timeline.filter((_,i)=>i%12===0).map(t=>t.value);const inv=result.timeline.filter((_,i)=>i%12===0).map(t=>t.invested);
+    charts['cic-port-chart']=new Chart(document.getElementById('cic-port-chart'),{type:'line',data:{labels,datasets:[{label:'Portfolio Waarde',data:vals,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.08)',borderWidth:2.5,fill:true,tension:.3,pointRadius:0,pointHoverRadius:5},{label:'Totale Inleg',data:inv,borderColor:'rgba(100,116,139,.6)',borderDash:[3,3],borderWidth:1.5,fill:false,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{backgroundColor:'rgba(0,0,0,.8)',titleFont:{size:11},bodyFont:{size:10},padding:8,cornerRadius:4,callbacks:{label:c=>'€'+c.raw.toLocaleString('nl-NL',{maximumFractionDigits:0})}}},scales:{y:{ticks:{callback:v=>'€'+v.toLocaleString('nl-NL',{maximumFractionDigits:0})}}}}}});
 }
 
-function cicRenderWhat(){
-    try{
-        const inputsEl=document.getElementById('cic-what-inputs');
-        inputsEl.innerHTML='<label style="font-size:.7rem;color:var(--muted)">Maandse inleg (€)<br><input type="number" id="ci-monthly" value="1850" class="cic-input" onchange="cicRenderWhat()"></label>'+
-        '<label style="font-size:.7rem;color:var(--muted)">Jaren<br><input type="number" id="ci-years" value="20" min="1" max="50" class="cic-input" onchange="cicRenderWhat()"></label>'+
-        '<label style="font-size:.7rem;color:var(--muted)">Rendement (%)<br><input type="number" id="ci-rate" value="7" step="0.5" class="cic-input" onchange="cicRenderWhat()"></label>'+
-        '<label style="font-size:.7rem;color:var(--muted)">Startsaldo (€)<br><input type="number" id="ci-start" value="0" class="cic-input" onchange="cicRenderWhat()"></label>';
-
-        const m=+(document.getElementById('ci-monthly')?.value||1850);
-        const y=+(document.getElementById('ci-years')?.value||20);
-        const rt=+(document.getElementById('ci-rate')?.value||7);
-        const s=+(document.getElementById('ci-start')?.value||0);
-
-        const r=cicCalc(s,m,rt,y);
-
-        const kpisEl=document.getElementById('cic-what-kpis');
-        kpisEl.innerHTML='';
-        [['Eindwaarde',eur(r.val)],['Totale inleg',eur(r.inv)],['Totale winst',eur(r.gain)],['Winstpercentage',pct(r.gainPct)]].forEach(([l,v])=>{
-            const k=document.createElement('div');
-            k.className='cic-kcard';
-            k.innerHTML='<div class="cic-klbl">'+l+'</div><div class="cic-kval">'+v+'</div>';
-            kpisEl.appendChild(k);
-        });
-
-        dc('cic-what-line');
-        const lineCanvas=document.getElementById('cic-what-line');
-        if(lineCanvas){
-            charts['cic-what-line']=new Chart(lineCanvas,{
-                type:'line',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Waarde',data:r.tl.map(t=>t.val),borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:0}]},
-                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>eur(v)}}}}
-            });
-        }
-
-        dc('cic-what-stack');
-        const stackCanvas=document.getElementById('cic-what-stack');
-        if(stackCanvas){
-            charts['cic-what-stack']=new Chart(stackCanvas,{
-                type:'bar',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Inleg',data:r.tl.map(t=>t.inv),backgroundColor:'rgba(100,116,139,.6)'},{label:'Winst',data:r.tl.map(t=>t.gain),backgroundColor:'rgba(5,150,105,.7)'}]},
-                options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{callback:v=>eur(v)}}}}
-            });
-        }
-    }catch(e){
-        console.error('cicRenderWhat error:',e);
-        alert('Fout in What-If calculator: '+e.message);
-    }
+function cicInitWhatIf(){
+    const p=CIC.whatIfParams;
+    const inputsEl=document.getElementById('cic-what-inputs');
+    inputsEl.innerHTML=`
+        <div>
+            <label class="cic-label">Maandse Inleg (€)</label>
+            <input type="number" id="cic-monthly" value="${p.monthlyContribution}" step="50" min="0" class="cic-input" onchange="CIC.whatIfParams.monthlyContribution=+this.value;cicUpdateWhatIfScenario()">
+        </div>
+        <div>
+            <label class="cic-label">Jaren</label>
+            <div style="display:flex;gap:8px;align-items:center">
+                <input type="range" id="cic-years" min="1" max="50" value="${p.years}" class="cic-slider" style="flex:1" onchange="CIC.whatIfParams.years=+this.value;cicUpdateWhatIfScenario()">
+                <span style="font-family:var(--mono);font-weight:700;min-width:35px;text-align:right">${p.years}j</span>
+            </div>
+        </div>
+        <div>
+            <label class="cic-label">Rendement (%)</label>
+            <div style="display:flex;gap:8px;align-items:center">
+                <input type="range" id="cic-rate" min="0" max="15" step="0.5" value="${p.annualInterest}" class="cic-slider" style="flex:1" onchange="CIC.whatIfParams.annualInterest=+this.value;cicUpdateWhatIfScenario()">
+                <span style="font-family:var(--mono);font-weight:700;min-width:35px;text-align:right">${p.annualInterest.toFixed(1)}%</span>
+            </div>
+        </div>
+        <div>
+            <label class="cic-label">Startsaldo (€)</label>
+            <input type="number" id="cic-start" value="${p.startBalance}" step="100" min="0" class="cic-input" onchange="CIC.whatIfParams.startBalance=+this.value;cicUpdateWhatIfScenario()">
+        </div>
+        <div>
+            <label class="cic-label">Volatiliteit</label>
+            <div class="cic-radio-group">
+                ${['low','normal','high'].map(v=>`<button class="cic-radio-btn ${p.volatility===v?'active':''}" onclick="CIC.whatIfParams.volatility='${v}';cicUpdateWhatIfScenario()">${v==='low'?'Laag':v==='normal'?'Norm.':'Hoog'}</button>`).join('')}
+            </div>
+        </div>
+        <div>
+            <label class="cic-label">Inflatie (%)</label>
+            <input type="number" id="cic-inflation" value="${p.inflationRate}" step="0.1" min="0" max="10" class="cic-input" onchange="CIC.whatIfParams.inflationRate=+this.value;cicUpdateWhatIfScenario()">
+        </div>
+    `;
+    CIC.whatIfInitialized=true;
 }
 
-function cicRender(){
-    const cur=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
+function cicUpdateWhatIfScenario(){
+    const p=CIC.whatIfParams;
+
+    document.getElementById('cic-years').value=p.years;
+    const yearsDisplay=document.querySelector('#cic-years')?.nextElementSibling;
+    if(yearsDisplay) yearsDisplay.textContent=p.years+'j';
+
+    document.getElementById('cic-rate').value=p.annualInterest;
+    const rateDisplay=document.querySelector('#cic-rate')?.nextElementSibling;
+    if(rateDisplay) rateDisplay.textContent=p.annualInterest.toFixed(1)+'%';
+
+    const low=cicCalculateFV(p.startBalance,p.monthlyContribution*0.8,Math.max(0,p.annualInterest-2),p.years);const base=cicCalculateFV(p.startBalance,p.monthlyContribution,p.annualInterest,p.years);const high=cicCalculateFV(p.startBalance,p.monthlyContribution*1.2,Math.min(15,p.annualInterest+2),p.years);
+    const realCAGR=base.cagr-p.inflationRate;
+
+    const kpisEl=document.getElementById('cic-what-kpis');
+    kpisEl.innerHTML=`
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Eindwaarde (Base)</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(base.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${pct(base.gainPct)}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Total P&L</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(base.totalGain,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">vs ${eur(base.totalInvested,0)}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">CAGR (Real)</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--accent)">${base.cagr.toFixed(2)}% / ${realCAGR.toFixed(2)}%</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Nominaal / Inflatie-adj</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Scenario Range</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--yellow)">${eur(low.finalValue,0)} → ${eur(high.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Cons. / Agg.</div>
+        </div>
+    `;
+
+    dc('cic-what-line-chart');const labels1=base.timeline.filter((_,i)=>i%12===0).map(t=>`${t.year}j`);
+    charts['cic-what-line-chart']=new Chart(document.getElementById('cic-what-line-chart'),{type:'line',data:{labels:labels1,datasets:[{label:'Conservative',data:low.timeline.filter((_,i)=>i%12===0).map(t=>t.value),borderColor:'#d97706',borderWidth:1.5,fill:false,pointRadius:0,tension:.3},{label:'Base Case',data:base.timeline.filter((_,i)=>i%12===0).map(t=>t.value),borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',borderWidth:2.5,fill:true,pointRadius:0,tension:.3},{label:'Aggressive',data:high.timeline.filter((_,i)=>i%12===0).map(t=>t.value),borderColor:'#059669',borderWidth:1.5,fill:false,pointRadius:0,tension:.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}},tooltip:{backgroundColor:'rgba(0,0,0,.8)',titleFont:{size:10},bodyFont:{size:9},padding:6,cornerRadius:4,callbacks:{label:c=>'€'+c.raw.toLocaleString('nl-NL',{maximumFractionDigits:0})}}},scales:{y:{ticks:{callback:v=>'€'+v.toLocaleString('nl-NL',{maximumFractionDigits:0})}}}}}});
+
+    dc('cic-what-stack-chart');const labels2=base.timeline.filter((_,i)=>i%12===0).map(t=>`${t.year}j`);
+    charts['cic-what-stack-chart']=new Chart(document.getElementById('cic-what-stack-chart'),{type:'bar',data:{labels:labels2,datasets:[{label:'Inleggen',data:base.timeline.filter((_,i)=>i%12===0).map(t=>t.invested),backgroundColor:'rgba(100,116,139,.6)',stack:'stack'},{label:'Rendement',data:base.timeline.filter((_,i)=>i%12===0).map(t=>t.growth),backgroundColor:'rgba(5,150,105,.7)',stack:'stack'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}},tooltip:{backgroundColor:'rgba(0,0,0,.8)',titleFont:{size:10},bodyFont:{size:9},padding:6,cornerRadius:4}},scales:{x:{stacked:true,ticks:{callback:v=>'€'+v.toLocaleString('nl-NL',{maximumFractionDigits:0})}}}}}});
+
+    const hm=cicGenerateHeatmap(p.startBalance,p.monthlyContribution,Math.min(30,p.years));const ratesArr=Object.keys(hm).map(Number).sort((a,b)=>a-b);const yearsArr=Array.from({length:Math.min(20,p.years)},(_,i)=>i+1);
+    const hmEl=document.getElementById('cic-what-heatmap');const rows=yearsArr.map(y=>{const cells=ratesArr.map(r=>{const d=hm[r]?.find(x=>x.year===y);if(!d) return'<td>—</td>';const val=Math.round(d.value/1000);const pctGain=d.gainPct;const alpha=Math.min(0.15+Math.abs(pctGain)/100*0.7,1);const bg=pctGain>=0?`rgba(5,150,105,${alpha})`:`rgba(220,38,38,${alpha})`;const fg=Math.abs(pctGain)>15?'#fff':(pctGain>=0?'#065f46':'#991b1b');return`<td style="background:${bg};color:${fg};padding:4px 6px;text-align:center;border-radius:2px" title="€${Math.round(d.value)}">${val}k</td>`;}).join('');return`<tr><td style="font-weight:700;padding-right:8px;min-width:30px">${y}j</td>${cells}</tr>`;}).join('');
+    hmEl.innerHTML=`<table style="border-collapse:collapse;width:100%;font-size:.65rem"><thead><tr><th></th>${ratesArr.map(r=>`<th style="padding:4px 2px;text-align:center;font-size:.6rem">${r}%</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderCompoundInterestCalculator(){
+    const current=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
     const panel=document.getElementById('cic-panel');
-    if(!cur||!panel) return;
+    if(!current){panel.style.display='none';return;}
     panel.style.display='block';
-    setTimeout(()=>CIC.tab==='portfolio'?cicRenderPort():cicRenderWhat(),50);
+    cicSwitchTab(CIC.currentTab);
 }
 
 /* ══════════════════════════════════════════════════════
