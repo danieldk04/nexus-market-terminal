@@ -1965,8 +1965,17 @@ function renderHistoryChart(){
     const allShown = filtered.length >= fullHist.length && histRange!=='max';
     const rangeNote = allShown ? ` (alles getoond)` : '';
     document.getElementById('hist-tag').textContent=`${rlbl}${rangeNote} · ${labels[0]} – ${labels[labels.length-1]} · ${delta>=0?'+':''}${deltaPct}%`;
+    // Ingelegd (kostprijs) als referentielijn — zelfde logica als de tijdlijn-grafiek
+    const fullTl=(M?.investment_timeline||[]);
+    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
+    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
+    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
+    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
+    const histDatasets=[{label:'Portfoliowaarde',data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2.5,pointRadius:slice.length<=14?2.5:0,pointHoverRadius:5,fill:true,tension:.35,order:1}];
+    if(allInvested>0) histDatasets.push({label:'Ingelegd',data:labels.map(()=>allInvested),borderColor:'rgba(100,116,139,.7)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[3,3],pointRadius:0,fill:false,tension:0,order:0});
     dc('hist');
-    charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'line',data:{labels,datasets:[{data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2,pointRadius:slice.length<=30?3:0,pointHoverRadius:5,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${eur(c.raw)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:10,font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
+    charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'line',data:{labels,datasets:histDatasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true}},tooltip:{...TT,callbacks:{label:c=>` ${c.dataset.label}: ${eur(c.raw)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:10,font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
 }
 
 function renderDashNews(){
