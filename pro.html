@@ -710,6 +710,7 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
                 🎯 What-If Scenario
             </button>
         </div>
+        <div id="cic-desc" style="padding:9px 16px;font-size:.7rem;line-height:1.4;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface)"></div>
 
         <!-- TAB 1: Portfolio Projectie -->
         <div id="cic-port-pane" class="cic-pane">
@@ -2943,12 +2944,24 @@ function cicGenerateHeatmap(principal,monthly,maxYears){
 function cicSwitchTab(tab){
     CIC.currentTab=tab;
     const suffix=tab==='portfolio'?'port':'what';
-    document.querySelectorAll('.cic-tab-btn').forEach(b=>b.classList.toggle('active',b.dataset['cic-tab']===tab));
+    document.querySelectorAll('.cic-tab-btn').forEach(b=>{
+        const on=b.dataset['cic-tab']===tab;
+        b.classList.toggle('active',on);
+        b.style.background=on?'var(--accent)':'var(--surface)';
+        b.style.color=on?'#fff':'var(--muted)';
+        b.style.borderColor=on?'var(--accent)':'var(--border)';
+        b.style.fontWeight=on?'700':'500';
+        b.style.boxShadow=on?'0 1px 4px rgba(37,99,235,.25)':'none';
+    });
     document.querySelectorAll('.cic-pane').forEach(p=>{
         const isActive=p.id==='cic-'+suffix+'-pane';
         p.classList.toggle('active',isActive);
         p.style.display=isActive?'block':'none';
     });
+    const desc=document.getElementById('cic-desc');
+    if(desc) desc.textContent=tab==='portfolio'
+        ? 'Projectie van jóuw huidige portfolio: hoe het over 30 jaar groeit op basis van je eigen historische rendement. Pas rendement of jaarlijkse inleg aan.'
+        : 'Vrije simulatie los van je portfolio: kies zelf inleg, looptijd, rendement en risico om toekomstscenario\'s te vergelijken (conservatief / basis / agressief).';
     if(tab==='portfolio') cicRenderPortfolioProjection();
     else {
         if(!CIC.whatIfInitialized) cicInitWhatIf();
@@ -2966,26 +2979,36 @@ function cicRenderPortfolioProjection(){
     CIC.portfolioParams.currentBalance=current;CIC.portfolioParams.historicalReturn=historicalReturn;
 
     const inputsEl=document.getElementById('cic-port-inputs');
+    const prevRate=document.getElementById('cic-port-rate')?.value;
+    const prevContrib=document.getElementById('cic-port-contrib')?.value;
     inputsEl.innerHTML=`
         <div style="min-width:120px">
             <label class="cic-label">Huidig Saldo</label>
             <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg);color:var(--muted)">${eur(current)}</div>
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Som van al je brokers — startpunt</div>
         </div>
         <div style="min-width:120px">
             <label class="cic-label">Jaarlijks Rendement (%)</label>
-            <input type="number" id="cic-port-rate" value="${historicalReturn.toFixed(2)}" step="0.1" min="0" max="20" class="cic-input" onchange="cicRenderPortfolioProjection()">
+            <input type="number" id="cic-port-rate" value="${prevRate||historicalReturn.toFixed(2)}" step="0.1" min="0" max="20" class="cic-input" onchange="cicUpdatePortfolio()">
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Geschat uit je eigen historie — pas aan</div>
         </div>
         <div style="min-width:120px">
             <label class="cic-label">Jaarlijkse Inleg (€)</label>
-            <input type="number" id="cic-port-contrib" value="22200" step="100" min="0" class="cic-input" onchange="cicRenderPortfolioProjection()">
+            <input type="number" id="cic-port-contrib" value="${prevContrib||22200}" step="100" min="0" class="cic-input" onchange="cicUpdatePortfolio()">
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Wat je elk jaar extra bijstort</div>
         </div>
         <div style="min-width:120px">
             <label class="cic-label">Projectieperiode</label>
             <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg);color:var(--text)">30 jaar</div>
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Vaste horizon van de projectie</div>
         </div>
     `;
+    cicUpdatePortfolio();
+}
 
-    const rate=parseFloat(document.getElementById('cic-port-rate')?.value||historicalReturn);const monthlyContrib=parseFloat(document.getElementById('cic-port-contrib')?.value||22200)/12;const result=cicCalculateFV(current,monthlyContrib,rate,30);
+function cicUpdatePortfolio(){
+    const current=CIC.portfolioParams.currentBalance;
+    const rate=parseFloat(document.getElementById('cic-port-rate')?.value||CIC.portfolioParams.historicalReturn);const monthlyContrib=parseFloat(document.getElementById('cic-port-contrib')?.value||22200)/12;const result=cicCalculateFV(current,monthlyContrib,rate,30);
 
     const kpisEl=document.getElementById('cic-port-kpis');
     kpisEl.innerHTML=`
