@@ -2923,8 +2923,10 @@ function cicShowTab(tab){
     document.getElementById('cic-what-tab').style.display=tab==='whatif'?'block':'none';
     document.getElementById('cic-tab-port').classList.toggle('active',tab==='portfolio');
     document.getElementById('cic-tab-what').classList.toggle('active',tab==='whatif');
-    if(tab==='portfolio') cicRenderPort();
-    else cicRenderWhat();
+    setTimeout(()=>{
+        if(tab==='portfolio') cicRenderPort();
+        else cicRenderWhat();
+    }, 50);
 }
 
 function cicRenderPort(){
