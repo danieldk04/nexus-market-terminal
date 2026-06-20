@@ -2925,7 +2925,7 @@ document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>swi
 /* ══════════════════════════════════════════════════════
    COMPOUND INTEREST CALCULATOR
 ══════════════════════════════════════════════════════ */
-const CIC={currentTab:'portfolio',portfolioParams:{currentBalance:0,historicalReturn:7.5,monthlyContribution:1850},whatIfParams:{monthlyContribution:1850,years:10,annualInterest:7,startBalance:0,volatility:'normal',inflationRate:2}};
+const CIC={currentTab:'portfolio',whatIfInitialized:false,portfolioParams:{currentBalance:0,historicalReturn:7.5,monthlyContribution:1850},whatIfParams:{monthlyContribution:1850,years:10,annualInterest:7,startBalance:0,volatility:'normal',inflationRate:2}};
 
 function cicCalculateFV(principal,monthlyPayment,annualRate,years){
     const months=years*12;const monthlyRate=annualRate/100/12;let balance=principal;const timeline=[{month:0,value:principal,invested:principal,growth:0}];let totalInvested=principal;
@@ -2945,7 +2945,10 @@ function cicSwitchTab(tab){
     document.querySelectorAll('.cic-tab-btn').forEach(b=>b.classList.toggle('active',b.dataset['cic-tab']===tab));
     document.querySelectorAll('.cic-pane').forEach(p=>p.classList.toggle('active',p.id==='cic-'+tab+'-pane'));
     if(tab==='portfolio') cicRenderPortfolioProjection();
-    else cicRenderWhatIfScenario();
+    else {
+        if(!CIC.whatIfInitialized) cicInitWhatIf();
+        cicUpdateWhatIfScenario();
+    }
 }
 
 function cicRenderPortfolioProjection(){
@@ -3008,43 +3011,48 @@ function cicRenderPortfolioProjection(){
     charts['cic-port-chart']=new Chart(document.getElementById('cic-port-chart'),{type:'line',data:{labels,datasets:[{label:'Portfolio Waarde',data:vals,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.08)',borderWidth:2.5,fill:true,tension:.3,pointRadius:0,pointHoverRadius:5},{label:'Totale Inleg',data:inv,borderColor:'rgba(100,116,139,.6)',borderDash:[3,3],borderWidth:1.5,fill:false,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{backgroundColor:'rgba(0,0,0,.8)',titleFont:{size:11},bodyFont:{size:10},padding:8,cornerRadius:4,callbacks:{label:c=>'€'+c.raw.toLocaleString('nl-NL',{maximumFractionDigits:0})}}},scales:{y:{ticks:{callback:v=>'€'+v.toLocaleString('nl-NL',{maximumFractionDigits:0})}}}}}});
 }
 
-function cicRenderWhatIfScenario(){
+function cicInitWhatIf(){
     const p=CIC.whatIfParams;
     const inputsEl=document.getElementById('cic-what-inputs');
     inputsEl.innerHTML=`
         <div>
             <label class="cic-label">Maandse Inleg (€)</label>
-            <input type="number" id="cic-monthly" value="${p.monthlyContribution}" step="50" min="0" class="cic-input" onchange="CIC.whatIfParams.monthlyContribution=+this.value;cicRenderWhatIfScenario()">
+            <input type="number" id="cic-monthly" value="${p.monthlyContribution}" step="50" min="0" class="cic-input" onchange="CIC.whatIfParams.monthlyContribution=+this.value;cicUpdateWhatIfScenario()">
         </div>
         <div>
             <label class="cic-label">Jaren</label>
             <div style="display:flex;gap:8px;align-items:center">
-                <input type="range" id="cic-years" min="1" max="50" value="${p.years}" class="cic-slider" style="flex:1" onchange="CIC.whatIfParams.years=+this.value;cicRenderWhatIfScenario()">
+                <input type="range" id="cic-years" min="1" max="50" value="${p.years}" class="cic-slider" style="flex:1" onchange="CIC.whatIfParams.years=+this.value;cicUpdateWhatIfScenario()">
                 <span style="font-family:var(--mono);font-weight:700;min-width:35px;text-align:right">${p.years}j</span>
             </div>
         </div>
         <div>
             <label class="cic-label">Rendement (%)</label>
             <div style="display:flex;gap:8px;align-items:center">
-                <input type="range" id="cic-rate" min="0" max="15" step="0.5" value="${p.annualInterest}" class="cic-slider" style="flex:1" onchange="CIC.whatIfParams.annualInterest=+this.value;cicRenderWhatIfScenario()">
+                <input type="range" id="cic-rate" min="0" max="15" step="0.5" value="${p.annualInterest}" class="cic-slider" style="flex:1" onchange="CIC.whatIfParams.annualInterest=+this.value;cicUpdateWhatIfScenario()">
                 <span style="font-family:var(--mono);font-weight:700;min-width:35px;text-align:right">${p.annualInterest.toFixed(1)}%</span>
             </div>
         </div>
         <div>
             <label class="cic-label">Startsaldo (€)</label>
-            <input type="number" id="cic-start" value="${p.startBalance}" step="100" min="0" class="cic-input" onchange="CIC.whatIfParams.startBalance=+this.value;cicRenderWhatIfScenario()">
+            <input type="number" id="cic-start" value="${p.startBalance}" step="100" min="0" class="cic-input" onchange="CIC.whatIfParams.startBalance=+this.value;cicUpdateWhatIfScenario()">
         </div>
         <div>
             <label class="cic-label">Volatiliteit</label>
             <div class="cic-radio-group">
-                ${['low','normal','high'].map(v=>`<button class="cic-radio-btn ${p.volatility===v?'active':''}" onclick="CIC.whatIfParams.volatility='${v}';cicRenderWhatIfScenario()">${v==='low'?'Laag':v==='normal'?'Norm.':'Hoog'}</button>`).join('')}
+                ${['low','normal','high'].map(v=>`<button class="cic-radio-btn ${p.volatility===v?'active':''}" onclick="CIC.whatIfParams.volatility='${v}';cicUpdateWhatIfScenario()">${v==='low'?'Laag':v==='normal'?'Norm.':'Hoog'}</button>`).join('')}
             </div>
         </div>
         <div>
             <label class="cic-label">Inflatie (%)</label>
-            <input type="number" id="cic-inflation" value="${p.inflationRate}" step="0.1" min="0" max="10" class="cic-input" onchange="CIC.whatIfParams.inflationRate=+this.value;cicRenderWhatIfScenario()">
+            <input type="number" id="cic-inflation" value="${p.inflationRate}" step="0.1" min="0" max="10" class="cic-input" onchange="CIC.whatIfParams.inflationRate=+this.value;cicUpdateWhatIfScenario()">
         </div>
     `;
+    CIC.whatIfInitialized=true;
+}
+
+function cicUpdateWhatIfScenario(){
+    const p=CIC.whatIfParams;
 
     const low=cicCalculateFV(p.startBalance,p.monthlyContribution*0.8,Math.max(0,p.annualInterest-2),p.years);const base=cicCalculateFV(p.startBalance,p.monthlyContribution,p.annualInterest,p.years);const high=cicCalculateFV(p.startBalance,p.monthlyContribution*1.2,Math.min(15,p.annualInterest+2),p.years);
     const realCAGR=base.cagr-p.inflationRate;
@@ -3089,8 +3097,7 @@ function renderCompoundInterestCalculator(){
     const panel=document.getElementById('cic-panel');
     if(!current){panel.style.display='none';return;}
     panel.style.display='block';
-    if(CIC.currentTab==='portfolio') cicRenderPortfolioProjection();
-    else cicRenderWhatIfScenario();
+    cicSwitchTab(CIC.currentTab);
 }
 
 /* ══════════════════════════════════════════════════════
