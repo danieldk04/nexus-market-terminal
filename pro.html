@@ -2972,44 +2972,50 @@ function cicRenderPort(){
 }
 
 function cicRenderWhat(){
-    const inputsEl=document.getElementById('cic-what-inputs');
-    inputsEl.innerHTML='<label style="font-size:.7rem;color:var(--muted)">Maandse inleg (€)<br><input type="number" id="ci-monthly" value="1850" class="cic-input" onchange="cicRenderWhat()"></label>'+
-    '<label style="font-size:.7rem;color:var(--muted)">Jaren<br><input type="number" id="ci-years" value="20" min="1" max="50" class="cic-input" onchange="cicRenderWhat()"></label>'+
-    '<label style="font-size:.7rem;color:var(--muted)">Rendement (%)<br><input type="number" id="ci-rate" value="7" step="0.5" class="cic-input" onchange="cicRenderWhat()"></label>'+
-    '<label style="font-size:.7rem;color:var(--muted)">Startsaldo (€)<br><input type="number" id="ci-start" value="0" class="cic-input" onchange="cicRenderWhat()"></label>';
+    try{
+        const inputsEl=document.getElementById('cic-what-inputs');
+        inputsEl.innerHTML='<label style="font-size:.7rem;color:var(--muted)">Maandse inleg (€)<br><input type="number" id="ci-monthly" value="1850" class="cic-input" onchange="cicRenderWhat()"></label>'+
+        '<label style="font-size:.7rem;color:var(--muted)">Jaren<br><input type="number" id="ci-years" value="20" min="1" max="50" class="cic-input" onchange="cicRenderWhat()"></label>'+
+        '<label style="font-size:.7rem;color:var(--muted)">Rendement (%)<br><input type="number" id="ci-rate" value="7" step="0.5" class="cic-input" onchange="cicRenderWhat()"></label>'+
+        '<label style="font-size:.7rem;color:var(--muted)">Startsaldo (€)<br><input type="number" id="ci-start" value="0" class="cic-input" onchange="cicRenderWhat()"></label>';
 
-    const m=+document.getElementById('ci-monthly').value;
-    const y=+document.getElementById('ci-years').value;
-    const rt=+document.getElementById('ci-rate').value;
-    const s=+document.getElementById('ci-start').value;
+        const m=+(document.getElementById('ci-monthly')?.value||1850);
+        const y=+(document.getElementById('ci-years')?.value||20);
+        const rt=+(document.getElementById('ci-rate')?.value||7);
+        const s=+(document.getElementById('ci-start')?.value||0);
 
-    const r=cicCalc(s,m,rt,y);
+        const r=cicCalc(s,m,rt,y);
 
-    const kpisEl=document.getElementById('cic-what-kpis');
-    kpisEl.innerHTML='';
-    [
-        ['Eindwaarde',eur(r.val)],
-        ['Totale inleg',eur(r.inv)],
-        ['Totale winst',eur(r.gain)],
-        ['Winstpercentage',pct(r.gainPct)]
-    ].forEach(([l,v])=>{
-        const k=document.createElement('div');
-        k.className='cic-kcard';
-        k.innerHTML='<div class="cic-klbl">'+l+'</div><div class="cic-kval">'+v+'</div>';
-        kpisEl.appendChild(k);
-    });
+        const kpisEl=document.getElementById('cic-what-kpis');
+        kpisEl.innerHTML='';
+        [['Eindwaarde',eur(r.val)],['Totale inleg',eur(r.inv)],['Totale winst',eur(r.gain)],['Winstpercentage',pct(r.gainPct)]].forEach(([l,v])=>{
+            const k=document.createElement('div');
+            k.className='cic-kcard';
+            k.innerHTML='<div class="cic-klbl">'+l+'</div><div class="cic-kval">'+v+'</div>';
+            kpisEl.appendChild(k);
+        });
 
-    dc('cic-what-line');
-    charts['cic-what-line']=new Chart(document.getElementById('cic-what-line'),{
-        type:'line',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Waarde',data:r.tl.map(t=>t.val),borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:0}]},
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>eur(v)}}}}
-    });
+        dc('cic-what-line');
+        const lineCanvas=document.getElementById('cic-what-line');
+        if(lineCanvas){
+            charts['cic-what-line']=new Chart(lineCanvas,{
+                type:'line',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Waarde',data:r.tl.map(t=>t.val),borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:0}]},
+                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>eur(v)}}}}
+            });
+        }
 
-    dc('cic-what-stack');
-    charts['cic-what-stack']=new Chart(document.getElementById('cic-what-stack'),{
-        type:'bar',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Inleg',data:r.tl.map(t=>t.inv),backgroundColor:'rgba(100,116,139,.6)'},{label:'Winst',data:r.tl.map(t=>t.gain),backgroundColor:'rgba(5,150,105,.7)'}]},
-        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{callback:v=>eur(v)}}}}
-    });
+        dc('cic-what-stack');
+        const stackCanvas=document.getElementById('cic-what-stack');
+        if(stackCanvas){
+            charts['cic-what-stack']=new Chart(stackCanvas,{
+                type:'bar',data:{labels:r.tl.map(t=>''+t.y+'j'),datasets:[{label:'Inleg',data:r.tl.map(t=>t.inv),backgroundColor:'rgba(100,116,139,.6)'},{label:'Winst',data:r.tl.map(t=>t.gain),backgroundColor:'rgba(5,150,105,.7)'}]},
+                options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{callback:v=>eur(v)}}}}
+            });
+        }
+    }catch(e){
+        console.error('cicRenderWhat error:',e);
+        alert('Fout in What-If calculator: '+e.message);
+    }
 }
 
 function cicRender(){
