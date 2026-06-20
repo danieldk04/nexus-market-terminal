@@ -2144,7 +2144,7 @@ function renderInvestmentTimeline(){
     const kpisEl=document.getElementById('inv-kpis');
     const canvasWrap=document.querySelector('#inv-chart')?.parentElement;
 
-    const INV_RANGES=[['1m','1M'],['3m','3M'],['6m','6M'],['ytd','YTD'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
+    const INV_RANGES=[['1w','1W'],['1m','1M'],['3m','3M'],['6m','6M'],['ytd','YTD'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
     makeRangeBtns('inv-rbtn-row',INV_RANGES,invRange,r=>{invRange=r;renderInvestmentTimeline();});
 
     if(!fullTl.length){
@@ -2199,17 +2199,23 @@ function renderInvestmentTimeline(){
             <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${duurStr} <span style="font-size:.72rem;color:var(--muted)">(${totalMonths} mnd)</span></div>
         </div>`;
 
-    document.getElementById('inv-meta').textContent=`${tl[0].date} – ${tl[tl.length-1].date} · ${tl.length} mnd getoond`;
-
-    // Gebruik portfolio_value_history als die beschikbaar is — anders fallback naar investment timeline
+    // Korte ranges (1W/1M) gebruiken DAGELIJKSE portfolio_history → echte vloeiende lijn.
+    // Lange ranges gebruiken maandelijkse portfolio_value_history (+ verandering-balken).
     const pvh = (M?.portfolio_value_history||[]);
+    const dailyHist = (M?.portfolio_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    const useDaily = (invRange==='1w'||invRange==='1m') && dailyHist.length>=2;
     const useValueHistory = pvh.length >= 2;
 
-    let chartLabels, chartLine, chartBars;
+    let chartLabels, chartLine, chartBars=null, isDaily=false;
 
-    if(useValueHistory){
-        // Filter op hetzelfde bereik als de investment timeline
-        const tlDates = new Set(tl.map(t=>t.date));
+    if(useDaily){
+        const dFiltered = filterRange(dailyHist, invRange, false);
+        const series = dFiltered.length>=2 ? dFiltered : dailyHist;
+        isDaily = true;
+        chartLabels = series.map(p=>p.date);
+        // Totale broker-waarde per dag (DEGIRO + Trade Republic + BUX) — consistent met KPI
+        chartLine   = series.map(p=>(p.degiro||0)+(p.tr||0)+(p.bux||0));
+    } else if(useValueHistory){
         // Gebruik portfolio_value_history gefilterd op geselecteerde range
         const pvhFiltered = filterRange(pvh, invRange, true).length>=2
             ? filterRange(pvh, invRange, true)
@@ -2224,13 +2230,19 @@ function renderInvestmentTimeline(){
         chartBars   = tl.map((t,i)=>i===0?t.invested:Math.max(0,t.invested-(tl[i-1]?.invested||0)));
     }
 
-    const barColors = chartBars.map(v=>v>=0?'rgba(5,150,105,.5)':'rgba(220,38,38,.5)');
+    const barColors = (chartBars||[]).map(v=>v>=0?'rgba(5,150,105,.5)':'rgba(220,38,38,.5)');
     const lineColor = gain>=0?'#059669':'#dc2626';
     const lineFill  = gain>=0?'rgba(5,150,105,.08)':'rgba(220,38,38,.06)';
-    const lineLabel = useValueHistory?'Portfoliowaarde':'Cumulatief geïnvesteerd (DEGIRO)';
+    const lineLabel = (isDaily||useValueHistory)?'Portfoliowaarde':'Cumulatief geïnvesteerd (DEGIRO)';
 
-    const datasets=[
-        {
+    // Meta-tekst: dagen voor daily, maanden voor maandelijks
+    document.getElementById('inv-meta').textContent = isDaily
+        ? `${chartLabels[0]} – ${chartLabels[chartLabels.length-1]} · ${chartLabels.length} dagen getoond`
+        : `${tl[0].date} – ${tl[tl.length-1].date} · ${tl.length} mnd getoond`;
+
+    const datasets=[];
+    if(!isDaily && chartBars){
+        datasets.push({
             type:'bar',
             label:'Maandelijkse verandering',
             data:chartBars,
@@ -2239,25 +2251,25 @@ function renderInvestmentTimeline(){
             borderSkipped:false,
             yAxisID:'yBar',
             order:2
-        },
-        {
-            type:'line',
-            label:lineLabel,
-            data:chartLine,
-            borderColor:lineColor,
-            backgroundColor:lineFill,
-            borderWidth:2.5,
-            pointRadius:0,
-            pointHoverRadius:4,
-            fill:true,
-            tension:.35,
-            yAxisID:'y',
-            order:1
-        }
-    ];
+        });
+    }
+    datasets.push({
+        type:'line',
+        label:lineLabel,
+        data:chartLine,
+        borderColor:lineColor,
+        backgroundColor:lineFill,
+        borderWidth:2.5,
+        pointRadius:(isDaily&&chartLabels.length<=14)?2.5:0,
+        pointHoverRadius:4,
+        fill:true,
+        tension:.35,
+        yAxisID:'y',
+        order:1
+    });
 
-    // Kostprijs totaal als referentielijn (alleen als we de waarde-lijn tonen)
-    if(useValueHistory && allInvested>0){
+    // Ingelegd-referentielijn (bij waarde-lijn of daily)
+    if((useValueHistory||isDaily) && allInvested>0){
         datasets.push({
             type:'line',
             label:'Ingelegd',
@@ -2275,7 +2287,7 @@ function renderInvestmentTimeline(){
     }
 
     dc('inv-chart');
-    const maxAbsBar = Math.max(...chartBars.map(Math.abs), 1);
+    const maxAbsBar = Math.max(...(chartBars||[0]).map(Math.abs), 1);
     charts['inv-chart']=new Chart(document.getElementById('inv-chart'),{
         type:'bar',
         data:{labels:chartLabels, datasets},
@@ -2283,9 +2295,9 @@ function renderInvestmentTimeline(){
             responsive:true, maintainAspectRatio:false,
             interaction:{mode:'index', intersect:false},
             plugins:{
-                legend:{display:true, position:'top', labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true,filter:i=>i.datasetIndex!==0}},
+                legend:{display:true, position:'top', labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true,filter:i=>i.text!=='Maandelijkse verandering'}},
                 tooltip:{...TT, callbacks:{label:c=>{
-                    if(c.datasetIndex===0){
+                    if(c.dataset.type==='bar'){
                         const v=c.raw||0;
                         return ` ${v>=0?'+':''}${eur(v)}`;
                     }
