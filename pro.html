@@ -3040,7 +3040,7 @@ function cicInitWhatIf(){
         <div>
             <label class="cic-label">Volatiliteit</label>
             <div class="cic-radio-group">
-                ${['low','normal','high'].map(v=>`<button class="cic-radio-btn ${p.volatility===v?'active':''}" onclick="CIC.whatIfParams.volatility='${v}';cicUpdateWhatIfScenario()">${v==='low'?'Laag':v==='normal'?'Norm.':'Hoog'}</button>`).join('')}
+                ${['low','normal','high'].map(v=>`<button class="cic-radio-btn ${p.volatility===v?'active':''}" onclick='CIC.whatIfParams.volatility="${v}";cicUpdateWhatIfScenario()'>${v==='low'?'Laag':v==='normal'?'Norm.':'Hoog'}</button>`).join('')}
             </div>
         </div>
         <div>
