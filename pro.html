@@ -2144,7 +2144,7 @@ function renderInvestmentTimeline(){
     const kpisEl=document.getElementById('inv-kpis');
     const canvasWrap=document.querySelector('#inv-chart')?.parentElement;
 
-    const INV_RANGES=[['ytd','YTD'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
+    const INV_RANGES=[['1m','1M'],['3m','3M'],['6m','6M'],['ytd','YTD'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
     makeRangeBtns('inv-rbtn-row',INV_RANGES,invRange,r=>{invRange=r;renderInvestmentTimeline();});
 
     if(!fullTl.length){
@@ -2260,7 +2260,7 @@ function renderInvestmentTimeline(){
     if(useValueHistory && allInvested>0){
         datasets.push({
             type:'line',
-            label:'Kostprijs totaal',
+            label:'Ingelegd',
             data:chartLabels.map(()=>allInvested),
             borderColor:'rgba(100,116,139,.7)',
             backgroundColor:'transparent',
