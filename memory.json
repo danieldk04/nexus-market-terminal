@@ -159,6 +159,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-06-22",
+      "degiro": 16413.27,
+      "tr": 8435.09,
+      "nexus": 5088.58,
+      "bux": 1825.41
+    },
+    {
       "date": "2026-06-21",
       "degiro": 16411.17,
       "tr": 8449.19,
@@ -378,26 +385,26 @@
   "last_news": [
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
     "SpaceX goed door eerste dag op de beurs, Musk eerste biljonair ooit",
-    "Aandeel SpaceX verliest terrein op Wall Street na spectaculaire beursgang",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
     "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran",
-    "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen"
+    "De beurs maakt Nederlanders rijker, maar niemand durft te stoppen met sparen",
+    "Beursgang van de eeuw: SpaceX: Meedoen of Mijden?"
   ],
   "tr_summary": {
-    "total": 8449.19,
-    "total_pl_pct": -0.39,
+    "total": 8435.09,
+    "total_pl_pct": -0.55,
     "total_invested": 8482.02,
     "interest_total": 78.23,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4619.25,
-        "price": 55939.3789,
-        "pl_pct": -7.23,
-        "pl_eur": -360.04,
-        "weight": 54.7
+        "value": 4605.08,
+        "price": 55767.7305,
+        "pl_pct": -7.52,
+        "pl_eur": -374.21,
+        "weight": 54.6
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -405,7 +412,7 @@
         "price": 154.7788,
         "pl_pct": 27.81,
         "pl_eur": 278.14,
-        "weight": 15.1
+        "weight": 15.2
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -425,19 +432,19 @@
       },
       {
         "name": "VHYL (High Div Yield)",
-        "value": 180.74,
-        "price": 78.361,
-        "pl_pct": -9.63,
-        "pl_eur": -19.26,
+        "value": 180.82,
+        "price": 78.394,
+        "pl_pct": -9.59,
+        "pl_eur": -19.18,
         "weight": 2.1
       }
     ]
   },
-  "dashboard_updated": "2026-06-21T19:01:04.260290+00:00",
+  "dashboard_updated": "2026-06-22T07:01:03.455075+00:00",
   "degiro_summary": {
-    "total": 16411.17,
-    "total_pl_pct": 33.75,
-    "total_invested": 12270.13,
+    "total": 16413.27,
+    "total_pl_pct": 33.76,
+    "total_invested": 12270.29,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -463,9 +470,9 @@
       },
       {
         "name": "VHYL.AS",
-        "value": 4388.22,
-        "pl_pct": 24.42,
-        "pl_eur": 861.34,
+        "value": 4390.06,
+        "pl_pct": 24.47,
+        "pl_eur": 863.18,
         "div_yield": 0.015,
         "annual_div_eur": 65.65,
         "first_buy_date": null,
@@ -474,9 +481,9 @@
       },
       {
         "name": "V",
-        "value": 570.64,
+        "value": 570.9,
         "pl_pct": 62.04,
-        "pl_eur": 218.48,
+        "pl_eur": 218.58,
         "div_yield": 0.0082,
         "annual_div_eur": 4.68,
         "first_buy_date": null,
@@ -487,35 +494,35 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX beursgang en sentiment",
-      "summary": "SpaceX is genoteerd met gemengde reacties: sterke eerste dag maar daaropvolgend koersverlies. Dit toont voorzichtigheid van beleggers ondanks hype rond Musk, relevant voor wie in brede aandelen-ETFs zit en techaandelen volgt."
+      "theme": "SpaceX beursgang en Musk-effect",
+      "summary": "SpaceX is succesvol naar de beurs gegaan en stelt beleggers in staat in Musks ruimtevaartambities te investeren. Dit be\u00efnvloedt het sentiment rond technologie- en groewaarden in bredere indices zoals S&P500."
     },
     {
-      "theme": "Geopolitieke risico's wereldwijd",
-      "summary": "Oorlogen in Midden-Oosten en Iran-spanningen remmen Aziatische markten en slepen luchtvaartaandelen omlaag (Air France-KLM). Dit direct be\u00efnvloedt AEX en S&P500-exposure door hogere volatiliteit en sectormijding."
+      "theme": "Geopolitieke onrust drukt markten",
+      "summary": "Oorlogsdreiging met Iran en conflicten veroorzaken volatiliteit: Aziatische beurzen dalen, luchtvaart- en retailaandelen kelderen (Air France-KLM), terwijl defensiebedrijven juist stijgen. Dit leidt tot tweeling in AEX en wereldmarkten."
     },
     {
-      "theme": "Europese markten herstellen stap",
-      "summary": "AEX stijgt 1% en volgt Amerikaanse beurs omhoog ondanks turbulentie. Dit suggereert herstel na diepe inzinkingen, maar beleggers blijven voorzichtig en blijven sparen in plaats van fully exposed te zijn."
+      "theme": "Defensiesector en oorlogswinsten",
+      "summary": "Europese defensie-aandelen en het Tsjechische bedrijf CSG profiteren van geopolitieke spanning en stijgen aanzienlijk. Voor beleggers is de vraag relevant of dit duurzame groeistuwers zijn of symptomen van crisis."
     },
     {
-      "theme": "Marktvolatiliteit en AI-dichotomie",
-      "summary": "Twijfel tussen verkopers (tech-angst) en kopers (AI-hoop) cre\u00ebert tweedeling op de beurs; daling van bitcoin en sommige aandelen tegenover stijgende AEX. ETF-beleggers moeten rekening houden met sectorselectie en timing."
+      "theme": "Volatiliteit, AI-angst en beleggersvrees",
+      "summary": "Dalende koersen, bitcoin-onrust, Ferrari-kolappen en CEO-inkoopjes wijzen op nervositeit en tweedeling door AI-bezorgdheden. Beleggers in World-ETFs en aandelen merken hogere volatiliteit en rood sentiment op de beurs."
     }
   ],
   "bux_summary": {
-    "total": 1824.57,
-    "total_pl_pct": -20.76,
+    "total": 1825.41,
+    "total_pl_pct": -20.73,
     "total_invested": 2302.64,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1778.99,
-        "price": 349.19,
-        "pl_pct": -16.21,
-        "pl_eur": -344.08,
+        "value": 1779.81,
+        "price": 349.35,
+        "pl_pct": -16.17,
+        "pl_eur": -343.26,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -525,10 +532,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 45.58,
-        "price": 45.58,
-        "pl_pct": -74.62,
-        "pl_eur": -133.99,
+        "value": 45.6,
+        "price": 45.6,
+        "pl_pct": -74.6,
+        "pl_eur": -133.97,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
