@@ -2223,7 +2223,19 @@ function renderInvestmentTimeline(){
     const useDaily=(invRange==='1w'||invRange==='1m')&&dailyHist.length>=2;
     const useValueHistory=pvh.length>=2;
 
-    // PERIODE-rendement — gebruik de juiste bron per range
+    // Geïnvesteerd bedrag (kostprijs) op een gegeven datum — DEGIRO wijzigt maandelijks (fullTl),
+    // TR/BUX kostprijs-historie ontbreekt dus we nemen die als (bij benadering) constant t.o.v. nu.
+    // Hiermee sluiten we nieuwe stortingen uit van het periode-RENDEMENT (dat is portfoliogroei-neutraal,
+    // niet hetzelfde als geld dat je toevoegt).
+    function investedAtDate(dateStr){
+        if(!dateStr) return allInvested;
+        const ym=dateStr.slice(0,7);
+        const match=fullTl.filter(t=>t.date<=ym);
+        const degiroAtDate=match.length?match[match.length-1].invested:(D.total_invested||totalInvested);
+        return degiroAtDate+trInv+buxInv;
+    }
+
+    // PERIODE-RENDEMENT — echte performance (waardegroei), stortingen tijdens de periode uitgesloten
     let periodStart=null,periodEnd=null,periodGain=null,periodGainPct=null;
     if(useDaily){
         const dFiltered=filterRange(dailyHist,invRange,false);
@@ -2231,17 +2243,25 @@ function renderInvestmentTimeline(){
         const toTotal=p=>(p.degiro||0)+(p.tr||0)+(p.bux||0);
         periodStart=toTotal(series[0]);
         periodEnd=toTotal(series[series.length-1])||currentPortfolio;
+        const startInvested=investedAtDate(series[0]?.date);
+        periodGain=(periodEnd-allInvested)-(periodStart-startInvested);
+        periodGainPct=startInvested?(periodGain/startInvested*100):null;
     } else if(useValueHistory){
         const pvhFiltered=filterRange(pvh,invRange).length>=1?filterRange(pvh,invRange):pvh;
         periodStart=pvhFiltered[0]?.value||null;
         periodEnd=pvhFiltered[pvhFiltered.length-1]?.value||currentPortfolio;
+        const startInvested=investedAtDate(pvhFiltered[0]?.date);
+        if(periodStart!=null){
+            periodGain=(periodEnd-allInvested)-(periodStart-startInvested);
+            periodGainPct=startInvested?(periodGain/startInvested*100):null;
+        }
     } else if(tl.length>=2){
         periodStart=tl[0]?.invested||null;
         periodEnd=currentPortfolio;
-    }
-    if(periodStart&&periodEnd){
-        periodGain=periodEnd-periodStart;
-        periodGainPct=periodStart?(periodGain/periodStart*100):null;
+        if(periodStart){
+            periodGain=periodEnd-periodStart;
+            periodGainPct=periodStart?(periodGain/periodStart*100):null;
+        }
     }
 
     const rangeLabelMap={'1w':'1 Week','1m':'1 Maand','3m':'3 Maanden','6m':'6 Maanden','ytd':'Year-to-Date','1y':'1 Jaar','2y':'2 Jaar','3y':'3 Jaar','5y':'5 Jaar','max':'Totaal'};
