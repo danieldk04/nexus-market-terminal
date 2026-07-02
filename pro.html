@@ -1543,11 +1543,11 @@ function selectStock(ticker, source) {
     fetchPrice(ticker).then(() => renderPriceChart(ticker));
 
     // TradingView chart
-    const symbol = ticker.includes('.AS') ? 'EURONEXT:' + ticker.split('.')[0] : ticker;
+    const symbol = tvSym(ticker);
     document.getElementById('tv-container').innerHTML = '';
     new TradingView.widget({
         autosize: true, symbol, interval: 'D', timezone: 'Etc/UTC',
-        theme: 'dark', style: '1', locale: 'en', hide_side_toolbar: false,
+        theme: 'dark', style: '3', locale: 'en', hide_side_toolbar: false,
         container_id: 'tv-container',
         backgroundColor: '#0d1117',
         gridColor: 'rgba(31,41,55,0.5)',
