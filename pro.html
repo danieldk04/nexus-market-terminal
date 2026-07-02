@@ -2317,7 +2317,9 @@ function renderInvestmentTimeline(){
         if(!dateStr) return allInvested;
         const ym=dateStr.slice(0,7);
         const match=fullTl.filter(t=>t.date<=ym);
-        const degiroAtDate=match.length?match[match.length-1].invested:(D.total_invested||totalInvested);
+        // Vóór de eerste bekende DEGIRO-transactie was er simpelweg nog niets belegd (0),
+        // niet het HUIDIGE bedrag — anders herhaalt zich exact hetzelfde probleem als bij TR/BUX.
+        const degiroAtDate=match.length?match[match.length-1].invested:(fullTl.length?0:(D.total_invested||totalInvested));
         const trPart=(!trFirstSeen||dateStr>=trFirstSeen)?trInv:0;
         const buxPart=(!buxFirstSeen||dateStr>=buxFirstSeen)?buxInv:0;
         return degiroAtDate+trPart+buxPart;
