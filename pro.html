@@ -2470,10 +2470,10 @@ function renderInvestmentTimeline(){
                         const v=c.raw;
                         if(c.dataset.label==='Periodestart') return null;
                         if(c.dataset.label==='Ingelegd') return ` Ingelegd: ${eur(v,0)}`;
-                        const pVal=periodStart;
-                        const periodRet=pVal&&v!=null?((v-pVal)/pVal*100):null;
-                        const retStr=periodRet!=null?` (${periodRet>=0?'+':''}${periodRet.toFixed(1)}% ${rangeLabel})`:'';
-                        return ` ${c.dataset.label}: ${eur(v,0)}${retStr}`;
+                        // Geen % t.o.v. periodestart hier — dat vermengt koersgroei met latere
+                        // stortingen en geeft misleidende cijfers (zie periodGainPct hierboven,
+                        // die WEL correct is omdat die stortingen eruit filtert).
+                        return ` ${c.dataset.label}: ${eur(v,0)}`;
                     }
                 }}
             },
