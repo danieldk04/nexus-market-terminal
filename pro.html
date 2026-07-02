@@ -148,6 +148,23 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .macro-lbl{font-size:.58rem;color:var(--muted);margin-bottom:1px}
 .macro-val{font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--text)}
 
+/* ─── COMPOUND INTEREST CALCULATOR ─── */
+.cic-tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.cic-tab-btn.active:hover{opacity:.95}
+.cic-tab-btn:hover{background:var(--bg)}
+.cic-pane{display:none}
+.cic-pane.active{display:block}
+.cic-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:block}
+.cic-input{width:100%;padding:7px 10px;border:1px solid var(--border2);border-radius:var(--r-sm);font-family:var(--mono);font-size:.85rem;background:var(--surface);color:var(--text)}
+.cic-input:focus{outline:none;border-color:var(--accent)}
+.cic-slider{width:100%;height:4px;background:var(--border);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none}
+.cic-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer}
+.cic-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
+.cic-radio-group{display:flex;gap:6px;flex-wrap:wrap}
+.cic-radio-btn{padding:6px 12px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);cursor:pointer;font-size:.75rem;font-weight:600;color:var(--muted);transition:all .15s}
+.cic-radio-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cic-radio-btn:hover{border-color:var(--accent)}
+
 /* ─── 2 COL LAYOUT ─── */
 .col2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .col2-wide{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
@@ -243,7 +260,8 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 .sc2-tags{display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:16px}
 
 /* ─── FILTER BAR ─── */
-.fbar{display:flex;gap:6px;padding:9px 14px;border-bottom:1px solid var(--border);flex-wrap:wrap;background:#f8fafc}
+.fbar{border-bottom:1px solid var(--border);background:#f8fafc}
+.fbar-row{display:flex;gap:6px;padding:9px 14px;flex-wrap:wrap;align-items:center}
 .fbtn{padding:3px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.67rem;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
 .fbtn:hover{background:var(--bg);color:var(--text)}
 .fbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -257,6 +275,32 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 /* ─── BOT EQUITY BADGE ─── */
 .bot-header{background:var(--bot-bg);border-bottom:1px solid var(--bot-border)}
 .bot-header .pt{color:var(--bot)}
+
+/* ─── KANDIDAAT CARDS ─── */
+.cand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;padding:14px}
+.cand-card{background:var(--surface);border:1px solid var(--border);border-top-width:3px;border-radius:var(--r-sm);padding:12px;cursor:pointer;transition:box-shadow .15s,transform .12s}
+.cand-card:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+.cand-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3px}
+.cand-ticker{font-family:var(--mono);font-weight:700;font-size:.88rem;color:var(--bot)}
+.cand-badges{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.cand-cap{font-size:.52rem;padding:1px 5px;border-radius:4px;font-weight:700}
+.cand-name{font-size:.63rem;color:var(--muted);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cand-score{font-family:var(--mono);font-size:1.25rem;font-weight:700;margin-bottom:8px;line-height:1}
+.cand-stats{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.cs-l{font-size:.52rem;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.04em}
+.cs-v{font-family:var(--mono);font-size:.7rem;font-weight:600;color:var(--text)}
+/* top-picks strip */
+.top-picks{display:flex;gap:8px;padding:10px 14px;overflow-x:auto;border-bottom:1px solid var(--border);background:linear-gradient(135deg,#f0fdf4,#ecfdf5)}
+.tp-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:20px;border:1px solid #a7f3d0;background:#fff;white-space:nowrap;cursor:pointer;transition:box-shadow .12s}
+.tp-chip:hover{box-shadow:var(--sh-md)}
+@media(max-width:600px){
+    .cand-grid{grid-template-columns:1fr!important;padding:10px}
+    .cand-card{padding:14px}
+    .fbar{padding:0;gap:0;background:var(--surface)}
+    .fbar-row{display:flex;gap:6px;padding:7px 12px;overflow-x:auto;border-bottom:1px solid var(--border);flex-wrap:nowrap;scrollbar-width:none;background:#f8fafc;-webkit-overflow-scrolling:touch}
+    .fbar-row::-webkit-scrollbar{display:none}
+    .fbtn{white-space:nowrap;flex-shrink:0;font-size:.7rem;padding:4px 11px}
+}
 
 /* ─── TV CHART ─── */
 .chips{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;border-bottom:1px solid var(--border)}
@@ -652,6 +696,44 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
+    <!-- COMPOUND INTEREST CALCULATOR -->
+    <div class="panel" id="cic-panel" style="display:none">
+        <div class="ph">
+            <span class="pt">💰 Samengestelde Rente Simulator</span>
+            <span class="ptag">Projectie van toekomstig vermogen</span>
+        </div>
+        <div class="cic-tabs" style="display:flex;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg)">
+            <button class="cic-tab-btn active" data-cic-tab="portfolio" onclick="cicSwitchTab('portfolio')" style="padding:7px 13px;border:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;font-size:.8rem;font-weight:500;color:var(--text);transition:all .15s">
+                📈 Portfolio Projectie
+            </button>
+            <button class="cic-tab-btn" data-cic-tab="whatif" onclick="cicSwitchTab('whatif')" style="padding:7px 13px;border:none;background:none;border:1px solid transparent;border-radius:var(--r-sm);cursor:pointer;font-size:.8rem;font-weight:500;color:var(--muted);transition:all .15s">
+                🎯 What-If Scenario
+            </button>
+        </div>
+        <div id="cic-desc" style="padding:9px 16px;font-size:.7rem;line-height:1.4;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface)"></div>
+
+        <!-- TAB 1: Portfolio Projectie -->
+        <div id="cic-port-pane" class="cic-pane">
+            <div id="cic-port-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)"></div>
+            <div id="cic-port-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)"></div>
+            <div style="padding:16px;height:320px;position:relative"><canvas id="cic-port-chart"></canvas></div>
+        </div>
+
+        <!-- TAB 2: What-If Scenario -->
+        <div id="cic-what-pane" class="cic-pane" style="display:none">
+            <div id="cic-what-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:14px 16px;border-bottom:1px solid var(--border)"></div>
+            <div id="cic-what-kpis" style="display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)"></div>
+            <div class="col2" style="gap:0">
+                <div style="padding:16px;height:300px;position:relative;border-right:1px solid var(--border)"><canvas id="cic-what-line-chart"></canvas></div>
+                <div style="padding:16px;height:300px;position:relative"><canvas id="cic-what-stack-chart"></canvas></div>
+            </div>
+            <div style="padding:16px;border-top:1px solid var(--border)">
+                <div style="font-size:.65rem;font-weight:700;color:var(--muted);margin-bottom:10px;letter-spacing:.08em;text-transform:uppercase">Gevoeligheidsmatrix (eindwaarde)</div>
+                <div style="overflow-x:auto"><div id="cic-what-heatmap" style="font-size:.7rem;font-family:var(--mono)"></div></div>
+            </div>
+        </div>
+    </div>
+
     <div class="col3">
         <!-- Broker allocation -->
         <div class="panel">
@@ -670,8 +752,8 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
-    <!-- Dividend + Rebalancing -->
-    <div class="col2">
+    <!-- Dividend + Rebalancing + Rente -->
+    <div class="col3">
         <div class="panel">
             <div class="ph"><span class="pt">Dividend Inkomen</span><span class="ptag">geschat per jaar</span></div>
             <div style="padding:12px 16px" id="div-panel"></div>
@@ -679,6 +761,10 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         <div class="panel">
             <div class="ph"><span class="pt">Rebalancing</span><span class="ptag">target vs actueel</span></div>
             <div style="padding:12px 16px" id="rebal-panel"></div>
+        </div>
+        <div class="panel">
+            <div class="ph"><span class="pt">Rente Ontvangen</span><span class="ptag" id="interest-tag">cumulatief totaal</span></div>
+            <div style="padding:12px 16px" id="interest-panel"></div>
         </div>
     </div>
 
@@ -733,6 +819,26 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
+    <!-- Sector Rotatie -->
+    <div class="panel" id="sector-rot-panel" style="display:none">
+        <div class="ph bot-header">
+            <span class="pt">Sector Rotatie</span>
+            <span class="ptag" id="sr-tag">1 maand performance</span>
+        </div>
+        <div id="sr-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:12px"></div>
+    </div>
+
+    <!-- Screener Kandidaten -->
+    <div class="panel">
+        <div class="ph bot-header">
+            <span class="pt">Screener Kandidaten</span>
+            <span class="ptag" id="cand-tag">—</span>
+        </div>
+        <div class="top-picks" id="top-picks" style="display:none"></div>
+        <div class="fbar" id="cand-fbar"></div>
+        <div class="cand-grid" id="cand-grid"></div>
+    </div>
+
     <!-- Bot trades table -->
     <div class="panel">
         <div class="ph bot-header"><span class="pt">Actieve Bot Posities</span><span class="ptag" id="bot-trades-tag"></span></div>
@@ -746,10 +852,11 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
                     <th class="r">P&amp;L %</th>
                     <th class="r">Waarde ($)</th>
                     <th class="r">TP doel</th>
+                    <th class="r">Trail Stop</th>
                     <th class="r">Score</th>
                     <th class="r">Datum</th>
                 </tr></thead>
-                <tbody id="bot-body"><tr><td colspan="9" class="loading"><div class="spin"></div></td></tr></tbody>
+                <tbody id="bot-body"><tr><td colspan="10" class="loading"><div class="spin"></div></td></tr></tbody>
             </table>
         </div>
     </div>
@@ -1123,11 +1230,14 @@ function renderDashboard(){
         document.getElementById('kf-bot').style.width=Math.min(Math.abs(bp.return_pct)*5,100)+'%';
     }
 
-    /* VIX */
+    /* VIX + S&P MA200 */
     const macro=B?.macro||{};
     if(macro.vix){
         document.getElementById('k-vix').textContent=macro.vix.toFixed(2);
-        document.getElementById('k-vix-s').textContent=`10Y: ${macro.treasury_10y?.toFixed(2)||'—'}%`;
+        const sp500ok=B?.memory?.sp500_above_ma200;
+        const spStr=sp500ok===false?' · S&P↓MA200':'';
+        document.getElementById('k-vix-s').textContent=`10Y: ${macro.treasury_10y?.toFixed(2)||'—'}%${spStr}`;
+        if(sp500ok===false) document.getElementById('k-vix-s').style.color='var(--red)';
         const vixPct=Math.min((macro.vix/40)*100,100);
         document.getElementById('kf-vix').style.width=vixPct+'%';
         document.getElementById('kf-vix').style.background=macro.vix>25?'var(--red)':macro.vix>18?'var(--yellow)':'var(--green)';
@@ -1777,6 +1887,30 @@ function renderDividendPanel(elId){
         </div>`;
 }
 
+function renderInterestPanel(){
+    const el=document.getElementById('interest-panel');
+    if(!el) return;
+    const trInt=(M?.tr_summary?.interest_total)||0;
+    const buxInt=(M?.bux_summary?.interest_total)||0;
+    const total=trInt+buxInt;
+    if(total<=0){
+        el.innerHTML='<div class="empty" style="padding:8px 0;font-size:.75rem">Rente data beschikbaar na volgende briefing run</div>';
+        return;
+    }
+    const rows=[];
+    if(trInt>0) rows.push({broker:'Trade Republic',icon:'📱',amount:trInt});
+    if(buxInt>0) rows.push({broker:'BUX',icon:'🟠',amount:buxInt});
+    document.getElementById('interest-tag').textContent=eur(total);
+    el.innerHTML=`
+        ${rows.map(r=>`<div class="div-row">
+            <div><span class="div-ticker">${r.icon} ${r.broker}</span></div>
+            <span class="div-annual">${eur(r.amount)}</span>
+        </div>`).join('')}
+        <div style="padding:8px 0 2px;display:flex;justify-content:space-between;font-size:.75rem;font-weight:700;border-top:1px solid var(--border);margin-top:4px">
+            <span>Totaal rente</span><span class="pc">${eur(total)}</span>
+        </div>`;
+}
+
 /* ── Range filter helper ── */
 function filterRange(data,range,monthly=false){
     if(range==='max') return data;
@@ -1832,8 +1966,17 @@ function renderHistoryChart(){
     const allShown = filtered.length >= fullHist.length && histRange!=='max';
     const rangeNote = allShown ? ` (alles getoond)` : '';
     document.getElementById('hist-tag').textContent=`${rlbl}${rangeNote} · ${labels[0]} – ${labels[labels.length-1]} · ${delta>=0?'+':''}${deltaPct}%`;
+    // Ingelegd (kostprijs) als referentielijn — zelfde logica als de tijdlijn-grafiek
+    const fullTl=(M?.investment_timeline||[]);
+    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
+    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
+    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
+    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
+    const histDatasets=[{label:'Portfoliowaarde',data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2.5,pointRadius:slice.length<=14?2.5:0,pointHoverRadius:5,fill:true,tension:.35,order:1}];
+    if(allInvested>0) histDatasets.push({label:'Ingelegd',data:labels.map(()=>allInvested),borderColor:'rgba(100,116,139,.7)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[3,3],pointRadius:0,fill:false,tension:0,order:0});
     dc('hist');
-    charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'line',data:{labels,datasets:[{data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2,pointRadius:slice.length<=30?3:0,pointHoverRadius:5,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>` ${eur(c.raw)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:10,font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
+    charts['hist']=new Chart(document.getElementById('hist-chart'),{type:'line',data:{labels,datasets:histDatasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true}},tooltip:{...TT,callbacks:{label:c=>` ${c.dataset.label}: ${eur(c.raw)}`}}},scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:10,font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v)}}}}});
 }
 
 function renderDashNews(){
@@ -1888,7 +2031,9 @@ function renderPortfolioTab(){
     renderPosTable();
     renderDividendPanel('div-panel');
     renderRebalancingPanel();
+    renderInterestPanel();
     renderInvestmentTimeline();
+    renderCompoundInterestCalculator();
 }
 
 function renderHeatmap(){
@@ -2071,26 +2216,32 @@ function renderInvestmentTimeline(){
     const years=Math.floor(totalMonths/12),remMonths=totalMonths%12;
     const duurStr=years>0?(years+'j'+(remMonths?` ${remMonths}m`:'')):(totalMonths+'m');
 
-    // PERIODE-rendement — gebruik portfolio_value_history als beschikbaar
+    // Korte ranges (1W/1M) gebruiken DAGELIJKSE portfolio_history → echte vloeiende lijn.
+    // Lange ranges gebruiken maandelijkse portfolio_value_history.
     const pvh=(M?.portfolio_value_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    const dailyHist=(M?.portfolio_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    const useDaily=(invRange==='1w'||invRange==='1m')&&dailyHist.length>=2;
     const useValueHistory=pvh.length>=2;
-    let periodStart=null,periodEnd=null,periodGain=null,periodGainPct=null;
 
-    if(useValueHistory){
+    // PERIODE-rendement — gebruik de juiste bron per range
+    let periodStart=null,periodEnd=null,periodGain=null,periodGainPct=null;
+    if(useDaily){
+        const dFiltered=filterRange(dailyHist,invRange,false);
+        const series=dFiltered.length>=2?dFiltered:dailyHist;
+        const toTotal=p=>(p.degiro||0)+(p.tr||0)+(p.bux||0);
+        periodStart=toTotal(series[0]);
+        periodEnd=toTotal(series[series.length-1])||currentPortfolio;
+    } else if(useValueHistory){
         const pvhFiltered=filterRange(pvh,invRange).length>=1?filterRange(pvh,invRange):pvh;
         periodStart=pvhFiltered[0]?.value||null;
         periodEnd=pvhFiltered[pvhFiltered.length-1]?.value||currentPortfolio;
-        if(periodStart&&periodEnd){
-            periodGain=periodEnd-periodStart;
-            periodGainPct=periodStart?(periodGain/periodStart*100):null;
-        }
-    } else {
-        // Fallback: gebruik investment_timeline start-waarde
-        if(tl.length>=2){
-            periodStart=tl[0]?.invested||null;
-            periodEnd=currentPortfolio;
-            if(periodStart){periodGain=periodEnd-periodStart;periodGainPct=periodStart?(periodGain/periodStart*100):null;}
-        }
+    } else if(tl.length>=2){
+        periodStart=tl[0]?.invested||null;
+        periodEnd=currentPortfolio;
+    }
+    if(periodStart&&periodEnd){
+        periodGain=periodEnd-periodStart;
+        periodGainPct=periodStart?(periodGain/periodStart*100):null;
     }
 
     const rangeLabelMap={'1w':'1 Week','1m':'1 Maand','3m':'3 Maanden','6m':'6 Maanden','ytd':'Year-to-Date','1y':'1 Jaar','2y':'2 Jaar','3y':'3 Jaar','5y':'5 Jaar','max':'Totaal'};
@@ -2124,35 +2275,41 @@ function renderInvestmentTimeline(){
             <div style="font-size:.62rem;color:var(--muted)">vanaf ${firstDate||fullTl[0].date}</div>
         </div>`;
 
-    document.getElementById('inv-meta').textContent=`${tl[0]?.date||''} – ${tl[tl.length-1]?.date||''} · ${tl.length} mnd getoond`;
+    // Chart data — pure lijn (Trade Republic stijl), geen bars. Dagelijks voor 1W/1M, maandelijks daarboven.
+    let chartLabels,chartLine,chartInvested=null,isDaily=false;
 
-    // Chart data — pure lijn (Trade Republic stijl), geen bars
-    let chartLabels,chartLine,chartInvested;
-
-    if(useValueHistory){
+    if(useDaily){
+        const dFiltered=filterRange(dailyHist,invRange,false);
+        const series=dFiltered.length>=2?dFiltered:dailyHist;
+        isDaily=true;
+        chartLabels=series.map(p=>p.date);
+        chartLine=series.map(p=>(p.degiro||0)+(p.tr||0)+(p.bux||0));
+    } else if(useValueHistory){
         const pvhFiltered=filterRange(pvh,invRange).length>=2?filterRange(pvh,invRange):pvh;
-        chartLabels=pvhFiltered.map(p=>p.date.slice(5));
+        chartLabels=pvhFiltered.map(p=>p.date);
         chartLine=pvhFiltered.map(p=>p.value);
-        // Genormaliseerde invested lijn (stap-functie op basis van investment_timeline)
         chartInvested=pvhFiltered.map(p=>{
             const match=fullTl.filter(t=>t.date<=p.date.slice(0,7));
             return match.length?match[match.length-1].invested:null;
         });
     } else {
-        chartLabels=tl.map(t=>t.date.slice(5));
+        chartLabels=tl.map(t=>t.date);
         chartLine=tl.map(t=>t.invested);
-        chartInvested=null;
     }
+
+    document.getElementById('inv-meta').textContent = isDaily
+        ? `${chartLabels[0]} – ${chartLabels[chartLabels.length-1]} · ${chartLabels.length} dagen getoond`
+        : `${tl[0]?.date||''} – ${tl[tl.length-1]?.date||''} · ${tl.length} mnd getoond`;
 
     const lineIsPositive=periodGain!=null?periodGain>=0:gainAll>=0;
     const lineColor=lineIsPositive?'#059669':'#dc2626';
     const lineFill=lineIsPositive?'rgba(5,150,105,.08)':'rgba(220,38,38,.06)';
-    const lineLabel=useValueHistory?'Portfoliowaarde':'Cumulatief geïnvesteerd';
+    const lineLabel=(isDaily||useValueHistory)?'Portfoliowaarde':'Cumulatief geïnvesteerd';
 
     const datasets=[{
         type:'line',label:lineLabel,data:chartLine,
         borderColor:lineColor,backgroundColor:lineFill,borderWidth:2.5,
-        pointRadius:0,pointHoverRadius:5,fill:true,tension:.35,order:1
+        pointRadius:(isDaily&&chartLabels.length<=14)?2.5:0,pointHoverRadius:5,fill:true,tension:.35,order:1
     }];
 
     if(chartInvested&&chartInvested.some(v=>v!=null)){
@@ -2161,10 +2318,16 @@ function renderInvestmentTimeline(){
             borderColor:'rgba(100,116,139,.6)',backgroundColor:'transparent',
             borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,tension:0,order:2
         });
+    } else if(isDaily&&allInvested>0){
+        datasets.push({
+            type:'line',label:'Ingelegd',data:chartLabels.map(()=>allInvested),
+            borderColor:'rgba(100,116,139,.6)',backgroundColor:'transparent',
+            borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,tension:0,order:2
+        });
     }
 
     // Periode-start markerlijn
-    if(periodStart!=null&&useValueHistory){
+    if(periodStart!=null){
         datasets.push({
             type:'line',label:'Periodestart',
             data:chartLabels.map(()=>periodStart),
@@ -2265,6 +2428,8 @@ function renderBotTab(){
         const plc=t.pl_percent>=0?'var(--green)':'var(--red)';
         const sc=t.score_at_entry||0;
         const sColor=sc>=8?'var(--green)':sc>=7?'var(--yellow)':'var(--muted)';
+        const ts=t.trailing_stop_price;
+        const tsClr=ts?'var(--yellow)':'var(--muted)';
         return `<tr onclick="openChart('${t.ticker}')">
             <td><div class="ticker-cell">${t.ticker}</div><div class="name-cell">${t.name||''}</div></td>
             <td style="font-size:.7rem;color:var(--muted)">${t.sector||'—'}</td>
@@ -2273,6 +2438,7 @@ function renderBotTab(){
             <td class="r" style="color:${plc};font-weight:700">${pct(t.pl_percent)}</td>
             <td class="r">${usd(t.current_value||0)}</td>
             <td class="r" style="color:var(--accent)">+${t.tp_target?.toFixed(0)||'—'}%</td>
+            <td class="r" style="color:${tsClr};font-size:.68rem" title="${ts?'Trailing stop actief — vergrendelt winst':'Actief bij +15%'}">${ts?'$'+ts.toFixed(2):'—'}</td>
             <td class="r"><span class="score-pill" style="background:${sColor}18;color:${sColor};border:1px solid ${sColor}44">${sc.toFixed(1)}</span></td>
             <td class="r" style="font-size:.68rem;color:var(--muted)">${t.buy_date||'—'}</td>
         </tr>`;
@@ -2299,6 +2465,287 @@ function renderBotTab(){
             </tr>`;
         }).join('')
         :'<tr><td colspan="8" class="empty">Nog geen gesloten trades</td></tr>';
+
+    /* sector rotatie */
+    renderSectorRotationPanel();
+
+    /* screener kandidaten */
+    renderCandidatesPanel();
+}
+
+function renderSectorRotationPanel(){
+    const panel=document.getElementById('sector-rot-panel');
+    const grid=document.getElementById('sr-grid');
+    const tag=document.getElementById('sr-tag');
+    if(!panel||!grid) return;
+    const sr=M?.sector_rotation||{};
+    const srAdj=M?.sector_rotation_adj||{};
+    const date=M?.sector_rotation_date;
+    if(!Object.keys(sr).length){panel.style.display='none';return;}
+    panel.style.display='';
+    if(date) tag.textContent=`1 maand · ${new Date(date).toLocaleDateString('nl-NL',{day:'2-digit',month:'short'})}`;
+    // Sorteer op performance
+    const entries=Object.entries(sr).sort((a,b)=>b[1]-a[1]);
+    const maxAbs=Math.max(...entries.map(([,v])=>Math.abs(v)),1);
+    grid.innerHTML=entries.map(([sector,perf])=>{
+        const adj=srAdj[sector]||0;
+        const isPos=perf>=0;
+        const clr=perf>=5?'var(--green)':perf<=-5?'var(--red)':perf>=0?'#65a30d':'#f59e0b';
+        const barW=Math.min(Math.abs(perf)/maxAbs*100,100);
+        const adjBadge=adj>0?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700;margin-left:4px">+score</span>':adj<0?'<span style="font-size:.48rem;background:#dc262618;color:#dc2626;border:1px solid #dc262644;padding:1px 4px;border-radius:3px;font-weight:700;margin-left:4px">-score</span>':'';
+        return `<div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px">
+            <div style="font-size:.6rem;font-weight:700;color:var(--muted);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${sector}${adjBadge}</div>
+            <div style="font-family:var(--mono);font-size:.9rem;font-weight:700;color:${clr};margin-bottom:4px">${isPos?'+':''}${perf.toFixed(1)}%</div>
+            <div style="height:3px;background:var(--border);border-radius:2px">
+                <div style="height:100%;width:${barW}%;background:${clr};border-radius:2px;opacity:.7"></div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+/* ══════════════════════════════════════════════════════
+   SCREENER KANDIDATEN PANEL — RATINGS SYSTEEM
+══════════════════════════════════════════════════════ */
+let candRegion='all', candCap='all', candSort='score';
+
+const CAP_COLORS={mega:'#7c3aed',large:'#2563eb',mid:'#059669',small:'#d97706','?':'#64748b'};
+const CAP_LABELS={mega:'MEGA',large:'LARGE',mid:'MID',small:'SMALL','?':'?'};
+
+/* ── Rating helpers ── */
+function _fundamentalRating(c){
+    let pts=0;
+    if(c.fcf_positive!==false) pts+=2;
+    if((c.profit_margin||0)>15) pts+=2;
+    if((c.revenue_growth||0)>10) pts+=2;
+    if((c.debt_to_equity||99)<1) pts+=2;
+    if((c.roe||0)>15) pts+=2;
+    if(pts>=9) return {lbl:'Uitstekend',clr:'#059669',pts};
+    if(pts>=7)  return {lbl:'Gezond',clr:'#65a30d',pts};
+    if(pts>=5)  return {lbl:'Matig',clr:'#d97706',pts};
+    return {lbl:'Zwak',clr:'#dc2626',pts};
+}
+
+function _managementRating(c){
+    const roic=c.roic||0,roce=c.roce||0;
+    const avg=(roic+roce)/2;
+    if(roic>=25||avg>=20) return {lbl:'Excellent',clr:'#059669',sub:`ROIC ${roic}%`};
+    if(roic>=15)           return {lbl:'Goed',clr:'#65a30d',sub:`ROIC ${roic}%`};
+    if(roic>=10)           return {lbl:'Redelijk',clr:'#d97706',sub:`ROIC ${roic}%`};
+    return {lbl:'Zwak',clr:'#dc2626',sub:roic?`ROIC ${roic}%`:'ROIC n/b'};
+}
+
+function _valuationRating(c){
+    const dcfUp=c.dcf?.dcf_upside;
+    if(dcfUp==null) return {lbl:'Onbekend',clr:'#64748b',sub:'DCF n/b'};
+    if(dcfUp>=25)   return {lbl:'Ondergew.',clr:'#059669',sub:`+${dcfUp.toFixed(0)}% DCF`};
+    if(dcfUp>=8)    return {lbl:'Licht onder',clr:'#65a30d',sub:`+${dcfUp.toFixed(0)}% DCF`};
+    if(dcfUp>=-10)  return {lbl:'Fair',clr:'#d97706',sub:`${dcfUp.toFixed(0)}% DCF`};
+    return {lbl:'Overgew.',clr:'#dc2626',sub:`${dcfUp.toFixed(0)}% DCF`};
+}
+
+function _verdictRating(c){
+    const sc=c.score||0;
+    const dcfUp=c.dcf?.dcf_upside;
+    const sentiment=c.tier2?.sentiment_score;
+    if(sentiment==='BULLISH') return {lbl:'KOOP',clr:'#059669',bg:'#ecfdf5',ord:0};
+    if(sentiment==='BEARISH') return {lbl:'MIJDEN',clr:'#dc2626',bg:'#fef2f2',ord:2};
+    // KOOP: convergence score decent AND DCF not massively overvalued,
+    // OR low score but significantly undervalued (DCF ≥ +20%)
+    const dcfOk=dcfUp==null||dcfUp>=-20;
+    if((sc>=3.0&&dcfOk)||(dcfUp!=null&&dcfUp>=20&&sc>=2.0))
+        return {lbl:'KOOP',clr:'#059669',bg:'#ecfdf5',ord:0};
+    // MIJDEN: very weak fundamentals OR massively overvalued
+    if(sc<1.8||(dcfUp!=null&&dcfUp<-50))
+        return {lbl:'MIJDEN',clr:'#dc2626',bg:'#fef2f2',ord:2};
+    return {lbl:'HOUD/WACHT',clr:'#d97706',bg:'#fffbeb',ord:1};
+}
+
+function _momBar(score){
+    if(score==null) return '';
+    const clr=score>=70?'#059669':score>=45?'#d97706':'#94a3b8';
+    return `<div style="margin-top:6px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+            <span style="font-size:.48rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700">Momentum</span>
+            <span style="font-family:var(--mono);font-size:.62rem;color:${clr};font-weight:700">${score}/100</span>
+        </div>
+        <div style="height:3px;background:var(--border);border-radius:2px">
+            <div style="height:100%;width:${score}%;background:${clr};border-radius:2px;transition:width .3s"></div>
+        </div>
+    </div>`;
+}
+
+function renderCandidatesPanel(){
+    const el=document.getElementById('cand-grid');
+    const tag=document.getElementById('cand-tag');
+    const fbar=document.getElementById('cand-fbar');
+    const tpEl=document.getElementById('top-picks');
+    if(!el) return;
+    const all=B?.top_candidates||[];
+    if(!all.length){
+        el.innerHTML='<div class="empty" style="padding:16px">Geen data — voer Tier 1 scan uit via GitHub Actions.</div>';
+        tag.textContent='—';
+        fbar.innerHTML='';
+        if(tpEl) tpEl.style.display='none';
+        return;
+    }
+
+    /* top-picks strip: KOOP kandidaten over alle filters */
+    if(tpEl){
+        const koopAll=all.filter(c=>_verdictRating(c).ord===0).slice(0,6);
+        if(koopAll.length){
+            tpEl.style.display='flex';
+            tpEl.innerHTML=`<span style="font-size:.62rem;font-weight:700;color:#059669;white-space:nowrap;align-self:center;flex-shrink:0">Top Picks:</span>`+
+                koopAll.map(c=>{
+                    const dcfUp=c.dcf?.dcf_upside;
+                    return `<div class="tp-chip" onclick="openChart('${c.ticker}')">
+                        <span style="font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--bot)">${c.ticker.split('.')[0]}</span>
+                        <span style="font-size:.6rem;font-weight:700;color:var(--green)">${c.score?.toFixed(1)}/10</span>
+                        ${dcfUp!=null?`<span style="font-size:.6rem;color:#059669;font-family:var(--mono)">+${dcfUp.toFixed(0)}%↑</span>`:''}
+                    </div>`;
+                }).join('');
+        } else tpEl.style.display='none';
+    }
+
+    /* filter bar */
+    const regBtns=[['all','Alles'],['US','🇺🇸 US'],['EU','🇪🇺 EU']];
+    const capBtns=[['all','Alle caps'],['mega','Mega'],['large','Large'],['mid','Mid'],['small','Small']];
+    const srtBtns=[['score','↕ Value'],['verdict','↕ Verdict'],['momentum_score','↕ Momentum'],['combo','↕ Combo']];
+    fbar.innerHTML=`
+        <div class="fbar-row">
+            ${regBtns.map(([v,l])=>`<button class="fbtn${candRegion===v?' active':''}" data-r="${v}">${l}</button>`).join('')}
+            <span style="width:1px;background:var(--border2);margin:0 4px;flex-shrink:0;align-self:stretch"></span>
+            ${capBtns.map(([v,l])=>`<button class="fbtn${candCap===v?' active':''}" data-c="${v}">${l}</button>`).join('')}
+            <span style="width:1px;background:var(--border2);margin:0 4px;flex-shrink:0;align-self:stretch"></span>
+            ${srtBtns.map(([v,l])=>`<button class="fbtn${candSort===v?' active':''}" data-s="${v}">${l}</button>`).join('')}
+        </div>`;
+    fbar.querySelectorAll('[data-r]').forEach(b=>b.addEventListener('click',()=>{candRegion=b.dataset.r;renderCandidatesPanel();}));
+    fbar.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{candCap=b.dataset.c;renderCandidatesPanel();}));
+    fbar.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{candSort=b.dataset.s;renderCandidatesPanel();}));
+
+    /* filter */
+    let filtered=all.filter(c=>{
+        if(candRegion!=='all'&&(c.region||'US')!==candRegion) return false;
+        if(candCap!=='all'&&(c.market_cap_cat||'?')!==candCap) return false;
+        return true;
+    });
+
+    /* sort */
+    if(candSort==='verdict'){
+        filtered=[...filtered].sort((a,b)=>_verdictRating(a).ord-_verdictRating(b).ord||(b.score||0)-(a.score||0));
+    } else if(candSort==='momentum_score'){
+        filtered=[...filtered].sort((a,b)=>{
+            const ma=a.momentum_score!=null?a.momentum_score:(a.convergence_score||0)*10;
+            const mb=b.momentum_score!=null?b.momentum_score:(b.convergence_score||0)*10;
+            return mb-ma;
+        });
+    } else if(candSort==='combo'){
+        filtered=[...filtered].sort((a,b)=>{
+            const ma=a.momentum_score!=null?a.momentum_score:(a.convergence_score||0)*10;
+            const mb=b.momentum_score!=null?b.momentum_score:(b.convergence_score||0)*10;
+            const sa=(a.score||0)/10*60+ma*0.4;
+            const sb=(b.score||0)/10*60+mb*0.4;
+            return sb-sa;
+        });
+    }
+
+    tag.textContent=`${filtered.length} van ${all.length}`;
+    if(!filtered.length){
+        el.innerHTML='<div class="empty" style="padding:16px">Geen kandidaten voor deze filter.</div>';
+        return;
+    }
+
+    const watchList=B?.memory?.watch_list||[];
+    el.innerHTML=filtered.slice(0,40).map(c=>{
+        const cap=c.market_cap_cat||'?';
+        const capClr=CAP_COLORS[cap]||'#64748b';
+        const region=c.region==='EU'?'🇪🇺':'🇺🇸';
+        const isWatched=c.watched||watchList.includes(c.ticker);
+        const sc=c.score||0;
+        // momentum_score is 0-100; fall back to convergence_score*10 when not yet in data
+        const ms=c.momentum_score!=null?c.momentum_score:(c.convergence_score!=null?Math.round(c.convergence_score*10):null);
+        // above_ma50/200: use stored booleans when present, else derive from price vs sma
+        const _aboveMA50=c.above_ma50!=null?c.above_ma50:(c.sma50&&c.price?c.price>c.sma50:null);
+        const _aboveMA200=c.above_ma200!=null?c.above_ma200:(c.sma200&&c.price?c.price>c.sma200:null);
+
+        const fund=_fundamentalRating(c);
+        const mgmt=_managementRating(c);
+        const val=_valuationRating(c);
+        const verdict=_verdictRating(c);
+
+        // Key numbers
+        const roe=c.roe!=null?c.roe.toFixed(1)+'%':'—';
+        const roicStr=c.roic!=null?c.roic+'%':'—';
+        const pe=c.pe_ratio!=null?c.pe_ratio.toFixed(1):'—';
+        const de=c.debt_to_equity!=null?c.debt_to_equity.toFixed(2):'—';
+        const deClr=(c.debt_to_equity||0)<1?'var(--green)':(c.debt_to_equity||0)<2?'var(--yellow)':'var(--red)';
+        const revG=c.revenue_growth!=null?((c.revenue_growth>=0?'+':'')+c.revenue_growth.toFixed(1)+'%'):'—';
+        const fcfIcon=c.fcf_positive!==false?`<span style="color:var(--green);font-size:.8rem">✓</span>`:`<span style="color:var(--red);font-size:.8rem">✗</span>`;
+
+        // Small badges row
+        const badges=[
+            isWatched?'<span style="font-size:.52rem;background:#7c3aed18;color:#7c3aed;border:1px solid #7c3aed55;padding:2px 5px;border-radius:3px;font-weight:700">👁 BEWAAKT</span>':'',
+            _aboveMA50?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">MA50✓</span>':'',
+            _aboveMA200?'<span style="font-size:.48rem;background:#2563eb18;color:#2563eb;border:1px solid #2563eb44;padding:1px 4px;border-radius:3px;font-weight:700">MA200✓</span>':'',
+            c.insider_score>=7?'<span style="font-size:.48rem;background:#05966918;color:#059669;border:1px solid #05966944;padding:1px 4px;border-radius:3px;font-weight:700">INSDR↑</span>':'',
+            (c.earnings_days!=null&&c.earnings_days>=0&&c.earnings_days<=28)?`<span style="font-size:.48rem;background:#7c3aed18;color:#7c3aed;border:1px solid #7c3aed44;padding:1px 4px;border-radius:3px;font-weight:700" title="Resultaten over ${c.earnings_days} dagen">📅${c.earnings_days}d</span>`:'',
+        ].filter(Boolean).join('');
+
+        const shortName=(c.name||c.ticker).replace(/ Inc\.?| Corp\.?| Ltd\.?| N\.V\.| SE$| AG$| PLC$| S\.A\./gi,'').trim().substring(0,20);
+
+        return `<div class="cand-card" onclick="openChart('${c.ticker}')" title="${c.name||c.ticker}" style="border-top-color:${verdict.clr}${isWatched?';box-shadow:0 0 0 1.5px #7c3aed55,var(--sh)':''}">
+            <!-- header -->
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px">
+                <div style="min-width:0;flex:1">
+                    <div style="font-family:var(--mono);font-weight:700;font-size:1rem;color:var(--bot);line-height:1">${c.ticker.split('.')[0]}</div>
+                    <div style="font-size:.64rem;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${shortName}</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+                    <span style="font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:10px;background:${verdict.bg};color:${verdict.clr};border:1px solid ${verdict.clr}55;white-space:nowrap;letter-spacing:.02em">${verdict.lbl}</span>
+                    <div style="display:flex;gap:4px;align-items:center">
+                        <span style="font-size:.55rem;padding:2px 5px;border-radius:3px;background:${capClr}18;color:${capClr};border:1px solid ${capClr}44;font-weight:700">${CAP_LABELS[cap]}</span>
+                        <span style="font-size:.7rem">${region}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 ratings -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:9px">
+                <div style="background:${fund.clr}14;border:1px solid ${fund.clr}35;border-radius:6px;padding:7px 4px;text-align:center">
+                    <div style="font-size:.5rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">Fundament.</div>
+                    <div style="font-size:.68rem;font-weight:700;color:${fund.clr};line-height:1.2">${fund.lbl}</div>
+                </div>
+                <div style="background:${mgmt.clr}14;border:1px solid ${mgmt.clr}35;border-radius:6px;padding:7px 4px;text-align:center">
+                    <div style="font-size:.5rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">Management</div>
+                    <div style="font-size:.68rem;font-weight:700;color:${mgmt.clr};line-height:1.2">${mgmt.lbl}</div>
+                    <div style="font-size:.52rem;color:var(--muted);font-family:var(--mono);margin-top:1px">${mgmt.sub}</div>
+                </div>
+                <div style="background:${val.clr}14;border:1px solid ${val.clr}35;border-radius:6px;padding:7px 4px;text-align:center">
+                    <div style="font-size:.5rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">Waardering</div>
+                    <div style="font-size:.68rem;font-weight:700;color:${val.clr};line-height:1.2">${val.lbl}</div>
+                    <div style="font-size:.52rem;color:var(--muted);font-family:var(--mono);margin-top:1px">${val.sub}</div>
+                </div>
+            </div>
+
+            <!-- 6 key metrics -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px;background:var(--bg);border-radius:6px;padding:9px 6px">
+                <div style="text-align:center"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">ROE</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700">${roe}</div></div>
+                <div style="text-align:center"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">ROIC</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700;color:${mgmt.clr}">${roicStr}</div></div>
+                <div style="text-align:center"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">P/E</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700">${pe}</div></div>
+                <div style="text-align:center;margin-top:5px"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">FCF</div><div style="font-size:.82rem;font-weight:700">${fcfIcon}</div></div>
+                <div style="text-align:center;margin-top:5px"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">Rev↑</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700;color:${(c.revenue_growth||0)>0?'var(--green)':'var(--muted)'}">${revG}</div></div>
+                <div style="text-align:center;margin-top:5px"><div style="font-size:.52rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">D/E</div><div style="font-family:var(--mono);font-size:.82rem;font-weight:700;color:${deClr}">${de}</div></div>
+            </div>
+
+            <!-- Momentum bar -->
+            ${_momBar(ms)}
+
+            <!-- bottom: badges + NEXUS score -->
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;flex-wrap:wrap;gap:3px">
+                <div style="display:flex;gap:3px;flex-wrap:wrap">${badges}</div>
+                <span style="font-family:var(--mono);font-size:.68rem;font-weight:700;color:${sc>=8?'var(--green)':sc>=7?'var(--yellow)':'var(--muted)'}">${sc.toFixed(1)}/10</span>
+            </div>
+        </div>`;
+    }).join('');
 }
 
 /* ══════════════════════════════════════════════════════
@@ -2542,6 +2989,219 @@ function switchTab(name,skipRender=false){
     if(name==='analyse'){renderChartsTab();}
 }
 document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+/* ══════════════════════════════════════════════════════
+   COMPOUND INTEREST CALCULATOR
+══════════════════════════════════════════════════════ */
+const CIC={currentTab:'portfolio',whatIfInitialized:false,portfolioParams:{currentBalance:0,historicalReturn:7.5,monthlyContribution:1850},whatIfParams:{monthlyContribution:1850,years:10,annualInterest:7,startBalance:0,volatility:'normal',inflationRate:2}};
+
+function cicCalculateFV(principal,monthlyPayment,annualRate,years){
+    const months=years*12;const monthlyRate=annualRate/100/12;let balance=principal;const timeline=[{month:0,year:0,value:principal,invested:principal,growth:0}];let totalInvested=principal;
+    for(let m=1;m<=months;m++){balance=balance*(1+monthlyRate)+monthlyPayment;totalInvested+=monthlyPayment;const growth=balance-totalInvested;timeline.push({month:m,year:Math.ceil(m/12),value:balance,invested:totalInvested,growth:growth});}
+    const cagr=principal&&years?(Math.pow(balance/principal,1/years)-1)*100:annualRate;
+    return{finalValue:balance,totalInvested,totalGain:balance-totalInvested,gainPct:((balance-totalInvested)/totalInvested*100),cagr,timeline};
+}
+
+function cicGenerateHeatmap(principal,monthly,maxYears){
+    const rates=[1,2,3,4,5,6,7,8,10,12,15];const hm={};
+    rates.forEach(r=>{hm[r]=[];for(let y=1;y<=Math.min(maxYears,30);y++){const res=cicCalculateFV(principal,monthly,r,y);hm[r].push({year:y,value:res.finalValue,gainPct:res.gainPct});}});
+    return hm;
+}
+
+function cicSwitchTab(tab){
+    CIC.currentTab=tab;
+    const suffix=tab==='portfolio'?'port':'what';
+    document.querySelectorAll('.cic-tab-btn').forEach(b=>{
+        const on=b.dataset['cic-tab']===tab;
+        b.classList.toggle('active',on);
+        b.style.background=on?'var(--accent)':'var(--surface)';
+        b.style.color=on?'#fff':'var(--muted)';
+        b.style.borderColor=on?'var(--accent)':'var(--border)';
+        b.style.fontWeight=on?'700':'500';
+        b.style.boxShadow=on?'0 1px 4px rgba(37,99,235,.25)':'none';
+    });
+    document.querySelectorAll('.cic-pane').forEach(p=>{
+        const isActive=p.id==='cic-'+suffix+'-pane';
+        p.classList.toggle('active',isActive);
+        p.style.display=isActive?'block':'none';
+    });
+    const desc=document.getElementById('cic-desc');
+    if(desc) desc.textContent=tab==='portfolio'
+        ? 'Projectie van jóuw huidige portfolio: hoe het over 30 jaar groeit op basis van je eigen historische rendement. Pas rendement of jaarlijkse inleg aan.'
+        : 'Vrije simulatie los van je portfolio: kies zelf inleg, looptijd, rendement en risico om toekomstscenario\'s te vergelijken (conservatief / basis / agressief).';
+    if(tab==='portfolio') cicRenderPortfolioProjection();
+    else {
+        if(!CIC.whatIfInitialized) cicInitWhatIf();
+        cicUpdateWhatIfScenario();
+    }
+}
+
+function cicRenderPortfolioProjection(){
+    const current=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
+    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
+    const fullTl=(M?.investment_timeline||[]);const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);const allInvested=(D.total_invested||fullTl[fullTl.length-1]?.invested||0)+trInv+buxInv;
+    const investYears=M?.first_investment_date?((new Date()-new Date(M.first_investment_date.length<=7?M.first_investment_date+'-01':M.first_investment_date))/1000/60/60/24/365.25):0;
+    let historicalReturn=7.5;if(investYears>0&&allInvested>0) historicalReturn=Math.max(0,((current-allInvested)/allInvested/investYears)*100);
+
+    CIC.portfolioParams.currentBalance=current;CIC.portfolioParams.historicalReturn=historicalReturn;
+
+    const inputsEl=document.getElementById('cic-port-inputs');
+    const prevRate=document.getElementById('cic-port-rate')?.value;
+    const prevContrib=document.getElementById('cic-port-contrib')?.value;
+    inputsEl.innerHTML=`
+        <div style="min-width:120px">
+            <label class="cic-label">Huidig Saldo</label>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg);color:var(--muted)">${eur(current)}</div>
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Som van al je brokers — startpunt</div>
+        </div>
+        <div style="min-width:120px">
+            <label class="cic-label">Jaarlijks Rendement (%)</label>
+            <input type="number" id="cic-port-rate" value="${prevRate||historicalReturn.toFixed(2)}" step="0.1" min="0" max="20" class="cic-input" onchange="cicUpdatePortfolio()">
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Geschat uit je eigen historie — pas aan</div>
+        </div>
+        <div style="min-width:120px">
+            <label class="cic-label">Jaarlijkse Inleg (€)</label>
+            <input type="number" id="cic-port-contrib" value="${prevContrib||22200}" step="100" min="0" class="cic-input" onchange="cicUpdatePortfolio()">
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Wat je elk jaar extra bijstort</div>
+        </div>
+        <div style="min-width:120px">
+            <label class="cic-label">Projectieperiode</label>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg);color:var(--text)">30 jaar</div>
+            <div style="font-size:.6rem;color:var(--muted2);margin-top:3px">Vaste horizon van de projectie</div>
+        </div>
+    `;
+    cicUpdatePortfolio();
+}
+
+function cicUpdatePortfolio(){
+    const current=CIC.portfolioParams.currentBalance;
+    const rate=parseFloat(document.getElementById('cic-port-rate')?.value||CIC.portfolioParams.historicalReturn);const monthlyContrib=parseFloat(document.getElementById('cic-port-contrib')?.value||22200)/12;const result=cicCalculateFV(current,monthlyContrib,rate,30);
+
+    const kpisEl=document.getElementById('cic-port-kpis');
+    kpisEl.innerHTML=`
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Waarde in 30 jaar</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(result.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${pct(result.gainPct)}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Totale Inleg</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--text)">${eur(result.totalInvested,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${eur(monthlyContrib*12,0)}/jaar</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Totale Winst</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(result.totalGain,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">CAGR: ${result.cagr.toFixed(2)}%</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Startwaarde vs Eindwaarde</div>
+            <div style="font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--accent)">${eur(current,0)} → ${eur(result.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">x${(result.finalValue/current).toFixed(2)}</div>
+        </div>
+    `;
+
+    dc('cic-port-chart');
+    const labels=result.timeline.filter((_,i)=>i%12===0).map(t=>`${t.year}j`);const vals=result.timeline.filter((_,i)=>i%12===0).map(t=>t.value);const inv=result.timeline.filter((_,i)=>i%12===0).map(t=>t.invested);
+    charts['cic-port-chart']=new Chart(document.getElementById('cic-port-chart'),{type:'line',data:{labels,datasets:[{label:'Portfolio Waarde',data:vals,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.08)',borderWidth:2.5,fill:true,tension:.3,pointRadius:0,pointHoverRadius:5},{label:'Totale Inleg',data:inv,borderColor:'rgba(100,116,139,.6)',borderDash:[3,3],borderWidth:1.5,fill:false,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{backgroundColor:'rgba(0,0,0,.8)',titleFont:{size:11},bodyFont:{size:10},padding:8,cornerRadius:4,callbacks:{label:c=>'€'+c.raw.toLocaleString('nl-NL',{maximumFractionDigits:0})}}},scales:{y:{ticks:{callback:v=>'€'+v.toLocaleString('nl-NL',{maximumFractionDigits:0})}}}}});
+}
+
+function cicInitWhatIf(){
+    const p=CIC.whatIfParams;
+    const inputsEl=document.getElementById('cic-what-inputs');
+    inputsEl.innerHTML=`
+        <div>
+            <label class="cic-label">Maandse Inleg (€)</label>
+            <input type="number" id="cic-monthly" value="${p.monthlyContribution}" step="50" min="0" class="cic-input" onchange="CIC.whatIfParams.monthlyContribution=+this.value;cicUpdateWhatIfScenario()">
+        </div>
+        <div>
+            <label class="cic-label">Jaren</label>
+            <div style="display:flex;gap:8px;align-items:center">
+                <input type="range" id="cic-years" min="1" max="50" value="${p.years}" class="cic-slider" style="flex:1" oninput="CIC.whatIfParams.years=+this.value;cicUpdateWhatIfScenario()">
+                <span style="font-family:var(--mono);font-weight:700;min-width:35px;text-align:right">${p.years}j</span>
+            </div>
+        </div>
+        <div>
+            <label class="cic-label">Rendement (%)</label>
+            <div style="display:flex;gap:8px;align-items:center">
+                <input type="range" id="cic-rate" min="0" max="15" step="0.5" value="${p.annualInterest}" class="cic-slider" style="flex:1" oninput="CIC.whatIfParams.annualInterest=+this.value;cicUpdateWhatIfScenario()">
+                <span style="font-family:var(--mono);font-weight:700;min-width:35px;text-align:right">${p.annualInterest.toFixed(1)}%</span>
+            </div>
+        </div>
+        <div>
+            <label class="cic-label">Startsaldo (€)</label>
+            <input type="number" id="cic-start" value="${p.startBalance}" step="100" min="0" class="cic-input" onchange="CIC.whatIfParams.startBalance=+this.value;cicUpdateWhatIfScenario()">
+        </div>
+        <div>
+            <label class="cic-label">Volatiliteit</label>
+            <div class="cic-radio-group">
+                ${['low','normal','high'].map(v=>`<button class="cic-radio-btn ${p.volatility===v?'active':''}" onclick='CIC.whatIfParams.volatility="${v}";cicUpdateWhatIfScenario()'>${v==='low'?'Laag':v==='normal'?'Norm.':'Hoog'}</button>`).join('')}
+            </div>
+        </div>
+        <div>
+            <label class="cic-label">Inflatie (%)</label>
+            <input type="number" id="cic-inflation" value="${p.inflationRate}" step="0.1" min="0" max="10" class="cic-input" onchange="CIC.whatIfParams.inflationRate=+this.value;cicUpdateWhatIfScenario()">
+        </div>
+    `;
+    CIC.whatIfInitialized=true;
+}
+
+function cicUpdateWhatIfScenario(){
+    const p=CIC.whatIfParams;
+
+    document.getElementById('cic-years').value=p.years;
+    const yearsDisplay=document.querySelector('#cic-years')?.nextElementSibling;
+    if(yearsDisplay) yearsDisplay.textContent=p.years+'j';
+
+    document.getElementById('cic-rate').value=p.annualInterest;
+    const rateDisplay=document.querySelector('#cic-rate')?.nextElementSibling;
+    if(rateDisplay) rateDisplay.textContent=p.annualInterest.toFixed(1)+'%';
+
+    const low=cicCalculateFV(p.startBalance,p.monthlyContribution*0.8,Math.max(0,p.annualInterest-2),p.years);const base=cicCalculateFV(p.startBalance,p.monthlyContribution,p.annualInterest,p.years);const high=cicCalculateFV(p.startBalance,p.monthlyContribution*1.2,Math.min(15,p.annualInterest+2),p.years);
+    const realCAGR=base.cagr-p.inflationRate;
+
+    const kpisEl=document.getElementById('cic-what-kpis');
+    kpisEl.innerHTML=`
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Eindwaarde (Base)</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(base.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${pct(base.gainPct)}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Total P&L</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--green)">${eur(base.totalGain,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">vs ${eur(base.totalInvested,0)}</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">CAGR (Real)</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--accent)">${base.cagr.toFixed(2)}% / ${realCAGR.toFixed(2)}%</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Nominaal / Inflatie-adj</div>
+        </div>
+        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div class="cic-label">Scenario Range</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--yellow)">${eur(low.finalValue,0)} → ${eur(high.finalValue,0)}</div>
+            <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Cons. / Agg.</div>
+        </div>
+    `;
+
+    dc('cic-what-line-chart');const labels1=base.timeline.filter((_,i)=>i%12===0).map(t=>`${t.year}j`);
+    charts['cic-what-line-chart']=new Chart(document.getElementById('cic-what-line-chart'),{type:'line',data:{labels:labels1,datasets:[{label:'Conservative',data:low.timeline.filter((_,i)=>i%12===0).map(t=>t.value),borderColor:'#d97706',borderWidth:1.5,fill:false,pointRadius:0,tension:.3},{label:'Base Case',data:base.timeline.filter((_,i)=>i%12===0).map(t=>t.value),borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',borderWidth:2.5,fill:true,pointRadius:0,tension:.3},{label:'Aggressive',data:high.timeline.filter((_,i)=>i%12===0).map(t=>t.value),borderColor:'#059669',borderWidth:1.5,fill:false,pointRadius:0,tension:.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}},tooltip:{backgroundColor:'rgba(0,0,0,.8)',titleFont:{size:10},bodyFont:{size:9},padding:6,cornerRadius:4,callbacks:{label:c=>'€'+c.raw.toLocaleString('nl-NL',{maximumFractionDigits:0})}}},scales:{y:{ticks:{callback:v=>'€'+v.toLocaleString('nl-NL',{maximumFractionDigits:0})}}}}});
+
+    dc('cic-what-stack-chart');const labels2=base.timeline.filter((_,i)=>i%12===0).map(t=>`${t.year}j`);
+    charts['cic-what-stack-chart']=new Chart(document.getElementById('cic-what-stack-chart'),{type:'bar',data:{labels:labels2,datasets:[{label:'Inleggen',data:base.timeline.filter((_,i)=>i%12===0).map(t=>t.invested),backgroundColor:'rgba(100,116,139,.6)',stack:'stack'},{label:'Rendement',data:base.timeline.filter((_,i)=>i%12===0).map(t=>t.growth),backgroundColor:'rgba(5,150,105,.7)',stack:'stack'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}},tooltip:{backgroundColor:'rgba(0,0,0,.8)',titleFont:{size:10},bodyFont:{size:9},padding:6,cornerRadius:4}},scales:{x:{stacked:true,ticks:{callback:v=>'€'+v.toLocaleString('nl-NL',{maximumFractionDigits:0})}}}}});
+
+    const hm=cicGenerateHeatmap(p.startBalance,p.monthlyContribution,Math.min(30,p.years));const ratesArr=Object.keys(hm).map(Number).sort((a,b)=>a-b);const yearsArr=Array.from({length:Math.min(20,p.years)},(_,i)=>i+1);
+    const hmEl=document.getElementById('cic-what-heatmap');const rows=yearsArr.map(y=>{const cells=ratesArr.map(r=>{const d=hm[r]?.find(x=>x.year===y);if(!d) return'<td>—</td>';const val=Math.round(d.value/1000);const pctGain=d.gainPct;const alpha=Math.min(0.15+Math.abs(pctGain)/100*0.7,1);const bg=pctGain>=0?`rgba(5,150,105,${alpha})`:`rgba(220,38,38,${alpha})`;const fg=Math.abs(pctGain)>15?'#fff':(pctGain>=0?'#065f46':'#991b1b');return`<td style="background:${bg};color:${fg};padding:4px 6px;text-align:center;border-radius:2px" title="€${Math.round(d.value)}">${val}k</td>`;}).join('');return`<tr><td style="font-weight:700;padding-right:8px;min-width:30px">${y}j</td>${cells}</tr>`;}).join('');
+    hmEl.innerHTML=`<table style="border-collapse:collapse;width:100%;font-size:.65rem"><thead><tr><th></th>${ratesArr.map(r=>`<th style="padding:4px 2px;text-align:center;font-size:.6rem">${r}%</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderCompoundInterestCalculator(){
+    const current=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
+    const panel=document.getElementById('cic-panel');
+    if(!current){panel.style.display='none';return;}
+    panel.style.display='block';
+    cicSwitchTab(CIC.currentTab);
+}
 
 /* ══════════════════════════════════════════════════════
    INIT & RENDER ALL

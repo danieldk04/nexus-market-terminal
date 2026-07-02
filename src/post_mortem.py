@@ -8,10 +8,25 @@ import os
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+import yfinance as yf
 
 BASE_DIR    = Path(__file__).parent.parent
 DATA_PATH   = BASE_DIR / "data.json"
 MEMORY_PATH = BASE_DIR / "memory.json"
+
+# Sector ETFs voor rotatie-tracking (1-maand performance)
+SECTOR_ETFS = {
+    "Tech & AI":         "XLK",
+    "Financials":        "XLF",
+    "Healthcare":        "XLV",
+    "Energy":            "XLE",
+    "Industrials":       "XLI",
+    "Consumer Cyclical": "XLY",
+    "Consumer Defensive":"XLP",
+    "Utilities":         "XLU",
+    "Real Estate":       "XLRE",
+    "Materials":         "XLB",
+}
 
 
 def load_json(path, default):
@@ -66,6 +81,20 @@ def compute_pattern_stats(lessons: list) -> dict | None:
     }
 
 
+def fetch_sector_rotation() -> dict:
+    """Haal 1-maand ETF performance op voor sectorrotatie-signalen."""
+    rotation = {}
+    for sector, etf in SECTOR_ETFS.items():
+        try:
+            hist = yf.Ticker(etf).history(period="1mo", auto_adjust=True)
+            if hist is not None and len(hist) >= 5:
+                ret = round((float(hist["Close"].iloc[-1]) / float(hist["Close"].iloc[0]) - 1) * 100, 1)
+                rotation[sector] = ret
+        except Exception:
+            pass
+    return rotation
+
+
 def run_post_mortem():
     print("=== NEXUS POST-MORTEM STARTING ===")
 
@@ -86,6 +115,23 @@ def run_post_mortem():
     for sector, count in stats["best_sectors"]:
         sector_adjustments[sector] = sector_adjustments.get(sector, 0) + 0.3 * min(count, 3)
 
+    # Sectorrotatie: 1-maand ETF performance → aanvullende score-aanpassingen
+    print("Sector rotatie ophalen...")
+    sector_rotation = fetch_sector_rotation()
+    rotation_adj = {}
+    for sector, perf in sector_rotation.items():
+        if perf >= 5:
+            rotation_adj[sector] = 0.3   # Sterke sector: beloon
+        elif perf <= -5:
+            rotation_adj[sector] = -0.3  # Zwakke sector: straf
+    memory["sector_rotation"]     = sector_rotation
+    memory["sector_rotation_adj"] = rotation_adj
+    memory["sector_rotation_date"] = datetime.now(timezone.utc).isoformat()
+    if sector_rotation:
+        best_s  = max(sector_rotation, key=sector_rotation.get)
+        worst_s = min(sector_rotation, key=sector_rotation.get)
+        print(f"Rotatie: beste={best_s}({sector_rotation[best_s]}%), slechtste={worst_s}({sector_rotation[worst_s]}%)")
+
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         print("Geen ANTHROPIC_API_KEY — statistische summary opgeslagen zonder AI.")
@@ -98,6 +144,7 @@ def run_post_mortem():
         }
         with open(MEMORY_PATH, "w") as f:
             json.dump(memory, f, indent=4)
+        print("Sector rotatie en post-mortem opgeslagen (geen AI).")
         return
 
     import anthropic
