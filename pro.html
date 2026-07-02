@@ -2499,6 +2499,89 @@ function renderInvestmentTimeline(){
 }
 
 /* ══════════════════════════════════════════════════════
+   RENDEMENT PER JAAR
+   Rendement per kalenderjaar, stortingen uitgesloten — telkens gedeeld door de inleg aan het
+   BEGIN van dat specifieke jaar (niet de huidige totale inleg). Dat werkt hier wél goed, omdat
+   elk jaar op zichzelf staat: geen risico dat je winst over een tiny historische basis uit een
+   ver verleden deelt (het probleem dat de periode-KPI hierboven had bij lange bereiken).
+   Het openingsjaar (waarin de eerste storting viel) is een uitzondering: de startbasis is dan
+   bijna nul, dus dat jaar krijgt een aparte badge en telt niet mee in het gemiddelde.
+══════════════════════════════════════════════════════ */
+function renderYearlyReturns(){
+    const summaryEl=document.getElementById('yr-summary');
+    const listEl=document.getElementById('yr-list');
+    if(!summaryEl||!listEl) return;
+
+    const ctx=investmentContext();
+    const {pvh,allInvested,investedAtDate}=ctx;
+    if(pvh.length<2){
+        summaryEl.innerHTML='';
+        listEl.innerHTML='<div class="empty" style="font-size:.75rem">Beschikbaar na meerdere maandelijkse snapshots</div>';
+        return;
+    }
+
+    const firstYear=parseInt(pvh[0].date.slice(0,4),10);
+    const curYear=new Date().getFullYear();
+    const valueAtOrBefore=ym=>{ const c=pvh.filter(p=>p.date<=ym); return c.length?c[c.length-1]:null; };
+    const valueAtOrAfter =ym=>{ const c=pvh.filter(p=>p.date>=ym); return c.length?c[0]:null; };
+
+    const rows=[];
+    for(let y=firstYear;y<=curYear;y++){
+        const isFirst=y===firstYear, isCurrent=y===curYear;
+        const startEntry=isFirst ? valueAtOrAfter(y+'-01') : (valueAtOrBefore(y+'-01')||valueAtOrAfter(y+'-01'));
+        const endEntry=isCurrent ? pvh[pvh.length-1] : (valueAtOrBefore(y+'-12')||valueAtOrBefore((y+1)+'-01'));
+        if(!startEntry||!endEntry) continue;
+        const startInvested=investedAtDate(startEntry.date);
+        const endInvested=isCurrent?allInvested:investedAtDate(endEntry.date);
+        const gain=(endEntry.value-endInvested)-(startEntry.value-startInvested);
+        const pct=startInvested?(gain/startInvested*100):null;
+        rows.push({year:y,gain,pct,isFirst,isCurrent});
+    }
+
+    if(!rows.length){
+        summaryEl.innerHTML='';
+        listEl.innerHTML='<div class="empty" style="font-size:.75rem">Onvoldoende data</div>';
+        return;
+    }
+
+    // Gemiddelde/beste/slechtste over VOLLEDIGE jaren (opstartjaar + lopend jaar tellen niet mee —
+    // die zijn per definitie onvolledig of vertekend door een piepkleine startbasis)
+    const complete=rows.filter(r=>!r.isFirst&&!r.isCurrent&&r.pct!=null);
+    const avgPct=complete.length?complete.reduce((s,r)=>s+r.pct,0)/complete.length:null;
+    const best=complete.length?complete.reduce((a,b)=>b.pct>a.pct?b:a):null;
+    const worst=complete.length?complete.reduce((a,b)=>b.pct<a.pct?b:a):null;
+
+    const chip=(label,val,color,sub)=>`
+        <div style="flex:1;min-width:110px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">${label}</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;color:${color}">${val}</div>
+            ${sub?`<div style="font-size:.62rem;color:var(--muted)">${sub}</div>`:''}
+        </div>`;
+    summaryEl.innerHTML = avgPct!=null ? [
+        chip('Gemiddeld per jaar', (avgPct>=0?'+':'')+avgPct.toFixed(1)+'%', avgPct>=0?'var(--green)':'var(--red)', `${complete.length} volledige jaren`),
+        best?chip('Beste jaar', `${best.year}: ${best.pct>=0?'+':''}${best.pct.toFixed(1)}%`, 'var(--green)'):'',
+        worst?chip('Slechtste jaar', `${worst.year}: ${worst.pct>=0?'+':''}${worst.pct.toFixed(1)}%`, worst.pct>=0?'var(--green)':'var(--red)'):'',
+    ].join('') : '<div class="empty" style="font-size:.75rem">Nog geen volledig jaar afgerond</div>';
+
+    const maxAbs=Math.max(...rows.map(r=>Math.abs(r.pct||0)),1);
+    listEl.innerHTML=rows.slice().reverse().map(r=>{
+        const pct=r.pct;
+        const color=pct==null?'var(--muted)':pct>=0?'var(--green)':'var(--red)';
+        const barPct=pct==null?0:Math.min(Math.abs(pct)/maxAbs*100,100);
+        const badge=r.isFirst?'<span class="tag-chip" style="background:var(--bg);color:var(--muted);border:1px solid var(--border);margin-left:6px">opstartjaar</span>'
+                   :r.isCurrent?'<span class="tag-chip" style="background:var(--bg);color:var(--accent);border:1px solid var(--border);margin-left:6px">tot nu toe</span>':'';
+        return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)">
+            <div style="width:110px;flex-shrink:0;font-size:.8rem;font-weight:600;display:flex;align-items:center">${r.year}${badge}</div>
+            <div style="flex:1;height:7px;background:var(--bg);border-radius:4px;overflow:hidden;position:relative">
+                <div style="height:100%;border-radius:4px;background:${color};width:${barPct}%;margin-left:${pct!=null&&pct<0?'auto':'0'}"></div>
+            </div>
+            <div style="width:110px;flex-shrink:0;text-align:right;font-family:var(--mono);font-size:.82rem;font-weight:700;color:${color}">${pct!=null?(pct>=0?'+':'')+pct.toFixed(1)+'%':'—'}</div>
+            <div style="width:80px;flex-shrink:0;text-align:right;font-family:var(--mono);font-size:.65rem;color:var(--muted)">${pct!=null?(r.gain>=0?'+':'')+eur(Math.abs(r.gain),0):''}</div>
+        </div>`;
+    }).join('');
+}
+
+/* ══════════════════════════════════════════════════════
    BOT TAB
 ══════════════════════════════════════════════════════ */
 function renderBotTab(){
