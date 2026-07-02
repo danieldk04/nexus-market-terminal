@@ -2918,7 +2918,7 @@ function openChart(ticker){
     const frame=document.getElementById('tv-container');
     frame.innerHTML='';
     if(typeof TradingView!=='undefined'){
-        new TradingView.widget({container_id:'tv-container',symbol:tvSym(ticker),interval:'D',timezone:'Europe/Amsterdam',theme:'dark',backgroundColor:'#0d1117',gridColor:'rgba(31,41,55,0.5)',style:'1',locale:'nl',toolbar_bg:'#0d1117',enable_publishing:false,hide_side_toolbar:false,allow_symbol_change:true,save_image:false,width:'100%',height:'420'});
+        new TradingView.widget({container_id:'tv-container',symbol:tvSym(ticker),interval:'D',timezone:'Europe/Amsterdam',theme:'dark',backgroundColor:'#0d1117',gridColor:'rgba(31,41,55,0.5)',style:'3',locale:'nl',toolbar_bg:'#0d1117',enable_publishing:false,hide_side_toolbar:false,allow_symbol_change:true,save_image:false,width:'100%',height:'420'});
     }
     /* Analysis panels — zoek data in candidates en watchlist */
     const badge = document.getElementById('analysis-badge');
