@@ -3379,6 +3379,258 @@ function _pwaDismiss(){
     document.getElementById('pwa-banner').style.display='none';
     localStorage.setItem('pwa-dismissed','1');
 }
+
+/* ══════════════════════════════════════════════════════
+   IMPORT TAB — client-side CSV parsing (spiegelt Python backend)
+   Alles gebeurt lokaal in de browser; er wordt niets verstuurd.
+══════════════════════════════════════════════════════ */
+function _csvRows(text){
+    // Simpele RFC4180-achtige CSV parser (ondersteunt quoted velden met komma's)
+    const rows=[];let row=[],field='',inQ=false;
+    for(let i=0;i<text.length;i++){
+        const c=text[i];
+        if(inQ){
+            if(c==='"'){ if(text[i+1]==='"'){field+='"';i++;} else inQ=false; }
+            else field+=c;
+        } else {
+            if(c==='"') inQ=true;
+            else if(c===','){row.push(field);field='';}
+            else if(c==='\r'){ }
+            else if(c==='\n'){row.push(field);rows.push(row);row=[];field='';}
+            else field+=c;
+        }
+    }
+    if(field||row.length){row.push(field);rows.push(row);}
+    return rows.filter(r=>r.length>1||r[0]!=='');
+}
+function _csvObjects(text){
+    const rows=_csvRows(text);
+    if(!rows.length) return [];
+    const header=rows[0].map(h=>h.trim());
+    return rows.slice(1).map(r=>{
+        const o={}; header.forEach((h,i)=>o[h]=(r[i]!==undefined?r[i]:'')); return o;
+    });
+}
+
+/* ── TR CSV parser — mirror van _parse_tr_transactions_csv() in tr_portfolio.py ── */
+const TR_ISIN_NAMES={
+    'IE00BK5BQT80':{ticker:'VWCE.DE',name:'VWCE (All-World Acc)'},
+    'IE00BK5BR626':{ticker:'VHYL.AS',name:'VHYL (High Div Yield)'},
+    'LU1681048804':{ticker:'CSP1',name:'CSP1 (S&P 500 EUR)'},
+    'NL0011683594':{ticker:'TDIV.AS',name:'TDIV (Dev Div Leaders)'},
+    'BTC':{ticker:'BTC-EUR',name:'Bitcoin'},
+};
+function parseTRTransactionsCSV(text){
+    const objs=_csvObjects(text);
+    const acc={};
+    let rowsOk=0;
+    for(const row of objs){
+        const category=(row.category||'').trim();
+        const txType=(row.type||'').trim();
+        const symbol=(row.symbol||'').trim().toUpperCase();
+        if(!symbol) continue;
+        const sharesStr=(row.shares||'').trim();
+        const priceStr=(row.price||'').trim();
+        const amountStr=(row.amount||'').trim();
+        if(!sharesStr) continue;
+        const qty=parseFloat(sharesStr);
+        if(isNaN(qty)) continue;
+        if(!acc[symbol]) acc[symbol]={shares:0,cost_eur:0};
+        const h=acc[symbol];
+        if(category==='TRADING'&&txType==='BUY'){
+            let cost;
+            if(amountStr){ const a=parseFloat(amountStr); cost=isNaN(a)?(priceStr?qty*parseFloat(priceStr):0):Math.abs(a); }
+            else if(priceStr) cost=qty*parseFloat(priceStr);
+            else continue;
+            h.shares+=qty; h.cost_eur+=cost; rowsOk++;
+        } else if(category==='DELIVERY'&&txType==='FREE_RECEIPT'){
+            if(priceStr){ const p=parseFloat(priceStr); if(p>0){ h.shares+=qty; h.cost_eur+=qty*p; rowsOk++; } }
+        } else if(category==='TRADING'&&txType==='SELL'){
+            if(h.shares>0&&qty>0){ const ratio=Math.min(qty/h.shares,1); h.cost_eur*=(1-ratio); h.shares=Math.max(0,h.shares-qty); rowsOk++; }
+        }
+    }
+    const result=[];
+    for(const symbol in acc){
+        const h=acc[symbol];
+        if(h.shares>0.0001&&h.cost_eur>0){
+            const meta=TR_ISIN_NAMES[symbol]||{ticker:symbol,name:symbol};
+            result.push({isin:symbol,ticker:meta.ticker,name:meta.name,shares:h.shares,avg_price:h.cost_eur/h.shares,cost_eur:h.cost_eur});
+        }
+    }
+    return {positions:result,rowsOk,rowsTotal:objs.length};
+}
+
+/* ── BUX CSV parser — mirror van _parse_bux_transactions_csv() in morning_briefing.py ── */
+const BUX_ISIN_TO_TICKER={
+    'NL0000009082':'KPN.AS','US88160R1014':'TSLA.DE','US84615Q1031':'SPAX.PVT',
+    'US7134481081':'PEP','US29355A1079':'ENPH','US30303M1027':'META','US02079K3059':'GOOGL',
+    'US98986T1088':null,'US5949181045':'MSFT','US0231351067':'AMZN','US0378331005':'AAPL',
+    'US67066G1040':'NVDA','US46090E1038':'IVV','US4592001014':'IBM','NL0015436031':'ASML.AS','US46625H1005':'JPM',
+};
+function parseBUXTransactionsCSV(text){
+    const objs=_csvObjects(text);
+    let ipoDebit=0,ipoCredit=0,ipoTotalShares=0,interestTotal=0,rowsOk=0;
+    for(const row of objs){
+        const cat=(row['Transaction Category']||'').trim();
+        const txType=(row['Transaction Type']||'').trim();
+        const xfer=(row['Transfer Type']||'').trim();
+        const currency=(row['Transaction Currency']||'').trim();
+        const amt=parseFloat(row['Transaction Amount']||'');
+        if(cat==='others'&&txType==='Ipo'&&currency==='EUR'&&!isNaN(amt)){
+            if(xfer==='CASH_DEBIT') ipoDebit+=Math.abs(amt);
+            else if(xfer==='CASH_CREDIT') ipoCredit+=Math.abs(amt);
+        }
+    }
+    const ipoNetEur=ipoDebit-ipoCredit;
+    for(const row of objs){
+        const cat=(row['Transaction Category']||'').trim();
+        const txType=(row['Transaction Type']||'').trim();
+        const xfer=(row['Transfer Type']||'').trim();
+        const qty=parseFloat(row['Asset Quantity']||'');
+        if(cat==='others'&&txType==='Ipo Assets'&&xfer==='ASSET_DEPOSIT'&&!isNaN(qty)) ipoTotalShares+=Math.abs(qty);
+    }
+    const acc={};
+    for(const row of objs){
+        const cat=(row['Transaction Category']||'').trim();
+        const txType=(row['Transaction Type']||'').trim();
+        const xferType=(row['Transfer Type']||'').trim();
+        const isin=(row['Asset Id']||'').trim();
+        const name=(row['Asset Name']||isin).trim();
+        const currency=(row['Transaction Currency']||'').trim();
+        const qtyStr=(row['Asset Quantity']||'').trim();
+        const amtStr=(row['Transaction Amount']||'').trim();
+
+        if(!isin&&xferType==='CASH_CREDIT'&&currency==='EUR'){
+            const tl=txType.toLowerCase();
+            if(tl.includes('interest')||tl.includes('rente')||tl.includes('saving')){
+                const a=Math.abs(parseFloat(amtStr)); if(!isNaN(a)&&a>0) interestTotal+=a;
+            }
+            continue;
+        }
+        if(!isin||!qtyStr||currency!=='EUR') continue;
+        const qty=Math.abs(parseFloat(qtyStr));
+        if(isNaN(qty)) continue;
+        if(!acc[isin]) acc[isin]={name,shares:0,cost_eur:0};
+        const h=acc[isin];
+        if(txType==='Buy Trade'&&xferType==='CASH_DEBIT'&&currency==='EUR'){
+            const a=Math.abs(parseFloat(amtStr));
+            if(!isNaN(a)){ h.shares+=qty; h.cost_eur+=a; rowsOk++; }
+        } else if(txType==='Sell Trade'&&xferType==='CASH_CREDIT'&&currency==='EUR'){
+            if(h.shares>0&&qty>0){ const ratio=Math.min(qty/h.shares,1); h.cost_eur*=(1-ratio); h.shares=Math.max(0,h.shares-qty); rowsOk++; }
+        } else if(cat==='others'&&txType==='Ipo Assets'&&xferType==='ASSET_DEPOSIT'){
+            h.shares+=qty;
+            if(ipoTotalShares>0) h.cost_eur+=ipoNetEur*(qty/ipoTotalShares);
+            rowsOk++;
+        }
+    }
+    const result=[];
+    const skipped=[];
+    for(const isin in acc){
+        const h=acc[isin];
+        if(h.shares<0.0001) continue;
+        const ticker=BUX_ISIN_TO_TICKER[isin];
+        if(ticker===undefined){ skipped.push({isin,name:h.name,reason:'onbekende ISIN — voeg toe aan BUX_ISIN_TO_TICKER'}); continue; }
+        if(ticker===null){ skipped.push({isin,name:h.name,reason:'acquired/delisted'}); continue; }
+        result.push({isin,ticker,name:h.name,shares:h.shares,avg_price:h.cost_eur/h.shares,cost_eur:h.cost_eur});
+    }
+    return {positions:result,skipped,interestTotal,rowsOk,rowsTotal:objs.length};
+}
+
+async function _renderImportPreview(containerId,positions,skipped,extra){
+    const el=document.getElementById(containerId);
+    el.innerHTML='<div class="loading" style="padding:12px"><div class="spin"></div> live prijzen ophalen...</div>';
+    const rows=await Promise.all(positions.map(async p=>{
+        const live=await fetchPrice(p.ticker).catch(()=>null);
+        const price=live&&live.price?live.price:null;
+        const value=price?price*p.shares:null;
+        const plPct=price?((price-p.avg_price)/p.avg_price*100):null;
+        return {...p,price,value,plPct};
+    }));
+    const totalValue=rows.reduce((s,r)=>s+(r.value||0),0);
+    const totalCost=rows.reduce((s,r)=>s+(r.cost_eur||0),0);
+    let html=`<table class="tbl" style="font-size:.7rem">
+        <thead><tr><th>Ticker</th><th class="r">Aandelen</th><th class="r">Gem. kostprijs</th><th class="r">Live prijs</th><th class="r">Waarde</th><th class="r">P&amp;L%</th></tr></thead>
+        <tbody>${rows.map(r=>`<tr>
+            <td><div class="ticker-cell">${r.ticker}</div><div class="name-cell">${r.name!==r.ticker?r.name:''}</div></td>
+            <td class="r">${r.shares.toFixed(4)}</td>
+            <td class="r">${eur(r.avg_price,2)}</td>
+            <td class="r">${r.price!=null?eur(r.price,2):'—'}</td>
+            <td class="r">${r.value!=null?eur(r.value,2):'—'}</td>
+            <td class="r" style="color:${r.plPct==null?'var(--muted)':(r.plPct>=0?'var(--green)':'var(--red)')}">${r.plPct!=null?pct(r.plPct):'—'}</td>
+        </tr>`).join('')}</tbody>
+    </table>
+    <div style="display:flex;gap:16px;margin-top:8px;font-size:.68rem;color:var(--muted)">
+        <span>Totaal waarde: <strong style="color:var(--text)">${eur(totalValue,2)}</strong></span>
+        <span>Totaal kostprijs: <strong style="color:var(--text)">${eur(totalCost,2)}</strong></span>
+        <span>${rows.length} posities · ${extra?.rowsOk||0}/${extra?.rowsTotal||0} regels verwerkt</span>
+    </div>`;
+    if(extra?.interestTotal){
+        html+=`<div style="margin-top:4px;font-size:.65rem;color:var(--muted)">Rente ontvangen: ${eur(extra.interestTotal,2)}</div>`;
+    }
+    if(skipped&&skipped.length){
+        html+=`<div style="margin-top:8px;padding:8px 10px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2);border-radius:6px;font-size:.65rem;color:var(--red)">
+            ${skipped.length} positie(s) overgeslagen: ${skipped.map(s=>`${s.name} (${s.reason})`).join(', ')}
+        </div>`;
+    }
+    if(extra?.trHoldings){
+        html+=`<div style="margin-top:10px">
+            <div style="font-size:.62rem;color:var(--muted);margin-bottom:4px">Gegenereerde <code>TR_HOLDINGS</code> (huidige posities, uit transactiehistorie):</div>
+            <textarea readonly style="width:100%;min-height:${Math.min(120,24+extra.trHoldings.split('\\n').length*16)}px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;font-family:var(--mono);font-size:.65rem;color:var(--text)">${extra.trHoldings}</textarea>
+            <button class="fbtn" style="margin-top:4px;cursor:pointer" onclick="navigator.clipboard.writeText(\`${extra.trHoldings.replace(/`/g,'\\`')}\`)">Kopieer TR_HOLDINGS</button>
+        </div>`;
+    }
+    el.innerHTML=html;
+}
+
+async function parseTRInput(){
+    const text=document.getElementById('tr-paste').value.trim();
+    const el=document.getElementById('tr-preview');
+    if(!text){ el.innerHTML='<div class="empty" style="font-size:.72rem">Plak of upload eerst een CSV.</div>'; return; }
+    let parsed;
+    try{ parsed=parseTRTransactionsCSV(text); }
+    catch(e){ el.innerHTML=`<div class="empty" style="font-size:.72rem;color:var(--red)">Parse-fout: ${e.message}</div>`; return; }
+    if(!parsed.positions.length){ el.innerHTML='<div class="empty" style="font-size:.72rem">Geen open posities gevonden — controleer of dit de juiste CSV-export is (kolommen: type, category, symbol, shares, price, amount).</div>'; return; }
+    const trHoldings=parsed.positions.map(p=>`${p.isin}\t${p.shares.toFixed(7)}`).join('\n');
+    await _renderImportPreview('tr-preview',parsed.positions,null,{rowsOk:parsed.rowsOk,rowsTotal:parsed.rowsTotal,trHoldings});
+}
+
+async function parseBUXInput(){
+    const text=document.getElementById('bux-paste').value.trim();
+    const el=document.getElementById('bux-preview');
+    if(!text){ el.innerHTML='<div class="empty" style="font-size:.72rem">Plak of upload eerst een CSV.</div>'; return; }
+    let parsed;
+    try{ parsed=parseBUXTransactionsCSV(text); }
+    catch(e){ el.innerHTML=`<div class="empty" style="font-size:.72rem;color:var(--red)">Parse-fout: ${e.message}</div>`; return; }
+    if(!parsed.positions.length && !parsed.skipped.length){ el.innerHTML='<div class="empty" style="font-size:.72rem">Geen posities gevonden — controleer of dit de juiste BUX-export is (kolommen: Transaction Category, Transaction Type, Transfer Type, Asset Id, Asset Quantity, Transaction Amount).</div>'; return; }
+    await _renderImportPreview('bux-preview',parsed.positions,parsed.skipped,{rowsOk:parsed.rowsOk,rowsTotal:parsed.rowsTotal,interestTotal:parsed.interestTotal});
+}
+
+function copyToClipboard(textareaId,msgId){
+    const ta=document.getElementById(textareaId);
+    if(!ta.value.trim()){ return; }
+    navigator.clipboard.writeText(ta.value).then(()=>{
+        const msg=document.getElementById(msgId);
+        msg.textContent='✓ Gekopieerd';
+        setTimeout(()=>{msg.textContent='';},2000);
+    });
+}
+
+function _wireImportDropzone(dropId,fileId,textareaId){
+    const drop=document.getElementById(dropId),file=document.getElementById(fileId),ta=document.getElementById(textareaId);
+    if(!drop||!file||!ta) return;
+    drop.addEventListener('click',()=>file.click());
+    file.addEventListener('change',()=>{ if(file.files[0]) _readFileInto(file.files[0],ta); });
+    ['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{ e.preventDefault(); drop.style.borderColor='var(--accent)'; }));
+    ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{ e.preventDefault(); drop.style.borderColor='var(--border2)'; }));
+    drop.addEventListener('drop',e=>{ const f=e.dataTransfer.files[0]; if(f) _readFileInto(f,ta); });
+}
+function _readFileInto(file,textarea){
+    const reader=new FileReader();
+    reader.onload=()=>{ textarea.value=reader.result; };
+    reader.readAsText(file);
+}
+_wireImportDropzone('tr-drop','tr-file','tr-paste');
+_wireImportDropzone('bux-drop','bux-file','bux-paste');
 </script>
 
 <!-- PWA install banner (verborgen tot beforeinstallprompt event) -->
