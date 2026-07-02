@@ -2264,8 +2264,44 @@ function renderPosTable(){
 /* ══════════════════════════════════════════════════════
    INVESTMENT TIMELINE
 ══════════════════════════════════════════════════════ */
-function renderInvestmentTimeline(){
+/* ── gedeelde helpers: kostprijs-op-datum, gebruikt door tijdlijn + jaaroverzicht ──
+   TR/BUX hebben geen kostprijs-historie, dus we tellen hun HUIDIGE kostprijs alleen mee vanaf
+   de eerst bekende dag dat die broker daadwerkelijk waarde had (portfolio_history). Vóór die
+   datum was het account er waarschijnlijk nog niet — anders tel je stortingen mee als "verlies
+   uit het verleden" dat later wordt "goedgemaakt", wat het rendement enorm opblaast. */
+function investmentContext(){
     const fullTl=(M?.investment_timeline||[]);
+    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
+    const currentPortfolio=(D.total||0)+(T.total||0)+(BX.total||0);
+    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
+    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
+    const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
+    const dailyHist=(M?.portfolio_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    const pvh=(M?.portfolio_value_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    function findFirstSeen(key){
+        for(const p of dailyHist){ if((p[key]||0)>0) return p.date; }
+        return null;
+    }
+    const trFirstSeen=findFirstSeen('tr');
+    const buxFirstSeen=findFirstSeen('bux');
+    function investedAtDate(dateStr){
+        if(!dateStr) return allInvested;
+        const ym=dateStr.slice(0,7);
+        const match=fullTl.filter(t=>t.date<=ym);
+        // Vóór de eerste bekende DEGIRO-transactie was er simpelweg nog niets belegd (0),
+        // niet het HUIDIGE bedrag — anders herhaalt zich exact hetzelfde probleem als bij TR/BUX.
+        const degiroAtDate=match.length?match[match.length-1].invested:(fullTl.length?0:(D.total_invested||totalInvested));
+        const trPart=(!trFirstSeen||dateStr>=trFirstSeen)?trInv:0;
+        const buxPart=(!buxFirstSeen||dateStr>=buxFirstSeen)?buxInv:0;
+        return degiroAtDate+trPart+buxPart;
+    }
+    return {fullTl,D,T,BX,currentPortfolio,trInv,buxInv,totalInvested,allInvested,dailyHist,pvh,investedAtDate};
+}
+
+function renderInvestmentTimeline(){
+    const ctx=investmentContext();
+    const {fullTl,D,currentPortfolio,allInvested,totalInvested,pvh,dailyHist,investedAtDate}=ctx;
     const firstDate=M?.first_investment_date;
     const emptyEl=document.getElementById('inv-empty');
     const kpisEl=document.getElementById('inv-kpis');
@@ -2286,14 +2322,6 @@ function renderInvestmentTimeline(){
 
     const tl=filterRange(fullTl,invRange,true).length>=2?filterRange(fullTl,invRange,true):fullTl;
 
-    // Totale portfolio waarde nu
-    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
-    const currentPortfolio=(D.total||0)+(T.total||0)+(BX.total||0);
-    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
-    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
-    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
-    const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
-
     // Alle-tijden gain
     const gainAll=currentPortfolio-allInvested;
     const gainAllPct=allInvested?(gainAll/allInvested*100):0;
@@ -2307,33 +2335,8 @@ function renderInvestmentTimeline(){
 
     // Korte ranges (1W/1M) gebruiken DAGELIJKSE portfolio_history → echte vloeiende lijn.
     // Lange ranges gebruiken maandelijkse portfolio_value_history.
-    const pvh=(M?.portfolio_value_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
-    const dailyHist=(M?.portfolio_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
     const useDaily=(invRange==='1w'||invRange==='1m')&&dailyHist.length>=2;
     const useValueHistory=pvh.length>=2;
-
-    // Geïnvesteerd bedrag (kostprijs) op een gegeven datum — DEGIRO wijzigt maandelijks (fullTl).
-    // TR/BUX hebben geen kostprijs-historie, dus we tellen hun HUIDIGE kostprijs alleen mee vanaf
-    // de eerst bekende dag dat die broker daadwerkelijk waarde had (portfolio_history). Vóór die
-    // datum was het account er waarschijnlijk nog niet — anders tel je stortingen mee als "verlies
-    // uit het verleden" dat later wordt "goedgemaakt", wat het rendement enorm opblaast.
-    function findFirstSeen(key){
-        for(const p of dailyHist){ if((p[key]||0)>0) return p.date; }
-        return null;
-    }
-    const trFirstSeen=findFirstSeen('tr');
-    const buxFirstSeen=findFirstSeen('bux');
-    function investedAtDate(dateStr){
-        if(!dateStr) return allInvested;
-        const ym=dateStr.slice(0,7);
-        const match=fullTl.filter(t=>t.date<=ym);
-        // Vóór de eerste bekende DEGIRO-transactie was er simpelweg nog niets belegd (0),
-        // niet het HUIDIGE bedrag — anders herhaalt zich exact hetzelfde probleem als bij TR/BUX.
-        const degiroAtDate=match.length?match[match.length-1].invested:(fullTl.length?0:(D.total_invested||totalInvested));
-        const trPart=(!trFirstSeen||dateStr>=trFirstSeen)?trInv:0;
-        const buxPart=(!buxFirstSeen||dateStr>=buxFirstSeen)?buxInv:0;
-        return degiroAtDate+trPart+buxPart;
-    }
 
     // PERIODE-RENDEMENT — winst gemaakt tijdens de periode (waardegroei, stortingen uitgesloten),
     // uitgedrukt als % van de HUIDIGE totale inleg (net als "Totaal rendement" hierboven).
