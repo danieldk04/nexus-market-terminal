@@ -1915,7 +1915,7 @@ async function yfFetchJson(yfUrl) {
 function renderBenchmarkPanel(){
     const el=document.getElementById('bmark-panel');
     if(!el) return;
-    const ph=M?.portfolio_history||[];
+    const ph=(M?.portfolio_history||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
     if(ph.length<2){el.innerHTML='<div class="empty">Beschikbaar na meerdere briefing runs</div>';return;}
 
     // Portfolio YTD: vergelijk huidige waarde met begin van het jaar
