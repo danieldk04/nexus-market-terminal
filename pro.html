@@ -981,6 +981,78 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 
 </div></div>
 
+<!-- ═══════════════════════════════════════
+     TAB: IMPORT
+═══════════════════════════════════════ -->
+<div id="tab-import" class="tc"><div class="pw">
+
+    <div class="panel" style="padding:14px 16px">
+        <div style="font-size:.8rem;line-height:1.6;color:var(--muted)">
+            Upload of plak hier je <strong style="color:var(--text)">Trade Republic</strong>- en <strong style="color:var(--text)">BUX</strong>-exports.
+            De pagina leest ze direct in je browser uit (niets wordt verstuurd) en toont een preview van je posities, gemiddelde kostprijs en huidige waarde —
+            zodat je kan controleren of alles klopt vóórdat je het definitief verwerkt.
+            <br><br>
+            <strong style="color:var(--text)">Let op:</strong> deze site is statisch (GitHub Pages) en heeft geen eigen server — het dashboard (Portfolio-tab, historiek) wordt elke ochtend
+            automatisch bijgewerkt door een GitHub Action die de CSV's leest uit <em>GitHub Secrets</em>. Deze Import-tab kan die stap niet overslaan (dat zou credentials vereisen die ik nooit
+            namens jou mag invoeren), maar wél het kopiëren foutloos maken: parse → controleer de preview → kopieer → plak in de juiste secret → run de workflow.
+        </div>
+    </div>
+
+    <div class="col2">
+        <!-- TR import -->
+        <div class="panel">
+            <div class="ph"><span class="pt">Trade Republic — transacties CSV</span><span class="ptag">TR app → Profiel → Documenten → Alle tijd</span></div>
+            <div style="padding:14px 16px">
+                <div id="tr-drop" style="border:2px dashed var(--border2);border-radius:var(--r-sm);padding:22px;text-align:center;cursor:pointer;transition:.15s">
+                    <div style="font-size:.8rem;color:var(--muted)">Sleep je TR CSV hierheen, of <span style="color:var(--accent);font-weight:600">klik om te kiezen</span></div>
+                    <input type="file" id="tr-file" accept=".csv" style="display:none">
+                </div>
+                <textarea id="tr-paste" placeholder="...of plak de CSV-inhoud hier" style="width:100%;margin-top:10px;min-height:70px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;font-family:var(--mono);font-size:.68rem;color:var(--text);resize:vertical"></textarea>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <button class="fbtn active" style="cursor:pointer" onclick="parseTRInput()">Parse &amp; preview</button>
+                    <button class="fbtn" style="cursor:pointer" onclick="copyToClipboard('tr-paste','tr-copy-msg')">Kopieer CSV</button>
+                    <span id="tr-copy-msg" style="font-size:.65rem;color:var(--green);align-self:center"></span>
+                </div>
+                <div id="tr-preview" style="margin-top:12px"></div>
+                <div style="margin-top:10px;font-size:.62rem;color:var(--muted)">
+                    Deze CSV hoort in GitHub secret <code>TR_TRANSACTIONS_CSV</code>. Voor huidige aantallen aandelen heb je ook <code>TR_HOLDINGS</code> nodig — die genereert de preview hieronder automatisch (op basis van resterende posities in de transactiehistorie).
+                </div>
+                <a href="https://github.com/danieldk04/nexus-market-terminal/settings/secrets/actions" target="_blank" class="source-link" style="display:inline-block;margin-top:8px;font-size:.65rem;text-decoration:none;color:var(--accent);border:1px solid var(--border2);padding:4px 10px;border-radius:6px">→ Open GitHub Secrets</a>
+            </div>
+        </div>
+
+        <!-- BUX import -->
+        <div class="panel">
+            <div class="ph"><span class="pt">BUX — transacties CSV</span><span class="ptag">BUX app → Instellingen → Exporteer transacties</span></div>
+            <div style="padding:14px 16px">
+                <div id="bux-drop" style="border:2px dashed var(--border2);border-radius:var(--r-sm);padding:22px;text-align:center;cursor:pointer;transition:.15s">
+                    <div style="font-size:.8rem;color:var(--muted)">Sleep je BUX CSV hierheen, of <span style="color:var(--accent);font-weight:600">klik om te kiezen</span></div>
+                    <input type="file" id="bux-file" accept=".csv" style="display:none">
+                </div>
+                <textarea id="bux-paste" placeholder="...of plak de CSV-inhoud hier" style="width:100%;margin-top:10px;min-height:70px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;font-family:var(--mono);font-size:.68rem;color:var(--text);resize:vertical"></textarea>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <button class="fbtn active" style="cursor:pointer" onclick="parseBUXInput()">Parse &amp; preview</button>
+                    <button class="fbtn" style="cursor:pointer" onclick="copyToClipboard('bux-paste','bux-copy-msg')">Kopieer CSV</button>
+                    <span id="bux-copy-msg" style="font-size:.65rem;color:var(--green);align-self:center"></span>
+                </div>
+                <div id="bux-preview" style="margin-top:12px"></div>
+                <div style="margin-top:10px;font-size:.62rem;color:var(--muted)">
+                    Deze CSV hoort volledig (incl. header) in GitHub secret <code>BUX_TRANSACTIONS_CSV</code>.
+                </div>
+                <a href="https://github.com/danieldk04/nexus-market-terminal/settings/secrets/actions" target="_blank" class="source-link" style="display:inline-block;margin-top:8px;font-size:.65rem;text-decoration:none;color:var(--accent);border:1px solid var(--border2);padding:4px 10px;border-radius:6px">→ Open GitHub Secrets</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="padding:14px 16px">
+        <div style="font-size:.75rem;color:var(--muted)">
+            Na het bijwerken van de secret(s): ga naar <a href="https://github.com/danieldk04/nexus-market-terminal/actions" target="_blank" style="color:var(--accent)">GitHub → Actions → NEXUS Morning Briefing → Run workflow</a>
+            om het dashboard direct te verversen (anders gebeurt dit automatisch bij de volgende geplande run).
+        </div>
+    </div>
+
+</div></div>
+
 <!-- ═══ SCRIPT ═══ -->
 <script>
 /* ══════════════════════════════════════════════════════
