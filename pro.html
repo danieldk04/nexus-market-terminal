@@ -2572,8 +2572,8 @@ function renderYearlyReturns(){
                    :r.isCurrent?'<span class="tag-chip" style="background:var(--bg);color:var(--accent);border:1px solid var(--border);margin-left:6px">tot nu toe</span>':'';
         return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)">
             <div style="width:110px;flex-shrink:0;font-size:.8rem;font-weight:600;display:flex;align-items:center">${r.year}${badge}</div>
-            <div style="flex:1;height:7px;background:var(--bg);border-radius:4px;overflow:hidden;position:relative">
-                <div style="height:100%;border-radius:4px;background:${color};width:${barPct}%;margin-left:${pct!=null&&pct<0?'auto':'0'}"></div>
+            <div style="flex:1;height:7px;background:var(--bg);border-radius:4px;position:relative">
+                <div style="height:100%;border-radius:4px;background:${color};width:${barPct}%;position:absolute;top:0;${pct!=null&&pct<0?'right':'left'}:0"></div>
             </div>
             <div style="width:110px;flex-shrink:0;text-align:right;font-family:var(--mono);font-size:.82rem;font-weight:700;color:${color}">${pct!=null?(pct>=0?'+':'')+pct.toFixed(1)+'%':'—'}</div>
             <div style="width:80px;flex-shrink:0;text-align:right;font-family:var(--mono);font-size:.65rem;color:var(--muted)">${pct!=null?(r.gain>=0?'+':'')+eur(Math.abs(r.gain),0):''}</div>
