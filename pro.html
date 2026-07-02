@@ -1271,7 +1271,7 @@ function renderDashboard(){
     document.getElementById('b-val').textContent=eur(tv);
 
     // Vandaag's verandering in € vanuit portfolio_history
-    const ph=M?.portfolio_history||[];
+    const ph=(M?.portfolio_history||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
     const snap0=ph[0],snap1=ph.find((_,i)=>i>0);
     const tot0=snap0?((snap0.degiro||0)+(snap0.tr||0)+(snap0.bux||0)):0;
     const tot1=snap1?((snap1.degiro||0)+(snap1.tr||0)+(snap1.bux||0)):0;
