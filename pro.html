@@ -2008,8 +2008,8 @@ function renderInvestmentTimeline(){
     const kpisEl=document.getElementById('inv-kpis');
     const canvasWrap=document.querySelector('#inv-chart')?.parentElement;
 
-    const INV_RANGES=[['ytd','YTD'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
-    makeRangeBtns('inv-rbtn-row',INV_RANGES,invRange,r=>{invRange=r;renderInvestmentTimeline();});
+    const INV_RANGES=[['1w','1W'],['1m','1M'],['3m','3M'],['6m','6M'],['ytd','YTD'],['1y','1J'],['2y','2J'],['3y','3J'],['5y','5J'],['max','Max']];
+    makeRangeBtns('inv-rbtn-row',INV_RANGES,invRange,r=>{invRange=r;renderInvestmentTimeline();renderPosTable();});
 
     if(!fullTl.length){
         if(emptyEl) emptyEl.style.display='block';
@@ -2023,143 +2023,154 @@ function renderInvestmentTimeline(){
 
     const tl=filterRange(fullTl,invRange,true).length>=2?filterRange(fullTl,invRange,true):fullTl;
 
-    // KPIs altijd op basis van VOLLEDIGE tijdlijn (niet gefilterd)
-    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
-    const currentPortfolio=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
-
-    // Gebruik kostprijs van ALLE brokers — zelfde logica als dashboard banner
+    // Totale portfolio waarde nu
     const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
+    const currentPortfolio=(D.total||0)+(T.total||0)+(BX.total||0);
     const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
     const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
     const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
-    const gain=currentPortfolio-allInvested;
-    const gainPct=allInvested?(gain/allInvested*100):0;
-    // Beleggingsduur = werkelijke kalendermaanden van eerste aankoop tot vandaag
+
+    // Alle-tijden gain
+    const gainAll=currentPortfolio-allInvested;
+    const gainAllPct=allInvested?(gainAll/allInvested*100):0;
+
+    // Beleggingsduur
     const firstDateStr=firstDate||fullTl[0].date;
     const _sd=new Date(firstDateStr.length<=7?firstDateStr+'-01':firstDateStr);
-    const _nd=new Date();
-    const totalMonths=Math.max(0,(_nd.getFullYear()-_sd.getFullYear())*12+(_nd.getMonth()-_sd.getMonth()));
-    const years=Math.floor(totalMonths/12);
-    const remMonths=totalMonths%12;
+    const totalMonths=Math.max(0,(new Date().getFullYear()-_sd.getFullYear())*12+(new Date().getMonth()-_sd.getMonth()));
+    const years=Math.floor(totalMonths/12),remMonths=totalMonths%12;
     const duurStr=years>0?(years+'j'+(remMonths?` ${remMonths}m`:'')):(totalMonths+'m');
 
-    // KPI strip
-    const kpiColor=gain>=0?'var(--green)':'var(--red)';
-    kpisEl.innerHTML=`
-        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
-            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Eerste aankoop</div>
-            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${firstDate||fullTl[0].date}</div>
-        </div>
-        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
-            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Totaal geïnvesteerd</div>
-            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${eur(allInvested||totalInvested)}</div>
-        </div>
-        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
-            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Ongerealiseerde winst</div>
-            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;color:${kpiColor}">${gain>=0?'+':''}${eur(Math.abs(gain))} <span style="font-size:.78rem">(${gain>=0?'+':''}${gainPct.toFixed(1)}%)</span></div>
-        </div>
-        <div style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
-            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Beleggingsduur</div>
-            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${duurStr} <span style="font-size:.72rem;color:var(--muted)">(${totalMonths} mnd)</span></div>
-        </div>`;
-
-    document.getElementById('inv-meta').textContent=`${tl[0].date} – ${tl[tl.length-1].date} · ${tl.length} mnd getoond`;
-
-    // Gebruik portfolio_value_history als die beschikbaar is — anders fallback naar investment timeline
-    const pvh = (M?.portfolio_value_history||[]);
-    const useValueHistory = pvh.length >= 2;
-
-    let chartLabels, chartLine, chartBars;
+    // PERIODE-rendement — gebruik portfolio_value_history als beschikbaar
+    const pvh=(M?.portfolio_value_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    const useValueHistory=pvh.length>=2;
+    let periodStart=null,periodEnd=null,periodGain=null,periodGainPct=null;
 
     if(useValueHistory){
-        // Filter op hetzelfde bereik als de investment timeline
-        const tlDates = new Set(tl.map(t=>t.date));
-        // Gebruik portfolio_value_history gefilterd op geselecteerde range
-        const pvhFiltered = filterRange(pvh, invRange, true).length>=2
-            ? filterRange(pvh, invRange, true)
-            : pvh;
-        chartLabels = pvhFiltered.map(p=>p.date);
-        chartLine   = pvhFiltered.map(p=>p.value);
-        // Maandelijkse delta als bars (posi=groen, neg=rood)
-        chartBars   = pvhFiltered.map((p,i)=>i===0?0:p.value-(pvhFiltered[i-1]?.value||p.value));
+        const pvhFiltered=filterRange(pvh,invRange).length>=1?filterRange(pvh,invRange):pvh;
+        periodStart=pvhFiltered[0]?.value||null;
+        periodEnd=pvhFiltered[pvhFiltered.length-1]?.value||currentPortfolio;
+        if(periodStart&&periodEnd){
+            periodGain=periodEnd-periodStart;
+            periodGainPct=periodStart?(periodGain/periodStart*100):null;
+        }
     } else {
-        chartLabels = tl.map(t=>t.date);
-        chartLine   = tl.map(t=>t.invested);
-        chartBars   = tl.map((t,i)=>i===0?t.invested:Math.max(0,t.invested-(tl[i-1]?.invested||0)));
+        // Fallback: gebruik investment_timeline start-waarde
+        if(tl.length>=2){
+            periodStart=tl[0]?.invested||null;
+            periodEnd=currentPortfolio;
+            if(periodStart){periodGain=periodEnd-periodStart;periodGainPct=periodStart?(periodGain/periodStart*100):null;}
+        }
     }
 
-    const barColors = chartBars.map(v=>v>=0?'rgba(5,150,105,.5)':'rgba(220,38,38,.5)');
-    const lineColor = gain>=0?'#059669':'#dc2626';
-    const lineFill  = gain>=0?'rgba(5,150,105,.08)':'rgba(220,38,38,.06)';
-    const lineLabel = useValueHistory?'Portfoliowaarde':'Cumulatief geïnvesteerd (DEGIRO)';
+    const rangeLabelMap={'1w':'1 Week','1m':'1 Maand','3m':'3 Maanden','6m':'6 Maanden','ytd':'Year-to-Date','1y':'1 Jaar','2y':'2 Jaar','3y':'3 Jaar','5y':'5 Jaar','max':'Totaal'};
+    const rangeLabel=rangeLabelMap[invRange]||invRange;
+    const periodColor=periodGain!=null?(periodGain>=0?'var(--green)':'var(--red)'):'var(--muted)';
+    const allTimeColor=gainAll>=0?'var(--green)':'var(--red)';
 
-    const datasets=[
-        {
-            type:'bar',
-            label:'Maandelijkse verandering',
-            data:chartBars,
-            backgroundColor:barColors,
-            borderRadius:2,
-            borderSkipped:false,
-            yAxisID:'yBar',
-            order:2
-        },
-        {
-            type:'line',
-            label:lineLabel,
-            data:chartLine,
-            borderColor:lineColor,
-            backgroundColor:lineFill,
-            borderWidth:2.5,
-            pointRadius:0,
-            pointHoverRadius:4,
-            fill:true,
-            tension:.35,
-            yAxisID:'y',
-            order:1
-        }
-    ];
+    // Samengesteld jaarlijks rendement (CAGR) op basis van totale duur
+    const cagrMonths=totalMonths;
+    const cagr=cagrMonths>=12&&allInvested>0?((Math.pow(currentPortfolio/allInvested,12/cagrMonths)-1)*100):null;
 
-    // Kostprijs totaal als referentielijn (alleen als we de waarde-lijn tonen)
-    if(useValueHistory && allInvested>0){
+    kpisEl.innerHTML=`
+        <div style="flex:2;min-width:160px;border:2px solid ${periodGain!=null?(periodGain>=0?'rgba(5,150,105,.3)':'rgba(220,38,38,.3)'):'var(--border)'};border-radius:var(--r-sm);padding:10px 16px;background:${periodGain!=null?(periodGain>=0?'rgba(5,150,105,.04)':'rgba(220,38,38,.04)'):'transparent'}">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${periodColor};margin-bottom:4px">Rendement ${rangeLabel}</div>
+            <div style="font-family:var(--mono);font-size:1.35rem;font-weight:800;color:${periodColor}">${periodGainPct!=null?(periodGainPct>=0?'+':'')+periodGainPct.toFixed(2)+'%':'—'}</div>
+            <div style="font-family:var(--mono);font-size:.75rem;color:${periodColor};margin-top:2px">${periodGain!=null?(periodGain>=0?'+':'')+eur(Math.abs(periodGain),0):'—'}</div>
+        </div>
+        <div style="flex:1;min-width:110px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Totaal rendement</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;color:${allTimeColor}">${gainAll>=0?'+':''}${gainAllPct.toFixed(1)}%</div>
+            <div style="font-family:var(--mono);font-size:.72rem;color:${allTimeColor}">${gainAll>=0?'+':''}${eur(Math.abs(gainAll),0)}</div>
+        </div>
+        <div style="flex:1;min-width:110px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">CAGR (jaarlijks)</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700;color:${cagr!=null?(cagr>=0?'var(--green)':'var(--red)'):'var(--muted)'}">${cagr!=null?(cagr>=0?'+':'')+cagr.toFixed(1)+'%':'—'}</div>
+            <div style="font-size:.62rem;color:var(--muted)">${duurStr} belegd</div>
+        </div>
+        <div style="flex:1;min-width:110px;border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px">
+            <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Geïnvesteerd</div>
+            <div style="font-family:var(--mono);font-size:.95rem;font-weight:700">${eur(allInvested||totalInvested)}</div>
+            <div style="font-size:.62rem;color:var(--muted)">vanaf ${firstDate||fullTl[0].date}</div>
+        </div>`;
+
+    document.getElementById('inv-meta').textContent=`${tl[0]?.date||''} – ${tl[tl.length-1]?.date||''} · ${tl.length} mnd getoond`;
+
+    // Chart data — pure lijn (Trade Republic stijl), geen bars
+    let chartLabels,chartLine,chartInvested;
+
+    if(useValueHistory){
+        const pvhFiltered=filterRange(pvh,invRange).length>=2?filterRange(pvh,invRange):pvh;
+        chartLabels=pvhFiltered.map(p=>p.date.slice(5));
+        chartLine=pvhFiltered.map(p=>p.value);
+        // Genormaliseerde invested lijn (stap-functie op basis van investment_timeline)
+        chartInvested=pvhFiltered.map(p=>{
+            const match=fullTl.filter(t=>t.date<=p.date.slice(0,7));
+            return match.length?match[match.length-1].invested:null;
+        });
+    } else {
+        chartLabels=tl.map(t=>t.date.slice(5));
+        chartLine=tl.map(t=>t.invested);
+        chartInvested=null;
+    }
+
+    const lineIsPositive=periodGain!=null?periodGain>=0:gainAll>=0;
+    const lineColor=lineIsPositive?'#059669':'#dc2626';
+    const lineFill=lineIsPositive?'rgba(5,150,105,.08)':'rgba(220,38,38,.06)';
+    const lineLabel=useValueHistory?'Portfoliowaarde':'Cumulatief geïnvesteerd';
+
+    const datasets=[{
+        type:'line',label:lineLabel,data:chartLine,
+        borderColor:lineColor,backgroundColor:lineFill,borderWidth:2.5,
+        pointRadius:0,pointHoverRadius:5,fill:true,tension:.35,order:1
+    }];
+
+    if(chartInvested&&chartInvested.some(v=>v!=null)){
         datasets.push({
-            type:'line',
-            label:'Kostprijs totaal',
-            data:chartLabels.map(()=>allInvested),
-            borderColor:'rgba(100,116,139,.7)',
-            backgroundColor:'transparent',
-            borderWidth:1.5,
-            borderDash:[3,3],
-            pointRadius:0,
-            fill:false,
-            tension:0,
-            yAxisID:'y',
-            order:0
+            type:'line',label:'Ingelegd',data:chartInvested,
+            borderColor:'rgba(100,116,139,.6)',backgroundColor:'transparent',
+            borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,tension:0,order:2
+        });
+    }
+
+    // Periode-start markerlijn
+    if(periodStart!=null&&useValueHistory){
+        datasets.push({
+            type:'line',label:'Periodestart',
+            data:chartLabels.map(()=>periodStart),
+            borderColor:'rgba(37,99,235,.35)',backgroundColor:'transparent',
+            borderWidth:1,borderDash:[2,4],pointRadius:0,fill:false,tension:0,order:3
         });
     }
 
     dc('inv-chart');
-    const maxAbsBar = Math.max(...chartBars.map(Math.abs), 1);
     charts['inv-chart']=new Chart(document.getElementById('inv-chart'),{
-        type:'bar',
-        data:{labels:chartLabels, datasets},
+        type:'line',
+        data:{labels:chartLabels,datasets},
         options:{
-            responsive:true, maintainAspectRatio:false,
-            interaction:{mode:'index', intersect:false},
+            responsive:true,maintainAspectRatio:false,
+            interaction:{mode:'index',intersect:false},
             plugins:{
-                legend:{display:true, position:'top', labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true,filter:i=>i.datasetIndex!==0}},
-                tooltip:{...TT, callbacks:{label:c=>{
-                    if(c.datasetIndex===0){
-                        const v=c.raw||0;
-                        return ` ${v>=0?'+':''}${eur(v)}`;
+                legend:{display:true,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:10,usePointStyle:true,
+                    filter:i=>i.text!=='Periodestart'
+                }},
+                tooltip:{...TT,callbacks:{
+                    title:t=>`📅 ${t[0]?.label||''}`,
+                    label:c=>{
+                        const v=c.raw;
+                        if(c.dataset.label==='Periodestart') return null;
+                        if(c.dataset.label==='Ingelegd') return ` Ingelegd: ${eur(v,0)}`;
+                        const pVal=periodStart;
+                        const periodRet=pVal&&v!=null?((v-pVal)/pVal*100):null;
+                        const retStr=periodRet!=null?` (${periodRet>=0?'+':''}${periodRet.toFixed(1)}% ${rangeLabel})`:'';
+                        return ` ${c.dataset.label}: ${eur(v,0)}${retStr}`;
                     }
-                    return ` ${c.dataset.label}: ${eur(c.raw||0)}`;
-                }}}
+                }}
             },
             scales:{
-                x:{grid:{display:false}, ticks:{color:'#94a3b8', maxTicksLimit:14, font:{family:'JetBrains Mono',size:10}}},
-                y:{position:'left', grid:{color:'rgba(226,232,240,.5)'}, ticks:{color:'#94a3b8', font:{family:'JetBrains Mono',size:10}, callback:v=>eur(v)}},
-                yBar:{position:'right', display:false, max:maxAbsBar*8, min:-maxAbsBar*8, grid:{display:false}}
+                x:{grid:{display:false},ticks:{color:'#94a3b8',maxTicksLimit:12,font:{family:'JetBrains Mono',size:10}}},
+                y:{grid:{color:'rgba(226,232,240,.5)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10},callback:v=>eur(v,0)}}
             }
         }
     });
