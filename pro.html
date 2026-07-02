@@ -2325,7 +2325,14 @@ function renderInvestmentTimeline(){
         return degiroAtDate+trPart+buxPart;
     }
 
-    // PERIODE-RENDEMENT — echte performance (waardegroei), stortingen tijdens de periode uitgesloten
+    // PERIODE-RENDEMENT — winst gemaakt tijdens de periode (waardegroei, stortingen uitgesloten),
+    // uitgedrukt als % van de HUIDIGE totale inleg (net als "Totaal rendement" hierboven).
+    // Let op: delen door de inleg aan het BEGIN van de periode lijkt logischer, maar loopt volledig
+    // uit de hand zodra je portfolio grotendeels via latere stortingen is gegroeid — vroeg in de
+    // tijdlijn was er soms maar een paar honderd euro belegd, dus een winst van een paar duizend euro
+    // t.o.v. dat kleine bedrag geeft een percentage van honderden procenten dat niets zegt over
+    // je werkelijke rendement. Door consequent door de huidige inleg te delen blijft het cijfer
+    // altijd binnen realistische grenzen en vergelijkbaar tussen periodes.
     let periodStart=null,periodEnd=null,periodGain=null,periodGainPct=null;
     if(useDaily){
         const dFiltered=filterRange(dailyHist,invRange,false);
@@ -2335,7 +2342,7 @@ function renderInvestmentTimeline(){
         periodEnd=toTotal(series[series.length-1])||currentPortfolio;
         const startInvested=investedAtDate(series[0]?.date);
         periodGain=(periodEnd-allInvested)-(periodStart-startInvested);
-        periodGainPct=startInvested?(periodGain/startInvested*100):null;
+        periodGainPct=allInvested?(periodGain/allInvested*100):null;
     } else if(useValueHistory){
         const pvhFiltered=filterRange(pvh,invRange).length>=1?filterRange(pvh,invRange):pvh;
         periodStart=pvhFiltered[0]?.value||null;
@@ -2343,14 +2350,14 @@ function renderInvestmentTimeline(){
         const startInvested=investedAtDate(pvhFiltered[0]?.date);
         if(periodStart!=null){
             periodGain=(periodEnd-allInvested)-(periodStart-startInvested);
-            periodGainPct=startInvested?(periodGain/startInvested*100):null;
+            periodGainPct=allInvested?(periodGain/allInvested*100):null;
         }
     } else if(tl.length>=2){
         periodStart=tl[0]?.invested||null;
         periodEnd=currentPortfolio;
         if(periodStart){
             periodGain=periodEnd-periodStart;
-            periodGainPct=periodStart?(periodGain/periodStart*100):null;
+            periodGainPct=allInvested?(periodGain/allInvested*100):null;
         }
     }
 
