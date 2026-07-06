@@ -214,6 +214,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-06",
+      "degiro": 16591.85,
+      "tr": 8412.32,
+      "nexus": 5270.6,
+      "bux": 2100.27
+    },
+    {
       "date": "2026-07-05",
       "degiro": 16588.84,
       "tr": 8395.77,
@@ -533,24 +540,24 @@
     "X-Fab ontploft op beurs door hype op X, handel meermaals stilgelegd",
     "Het is officieel: SpaceX voor 135 dollar per aandeel naar de beurs, en Musk haalt dus 75 miljard dollar op - NRC",
     "SpaceX keldert op de beurs: 400 miljard dollar verdampt in een dag",
-    "IPO aandelen kopen",
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
-    "\u2019SpaceX pakt op beurs direct dikke winst, enorme honger naar aandeel\u2019",
-    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?"
+    "IPO aandelen kopen",
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "\u2019SpaceX pakt op beurs direct dikke winst, enorme honger naar aandeel\u2019"
   ],
   "tr_summary": {
-    "total": 8395.77,
+    "total": 8412.32,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4533.57,
-        "price": 54901.7812,
+        "value": 4550.04,
+        "price": 55101.2383,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 54.0
+        "weight": 54.1
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -558,7 +565,7 @@
         "price": 155.3464,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.3
+        "weight": 15.2
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -578,19 +585,19 @@
       },
       {
         "name": "VHYL (High Div Yield)",
-        "value": 184.11,
-        "price": 79.822,
+        "value": 184.2,
+        "price": 79.859,
         "pl_pct": null,
         "pl_eur": null,
         "weight": 2.2
       }
     ]
   },
-  "dashboard_updated": "2026-07-05T19:01:15.404793+00:00",
+  "dashboard_updated": "2026-07-06T07:01:25.613498+00:00",
   "degiro_summary": {
-    "total": 16588.84,
-    "total_pl_pct": 35.19,
-    "total_invested": 12271.02,
+    "total": 16591.85,
+    "total_pl_pct": 35.21,
+    "total_invested": 12271.54,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -616,22 +623,22 @@
       },
       {
         "name": "VHYL.AS",
-        "value": 4470.03,
-        "pl_pct": 26.74,
-        "pl_eur": 943.15,
+        "value": 4472.1,
+        "pl_pct": 26.8,
+        "pl_eur": 945.22,
         "div_yield": 0.0248,
         "annual_div_eur": 110.82,
         "first_buy_date": null,
         "sector": null,
-        "weight": 26.9
+        "weight": 27.0
       },
       {
         "name": "V",
-        "value": 633.08,
+        "value": 634.02,
         "pl_pct": 79.32,
-        "pl_eur": 280.03,
+        "pl_eur": 280.45,
         "div_yield": 0.0074,
-        "annual_div_eur": 4.68,
+        "annual_div_eur": 4.69,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.8
@@ -640,35 +647,35 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX beursgang: volatiliteit en correctie",
-      "summary": "SpaceX is gedebuteerd op de beurs met grote initi\u00eble vraag, maar verliest daarna fors terrain met circa 20% daling en 400 miljard dollar verdamping in \u00e9\u00e9n dag. Dit illustreert typische IPO-volatiliteit en de risico's van overgewaardeerde nieuwkomers, wat relevant is voor wie exposure heeft naar groeiaandelen en tech-geori\u00ebnteerde fondsen."
+      "theme": "SpaceX beursgang: volatiliteit en waarderingen",
+      "summary": "SpaceX ging naar de beurs tegen 135 dollar per aandeel met Musk die 75 miljard dollar ophaalde, maar het aandeel vertoonde extreme volatiliteit met eerst forse winsten gevolgd door een daling van 400 miljard dollar in marktwaarde en 20% koersverlies in \u00e9\u00e9n dag. Dit illustreert de risico's van zeer gehypte IPO's en waarschuwt beleggers voor overbeveiligde technologieposities."
     },
     {
-      "theme": "Geopolitieke spanningen drukken markten",
-      "summary": "Oorlogen en spanningen in het Midden-Oosten (Iran-conflict) brengen onrust op de markten, met name in Azi\u00eb en voor sectoren als luchtvaart (Air France-KLM maakt verliezen). Dit raakt direct portefeuilles met internationale aandelen en ETFs die gevoelig zijn voor geopolitiek risico."
+      "theme": "Brede marktonrust en geopolitieke druk",
+      "summary": "De beurzen vertonen gemengde signalen met Europese aandelen hersteld maar Aziatische markten dalend door oorlogsangst met Iran, terwijl bitcoin onderuit gaat en sentiment op 'code oranje' staat. Dit geopolitieke risico raakt direct World en S&P500-ETF beleggers, vooral lucht- en defensiesectoren onder druk."
     },
     {
-      "theme": "Gemengde signalen in brede markten",
-      "summary": "Europese en Amerikaanse indices herstellen licht (AEX +1%), maar volatiliteit en sectorrotatie domineren het plaatje met daling van bitcoin en onzekerheid over AI-waarderingen. Voor ETF-beleggers betekent dit voorzichtigheid en potenti\u00eble herbalancering om marktbrede risico's in te perken."
+      "theme": "Sector-specifieke schokken: luchtvaart en chipfondsen",
+      "summary": "Air France-KLM kelderden op vliegannuleringen naar het Midden-Oosten, terwijl X-Fab exploderend steeg op speculatie voordat handel stilgelegd werd; dit toont extreme volatiliteit in cyclische en niche-sectoren. AEX-beleggers moeten alert blijven op dislocatie tussen sentiment en fundamentals."
     },
     {
-      "theme": "Beleggersstrategie: rendement versus risico",
-      "summary": "Ondanks beursstijgingen en groeiende rijkdom durven particuliere beleggers niet om te zetten naar aanwending; tegelijk blijkt overgewaardeerde hype (SpaceX, X-Fab) risicovol. Dit vraagt discipline en realisme: focus op fundamentele waarde in plaats van momentum-trading."
+      "theme": "Marktbreedte: AI-voorzichtigheid versus herstel",
+      "summary": "AEX steeg 1% in navolging van Amerikaanse beurs, maar een tweedeling ontstaat waarbij AI-aandelen voorzichtig zijn terwijl andere sectoren herstellen; sentiment is instabiel met beleggers die tussen paniek en FOMO laveren. Dit vereist gedisciplineerde positionering in gediversifieerde ETFs versus speculatieve aandelen."
     }
   ],
   "bux_summary": {
-    "total": 2097.17,
-    "total_pl_pct": -21.95,
+    "total": 2100.27,
+    "total_pl_pct": -21.84,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1803.15,
-        "price": 343.91,
-        "pl_pct": -17.02,
-        "pl_eur": -369.92,
+        "value": 1805.83,
+        "price": 344.43,
+        "pl_pct": -16.9,
+        "pl_eur": -367.24,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -678,12 +685,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 252.13,
-        "price": 126.06,
-        "pl_pct": -23.86,
-        "pl_eur": -79.01,
+        "value": 252.5,
+        "price": 126.25,
+        "pl_pct": -23.75,
+        "pl_eur": -78.64,
         "div_yield": 0.041,
-        "annual_div_eur": 10.34,
+        "annual_div_eur": 10.35,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 12.0
@@ -691,10 +698,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 37.65,
-        "price": 37.65,
-        "pl_pct": -79.03,
-        "pl_eur": -141.92,
+        "value": 37.7,
+        "price": 37.7,
+        "pl_pct": -79.0,
+        "pl_eur": -141.87,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
