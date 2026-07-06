@@ -102,6 +102,33 @@ def _parse_tr_holdings() -> list[dict]:
     return holdings
 
 
+def _sniff_tr_csv_reader(raw: str) -> csv.DictReader:
+    """
+    TR wisselt af en toe van CSV-dialect (komma vs. puntkomma, afhankelijk van
+    de taal/regio-instelling van het account). Detecteer het scheidingsteken i.p.v.
+    hardcoded komma aan te nemen, anders valt DictReader terug op 1 kolom per rij
+    en levert row.get(...) voor alles None op — precies het faalpatroon dat op
+    2026-07-05 alle TR-kostprijzen liet verdwijnen.
+    """
+    sample = raw[:4096]
+    try:
+        dialect = csv.Sniffer().sniff(sample, delimiters=",;\t")
+    except csv.Error:
+        dialect = csv.excel
+    return csv.DictReader(io.StringIO(raw), dialect=dialect)
+
+
+def _row_get(row: dict, *keys: str) -> str:
+    """Case-insensitive/whitespace-tolerante kolom-lookup — TR hernoemt kolommen
+    soms (bv. 'Symbol' vs 'symbol' vs 'ISIN') tussen exportversies."""
+    norm = {(k or "").strip().lower(): v for k, v in row.items()}
+    for key in keys:
+        v = norm.get(key.lower())
+        if v is not None:
+            return v
+    return ""
+
+
 def _parse_tr_transactions_csv() -> dict[str, float]:
     """
     Lees TR_TRANSACTIONS_CSV omgevingsvariabele (volledige inhoud van TR CSV-export).
@@ -124,19 +151,22 @@ def _parse_tr_transactions_csv() -> dict[str, float]:
     acc: dict[str, dict] = {}  # symbol → {shares, cost_eur}
 
     try:
-        reader = csv.DictReader(io.StringIO(raw))
+        reader = _sniff_tr_csv_reader(raw)
+        log.info(f"TR CSV kolommen gedetecteerd: {reader.fieldnames}")
         rows_processed = 0
+        rows_seen = 0
         for row in reader:
-            category = (row.get("category") or "").strip()
-            tx_type  = (row.get("type")     or "").strip()
-            symbol   = (row.get("symbol")   or "").strip().upper()
+            rows_seen += 1
+            category = _row_get(row, "category").strip().upper()
+            tx_type  = _row_get(row, "type").strip().upper()
+            symbol   = _row_get(row, "symbol", "isin").strip().upper()
 
             if not symbol:
                 continue
 
-            shares_str = (row.get("shares") or "").strip()
-            price_str  = (row.get("price")  or "").strip()
-            amount_str = (row.get("amount") or "").strip()
+            shares_str = _row_get(row, "shares").strip()
+            price_str  = _row_get(row, "price").strip()
+            amount_str = _row_get(row, "amount").strip()
 
             if not shares_str:
                 continue
@@ -185,7 +215,9 @@ def _parse_tr_transactions_csv() -> dict[str, float]:
                     h["shares"]   = max(0.0, h["shares"] - qty)
                     rows_processed += 1
 
-        log.info(f"TR CSV: {rows_processed} transactieregels verwerkt voor {len(acc)} symbolen.")
+        log.info(f"TR CSV: {rows_seen} rijen gelezen, {rows_processed} transactieregels verwerkt voor {len(acc)} symbolen.")
+        if rows_seen and not rows_processed:
+            log.warning("TR CSV: rijen gevonden maar 0 transacties herkend — controleer kolomnamen/categorie-waarden in de export.")
 
     except Exception as e:
         log.warning(f"TR CSV parsing fout: {e}")
@@ -217,11 +249,11 @@ def _parse_tr_interest() -> float:
 
     total = 0.0
     try:
-        reader = csv.DictReader(io.StringIO(raw))
+        reader = _sniff_tr_csv_reader(raw)
         for row in reader:
-            category   = (row.get("category") or "").strip().upper()
-            tx_type    = (row.get("type")      or "").strip().upper()
-            amount_str = (row.get("amount")    or "").strip()
+            category   = _row_get(row, "category").strip().upper()
+            tx_type    = _row_get(row, "type").strip().upper()
+            amount_str = _row_get(row, "amount").strip()
             # TR exporteert rente als type=INTEREST_PAYMENT of category=INTEREST/SAVING
             if "INTEREST" in tx_type or "INTEREST" in category or "SAVING" in category:
                 try:
