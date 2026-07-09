@@ -438,15 +438,19 @@ class SignalAnalyzer:
     
     def get_signal_performance(self) -> Dict:
         """
-        Calculate performance of historical signals
+        Calculate performance of historical signals, from real resolved
+        outcomes in the track record (not a mocked number).
         """
-        # In production, track actual outcomes
-        # For now, return mock metrics
-        
+        stats = self.track_record.stats_for()
+
         return {
             'total_signals': len(self.signal_history),
-            'win_rate': 0.67,  # Target >60%
-            'avg_confidence': 0.75,
+            'resolved_trades': stats['sample_size'],
+            'win_rate': stats['win_rate'],  # None until trades have resolved
+            'avg_confidence': (
+                sum(s['signal']['confidence'] for s in self.signal_history) / len(self.signal_history)
+                if self.signal_history else 0
+            ),
             'signals_by_type': {
                 'BUY': sum(1 for s in self.signal_history if s['signal']['type'] == 'BUY'),
                 'SELL': sum(1 for s in self.signal_history if s['signal']['type'] == 'SELL')
