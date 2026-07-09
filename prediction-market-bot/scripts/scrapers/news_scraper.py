@@ -11,6 +11,11 @@ import logging
 from typing import Dict, List
 from datetime import datetime, timedelta
 import re
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from sentiment_engine import score_text
 
 logger = logging.getLogger(__name__)
 
