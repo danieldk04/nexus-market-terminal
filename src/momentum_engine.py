@@ -76,54 +76,74 @@ def _atr(h: pd.DataFrame, n: int) -> float:
 
 # ── Raw indicator fetch ───────────────────────────────────────────────────────
 
+def indicators_from_hist(hist: pd.DataFrame, spy_6m: float) -> dict | None:
+    """
+    Compute every indicator required for Stage 2 classification and VCP
+    detection from a daily OHLCV DataFrame.
+
+    IMPORTANT — this uses ONLY the data present in `hist`, treating the last
+    row as "now". Feeding it a historical slice that ends at some past date T
+    therefore yields a point-in-time, lookahead-free snapshot: exactly the
+    indicators the live engine would have computed on date T. This is what
+    lets the backtester test precisely what runs in production.
+
+    `spy_6m` is SPY's trailing ~6-month return as of the same point in time,
+    used for the relative-strength leadership criterion.
+
+    Returns None if < 220 trading days of history are available.
+    """
+    if hist is None or len(hist) < 220:
+        return None
+    c, v = hist["Close"], hist["Volume"]
+    price = float(c.iloc[-1])
+    if price <= 0:
+        return None
+
+    sma200_now  = _sma(c, 200)
+    sma200_prev = _sma(c.iloc[:-30], 200) if len(c) >= 230 else sma200_now
+    sma200_slope = (sma200_now - sma200_prev) / sma200_prev if sma200_prev > 0 else 0.0
+
+    vol_today = float(v.iloc[-1])
+    vol_10d   = float(v.iloc[-11:-1].mean()) if len(v) >= 11 else vol_today
+    rvol      = vol_today / vol_10d if vol_10d > 0 else 1.0
+
+    stock_6m  = float(c.iloc[-1] / c.iloc[-126] - 1) if len(c) >= 126 else 0.0
+
+    return {
+        "price":        price,
+        "ema10":        _ema_last(c, 10),
+        "ema20":        _ema_last(c, 20),
+        "sma50":        _sma(c, 50),
+        "sma150":       _sma(c, 150),
+        "sma200":       sma200_now,
+        "sma200_slope": sma200_slope,
+        "low52":        float(c.iloc[-252:].min()) if len(c) >= 252 else float(c.min()),
+        "high52":       float(c.iloc[-252:].max()) if len(c) >= 252 else float(c.max()),
+        "atr14":        _atr(hist, 14),
+        "atr50":        _atr(hist, 50),
+        "range1m":      (float(c.iloc[-21:].max()) - float(c.iloc[-21:].min())) / price,
+        "rsi14":        _rsi(c, 14),
+        "macd_line":    _macd(c)[0],
+        "macd_sig":     _macd(c)[1],
+        "macd_hist":    _macd(c)[2],
+        "rvol":         rvol,
+        "vol_buzz":     (rvol - 1.0) * 100.0,
+        "vol_dryup":    (float(v.iloc[-20:].mean()) < float(v.iloc[-50:].mean()))
+                        if len(v) >= 50 else False,
+        "rs_leading":   stock_6m > spy_6m * 1.25,
+    }
+
+
 def _fetch_indicators(ticker: str) -> dict | None:
     """
-    Download 15 months of daily OHLCV and compute every indicator
-    required for Stage 2 classification and VCP detection.
+    Download 15 months of daily OHLCV and compute every indicator via
+    indicators_from_hist(). Live wrapper — uses the current SPY 6-month
+    return for the RS criterion.
     Returns None if < 220 trading days of history are available.
     """
     try:
         hist = yf.Ticker(ticker).history(period="15mo")
-        if hist is None or len(hist) < 220:
-            return None
-        c, v = hist["Close"], hist["Volume"]
-        price = float(c.iloc[-1])
-        if price <= 0:
-            return None
-
-        sma200_now  = _sma(c, 200)
-        sma200_prev = _sma(c.iloc[:-30], 200) if len(c) >= 230 else sma200_now
-        sma200_slope = (sma200_now - sma200_prev) / sma200_prev if sma200_prev > 0 else 0.0
-
-        vol_today = float(v.iloc[-1])
-        vol_10d   = float(v.iloc[-11:-1].mean()) if len(v) >= 11 else vol_today
-        rvol      = vol_today / vol_10d if vol_10d > 0 else 1.0
-
-        stock_6m  = float(c.iloc[-1] / c.iloc[-126] - 1) if len(c) >= 126 else 0.0
-
-        return {
-            "price":        price,
-            "ema10":        _ema_last(c, 10),
-            "ema20":        _ema_last(c, 20),
-            "sma50":        _sma(c, 50),
-            "sma150":       _sma(c, 150),
-            "sma200":       sma200_now,
-            "sma200_slope": sma200_slope,
-            "low52":        float(c.iloc[-252:].min()) if len(c) >= 252 else float(c.min()),
-            "high52":       float(c.iloc[-252:].max()) if len(c) >= 252 else float(c.max()),
-            "atr14":        _atr(hist, 14),
-            "atr50":        _atr(hist, 50),
-            "range1m":      (float(c.iloc[-21:].max()) - float(c.iloc[-21:].min())) / price,
-            "rsi14":        _rsi(c, 14),
-            "macd_line":    _macd(c)[0],
-            "macd_sig":     _macd(c)[1],
-            "macd_hist":    _macd(c)[2],
-            "rvol":         rvol,
-            "vol_buzz":     (rvol - 1.0) * 100.0,
-            "vol_dryup":    (float(v.iloc[-20:].mean()) < float(v.iloc[-50:].mean()))
-                            if len(v) >= 50 else False,
-            "rs_leading":   stock_6m > _spy_benchmark() * 1.25,
-        }
+        return indicators_from_hist(hist, _spy_benchmark())
     except Exception as e:
         log.debug("[%s] indicator fetch error: %s", ticker, e)
         return None
