@@ -232,6 +232,8 @@ def run_smart_analysis():
                 "news_used":      True,
                 "filing_used":    bool(filing_ctx),
                 "dcf_used":       bool(c.get("dcf")),
+                "stocktwits_bullish_ratio": sentiment_ctx["stocktwits"].get("bullish_ratio"),
+                "reddit_mentions":          sentiment_ctx["reddit_mention_count"],
             }
             updated = True
             print(f"  → {ticker} klaar | Sentiment: {sentiment}")
