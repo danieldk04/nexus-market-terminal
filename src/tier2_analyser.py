@@ -6,7 +6,6 @@ import json
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-import yfinance as yf
 import anthropic
 
 from social_sentiment import build_sentiment_context
