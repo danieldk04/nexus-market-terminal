@@ -180,18 +180,8 @@ class TwitterScraper:
         Analyze sentiment of a tweet
         Returns tweet with sentiment score added
         """
-        text = tweet['text'].lower()
-        
-        # Count positive and negative words
-        positive_count = sum(1 for word in self.positive_words if word in text)
-        negative_count = sum(1 for word in self.negative_words if word in text)
-        
-        # Calculate sentiment score (-1 to +1)
-        total = positive_count + negative_count
-        if total == 0:
-            sentiment_score = 0
-        else:
-            sentiment_score = (positive_count - negative_count) / total
+        # VADER: context/negation-aware sentiment (free, local, no API cost)
+        sentiment_score = score_text(tweet['text'])
         
         # Weight by engagement (likes + retweets)
         engagement = tweet['likes'] + tweet['retweets'] * 2
