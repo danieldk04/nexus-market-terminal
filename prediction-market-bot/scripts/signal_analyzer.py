@@ -7,11 +7,20 @@ Achieves >60% win rate through multi-signal analysis
 
 import asyncio
 import logging
+import re
 from typing import Dict, List, Optional
 from datetime import datetime
 import json
 
+from track_record import TrackRecord
+
 logger = logging.getLogger(__name__)
+
+_TITLE_STOPWORDS = {
+    'will', 'the', 'a', 'an', 'be', 'in', 'on', 'by', 'to', 'of', 'for',
+    'is', 'are', 'and', 'or', 'at', 'than', 'more', 'less', 'this', 'that',
+    'what', 'who', 'when', 'before', 'after', 'above', 'below', 'does', 'do'
+}
 
 
 class SignalAnalyzer:
@@ -19,10 +28,10 @@ class SignalAnalyzer:
     Analyzes market data and sentiment to generate trading signals
     Combines Twitter, Reddit, News, and market data
     """
-    
+
     def __init__(self, config: Dict):
         self.config = config
-        
+
         # Signal weights (must sum to 1.0)
         self.weights = {
             'twitter_sentiment': 0.30,
@@ -31,13 +40,20 @@ class SignalAnalyzer:
             'market_liquidity': 0.15,
             'historical_accuracy': 0.10
         }
-        
+
+        # Categories from config, used for both topic tagging and
+        # category-level historical stats (free — no external calls)
+        self.categories = config.get('categories', {})
+
         # Thresholds
         self.min_confidence = config['trading']['min_confidence']
         self.min_sources = 3  # Minimum data sources required
-        
-        # Historical signal tracking
+
+        # Historical signal tracking (in-memory, this session)
         self.signal_history = []
+
+        # Real, persisted win/loss track record (free, local JSON store)
+        self.track_record = TrackRecord()
     
     async def analyze(self, market: Dict, sentiment_data: Optional[Dict] = None) -> Optional[Dict]:
         """
