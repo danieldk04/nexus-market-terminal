@@ -213,7 +213,20 @@ def compute_s_momentum(
     ind = _fetch_indicators(ticker)
     if ind is None:
         return None
+    return score_from_indicators(ind, sector_rrg, short_interest_pct, days_to_cover)
 
+
+def score_from_indicators(
+    ind:                dict,
+    sector_rrg:         str   = "Lagging",
+    short_interest_pct: float = 0.0,
+    days_to_cover:      float = 0.0,
+) -> dict:
+    """
+    Pure scoring: turn a pre-computed indicator snapshot into S_Momentum and
+    its component factors. Shared by the live engine and the backtester so
+    both score identically. See compute_s_momentum() for the formula.
+    """
     p = ind["price"]
 
     # M factor: full Minervini Stage 2 alignment
