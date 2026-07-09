@@ -58,7 +58,7 @@ def get_filing_context(ticker: str, filings_data: dict) -> str:
     return "\n".join(lines)
 
 
-def build_bull_bear_prompt(c: dict, news: str, filing_ctx: str) -> str:
+def build_bull_bear_prompt(c: dict, sentiment_text: str, filing_ctx: str) -> str:
     ticker  = c["ticker"]
     name    = c.get("name", ticker)
     group   = c.get("industry_group", "?")
