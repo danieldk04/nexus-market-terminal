@@ -96,13 +96,25 @@ class SignalAnalyzer:
         if signal and signal['confidence'] >= self.min_confidence:
             logger.info(f"⚡ Signal generated: {signal['type']} with {signal['confidence']:.1%} confidence")
             
-            # Track signal
+            # Track signal in-memory (this session)
             self.signal_history.append({
                 'market_id': market['id'],
                 'signal': signal,
                 'timestamp': datetime.now().isoformat()
             })
-            
+
+            # Persist to the real track record so future analyze_historical()
+            # calls for this topic/category reflect actual outcomes once the
+            # position resolves (see track_record.record_outcome, called from
+            # main.py when a position closes).
+            self.track_record.record_signal(
+                market_id=market['id'],
+                topic=topic,
+                category=category,
+                signal_type=signal['type'],
+                entry=signal['entry']
+            )
+
             return signal
         else:
             logger.info("❌ No high-confidence signal found")
