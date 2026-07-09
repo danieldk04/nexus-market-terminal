@@ -217,18 +217,8 @@ class RedditScraper:
         """
         Analyze sentiment of a Reddit post
         """
-        text = (post['title'] + ' ' + post['text']).lower()
-        
-        # Count bullish and bearish terms
-        bullish_count = sum(1 for term in self.bullish_terms if term in text)
-        bearish_count = sum(1 for term in self.bearish_terms if term in text)
-        
-        # Calculate sentiment score
-        total = bullish_count + bearish_count
-        if total == 0:
-            sentiment_score = 0
-        else:
-            sentiment_score = (bullish_count - bearish_count) / total
+        # VADER: context/negation-aware sentiment (free, local, no API cost)
+        sentiment_score = score_text(post['title'] + ' ' + post['text'])
         
         # Adjust by upvote ratio and score
         engagement_weight = 1 + (post['score'] / 1000)  # Cap influence of high scores
