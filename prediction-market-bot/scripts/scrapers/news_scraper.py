@@ -188,19 +188,8 @@ class NewsScraper:
         """
         Analyze sentiment of a news article
         """
-        # Combine title and description for analysis
-        text = (article['title'] + ' ' + article['description']).lower()
-        
-        # Count positive and negative terms
-        positive_count = sum(1 for term in self.positive_terms if term in text)
-        negative_count = sum(1 for term in self.negative_terms if term in text)
-        
-        # Calculate sentiment score
-        total = positive_count + negative_count
-        if total == 0:
-            sentiment_score = 0
-        else:
-            sentiment_score = (positive_count - negative_count) / total
+        # VADER: context/negation-aware sentiment (free, local, no API cost)
+        sentiment_score = score_text(article['title'] + ' ' + article['description'])
         
         # Weight by source credibility
         credible_sources = ['bloomberg', 'reuters', 'financial times', 'wall street journal']
