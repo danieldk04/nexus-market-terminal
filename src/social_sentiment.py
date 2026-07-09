@@ -102,15 +102,23 @@ def get_stocktwits_sentiment(ticker: str) -> dict:
 
 def get_reddit_mentions(ticker: str, subreddits=("wallstreetbets", "stocks", "investing")) -> dict:
     """
-    Publieke Reddit search JSON — geen auth nodig voor read-only queries.
-    Telt recente mentions en pakt een paar titels als voorbeeld voor de LLM.
+    Reddit search via OAuth (free "script" app credentials, see
+    REDDIT_CLIENT_ID/SECRET above). Reddit's anonymous JSON endpoint now
+    403s unconditionally, so this is skipped entirely if no token can be
+    obtained — the rest of the sentiment pipeline still works fine.
     """
+    token = _get_reddit_token()
+    if not token:
+        return {"available": False, "mention_count": 0, "top_posts": []}
+
+    auth_headers = {"Authorization": f"bearer {token}", "User-Agent": REDDIT_USER_AGENT}
+
     all_posts = []
     for sub in subreddits:
         try:
-            url = f"https://www.reddit.com/r/{sub}/search.json"
+            url = f"https://oauth.reddit.com/r/{sub}/search"
             params = {"q": ticker, "restrict_sr": "on", "sort": "new", "t": "week", "limit": 10}
-            res = requests.get(url, headers=HEADERS, params=params, timeout=TIMEOUT)
+            res = requests.get(url, headers=auth_headers, params=params, timeout=TIMEOUT)
             if res.status_code != 200:
                 continue
             children = res.json().get("data", {}).get("children", [])
