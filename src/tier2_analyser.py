@@ -206,9 +206,9 @@ def run_smart_analysis():
             continue
 
         print(f"--- Analyseren: {ticker} ---")
-        news        = get_news(ticker)
-        filing_ctx  = get_filing_context(ticker, filings)
-        prompt      = build_bull_bear_prompt(c, news, filing_ctx)
+        sentiment_ctx = build_sentiment_context(ticker, c.get("name", ticker))
+        filing_ctx    = get_filing_context(ticker, filings)
+        prompt        = build_bull_bear_prompt(c, sentiment_ctx["text_block"], filing_ctx)
 
         try:
             message = client.messages.create(
