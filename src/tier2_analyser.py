@@ -9,6 +9,8 @@ from pathlib import Path
 import yfinance as yf
 import anthropic
 
+from social_sentiment import build_sentiment_context
+
 BASE_DIR    = Path(__file__).parent.parent
 DATA_PATH   = BASE_DIR / "data.json"
 MEMORY_PATH = BASE_DIR / "memory.json"
