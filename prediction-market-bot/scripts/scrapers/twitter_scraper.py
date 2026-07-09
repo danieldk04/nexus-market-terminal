@@ -35,21 +35,6 @@ class TwitterScraper:
         # Keywords to track
         self.keywords = config['scraping']['twitter_keywords']
         self.max_tweets = config['scraping'].get('twitter_max_tweets', 500)
-        
-        # Sentiment tracking
-        self.positive_words = set([
-            'bullish', 'moon', 'buy', 'pump', 'gain', 'profit', 'win', 'surge',
-            'rally', 'breakout', 'strong', 'confident', 'optimistic', 'green',
-            'up', 'rise', 'growth', 'boom', 'success', 'ath', 'rocket', '🚀',
-            '📈', '💎', '🔥', 'fire', 'amazing', 'great', 'excellent'
-        ])
-        
-        self.negative_words = set([
-            'bearish', 'dump', 'sell', 'crash', 'loss', 'fail', 'drop', 'fall',
-            'decline', 'weak', 'bearish', 'pessimistic', 'red', 'down', 'plunge',
-            'crash', 'bubble', 'scam', 'rug', 'dead', '📉', '💩', 'terrible',
-            'awful', 'disaster', 'warning', 'danger'
-        ])
     
     async def scrape(self) -> List[Dict]:
         """
