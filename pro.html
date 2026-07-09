@@ -3328,6 +3328,7 @@ function switchTab(name,skipRender=false){
     if(name==='bot'&&needRender.has('bot')){renderBotTab();needRender.delete('bot');}
     if(name==='nieuws'&&needRender.has('nieuws')){renderNieuwsTab();needRender.delete('nieuws');}
     if(name==='learn'&&needRender.has('learn')){renderLearnTab();needRender.delete('learn');}
+    if(name==='backtest'){renderBacktestTab();}
     if(name==='analyse'){renderChartsTab();}
 }
 document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
