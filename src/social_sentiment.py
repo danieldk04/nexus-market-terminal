@@ -9,7 +9,9 @@ Resultaat wordt zowel als tekstblok (voor de Tier-2 LLM-prompt) als
 gestructureerde data (bull/bear ratio) teruggegeven, zodat het ook
 buiten de LLM-analyse om bruikbaar is.
 """
+import os
 import re
+import time
 import xml.etree.ElementTree as ET
 from urllib.parse import quote
 
@@ -17,6 +19,40 @@ import requests
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; NEXUSBot/3.0; +danieldekoning66@gmail.com)"}
 TIMEOUT = 8
+
+# Reddit locked down its anonymous JSON endpoints (they now 403 regardless of
+# User-Agent). A free "script" app at https://www.reddit.com/prefs/apps still
+# gets full read access at zero cost — just set these two env vars to enable
+# it. Without them, Reddit mentions are silently skipped (StockTwits + Google
+# News still work with no setup at all).
+REDDIT_CLIENT_ID = os.environ.get("REDDIT_CLIENT_ID")
+REDDIT_CLIENT_SECRET = os.environ.get("REDDIT_CLIENT_SECRET")
+REDDIT_USER_AGENT = "python:nexus-sentiment:v1.0 (by /u/nexus-bot)"
+
+_reddit_token = {"value": None, "expires_at": 0}
+
+
+def _get_reddit_token() -> str | None:
+    if not REDDIT_CLIENT_ID or not REDDIT_CLIENT_SECRET:
+        return None
+    if _reddit_token["value"] and time.time() < _reddit_token["expires_at"]:
+        return _reddit_token["value"]
+    try:
+        res = requests.post(
+            "https://www.reddit.com/api/v1/access_token",
+            auth=(REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET),
+            data={"grant_type": "client_credentials"},
+            headers={"User-Agent": REDDIT_USER_AGENT},
+            timeout=TIMEOUT,
+        )
+        if res.status_code != 200:
+            return None
+        payload = res.json()
+        _reddit_token["value"] = payload["access_token"]
+        _reddit_token["expires_at"] = time.time() + payload.get("expires_in", 3600) - 60
+        return _reddit_token["value"]
+    except Exception:
+        return None
 
 
 def get_stocktwits_sentiment(ticker: str) -> dict:
