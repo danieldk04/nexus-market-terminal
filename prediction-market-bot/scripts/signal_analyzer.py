@@ -297,17 +297,29 @@ class SignalAnalyzer:
             'reason': f'Liquidity: ${liquidity:,.0f}'
         }
     
-    def analyze_historical(self, topic: str) -> Dict:
+    def analyze_historical(self, topic: str, category: str) -> Dict:
         """
-        Analyze historical accuracy for this topic/category
+        Real historical accuracy for this topic/category, computed from the
+        bot's own persisted track record (free — local JSON, no external
+        calls). Falls back topic -> category -> global as sample size grows,
+        so early trades aren't overfit to a handful of outcomes.
         """
-        # In production, this would query historical trade results
-        # For now, return neutral signal
-        
+        stats = self.track_record.stats_for(topic=topic, category=category)
+
+        if stats['sample_size'] == 0:
+            return {
+                'score': 0,
+                'confidence': 0,
+                'reason': 'No resolved trades yet for this topic/category'
+            }
+
         return {
-            'score': 0,
-            'confidence': 0.5,
-            'reason': 'Insufficient historical data'
+            'score': stats['score'],
+            'confidence': stats['confidence'],
+            'reason': (
+                f"{stats['sample_size']} resolved trades, "
+                f"{stats['win_rate']:.1%} historical win rate"
+            )
         }
     
     def combine_signals(self, market: Dict, twitter: Dict, reddit: Dict, 
