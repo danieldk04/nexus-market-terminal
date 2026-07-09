@@ -12,6 +12,11 @@ from typing import Dict, List
 from datetime import datetime, timedelta
 from collections import Counter
 import re
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from sentiment_engine import score_text
 
 logger = logging.getLogger(__name__)
 
@@ -21,33 +26,20 @@ class RedditScraper:
     Scrapes and analyzes Reddit for market sentiment
     Uses Reddit API (PRAW wrapper or direct REST)
     """
-    
+
     def __init__(self, config: Dict):
         self.config = config
         self.api_base = 'https://oauth.reddit.com'
         self.auth_url = 'https://www.reddit.com/api/v1/access_token'
-        
+
         self.client_id = config['api_keys'].get('reddit_client_id', '')
         self.client_secret = config['api_keys'].get('reddit_client_secret', '')
-        
+
         self.subreddits = config['scraping']['reddit_subreddits']
         self.max_posts = config['scraping'].get('reddit_max_posts', 100)
-        
+
         self.access_token = None
-        
-        # Sentiment keywords
-        self.bullish_terms = set([
-            'bullish', 'buy', 'moon', 'rocket', 'calls', 'long', 'pump',
-            'gains', 'yolo', 'hold', 'hodl', 'diamond hands', 'to the moon',
-            '🚀', '📈', '💎', '🙌', 'ath', 'breakout', 'surge'
-        ])
-        
-        self.bearish_terms = set([
-            'bearish', 'sell', 'puts', 'short', 'dump', 'crash', 'rug',
-            'scam', 'bubble', 'overvalued', 'dead', 'paper hands',
-            '📉', '💩', 'rip', 'bag holder'
-        ])
-    
+
     async def scrape(self) -> List[Dict]:
         """
         Scrape Reddit for relevant posts and comments
