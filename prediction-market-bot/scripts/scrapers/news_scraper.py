@@ -34,20 +34,7 @@ class NewsScraper:
         self.sources = config['scraping'].get('news_sources', [
             'bloomberg', 'reuters', 'coindesk', 'cnbc', 'financial-times'
         ])
-        
-        # Sentiment keywords
-        self.positive_terms = set([
-            'surge', 'gains', 'rally', 'boom', 'growth', 'profit', 'success',
-            'breakthrough', 'record', 'high', 'optimistic', 'bullish', 'rise',
-            'increase', 'strong', 'positive', 'advance', 'expand', 'recover'
-        ])
-        
-        self.negative_terms = set([
-            'crash', 'fall', 'plunge', 'decline', 'drop', 'loss', 'crisis',
-            'collapse', 'failure', 'recession', 'bearish', 'pessimistic', 'weak',
-            'negative', 'retreat', 'shrink', 'downturn', 'risk', 'concern'
-        ])
-    
+
     async def scrape(self) -> List[Dict]:
         """
         Scrape news articles
