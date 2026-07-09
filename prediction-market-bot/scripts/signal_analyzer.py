@@ -74,13 +74,14 @@ class SignalAnalyzer:
         
         # Extract topic from market title
         topic = self.extract_topic(market['title'])
-        
+        category = self.get_category(topic)
+
         # Get sentiment from each source
         twitter_signal = self.analyze_twitter(topic, sentiment_data.get('twitter', []))
         reddit_signal = self.analyze_reddit(topic, sentiment_data.get('reddit', []))
         news_signal = self.analyze_news(topic, sentiment_data.get('news', []))
         liquidity_signal = self.analyze_liquidity(market)
-        historical_signal = self.analyze_historical(topic)
+        historical_signal = self.analyze_historical(topic, category)
         
         # Combine signals
         signal = self.combine_signals(
