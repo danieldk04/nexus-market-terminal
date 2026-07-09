@@ -165,7 +165,7 @@
   "initialized_at": "2026-04-04T00:00:00+00:00",
   "version": "nexus-v2",
   "post_mortem": {
-    "analysis": "# POST-MORTEM RAPPORT | AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Serie\u00ebl single-stock bleeders**: BR verliest 6 opeenvolgende dagen (-5.1% tot -6.2%). Win rate van 8.7% (2/23) is catastrofaal. Tech & AI sector draagt 16 van 23 verliezen, maar slechts 1 win.\n\n## 2. ROOT CAUSE\n**Timing-failure in exit-logic**, niet selectie. ADBE en DECK winnen met trailing stops (+9.9%, +9.7%), maar BR-positie heeft geen adequate stop-loss. Systematische blindheid voor negatieve momentum na ingang.\n\n## 3. AANBEVELINGEN\n1. **Hard stop-loss invoeren**: Max -3% per positie. BR's cascade naar -32% zou met -3% stop na dag 1 zijn gekapet.\n2. **Sector-correlatie filter**: Voorkom 3+ posities in dezelfde sector parallel. Tech & AI heeft 89% van verliezen (16/18) \u2014 diversifieer agressief.\n\n## 4. SECTOR BIAS\n**Mijden**: Tech & AI (9:1 loss/win ratio \u2014 systematisch overshooting).  \n**Zwaarder wegen**: Consumer Cyclical (100% win rate met 1 sample, maar onvoldoende data).\n\n---\n**CONCLUSIE**: Bot faalt in risicobeheer, niet in idee-selectie. Implementeer hard stops onmiddellijk.",
+    "analysis": "# POST-MORTEM RAPPORT: AUTONOME BOT\n\n## 1. PATROON\n**Systematische BR-bleeders:** 6 opeenvolgende transacties (22-30 juni) met consistente -5% tot -6% verliezen. Deze vormen 28% van totale verliesvolume. Herhaalde verliezers (ADBE, NEM, GILD, APA) duiden op inadequate exit-strategie.\n\n## 2. ROOT CAUSE\n- **Timing-falen:** Bot houdt posities vast door middel van \"bewaken\"-labels zonder hard stop-loss triggers\n- **Sector-overfitting:** Tech & AI (8 verlies vs. 1 winst) suggereert dat winnend ADBE-trade door selectie-bias wordt overschat\n- **Win rate 8.7% is onhoudbaar:** Risk-reward ratio onvoldoende voor operationeel rendement\n\n## 3. AANBEVELINGEN\n1. **Implementeer hard stop-loss op -4%** (in plaats van \"bewaken\"): BR zou na dag 2 afgesloten zijn geweest, drinkpot van 31% bespaard\n2. **Sector-quarantaine Tech & AI:** Pauzeer nieuwe initiatief in deze sector totdat win rate > 15%. Redirect naar Consumer Cyclical (2/2 winning trades)\n\n## 4. SECTOR BIAS\n- **Mijden:** Tech & AI (89% verliesratio)\n- **Favoreren:** Consumer Cyclical (100% winst tot nu toe)\n\n**Conclusie:** Bot vereist kalibratie voordat verder gebruik. Huidige inzet economisch onverantwoord.",
     "win_rate": 8.7,
     "worst_sectors": [
       [
@@ -210,9 +210,58 @@
       "Healthcare": -1.0,
       "Consumer Cyclical": 0.3
     },
-    "run_at": "2026-07-02T18:30:01.361898+00:00"
+    "run_at": "2026-07-08T08:18:18.577833+00:00"
   },
   "portfolio_history": [
+    {
+      "date": "2026-07-09",
+      "degiro": 16419.52,
+      "tr": 8383.26,
+      "nexus": 5270.6,
+      "bux": 2096.0
+    },
+    {
+      "date": "2026-07-08",
+      "degiro": 16422.5,
+      "tr": 8333.92,
+      "nexus": 5270.6,
+      "bux": 2089.68
+    },
+    {
+      "date": "2026-07-07",
+      "degiro": 16610.21,
+      "tr": 8439.61,
+      "nexus": 5270.6,
+      "bux": 2218.96
+    },
+    {
+      "date": "2026-07-06",
+      "degiro": 16650.35,
+      "tr": 8468.08,
+      "nexus": 5270.6,
+      "bux": 2201.34
+    },
+    {
+      "date": "2026-07-05",
+      "degiro": 16588.84,
+      "tr": 8395.77,
+      "nexus": 5270.6,
+      "bux": 2097.17
+    },
+    {
+      "date": "2026-07-04",
+      "degiro": 16588.84,
+      "tr": 8424.47,
+      "nexus": 5270.6,
+      "bux": 1789.78
+    },
+    {
+      "date": "2026-07-03",
+      "degiro": 16588.76,
+      "tr": 8350.24,
+      "nexus": 5270.6,
+      "bux": 1789.57
+    },
     {
       "date": "2026-07-02",
       "degiro": 16506.71,
@@ -509,74 +558,74 @@
   ],
   "last_news": [
     "SpaceX goed door eerste dag op de beurs, Musk eerste biljonair ooit",
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "Het is officieel: SpaceX voor 135 dollar per aandeel naar de beurs, en Musk haalt dus 75 miljard dollar op - NRC",
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
     "SpaceX keldert op de beurs: 400 miljard dollar verdampt in een dag",
     "IPO aandelen kopen",
-    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
-    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
+    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
+    "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
   ],
   "tr_summary": {
-    "total": 8299.24,
-    "total_pl_pct": -2.15,
-    "total_invested": 8482.02,
-    "interest_total": 78.23,
+    "total": 8383.26,
+    "total_pl_pct": null,
+    "total_invested": null,
+    "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4453.14,
-        "price": 53927.7812,
-        "pl_pct": -10.57,
-        "pl_eur": -526.15,
-        "weight": 53.7
+        "value": 4545.21,
+        "price": 55042.75,
+        "pl_pct": null,
+        "pl_eur": null,
+        "weight": 54.2
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
-        "value": 1279.95,
-        "price": 154.9988,
-        "pl_pct": 28.0,
-        "pl_eur": 279.95,
-        "weight": 15.4
+        "value": 1275.77,
+        "price": 154.4928,
+        "pl_pct": null,
+        "pl_eur": null,
+        "weight": 15.2
       },
       {
         "name": "TDIV (Dev Div Leaders)",
-        "value": 1202.91,
-        "price": 52.55,
-        "pl_pct": 0.24,
-        "pl_eur": 2.91,
-        "weight": 14.5
+        "value": 1207.95,
+        "price": 52.77,
+        "pl_pct": null,
+        "pl_eur": null,
+        "weight": 14.4
       },
       {
         "name": "VWCE (All-World Acc)",
-        "value": 1180.19,
-        "price": 164.98,
-        "pl_pct": 7.02,
-        "pl_eur": 77.46,
-        "weight": 14.2
+        "value": 1171.61,
+        "price": 163.78,
+        "pl_pct": null,
+        "pl_eur": null,
+        "weight": 14.0
       },
       {
         "name": "VHYL (High Div Yield)",
-        "value": 183.04,
-        "price": 79.358,
-        "pl_pct": -8.48,
-        "pl_eur": -16.96,
+        "value": 182.72,
+        "price": 79.22,
+        "pl_pct": null,
+        "pl_eur": null,
         "weight": 2.2
       }
     ]
   },
-  "dashboard_updated": "2026-07-02T19:01:15.211484+00:00",
+  "dashboard_updated": "2026-07-09T07:01:33.077812+00:00",
   "degiro_summary": {
-    "total": 16506.71,
-    "total_pl_pct": 34.52,
-    "total_invested": 12271.14,
+    "total": 16419.52,
+    "total_pl_pct": 33.81,
+    "total_invested": 12270.86,
     "positions": [
       {
         "name": "VWRL.AS",
-        "value": 6228.3,
-        "pl_pct": 33.85,
-        "pl_eur": 1575.21,
-        "div_yield": 0.0126,
+        "value": 6186.96,
+        "pl_pct": 32.96,
+        "pl_eur": 1533.87,
+        "div_yield": 0.0127,
         "annual_div_eur": 78.4,
         "first_buy_date": null,
         "sector": null,
@@ -584,88 +633,114 @@
       },
       {
         "name": "VUSA.AS",
-        "value": 5205.94,
-        "pl_pct": 39.27,
-        "pl_eur": 1467.94,
+        "value": 5188.97,
+        "pl_pct": 38.82,
+        "pl_eur": 1450.97,
         "div_yield": 0.0087,
         "annual_div_eur": 45.31,
         "first_buy_date": null,
         "sector": null,
-        "weight": 31.5
+        "weight": 31.6
       },
       {
         "name": "VHYL.AS",
-        "value": 4444.05,
-        "pl_pct": 26.01,
-        "pl_eur": 917.17,
-        "div_yield": 0.0249,
+        "value": 4436.32,
+        "pl_pct": 25.79,
+        "pl_eur": 909.44,
+        "div_yield": 0.025,
         "annual_div_eur": 110.82,
         "first_buy_date": null,
         "sector": null,
-        "weight": 26.9
+        "weight": 27.0
       },
       {
         "name": "V",
-        "value": 628.42,
-        "pl_pct": 77.94,
-        "pl_eur": 275.25,
+        "value": 607.27,
+        "pl_pct": 72.09,
+        "pl_eur": 254.38,
         "div_yield": 0.0076,
-        "annual_div_eur": 4.78,
+        "annual_div_eur": 4.62,
         "first_buy_date": null,
         "sector": "Financial Services",
-        "weight": 3.8
+        "weight": 3.7
       }
     ]
   },
   "news_summary": [
     {
-      "theme": "SpaceX beursgang: hype versus realiteit",
-      "summary": "SpaceX ging naar de beurs tegen 135 dollar per aandeel, wat Musk de eerste biljonair maakte. De markt toont tegenstrijdige signalen: enkele bronnen rapporteren sterke vraag en winsten, terwijl anderen waarschuwen voor 400 miljard dollar verdampte waarde en blinde beleggersenthusiasme ondanks risico's. Dit illustreert volatiliteit in growth-aandelen die je portefeuille kan treffen."
+      "theme": "SpaceX beursgang volatiliteit",
+      "summary": "SpaceX debuteerde op de beurs met sterke koopkracht tegen 135 dollar per aandeel, wat Musk naar biljonair-status katapulteerde. De aandelen kelderden echter direct na lancering en verloren 400 miljard dollar aan waarde in \u00e9\u00e9n dag, wat wijst op extreme volatiliteit typisch voor mega-IPO's en beleggersverwachtingen."
     },
     {
-      "theme": "Brede marktvolatiliteit en onzekerheid",
-      "summary": "Europese aandelen herstellen zich maar Aziatische markten dalen door oorlogsdreiging met Iran, met berichten over 'code oranje' en 'gooi- en smijtdagen' op de beurs. Deze geopolitieke spanningen cre\u00ebren onrust die ETF-posities wereldwijd kan be\u00efnvloeden, ondanks dat beleggers oorlogsrisico's tot nu toe lijken te negeren."
+      "theme": "Geopolitieke onrust be\u00efnvloedt markten",
+      "summary": "Oorlogen in het Midden-Oosten en Iran veroorzaken verdeelde reacties: Europese aandelen herstellen zich, maar Aziatische markten dalen en Air France-KLM verliest fors door annuleringen. Dit toont aan hoe geopolitieke risico's selectief sectoren treffen en beleggers moeten anticiperen op regio-specifieke impact."
     },
     {
-      "theme": "AI-gerelateerde tweedeling en beleggersfractie",
-      "summary": "Op de beurs ontstaat een tweedeling waar AI-gerelateerde aandelen onder druk staan door vrees en onzekerheid, terwijl beleggers overdreven reacties vertonen. Deze volatiliteit in technologie- en innovatieasectoren raakt direct S&P500- en World-ETF-posities die zwaar in tech belegd zijn."
+      "theme": "AEX en brede markt momentum",
+      "summary": "De AEX steeg 1% en doorbreekt de 1000-puntgrens onder leiding van tech-aandelen, terwijl de Amerikaanse beurs als trendsetter fungeert. Dit positieve momentum biedt koopkansen na eerdere volatiliteit en suggereert groeiende beleggersmotivatie ondanks macro-onzekerheden."
     },
     {
-      "theme": "Defensie-aandelen stijgen, spaarparadox",
-      "summary": "Europese defensie-aandelen stijgen door oorlogsdreiging, terwijl Nederlanders rijker worden van de beurs maar uit voorzichtigheid blijven sparen. Dit signaleert dat beleggers defensieve sectoren zoeken en risicobewust blijven, wat kan leiden tot defensieve portefeuille-shifts in AEX en international indices."
+      "theme": "AI-hype versus marktangst",
+      "summary": "Er ontstaat een tweedeling op de beurs waar beleggers tussen AI-opportuniteiten en onrustbarometers (dalende koersen, bitcoin-zwakte) laveren, met 'code oranje' signalen. Dit reflecteert overdroven emotionele reacties en het belang van gedisciplineerde positiebeheer in volatiele omgevingen."
     }
   ],
   "bux_summary": {
-    "total": 1780.65,
-    "total_pl_pct": -22.67,
-    "total_invested": 2302.64,
+    "total": 2096.0,
+    "total_pl_pct": -22.0,
+    "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1743.2,
-        "price": 342.16,
-        "pl_pct": -17.89,
-        "pl_eur": -379.87,
+        "value": 1805.12,
+        "price": 344.29,
+        "pl_pct": -16.93,
+        "pl_eur": -367.95,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 97.9
+        "weight": 86.1
+      },
+      {
+        "name": "PEP",
+        "ticker": "PEP",
+        "value": 249.02,
+        "price": 124.51,
+        "pl_pct": -24.8,
+        "pl_eur": -82.12,
+        "div_yield": 0.0408,
+        "annual_div_eur": 10.16,
+        "first_buy_date": null,
+        "sector": "Consumer Defensive",
+        "weight": 11.9
       },
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 37.45,
-        "price": 37.45,
-        "pl_pct": -79.14,
-        "pl_eur": -142.12,
+        "value": 37.59,
+        "price": 37.59,
+        "pl_pct": -79.07,
+        "pl_eur": -141.98,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": "Technology",
-        "weight": 2.1
+        "weight": 1.8
+      },
+      {
+        "name": "KPN.AS",
+        "ticker": "KPN.AS",
+        "value": 4.27,
+        "price": 4.27,
+        "pl_pct": 30.3,
+        "pl_eur": 0.99,
+        "div_yield": 0.0515,
+        "annual_div_eur": 0.22,
+        "first_buy_date": null,
+        "sector": "Communication Services",
+        "weight": 0.2
       }
     ]
   },
@@ -765,322 +840,6 @@
   ],
   "first_investment_date": "2022-03-29",
   "predictions": [
-    {
-      "date": "2026-06-17",
-      "macro_snapshot": {
-        "vix": 17.47,
-        "treasury_10y": 4.46
-      },
-      "candidates": [
-        {
-          "ticker": "MNST",
-          "price": 91.8,
-          "score": 3.9,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "DOV",
-          "price": 221.83,
-          "score": 3.65,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "GEV",
-          "price": 1048.39,
-          "score": 3.65,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "HST",
-          "price": 24.77,
-          "score": 3.65,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "OTIS",
-          "price": 73.0,
-          "score": 3.62,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "HLT",
-          "price": 351.68,
-          "score": 3.35,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "ITW",
-          "price": 263.06,
-          "score": 3.21,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "EQIX",
-          "price": 1085.59,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "IEX",
-          "price": 223.21,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "JCI",
-          "price": 144.78,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        }
-      ]
-    },
-    {
-      "date": "2026-06-18",
-      "macro_snapshot": {
-        "vix": 16.95,
-        "treasury_10y": 4.45
-      },
-      "candidates": [
-        {
-          "ticker": "AME",
-          "price": 236.02,
-          "score": 4.43,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "MNST",
-          "price": 91.33,
-          "score": 3.9,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "GE",
-          "price": 357.92,
-          "score": 3.8,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "OTIS",
-          "price": 73.17,
-          "score": 3.48,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "DAL",
-          "price": 83.7,
-          "score": 3.2,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "HST",
-          "price": 25.05,
-          "score": 3.15,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "EQIX",
-          "price": 1095.5,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "GEV",
-          "price": 1100.86,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "IEX",
-          "price": 225.48,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "JCI",
-          "price": 144.92,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        }
-      ]
-    },
-    {
-      "date": "2026-06-19",
-      "macro_snapshot": {
-        "vix": 16.78,
-        "treasury_10y": 4.45
-      },
-      "candidates": [
-        {
-          "ticker": "MNST",
-          "price": 91.34,
-          "score": 4.9,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "OTIS",
-          "price": 73.27,
-          "score": 4.47,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "DAL",
-          "price": 84.18,
-          "score": 4.4,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "IEX",
-          "price": 224.93,
-          "score": 4.2,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "NDSN",
-          "price": 295.92,
-          "score": 4.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "GE",
-          "price": 357.64,
-          "score": 4.0,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "BF-B",
-          "price": 26.64,
-          "score": 3.96,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "MO",
-          "price": 69.12,
-          "score": 3.96,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "JCI",
-          "price": 144.82,
-          "score": 3.8,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "DPZ",
-          "price": 312.47,
-          "score": 3.8,
-          "recommended_action": "avoid",
-          "conviction": null
-        }
-      ]
-    },
-    {
-      "date": "2026-06-22",
-      "macro_snapshot": {
-        "vix": 17.41,
-        "treasury_10y": 4.51
-      },
-      "candidates": [
-        {
-          "ticker": "AME",
-          "price": 241.51,
-          "score": 3.97,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "MNST",
-          "price": 93.02,
-          "score": 3.9,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "DLR",
-          "price": 195.53,
-          "score": 3.65,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "OTIS",
-          "price": 72.44,
-          "score": 3.48,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "EME",
-          "price": 869.01,
-          "score": 3.46,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "DAL",
-          "price": 85.93,
-          "score": 3.4,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "GE",
-          "price": 355.51,
-          "score": 3.3,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "HST",
-          "price": 25.13,
-          "score": 3.15,
-          "recommended_action": "watch",
-          "conviction": null
-        },
-        {
-          "ticker": "EQIX",
-          "price": 1115.94,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        },
-        {
-          "ticker": "JCI",
-          "price": 148.23,
-          "score": 3.1,
-          "recommended_action": "avoid",
-          "conviction": null
-        }
-      ]
-    },
     {
       "date": "2026-06-23",
       "macro_snapshot": {
@@ -1712,6 +1471,322 @@
           "conviction": null
         }
       ]
+    },
+    {
+      "date": "2026-07-03",
+      "macro_snapshot": {
+        "vix": 15.9,
+        "treasury_10y": 4.48
+      },
+      "candidates": [
+        {
+          "ticker": "MO",
+          "price": 72.71,
+          "score": 4.3,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "EBAY",
+          "price": 114.84,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MNST",
+          "price": 97.6,
+          "score": 3.9,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HLT",
+          "price": 338.12,
+          "score": 3.7,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "KO",
+          "price": 84.14,
+          "score": 3.52,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "DOC",
+          "price": 21.89,
+          "score": 3.5,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "GEV",
+          "price": 1113.11,
+          "score": 3.3,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "AVY",
+          "price": 166.97,
+          "score": 3.17,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "HST",
+          "price": 23.35,
+          "score": 3.15,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "ALGN",
+          "price": 184.52,
+          "score": 3.0,
+          "recommended_action": "avoid",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-07-06",
+      "macro_snapshot": {
+        "vix": 15.73,
+        "treasury_10y": 4.48
+      },
+      "candidates": [
+        {
+          "ticker": "MNST",
+          "price": 97.09,
+          "score": 4.4,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MO",
+          "price": 71.71,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "EBAY",
+          "price": 113.69,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HLT",
+          "price": 337.91,
+          "score": 3.7,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "DOC",
+          "price": 21.77,
+          "score": 3.5,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "GEV",
+          "price": 1147.32,
+          "score": 3.3,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HST",
+          "price": 23.38,
+          "score": 3.15,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "JCI",
+          "price": 142.32,
+          "score": 3.15,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "AVY",
+          "price": 165.46,
+          "score": 3.14,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "ALGN",
+          "price": 186.78,
+          "score": 3.0,
+          "recommended_action": "avoid",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-07-07",
+      "macro_snapshot": {
+        "vix": 15.71,
+        "treasury_10y": 4.52
+      },
+      "candidates": [
+        {
+          "ticker": "EBAY",
+          "price": 115.01,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MNST",
+          "price": 96.3,
+          "score": 3.8,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HLT",
+          "price": 341.56,
+          "score": 3.8,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "DOC",
+          "price": 21.96,
+          "score": 3.6,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "KO",
+          "price": 83.99,
+          "score": 3.52,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "GEV",
+          "price": 1067.39,
+          "score": 3.3,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HST",
+          "price": 23.34,
+          "score": 3.15,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "MO",
+          "price": 72.68,
+          "score": 3.1,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "CBRE",
+          "price": 143.72,
+          "score": 3.0,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "BEN",
+          "price": 34.54,
+          "score": 2.85,
+          "recommended_action": "avoid",
+          "conviction": null
+        }
+      ]
+    },
+    {
+      "date": "2026-07-08",
+      "macro_snapshot": {
+        "vix": 16.49,
+        "treasury_10y": 4.53
+      },
+      "candidates": [
+        {
+          "ticker": "EBAY",
+          "price": 114.71,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "MNST",
+          "price": 96.92,
+          "score": 4.2,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HLT",
+          "price": 341.12,
+          "score": 3.8,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "GEV",
+          "price": 1077.08,
+          "score": 3.7,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "HST",
+          "price": 23.35,
+          "score": 3.7,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "DOC",
+          "price": 21.93,
+          "score": 3.6,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "BMY",
+          "price": 57.97,
+          "score": 3.4,
+          "recommended_action": "watch",
+          "conviction": null
+        },
+        {
+          "ticker": "MO",
+          "price": 72.96,
+          "score": 3.1,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "KO",
+          "price": 84.05,
+          "score": 3.0,
+          "recommended_action": "avoid",
+          "conviction": null
+        },
+        {
+          "ticker": "CBRE",
+          "price": 143.73,
+          "score": 2.8,
+          "recommended_action": "avoid",
+          "conviction": null
+        }
+      ]
     }
   ],
   "portfolio_value_history": [
@@ -1943,30 +2018,30 @@
     "DECK": "2026-06-24"
   },
   "benchmark_history": {
-    "sp500_ytd": 8.64,
-    "aex_ytd": 10.87,
-    "msci_ytd": 12.48
+    "sp500_ytd": 9.1,
+    "aex_ytd": 11.22,
+    "msci_ytd": 11.8
   },
   "sector_rotation": {
-    "Tech & AI": -9.0,
-    "Financials": 8.0,
-    "Healthcare": 11.8,
-    "Energy": -7.7,
-    "Industrials": 5.2,
-    "Consumer Cyclical": -0.3,
-    "Consumer Defensive": 4.2,
-    "Utilities": 4.2,
-    "Real Estate": 3.3,
-    "Materials": 0.5
+    "Tech & AI": -2.6,
+    "Financials": 8.2,
+    "Healthcare": 8.2,
+    "Energy": -5.7,
+    "Industrials": 5.3,
+    "Consumer Cyclical": 1.9,
+    "Consumer Defensive": 2.9,
+    "Utilities": 5.7,
+    "Real Estate": 2.8,
+    "Materials": 3.5
   },
   "sector_rotation_adj": {
-    "Tech & AI": -0.3,
     "Financials": 0.3,
     "Healthcare": 0.3,
     "Energy": -0.3,
-    "Industrials": 0.3
+    "Industrials": 0.3,
+    "Utilities": 0.3
   },
-  "sector_rotation_date": "2026-07-02T18:29:54.991082+00:00",
+  "sector_rotation_date": "2026-07-08T08:18:12.855984+00:00",
   "watch_list": [
     "MELI"
   ]

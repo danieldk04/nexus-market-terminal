@@ -1262,11 +1262,10 @@ function buildPositions(){
 ══════════════════════════════════════════════════════ */
 function renderDashboard(){
     /* banner */
-    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
-    const tv=(D.total||0)+(T.total||0)+(BX.total||0);
-    // TR has no total_invested; estimate it back from total_pl_pct
-    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):0;
-    const ti=(D.total_invested||0)+trInv+(BX.total_invested||0);
+    const ictx=investmentContext();
+    const {D,T,BX,costBasisEstimated}=ictx;
+    const tv=ictx.currentPortfolio;
+    const ti=ictx.allInvested;
     const pl=ti?tv-ti:null,plp=ti&&pl!=null?(pl/ti)*100:null;
     document.getElementById('b-val').textContent=eur(tv);
 
@@ -1299,6 +1298,8 @@ function renderDashboard(){
 
     /* KPIs */
     document.getElementById('k-inv').textContent=ti?eur(ti):'n/b';
+    const kInvSubEl=document.querySelector('#k-inv')?.closest('.kcard')?.querySelector('.ks');
+    if(kInvSubEl) kInvSubEl.textContent = costBasisEstimated ? '⚠️ kostprijs deels geschat (TR/BUX)' : 'kostprijs basis';
     const pnlEl=document.getElementById('k-pnl');
     if(pl!=null){pnlEl.textContent=(pl>=0?'+':'')+eur(Math.abs(pl),2);pnlEl.style.color=pl>=0?'var(--green)':'var(--red)';}
     document.getElementById('k-pnl-s').textContent=plp!=null?pct(plp):'';
@@ -2051,12 +2052,7 @@ function renderHistoryChart(){
     const rangeNote = allShown ? ` (alles getoond)` : '';
     document.getElementById('hist-tag').textContent=`${rlbl}${rangeNote} · ${labels[0]} – ${labels[labels.length-1]} · ${delta>=0?'+':''}${deltaPct}%`;
     // Ingelegd (kostprijs) als referentielijn — zelfde logica als de tijdlijn-grafiek
-    const fullTl=(M?.investment_timeline||[]);
-    const totalInvested=fullTl[fullTl.length-1]?.invested||0;
-    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
-    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
-    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
-    const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
+    const {allInvested}=investmentContext();
     const histDatasets=[{label:'Portfoliowaarde',data,borderColor:isP?'#059669':'#dc2626',backgroundColor:isP?'rgba(5,150,105,.07)':'rgba(220,38,38,.06)',borderWidth:2.5,pointRadius:slice.length<=14?2.5:0,pointHoverRadius:5,fill:true,tension:.35,order:1}];
     if(allInvested>0) histDatasets.push({label:'Ingelegd',data:labels.map(()=>allInvested),borderColor:'rgba(100,116,139,.7)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[3,3],pointRadius:0,fill:false,tension:0,order:0});
     dc('hist');
@@ -2254,12 +2250,24 @@ function renderPosTable(){
    de eerst bekende dag dat die broker daadwerkelijk waarde had (portfolio_history). Vóór die
    datum was het account er waarschijnlijk nog niet — anders tel je stortingen mee als "verlies
    uit het verleden" dat later wordt "goedgemaakt", wat het rendement enorm opblaast. */
+/* Kostprijs van een broker die zelf geen total_invested/total_pl_pct meer aanlevert
+   (bv. TR-export kapot of onvolledig) NOOIT stilzwijgend op €0 zetten — dat maakt het
+   rendement torenhoog en volkomen fout. Bij écht onbekende kostprijs gaan we uit van
+   break-even (huidige waarde = kostprijs), en melden we dat de data onbetrouwbaar is. */
+function brokerInvested(b){
+    if(b.total_invested!=null) return {inv:b.total_invested, estimated:false};
+    if(b.total&&b.total_pl_pct!=null) return {inv:b.total/(1+b.total_pl_pct/100), estimated:false};
+    const posCost=(b.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    if(posCost>0) return {inv:posCost, estimated:false};
+    return {inv:b.total||0, estimated:!!b.total};
+}
 function investmentContext(){
     const fullTl=(M?.investment_timeline||[]);
     const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
     const currentPortfolio=(D.total||0)+(T.total||0)+(BX.total||0);
-    const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);
-    const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);
+    const trRes=brokerInvested(T), buxRes=brokerInvested(BX);
+    const trInv=trRes.inv, buxInv=buxRes.inv;
+    const costBasisEstimated=trRes.estimated||buxRes.estimated;
     const totalInvested=fullTl[fullTl.length-1]?.invested||0;
     const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
     const dailyHist=(M?.portfolio_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
@@ -2281,12 +2289,12 @@ function investmentContext(){
         const buxPart=(!buxFirstSeen||dateStr>=buxFirstSeen)?buxInv:0;
         return degiroAtDate+trPart+buxPart;
     }
-    return {fullTl,D,T,BX,currentPortfolio,trInv,buxInv,totalInvested,allInvested,dailyHist,pvh,investedAtDate};
+    return {fullTl,D,T,BX,currentPortfolio,trInv,buxInv,totalInvested,allInvested,costBasisEstimated,dailyHist,pvh,investedAtDate};
 }
 
 function renderInvestmentTimeline(){
     const ctx=investmentContext();
-    const {fullTl,D,currentPortfolio,allInvested,totalInvested,pvh,dailyHist,investedAtDate}=ctx;
+    const {fullTl,D,currentPortfolio,allInvested,totalInvested,pvh,dailyHist,investedAtDate,costBasisEstimated}=ctx;
     const firstDate=M?.first_investment_date;
     const emptyEl=document.getElementById('inv-empty');
     const kpisEl=document.getElementById('inv-kpis');
@@ -2412,9 +2420,10 @@ function renderInvestmentTimeline(){
         chartLine=tl.map(t=>t.invested);
     }
 
-    document.getElementById('inv-meta').textContent = isDaily
+    document.getElementById('inv-meta').textContent = (isDaily
         ? `${chartLabels[0]} – ${chartLabels[chartLabels.length-1]} · ${chartLabels.length} dagen getoond`
-        : `${tl[0]?.date||''} – ${tl[tl.length-1]?.date||''} · ${tl.length} mnd getoond`;
+        : `${tl[0]?.date||''} – ${tl[tl.length-1]?.date||''} · ${tl.length} mnd getoond`)
+        + (costBasisEstimated ? ' · ⚠️ kostprijs TR/BUX onbekend, rendement is een schatting' : '');
 
     const lineIsPositive=periodGain!=null?periodGain>=0:gainAll>=0;
     const lineColor=lineIsPositive?'#059669':'#dc2626';
@@ -3235,9 +3244,7 @@ function cicSwitchTab(tab){
 }
 
 function cicRenderPortfolioProjection(){
-    const current=(M?.degiro_summary?.total||0)+(M?.tr_summary?.total||0)+(M?.bux_summary?.total||0);
-    const D=M?.degiro_summary||{},T=M?.tr_summary||{},BX=M?.bux_summary||{};
-    const fullTl=(M?.investment_timeline||[]);const trInv=T.total&&T.total_pl_pct!=null?T.total/(1+T.total_pl_pct/100):(T.total_invested||0);const buxInv=BX.total_invested||(BX.positions||[]).reduce((s,p)=>s+(p.cost_eur||0),0);const allInvested=(D.total_invested||fullTl[fullTl.length-1]?.invested||0)+trInv+buxInv;
+    const {currentPortfolio:current,allInvested}=investmentContext();
     const investYears=M?.first_investment_date?((new Date()-new Date(M.first_investment_date.length<=7?M.first_investment_date+'-01':M.first_investment_date))/1000/60/60/24/365.25):0;
     let historicalReturn=7.5;if(investYears>0&&allInvested>0) historicalReturn=Math.max(0,((current-allInvested)/allInvested/investYears)*100);
 
