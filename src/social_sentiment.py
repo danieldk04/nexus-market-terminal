@@ -187,7 +187,9 @@ def build_sentiment_context(ticker: str, company_name: str = "") -> dict:
     else:
         lines.append("StockTwits: geen data beschikbaar")
 
-    if reddit.get("mention_count"):
+    if not reddit.get("available"):
+        lines.append("\nReddit: overgeslagen (geen REDDIT_CLIENT_ID/SECRET geconfigureerd)")
+    elif reddit.get("mention_count"):
         lines.append(f"\nReddit (r/wallstreetbets, r/stocks, r/investing, laatste week): {reddit['mention_count']} mentions")
         for post in reddit.get("top_posts", [])[:3]:
             lines.append(f"  • [{post['subreddit']}] {post['title']} ({post['score']} upvotes, {post['num_comments']} comments)")
