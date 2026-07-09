@@ -3224,6 +3224,96 @@ function renderPriceChart(ticker){
 /* ══════════════════════════════════════════════════════
    TABS
 ══════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   BACKTEST TAB
+══════════════════════════════════════════════════════ */
+let BT=null,btLoaded=false;
+async function renderBacktestTab(){
+    if(!btLoaded){
+        btLoaded=true;
+        BT=await fetchJSON('backtest_results.json');
+    }
+    const box=document.getElementById('bt-verdict-box');
+    if(!BT||!BT.metrics){
+        box.innerHTML='<div style="font-size:.85rem;color:var(--muted);line-height:1.6">Nog geen backtest-resultaat gevonden.<br>Draai eerst <code style="background:var(--bg);padding:2px 6px;border-radius:4px">python3 src/backtest_engine.py</code> om <code>backtest_results.json</code> te genereren.</div>';
+        return;
+    }
+    const m=BT.metrics,cfg=BT.config;
+    const pos=x=>x>0;
+    // Verdict color by content
+    const v=m.verdict||'';
+    let vColor=v.includes('SIGNIFICANTE')?'var(--pos)':v.includes('GEEN EDGE')?'var(--neg)':v.includes('ONVOLDOENDE')?'var(--muted)':'var(--yellow)';
+    box.innerHTML=
+        `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span style="width:10px;height:10px;border-radius:50%;background:${vColor};flex-shrink:0"></span>
+            <span style="font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:${vColor}">${v}</span>
+        </div>
+        <div style="font-size:.8rem;color:var(--muted);line-height:1.5">
+            Strategie <b style="color:var(--text)">${m.strategy_cagr>=0?'+':''}${m.strategy_cagr}%</b>/jaar vs index
+            <b style="color:var(--text)">${m.benchmark_cagr>=0?'+':''}${m.benchmark_cagr}%</b>/jaar over ${m.periods} kwartalen.
+            De alpha is ${m.significant?'statistisch significant':'(nog) niet statistisch significant'} (t=${m.t_stat}).
+        </div>`;
+
+    // KPI cards
+    const kpi=(lbl,val,cls,sub)=>`<div class="wl-card"><div class="wl-lbl">${lbl}</div><div class="wl-val ${cls||''}">${val}</div>${sub?`<div style="font-size:.62rem;color:var(--muted);margin-top:2px">${sub}</div>`:''}</div>`;
+    document.getElementById('bt-kpi-grid').innerHTML=
+        kpi('Alpha (p.j.)',`${m.alpha_cagr>=0?'+':''}${m.alpha_cagr}%`,pos(m.alpha_cagr)?'pc':'nc','vs SPY')+
+        kpi('Strategie CAGR',`${m.strategy_cagr>=0?'+':''}${m.strategy_cagr}%`,pos(m.strategy_cagr)?'pc':'nc',`totaal ${m.strategy_total_return>=0?'+':''}${m.strategy_total_return}%`)+
+        kpi('Hit Rate',`${m.hit_rate}%`,m.hit_rate>=55?'pc':m.hit_rate>=50?'':'nc','periodes > index')+
+        kpi('Sharpe',`${m.sharpe}`,m.sharpe>=1?'pc':'','risico-gecorrigeerd')+
+        kpi('Max Drawdown',`${m.max_drawdown}%`,'nc',`index ${m.benchmark_max_drawdown}%`)+
+        kpi('Significantie',m.significant?'JA':'NEE',m.significant?'pc':'nc',`t=${m.t_stat}`);
+
+    // Period tag
+    const ec=BT.equity_curve||[];
+    document.getElementById('bt-period-tag').textContent=ec.length?`${ec[0].date} → ${ec[ec.length-1].date}`:'';
+    document.getElementById('bt-rebal-tag').textContent=`${(BT.rebalances||[]).length} periodes · top ${cfg.top_n} · elke ${cfg.rebalance_months} mnd`;
+
+    // Equity chart
+    if(charts['bt-eq'])charts['bt-eq'].destroy();
+    const labels=ec.map(p=>p.date);
+    charts['bt-eq']=new Chart(document.getElementById('bt-equity-chart'),{
+        type:'line',
+        data:{labels,datasets:[
+            {label:'NEXUS strategie',data:ec.map(p=>p.strategy),borderColor:'#059669',backgroundColor:'rgba(5,150,105,.06)',borderWidth:2,pointRadius:0,pointHoverRadius:4,fill:true,tension:.25},
+            {label:'Index (SPY)',data:ec.map(p=>p.benchmark),borderColor:'#94a3b8',borderWidth:1.5,borderDash:[5,4],pointRadius:0,pointHoverRadius:4,fill:false,tension:.25}
+        ]},
+        options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+            plugins:{legend:{display:true,position:'top',labels:{font:{family:'Inter',size:11},boxWidth:12,usePointStyle:true}},
+                tooltip:{...TT,callbacks:{label:c=>` ${c.dataset.label}: ${c.raw} (start=100)`}}},
+            scales:{x:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',maxTicksLimit:8,font:{family:'JetBrains Mono',size:10}}},
+                y:{grid:{color:'rgba(226,232,240,.6)'},ticks:{color:'#94a3b8',font:{family:'JetBrains Mono',size:10}}}}}
+    });
+
+    // Rebalance table
+    const rows=(BT.rebalances||[]).slice().reverse().map(r=>{
+        const exCls=r.excess>0?'pc':'nc';
+        const picks=(r.picks||[]).map(p=>`${p.ticker}<span style="color:var(--muted)">(${p.ret>=0?'+':''}${p.ret}%)</span>`).join(', ')||'<span style="color:var(--muted)">cash</span>';
+        return `<tr>
+            <td style="white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:.72rem">${r.date}</td>
+            <td class="${r.period_return>0?'pc':'nc'}" style="text-align:right;font-family:'JetBrains Mono',monospace">${r.period_return>=0?'+':''}${r.period_return}%</td>
+            <td style="text-align:right;font-family:'JetBrains Mono',monospace;color:var(--muted)">${r.benchmark_return>=0?'+':''}${r.benchmark_return}%</td>
+            <td class="${exCls}" style="text-align:right;font-family:'JetBrains Mono',monospace">${r.excess>=0?'+':''}${r.excess}%</td>
+            <td style="font-size:.72rem;line-height:1.5">${picks}</td>
+        </tr>`;
+    }).join('');
+    document.getElementById('bt-rebal-table').innerHTML=
+        `<table class="tbl" style="width:100%;border-collapse:collapse;font-size:.78rem">
+            <thead><tr style="text-align:left;color:var(--muted);border-bottom:1px solid var(--border)">
+                <th style="padding:6px 8px">Datum</th>
+                <th style="padding:6px 8px;text-align:right">Strategie</th>
+                <th style="padding:6px 8px;text-align:right">Index</th>
+                <th style="padding:6px 8px;text-align:right">Excess</th>
+                <th style="padding:6px 8px">Picks (rendement komende periode)</th>
+            </tr></thead><tbody>${rows}</tbody>
+        </table>`;
+
+    // Caveats
+    document.getElementById('bt-caveats').innerHTML=
+        (BT.caveats||[]).map(c=>`• ${c}`).join('<br>')+
+        `<br><br><span style="color:var(--text)">Engine:</span> ${cfg.engine} · <span style="color:var(--text)">universe:</span> ${cfg.universe_size} tickers · <span style="color:var(--text)">kosten:</span> ${cfg.cost_bps} bps/herbalancering`;
+}
+
 function switchTab(name,skipRender=false){
     activeTab=name;
     document.querySelectorAll('.tbtn').forEach(b=>{
