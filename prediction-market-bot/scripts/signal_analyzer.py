@@ -109,21 +109,40 @@ class SignalAnalyzer:
     
     def extract_topic(self, market_title: str) -> str:
         """
-        Extract the main topic from market title
+        Extract the main topic from market title.
+
+        Previously this matched against a hardcoded list of ~12 words, which
+        meant most markets (anything not literally containing "bitcoin",
+        "fed", "ai", etc.) fell through to "use the first word" — a near
+        meaningless topic. This now matches against every keyword defined
+        across config['categories'], which is a much larger, easily
+        extensible, still-free vocabulary. It falls back to the most
+        significant (non-stopword, longest) word in the title so unseen
+        topics still get a stable, reusable tag instead of "unknown".
         """
-        # Common prediction market topics
-        topics = ['bitcoin', 'btc', 'ethereum', 'eth', 'crypto', 'election', 
-                 'democrat', 'republican', 'fed', 'rate', 'ai', 'regulation']
-        
         title_lower = market_title.lower()
-        
-        for topic in topics:
-            if topic in title_lower:
-                return topic
-        
-        # If no match, use first significant word
-        words = market_title.lower().split()
+
+        for category_data in self.categories.values():
+            for keyword in category_data.get('keywords', []):
+                if keyword in title_lower:
+                    return keyword
+
+        words = re.findall(r"[a-z0-9']+", title_lower)
+        significant = [w for w in words if w not in _TITLE_STOPWORDS and len(w) > 2]
+
+        if significant:
+            # Longest word is usually the most specific/significant one
+            return max(significant, key=len)
+
         return words[0] if words else 'unknown'
+
+    def get_category(self, topic: str) -> str:
+        """Map a topic keyword back to its configured category, for
+        category-level historical stats when topic-level data is sparse."""
+        for category_name, category_data in self.categories.items():
+            if topic in category_data.get('keywords', []):
+                return category_name
+        return 'uncategorized'
     
     def analyze_twitter(self, topic: str, twitter_data: List[Dict]) -> Dict:
         """
