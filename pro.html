@@ -961,6 +961,47 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 </div></div>
 
 <!-- ═══════════════════════════════════════
+     TAB: BACKTEST
+═══════════════════════════════════════ -->
+<div id="tab-backtest" class="tc"><div class="pw">
+
+    <!-- Verdict banner -->
+    <div class="panel" style="margin-bottom:14px">
+        <div style="padding:16px 18px" id="bt-verdict-box">
+            <div class="loading"><div class="spin"></div></div>
+        </div>
+    </div>
+
+    <!-- KPI grid -->
+    <div class="wl-grid" id="bt-kpi-grid" style="margin-bottom:14px"></div>
+
+    <!-- Equity curve -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Strategie vs Index (SPY)</span>
+            <span class="ptag" id="bt-period-tag"></span>
+        </div>
+        <div style="padding:16px;height:340px;position:relative"><canvas id="bt-equity-chart"></canvas></div>
+    </div>
+
+    <!-- Per-rebalance table -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Herbalanceringen</span>
+            <span class="ptag" id="bt-rebal-tag"></span>
+        </div>
+        <div style="padding:8px 16px 16px;overflow-x:auto" id="bt-rebal-table"></div>
+    </div>
+
+    <!-- Caveats -->
+    <div class="panel">
+        <div class="ph"><span class="pt">Belangrijke kanttekeningen</span></div>
+        <div style="padding:14px 16px;font-size:.78rem;line-height:1.55;color:var(--muted)" id="bt-caveats"></div>
+    </div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════
      TAB: ANALYSE
 ═══════════════════════════════════════ -->
 <div id="tab-analyse" class="tc"><div class="pw">
