@@ -344,9 +344,17 @@ class SignalAnalyzer:
         # Calculate weighted average score
         total_weight = 0
         weighted_score = 0
-        
+
+        weight_keys = {
+            'twitter': 'twitter_sentiment',
+            'reddit': 'reddit_sentiment',
+            'news': 'news_sentiment',
+            'liquidity': 'market_liquidity',
+            'historical': 'historical_accuracy',
+        }
+
         for name, signal in signals.items():
-            weight = self.weights[f'{name}_sentiment' if name != 'liquidity' and name != 'historical' else name.replace('_sentiment', '')]
+            weight = self.weights[weight_keys[name]]
             confidence = signal['confidence']
             
             total_weight += weight * confidence
