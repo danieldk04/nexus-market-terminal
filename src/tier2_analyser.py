@@ -31,16 +31,6 @@ def _fmt(val, suffix="", na="n/b"):
     return f"{val}{suffix}" if val is not None else na
 
 
-def get_news(ticker_symbol: str) -> str:
-    """Haal recente nieuwskoppen op via yfinance."""
-    try:
-        news  = yf.Ticker(ticker_symbol).news or []
-        lines = [f"• {n.get('title','')}" for n in news[:7] if n.get("title")]
-        return "\n".join(lines) if lines else "Geen recent nieuws."
-    except Exception:
-        return "Nieuws niet beschikbaar."
-
-
 def get_filing_context(ticker: str, filings_data: dict) -> str:
     """Haal relevante SEC-filing context op als beschikbaar."""
     entry = filings_data.get(ticker, {})
