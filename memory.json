@@ -214,6 +214,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-10",
+      "degiro": 16557.3,
+      "tr": 8468.18,
+      "nexus": 5270.6,
+      "bux": 2146.91
+    },
+    {
       "date": "2026-07-09",
       "degiro": 16554.65,
       "tr": 8426.71,
@@ -557,28 +564,28 @@
     }
   ],
   "last_news": [
-    "SpaceX goed door eerste dag op de beurs, Musk eerste biljonair ooit",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "SpaceX goed door eerste dag op de beurs, Musk eerste biljonair ooit",
+    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
     "Het is officieel: SpaceX voor 135 dollar per aandeel naar de beurs, en Musk haalt dus 75 miljard dollar op - NRC",
     "IPO aandelen kopen",
     "SpaceX keldert op de beurs: 400 miljard dollar verdampt in een dag",
-    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-    "Koers Europese aandelen herstelt, maar die in Azi\u00eb blijven dalen door de oorlog met Iran"
+    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
   ],
   "tr_summary": {
-    "total": 8426.71,
+    "total": 8468.18,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4562.47,
-        "price": 55251.7109,
+        "value": 4603.93,
+        "price": 55753.9102,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 54.1
+        "weight": 54.4
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -586,7 +593,7 @@
         "price": 155.936,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.3
+        "weight": 15.2
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -602,7 +609,7 @@
         "price": 165.56,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 14.1
+        "weight": 14.0
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -614,11 +621,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-09T19:01:14.539706+00:00",
+  "dashboard_updated": "2026-07-10T07:01:15.912843+00:00",
   "degiro_summary": {
-    "total": 16554.65,
-    "total_pl_pct": 34.91,
-    "total_invested": 12271.1,
+    "total": 16557.3,
+    "total_pl_pct": 34.93,
+    "total_invested": 12270.9,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -655,11 +662,11 @@
       },
       {
         "name": "V",
-        "value": 605.86,
-        "pl_pct": 71.57,
-        "pl_eur": 252.73,
+        "value": 608.51,
+        "pl_pct": 72.42,
+        "pl_eur": 255.58,
         "div_yield": 0.0077,
-        "annual_div_eur": 4.67,
+        "annual_div_eur": 4.69,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.7
@@ -685,18 +692,18 @@
     }
   ],
   "bux_summary": {
-    "total": 2148.39,
-    "total_pl_pct": -20.05,
+    "total": 2146.91,
+    "total_pl_pct": -20.1,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1865.03,
-        "price": 355.72,
-        "pl_pct": -14.18,
-        "pl_eur": -308.04,
+        "value": 1862.54,
+        "price": 355.24,
+        "pl_pct": -14.29,
+        "pl_eur": -310.53,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -706,12 +713,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 239.83,
-        "price": 119.91,
-        "pl_pct": -27.57,
-        "pl_eur": -91.31,
-        "div_yield": 0.0311,
-        "annual_div_eur": 7.46,
+        "value": 240.92,
+        "price": 120.46,
+        "pl_pct": -27.24,
+        "pl_eur": -90.22,
+        "div_yield": 0.0415,
+        "annual_div_eur": 10.0,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 11.2
@@ -719,10 +726,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 39.3,
-        "price": 39.3,
-        "pl_pct": -78.11,
-        "pl_eur": -140.27,
+        "value": 39.22,
+        "price": 39.22,
+        "pl_pct": -78.16,
+        "pl_eur": -140.35,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2018,7 +2025,7 @@
     "DECK": "2026-06-24"
   },
   "benchmark_history": {
-    "sp500_ytd": 9.87,
+    "sp500_ytd": 9.99,
     "aex_ytd": 11.96,
     "msci_ytd": 12.92
   },
