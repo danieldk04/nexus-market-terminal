@@ -3764,8 +3764,8 @@
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 74.625,
-            "current_value": 749.06,
+            "current_price": 74.62,
+            "current_value": 749.01,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -3773,15 +3773,15 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 4.04,
+            "pl_percent": 4.03,
             "tp_target": 30.0
         },
         {
             "ticker": "PGR",
             "name": "Progressive Corporation (The)",
             "buy_price": 197.19,
-            "current_price": 233.465,
-            "current_value": 1534.4,
+            "current_price": 233.62,
+            "current_value": 1535.42,
             "buy_date": "2026-05-14",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3793,15 +3793,15 @@
             "kelly_fraction": 0.2,
             "position_value": 1296.0,
             "shares": 6.5723,
-            "pl_percent": 18.4,
+            "pl_percent": 18.47,
             "trailing_stop_price": 220.2731
         },
         {
             "ticker": "BR",
             "name": "Broadridge Financial Solutions,",
             "buy_price": 143.72,
-            "current_price": 150.945,
-            "current_value": 1088.92,
+            "current_price": 151.225,
+            "current_value": 1090.94,
             "buy_date": "2026-05-14",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -3813,14 +3813,14 @@
             "kelly_fraction": 0.2,
             "position_value": 1036.8,
             "shares": 7.214,
-            "pl_percent": 5.03
+            "pl_percent": 5.22
         },
         {
             "ticker": "TRV",
             "name": "The Travelers Companies, Inc.",
             "buy_price": 299.94,
-            "current_price": 340.575,
-            "current_value": 800.73,
+            "current_price": 340.8,
+            "current_value": 801.25,
             "buy_date": "2026-05-27",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3832,7 +3832,7 @@
             "kelly_fraction": 0.2,
             "position_value": 705.19,
             "shares": 2.3511,
-            "pl_percent": 13.55
+            "pl_percent": 13.62
         }
     ],
     "equity_history": [
@@ -4345,5 +4345,6 @@
             "retrieved_at": "2026-07-13T18:37:01.746289+00:00"
         }
     },
-    "filings_at": "2026-07-13T18:37:02.246462+00:00"
+    "filings_at": "2026-07-13T18:37:02.246462+00:00",
+    "ticker_updated_at": "2026-07-13T18:52:47.648998+00:00"
 }
