@@ -3660,8 +3660,8 @@
         {
             "ticker": "ALL",
             "buy_price": 210.53,
-            "current_price": 252.07,
-            "current_value": 957.84,
+            "current_price": 251.4,
+            "current_value": 955.29,
             "buy_date": "2026-04-08",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3669,15 +3669,15 @@
             "allocation_pct": 0.1,
             "position_value": 800.0,
             "shares": 3.7999,
-            "pl_percent": 19.73,
+            "pl_percent": 19.41,
             "tp_target": 30.0,
             "trailing_stop_price": 238.08
         },
         {
             "ticker": "UBER",
             "buy_price": 71.73,
-            "current_price": 73.3,
-            "current_value": 735.76,
+            "current_price": 71.63,
+            "current_value": 718.99,
             "buy_date": "2026-04-08",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -3685,15 +3685,15 @@
             "allocation_pct": 0.1,
             "position_value": 720.0,
             "shares": 10.0376,
-            "pl_percent": 2.19,
+            "pl_percent": -0.14,
             "tp_target": 30.0
         },
         {
             "ticker": "PGR",
             "name": "Progressive Corporation (The)",
             "buy_price": 197.19,
-            "current_price": 227.86,
-            "current_value": 1497.56,
+            "current_price": 227.155,
+            "current_value": 1492.93,
             "buy_date": "2026-05-14",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3705,15 +3705,15 @@
             "kelly_fraction": 0.2,
             "position_value": 1296.0,
             "shares": 6.5723,
-            "pl_percent": 15.55,
+            "pl_percent": 15.2,
             "trailing_stop_price": 220.2731
         },
         {
             "ticker": "BR",
             "name": "Broadridge Financial Solutions,",
             "buy_price": 143.72,
-            "current_price": 148.495,
-            "current_value": 1071.24,
+            "current_price": 147.19,
+            "current_value": 1061.83,
             "buy_date": "2026-05-14",
             "industry_group": "Tech & AI",
             "sector": "Technology",
@@ -3725,14 +3725,14 @@
             "kelly_fraction": 0.2,
             "position_value": 1036.8,
             "shares": 7.214,
-            "pl_percent": 3.32
+            "pl_percent": 2.41
         },
         {
             "ticker": "TRV",
             "name": "The Travelers Companies, Inc.",
             "buy_price": 299.94,
-            "current_price": 337.31,
-            "current_value": 793.05,
+            "current_price": 336.175,
+            "current_value": 790.38,
             "buy_date": "2026-05-27",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -3744,7 +3744,7 @@
             "kelly_fraction": 0.2,
             "position_value": 705.19,
             "shares": 2.3511,
-            "pl_percent": 12.46
+            "pl_percent": 12.08
         }
     ],
     "equity_history": [
@@ -4258,5 +4258,5 @@
         }
     },
     "filings_at": "2026-07-14T07:59:10.250562+00:00",
-    "ticker_updated_at": "2026-07-14T16:58:10.501881+00:00"
+    "ticker_updated_at": "2026-07-14T17:58:11.353866+00:00"
 }
