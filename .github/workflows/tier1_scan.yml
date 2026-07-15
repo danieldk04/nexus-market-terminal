@@ -97,7 +97,7 @@ jobs:
         run: |
           git config user.name  "NEXUS-InvestBot"
           git config user.email "nexus@bot.local"
-          git add data.json memory.json
+          git add data.json memory.json data/nexus_signals.db
           git diff --cached --quiet || git commit -m "Auto-update: Dual-Engine Scan $(date -u +'%Y-%m-%d %H:%M UTC')"
           git fetch origin
           git merge origin/main -X ours --no-edit
