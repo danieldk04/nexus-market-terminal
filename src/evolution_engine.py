@@ -406,6 +406,24 @@ def run_evolution():
         if score < effective_threshold:
             continue
 
+        # ── Confidence-gate (stap 6) ──────────────────────────────────────────
+        # Blokkeert kandidaten waarvan de gekalibreerde confidence onder de
+        # drempel ligt. Standaard uit; fail-open als er geen historie is.
+        trade_confidence = None
+        if CONFIDENCE_GATING_ENABLED and conf_conn:
+            feats = conf_features_fn(c, macro, 1 if sp500_above_ma200 else 0)
+            conf_res = conf_cal.confidence_for_signal(conf_conn, feats, horizon=CONFIDENCE_HORIZON)
+            if conf_res.get("available"):
+                trade_confidence = conf_res["confidence"]
+                if trade_confidence < MIN_CONFIDENCE:
+                    print(f"GATE: {ticker} overgeslagen — confidence {trade_confidence:.0%} "
+                          f"< {MIN_CONFIDENCE:.0%} (n={conf_res['n']}, beat {conf_res['beat_benchmark_rate']:.0%}).")
+                    continue
+                print(f"GATE OK: {ticker} confidence {trade_confidence:.0%} (n={conf_res['n']}).")
+            elif not ALLOW_WHEN_NO_CONFIDENCE:
+                print(f"GATE: {ticker} overgeslagen — geen confidence-historie.")
+                continue
+
         # Kelly Criterion positie-sizing (voorlopige schatting voor sector-% check)
         dcf = c.get("dcf") or {}
         dcf_upside = dcf.get("dcf_upside")
@@ -415,6 +433,14 @@ def run_evolution():
             cash=cash,
             max_pct=MAX_KELLY_PCT,
         )
+
+        # Confidence-gebaseerde size-scaling: hogere confidence → grotere positie.
+        # Lineair van 0.6× (op de drempel) tot 1.0× (bij confidence ≥ 0.75).
+        if (CONFIDENCE_GATING_ENABLED and CONFIDENCE_SIZE_SCALING
+                and trade_confidence is not None):
+            span = max(0.01, 0.75 - MIN_CONFIDENCE)
+            conf_scalar = 0.6 + 0.4 * max(0.0, min(1.0, (trade_confidence - MIN_CONFIDENCE) / span))
+            position_value = round(position_value * conf_scalar, 2)
 
         # ATR-based volatility scaling: shrink size for high-ATR/volatile
         # names so a 1-ATR adverse move stays close to a fixed risk budget,
