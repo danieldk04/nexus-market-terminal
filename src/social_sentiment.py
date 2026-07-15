@@ -146,6 +146,59 @@ def get_reddit_mentions(ticker: str, subreddits=("wallstreetbets", "stocks", "in
     }
 
 
+# Lichte keyword-lexicons voor bronnen zonder expliciete bull/bear-tags
+# (Bluesky). Bewust simpel gehouden — dit is een 'tell', geen NLP-model.
+_BULL_WORDS = ("buy", "bullish", "long", "calls", "moon", "breakout", "rally",
+               "undervalued", "strong buy", "accumulate", "up", "🚀", "📈")
+_BEAR_WORDS = ("sell", "bearish", "short", "puts", "crash", "dump", "overvalued",
+               "avoid", "weak", "down", "📉", "bagholder")
+
+
+def get_bluesky_sentiment(ticker: str, company_name: str = "") -> dict:
+    """
+    Bluesky post-search via het publieke AppView-endpoint (AT Protocol).
+    Geen key/OAuth nodig voor read-only search. Bluesky kent geen expliciete
+    Bullish/Bearish tags zoals StockTwits, dus we leiden een licht sentiment
+    af met een keyword-lexicon — een indicatie, geen bewijs.
+    """
+    try:
+        url = "https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts"
+        # Cashtag-zoekopdracht; valt terug op bedrijfsnaam voor bredere dekking
+        params = {"q": f"${ticker}", "limit": 25, "sort": "latest"}
+        res = requests.get(url, headers=HEADERS, params=params, timeout=TIMEOUT)
+        if res.status_code != 200:
+            return {"available": False}
+
+        posts = res.json().get("posts", [])
+        bullish = bearish = 0
+        samples = []
+        for p in posts:
+            text = ((p.get("record") or {}).get("text") or "").lower()
+            if not text:
+                continue
+            b = sum(w in text for w in _BULL_WORDS)
+            s = sum(w in text for w in _BEAR_WORDS)
+            if b > s:
+                bullish += 1
+            elif s > b:
+                bearish += 1
+            if len(samples) < 5:
+                samples.append(text[:140])
+
+        tagged = bullish + bearish
+        ratio = bullish / tagged if tagged else None
+        return {
+            "available": True,
+            "post_count": len(posts),
+            "bullish": bullish,
+            "bearish": bearish,
+            "bullish_ratio": round(ratio, 2) if ratio is not None else None,
+            "sample_posts": samples,
+        }
+    except Exception:
+        return {"available": False}
+
+
 def get_broad_news(ticker: str, company_name: str = "") -> list[str]:
     """
     Google News RSS — gratis, geen key, bredere dekking dan yfinance .news.
