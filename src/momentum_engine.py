@@ -250,10 +250,13 @@ def score_from_indicators(
     """
     p = ind["price"]
 
-    # M factor: full Minervini Stage 2 alignment
-    m = 1.0 if _stage2(ind) else 0.0
+    # M factor: fraction of Minervini Stage 2 criteria satisfied (graded)
+    m = _stage2_grade(ind)
 
-    # C factor: VCP squeeze tightness
+    # C factor: VCP squeeze tightness, graded instead of an all-or-nothing gate.
+    # Strict VCP (vcp_active, still used for the display flag) requires every
+    # sub-condition at once; scoring instead blends tightness + contraction +
+    # range so a near-miss setup still earns partial credit.
     atr_r = ind["atr14"] / p if (p > 0 and not np.isnan(ind["atr14"])) else 1.0
     vcp   = (
         atr_r < 0.05
@@ -261,7 +264,10 @@ def score_from_indicators(
         and ind["atr14"] < ind["atr50"]
         and ind["range1m"] < 0.10
     )
-    c = max(0.0, min(1.0, 1.0 - atr_r / 0.05)) if vcp else 0.0
+    tightness    = max(0.0, min(1.0, 1.0 - atr_r / 0.05))
+    contraction  = 1.0 if (not np.isnan(ind["atr50"]) and ind["atr14"] < ind["atr50"]) else 0.3
+    range_score  = max(0.0, min(1.0, 1.0 - ind["range1m"] / 0.10)) if ind["range1m"] > 0 else 0.5
+    c = round(0.5 * tightness + 0.25 * contraction + 0.25 * range_score, 3)
 
     # V factor: volume buzz (RVol 2.0 → full score, linearly)
     v = min(1.0, max(0.0, ind["vol_buzz"] / 100.0))
