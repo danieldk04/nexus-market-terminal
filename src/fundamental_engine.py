@@ -292,7 +292,15 @@ def compute_s_growth(
     if peg is None and pe > 0:
         rg  = float(info.get("revenueGrowth", 0) or 0)
         peg = pe / (rg * 100) if rg > 0.02 else None
-    U = u_base if (peg is not None and float(peg) < 1.5) else 0.0
+    # Taper valuation credit above the 1.5 PEG guideline instead of a hard
+    # cliff to zero — a PEG of 1.6 is not meaningfully worse than 1.4.
+    if peg is None:
+        peg_factor = 0.5   # unknown PEG: neutral, don't fully zero out U
+    elif float(peg) < 1.5:
+        peg_factor = 1.0
+    else:
+        peg_factor = max(0.0, 1.0 - (float(peg) - 1.5) / 2.0)
+    U = round(u_base * peg_factor, 3)
 
     # Alt modifier: thematic growth bonus (proxy for insider / 13F signal)
     alt = 0.5 if ticker in growth_themes else 0.0
