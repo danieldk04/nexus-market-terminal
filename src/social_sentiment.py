@@ -250,16 +250,44 @@ def build_sentiment_context(ticker: str, company_name: str = "") -> dict:
     else:
         lines.append("\nReddit: geen recente mentions gevonden")
 
+    if bluesky.get("available") and bluesky.get("post_count"):
+        ratio = bluesky.get("bullish_ratio")
+        ratio_str = f"{ratio:.0%} bullish (keyword-afgeleid)" if ratio is not None else "neutraal"
+        lines.append(
+            f"\nBluesky: {bluesky['post_count']} recente posts, "
+            f"{bluesky['bullish']} bullish / {bluesky['bearish']} bearish ({ratio_str})"
+        )
+        for msg in bluesky.get("sample_posts", [])[:3]:
+            lines.append(f"  • {msg}")
+    else:
+        lines.append("\nBluesky: geen data beschikbaar")
+
     if news:
         lines.append(f"\nBreder nieuws (Google News, top {len(news)}):")
         for headline in news[:7]:
             lines.append(f"  • {headline}")
 
+    # Gecombineerde bull-ratio over bronnen met een expliciete/afgeleide ratio,
+    # gewogen naar het aantal getagde berichten per bron. Dit is één samengevat
+    # sentiment-getal voor de signaal-database.
+    weighted_bull, weight = 0.0, 0
+    st_tag = stocktwits.get("bullish", 0) + stocktwits.get("bearish", 0)
+    if st_tag and stocktwits.get("bullish_ratio") is not None:
+        weighted_bull += stocktwits["bullish_ratio"] * st_tag
+        weight += st_tag
+    bs_tag = bluesky.get("bullish", 0) + bluesky.get("bearish", 0)
+    if bs_tag and bluesky.get("bullish_ratio") is not None:
+        weighted_bull += bluesky["bullish_ratio"] * bs_tag
+        weight += bs_tag
+    combined_ratio = round(weighted_bull / weight, 3) if weight else None
+
     return {
         "text_block": "\n".join(lines),
         "stocktwits": stocktwits,
+        "bluesky": bluesky,
         "reddit_mention_count": reddit.get("mention_count", 0),
         "news_count": len(news),
+        "combined_bull_ratio": combined_ratio,
     }
 
 
