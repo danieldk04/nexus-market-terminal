@@ -21,9 +21,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import signal_store as ss
+import calibration as cal
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_PATH = BASE_DIR / "data.json"
+
+# Horizon waarop we de dashboard-confidence tonen. 63d bleek in edge-discovery
+# consistenter dan 21d, dus dat is de standaard voor de weergave.
+DISPLAY_HORIZON = 63
 
 
 def _candidate_features(c: dict, macro: dict, spy_above_ma200: int | None) -> dict:
