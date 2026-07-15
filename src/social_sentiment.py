@@ -224,6 +224,7 @@ def build_sentiment_context(ticker: str, company_name: str = "") -> dict:
     """
     stocktwits = get_stocktwits_sentiment(ticker)
     reddit = get_reddit_mentions(ticker)
+    bluesky = get_bluesky_sentiment(ticker, company_name)
     news = get_broad_news(ticker, company_name)
 
     lines = []
