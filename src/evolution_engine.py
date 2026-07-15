@@ -354,9 +354,11 @@ def run_evolution():
                                - sector_adj
                                - rotation_adj
                                - watch_adj)
-        # Bearmarkt (S&P onder MA200): hogere instapdrempel
+        # Bearmarkt (S&P onder MA200): striktere instapdrempel — een vast punt
+        # op de oude 0-10 schaal (7.5) is nu onbereikbaar op de gekalibreerde
+        # schaal, dus verhoog relatief (+1.0) in plaats van een hard plafond.
         if not sp500_above_ma200:
-            effective_threshold = max(effective_threshold, 7.5)
+            effective_threshold = effective_threshold + 1.0
 
         if score < effective_threshold:
             continue
@@ -370,6 +372,16 @@ def run_evolution():
             cash=cash,
             max_pct=MAX_KELLY_PCT,
         )
+
+        # ATR-based volatility scaling: shrink size for high-ATR/volatile
+        # names so a 1-ATR adverse move stays close to a fixed risk budget,
+        # instead of Kelly sizing alone (which ignores volatility).
+        atr14 = c.get("atr14")
+        if atr14 and price > 0:
+            atr_pct    = atr14 / price
+            vol_scalar = max(0.5, min(1.0, ATR_VOL_TARGET / atr_pct)) if atr_pct > 0 else 1.0
+            position_value = round(position_value * vol_scalar, 2)
+
         position_value = min(position_value, cash)
 
         # Sector-% cap: voorkom dat één sector > MAX_SECTOR_PCT van totaal portfolio wordt
