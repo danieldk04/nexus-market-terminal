@@ -261,8 +261,16 @@ def compute_s_growth(
     """
     qdata = compute_quarterly_acceleration(t)
 
-    # A: fundamental acceleration (binary)
-    A = 1.0 if (qdata["rev_accel"] and qdata["eps_accel"]) else 0.0
+    # A: fundamental acceleration (graded — see _accel_grade docstring)
+    rev_grade = _accel_grade(qdata["rev_q1_yoy"] and qdata["rev_q1_yoy"] / 100,
+                              qdata["rev_q2_yoy"] and qdata["rev_q2_yoy"] / 100,
+                              qdata["rev_q3_yoy"] and qdata["rev_q3_yoy"] / 100,
+                              min_q1=0.25)
+    eps_grade = _accel_grade(qdata["eps_q1_yoy"] and qdata["eps_q1_yoy"] / 100,
+                              qdata["eps_q2_yoy"] and qdata["eps_q2_yoy"] / 100,
+                              qdata["eps_q3_yoy"] and qdata["eps_q3_yoy"] / 100,
+                              min_q1=0.30)
+    A = round(0.5 * (rev_grade + eps_grade), 3)
 
     # E: capital efficiency
     roic_score = min(1.0, float(roic) / 15.0) if roic is not None else 0.0
