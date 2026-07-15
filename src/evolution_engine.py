@@ -400,6 +400,9 @@ def run_evolution():
         # DCF-gebaseerde take-profit target voor nieuwe trade
         tp_target = get_dcf_take_profit({}, c)
 
+        # Hard technical stop set at entry — never moved down afterwards.
+        atr_stop_price = round(price - ATR_STOP_MULT * atr14, 4) if atr14 else None
+
         new_trade = {
             "ticker":          ticker,
             "name":            c.get("name", ticker),
@@ -416,6 +419,7 @@ def run_evolution():
             "tp_target":       tp_target,
             "kelly_fraction":  kelly_frac,
             "position_value":  position_value,
+            "atr_stop_price":  atr_stop_price,
             "shares":          shares,
             "pl_percent":      0.0,
         }
