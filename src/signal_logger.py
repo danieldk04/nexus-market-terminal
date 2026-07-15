@@ -88,6 +88,7 @@ def log_live_signals() -> dict:
 
     conn = ss.init_db()
     logged = 0
+    scored = 0
     for c in candidates:
         ticker = c.get("ticker")
         if not ticker:
@@ -96,13 +97,35 @@ def log_live_signals() -> dict:
         for h in ss.HORIZONS:
             ss.record_signal(conn, ticker, as_of, "live", h, features)
             logged += 1
+
+        # Gekalibreerde confidence op basis van historische analogen, teruggeschreven
+        # in de kandidaat zodat het dashboard het toont. Eerlijk: dit steunt nu op
+        # technische+regime-historie; de rijke laag rijpt nog.
+        conf = cal.confidence_for_signal(conn, features, horizon=DISPLAY_HORIZON)
+        if conf.get("available"):
+            c["confidence"] = {
+                "pct":        conf["confidence"],
+                "beat_rate":  conf["beat_benchmark_rate"],
+                "n":          conf["n"],
+                "horizon":    DISPLAY_HORIZON,
+                "avg_return": conf["avg_forward_return"],
+                "basis":      "technisch+regime (rijke laag rijpt nog)",
+            }
+            scored += 1
+        else:
+            c["confidence"] = None
     conn.commit()
+
+    # Confidence teruggeschreven → data.json opslaan
+    with open(DATA_PATH, "w") as f:
+        json.dump(data, f, indent=4)
 
     s = ss.stats(conn)
     print(f"Live signalen gelogd: {len(candidates)} kandidaten × {len(ss.HORIZONS)} horizons = {logged} rijen")
+    print(f"Confidence berekend voor {scored}/{len(candidates)} kandidaten (horizon {DISPLAY_HORIZON}d)")
     print(f"DB totaal: {s['total_signals']} ({s['realized_outcomes']} met uitkomst, "
           f"per bron: {s['by_source']})")
-    return {"logged": logged, "stats": s}
+    return {"logged": logged, "scored": scored, "stats": s}
 
 
 if __name__ == "__main__":
