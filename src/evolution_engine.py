@@ -489,6 +489,7 @@ def run_evolution():
             "kelly_fraction":  kelly_frac,
             "position_value":  position_value,
             "atr_stop_price":  atr_stop_price,
+            "confidence_at_entry": trade_confidence,
             "shares":          shares,
             "pl_percent":      0.0,
         }
