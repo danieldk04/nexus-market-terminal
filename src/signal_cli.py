@@ -7,6 +7,7 @@ NEXUS Signal CLI — inspecteer de signaal-database en test de kalibratie.
 import argparse
 
 import signal_store as ss
+import calibration as cal
 
 
 def cmd_stats():
