@@ -151,9 +151,9 @@ def _fetch_indicators(ticker: str) -> dict | None:
 
 # ── Minervini Stage 2 Template ────────────────────────────────────────────────
 
-def _stage2(ind: dict) -> bool:
+def _stage2_criteria(ind: dict) -> list[bool]:
     """
-    Returns True only if all 8 Minervini Trend Template criteria are satisfied.
+    Individual Minervini Trend Template criteria.
 
     Criteria:
       1. Price > SMA150 and Price > SMA200
@@ -168,8 +168,8 @@ def _stage2(ind: dict) -> bool:
     p = ind["price"]
     for key in ("ema10", "ema20", "sma50", "sma150", "sma200"):
         if np.isnan(ind[key]):
-            return False
-    return all([
+            return [False] * 10
+    return [
         p > ind["sma150"],
         p > ind["sma200"],
         ind["sma150"] > ind["sma200"],
@@ -180,7 +180,28 @@ def _stage2(ind: dict) -> bool:
         ind["low52"] > 0 and (p - ind["low52"]) / ind["low52"] >= 0.30,
         ind["high52"] > 0 and (ind["high52"] - p) / ind["high52"] <= 0.25,
         ind["rs_leading"],
-    ])
+    ]
+
+
+def _stage2(ind: dict) -> bool:
+    """True only if ALL Minervini Trend Template criteria are satisfied — used
+    for the display badge, not for scoring (see _stage2_grade)."""
+    return all(_stage2_criteria(ind))
+
+
+def _stage2_grade(ind: dict) -> float:
+    """
+    Fraction of Minervini criteria satisfied, in [0, 1].
+
+    M_factor previously required perfect Stage-2 alignment (all 10 criteria)
+    to earn any credit at all, which is the single biggest reason realistic
+    candidates never crossed the buy threshold: M carries the largest single
+    weight (3 of 10 points) in S_Momentum and was almost always exactly zero.
+    Grading it lets a stock that satisfies 7-9 of 10 criteria still earn most
+    of the credit instead of none.
+    """
+    crit = _stage2_criteria(ind)
+    return round(sum(crit) / len(crit), 3)
 
 
 # ── Public API ────────────────────────────────────────────────────────────────
