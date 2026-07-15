@@ -23,17 +23,28 @@ MEMORY_PATH = BASE_DIR / "memory.json"
 STARTING_CAPITAL  = 10_000.0
 STOP_LOSS_PCT     = -8.0    # Ruimer voor langetermijn (investor)
 TAKE_PROFIT_PCT   = 30.0    # Hoog doel — laat winnaars lopen
-MAX_TRADES        = 10      # Gespreide portefeuille
+MAX_TRADES        = 12      # Gespreide portefeuille
 MAX_PER_SECTOR    = 3       # Max aantal posities per sector
 MAX_SECTOR_PCT    = 0.40    # Max 40% van portfoliowaarde in één sector
 VIX_BLOCK         = 42.0    # Blokkeer alleen bij extreme paniek
 VIX_CAUTION       = 36.0    # Alleen high-conviction bij hoge VIX
 MAX_KELLY_PCT     = 0.20    # Maximaal 20% per positie (Kelly-cap)
 COOLDOWN_DAYS     = 2       # Geen herinstap binnen 2 dagen na sluiten
-ROTATION_MIN_DAYS   = 21    # Positie moet minstens 21 dagen oud zijn voor rotatie
+ROTATION_MIN_DAYS   = 14    # Positie moet minstens 14 dagen oud zijn voor rotatie
 ROTATION_MAX_PL_PCT = 5.0   # Roteer alleen stagnerende posities (< 5% winst)
-ROTATION_SCORE_GAP  = 1.5   # Nieuwe kandidaat moet minstens 1.5 punt beter scoren
+ROTATION_SCORE_GAP  = 1.0   # Nieuwe kandidaat moet minstens 1.0 punt beter scoren
 DCF_TP_MAX          = 35.0  # Cap op DCF-gebaseerde take-profit (voorkomt 130%+ doelen)
+
+# Relative ranking window: the buy threshold is capped at the score of the
+# RANK_WINDOW-th best candidate in today's scan, so the bot always has real
+# opportunities to evaluate instead of silently sitting on 100% cash whenever
+# the absolute scoring scale drifts (which is what was happening before —
+# realistic S_Growth/S_Momentum values rarely reached the old fixed 6.5-7.5
+# floor). VIX/bear-market logic still adjusts within that ceiling.
+RANK_WINDOW       = 10
+SCORE_FLOOR       = 2.0     # absolute sanity floor — never buy below this regardless of rank
+ATR_STOP_MULT     = 1.5     # hard technical stop = price - 1.5x ATR14 at entry
+ATR_VOL_TARGET    = 0.04    # position-size scalar target: 4% ATR/price is "normal" volatility
 
 
 def _is_in_cooldown(ticker: str, cooldowns: dict, today: str) -> bool:
