@@ -203,6 +203,31 @@ def compute_pe_z_score(pe: float, group: str) -> float:
     return round((pe - s["mean"]) / s["std"], 2) if s["std"] > 0 else 0.0
 
 
+def _accel_grade(q1: float | None, q2: float | None, q3: float | None, min_q1: float) -> float:
+    """
+    Graded acceleration score in [0, 1].
+
+    The strict blueprint definition (3 straight accelerating quarters above a
+    hypergrowth threshold) only ever fires for a handful of hypergrowth names,
+    which left A_factor at 0 for almost the entire scan universe and made the
+    S_Growth ceiling unreachable for perfectly good, merely-solid growers.
+    This grades partial credit so quality-but-not-hypergrowth companies still
+    score proportionally instead of being clipped to zero.
+    """
+    if q1 is None:
+        return 0.0
+    grade = 0.0
+    if q1 > 0:
+        grade += 0.35 * min(1.0, q1 / min_q1)
+    if q2 is not None and q1 > q2:
+        grade += 0.25
+    if q3 is not None and q2 is not None and q2 > q3:
+        grade += 0.20
+    if q3 is not None and q3 > 0:
+        grade += 0.20
+    return round(min(1.0, grade), 3)
+
+
 # ── S_Growth composite score ──────────────────────────────────────────────────
 
 def compute_s_growth(
