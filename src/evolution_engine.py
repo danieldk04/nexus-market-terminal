@@ -163,18 +163,23 @@ def run_evolution():
             c_data   = cand_by_ticker.get(ticker)
             tp_target = get_dcf_take_profit(trade, c_data)
 
-            # Stop-loss
-            if pl_pct <= STOP_LOSS_PCT:
+            # Stop-loss: percentage floor OR the ATR-based technical stop set
+            # at entry, whichever triggers first (tighter of the two wins —
+            # this is the "harde stop-loss" risk control, never moved down).
+            atr_stop = trade.get("atr_stop_price")
+            atr_hit  = atr_stop and cur_price <= atr_stop
+            if pl_pct <= STOP_LOSS_PCT or atr_hit:
                 cash += cur_value
+                reason = f"ATR-stop (${cur_price:.2f} ≤ ${atr_stop:.2f})" if atr_hit else f"{pl_pct:.1f}%"
                 add_lesson(ticker, sector,
-                           f"Stop-loss {ticker} ({pl_pct:.1f}%). Sector {sector} voorzichtig.",
+                           f"Stop-loss {ticker} ({reason}). Sector {sector} voorzichtig.",
                            "NEGATIVE_LEARNING")
                 notify_stop_loss(ticker, pl_pct, sector)
                 # Cooldown: blokkeer herinstap voor COOLDOWN_DAYS
                 if "cooldowns" not in memory:
                     memory["cooldowns"] = {}
                 memory["cooldowns"][ticker] = today
-                print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}% | €{cur_value:.2f} | cooldown {COOLDOWN_DAYS}d")
+                print(f"STOP-LOSS: {ticker} gesloten op {pl_pct:.1f}% ({reason}) | €{cur_value:.2f} | cooldown {COOLDOWN_DAYS}d")
                 closed_count += 1
                 continue
 
