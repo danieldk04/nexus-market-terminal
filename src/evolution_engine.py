@@ -140,6 +140,16 @@ def run_evolution():
     cash      = float(portfolio.get("cash", STARTING_CAPITAL))
     today     = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
+    # ── Confidence-gating engine (stap 6, standaard uit) ──────────────────────
+    conf_conn = conf_cal = conf_features_fn = None
+    if CONFIDENCE_GATING_ENABLED:
+        conf_conn, conf_cal, conf_features_fn = _load_confidence_engine()
+        if conf_conn:
+            print(f"CONFIDENCE-GATING AAN: min {MIN_CONFIDENCE:.0%} @ {CONFIDENCE_HORIZON}d "
+                  f"| size-scaling {'aan' if CONFIDENCE_SIZE_SCALING else 'uit'}")
+    else:
+        print("Confidence-gating: UIT (zet env CONFIDENCE_GATING=1 zodra de database gerijpt is).")
+
     # ── S&P 500 MA200 — macro filter voor berenmarkt ──────────────────────────
     sp500_above_ma200 = True
     try:
