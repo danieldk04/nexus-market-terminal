@@ -240,10 +240,24 @@ def run_evolution():
         print(f"MARKTPAUZE: {vix_str} ≥ {VIX_BLOCK} — geen nieuwe trades.")
         vix_threshold = 999
     elif vix >= VIX_CAUTION:
-        print(f"VOORZICHT: {vix_str} — alleen score > 7.5.")
-        vix_threshold = max(vix_threshold, 7.5)
+        print(f"VOORZICHT: {vix_str} — verhoogde drempel.")
+        vix_threshold = vix_threshold + 1.5
     else:
         print(f"MARKT: {vix_str} — dynamische drempel = {vix_threshold}")
+
+    # ── 3a. Relative rank ceiling ─────────────────────────────────────────────
+    # Cap the threshold at the score of the RANK_WINDOW-th best candidate in
+    # today's scan. Without this, an absolute threshold calibrated for one
+    # scoring regime can end up permanently unreachable if the underlying
+    # score distribution shifts (e.g. after a scoring recalibration or simply
+    # a quiet market with no hypergrowth names) — silently parking the bot in
+    # 100% cash forever instead of trading its best available ideas.
+    if vix < VIX_BLOCK and candidates:
+        ranked   = sorted(candidates, key=lambda c: c.get("score", 0), reverse=True)
+        rank_idx = min(RANK_WINDOW, len(ranked)) - 1
+        rank_cap = ranked[rank_idx].get("score", 0)
+        vix_threshold = max(SCORE_FLOOR, min(vix_threshold, rank_cap))
+        print(f"Rank-cap: top-{RANK_WINDOW} kandidaat scoort {rank_cap} → basisdrempel {vix_threshold}")
 
     # ── 3b. Score-rotatie: vervang stagnerende positie door betere kandidaat ──
     cooldowns = memory.get("cooldowns", {})
