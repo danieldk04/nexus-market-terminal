@@ -5,6 +5,7 @@ DCF-gebaseerde exits + dynamische VIX-drempel + post-mortem sector-aanpassingen
 + Sector-cap op portfoliowaarde (max 40%)
 """
 import json
+import os
 import yfinance as yf
 from datetime import datetime, date, timezone, timedelta
 from pathlib import Path
@@ -18,6 +19,38 @@ from notifier import (
 BASE_DIR    = Path(__file__).parent.parent
 DATA_PATH   = BASE_DIR / "data.json"
 MEMORY_PATH = BASE_DIR / "memory.json"
+
+# ─── CONFIDENCE-GATING (STAP 6) ──────────────────────────────────────────────
+# STANDAARD UIT. Zet aan met env CONFIDENCE_GATING=1 (of hieronder True) PAS
+# wanneer de live fundamenteel+sentiment-laag genoeg gerijpte waarnemingen heeft.
+# Nu aanzetten zou de bot strenger maken op basis van een technisch-only
+# muntworp-signaal — zie de roadmap-notitie. De machinerie staat klaar; jij
+# bepaalt wanneer je hem laat meewegen.
+CONFIDENCE_GATING_ENABLED = os.environ.get("CONFIDENCE_GATING", "0") == "1"
+# Minimale Wilson-confidence (0-1) om een nieuwe trade toe te staan.
+MIN_CONFIDENCE            = float(os.environ.get("MIN_CONFIDENCE", "0.55"))
+# Schaal positiegrootte mee met confidence (binnen Kelly-cap): hogere
+# confidence → grotere positie. Uit = gate blokkeert alleen, size onveranderd.
+CONFIDENCE_SIZE_SCALING   = os.environ.get("CONFIDENCE_SIZE_SCALING", "1") == "1"
+# Horizon waarop we de confidence beoordelen (moet in signal_store.HORIZONS zitten).
+CONFIDENCE_HORIZON        = int(os.environ.get("CONFIDENCE_HORIZON", "63"))
+# Wat te doen als er (nog) geen vergelijkbare historie is: fail-open (True =
+# trade toestaan) voorkomt dat een lege/dunne database alle trades blokkeert.
+ALLOW_WHEN_NO_CONFIDENCE  = True
+
+
+def _load_confidence_engine():
+    """Laad de kalibratie-modules lui; faal stil als ze ontbreken zodat de
+    bot ook zonder signaal-database blijft draaien."""
+    try:
+        import signal_store as ss
+        import calibration as cal
+        from signal_logger import _candidate_features
+        conn = ss.init_db()
+        return conn, cal, _candidate_features
+    except Exception as e:
+        print(f"Confidence-engine niet beschikbaar ({e}) — gating overgeslagen.")
+        return None, None, None
 
 # ─── INVESTOR CONFIGURATIE ───────────────────────────────────────────────────
 STARTING_CAPITAL  = 10_000.0
