@@ -51,12 +51,16 @@ def _build_conditions(features: dict) -> list[tuple[str, str, list]]:
     if features.get("spy_above_ma200") is not None:
         conds.append(("regime", "spy_above_ma200 = ?", [int(features["spy_above_ma200"])]))
 
-    mom = features.get("convergence_score")
+    # Match op s_momentum (puur technisch) — dit is apples-to-apples met de
+    # backfill-historie. De geblende convergence_score (groei+momentum) betekent
+    # in live-data iets anders dan in de backfill, dus die gebruiken we hier niet
+    # als match-as (wel later, zodra live-uitkomsten gerijpt zijn).
+    mom = features.get("s_momentum")
     if mom is None:
-        mom = features.get("s_momentum")
+        mom = features.get("convergence_score")
     if mom is not None:
         lo, hi = _momentum_bucket(mom)
-        conds.append((f"momentum∈[{lo:.0f},{hi:.0f})", "convergence_score >= ? AND convergence_score < ?", [lo, hi]))
+        conds.append((f"momentum∈[{lo:.0f},{hi:.0f})", "s_momentum >= ? AND s_momentum < ?", [lo, hi]))
 
     for col in ("stage2", "vcp_active", "macd_bullish"):
         if features.get(col) is not None:
