@@ -5,6 +5,7 @@ DCF-gebaseerde exits + dynamische VIX-drempel + post-mortem sector-aanpassingen
 + Sector-cap op portfoliowaarde (max 40%)
 """
 import json
+import os
 import yfinance as yf
 from datetime import datetime, date, timezone, timedelta
 from pathlib import Path
@@ -18,6 +19,38 @@ from notifier import (
 BASE_DIR    = Path(__file__).parent.parent
 DATA_PATH   = BASE_DIR / "data.json"
 MEMORY_PATH = BASE_DIR / "memory.json"
+
+# ─── CONFIDENCE-GATING (STAP 6) ──────────────────────────────────────────────
+# STANDAARD UIT. Zet aan met env CONFIDENCE_GATING=1 (of hieronder True) PAS
+# wanneer de live fundamenteel+sentiment-laag genoeg gerijpte waarnemingen heeft.
+# Nu aanzetten zou de bot strenger maken op basis van een technisch-only
+# muntworp-signaal — zie de roadmap-notitie. De machinerie staat klaar; jij
+# bepaalt wanneer je hem laat meewegen.
+CONFIDENCE_GATING_ENABLED = os.environ.get("CONFIDENCE_GATING", "0") == "1"
+# Minimale Wilson-confidence (0-1) om een nieuwe trade toe te staan.
+MIN_CONFIDENCE            = float(os.environ.get("MIN_CONFIDENCE", "0.55"))
+# Schaal positiegrootte mee met confidence (binnen Kelly-cap): hogere
+# confidence → grotere positie. Uit = gate blokkeert alleen, size onveranderd.
+CONFIDENCE_SIZE_SCALING   = os.environ.get("CONFIDENCE_SIZE_SCALING", "1") == "1"
+# Horizon waarop we de confidence beoordelen (moet in signal_store.HORIZONS zitten).
+CONFIDENCE_HORIZON        = int(os.environ.get("CONFIDENCE_HORIZON", "63"))
+# Wat te doen als er (nog) geen vergelijkbare historie is: fail-open (True =
+# trade toestaan) voorkomt dat een lege/dunne database alle trades blokkeert.
+ALLOW_WHEN_NO_CONFIDENCE  = True
+
+
+def _load_confidence_engine():
+    """Laad de kalibratie-modules lui; faal stil als ze ontbreken zodat de
+    bot ook zonder signaal-database blijft draaien."""
+    try:
+        import signal_store as ss
+        import calibration as cal
+        from signal_logger import _candidate_features
+        conn = ss.init_db()
+        return conn, cal, _candidate_features
+    except Exception as e:
+        print(f"Confidence-engine niet beschikbaar ({e}) — gating overgeslagen.")
+        return None, None, None
 
 # ─── INVESTOR CONFIGURATIE ───────────────────────────────────────────────────
 STARTING_CAPITAL  = 10_000.0
@@ -106,6 +139,16 @@ def run_evolution():
     portfolio = data.get("portfolio", {"cash": STARTING_CAPITAL, "starting_capital": STARTING_CAPITAL})
     cash      = float(portfolio.get("cash", STARTING_CAPITAL))
     today     = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    # ── Confidence-gating engine (stap 6, standaard uit) ──────────────────────
+    conf_conn = conf_cal = conf_features_fn = None
+    if CONFIDENCE_GATING_ENABLED:
+        conf_conn, conf_cal, conf_features_fn = _load_confidence_engine()
+        if conf_conn:
+            print(f"CONFIDENCE-GATING AAN: min {MIN_CONFIDENCE:.0%} @ {CONFIDENCE_HORIZON}d "
+                  f"| size-scaling {'aan' if CONFIDENCE_SIZE_SCALING else 'uit'}")
+    else:
+        print("Confidence-gating: UIT (zet env CONFIDENCE_GATING=1 zodra de database gerijpt is).")
 
     # ── S&P 500 MA200 — macro filter voor berenmarkt ──────────────────────────
     sp500_above_ma200 = True
@@ -363,6 +406,24 @@ def run_evolution():
         if score < effective_threshold:
             continue
 
+        # ── Confidence-gate (stap 6) ──────────────────────────────────────────
+        # Blokkeert kandidaten waarvan de gekalibreerde confidence onder de
+        # drempel ligt. Standaard uit; fail-open als er geen historie is.
+        trade_confidence = None
+        if CONFIDENCE_GATING_ENABLED and conf_conn:
+            feats = conf_features_fn(c, macro, 1 if sp500_above_ma200 else 0)
+            conf_res = conf_cal.confidence_for_signal(conf_conn, feats, horizon=CONFIDENCE_HORIZON)
+            if conf_res.get("available"):
+                trade_confidence = conf_res["confidence"]
+                if trade_confidence < MIN_CONFIDENCE:
+                    print(f"GATE: {ticker} overgeslagen — confidence {trade_confidence:.0%} "
+                          f"< {MIN_CONFIDENCE:.0%} (n={conf_res['n']}, beat {conf_res['beat_benchmark_rate']:.0%}).")
+                    continue
+                print(f"GATE OK: {ticker} confidence {trade_confidence:.0%} (n={conf_res['n']}).")
+            elif not ALLOW_WHEN_NO_CONFIDENCE:
+                print(f"GATE: {ticker} overgeslagen — geen confidence-historie.")
+                continue
+
         # Kelly Criterion positie-sizing (voorlopige schatting voor sector-% check)
         dcf = c.get("dcf") or {}
         dcf_upside = dcf.get("dcf_upside")
@@ -372,6 +433,14 @@ def run_evolution():
             cash=cash,
             max_pct=MAX_KELLY_PCT,
         )
+
+        # Confidence-gebaseerde size-scaling: hogere confidence → grotere positie.
+        # Lineair van 0.6× (op de drempel) tot 1.0× (bij confidence ≥ 0.75).
+        if (CONFIDENCE_GATING_ENABLED and CONFIDENCE_SIZE_SCALING
+                and trade_confidence is not None):
+            span = max(0.01, 0.75 - MIN_CONFIDENCE)
+            conf_scalar = 0.6 + 0.4 * max(0.0, min(1.0, (trade_confidence - MIN_CONFIDENCE) / span))
+            position_value = round(position_value * conf_scalar, 2)
 
         # ATR-based volatility scaling: shrink size for high-ATR/volatile
         # names so a 1-ATR adverse move stays close to a fixed risk budget,
@@ -420,6 +489,7 @@ def run_evolution():
             "kelly_fraction":  kelly_frac,
             "position_value":  position_value,
             "atr_stop_price":  atr_stop_price,
+            "confidence_at_entry": trade_confidence,
             "shares":          shares,
             "pl_percent":      0.0,
         }
