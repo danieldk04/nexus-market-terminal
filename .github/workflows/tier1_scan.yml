@@ -60,6 +60,18 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python src/evolution_engine.py
 
+      - name: Tier 3.5 — Signal Logger (live signalen → nexus_signals.db)
+        env:
+          PYTHONPATH: src
+          SILENT_RUN: "true"
+        run: python src/signal_logger.py || echo "Signal logger overgeslagen"
+
+      - name: Tier 3.6 — Outcome Updater (realiseer verstreken horizons)
+        env:
+          PYTHONPATH: src
+          SILENT_RUN: "true"
+        run: python src/update_outcomes.py || echo "Outcome updater overgeslagen"
+
       - name: Tier 4 — Post-Mortem Analyser (Self-Learning)
         env:
           PYTHONPATH: src
