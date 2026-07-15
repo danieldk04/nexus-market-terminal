@@ -2826,6 +2826,29 @@ function _momBar(score){
     </div>`;
 }
 
+/* Gekalibreerde confidence-badge: Wilson-ondergrens uit historische analogen.
+   Eerlijk gelabeld — dit is GEEN winkans-belofte maar een empirische maat. */
+function _confBadge(c){
+    const cf=c.confidence;
+    if(!cf||cf.pct==null) return '';
+    const pct=Math.round(cf.pct*100);
+    const beat=Math.round((cf.beat_rate||0)*100);
+    const clr=pct>=60?'#059669':pct>=50?'#d97706':'#94a3b8';
+    const avg=cf.avg_return!=null?((cf.avg_return>=0?'+':'')+(cf.avg_return*100).toFixed(1)+'%'):'—';
+    const tip=`Gekalibreerde confidence (Wilson-ondergrens 95%) o.b.v. ${cf.n} historische analogen `+
+              `over ${cf.horizon} handelsdagen. Versloeg de index ${beat}% van de keren, gemiddeld rendement ${avg}. `+
+              `Basis: ${cf.basis||'technisch+regime'}. Dit is een empirische maat, geen winstgarantie.`;
+    return `<div style="margin-top:7px;padding:6px 7px;background:${clr}12;border:1px solid ${clr}38;border-radius:6px" title="${tip}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+            <span style="font-size:.48rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700">Confidence · ${cf.horizon}d</span>
+            <span style="font-family:var(--mono);font-size:.7rem;color:${clr};font-weight:700">${pct}%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.5rem;color:var(--muted)">
+            <span>beat ${beat}% · n=${cf.n}</span><span>Ø ${avg}</span>
+        </div>
+    </div>`;
+}
+
 function renderCandidatesPanel(){
     const el=document.getElementById('cand-grid');
     const tag=document.getElementById('cand-tag');
