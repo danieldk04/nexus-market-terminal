@@ -226,6 +226,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-17",
+      "degiro": 16636.28,
+      "tr": 8429.66,
+      "nexus": 4395.24,
+      "bux": 2073.77
+    },
+    {
       "date": "2026-07-16",
       "degiro": 16632.15,
       "tr": 8535.13,
@@ -620,26 +627,26 @@
   "last_news": [
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
-    "Aandelen SpaceX zakken verder weg: voor het eerst onder introductieprijs",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
+    "Nieuwe koers bij de Fed zorgt voor onzekerheid op de beurs",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-    "IPO aandelen kopen",
     "Het is officieel: SpaceX voor 135 dollar per aandeel naar de beurs, en Musk haalt dus 75 miljard dollar op - NRC"
   ],
   "tr_summary": {
-    "total": 8535.13,
+    "total": 8429.66,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4639.14,
-        "price": 56180.2305,
+        "value": 4533.67,
+        "price": 54902.9609,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 54.4
+        "weight": 53.8
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -647,7 +654,7 @@
         "price": 156.6312,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.2
+        "weight": 15.3
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -655,7 +662,7 @@
         "price": 53.92,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 14.5
+        "weight": 14.6
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -663,7 +670,7 @@
         "price": 165.46,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 13.9
+        "weight": 14.0
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -675,11 +682,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-16T19:01:23.097593+00:00",
+  "dashboard_updated": "2026-07-17T07:01:22.527377+00:00",
   "degiro_summary": {
-    "total": 16632.15,
-    "total_pl_pct": 35.54,
-    "total_invested": 12270.98,
+    "total": 16636.28,
+    "total_pl_pct": 35.58,
+    "total_invested": 12270.61,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -712,15 +719,15 @@
         "annual_div_eur": 110.82,
         "first_buy_date": null,
         "sector": null,
-        "weight": 27.0
+        "weight": 26.9
       },
       {
         "name": "V",
-        "value": 633.48,
-        "pl_pct": 79.45,
-        "pl_eur": 280.47,
+        "value": 637.61,
+        "pl_pct": 80.81,
+        "pl_eur": 284.97,
         "div_yield": 0.0075,
-        "annual_div_eur": 4.75,
+        "annual_div_eur": 4.78,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.8
@@ -729,35 +736,35 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO: koersvolatiliteit",
-      "summary": "SpaceX ging vandaag naar de beurs tegen 135 dollar per aandeel, waarmee Musk 75 miljard dollar ophaalde. De koers schommelt wild: berichten spreken van sterke vraag en recordwinsten, maar ook van flinke dalingen en waardeverlies van honderden miljarden, wat wijst op heftige correcties na initi\u00eble hype."
+      "theme": "SpaceX beursintroductie: volatiliteit",
+      "summary": "SpaceX debuteerde op de beurs tegen 135 dollar per aandeel, waarmee Musk 75 miljard dollar ophaalde. De koers vertoont grote schommelingen met zowel flinke winsten op dag \u00e9\u00e9n als daaropvolgende dalingen tot 1 miljard dollar verlies, wat illustreert hoe volatiel nieuwe tech-IPO's kunnen zijn voor beleggers."
     },
     {
-      "theme": "Amerikaanse tech onder druk",
-      "summary": "De tech-sector in de VS kampt met tegenwind, wat doorwerkt in bredere marktindexen zoals S&P 500. Dit beperkt de groeimomentum en kan ETF-beleggers treffen die significant in Amerikaanse technologie zijn ge\u00efnvesteerd."
+      "theme": "Tech-sector onder druk in VS",
+      "summary": "Technologiebedrijven hebben het lastig op Amerikaanse beurzen, met dalende koersen en onzekerheid die door Fed-beleid wordt veroorzaakt. Dit raakt direct beleggers met S&P 500- en World ETF-posities die veel tech-exposure hebben."
     },
     {
-      "theme": "Europese en mondiale marktmengeling",
-      "summary": "Terwijl de AEX 1% stijgt en het Europese sentiment herstelt, vertonen Aziatische markten zwakte door geopolitieke spanning (Iran). Deze geografische uiteenlopende signalen maken het lastig om klare trends in wereldwijde ETFs te identificeren."
+      "theme": "Geopolitieke risico's belasten markten",
+      "summary": "Oorlogen en internationale spanningen, waaronder conflict met Iran, zorgen voor ongelijke reacties op beurzen: Europese aandelen herstellen maar Aziatische blijven dalen. Dit verhoogt het risico voor gediversificeerde buitenlandse beleggingsposities."
     },
     {
-      "theme": "Selectieve sectorkansen",
-      "summary": "Hardwarebedrijven zoals Dell presteren sterk en trekken positieve aandacht, terwijl andere tech-spelers worstelen. Dit suggereert dat beleggers selectiever worden en dat gespecialiseerde aandelen sterker kunnen uitkomen dan brede tech-indexen."
+      "theme": "Gemengde signalen, beleggers voorzichtig",
+      "summary": "Hoewel sterke bedrijfscijfers koopkansen bieden en de AEX 1% stijgt, blijft onzekerheid heersen door Fed-beleid en marktvolatiliteit. Beleggers worstelen met de spanning tussen potenti\u00eble winsten en risico's, wat voorzichtigheid rechtvaardigt."
     }
   ],
   "bux_summary": {
-    "total": 2074.11,
-    "total_pl_pct": -22.81,
+    "total": 2073.77,
+    "total_pl_pct": -22.82,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1790.22,
-        "price": 341.45,
+        "value": 1790.14,
+        "price": 341.43,
         "pl_pct": -17.62,
-        "pl_eur": -382.85,
+        "pl_eur": -382.93,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -767,10 +774,10 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 243.38,
-        "price": 121.69,
-        "pl_pct": -26.5,
-        "pl_eur": -87.76,
+        "value": 243.47,
+        "price": 121.74,
+        "pl_pct": -26.47,
+        "pl_eur": -87.67,
         "div_yield": 0.0437,
         "annual_div_eur": 10.64,
         "first_buy_date": null,
@@ -780,10 +787,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 36.22,
-        "price": 36.22,
-        "pl_pct": -79.83,
-        "pl_eur": -143.35,
+        "value": 35.87,
+        "price": 35.87,
+        "pl_pct": -80.03,
+        "pl_eur": -143.7,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2080,7 +2087,7 @@
     "PGR": "2026-07-15"
   },
   "benchmark_history": {
-    "sp500_ytd": 9.76,
+    "sp500_ytd": 9.85,
     "aex_ytd": 13.93,
     "msci_ytd": 13.41
   },
