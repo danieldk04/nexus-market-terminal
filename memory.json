@@ -226,6 +226,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-19",
+      "degiro": 16478.72,
+      "tr": 8539.59,
+      "nexus": 4395.24,
+      "bux": 2024.84
+    },
+    {
       "date": "2026-07-18",
       "degiro": 16478.72,
       "tr": 8527.61,
@@ -634,26 +641,26 @@
   "last_news": [
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
-    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
+    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
   ],
   "tr_summary": {
-    "total": 8527.61,
+    "total": 8539.59,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4657.99,
-        "price": 56408.5117,
+        "value": 4669.97,
+        "price": 56553.5586,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 54.6
+        "weight": 54.7
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -689,7 +696,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-18T19:01:07.703638+00:00",
+  "dashboard_updated": "2026-07-19T07:01:13.746648+00:00",
   "degiro_summary": {
     "total": 16478.72,
     "total_pl_pct": 34.29,
@@ -743,20 +750,20 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO en marktwaarde",
-      "summary": "SpaceX is naar de beurs gegaan tegen 135 dollar per aandeel, waaruit Elon Musk 75 miljard dollar ophaalt. Echter daalt de koers onder de introductieprijs, wat aangeeft dat beleggers voorzichtiger worden ondanks aanvankelijke enthousiasme voor groeiaandelen in de tech-sector."
+      "theme": "SpaceX IPO en valuatie",
+      "summary": "SpaceX ging naar de beurs tegen $135 per aandeel en haalde $75 miljard op, maar zakt nu onder de introductieprijs en verliest miljarden aan waarde. Dit signaal van zwakte in de techsector treft ook S&P500- en World-beleggers, omdat het vertrouwen in groeiaandelen krimpt."
     },
     {
-      "theme": "Tech-sector onder druk",
-      "summary": "Chipaandelen en tech-aandelen verkopen massaal af, waaronder ASML dat significant daalt. Dit illustreert brede risicovermijding in de groeigerichte technologie-sectoren die een groot gewicht hebben in S&P500 en World ETFs."
+      "theme": "Chipsektor onder druk",
+      "summary": "Beleggers verkopen massaal chipfondsen af, wat de koers van ASML en soortgelijke bedrijven doet dalen. Voor AEX-portefeuilles is dit direct relevant omdat ASML een zeer zware index-component is."
     },
     {
-      "theme": "Marktvolatiliteit en onzekerheid",
-      "summary": "Geopolitieke spanningen (oorlogen met Iran), nieuwe Fed-beleid en algemene marktinstabiliteit ('code oranje') zorgen voor turbulentie op beurzen wereldwijd, zowel in Europa als Azi\u00eb. Dit leidt tot wisselende koersen en twijfel onder beleggers over toekomstige richtingen."
+      "theme": "Marktvolatiliteit en macro-onzekerheid",
+      "summary": "De beurs vertoont onrust door dalende koersen, bitcoin-verlies, Fed-beleidsonzekerheid en geopolitieke spanningen (oorlogen Iran). Dit cre\u00ebert 'code oranje'-scenario's die alle brede indexen raken en verhandelbare koopjes cre\u00ebren in stabiele aandelen."
     },
     {
-      "theme": "Tweedeling in aandelenkeuze",
-      "summary": "Terwijl groeiaandelen (tech, AI-gerelateerd) volatiel zijn, bieden 'saaie' defensieve aandelen nu koopjes aan. Beleggers kunnen nu via ETFs en selectieve positie-opbouw profiteren van waarderingen in deze minder populaire segmenten."
+      "theme": "Tweedeling en beleggersgedrag",
+      "summary": "Terwijl Europese aandelen herstellen, blijven Aziatische koersen zwak, en beleggers vluchen naar 'saaie' defensieve waarden uit angst voor AI-vervangingen. Dit leidt tot selectiviteit in portefeuilles in plaats van brede markttrends."
     }
   ],
   "bux_summary": {
