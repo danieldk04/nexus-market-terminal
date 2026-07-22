@@ -2959,9 +2959,10 @@ function _confBadge(c){
 
 /* NEXUS-keuze: het 6-stappenplan uit de Uitleg-tab als één samengestelde score
    (0-100). Codeert: (1) score-horde, (2) trend meedoet, (3) waarde meedoet,
-   (4) waardering, (5) niet overgekocht, (6) confidence als tiebreaker.
-   Geeft ook de redenen (waarom hoog) en flags (waarom niet) terug voor de tooltip. */
-function _nexusPick(c){
+   (4) waardering, (5) niet overgekocht, (6) confidence (zwaarste factor).
+   _nexusRaw geeft de absolute score + redenen/flags; _nexusPick voegt daar het
+   RELATIEVE label aan toe (t.o.v. de beste kandidaat in het huidige veld). */
+function _nexusRaw(c){
     const sc=c.score||0, sg=c.s_growth, sm=c.s_momentum;
     const up=c.dcf?.dcf_upside, rsi=c.rsi14, stage2=c.stage2, cf=c.confidence;
     let pts=0; const reasons=[], flags=[];
