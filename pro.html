@@ -3044,7 +3044,7 @@ function renderCandidatesPanel(){
     /* filter bar */
     const regBtns=[['all','Alles'],['US','🇺🇸 US'],['EU','🇪🇺 EU']];
     const capBtns=[['all','Alle caps'],['mega','Mega'],['large','Large'],['mid','Mid'],['small','Small']];
-    const srtBtns=[['score','↕ Value'],['verdict','↕ Verdict'],['momentum_score','↕ Momentum'],['combo','↕ Combo']];
+    const srtBtns=[['nexus','⭐ NEXUS-keuze'],['score','↕ Value'],['verdict','↕ Verdict'],['momentum_score','↕ Momentum'],['combo','↕ Combo']];
     fbar.innerHTML=`
         <div class="fbar-row">
             ${regBtns.map(([v,l])=>`<button class="fbtn${candRegion===v?' active':''}" data-r="${v}">${l}</button>`).join('')}
