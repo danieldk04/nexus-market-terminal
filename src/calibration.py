@@ -141,6 +141,20 @@ def confidence_for_signal(conn: sqlite3.Connection, features: dict,
     avg_ret = sum(r["forward_return"] for r in rows) / n
     conf = ss._wilson_lower_bound(beats, n)
 
+    # Out-of-sample-toets: splits deze cohort op de mediaan-datum en kijk of de
+    # edge (>50% de index verslaan) in BEIDE tijdshelften overeind blijft.
+    # Een confidence die op de volle historie hoog is maar in één helft onder de
+    # muntworp zakt, is waarschijnlijk regime- of curve-fit — dezelfde discipline
+    # die discover_edges nu toepast. oos_consistent is None als niet toetsbaar
+    # (te weinig data of één helft leeg).
+    split = _split_date(conn, horizon)
+    oos_consistent = None
+    rate_first = rate_second = None
+    if split is not None:
+        rate_first, rate_second, n1, n2 = _cohort_halves(conn, horizon, conds, split)
+        if rate_first is not None and rate_second is not None:
+            oos_consistent = bool(rate_first > 0.5 and rate_second > 0.5)
+
     return {
         "available": True,
         "horizon_days": horizon,
@@ -151,7 +165,12 @@ def confidence_for_signal(conn: sqlite3.Connection, features: dict,
         "positive_return_rate": round(wins / n, 3),
         "avg_forward_return": round(avg_ret, 4),
         "confidence": round(conf, 3),
-        "high_conviction": conf >= 0.60 and n >= 100,
+        "beat_rate_first_half": round(rate_first, 3) if rate_first is not None else None,
+        "beat_rate_second_half": round(rate_second, 3) if rate_second is not None else None,
+        "oos_consistent": oos_consistent,
+        # high_conviction eist nu OOK out-of-sample-consistentie (waar toetsbaar):
+        # een edge die maar in één helft bestaat verdient geen 'high conviction'.
+        "high_conviction": conf >= 0.60 and n >= 100 and (oos_consistent is not False),
     }
 
 
