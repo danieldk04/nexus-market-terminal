@@ -2966,26 +2966,35 @@ function _nexusPick(c){
     const up=c.dcf?.dcf_upside, rsi=c.rsi14, stage2=c.stage2, cf=c.confidence;
     let pts=0; const reasons=[], flags=[];
 
-    // Stap 1 — score-horde (max 30)
-    if(sc>=7){pts+=30;reasons.push('Score ≥7 (sterk)');}
-    else if(sc>=5){pts+=20;reasons.push('Score ≥5');}
+    // Stap 1 — score-horde (max 22)
+    if(sc>=7){pts+=22;reasons.push('Score ≥7 (sterk)');}
+    else if(sc>=5){pts+=14;reasons.push('Score ≥5');}
     else{flags.push('Score <5');}
 
-    // Stap 2 — trend meedoet (Stage 2 + momentum, max 22)
-    if(stage2){pts+=12;reasons.push('Stage 2 ✓');} else{flags.push('geen Stage 2');}
-    if(sm!=null){ if(sm>=6){pts+=10;reasons.push('Momentum sterk');} else if(sm>=4){pts+=4;} else{flags.push('zwak momentum');} }
+    // Stap 2 — trend meedoet (Stage 2 + momentum, max 16)
+    if(stage2){pts+=8;reasons.push('Stage 2 ✓');} else{flags.push('geen Stage 2');}
+    if(sm!=null){ if(sm>=6){pts+=8;reasons.push('Momentum sterk');} else if(sm>=4){pts+=3;} else{flags.push('zwak momentum');} }
 
-    // Stap 2b — waarde meedoet (groei, max 10)
-    if(sg!=null){ if(sg>=6){pts+=10;reasons.push('Groei sterk');} else if(sg>=4){pts+=4;} else{flags.push('lage groei');} }
+    // Stap 2b — waarde meedoet (groei, max 8)
+    if(sg!=null){ if(sg>=6){pts+=8;reasons.push('Groei sterk');} else if(sg>=4){pts+=3;} else{flags.push('lage groei');} }
 
-    // Stap 3 — waardering (DCF, max 15 / penalty)
-    if(up!=null){ if(up>=15){pts+=15;reasons.push('DCF ondergewaardeerd');} else if(up>=0){pts+=6;} else if(up<=-20){pts-=8;flags.push('DCF overgewaardeerd');} }
+    // Stap 3 — waardering (DCF, max 12 / penalty)
+    if(up!=null){ if(up>=15){pts+=12;reasons.push('DCF ondergewaardeerd');} else if(up>=0){pts+=5;} else if(up<=-20){pts-=8;flags.push('DCF overgewaardeerd');} }
 
     // Stap 4 — niet overgekocht (RSI, bonus/penalty)
-    if(rsi!=null){ if(rsi>75){pts-=12;flags.push('RSI overgekocht');} else if(rsi>=50&&rsi<=70){pts+=8;reasons.push('RSI zoete zone');} else if(rsi<40){flags.push('RSI zwak');} }
+    if(rsi!=null){ if(rsi>75){pts-=10;flags.push('RSI overgekocht');} else if(rsi>=50&&rsi<=70){pts+=6;reasons.push('RSI zoete zone');} else if(rsi<40){flags.push('RSI zwak');} }
 
-    // Stap 5 — confidence als tiebreaker (max 15)
-    if(cf&&cf.pct!=null){ if(cf.pct>=0.60){pts+=15;reasons.push('Confidence groen');} else if(cf.pct>=0.50){pts+=7;reasons.push('Confidence amber');} }
+    // Stap 5 — confidence: nu de ZWAARSTE factor (max 40, penalty onder de muntworp).
+    // Bewust dominant: een signaal dat historisch de index verslaat weegt zwaarder
+    // dan losse technische/fundamentele plussen.
+    if(cf&&cf.pct!=null){
+        if(cf.pct>=0.70){pts+=40;reasons.push('Confidence zeer sterk (≥70%)');}
+        else if(cf.pct>=0.60){pts+=32;reasons.push('Confidence groen (≥60%)');}
+        else if(cf.pct>=0.55){pts+=22;reasons.push('Confidence bovengemiddeld');}
+        else if(cf.pct>=0.50){pts+=14;reasons.push('Confidence amber (≥50%)');}
+        else if(cf.pct>=0.45){pts+=4;}
+        else{pts-=10;flags.push('Confidence < muntworp');}
+    }
 
     const total=Math.max(0,Math.min(100,pts));
     let lbl,clr;
