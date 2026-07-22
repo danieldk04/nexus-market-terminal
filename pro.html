@@ -3065,7 +3065,9 @@ function renderCandidatesPanel(){
     });
 
     /* sort */
-    if(candSort==='verdict'){
+    if(candSort==='nexus'){
+        filtered=[...filtered].sort((a,b)=>_nexusPick(b).score-_nexusPick(a).score||(b.score||0)-(a.score||0));
+    } else if(candSort==='verdict'){
         filtered=[...filtered].sort((a,b)=>_verdictRating(a).ord-_verdictRating(b).ord||(b.score||0)-(a.score||0));
     } else if(candSort==='momentum_score'){
         filtered=[...filtered].sort((a,b)=>{
