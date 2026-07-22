@@ -60,6 +60,18 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python src/evolution_engine.py
 
+      - name: Tier 3.4 — Backfill bootstrap (eenmalig — technische historie)
+        env:
+          PYTHONPATH: src
+          SILENT_RUN: "true"
+        run: |
+          # Bouwt de lookahead-vrije backtest-historie op ZODRA het logboek nog
+          # geen backtest-rijen heeft. --if-empty maakt dit no-op op elke run
+          # daarna, dus geen dagelijkse yfinance-download. Zonder deze historie
+          # heeft de kalibratie geen data uit het verleden om op te leunen.
+          python src/backfill_signals.py --if-empty --years 6 --step-days 5 \
+            || echo "Backfill overgeslagen — doorgaan"
+
       - name: Tier 3.5 — Signal Logger (live signalen → nexus_signals.db)
         env:
           PYTHONPATH: src
