@@ -139,7 +139,7 @@ jobs:
               python src/signal_store.py --merge /tmp/origin_signals.db || echo "Merge overgeslagen"
             fi
 
-            git add data.json memory.json data/nexus_signals.db
+            git add data.json memory.json data/nexus_signals.db backtest_results.json
             git diff --cached --quiet || git commit -m "Auto-update: Dual-Engine Scan $(date -u +'%Y-%m-%d %H:%M UTC')"
 
             # 'ours' bevat nu origin's rijen (via de union hierboven), dus deze
