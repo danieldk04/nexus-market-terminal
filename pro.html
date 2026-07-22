@@ -3032,7 +3032,7 @@ function _nexusBadge(c){
     const p=_nexusPick(c);
     const tipR=p.reasons.length?'✓ '+p.reasons.join('  ✓ '):'';
     const tipF=p.flags.length?'✗ '+p.flags.join('  ✗ '):'';
-    const tip=`NEXUS-keuze ${p.score}/100 — ${p.lbl}. Volgt het 6-stappenplan (zie Uitleg-tab). ${tipR} ${tipF}`.trim();
+    const tip=`NEXUS-keuze ${p.score}/100 — ${p.lbl} (relatief t.o.v. beste kandidaat: ${p.rel}%). Volgt het 6-stappenplan (zie Uitleg-tab). ${tipR} ${tipF}`.trim();
     return `<div style="margin-top:7px;padding:6px 7px;background:${p.clr}12;border:1px solid ${p.clr}38;border-radius:6px" title="${tip}">
         <div style="display:flex;justify-content:space-between;align-items:center">
             <span style="font-size:.48rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700">⭐ NEXUS-keuze</span>
