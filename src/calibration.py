@@ -87,6 +87,34 @@ def _query_cohort(conn: sqlite3.Connection, horizon: int,
     return conn.execute(sql, params).fetchall()
 
 
+def _cohort_halves(conn: sqlite3.Connection, horizon: int,
+                   conds: list[tuple[str, str, list]], split: str) -> tuple:
+    """
+    Beat-benchmark-rate van een (geparametriseerde) cohort in de eerste helft
+    (as_of_date < split) en tweede helft (as_of_date >= split). Retourneert
+    (rate_first, rate_second, n_first, n_second); een rate is None bij een lege
+    helft. Param-bewuste tegenhanger van _cohort_rate_halves (die param-loze
+    atoom-fragmenten aanneemt).
+    """
+    base_where = ["horizon_days = ?", "beat_benchmark IS NOT NULL"]
+    base_params: list = [horizon]
+    for _, frag, p in conds:
+        base_where.append(frag)
+        base_params += p
+
+    def _rate(extra: str) -> tuple:
+        rows = conn.execute(
+            f"SELECT beat_benchmark FROM signals WHERE {' AND '.join(base_where + [extra])}",
+            base_params + [split],
+        ).fetchall()
+        n = len(rows)
+        return (sum(r["beat_benchmark"] for r in rows) / n if n else None), n
+
+    r1, n1 = _rate("as_of_date < ?")
+    r2, n2 = _rate("as_of_date >= ?")
+    return r1, r2, n1, n2
+
+
 def confidence_for_signal(conn: sqlite3.Connection, features: dict,
                           horizon: int = 21, min_sample: int = 40) -> dict:
     """
