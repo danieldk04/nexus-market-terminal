@@ -242,6 +242,53 @@ def update_pending_outcomes(conn: sqlite3.Connection, price_lookup) -> int:
     return updated
 
 
+def merge_from(conn: sqlite3.Connection, other_path) -> int:
+    """
+    Voeg alle signaal-rijen uit een ANDERE nexus_signals.db er additief bij.
+
+    Bestaat om te voorkomen dat twee 'motoren' (de CI-scan én een lokale/andere
+    terminal) elkaars logboek overschrijven wanneer beide het DB-bestand naar
+    git committen. In plaats van clobberen wordt de UNIE bewaard:
+
+      - onbekende (ticker, as_of_date, source, horizon_days) → nieuwe rij;
+      - bestaande sleutel → per kolom COALESCE(bestaand, inkomend), dus een
+        reeds bekende waarde (bv. een gerealiseerde uitkomst) gaat NOOIT
+        verloren; alleen NULL-gaten worden opgevuld.
+
+    Retourneert het aantal netto nieuw toegevoegde rijen (updates niet
+    meegeteld). Ontbreekt het bronbestand of de tabel, dan 0 (no-op).
+    """
+    other = Path(other_path)
+    if not other.exists():
+        return 0
+    init_db(conn)
+    key = ("ticker", "as_of_date", "source", "horizon_days")
+    cols = [r[1] for r in conn.execute("PRAGMA table_info(signals)").fetchall()
+            if r[1] != "id"]
+    updatable = [c for c in cols if c not in key]
+
+    conn.execute("ATTACH DATABASE ? AS src", (str(other),))
+    try:
+        has_table = conn.execute(
+            "SELECT name FROM src.sqlite_master WHERE type='table' AND name='signals'"
+        ).fetchone()
+        if not has_table:
+            return 0
+        col_sql = ",".join(cols)
+        set_sql = ",".join(f"{c}=COALESCE(signals.{c}, excluded.{c})" for c in updatable)
+        before = conn.execute("SELECT COUNT(*) FROM signals").fetchone()[0]
+        # 'WHERE true' ontwart de INSERT...SELECT...ON CONFLICT-parsing in SQLite.
+        conn.execute(
+            f"INSERT INTO signals ({col_sql}) SELECT {col_sql} FROM src.signals WHERE true "
+            f"ON CONFLICT({','.join(key)}) DO UPDATE SET {set_sql}"
+        )
+        conn.commit()
+        after = conn.execute("SELECT COUNT(*) FROM signals").fetchone()[0]
+        return after - before
+    finally:
+        conn.execute("DETACH DATABASE src")
+
+
 def stats(conn: sqlite3.Connection) -> dict:
     total = conn.execute("SELECT COUNT(*) FROM signals").fetchone()[0]
     realized = conn.execute(
