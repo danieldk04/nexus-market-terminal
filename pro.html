@@ -2998,11 +2998,33 @@ function _nexusRaw(c){
     }
 
     const total=Math.max(0,Math.min(100,pts));
+    return {score:total,reasons,flags};
+}
+
+/* Hoogste NEXUS-score in het huidige kandidatenveld, licht gememoïseerd zodat
+   we het niet per kaart herberekenen. Basis voor de relatieve labels. */
+let _nxHi=null,_nxHiKey=null;
+function _nexusFieldHi(){
+    const arr=B?.top_candidates||[];
+    const key=(B?.generated_at||'')+':'+arr.length;
+    if(_nxHiKey===key&&_nxHi!=null) return _nxHi;
+    let hi=0; for(const c of arr){ const s=_nexusRaw(c).score; if(s>hi)hi=s; }
+    _nxHi=hi>0?hi:1; _nxHiKey=key; return _nxHi;
+}
+
+/* NEXUS-keuze met RELATIEF label: de score blijft absoluut (eerlijk), maar
+   STERKE/REDELIJK/ZWAK beweegt mee met de beste kandidaat van nu. Zo zie je
+   altijd de "minst zwakke" bovenaan, ook als het hele veld zwak is — en zodra
+   er echt sterke kandidaten zijn, schuift de lat vanzelf omhoog. */
+function _nexusPick(c){
+    const r=_nexusRaw(c);
+    const hi=_nexusFieldHi();
+    const ratio=hi>0?r.score/hi:0;
     let lbl,clr;
-    if(total>=60){lbl='STERKE KEUZE';clr='#059669';}
-    else if(total>=40){lbl='REDELIJK';clr='#d97706';}
+    if(ratio>=0.80){lbl='STERKE KEUZE';clr='#059669';}
+    else if(ratio>=0.55){lbl='REDELIJK';clr='#d97706';}
     else{lbl='ZWAK';clr='#94a3b8';}
-    return {score:total,lbl,clr,reasons,flags};
+    return {score:r.score,lbl,clr,reasons:r.reasons,flags:r.flags,rel:Math.round(ratio*100)};
 }
 
 /* Compacte NEXUS-keuze-badge voor op de kandidaatkaart. */
