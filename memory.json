@@ -233,6 +233,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-22",
+      "degiro": 16580.41,
+      "tr": 8655.34,
+      "nexus": 4411.36,
+      "bux": 2016.37
+    },
+    {
       "date": "2026-07-21",
       "degiro": 16583.15,
       "tr": 8686.92,
@@ -663,25 +670,25 @@
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
-    "Waarom de Zuid Koreaanse beurs heftiger schommelt dan de Bitcoin koers",
     "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
     "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "Waarom de Zuid Koreaanse beurs heftiger schommelt dan de Bitcoin koers",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?"
   ],
   "tr_summary": {
-    "total": 8686.92,
+    "total": 8655.34,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4800.56,
-        "price": 58135.0,
+        "value": 4768.98,
+        "price": 57752.5586,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 55.3
+        "weight": 55.1
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -689,7 +696,7 @@
         "price": 155.7512,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 14.8
+        "weight": 14.9
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -697,7 +704,7 @@
         "price": 53.92,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 14.2
+        "weight": 14.3
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -717,11 +724,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-21T19:01:12.008211+00:00",
+  "dashboard_updated": "2026-07-22T07:00:59.413186+00:00",
   "degiro_summary": {
-    "total": 16583.15,
-    "total_pl_pct": 35.13,
-    "total_invested": 12272.03,
+    "total": 16580.41,
+    "total_pl_pct": 35.11,
+    "total_invested": 12271.83,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -758,11 +765,11 @@
       },
       {
         "name": "V",
-        "value": 626.21,
-        "pl_pct": 76.87,
-        "pl_eur": 272.15,
+        "value": 623.47,
+        "pl_pct": 76.19,
+        "pl_eur": 269.61,
         "div_yield": 0.0074,
-        "annual_div_eur": 4.63,
+        "annual_div_eur": 4.61,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.8
@@ -788,18 +795,18 @@
     }
   ],
   "bux_summary": {
-    "total": 2013.99,
-    "total_pl_pct": -25.05,
+    "total": 2016.37,
+    "total_pl_pct": -24.96,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1738.12,
-        "price": 331.51,
-        "pl_pct": -20.02,
-        "pl_eur": -434.95,
+        "value": 1740.58,
+        "price": 331.98,
+        "pl_pct": -19.9,
+        "pl_eur": -432.49,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -809,12 +816,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 236.3,
-        "price": 118.15,
-        "pl_pct": -28.64,
-        "pl_eur": -94.84,
+        "value": 236.55,
+        "price": 118.27,
+        "pl_pct": -28.57,
+        "pl_eur": -94.59,
         "div_yield": 0.0437,
-        "annual_div_eur": 10.33,
+        "annual_div_eur": 10.34,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 11.7
@@ -822,15 +829,15 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 35.32,
-        "price": 35.32,
-        "pl_pct": -80.33,
-        "pl_eur": -144.25,
+        "value": 34.99,
+        "price": 34.99,
+        "pl_pct": -80.51,
+        "pl_eur": -144.58,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": "Technology",
-        "weight": 1.8
+        "weight": 1.7
       },
       {
         "name": "KPN.AS",
@@ -2123,7 +2130,7 @@
     "MNST": "2026-07-21"
   },
   "benchmark_history": {
-    "sp500_ytd": 9.47,
+    "sp500_ytd": 9.49,
     "aex_ytd": 13.35,
     "msci_ytd": 12.95
   },
