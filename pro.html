@@ -1036,6 +1036,110 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 </div></div>
 
 <!-- ═══════════════════════════════════════
+     TAB: UITLEG / GIDS
+═══════════════════════════════════════ -->
+<div id="tab-gids" class="tc"><div class="pw">
+
+  <!-- Intro -->
+  <div class="panel" style="padding:18px 20px;margin-bottom:14px">
+    <div style="font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:6px">Hoe lees ik dit dashboard?</div>
+    <div style="font-size:.82rem;color:var(--muted);line-height:1.6;max-width:760px">
+      NEXUS scant elke werkdag ~honderd aandelen en rangschikt ze. Het geeft <b>geen</b> koopadvies en <b>geen</b> winstbelofte —
+      het geeft je een gerangschikte kandidatenlijst met, per aandeel, drie soorten signalen. Jij neemt de beslissing.
+      De filosofie is bewust nuchter: liever een eerlijk "we weten het niet zeker" dan een opgeblazen "90% kans".
+    </div>
+  </div>
+
+  <!-- De 3 lagen -->
+  <div class="panel" style="margin-bottom:14px">
+    <div class="ph"><span class="pt">De 3 lagen waarop de bot denkt</span></div>
+    <div style="padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+      <div style="border-left:3px solid var(--accent);padding:4px 0 4px 12px">
+        <div style="font-weight:700;font-size:.85rem;color:var(--text);margin-bottom:4px">1 · Technisch (de trend)</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.55">Beweegt de koers omhoog met kracht? Momentum, voortschrijdende gemiddelden, RSI, MACD. Zegt <i>wanneer</i>, niet <i>of</i> het een goed bedrijf is.</div>
+      </div>
+      <div style="border-left:3px solid var(--green);padding:4px 0 4px 12px">
+        <div style="font-weight:700;font-size:.85rem;color:var(--text);margin-bottom:4px">2 · Fundamenteel (de waarde)</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.55">Is het bedrijf gezond en goedkoop? Omzet-/winstgroei, ROIC, DCF-waardering, vrije kasstroom. Zegt <i>of</i> het bedrijf iets waard is.</div>
+      </div>
+      <div style="border-left:3px solid var(--bot);padding:4px 0 4px 12px">
+        <div style="font-weight:700;font-size:.85rem;color:var(--text);margin-bottom:4px">3 · Confidence (de historie)</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.55">Hoe vaak versloeg een <i>vergelijkbaar</i> signaal in het verleden de index? Dit is de eerlijke kalibratie op ~34.000 historische waarnemingen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Uitleg per getal -->
+  <div class="panel" style="margin-bottom:14px">
+    <div class="ph"><span class="pt">Wat betekent elk getal?</span><span class="ptag">zoals in Analyse & op de kaarten</span></div>
+    <div style="padding:8px 18px 16px">
+      <table style="width:100%;border-collapse:collapse;font-size:.78rem">
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--accent);white-space:nowrap;vertical-align:top">Score /10</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">De totaalscore (technisch + fundamenteel gecombineerd). Hoger = sterker gerangschikt. <b>Vuistregel: ≥ 5 is interessant, ≥ 7 is sterk.</b></td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">S_Momentum /10</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Kracht van de opwaartse trend. Hoog = de koers loopt sterk en gezond op.</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">S_Growth /10</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Kwaliteit van de bedrijfsgroei (omzet/winst/marges). Hoog = een echte groeier, geen krimpende cash cow.</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">Stage 2 ✓</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Weinstein-fase 2: het aandeel zit in een bevestigde opgaande trend (boven z'n lange gemiddelde). ✓ is een groen licht voor timing.</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">RSI14</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Momentum-meter (0–100). <b>50–70 = ideale zone.</b> Boven ~75 = overgekocht (risico op terugval); onder 40 = zwak.</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--green);white-space:nowrap;vertical-align:top">DCF Upside</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Hoeveel "korting" t.o.v. de berekende intrinsieke waarde. +30% = model zegt 30% ondergewaardeerd. <b>Let op:</b> bij krimpende bedrijven kan dit een modelartefact zijn (check S_Growth).</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">Intrinsic / WACC</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Intrinsic = berekende "eerlijke" koers. WACC = de rente-eis in het model (hoger = strenger gewaardeerd).</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">P/FCF · Div Yield</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">P/FCF = prijs t.o.v. vrije kasstroom (lager = goedkoper). Div Yield = dividendrendement.</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">Stop ATR</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Voorgestelde stop-loss koers, gebaseerd op de normale beweeglijkheid (ATR). Onder dit niveau is de trend "kapot".</td></tr>
+          <tr><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--bot);white-space:nowrap;vertical-align:top">Confidence-badge</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">De <b>eerlijke</b> maat: van vergelijkbare signalen uit het verleden, welk % versloeg daarna de index (conservatief, met foutmarge). Zie de kleuren hieronder.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Kleurenlegenda confidence -->
+  <div class="panel" style="margin-bottom:14px">
+    <div class="ph"><span class="pt">Confidence-kleuren</span><span class="ptag">grijs is géén fout — het is eerlijk</span></div>
+    <div style="padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+      <div style="padding:10px 12px;border-radius:8px;background:#05966912;border:1px solid #05966938">
+        <div style="font-weight:800;color:#059669;font-size:.85rem;margin-bottom:3px">🟢 Groen · ≥ 60%</div>
+        <div style="font-size:.74rem;color:var(--muted);line-height:1.5">Sterk historisch signaal. Zeldzaam — verdient je aandacht.</div>
+      </div>
+      <div style="padding:10px 12px;border-radius:8px;background:#d9770612;border:1px solid #d9770638">
+        <div style="font-weight:800;color:#d97706;font-size:.85rem;margin-bottom:3px">🟠 Amber · 50–60%</div>
+        <div style="font-size:.74rem;color:var(--muted);line-height:1.5">Licht boven de muntworp. Interessant, maar leun er niet blind op.</div>
+      </div>
+      <div style="padding:10px 12px;border-radius:8px;background:#94a3b812;border:1px solid #94a3b838">
+        <div style="font-weight:800;color:#64748b;font-size:.85rem;margin-bottom:3px">⚪ Grijs · &lt; 50%</div>
+        <div style="font-size:.74rem;color:var(--muted);line-height:1.5">Historisch niet beter dan de index. Eerlijk zwak — laat de fundamenten beslissen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hoe kies ik een aandeel -->
+  <div class="panel" style="margin-bottom:14px">
+    <div class="ph"><span class="pt">Hoe kies ik een aandeel? — stappenplan</span></div>
+    <div style="padding:16px 20px">
+      <ol style="margin:0;padding-left:22px;color:var(--text);font-size:.82rem;line-height:1.7">
+        <li style="margin-bottom:10px"><b>Begin bij de ranglijst.</b> Kijk op <b>Bot</b> of <b>Leermemory</b> naar de best gerangschikte kandidaten (hoogste Score). Score ≥ 5 is de instaphorde.</li>
+        <li style="margin-bottom:10px"><b>Eis dat trend én waarde meedoen.</b> Wil je zowel goede timing als een gezond bedrijf, zoek dan naar: <b>Stage 2 ✓</b>, <b>S_Momentum</b> hoog én <b>S_Growth</b> niet laag. Een hoge score die volledig op momentum leunt bij een krimpend bedrijf is fragiel.</li>
+        <li style="margin-bottom:10px"><b>Check de waardering.</b> Positieve <b>DCF Upside</b> is een plus — maar open <b>Analyse</b> en lees de DCF-tekst. Is de aangenomen groei realistisch? (Voorbeeld: bij een krimpend bedrijf is "+70% upside" vaak een modelartefact.)</li>
+        <li style="margin-bottom:10px"><b>Vermijd overgekocht.</b> Sla kandidaten met <b>RSI &gt; 75</b> liever even over — de kans op een terugval is groter. 50–70 is de zoete zone.</li>
+        <li style="margin-bottom:10px"><b>Weeg de confidence-badge als tiebreaker.</b> Bij twee gelijkwaardige kandidaten: kies de groenere/amberere badge. Behandel grijs als "geen historische rugwind" — niet als verbod, wel als reden om strenger op de fundamenten te zijn.</li>
+        <li><b>Bepaal vooraf je exit.</b> Noteer de <b>Stop ATR</b>-koers als je uitstapt. Discipline op de exit telt zwaarder dan de perfecte instap.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Nuance -->
+  <div class="panel" style="margin-bottom:14px;border-color:#d9770655">
+    <div class="ph" style="border-color:#d9770633"><span class="pt" style="color:#d97706">Eerlijke kanttekeningen — lees dit</span></div>
+    <div style="padding:14px 20px;font-size:.79rem;color:var(--muted);line-height:1.65">
+      <ul style="margin:0;padding-left:20px">
+        <li style="margin-bottom:7px">De <b>puur technische</b> edge is historisch ongeveer een muntworp (~50% t.o.v. de index). Daarom staan de confidence-badges nu meestal grijs. Dat is geen bug — het is het systeem dat eerlijk is.</li>
+        <li style="margin-bottom:7px">De echte hoop zit in de <b>rijke laag</b> (fundamenteel + sentiment). Die database groeit met elk live signaal; naarmate die rijpt, kunnen de confidence-cijfers stijgen — <i>als</i> er echt een edge is.</li>
+        <li style="margin-bottom:7px">De <b>Backtest</b>-tab toont +8,6% alpha/jaar over 5 jaar, maar statistisch nog niet overtuigend (t=1,49). Behandel het als bemoedigend, niet als bewijs.</li>
+        <li>Dit is een hulpmiddel voor je eigen research, geen financieel advies. Beslis zelf en risicomanage.</li>
+      </ul>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════
      TAB: IMPORT
 ═══════════════════════════════════════ -->
 <div id="tab-import" class="tc"><div class="pw">
