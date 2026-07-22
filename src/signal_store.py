@@ -261,6 +261,12 @@ def merge_from(conn: sqlite3.Connection, other_path) -> int:
     other = Path(other_path)
     if not other.exists():
         return 0
+    # Bron == doel is een no-op (en zou het bestand alleen maar locken).
+    try:
+        if other.resolve() == DB_PATH.resolve():
+            return 0
+    except OSError:
+        pass
     init_db(conn)
     key = ("ticker", "as_of_date", "source", "horizon_days")
     cols = [r[1] for r in conn.execute("PRAGMA table_info(signals)").fetchall()
