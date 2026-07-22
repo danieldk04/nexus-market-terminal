@@ -312,7 +312,21 @@ def stats(conn: sqlite3.Connection) -> dict:
 
 
 if __name__ == "__main__":
+    import argparse
+
+    ap = argparse.ArgumentParser(description="NEXUS signal store — stats & merge")
+    ap.add_argument("--merge", metavar="DB_PATH",
+                    help="Union de signalen uit een andere nexus_signals.db er "
+                         "additief bij (geen clobber). Print het aantal nieuwe rijen.")
+    args = ap.parse_args()
+
     conn = init_db()
+
+    if args.merge:
+        added = merge_from(conn, args.merge)
+        print(f"Merge uit {args.merge}: {added} nieuwe rij(en) toegevoegd "
+              f"(bestaande behouden).")
+
     s = stats(conn)
     print("=" * 60)
     print("NEXUS SIGNAL STORE")
