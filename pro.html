@@ -3024,18 +3024,20 @@ function renderCandidatesPanel(){
         return;
     }
 
-    /* top-picks strip: KOOP kandidaten over alle filters */
+    /* top-picks strip: hoogste NEXUS-keuze (6-stappenplan) over alle filters */
     if(tpEl){
-        const koopAll=all.filter(c=>_verdictRating(c).ord===0).slice(0,6);
-        if(koopAll.length){
+        const ranked=all.map(c=>({c,p:_nexusPick(c)}))
+                        .sort((a,b)=>b.p.score-a.p.score)
+                        .filter(x=>x.p.score>=50).slice(0,6);
+        if(ranked.length){
             tpEl.style.display='flex';
-            tpEl.innerHTML=`<span style="font-size:.62rem;font-weight:700;color:#059669;white-space:nowrap;align-self:center;flex-shrink:0">Top Picks:</span>`+
-                koopAll.map(c=>{
+            tpEl.innerHTML=`<span style="font-size:.62rem;font-weight:700;color:#059669;white-space:nowrap;align-self:center;flex-shrink:0" title="Volgens het 6-stappenplan uit de Uitleg-tab">⭐ NEXUS Top Picks:</span>`+
+                ranked.map(({c,p})=>{
                     const dcfUp=c.dcf?.dcf_upside;
-                    return `<div class="tp-chip" onclick="openChart('${c.ticker}')">
+                    return `<div class="tp-chip" onclick="openChart('${c.ticker}')" title="NEXUS-keuze ${p.score}/100 — ${p.lbl}">
                         <span style="font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--bot)">${c.ticker.split('.')[0]}</span>
-                        <span style="font-size:.6rem;font-weight:700;color:var(--green)">${c.score?.toFixed(1)}/10</span>
-                        ${dcfUp!=null?`<span style="font-size:.6rem;color:#059669;font-family:var(--mono)">+${dcfUp.toFixed(0)}%↑</span>`:''}
+                        <span style="font-size:.6rem;font-weight:800;color:${p.clr}">${p.score}</span>
+                        ${dcfUp!=null&&dcfUp>0?`<span style="font-size:.6rem;color:#059669;font-family:var(--mono)">+${dcfUp.toFixed(0)}%↑</span>`:''}
                     </div>`;
                 }).join('');
         } else tpEl.style.display='none';
