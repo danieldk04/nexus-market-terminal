@@ -105,6 +105,17 @@ jobs:
             echo "Niet vrijdag ($WEEKDAY) — weekly evaluator overgeslagen"
           fi
 
+      - name: Tier 5.1 — Backtest-rapport verversen (walk-forward, voor Backtest-tab)
+        if: ${{ github.event_name == 'workflow_dispatch' || startsWith(github.event.schedule, '0 17') }}
+        env:
+          PYTHONPATH: src
+          SILENT_RUN: "true"
+        run: |
+          # Genereert backtest_results.json (equity-curve strategie vs SPY) dat de
+          # Backtest-tab in het dashboard toont. Alleen in het avond-/handmatige
+          # venster zodat de dagelijkse scan niet vertraagt.
+          python src/backtest_engine.py || echo "Backtest-rapport overgeslagen — doorgaan"
+
       - name: Commit & Push resultaten
         env:
           PYTHONPATH: src
