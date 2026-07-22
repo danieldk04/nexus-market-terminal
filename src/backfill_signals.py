@@ -148,7 +148,21 @@ def main():
     ap.add_argument("--years", type=int, default=6)
     ap.add_argument("--step-days", type=int, default=5, help="Sample-interval in handelsdagen")
     ap.add_argument("--no-cache", action="store_true")
+    ap.add_argument("--if-empty", action="store_true",
+                    help="Sla over als er al backtest-historie in de DB staat "
+                         "(bootstrap-modus voor de pipeline).")
     args = ap.parse_args()
+
+    if args.if_empty:
+        conn = ss.init_db()
+        existing = conn.execute(
+            "SELECT COUNT(*) FROM signals WHERE source = 'backtest'"
+        ).fetchone()[0]
+        conn.close()
+        if existing > 0:
+            print(f"Backfill overgeslagen — {existing} backtest-rijen aanwezig "
+                  f"(--if-empty).")
+            return
 
     res = run_backfill(years=args.years, step_days=args.step_days, use_cache=not args.no_cache)
 
