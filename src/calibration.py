@@ -303,11 +303,18 @@ if __name__ == "__main__":
         d = discover_edges(conn, horizon=h)
         print(f"Baseline beat-rate: {d['baseline_beat_rate']:.1%} (n={d['baseline_n']})")
         print(f"Combinaties getest: {d['n_tests']} | Bonferroni z-lat: {d['z_threshold_bonferroni']}")
+        print(f"Out-of-sample-splitdatum: {d['oos_split_date']} (H1 < split ≤ H2)")
         print("-" * 72)
         for r in d["results"][:10]:
             flag = "✅" if r["significant"] else "  "
-            print(f"{flag} {' + '.join(r['conditions']):<38} "
+            if r["oos_consistent"] is None:
+                oos = "oos n/a"
+            elif r["oos_consistent"]:
+                oos = f"oos✓ {r['beat_rate_first_half']:.0%}/{r['beat_rate_second_half']:.0%}"
+            else:
+                oos = f"oos✗ {r['beat_rate_first_half']:.0%}/{r['beat_rate_second_half']:.0%}"
+            print(f"{flag} {' + '.join(r['conditions']):<34} "
                   f"beat {r['beat_rate']:.0%} (n={r['n']:>5}) "
-                  f"Wilson {r['confidence']:.0%}  z={r['z']:+.2f}")
+                  f"Wilson {r['confidence']:.0%}  z={r['z']:+.2f}  {oos}")
         print("-" * 72)
         print("CONCLUSIE:", d["conclusion"])
