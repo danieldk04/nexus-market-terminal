@@ -419,6 +419,15 @@ def run_evolution():
                     print(f"GATE: {ticker} overgeslagen — confidence {trade_confidence:.0%} "
                           f"< {MIN_CONFIDENCE:.0%} (n={conf_res['n']}, beat {conf_res['beat_benchmark_rate']:.0%}).")
                     continue
+                # Out-of-sample-gate: een cohort-edge die maar in één tijdshelft
+                # bestaat (oos_consistent is False) is waarschijnlijk regime-/
+                # curve-fit — die laten we niet door, ongeacht de volle-periode-
+                # confidence. None (niet toetsbaar) blijft toegestaan.
+                if conf_res.get("oos_consistent") is False:
+                    print(f"GATE: {ticker} overgeslagen — niet out-of-sample-consistent "
+                          f"(H1 {conf_res['beat_rate_first_half']:.0%} / "
+                          f"H2 {conf_res['beat_rate_second_half']:.0%}).")
+                    continue
                 print(f"GATE OK: {ticker} confidence {trade_confidence:.0%} (n={conf_res['n']}).")
             elif not ALLOW_WHEN_NO_CONFIDENCE:
                 print(f"GATE: {ticker} overgeslagen — geen confidence-historie.")
