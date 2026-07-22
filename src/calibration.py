@@ -154,6 +154,47 @@ def _cohort_stats(conn, horizon: int, frags: list[str]) -> tuple[int, int, float
     return n, beats, (beats / n if n else 0.0)
 
 
+def _split_date(conn, horizon: int) -> str | None:
+    """
+    Mediaan as_of_date over de gerealiseerde historie voor deze horizon. Deelt
+    de tijdlijn in twee even grote helften zodat een edge out-of-sample getoetst
+    kan worden (eerste helft vs tweede helft) — dezelfde anti-overfitting-
+    discipline die backtest_sweep toepast. None als er te weinig data is.
+    """
+    dates = [
+        r[0] for r in conn.execute(
+            "SELECT as_of_date FROM signals "
+            "WHERE horizon_days = ? AND beat_benchmark IS NOT NULL "
+            "ORDER BY as_of_date", (horizon,)
+        ).fetchall()
+    ]
+    if len(dates) < 2:
+        return None
+    return dates[len(dates) // 2]
+
+
+def _cohort_rate_halves(conn, horizon: int, frags: list[str],
+                        split: str) -> tuple[float | None, float | None, int, int]:
+    """
+    Beat-rate van de cohort in de eerste (as_of_date < split) en tweede helft
+    (as_of_date >= split). Retourneert (rate_first, rate_second, n_first,
+    n_second); een rate is None als die helft leeg is.
+    """
+    base = ["horizon_days = ?", "beat_benchmark IS NOT NULL"] + frags
+
+    def _rate(extra: str) -> tuple[float | None, int]:
+        rows = conn.execute(
+            f"SELECT beat_benchmark FROM signals WHERE {' AND '.join(base + [extra])}",
+            (horizon, split),
+        ).fetchall()
+        n = len(rows)
+        return (sum(r["beat_benchmark"] for r in rows) / n if n else None), n
+
+    r1, n1 = _rate("as_of_date < ?")
+    r2, n2 = _rate("as_of_date >= ?")
+    return r1, r2, n1, n2
+
+
 def discover_edges(conn: sqlite3.Connection, horizon: int = 21,
                    min_sample: int = 100, max_combo: int = 2) -> dict:
     """
