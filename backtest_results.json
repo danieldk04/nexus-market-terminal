@@ -1,0 +1,1324 @@
+{
+  "generated_at": "2026-07-22T18:37:27.668202+00:00",
+  "config": {
+    "years": 6,
+    "rebalance_months": 3,
+    "top_n": 10,
+    "min_score": 3.0,
+    "cost_bps": 10.0,
+    "universe_size": 71,
+    "benchmark": "SPY",
+    "engine": "S_Momentum (Minervini Stage-2 + VCP + volume + RSI/MACD)"
+  },
+  "metrics": {
+    "strategy_total_return": 178.3,
+    "benchmark_total_return": 93.52,
+    "strategy_cagr": 22.72,
+    "benchmark_cagr": 14.12,
+    "alpha_cagr": 8.6,
+    "hit_rate": 65.0,
+    "periods": 20,
+    "max_drawdown": -7.29,
+    "benchmark_max_drawdown": -11.03,
+    "annualized_vol": 15.91,
+    "sharpe": 1.39,
+    "t_stat": 1.49,
+    "significant": false,
+    "verdict": "MOGELIJKE EDGE \u2014 verslaat de index, maar niet statistisch overtuigend. Meer data nodig."
+  },
+  "equity_curve": [
+    {
+      "date": "2021-06-01",
+      "strategy": 100.0,
+      "benchmark": 100.0
+    },
+    {
+      "date": "2021-09-01",
+      "strategy": 111.55,
+      "benchmark": 108.01
+    },
+    {
+      "date": "2021-12-01",
+      "strategy": 112.11,
+      "benchmark": 108.04
+    },
+    {
+      "date": "2022-03-01",
+      "strategy": 103.94,
+      "benchmark": 103.48
+    },
+    {
+      "date": "2022-06-01",
+      "strategy": 110.29,
+      "benchmark": 98.88
+    },
+    {
+      "date": "2022-09-01",
+      "strategy": 112.09,
+      "benchmark": 96.12
+    },
+    {
+      "date": "2022-12-01",
+      "strategy": 119.42,
+      "benchmark": 99.18
+    },
+    {
+      "date": "2023-03-01",
+      "strategy": 117.81,
+      "benchmark": 96.54
+    },
+    {
+      "date": "2023-06-01",
+      "strategy": 122.26,
+      "benchmark": 103.56
+    },
+    {
+      "date": "2023-09-01",
+      "strategy": 135.86,
+      "benchmark": 111.18
+    },
+    {
+      "date": "2023-12-01",
+      "strategy": 147.08,
+      "benchmark": 113.53
+    },
+    {
+      "date": "2024-03-01",
+      "strategy": 188.75,
+      "benchmark": 127.34
+    },
+    {
+      "date": "2024-06-03",
+      "strategy": 191.08,
+      "benchmark": 131.46
+    },
+    {
+      "date": "2024-09-03",
+      "strategy": 195.97,
+      "benchmark": 137.95
+    },
+    {
+      "date": "2024-12-02",
+      "strategy": 200.02,
+      "benchmark": 151.29
+    },
+    {
+      "date": "2025-03-03",
+      "strategy": 191.86,
+      "benchmark": 146.8
+    },
+    {
+      "date": "2025-06-02",
+      "strategy": 198.47,
+      "benchmark": 149.5
+    },
+    {
+      "date": "2025-09-02",
+      "strategy": 196.54,
+      "benchmark": 161.98
+    },
+    {
+      "date": "2025-12-01",
+      "strategy": 213.81,
+      "benchmark": 172.57
+    },
+    {
+      "date": "2026-03-02",
+      "strategy": 238.25,
+      "benchmark": 174.64
+    },
+    {
+      "date": "2026-06-01",
+      "strategy": 278.3,
+      "benchmark": 193.52
+    }
+  ],
+  "rebalances": [
+    {
+      "date": "2021-06-01",
+      "n_picks": 10,
+      "period_return": 11.55,
+      "benchmark_return": 8.01,
+      "excess": 3.54,
+      "picks": [
+        {
+          "ticker": "BESI.AS",
+          "score": 6.25,
+          "ret": 16.08
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 6.24,
+          "ret": 21.97
+        },
+        {
+          "ticker": "JPM",
+          "score": 6.23,
+          "ret": -3.26
+        },
+        {
+          "ticker": "TSM",
+          "score": 6.05,
+          "ret": 2.04
+        },
+        {
+          "ticker": "ASML",
+          "score": 5.94,
+          "ret": 25.36
+        },
+        {
+          "ticker": "MSFT",
+          "score": 5.72,
+          "ret": 22.23
+        },
+        {
+          "ticker": "SMCI",
+          "score": 5.64,
+          "ret": 6.62
+        },
+        {
+          "ticker": "NOC",
+          "score": 5.6,
+          "ret": 0.25
+        },
+        {
+          "ticker": "LDOS",
+          "score": 5.52,
+          "ret": -4.97
+        },
+        {
+          "ticker": "LLY",
+          "score": 5.44,
+          "ret": 30.14
+        }
+      ]
+    },
+    {
+      "date": "2021-09-01",
+      "n_picks": 10,
+      "period_return": 0.5,
+      "benchmark_return": 0.03,
+      "excess": 0.47,
+      "picks": [
+        {
+          "ticker": "HUBS",
+          "score": 7.26,
+          "ret": 11.76
+        },
+        {
+          "ticker": "BESI.AS",
+          "score": 7.03,
+          "ret": 7.44
+        },
+        {
+          "ticker": "NET",
+          "score": 6.89,
+          "ret": 29.44
+        },
+        {
+          "ticker": "META",
+          "score": 6.77,
+          "ret": -18.7
+        },
+        {
+          "ticker": "CRWD",
+          "score": 6.76,
+          "ret": -25.36
+        },
+        {
+          "ticker": "LHX",
+          "score": 6.61,
+          "ret": -10.1
+        },
+        {
+          "ticker": "NOC",
+          "score": 6.56,
+          "ret": -4.79
+        },
+        {
+          "ticker": "AAPL",
+          "score": 6.44,
+          "ret": 8.2
+        },
+        {
+          "ticker": "AVGO",
+          "score": 6.41,
+          "ret": 13.32
+        },
+        {
+          "ticker": "SHOP",
+          "score": 6.23,
+          "ret": -5.15
+        }
+      ]
+    },
+    {
+      "date": "2021-12-01",
+      "n_picks": 10,
+      "period_return": -7.29,
+      "benchmark_return": -4.22,
+      "excess": -3.07,
+      "picks": [
+        {
+          "ticker": "INTU",
+          "score": 6.68,
+          "ret": -29.34
+        },
+        {
+          "ticker": "TMO",
+          "score": 5.68,
+          "ret": -13.23
+        },
+        {
+          "ticker": "MSFT",
+          "score": 5.66,
+          "ret": -10.46
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 5.61,
+          "ret": -4.96
+        },
+        {
+          "ticker": "REGN",
+          "score": 5.58,
+          "ret": -3.74
+        },
+        {
+          "ticker": "NOW",
+          "score": 5.54,
+          "ret": -4.75
+        },
+        {
+          "ticker": "NVO",
+          "score": 5.54,
+          "ret": -3.43
+        },
+        {
+          "ticker": "SMCI",
+          "score": 5.47,
+          "ret": -5.96
+        },
+        {
+          "ticker": "AVGO",
+          "score": 5.39,
+          "ret": 3.43
+        },
+        {
+          "ticker": "LLY",
+          "score": 5.35,
+          "ret": 0.57
+        }
+      ]
+    },
+    {
+      "date": "2022-03-01",
+      "n_picks": 10,
+      "period_return": 6.11,
+      "benchmark_return": -4.45,
+      "excess": 10.55,
+      "picks": [
+        {
+          "ticker": "COST",
+          "score": 6.55,
+          "ret": -12.47
+        },
+        {
+          "ticker": "SMCI",
+          "score": 6.08,
+          "ret": 29.57
+        },
+        {
+          "ticker": "LLY",
+          "score": 5.9,
+          "ret": 25.1
+        },
+        {
+          "ticker": "NOC",
+          "score": 5.63,
+          "ret": 2.17
+        },
+        {
+          "ticker": "NVO",
+          "score": 5.45,
+          "ret": 7.52
+        },
+        {
+          "ticker": "VST",
+          "score": 5.36,
+          "ret": 19.01
+        },
+        {
+          "ticker": "LHX",
+          "score": 5.29,
+          "ret": -4.91
+        },
+        {
+          "ticker": "VRTX",
+          "score": 5.14,
+          "ret": 16.78
+        },
+        {
+          "ticker": "FTNT",
+          "score": 4.72,
+          "ret": -14.44
+        },
+        {
+          "ticker": "FSLR",
+          "score": 4.56,
+          "ret": -6.28
+        }
+      ]
+    },
+    {
+      "date": "2022-06-01",
+      "n_picks": 10,
+      "period_return": 1.64,
+      "benchmark_return": -2.8,
+      "excess": 4.43,
+      "picks": [
+        {
+          "ticker": "NVO",
+          "score": 6.49,
+          "ret": -4.75
+        },
+        {
+          "ticker": "NOC",
+          "score": 6.44,
+          "ret": 3.82
+        },
+        {
+          "ticker": "LDOS",
+          "score": 6.03,
+          "ret": -8.91
+        },
+        {
+          "ticker": "LHX",
+          "score": 5.96,
+          "ret": -4.89
+        },
+        {
+          "ticker": "SMCI",
+          "score": 5.69,
+          "ret": 22.44
+        },
+        {
+          "ticker": "LLY",
+          "score": 5.01,
+          "ret": -0.3
+        },
+        {
+          "ticker": "VST",
+          "score": 4.97,
+          "ret": -2.86
+        },
+        {
+          "ticker": "REGN",
+          "score": 4.83,
+          "ret": -8.85
+        },
+        {
+          "ticker": "VRTX",
+          "score": 4.12,
+          "ret": 7.72
+        },
+        {
+          "ticker": "QLYS",
+          "score": 4.09,
+          "ret": 13.95
+        }
+      ]
+    },
+    {
+      "date": "2022-09-01",
+      "n_picks": 10,
+      "period_return": 6.54,
+      "benchmark_return": 3.19,
+      "excess": 3.35,
+      "picks": [
+        {
+          "ticker": "NOC",
+          "score": 5.83,
+          "ret": 10.77
+        },
+        {
+          "ticker": "LLY",
+          "score": 5.5,
+          "ret": 20.13
+        },
+        {
+          "ticker": "COST",
+          "score": 5.28,
+          "ret": -4.61
+        },
+        {
+          "ticker": "VST",
+          "score": 5.26,
+          "ret": -1.01
+        },
+        {
+          "ticker": "VRTX",
+          "score": 5.0,
+          "ret": 10.53
+        },
+        {
+          "ticker": "QLYS",
+          "score": 4.94,
+          "ret": -15.45
+        },
+        {
+          "ticker": "LDOS",
+          "score": 4.91,
+          "ret": 15.77
+        },
+        {
+          "ticker": "PANW",
+          "score": 4.8,
+          "ret": -1.83
+        },
+        {
+          "ticker": "ENPH",
+          "score": 4.48,
+          "ret": 11.4
+        },
+        {
+          "ticker": "NVO",
+          "score": 4.0,
+          "ret": 20.66
+        }
+      ]
+    },
+    {
+      "date": "2022-12-01",
+      "n_picks": 10,
+      "period_return": -1.34,
+      "benchmark_return": -2.66,
+      "excess": 1.31,
+      "picks": [
+        {
+          "ticker": "REGN",
+          "score": 6.53,
+          "ret": 1.21
+        },
+        {
+          "ticker": "VRTX",
+          "score": 6.41,
+          "ret": -9.21
+        },
+        {
+          "ticker": "BESI.AS",
+          "score": 5.95,
+          "ret": 15.68
+        },
+        {
+          "ticker": "NOC",
+          "score": 5.89,
+          "ret": -12.46
+        },
+        {
+          "ticker": "V",
+          "score": 5.7,
+          "ret": 0.82
+        },
+        {
+          "ticker": "LLY",
+          "score": 5.42,
+          "ret": -14.89
+        },
+        {
+          "ticker": "NVO",
+          "score": 5.24,
+          "ret": 13.26
+        },
+        {
+          "ticker": "COST",
+          "score": 5.22,
+          "ret": -4.83
+        },
+        {
+          "ticker": "KLAC",
+          "score": 5.17,
+          "ret": -2.86
+        },
+        {
+          "ticker": "ASML",
+          "score": 5.07,
+          "ret": 0.82
+        }
+      ]
+    },
+    {
+      "date": "2023-03-01",
+      "n_picks": 10,
+      "period_return": 3.77,
+      "benchmark_return": 7.27,
+      "excess": -3.49,
+      "picks": [
+        {
+          "ticker": "REGN",
+          "score": 6.98,
+          "ret": -5.1
+        },
+        {
+          "ticker": "FSLR",
+          "score": 6.44,
+          "ret": 6.67
+        },
+        {
+          "ticker": "NVO",
+          "score": 6.44,
+          "ret": 11.47
+        },
+        {
+          "ticker": "AXON",
+          "score": 5.99,
+          "ret": -13.08
+        },
+        {
+          "ticker": "JPM",
+          "score": 5.95,
+          "ret": -2.73
+        },
+        {
+          "ticker": "AVGO",
+          "score": 5.56,
+          "ret": 34.04
+        },
+        {
+          "ticker": "MELI",
+          "score": 5.56,
+          "ret": 4.08
+        },
+        {
+          "ticker": "SEA",
+          "score": 5.25,
+          "ret": -5.62
+        },
+        {
+          "ticker": "V",
+          "score": 5.23,
+          "ret": 3.93
+        },
+        {
+          "ticker": "MA",
+          "score": 5.12,
+          "ret": 5.08
+        }
+      ]
+    },
+    {
+      "date": "2023-06-01",
+      "n_picks": 10,
+      "period_return": 11.13,
+      "benchmark_return": 7.36,
+      "excess": 3.77,
+      "picks": [
+        {
+          "ticker": "AAPL",
+          "score": 6.71,
+          "ret": 5.35
+        },
+        {
+          "ticker": "MDB",
+          "score": 5.98,
+          "ret": 33.65
+        },
+        {
+          "ticker": "VST",
+          "score": 5.91,
+          "ret": 30.08
+        },
+        {
+          "ticker": "JPM",
+          "score": 5.9,
+          "ret": 7.45
+        },
+        {
+          "ticker": "ISRG",
+          "score": 5.85,
+          "ret": -0.04
+        },
+        {
+          "ticker": "UBER",
+          "score": 5.48,
+          "ret": 22.25
+        },
+        {
+          "ticker": "MSFT",
+          "score": 5.41,
+          "ret": -0.97
+        },
+        {
+          "ticker": "S",
+          "score": 5.24,
+          "ret": -16.94
+        },
+        {
+          "ticker": "NVO",
+          "score": 5.08,
+          "ret": 20.41
+        },
+        {
+          "ticker": "AVGO",
+          "score": 5.03,
+          "ret": 11.04
+        }
+      ]
+    },
+    {
+      "date": "2023-09-01",
+      "n_picks": 10,
+      "period_return": 8.26,
+      "benchmark_return": 2.11,
+      "excess": 6.15,
+      "picks": [
+        {
+          "ticker": "MDB",
+          "score": 7.42,
+          "ret": 10.78
+        },
+        {
+          "ticker": "VRTX",
+          "score": 6.86,
+          "ret": 0.02
+        },
+        {
+          "ticker": "V",
+          "score": 6.74,
+          "ret": 3.58
+        },
+        {
+          "ticker": "AVGO",
+          "score": 6.64,
+          "ret": 7.17
+        },
+        {
+          "ticker": "MSFT",
+          "score": 6.59,
+          "ret": 14.18
+        },
+        {
+          "ticker": "GTLB",
+          "score": 6.57,
+          "ret": 6.71
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 6.45,
+          "ret": -2.8
+        },
+        {
+          "ticker": "VST",
+          "score": 6.32,
+          "ret": 14.83
+        },
+        {
+          "ticker": "KLAC",
+          "score": 6.3,
+          "ret": 8.58
+        },
+        {
+          "ticker": "QLYS",
+          "score": 6.3,
+          "ret": 20.53
+        }
+      ]
+    },
+    {
+      "date": "2023-12-01",
+      "n_picks": 10,
+      "period_return": 28.33,
+      "benchmark_return": 12.16,
+      "excess": 16.17,
+      "picks": [
+        {
+          "ticker": "AXON",
+          "score": 7.07,
+          "ret": 35.74
+        },
+        {
+          "ticker": "VST",
+          "score": 7.01,
+          "ret": 51.07
+        },
+        {
+          "ticker": "SEA",
+          "score": 6.94,
+          "ret": 8.63
+        },
+        {
+          "ticker": "COST",
+          "score": 6.73,
+          "ret": 28.74
+        },
+        {
+          "ticker": "REGN",
+          "score": 6.52,
+          "ret": 20.61
+        },
+        {
+          "ticker": "LRCX",
+          "score": 6.14,
+          "ret": 36.3
+        },
+        {
+          "ticker": "NOW",
+          "score": 6.01,
+          "ret": 11.99
+        },
+        {
+          "ticker": "GTLB",
+          "score": 6.01,
+          "ret": 39.72
+        },
+        {
+          "ticker": "LDOS",
+          "score": 6.01,
+          "ret": 17.39
+        },
+        {
+          "ticker": "LLY",
+          "score": 5.94,
+          "ret": 34.15
+        }
+      ]
+    },
+    {
+      "date": "2024-03-01",
+      "n_picks": 10,
+      "period_return": 1.23,
+      "benchmark_return": 3.23,
+      "excess": -2.0,
+      "picks": [
+        {
+          "ticker": "AVGO",
+          "score": 7.22,
+          "ret": -5.12
+        },
+        {
+          "ticker": "ISRG",
+          "score": 6.95,
+          "ret": 1.5
+        },
+        {
+          "ticker": "REGN",
+          "score": 6.72,
+          "ret": 0.68
+        },
+        {
+          "ticker": "MRVL",
+          "score": 6.5,
+          "ret": -12.04
+        },
+        {
+          "ticker": "NOC",
+          "score": 6.42,
+          "ret": -0.79
+        },
+        {
+          "ticker": "ACN",
+          "score": 6.4,
+          "ret": -25.76
+        },
+        {
+          "ticker": "TSM",
+          "score": 6.25,
+          "ret": 16.19
+        },
+        {
+          "ticker": "SEA",
+          "score": 6.2,
+          "ret": 21.42
+        },
+        {
+          "ticker": "VRTX",
+          "score": 6.15,
+          "ret": 8.65
+        },
+        {
+          "ticker": "LHX",
+          "score": 6.05,
+          "ret": 8.61
+        }
+      ]
+    },
+    {
+      "date": "2024-06-03",
+      "n_picks": 10,
+      "period_return": 2.56,
+      "benchmark_return": 4.94,
+      "excess": -2.38,
+      "picks": [
+        {
+          "ticker": "NVO",
+          "score": 7.22,
+          "ret": 0.85
+        },
+        {
+          "ticker": "REGN",
+          "score": 6.7,
+          "ret": 18.12
+        },
+        {
+          "ticker": "ASML.AS",
+          "score": 6.49,
+          "ret": -10.93
+        },
+        {
+          "ticker": "LDOS",
+          "score": 6.39,
+          "ret": 7.35
+        },
+        {
+          "ticker": "META",
+          "score": 6.26,
+          "ret": 7.28
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 6.16,
+          "ret": -9.03
+        },
+        {
+          "ticker": "ASML",
+          "score": 5.97,
+          "ret": -12.28
+        },
+        {
+          "ticker": "LHX",
+          "score": 5.78,
+          "ret": 4.34
+        },
+        {
+          "ticker": "VRTX",
+          "score": 5.64,
+          "ret": 1.17
+        },
+        {
+          "ticker": "ISRG",
+          "score": 5.56,
+          "ret": 19.7
+        }
+      ]
+    },
+    {
+      "date": "2024-09-03",
+      "n_picks": 10,
+      "period_return": 2.06,
+      "benchmark_return": 9.67,
+      "excess": -7.61,
+      "picks": [
+        {
+          "ticker": "VRTX",
+          "score": 7.79,
+          "ret": -2.1
+        },
+        {
+          "ticker": "LHX",
+          "score": 7.46,
+          "ret": 4.21
+        },
+        {
+          "ticker": "SEA",
+          "score": 6.83,
+          "ret": -7.38
+        },
+        {
+          "ticker": "AAPL",
+          "score": 6.82,
+          "ret": 7.67
+        },
+        {
+          "ticker": "TMO",
+          "score": 6.61,
+          "ret": -12.56
+        },
+        {
+          "ticker": "COST",
+          "score": 6.57,
+          "ret": 11.12
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 6.55,
+          "ret": 9.12
+        },
+        {
+          "ticker": "TTD",
+          "score": 6.54,
+          "ret": 33.86
+        },
+        {
+          "ticker": "REGN",
+          "score": 6.54,
+          "ret": -34.78
+        },
+        {
+          "ticker": "JPM",
+          "score": 6.41,
+          "ret": 12.46
+        }
+      ]
+    },
+    {
+      "date": "2024-12-02",
+      "n_picks": 10,
+      "period_return": -4.08,
+      "benchmark_return": -2.96,
+      "excess": -1.12,
+      "picks": [
+        {
+          "ticker": "MA",
+          "score": 6.94,
+          "ret": 8.36
+        },
+        {
+          "ticker": "ACN",
+          "score": 6.13,
+          "ret": -4.13
+        },
+        {
+          "ticker": "MRVL",
+          "score": 6.0,
+          "ret": -11.34
+        },
+        {
+          "ticker": "META",
+          "score": 5.97,
+          "ret": 10.58
+        },
+        {
+          "ticker": "TSM",
+          "score": 5.93,
+          "ret": -10.74
+        },
+        {
+          "ticker": "AAPL",
+          "score": 5.85,
+          "ret": -0.54
+        },
+        {
+          "ticker": "TTD",
+          "score": 5.7,
+          "ret": -50.3
+        },
+        {
+          "ticker": "JPM",
+          "score": 5.52,
+          "ret": 6.38
+        },
+        {
+          "ticker": "ISRG",
+          "score": 5.5,
+          "ret": 4.45
+        },
+        {
+          "ticker": "COST",
+          "score": 5.39,
+          "ret": 7.49
+        }
+      ]
+    },
+    {
+      "date": "2025-03-03",
+      "n_picks": 10,
+      "period_return": 3.44,
+      "benchmark_return": 1.84,
+      "excess": 1.61,
+      "picks": [
+        {
+          "ticker": "MA",
+          "score": 6.65,
+          "ret": 1.26
+        },
+        {
+          "ticker": "V",
+          "score": 5.74,
+          "ret": 1.14
+        },
+        {
+          "ticker": "COST",
+          "score": 5.17,
+          "ret": 1.09
+        },
+        {
+          "ticker": "TSM",
+          "score": 5.16,
+          "ret": 13.08
+        },
+        {
+          "ticker": "AAPL",
+          "score": 4.71,
+          "ret": -15.15
+        },
+        {
+          "ticker": "GTLB",
+          "score": 4.7,
+          "ret": -19.02
+        },
+        {
+          "ticker": "AVGO",
+          "score": 4.63,
+          "ret": 33.14
+        },
+        {
+          "ticker": "OKTA",
+          "score": 4.5,
+          "ret": 20.16
+        },
+        {
+          "ticker": "JPM",
+          "score": 4.49,
+          "ret": 2.18
+        },
+        {
+          "ticker": "ISRG",
+          "score": 4.24,
+          "ret": -2.41
+        }
+      ]
+    },
+    {
+      "date": "2025-06-02",
+      "n_picks": 10,
+      "period_return": -0.97,
+      "benchmark_return": 8.34,
+      "excess": -9.32,
+      "picks": [
+        {
+          "ticker": "COST",
+          "score": 6.62,
+          "ret": -11.05
+        },
+        {
+          "ticker": "ZS",
+          "score": 6.54,
+          "ret": -6.35
+        },
+        {
+          "ticker": "META",
+          "score": 6.42,
+          "ret": 9.66
+        },
+        {
+          "ticker": "MA",
+          "score": 5.96,
+          "ret": 1.97
+        },
+        {
+          "ticker": "V",
+          "score": 5.86,
+          "ret": -4.01
+        },
+        {
+          "ticker": "JPM",
+          "score": 5.68,
+          "ret": 13.79
+        },
+        {
+          "ticker": "MELI",
+          "score": 5.06,
+          "ret": -8.24
+        },
+        {
+          "ticker": "FTNT",
+          "score": 5.03,
+          "ret": -24.92
+        },
+        {
+          "ticker": "AXON",
+          "score": 5.02,
+          "ret": -1.97
+        },
+        {
+          "ticker": "NOC",
+          "score": 5.02,
+          "ret": 22.4
+        }
+      ]
+    },
+    {
+      "date": "2025-09-02",
+      "n_picks": 10,
+      "period_return": 8.79,
+      "benchmark_return": 6.54,
+      "excess": 2.25,
+      "picks": [
+        {
+          "ticker": "LHX",
+          "score": 7.41,
+          "ret": -0.17
+        },
+        {
+          "ticker": "SEA",
+          "score": 7.1,
+          "ret": 4.9
+        },
+        {
+          "ticker": "JPM",
+          "score": 7.09,
+          "ret": 3.58
+        },
+        {
+          "ticker": "ZS",
+          "score": 6.85,
+          "ret": -11.4
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 6.54,
+          "ret": 49.12
+        },
+        {
+          "ticker": "MA",
+          "score": 6.27,
+          "ret": -7.97
+        },
+        {
+          "ticker": "NOC",
+          "score": 6.16,
+          "ret": -7.06
+        },
+        {
+          "ticker": "KLAC",
+          "score": 5.6,
+          "ret": 36.96
+        },
+        {
+          "ticker": "TSM",
+          "score": 5.57,
+          "ret": 26.36
+        },
+        {
+          "ticker": "V",
+          "score": 5.57,
+          "ret": -5.43
+        }
+      ]
+    },
+    {
+      "date": "2025-12-01",
+      "n_picks": 10,
+      "period_return": 11.43,
+      "benchmark_return": 1.2,
+      "excess": 10.23,
+      "picks": [
+        {
+          "ticker": "SEA",
+          "score": 6.49,
+          "ret": 22.91
+        },
+        {
+          "ticker": "ASML",
+          "score": 5.69,
+          "ret": 31.01
+        },
+        {
+          "ticker": "TMO",
+          "score": 5.45,
+          "ret": -13.02
+        },
+        {
+          "ticker": "MDB",
+          "score": 5.24,
+          "ret": -1.17
+        },
+        {
+          "ticker": "LDOS",
+          "score": 5.09,
+          "ret": -4.57
+        },
+        {
+          "ticker": "NU",
+          "score": 4.96,
+          "ret": -13.1
+        },
+        {
+          "ticker": "ASML.AS",
+          "score": 4.96,
+          "ret": 30.79
+        },
+        {
+          "ticker": "AAPL",
+          "score": 4.95,
+          "ret": -6.4
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 4.8,
+          "ret": -2.59
+        },
+        {
+          "ticker": "ACMR",
+          "score": 4.7,
+          "ret": 71.45
+        }
+      ]
+    },
+    {
+      "date": "2026-03-02",
+      "n_picks": 10,
+      "period_return": 16.81,
+      "benchmark_return": 10.81,
+      "excess": 6.0,
+      "picks": [
+        {
+          "ticker": "LHX",
+          "score": 7.2,
+          "ret": -17.92
+        },
+        {
+          "ticker": "NOC",
+          "score": 6.65,
+          "ret": -29.79
+        },
+        {
+          "ticker": "KLAC",
+          "score": 5.54,
+          "ret": 26.55
+        },
+        {
+          "ticker": "SEA",
+          "score": 5.1,
+          "ret": -0.46
+        },
+        {
+          "ticker": "ASML.AS",
+          "score": 4.97,
+          "ret": 15.42
+        },
+        {
+          "ticker": "ASML",
+          "score": 4.94,
+          "ret": 14.65
+        },
+        {
+          "ticker": "MRVL",
+          "score": 4.74,
+          "ret": 171.51
+        },
+        {
+          "ticker": "VRTX",
+          "score": 4.73,
+          "ret": -9.8
+        },
+        {
+          "ticker": "REGN",
+          "score": 4.66,
+          "ret": -23.93
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 4.6,
+          "ret": 22.87
+        }
+      ]
+    }
+  ],
+  "caveats": [
+    "Survivorship bias: de universe-lijst bevat de huidige namen; in het verleden gedelistte verliezers ontbreken, wat resultaten iets flatteert.",
+    "Alleen de MOMENTUM-engine (S_Momentum) wordt getest \u2014 die is volledig uit koershistorie te reproduceren. De fundamentele S_Growth-engine vereist point-in-time fundamentals die gratis data niet betrouwbaar levert, en zit dus (nog) niet in deze backtest.",
+    "Geen slippage/marktimpact gemodelleerd, alleen een vaste transactiekost.",
+    "Verleden rendement is geen garantie voor de toekomst."
+  ]
+}
