@@ -232,6 +232,21 @@ def discover_edges(conn: sqlite3.Connection, horizon: int = 21,
         # z-score t.o.v. baseline-beat-rate (edge boven de gemiddelde muntworp)
         se = math.sqrt(baseline_rate * (1 - baseline_rate) / n) if 0 < baseline_rate < 1 else 0
         z = (rate - baseline_rate) / se if se > 0 else 0.0
+
+        # Out-of-sample-consistentie: de edge moet in BEIDE tijdshelften boven
+        # de baseline blijven. Een combo die alleen op de volle periode oplicht
+        # maar in één helft onder de muntworp zakt, is waarschijnlijk curve-fit.
+        oos_consistent = None
+        rate_first = rate_second = None
+        if split is not None:
+            rate_first, rate_second, n1, n2 = _cohort_rate_halves(conn, horizon, frags, split)
+            if rate_first is not None and rate_second is not None:
+                oos_consistent = bool(rate_first > baseline_rate and rate_second > baseline_rate)
+
+        # 'significant' vereist nu ZOWEL de Bonferroni-z ALS out-of-sample-
+        # consistentie (als die toetsbaar is). Zo doet discovery wat de
+        # conclusie belooft i.p.v. het alleen aan te raden.
+        significant = bool(z >= z_threshold) and (oos_consistent is not False)
         results.append({
             "conditions": labels,
             "n": n,
@@ -239,7 +254,10 @@ def discover_edges(conn: sqlite3.Connection, horizon: int = 21,
             "vs_baseline": round(rate - baseline_rate, 3),
             "confidence": round(conf, 3),
             "z": round(z, 2),
-            "significant": bool(z >= z_threshold),
+            "beat_rate_first_half": round(rate_first, 3) if rate_first is not None else None,
+            "beat_rate_second_half": round(rate_second, 3) if rate_second is not None else None,
+            "oos_consistent": oos_consistent,
+            "significant": significant,
         })
 
     results.sort(key=lambda r: r["confidence"], reverse=True)
