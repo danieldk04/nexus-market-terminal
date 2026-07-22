@@ -205,6 +205,7 @@ def discover_edges(conn: sqlite3.Connection, horizon: int = 21,
     kandidaat-edge — nog steeds te bevestigen out-of-sample.
     """
     baseline_n, baseline_beats, baseline_rate = _cohort_stats(conn, horizon, [])
+    split = _split_date(conn, horizon)  # mediaan-datum voor out-of-sample-toets
 
     combos = []
     for k in range(1, max_combo + 1):
