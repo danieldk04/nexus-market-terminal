@@ -2957,6 +2957,58 @@ function _confBadge(c){
     </div>`;
 }
 
+/* NEXUS-keuze: het 6-stappenplan uit de Uitleg-tab als één samengestelde score
+   (0-100). Codeert: (1) score-horde, (2) trend meedoet, (3) waarde meedoet,
+   (4) waardering, (5) niet overgekocht, (6) confidence als tiebreaker.
+   Geeft ook de redenen (waarom hoog) en flags (waarom niet) terug voor de tooltip. */
+function _nexusPick(c){
+    const sc=c.score||0, sg=c.s_growth, sm=c.s_momentum;
+    const up=c.dcf?.dcf_upside, rsi=c.rsi14, stage2=c.stage2, cf=c.confidence;
+    let pts=0; const reasons=[], flags=[];
+
+    // Stap 1 — score-horde (max 30)
+    if(sc>=7){pts+=30;reasons.push('Score ≥7 (sterk)');}
+    else if(sc>=5){pts+=20;reasons.push('Score ≥5');}
+    else{flags.push('Score <5');}
+
+    // Stap 2 — trend meedoet (Stage 2 + momentum, max 22)
+    if(stage2){pts+=12;reasons.push('Stage 2 ✓');} else{flags.push('geen Stage 2');}
+    if(sm!=null){ if(sm>=6){pts+=10;reasons.push('Momentum sterk');} else if(sm>=4){pts+=4;} else{flags.push('zwak momentum');} }
+
+    // Stap 2b — waarde meedoet (groei, max 10)
+    if(sg!=null){ if(sg>=6){pts+=10;reasons.push('Groei sterk');} else if(sg>=4){pts+=4;} else{flags.push('lage groei');} }
+
+    // Stap 3 — waardering (DCF, max 15 / penalty)
+    if(up!=null){ if(up>=15){pts+=15;reasons.push('DCF ondergewaardeerd');} else if(up>=0){pts+=6;} else if(up<=-20){pts-=8;flags.push('DCF overgewaardeerd');} }
+
+    // Stap 4 — niet overgekocht (RSI, bonus/penalty)
+    if(rsi!=null){ if(rsi>75){pts-=12;flags.push('RSI overgekocht');} else if(rsi>=50&&rsi<=70){pts+=8;reasons.push('RSI zoete zone');} else if(rsi<40){flags.push('RSI zwak');} }
+
+    // Stap 5 — confidence als tiebreaker (max 15)
+    if(cf&&cf.pct!=null){ if(cf.pct>=0.60){pts+=15;reasons.push('Confidence groen');} else if(cf.pct>=0.50){pts+=7;reasons.push('Confidence amber');} }
+
+    const total=Math.max(0,Math.min(100,pts));
+    let lbl,clr;
+    if(total>=60){lbl='STERKE KEUZE';clr='#059669';}
+    else if(total>=40){lbl='REDELIJK';clr='#d97706';}
+    else{lbl='ZWAK';clr='#94a3b8';}
+    return {score:total,lbl,clr,reasons,flags};
+}
+
+/* Compacte NEXUS-keuze-badge voor op de kandidaatkaart. */
+function _nexusBadge(c){
+    const p=_nexusPick(c);
+    const tipR=p.reasons.length?'✓ '+p.reasons.join('  ✓ '):'';
+    const tipF=p.flags.length?'✗ '+p.flags.join('  ✗ '):'';
+    const tip=`NEXUS-keuze ${p.score}/100 — ${p.lbl}. Volgt het 6-stappenplan (zie Uitleg-tab). ${tipR} ${tipF}`.trim();
+    return `<div style="margin-top:7px;padding:6px 7px;background:${p.clr}12;border:1px solid ${p.clr}38;border-radius:6px" title="${tip}">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:.48rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700">⭐ NEXUS-keuze</span>
+            <span style="font-family:var(--mono);font-size:.72rem;color:${p.clr};font-weight:800">${p.score}<span style="font-size:.5rem;color:var(--muted)">/100 · ${p.lbl}</span></span>
+        </div>
+    </div>`;
+}
+
 function renderCandidatesPanel(){
     const el=document.getElementById('cand-grid');
     const tag=document.getElementById('cand-tag');
