@@ -240,6 +240,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-23",
+      "degiro": 16626.88,
+      "tr": 8656.96,
+      "nexus": 4410.48,
+      "bux": 1992.32
+    },
+    {
       "date": "2026-07-22",
       "degiro": 16627.56,
       "tr": 8675.04,
@@ -676,26 +683,26 @@
   "last_news": [
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
-    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
+    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
     "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "Waarom de Zuid Koreaanse beurs heftiger schommelt dan de Bitcoin koers",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?"
   ],
   "tr_summary": {
-    "total": 8675.04,
+    "total": 8656.96,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4768.26,
-        "price": 57743.9219,
+        "value": 4750.18,
+        "price": 57525.0,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 55.0
+        "weight": 54.9
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -719,7 +726,7 @@
         "price": 165.4,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 13.6
+        "weight": 13.7
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -731,11 +738,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-22T19:01:14.458572+00:00",
+  "dashboard_updated": "2026-07-23T07:01:02.472839+00:00",
   "degiro_summary": {
-    "total": 16627.56,
+    "total": 16626.88,
     "total_pl_pct": 35.49,
-    "total_invested": 12271.83,
+    "total_invested": 12271.42,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -772,9 +779,9 @@
       },
       {
         "name": "V",
-        "value": 619.24,
+        "value": 618.56,
         "pl_pct": 75.0,
-        "pl_eur": 265.38,
+        "pl_eur": 265.11,
         "div_yield": 0.0075,
         "annual_div_eur": 4.64,
         "first_buy_date": null,
@@ -802,33 +809,33 @@
     }
   ],
   "bux_summary": {
-    "total": 2001.6,
-    "total_pl_pct": -25.51,
+    "total": 1992.32,
+    "total_pl_pct": -25.86,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1724.38,
-        "price": 328.89,
-        "pl_pct": -20.65,
-        "pl_eur": -448.69,
+        "value": 1716.02,
+        "price": 327.3,
+        "pl_pct": -21.03,
+        "pl_eur": -457.05,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 86.2
+        "weight": 86.1
       },
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 238.05,
-        "price": 119.03,
-        "pl_pct": -28.11,
-        "pl_eur": -93.09,
+        "value": 237.41,
+        "price": 118.71,
+        "pl_pct": -28.3,
+        "pl_eur": -93.73,
         "div_yield": 0.0439,
-        "annual_div_eur": 10.45,
+        "annual_div_eur": 10.42,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 11.9
@@ -836,10 +843,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 34.92,
-        "price": 34.92,
-        "pl_pct": -80.55,
-        "pl_eur": -144.65,
+        "value": 34.64,
+        "price": 34.64,
+        "pl_pct": -80.71,
+        "pl_eur": -144.93,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2138,7 +2145,7 @@
     "ABNB": "2026-07-22"
   },
   "benchmark_history": {
-    "sp500_ytd": 9.49,
+    "sp500_ytd": 9.34,
     "aex_ytd": 13.77,
     "msci_ytd": 13.2
   },
