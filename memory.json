@@ -254,6 +254,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-24",
+      "degiro": 16467.47,
+      "tr": 8607.44,
+      "nexus": 4445.61,
+      "bux": 1746.79
+    },
+    {
       "date": "2026-07-23",
       "degiro": 16466.56,
       "tr": 8569.63,
@@ -696,27 +703,27 @@
   ],
   "last_news": [
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
-    "AEX koers onder druk door Alphabet, Tesla en stijgende olieprijs",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
-    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
+    "AEX koers onder druk door Alphabet, Tesla en stijgende olieprijs",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Het is officieel: SpaceX voor 135 dollar per aandeel naar de beurs, en Musk haalt dus 75 miljard dollar op - NRC"
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019"
   ],
   "tr_summary": {
-    "total": 8569.63,
+    "total": 8607.44,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4707.7,
-        "price": 57010.5586,
+        "value": 4745.51,
+        "price": 57468.4414,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 54.9
+        "weight": 55.1
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -752,11 +759,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-23T19:01:22.424165+00:00",
+  "dashboard_updated": "2026-07-24T07:01:30.817339+00:00",
   "degiro_summary": {
-    "total": 16466.56,
-    "total_pl_pct": 34.17,
-    "total_invested": 12272.84,
+    "total": 16467.47,
+    "total_pl_pct": 34.18,
+    "total_invested": 12272.55,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -793,11 +800,11 @@
       },
       {
         "name": "V",
-        "value": 616.43,
-        "pl_pct": 73.71,
-        "pl_eur": 261.56,
+        "value": 617.34,
+        "pl_pct": 74.1,
+        "pl_eur": 262.76,
         "div_yield": 0.0076,
-        "annual_div_eur": 4.68,
+        "annual_div_eur": 4.69,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.7
@@ -806,66 +813,66 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO en Musk-effect",
-      "summary": "SpaceX is naar de beurs gegaan tegen 135 dollar per aandeel, wat Elon Musk 75 miljard dollar opbrengt en hem tot miljardair maakt. Dit weerspiegelt sterke vraag naar techbedrijven ondanks initi\u00eble volatiliteit, wat relevant is voor beleggers in groeigerichte ETFs en tech-posities."
+      "theme": "SpaceX beursgang en Musk",
+      "summary": "SpaceX is naar de beurs gegaan met een introductieprijs van 135 dollar per aandeel, waarbij Elon Musk 75 miljard dollar ophaalt en de eerste biljonair wordt. Dit signaal voor techinvesteerders is belangrijk omdat het het sentiment rond groeiwaarden en de techsector als geheel be\u00efnvloedt, wat direct doorwerkt op je S&P500 en World ETF-posities."
     },
     {
-      "theme": "Tech-sector onder druk wereldwijd",
-      "summary": "Tech-aandelen zoals Alphabet, Tesla en ASML lijden onder beleggersverkopen, met name in chipbedrijven, waardoor de AEX en Amerikaanse beurs onder druk staan. Dit be\u00efnvloedt direct ETF-portefeuilles met hoge tech-weging zoals S&P500 en World indices."
+      "theme": "Techsector onder druk",
+      "summary": "Aandelen in de chipsector en grote techbedrijven zoals Alphabet en Tesla zakken in, wat wijst op brede teruggang in techaandelen. Dit raakt je S&P500 en World ETF direct vanwege het hoge gewicht van deze sector in deze indices."
     },
     {
-      "theme": "Marktvolatiliteit door monetair beleid",
-      "summary": "Onzekerheid rond de Fed-rentetarieven, geopolitieke risico's en oorlogen cre\u00ebren schommelingen op beurzen wereldwijd, met name zichtbaar in gevoelige markten zoals Zuid-Korea. Dit onderstreept het belang van diversificatie in ETF-portefeuilles tegen macro-risico's."
+      "theme": "AEX en Europese volatiliteit",
+      "summary": "De AEX staat onder druk door dalende techaandelen en geopolitieke spanningen (oorlog Iran), maar Europese aandelen stabiliseren zich terwijl Azi\u00eb verder daalt. Dit duidt op spreiding van risico's in je geografische posities."
     },
     {
-      "theme": "Kansen in 'saaie' aandelen",
-      "summary": "Terwijl beleggers van AI-gerelateerde en groeiaandelen afstappen, ontstaan waardekansen in minder populaire sectoren. Dit biedt diversificatie-opportuniteiten voor ETF-beleggers die tegen de stroom in willen roeien."
+      "theme": "Marktvolatiliteit en kansen",
+      "summary": "Er heerst onrust op de beurzen met bitcoin onderuit en wisselend sentiment ('code oranje'), maar tegelijk worden 'saaie' aandelen interessant voor kopers. Dit schept mogelijkheden voor waardebeleggers maar vereist discipline om niet in paniek aandelen af te stoten op deze moments."
     }
   ],
   "bux_summary": {
-    "total": 1756.21,
-    "total_pl_pct": -34.64,
+    "total": 1746.79,
+    "total_pl_pct": -34.99,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1481.31,
-        "price": 282.53,
-        "pl_pct": -31.83,
-        "pl_eur": -691.76,
+        "value": 1471.48,
+        "price": 280.66,
+        "pl_pct": -32.29,
+        "pl_eur": -701.59,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 84.3
+        "weight": 84.2
       },
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 236.77,
-        "price": 118.38,
-        "pl_pct": -28.5,
-        "pl_eur": -94.37,
+        "value": 236.95,
+        "price": 118.47,
+        "pl_pct": -28.45,
+        "pl_eur": -94.19,
         "div_yield": 0.0436,
-        "annual_div_eur": 10.32,
+        "annual_div_eur": 10.33,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
-        "weight": 13.5
+        "weight": 13.6
       },
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 33.91,
-        "price": 33.91,
-        "pl_pct": -81.12,
-        "pl_eur": -145.66,
+        "value": 34.14,
+        "price": 34.14,
+        "pl_pct": -80.99,
+        "pl_eur": -145.43,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": "Technology",
-        "weight": 1.9
+        "weight": 2.0
       },
       {
         "name": "KPN.AS",
@@ -2160,7 +2167,7 @@
     "DLTR": "2026-07-23"
   },
   "benchmark_history": {
-    "sp500_ytd": 7.82,
+    "sp500_ytd": 8.02,
     "aex_ytd": 12.31,
     "msci_ytd": 11.73
   },
