@@ -256,7 +256,7 @@
     {
       "date": "2026-07-25",
       "degiro": 16574.75,
-      "tr": 8524.17,
+      "tr": 8565.32,
       "nexus": 4445.61,
       "bux": 1719.4
     },
@@ -719,18 +719,18 @@
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019"
   ],
   "tr_summary": {
-    "total": 8524.17,
+    "total": 8565.32,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4634.72,
-        "price": 56126.7695,
+        "value": 4675.87,
+        "price": 56625.0195,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 54.4
+        "weight": 54.6
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -738,7 +738,7 @@
         "price": 155.012,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.0
+        "weight": 14.9
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -754,7 +754,7 @@
         "price": 164.28,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 13.8
+        "weight": 13.7
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -766,7 +766,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-25T09:12:15.853506+00:00",
+  "dashboard_updated": "2026-07-25T19:01:07.590076+00:00",
   "degiro_summary": {
     "total": 16574.75,
     "total_pl_pct": 35.05,
@@ -810,8 +810,8 @@
         "value": 625.46,
         "pl_pct": 76.15,
         "pl_eur": 270.39,
-        "div_yield": 0.0076,
-        "annual_div_eur": 4.75,
+        "div_yield": 0.0075,
+        "annual_div_eur": 4.69,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.8
@@ -820,20 +820,20 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX beursgang: turbulent debuut",
-      "summary": "SpaceX ging naar de beurs aan $135 per aandeel en haalde $75 miljard op, wat Elon Musk de eerste biljonair maakte. De koers fluctueert echter flink: eerst onder introductieprijs, daarna herstel met forse winsten, wat wijst op volatiliteit en speculatieve vraag in deze megacap-listing."
+      "theme": "SpaceX beursgang: groot succes",
+      "summary": "SpaceX is succesvol naar de beurs gegaan tegen 135 dollar per aandeel, waarmee Elon Musk 75 miljard dollar ophaalde en miljardair werd. Beleggers hebben grote honger naar het aandeel, wat wijst op sterke vraag naar groeiaandelen ondanks recente technische zwakte."
     },
     {
-      "theme": "Breder technische correctie in tech",
-      "summary": "Tech-aandelen ondergaan druk met dalingen in chipaandelen (ASML) en grote namen als Alphabet en Tesla. Dit raakt ETF-beleggers in S&P500 en World-trackers direct, omdat technologie een zwaar gewicht in deze indices heeft."
+      "theme": "Tech-sector onder druk in VS",
+      "summary": "Amerikaanse technologiebedrijven zoals Tesla en Alphabet kampen met dalende koersen, terwijl beleggers massaal chipaandelen verkopen en ASML onder druk staat. Dit weerspiegelt zich ook in internationaal geori\u00ebnteerde ETFs en verstoort het momentum van growthbeleggers."
     },
     {
-      "theme": "Geopolitieke en macro-onrust",
-      "summary": "Oorlogsrisico's (Iran-conflict) en stijgende olieprijzen drukken op Aziatische beurzen en de AEX, terwijl bitcoin onderuit gaat. Dit wijst op bredere marktvolatiliteit en risicoaverse sentiment ondanks beperkte dagelijkse impact."
+      "theme": "Geopolitieke risico's beurzen belast",
+      "summary": "Oorlogsrisico's in het Midden-Oosten en Iran drukken Aziatische aandelen, terwijl Europese indices het iets beter doen maar ook wankelen. Voor wereldwijde ETF-beleggers betekent dit volatiliteit en geografische divergentie in rendement."
     },
     {
-      "theme": "Koopjes in gedrukte waardes",
-      "summary": "Dalende koersen cre\u00ebren inkoopkansen in 'saaie' (defensieve/waarde-)aandelen, en beleggers aarzelen om winsten op te nemen ondanks rijkdom op papier. Dit suggereert timing-kansen voor value-geori\u00ebnteerde portefeuilleanpassingen."
+      "theme": "Marktvolatiliteit: kansen en angst",
+      "summary": "De beurs vertoont slingerende bewegingen met dalende bitcoins en adviseurs die 'code oranje' uitroepen, maar tegelijkertijd ontstaan koopkansen in ondergewaardeerde 'saaie' aandelen. Dit cre\u00ebert voor gedisciplineerde beleggers kansen op lagere niveaus."
     }
   ],
   "bux_summary": {
@@ -862,8 +862,8 @@
         "price": 120.12,
         "pl_pct": -27.45,
         "pl_eur": -90.9,
-        "div_yield": 0.0439,
-        "annual_div_eur": 10.55,
+        "div_yield": 0.0433,
+        "annual_div_eur": 10.4,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 14.0
@@ -2174,8 +2174,8 @@
     "DLTR": "2026-07-23"
   },
   "benchmark_history": {
-    "sp500_ytd": 8.07,
-    "aex_ytd": 12.66,
+    "sp500_ytd": null,
+    "aex_ytd": 12.31,
     "msci_ytd": 12.51
   },
   "sector_rotation": {
