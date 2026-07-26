@@ -254,6 +254,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-26",
+      "degiro": 16574.75,
+      "tr": 8567.0,
+      "nexus": 4445.61,
+      "bux": 1719.4
+    },
+    {
       "date": "2026-07-25",
       "degiro": 16574.75,
       "tr": 8565.32,
@@ -719,15 +726,15 @@
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019"
   ],
   "tr_summary": {
-    "total": 8565.32,
+    "total": 8567.0,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4675.87,
-        "price": 56625.0195,
+        "value": 4677.55,
+        "price": 56645.3984,
         "pl_pct": null,
         "pl_eur": null,
         "weight": 54.6
@@ -766,7 +773,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-25T19:01:07.590076+00:00",
+  "dashboard_updated": "2026-07-26T07:01:01.550084+00:00",
   "degiro_summary": {
     "total": 16574.75,
     "total_pl_pct": 35.05,
@@ -820,20 +827,20 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX beursgang: groot succes",
-      "summary": "SpaceX is succesvol naar de beurs gegaan tegen 135 dollar per aandeel, waarmee Elon Musk 75 miljard dollar ophaalde en miljardair werd. Beleggers hebben grote honger naar het aandeel, wat wijst op sterke vraag naar groeiaandelen ondanks recente technische zwakte."
+      "theme": "SpaceX beursgang: Musk-effect",
+      "summary": "SpaceX is succesvol naar de beurs gegaan tegen 135 dollar per aandeel, waarmee Elon Musk circa 75 miljard dollar ophaalde en miljardair-status bereikte. Dit significante techdebuut signaleert sterke beleggershonger naar groewaarden ondanks volatiliteit in de sector."
     },
     {
-      "theme": "Tech-sector onder druk in VS",
-      "summary": "Amerikaanse technologiebedrijven zoals Tesla en Alphabet kampen met dalende koersen, terwijl beleggers massaal chipaandelen verkopen en ASML onder druk staat. Dit weerspiegelt zich ook in internationaal geori\u00ebnteerde ETFs en verstoort het momentum van growthbeleggers."
+      "theme": "Tech en chips onder druk",
+      "summary": "Amerikaanse technologie-aandelen inclusief Microsoft en chipaandelen (ASML) dalen, met beleggers die massaal posities verkopen in halfgeleiders. Deze sectorbreedte correctie drukt indices als de AEX en S&P500 merkbaar naar beneden."
     },
     {
-      "theme": "Geopolitieke risico's beurzen belast",
-      "summary": "Oorlogsrisico's in het Midden-Oosten en Iran drukken Aziatische aandelen, terwijl Europese indices het iets beter doen maar ook wankelen. Voor wereldwijde ETF-beleggers betekent dit volatiliteit en geografische divergentie in rendement."
+      "theme": "Geopolitieke onrust remt optimisme",
+      "summary": "Oorlogen en spanning met Iran veroorzaken marktvolatiliteit, vooral in Aziatische beurzen die harder dalen dan Europese equivalenten. Deze geopolitieke risico's cre\u00ebren onrust ('code oranje') ondanks dat beleggers vooralsnog weerbaarheid tonen."
     },
     {
-      "theme": "Marktvolatiliteit: kansen en angst",
-      "summary": "De beurs vertoont slingerende bewegingen met dalende bitcoins en adviseurs die 'code oranje' uitroepen, maar tegelijkertijd ontstaan koopkansen in ondergewaardeerde 'saaie' aandelen. Dit cre\u00ebert voor gedisciplineerde beleggers kansen op lagere niveaus."
+      "theme": "Correcties bieden koopkansen",
+      "summary": "Dalende koersen openen mogelijkheden voor waardezoekende beleggers om 'saaie' en ondergewaardeerde aandelen in te kopen. Dit maakt dit een klassiek buy-the-dip moment voor ETF-beleggers die volhouding hebben."
     }
   ],
   "bux_summary": {
@@ -888,8 +895,8 @@
         "price": 4.1,
         "pl_pct": 25.03,
         "pl_eur": 0.82,
-        "div_yield": 0.0448,
-        "annual_div_eur": 0.18,
+        "div_yield": 0.0461,
+        "annual_div_eur": 0.19,
         "first_buy_date": null,
         "sector": "Communication Services",
         "weight": 0.2
@@ -2174,8 +2181,8 @@
     "DLTR": "2026-07-23"
   },
   "benchmark_history": {
-    "sp500_ytd": null,
-    "aex_ytd": 12.31,
+    "sp500_ytd": 8.07,
+    "aex_ytd": 12.66,
     "msci_ytd": 12.51
   },
   "sector_rotation": {
