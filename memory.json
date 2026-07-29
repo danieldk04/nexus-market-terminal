@@ -268,6 +268,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-07-29",
+      "degiro": 16591.77,
+      "tr": 8566.13,
+      "nexus": 5484.15,
+      "bux": 1701.43
+    },
+    {
       "date": "2026-07-28",
       "degiro": 16599.05,
       "tr": 8521.32,
@@ -754,18 +761,18 @@
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019"
   ],
   "tr_summary": {
-    "total": 8521.32,
+    "total": 8566.13,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4620.38,
-        "price": 55953.0391,
+        "value": 4665.19,
+        "price": 56495.7617,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 54.2
+        "weight": 54.5
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -773,7 +780,7 @@
         "price": 154.6732,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.0
+        "weight": 14.9
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -801,11 +808,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-07-28T19:01:11.562772+00:00",
+  "dashboard_updated": "2026-07-29T07:01:07.683091+00:00",
   "degiro_summary": {
-    "total": 16599.05,
-    "total_pl_pct": 35.25,
-    "total_invested": 12272.59,
+    "total": 16591.77,
+    "total_pl_pct": 35.2,
+    "total_invested": 12272.43,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -842,11 +849,11 @@
       },
       {
         "name": "V",
-        "value": 650.72,
-        "pl_pct": 83.5,
-        "pl_eur": 296.1,
+        "value": 643.44,
+        "pl_pct": 81.53,
+        "pl_eur": 288.98,
         "div_yield": 0.0074,
-        "annual_div_eur": 4.82,
+        "annual_div_eur": 4.76,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.9
@@ -855,35 +862,35 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX beursgang en valorisatie",
-      "summary": "SpaceX is naar de beurs gegaan tegen 135 dollar per aandeel en haalde 75 miljard dollar op, waardoor Elon Musk miljardair werd. De koers schommelt rond de introductieprijs, wat duidt op onzekerheid bij beleggers over de waardering van het ruimtebedrijf en kan invloed hebben op tech-gerelateerde indexfondsen."
+      "theme": "SpaceX beursgang en waardering",
+      "summary": "SpaceX is naar de beurs gegaan tegen 135 dollar per aandeel, wat Elon Musk 75 miljard dollar oplevert en hem tot eerste biljonair maakt. De koers schommelt sterk rond introductie, wat wijst op volatiliteit en onzekerheid over technologiebedrijven bij beleggers."
     },
     {
-      "theme": "Chipsektor en ASML onder druk",
-      "summary": "ASML-aandelen dalen fors door zorgen over Chinese concurrentie in de chipsector en massale verkopen van beleggers in chipwaarden. Dit raakt direct S&P500- en World-beleggers die via ETFs in halfgeleiderbedrijven belegd zijn."
+      "theme": "Technologie- en chipsektor zwak",
+      "summary": "Aandelen in tech en chips zoals ASML dalen door Chinese concurrentie en beleggers die hun chipposities verkopen. Dit raakt ook S&P500- en World-ETF bezitters die exposure hebben naar deze groeiessenti\u00eble sectoren."
     },
     {
-      "theme": "Geopolitieke onrust en marktvolatiliteit",
-      "summary": "Oorlogen (Iran) en geopolitieke spanningen veroorzaken volatiliteit op beurzen, met dalende Aziatische aandelen terwijl Europese aandelen deels herstellen. Dit leidt tot onrust (code oranje) en wisselende beleggerssentiment op wereldwijde indexen."
+      "theme": "Volatiliteit en marktbrekers",
+      "summary": "Markten ervaren onrust door geopolitieke spanning (Iran-conflict), bitcoin-daling en sterke verschillen tussen regio's (Azi\u00eb zwak, Europa herstelt). Dit veroorzaakt 'code oranje' stemming op beurzen en maakt het een kritieke periode voor portefeuille-stabiliteit."
     },
     {
-      "theme": "Koopkansen in dippende markten",
-      "summary": "Ondanks volatiliteit en dalende koersen zijn er momenteel 'saaie' aandelen en koopjes beschikbaar voor waardegeori\u00ebnteerde beleggers. Dit suggereert dat lange-termijn beleggers in AEX, S&P500 en World-indexen deze dips kunnen gebruiken voor gemiddelde instapprijs-verlaging."
+      "theme": "Beleggingskansen in 'saaie' waarden",
+      "summary": "Terwijl grote techaandelen onder druk staan en AI-vrees spreidt, ontstaan koopjesbeurzen voor defensieve, minder populaire aandelen. Dit biedt diversificatiemogelijkheden naast groei-ETF-posities voor risk-aware beleggers."
     }
   ],
   "bux_summary": {
-    "total": 1697.67,
-    "total_pl_pct": -36.82,
+    "total": 1701.43,
+    "total_pl_pct": -36.68,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1411.3,
-        "price": 269.18,
-        "pl_pct": -35.06,
-        "pl_eur": -761.77,
+        "value": 1414.61,
+        "price": 269.81,
+        "pl_pct": -34.9,
+        "pl_eur": -758.46,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -893,12 +900,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 250.11,
-        "price": 125.05,
-        "pl_pct": -24.47,
-        "pl_eur": -81.03,
+        "value": 250.75,
+        "price": 125.37,
+        "pl_pct": -24.28,
+        "pl_eur": -80.39,
         "div_yield": 0.0423,
-        "annual_div_eur": 10.58,
+        "annual_div_eur": 10.61,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 14.7
@@ -906,10 +913,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 32.06,
-        "price": 32.06,
-        "pl_pct": -82.14,
-        "pl_eur": -147.51,
+        "value": 31.87,
+        "price": 31.87,
+        "pl_pct": -82.25,
+        "pl_eur": -147.7,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2211,7 +2218,7 @@
     "TRV": "2026-07-27"
   },
   "benchmark_history": {
-    "sp500_ytd": 8.48,
+    "sp500_ytd": 8.32,
     "aex_ytd": 12.91,
     "msci_ytd": 12.44
   },
