@@ -607,11 +607,13 @@ def main():
             )
         time.sleep(0.15)   # Respecteer Yahoo rate limits
 
-    # Kalender: alles wat nog moet komen binnen de horizon
+    # Kalender: alles wat nog moet komen binnen de horizon. Een datum in het
+    # verleden betekent dat Yahoo de volgende rapportage nog niet ingepland
+    # heeft — dat bedrijf staat al bij de resultaten en hoort hier niet.
     calendar = sorted(
         [
             r for r in records
-            if r["days_until"] is not None and -1 <= r["days_until"] <= CALENDAR_HORIZON_DAYS
+            if r["days_until"] is not None and 0 <= r["days_until"] <= CALENDAR_HORIZON_DAYS
         ],
         key=lambda r: (r["days_until"], -(r["market_cap"] or 0)),
     )
