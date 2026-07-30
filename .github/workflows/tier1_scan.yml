@@ -43,6 +43,13 @@ jobs:
           SILENT_RUN: "true"
         run: python src/filing_agent.py || echo "Filing agent mislukt — doorgaan"
 
+      - name: Tier 1.6 — Earnings Agent (kwartaalkalender + resultaten)
+        env:
+          PYTHONPATH: src
+          SILENT_RUN: "true"
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/earnings_agent.py || echo "Earnings agent mislukt — doorgaan"
+
       - name: Tier 2 — Bull vs Bear AI Analyser (Sonnet + DCF + Nieuws)
         env:
           PYTHONPATH: src
