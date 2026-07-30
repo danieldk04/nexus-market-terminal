@@ -298,6 +298,53 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     .fbtn{white-space:nowrap;flex-shrink:0;font-size:.7rem;padding:4px 11px}
 }
 
+/* ─── KWARTAALCIJFERS ─── */
+.ern-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s}
+.ern-row:last-child{border-bottom:none}
+.ern-row:hover{background:#f8fafc}
+.ern-date{flex-shrink:0;width:52px;text-align:center;border-right:1px solid var(--border);padding-right:8px}
+.ern-date-d{font-family:var(--mono);font-size:.86rem;font-weight:800;color:var(--text);line-height:1}
+.ern-date-m{font-size:.52rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.ern-main{flex:1;min-width:0}
+.ern-tick{font-family:var(--mono);font-size:.8rem;font-weight:800;color:var(--text)}
+.ern-name{font-size:.6rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.ern-sub{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-top:3px}
+.ern-right{flex-shrink:0;text-align:right}
+.ern-cd{font-family:var(--mono);font-size:.7rem;font-weight:800;color:var(--accent)}
+.ern-cd.soon{color:var(--red)}
+.ern-cd.today{background:var(--red);color:#fff;padding:2px 6px;border-radius:10px}
+.ern-verdict{display:inline-block;font-family:var(--mono);font-size:.55rem;font-weight:800;letter-spacing:.05em;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.v-beat{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
+.v-miss{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+.v-inline{background:#f8fafc;color:#475569;border:1px solid var(--border2)}
+.v-none{background:#f8fafc;color:var(--muted2);border:1px solid var(--border)}
+.ern-tag{display:inline-block;font-family:var(--mono);font-size:.5rem;font-weight:700;letter-spacing:.04em;padding:1px 5px;border-radius:3px;text-transform:uppercase}
+.t-portfolio{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.t-bot{background:var(--bot-bg);color:var(--bot);border:1px solid var(--bot-border)}
+.t-kandidaat{background:#fefce8;color:#a16207;border:1px solid #fde68a}
+.t-watchlist{background:#faf5ff;color:#7c3aed;border:1px solid #ddd6fe}
+.t-mega{background:#f1f5f9;color:#475569;border:1px solid var(--border2)}
+.ern-group{padding:7px 14px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ern-card{border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 13px;background:var(--surface);box-shadow:var(--sh);display:flex;flex-direction:column;gap:9px;cursor:pointer;transition:box-shadow .15s,transform .1s}
+.ern-card:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+.ern-card.beat{border-left:3px solid var(--green)}
+.ern-card.miss{border-left:3px solid var(--red)}
+.ern-card.inline{border-left:3px solid var(--border2)}
+.ern-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;padding:14px}
+.ern-metrics{display:flex;border-top:1px solid var(--border);padding-top:8px}
+.ern-metric{flex:1;display:flex;flex-direction:column;align-items:center;border-right:1px solid var(--border);min-width:0}
+.ern-metric:last-child{border-right:none}
+.ern-m-l{font-family:var(--mono);font-size:.45rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ern-m-v{font-family:var(--mono);font-size:.76rem;font-weight:800;color:var(--text);margin-top:2px}
+.ern-summary{font-size:.66rem;line-height:1.45;color:var(--muted)}
+.ern-spark{display:flex;align-items:flex-end;gap:2px;height:22px}
+.ern-spark-bar{flex:1;border-radius:1px;min-height:2px}
+.ern-legend{font-family:var(--mono);font-size:.5rem;color:var(--muted2);margin-top:3px}
+@media(max-width:700px){
+    .ern-grid{grid-template-columns:1fr;padding:10px}
+    .ern-split{grid-template-columns:1fr!important}
+}
+
 /* ─── TV CHART ─── */
 .chips{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;border-bottom:1px solid var(--border)}
 .chip{padding:4px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.68rem;font-weight:600;cursor:pointer;font-family:var(--mono);transition:all .15s}
@@ -571,6 +618,10 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><path d="M4 6h8M4 9h6"/></svg>
             <span class="tbtn-lbl">Nieuws</span>
         </button>
+        <button class="tbtn" data-tab="cijfers">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="3" width="13" height="11.5" rx="1"/><path d="M1.5 6.5h13M5 1.5v3M11 1.5v3"/></svg>
+            <span class="tbtn-lbl">Cijfers</span>
+        </button>
         <button class="tbtn" data-tab="analyse">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1,12 5,7 9,9 15,3"/></svg>
             <span class="tbtn-lbl">Analyse</span>
@@ -646,6 +697,27 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
         <div id="list-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:16px">
             <div class="loading"><div class="spin"></div></div>
+        </div>
+    </div>
+
+    <!-- Kwartaalcijfers: kalender + laatste resultaten -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Kwartaalcijfers</span>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span class="ptag" id="ern-dash-tag"></span>
+                <button class="chip" onclick="switchTab('cijfers')">Alles bekijken →</button>
+            </div>
+        </div>
+        <div class="ern-split" style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+            <div style="border-right:1px solid var(--border)">
+                <div class="ern-group">Komt eraan</div>
+                <div id="ern-dash-cal"><div class="loading"><div class="spin"></div></div></div>
+            </div>
+            <div>
+                <div class="ern-group">Net gerapporteerd</div>
+                <div id="ern-dash-rep"><div class="loading"><div class="spin"></div></div></div>
+            </div>
         </div>
     </div>
 
@@ -925,6 +997,66 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 </div></div>
 
 <!-- ═══════════════════════════════════════
+     TAB: KWARTAALCIJFERS
+═══════════════════════════════════════ -->
+<div id="tab-cijfers" class="tc"><div class="pw">
+
+    <!-- Seizoen KPI's -->
+    <div class="kgrid">
+        <div class="kcard">
+            <div class="kl">Komende 7 dagen</div>
+            <div class="kv" id="ern-k-7d">—</div>
+            <div class="ks" id="ern-k-7d-s">rapportages</div>
+            <div class="kbar"><div class="kfill" id="ern-kf-7d" style="background:var(--accent)"></div></div>
+        </div>
+        <div class="kcard">
+            <div class="kl">Komende 30 dagen</div>
+            <div class="kv" id="ern-k-30d">—</div>
+            <div class="ks">rapportages</div>
+            <div class="kbar"><div class="kfill" id="ern-kf-30d" style="background:var(--purple)"></div></div>
+        </div>
+        <div class="kcard">
+            <div class="kl">Beat / Miss</div>
+            <div class="kv" id="ern-k-bm">—</div>
+            <div class="ks" id="ern-k-bm-s">laatste rapportages</div>
+            <div class="kbar"><div class="kfill" id="ern-kf-bm" style="background:var(--green)"></div></div>
+        </div>
+        <div class="kcard">
+            <div class="kl">Gem. EPS-surprise</div>
+            <div class="kv" id="ern-k-surp">—</div>
+            <div class="ks">vs. analistenverwachting</div>
+            <div class="kbar"><div class="kfill" id="ern-kf-surp" style="background:var(--yellow)"></div></div>
+        </div>
+    </div>
+
+    <!-- AI-duiding -->
+    <div class="panel" id="ern-ai-panel" style="display:none">
+        <div class="ph"><span class="pt">Duiding van het cijferseizoen</span><span class="ptag" id="ern-ai-tag"></span></div>
+        <div style="padding:14px 16px;font-size:.76rem;line-height:1.6" id="ern-ai-body"></div>
+    </div>
+
+    <!-- Kalender -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Kalender</span>
+            <span class="ptag" id="ern-cal-tag"></span>
+        </div>
+        <div class="fbar"><div class="fbar-row" id="ern-filter"></div></div>
+        <div id="ern-cal-list"><div class="loading"><div class="spin"></div></div></div>
+    </div>
+
+    <!-- Resultaten -->
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Laatste resultaten</span>
+            <span class="ptag" id="ern-rep-tag"></span>
+        </div>
+        <div class="ern-grid" id="ern-rep-grid"><div class="loading"><div class="spin"></div></div></div>
+    </div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════
      TAB: LEERMEMORY
 ═══════════════════════════════════════ -->
 <div id="tab-learn" class="tc"><div class="pw">
@@ -1084,6 +1216,9 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
           <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">Intrinsic / WACC</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Intrinsic = berekende "eerlijke" koers. WACC = de rente-eis in het model (hoger = strenger gewaardeerd).</td></tr>
           <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">P/FCF · Div Yield</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">P/FCF = prijs t.o.v. vrije kasstroom (lager = goedkoper). Div Yield = dividendrendement.</td></tr>
           <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">Stop ATR</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Voorgestelde stop-loss koers, gebaseerd op de normale beweeglijkheid (ATR). Onder dit niveau is de trend "kapot".</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">EPS-surprise</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Op de Cijfers-tab: hoeveel % de gerapporteerde winst per aandeel afweek van de analistenverwachting. <b>+2% of meer = beat, −2% of minder = miss</b>, daartussen "in lijn".</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">Beat-rate</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Hoe vaak dit bedrijf de verwachting versloeg in de laatste 8 kwartalen. Hoog = het management stuurt de verwachting consequent laag genoeg (of presteert echt beter).</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--text);white-space:nowrap;vertical-align:top">Reactie</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">Koersbeweging op de eerste handelsdag ná de cijfers. Een beat met een negatieve reactie betekent meestal dat de markt méér had ingeprijsd dan de analisten.</td></tr>
           <tr><td style="padding:9px 10px 9px 0;font-weight:700;color:var(--bot);white-space:nowrap;vertical-align:top">Confidence-badge</td><td style="padding:9px 0;color:var(--muted);line-height:1.5">De <b>eerlijke</b> maat: van vergelijkbare signalen uit het verleden, welk % versloeg daarna de index (conservatief, met foutmarge). Zie de kleuren hieronder.</td></tr>
         </tbody>
       </table>
@@ -3229,6 +3364,270 @@ function renderCandidatesPanel(){
 }
 
 /* ══════════════════════════════════════════════════════
+   KWARTAALCIJFERS (kalender + resultaten)
+   Databron: data.json["earnings"] via src/earnings_agent.py
+══════════════════════════════════════════════════════ */
+const ERN_MONTHS=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+const ERN_CCY={USD:'$',EUR:'€',GBp:'p',GBP:'£',CHF:'CHF ',DKK:'kr ',SEK:'kr ',NOK:'kr '};
+const ERN_FILTERS=[
+    {key:'ALL',       label:'Alle'},
+    {key:'portfolio', label:'Mijn posities'},
+    {key:'bot',       label:'Bot'},
+    {key:'kandidaat', label:'Kandidaten'},
+    {key:'watchlist', label:'Watchlist'},
+    {key:'mega-cap',  label:'Zwaargewichten'},
+];
+let ernFilter='ALL';
+
+function ernEsc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function ernData(){return B?.earnings||null;}
+
+function ernDate(iso){
+    if(!iso) return null;
+    const d=new Date(iso+'T00:00:00');
+    return isNaN(d)?null:d;
+}
+function ernDayMonth(iso){
+    const d=ernDate(iso);
+    return d?{d:d.getDate(),m:ERN_MONTHS[d.getMonth()]}:{d:'?',m:''};
+}
+function ernNiceDate(iso){
+    const d=ernDate(iso);
+    return d?`${d.getDate()} ${ERN_MONTHS[d.getMonth()]}`:'—';
+}
+function ernBig(v,ccy){
+    if(v==null||isNaN(v)) return '—';
+    const sym=ERN_CCY[ccy]||'';
+    const a=Math.abs(v);
+    if(a>=1e9) return sym+(v/1e9).toFixed(1).replace('.',',')+' mld';
+    if(a>=1e6) return sym+(v/1e6).toFixed(0)+' mln';
+    return sym+v.toLocaleString('nl-NL');
+}
+function ernPct(v,dec=1){
+    if(v==null||isNaN(v)) return '—';
+    return (v>=0?'+':'')+v.toFixed(dec).replace('.',',')+'%';
+}
+function ernPctCol(v){return v==null||isNaN(v)?'var(--muted)':v>0?'var(--green)':v<0?'var(--red)':'var(--muted)';}
+
+function ernCountdown(days){
+    if(days==null) return {txt:'—',cls:''};
+    if(days<0)  return {txt:'gisteren',cls:''};
+    if(days===0) return {txt:'VANDAAG',cls:'today'};
+    if(days===1) return {txt:'morgen',cls:'soon'};
+    return {txt:days+' dgn',cls:days<=7?'soon':''};
+}
+
+function ernTagChips(tags){
+    const MAP={portfolio:['t-portfolio','positie'],bot:['t-bot','bot'],kandidaat:['t-kandidaat','kandidaat'],
+               watchlist:['t-watchlist','watchlist'],'mega-cap':['t-mega','zwaargewicht']};
+    return (tags||[]).filter(t=>MAP[t]).map(t=>`<span class="ern-tag ${MAP[t][0]}">${MAP[t][1]}</span>`).join(' ');
+}
+
+function ernVerdictBadge(v){
+    const MAP={BEAT:['v-beat','beat'],MISS:['v-miss','miss'],INLINE:['v-inline','in lijn']};
+    const m=MAP[v]||['v-none','geen data'];
+    return `<span class="ern-verdict ${m[0]}">${m[1]}</span>`;
+}
+
+function ernMatchesFilter(r){
+    return ernFilter==='ALL'||(r.tags||[]).includes(ernFilter);
+}
+
+/* ── kalenderregel ── */
+function ernCalRow(r){
+    const dm=ernDayMonth(r.next_date);
+    const cd=ernCountdown(r.days_until);
+    const est=r.date_estimate?' <span style="color:var(--muted2)">(schatting)</span>':'';
+    const eps=r.eps_estimate!=null?`verwacht EPS ${r.eps_estimate.toFixed(2).replace('.',',')}`:'geen EPS-verwachting';
+    const beat=r.beat_rate!=null?` · beat-rate ${r.beat_rate}%`:'';
+    return `<div class="ern-row" onclick="openChart('${ernEsc(r.ticker)}')">
+        <div class="ern-date"><div class="ern-date-d">${dm.d}</div><div class="ern-date-m">${dm.m}</div></div>
+        <div class="ern-main">
+            <div class="ern-tick">${ernEsc(r.ticker)} ${ernTagChips(r.tags)}</div>
+            <div class="ern-name">${ernEsc(r.name)}</div>
+            <div class="ern-sub">${eps}${beat}${est}</div>
+        </div>
+        <div class="ern-right"><span class="ern-cd ${cd.cls}">${cd.txt}</span></div>
+    </div>`;
+}
+
+/* ── compacte resultaatregel (dashboard) ── */
+function ernRepRow(r){
+    const l=r.last||{};
+    const dm=ernDayMonth(l.date);
+    return `<div class="ern-row" onclick="openChart('${ernEsc(r.ticker)}')">
+        <div class="ern-date"><div class="ern-date-d">${dm.d}</div><div class="ern-date-m">${dm.m}</div></div>
+        <div class="ern-main">
+            <div class="ern-tick">${ernEsc(r.ticker)} ${ernVerdictBadge(l.verdict)}</div>
+            <div class="ern-sub">EPS ${ernPct(l.surprise_pct)} vs verwacht${l.revenue_yoy!=null?` · omzet ${ernPct(l.revenue_yoy)} j-o-j`:''}</div>
+        </div>
+        <div class="ern-right">
+            <div class="ern-cd" style="color:${ernPctCol(l.reaction_pct)}">${ernPct(l.reaction_pct)}</div>
+            <div class="ern-legend">koers dag erna</div>
+        </div>
+    </div>`;
+}
+
+/* ── surprise-historie als mini-balkjes ── */
+function ernSpark(history){
+    const rows=(history||[]).filter(h=>h.surprise_pct!=null).slice(-8);
+    if(!rows.length) return '';
+    const max=Math.max(5,...rows.map(h=>Math.abs(h.surprise_pct)));
+    const bars=rows.map(h=>{
+        const pos=h.surprise_pct>=0;
+        const hgt=Math.max(10,Math.round(Math.abs(h.surprise_pct)/max*100));
+        return `<div class="ern-spark-bar" title="${h.date}: ${ernPct(h.surprise_pct)}" style="height:${hgt}%;background:${pos?'var(--green)':'var(--red)'};opacity:.75"></div>`;
+    }).join('');
+    return `<div><div class="ern-spark">${bars}</div><div class="ern-legend">EPS-surprise laatste ${rows.length} kwartalen</div></div>`;
+}
+
+/* ── uitgebreide resultaatkaart (Cijfers-tab) ── */
+function ernRepCard(r){
+    const l=r.last||{};
+    const cls=l.verdict==='BEAT'?'beat':l.verdict==='MISS'?'miss':'inline';
+    const dstr=ernNiceDate(l.date);
+    return `<div class="ern-card ${cls}" onclick="openChart('${ernEsc(r.ticker)}')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <div style="min-width:0">
+                <div class="ern-tick">${ernEsc(r.ticker)}</div>
+                <div class="ern-name">${ernEsc(r.name)}</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0">
+                ${ernVerdictBadge(l.verdict)}
+                <div class="ern-legend">${dstr}${l.days_ago!=null?` · ${l.days_ago} dgn geleden`:''}</div>
+            </div>
+        </div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap">${ernTagChips(r.tags)}</div>
+        <div class="ern-metrics">
+            <div class="ern-metric"><span class="ern-m-l">EPS</span><span class="ern-m-v">${l.eps_actual!=null?l.eps_actual.toFixed(2).replace('.',','):'—'}</span></div>
+            <div class="ern-metric"><span class="ern-m-l">Verwacht</span><span class="ern-m-v">${l.eps_estimate!=null?l.eps_estimate.toFixed(2).replace('.',','):'—'}</span></div>
+            <div class="ern-metric"><span class="ern-m-l">Surprise</span><span class="ern-m-v" style="color:${ernPctCol(l.surprise_pct)}">${ernPct(l.surprise_pct)}</span></div>
+            <div class="ern-metric"><span class="ern-m-l">Reactie</span><span class="ern-m-v" style="color:${ernPctCol(l.reaction_pct)}">${ernPct(l.reaction_pct)}</span></div>
+        </div>
+        <div class="ern-metrics" style="border-top:none;padding-top:0">
+            <div class="ern-metric"><span class="ern-m-l">Omzet kw.</span><span class="ern-m-v">${ernBig(l.revenue,r.currency)}</span></div>
+            <div class="ern-metric"><span class="ern-m-l">Omzet j-o-j</span><span class="ern-m-v" style="color:${ernPctCol(l.revenue_yoy)}">${ernPct(l.revenue_yoy)}</span></div>
+            <div class="ern-metric"><span class="ern-m-l">EPS j-o-j</span><span class="ern-m-v" style="color:${ernPctCol(l.eps_yoy)}">${ernPct(l.eps_yoy)}</span></div>
+            <div class="ern-metric"><span class="ern-m-l">Beat-rate</span><span class="ern-m-v">${r.beat_rate!=null?r.beat_rate+'%':'—'}</span></div>
+        </div>
+        <div class="ern-summary">${ernEsc(l.summary||'')}</div>
+        ${ernSpark(r.history)}
+        ${r.next_date?`<div class="ern-legend">Volgende cijfers: ${ernNiceDate(r.next_date)}${r.days_until!=null?` (over ${r.days_until} dgn)`:''}</div>`:''}
+    </div>`;
+}
+
+/* ── dashboardblok ── */
+function renderEarningsDash(){
+    const e=ernData();
+    const calEl=document.getElementById('ern-dash-cal');
+    const repEl=document.getElementById('ern-dash-rep');
+    const tag=document.getElementById('ern-dash-tag');
+    if(!calEl||!repEl) return;
+
+    if(!e){
+        const msg='<div class="empty">Nog geen cijferdata.<br>Run <code>src/earnings_agent.py</code>.</div>';
+        calEl.innerHTML=msg; repEl.innerHTML='<div class="empty">—</div>';
+        if(tag) tag.textContent='';
+        return;
+    }
+
+    const s=e.stats||{};
+    if(tag) tag.textContent=`${s.upcoming_7d||0} deze week · ${s.reported||0} net gerapporteerd`;
+
+    const cal=(e.calendar||[]).slice(0,6);
+    const rep=(e.reported||[]).slice(0,6);
+    calEl.innerHTML=cal.length?cal.map(ernCalRow).join(''):'<div class="empty">Geen rapportages ingepland.</div>';
+    repEl.innerHTML=rep.length?rep.map(ernRepRow).join(''):'<div class="empty">Nog geen recente cijfers.</div>';
+}
+
+/* ── filterchips ── */
+function ernSetFilter(key){
+    ernFilter=key;
+    renderEarningsTab();
+}
+
+/* ── volledige Cijfers-tab ── */
+function renderEarningsTab(){
+    const e=ernData();
+    const calEl=document.getElementById('ern-cal-list');
+    const repEl=document.getElementById('ern-rep-grid');
+    if(!calEl||!repEl) return;
+
+    if(!e){
+        calEl.innerHTML='<div class="empty"><strong>Geen kwartaalcijfers geladen</strong>Run <code>python src/earnings_agent.py</code> (of wacht op de dagelijkse scan).</div>';
+        repEl.innerHTML='';
+        return;
+    }
+
+    const s=e.stats||{};
+    const setTxt=(id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
+    const setBar=(id,pct)=>{const el=document.getElementById(id); if(el) el.style.width=Math.max(0,Math.min(100,pct))+'%';};
+
+    setTxt('ern-k-7d',s.upcoming_7d??0);
+    setTxt('ern-k-7d-s',`van ${s.tracked??0} gevolgde bedrijven`);
+    setBar('ern-kf-7d',(s.upcoming_7d||0)/Math.max(1,s.upcoming_30d||1)*100);
+    setTxt('ern-k-30d',s.upcoming_30d??0);
+    setBar('ern-kf-30d',(s.upcoming_30d||0)/Math.max(1,s.tracked||1)*100);
+
+    const bm=(s.beats||0)+(s.misses||0)+(s.inline||0);
+    setTxt('ern-k-bm',`${s.beats||0} / ${s.misses||0}`);
+    setTxt('ern-k-bm-s',`${bm} rapportages, ${s.inline||0} in lijn`);
+    setBar('ern-kf-bm',bm?(s.beats||0)/bm*100:0);
+    setTxt('ern-k-surp',s.avg_surprise!=null?ernPct(s.avg_surprise):'—');
+    setBar('ern-kf-surp',Math.min(100,Math.abs(s.avg_surprise||0)*10));
+
+    /* AI-duiding */
+    const aiPanel=document.getElementById('ern-ai-panel');
+    if(aiPanel){
+        const ai=e.ai_summary;
+        if(ai?.text){
+            aiPanel.style.display='block';
+            document.getElementById('ern-ai-body').innerHTML=mdToHtml(ai.text);
+            document.getElementById('ern-ai-tag').textContent=ai.model||'';
+        }else{
+            aiPanel.style.display='none';
+        }
+    }
+
+    /* filterchips — alleen tonen wat daadwerkelijk voorkomt */
+    const present=new Set();
+    [...(e.calendar||[]),...(e.reported||[])].forEach(r=>(r.tags||[]).forEach(t=>present.add(t)));
+    const fbar=document.getElementById('ern-filter');
+    if(fbar){
+        fbar.innerHTML=ERN_FILTERS.filter(f=>f.key==='ALL'||present.has(f.key))
+            .map(f=>`<button class="fbtn ${ernFilter===f.key?'active':''}" onclick="ernSetFilter('${f.key}')">${f.label}</button>`).join('');
+    }
+
+    /* kalender gegroepeerd op nabijheid */
+    const cal=(e.calendar||[]).filter(ernMatchesFilter);
+    const groups=[
+        {label:'Vandaag & morgen', test:d=>d<=1},
+        {label:'Komende 7 dagen',  test:d=>d<=7},
+        {label:'Deze maand',       test:d=>d<=30},
+        {label:'Later',            test:()=>true},
+    ];
+    let html='';
+    let rest=cal;
+    groups.forEach(g=>{
+        const inGroup=rest.filter(r=>g.test(r.days_until??999));
+        rest=rest.filter(r=>!g.test(r.days_until??999));
+        if(inGroup.length) html+=`<div class="ern-group">${g.label} · ${inGroup.length}</div>`+inGroup.map(ernCalRow).join('');
+    });
+    calEl.innerHTML=html||'<div class="empty">Geen rapportages binnen dit filter.</div>';
+    const calTag=document.getElementById('ern-cal-tag');
+    if(calTag) calTag.textContent=`${cal.length} rapportages · horizon ${e.horizon_days||75} dagen`;
+
+    /* resultaten */
+    const rep=(e.reported||[]).filter(ernMatchesFilter);
+    repEl.innerHTML=rep.length?rep.map(ernRepCard).join(''):'<div class="empty">Geen recente cijfers binnen dit filter.</div>';
+    const repTag=document.getElementById('ern-rep-tag');
+    if(repTag){
+        const upd=e.generated_at?new Date(e.generated_at).toLocaleString('nl-NL',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+        repTag.textContent=`${rep.length} bedrijven${upd?` · bijgewerkt ${upd}`:''}`;
+    }
+}
+
+/* ══════════════════════════════════════════════════════
    NIEUWS TAB
 ══════════════════════════════════════════════════════ */
 function renderNieuwsTab(){
@@ -3556,6 +3955,7 @@ function switchTab(name,skipRender=false){
     if(name==='bot'&&needRender.has('bot')){renderBotTab();needRender.delete('bot');}
     if(name==='nieuws'&&needRender.has('nieuws')){renderNieuwsTab();needRender.delete('nieuws');}
     if(name==='learn'&&needRender.has('learn')){renderLearnTab();needRender.delete('learn');}
+    if(name==='cijfers'&&needRender.has('cijfers')){renderEarningsTab();needRender.delete('cijfers');}
     if(name==='backtest'){renderBacktestTab();}
     if(name==='analyse'){renderChartsTab();}
 }
@@ -3782,11 +4182,14 @@ function renderAll(){
     needRender.add('bot');
     needRender.add('nieuws');
     needRender.add('learn');
+    needRender.add('cijfers');
+    try{renderEarningsDash();}catch(e){console.error('renderEarningsDash fout:',e);}
     /* render active tab's content immediately */
     if(activeTab==='portfolio'){try{renderPortfolioTab();needRender.delete('portfolio');}catch(e){console.error(e);}}
     else if(activeTab==='bot'){try{renderBotTab();needRender.delete('bot');}catch(e){console.error(e);}}
     else if(activeTab==='nieuws'){try{renderNieuwsTab();needRender.delete('nieuws');}catch(e){console.error(e);}}
     else if(activeTab==='learn'){try{renderLearnTab();needRender.delete('learn');}catch(e){console.error(e);}}
+    else if(activeTab==='cijfers'){try{renderEarningsTab();needRender.delete('cijfers');}catch(e){console.error(e);}}
     else if(activeTab==='analyse'){try{renderChartsTab();}catch(e){console.error(e);}}
 }
 
