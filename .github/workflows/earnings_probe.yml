@@ -1,0 +1,51 @@
+name: NEXUS EARNINGS PROBE (tijdelijk)
+
+# Diagnostiek: welke earnings-velden levert Yahoo in deze omgeving?
+# Schrijft niets weg — alleen logging. Verwijderen zodra de vraag beantwoord is.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install yfinance pandas lxml beautifulsoup4
+      - name: Probe
+        run: |
+          python - <<'PY'
+          import yfinance as yf, pandas as pd, traceback
+          print("yfinance", yf.__version__)
+          for tk in ["MSFT", "V", "JCI", "KPN.AS", "MO"]:
+              print("=" * 60, tk)
+              t = yf.Ticker(tk)
+              try:
+                  info = t.info or {}
+                  for k in ("earningsTimestamp", "earningsTimestampStart", "earningsTimestampEnd",
+                            "isEarningsDateEstimate", "mostRecentQuarter", "lastFiscalYearEnd"):
+                      v = info.get(k)
+                      ts = pd.to_datetime(v, unit="s") if isinstance(v, (int, float)) and v and v > 1e8 else v
+                      print(f"  info.{k} = {v}  -> {ts}")
+              except Exception:
+                  traceback.print_exc()
+              try:
+                  df = t.get_earnings_dates(limit=12)
+                  print("  get_earnings_dates ->", type(df).__name__,
+                        "None" if df is None else f"shape={df.shape} cols={list(df.columns)}")
+                  if df is not None and not df.empty:
+                      print(df.head(6).to_string())
+              except Exception:
+                  traceback.print_exc()
+              try:
+                  eh = t.earnings_history
+                  print("  earnings_history ->", "None" if eh is None else f"shape={eh.shape} cols={list(eh.columns)}")
+                  if eh is not None and not eh.empty:
+                      print("   index:", list(eh.index[-3:]))
+              except Exception:
+                  traceback.print_exc()
+          PY
