@@ -1,0 +1,66 @@
+name: NEXUS EARNINGS AGENT
+
+# Ververst de kwartaalcijfer-kalender en de laatste resultaten los van de
+# volledige dual-engine scan. Draait 's ochtends vroeg (vóór de morning
+# briefing) en is handmatig te starten als je de kalender direct wilt zien.
+
+on:
+  schedule:
+    - cron: "30 5 * * 1-5"   # Werkdagen 05:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  earnings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installeer dependencies
+        run: pip install yfinance pandas requests anthropic
+
+      - name: Earnings Agent (kalender + resultaten)
+        env:
+          PYTHONPATH: src
+          SILENT_RUN: "true"
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/earnings_agent.py
+
+      - name: Commit data.json
+        run: |
+          set -e
+          git config user.name  "nexus-earnings-bot"
+          git config user.email "nexus@bot.local"
+
+          git add data.json
+          git diff --cached --quiet && echo "Geen wijzigingen." && exit 0
+          git commit -m "Auto-update: Kwartaalcijfers $(date -u +'%Y-%m-%d %H:%M UTC')"
+
+          # De ticker-workflow schrijft ook naar data.json. Bij een race lost
+          # '-X ours' die deterministisch op — zelfde aanpak als tier1_scan.
+          # Een koersupdate die we daarmee overschrijven staat er binnen 15
+          # minuten weer op; de earnings-data zou anders verloren gaan.
+          for attempt in 1 2 3; do
+            git fetch origin main || true
+            git merge origin/main -X ours --no-edit || true
+            if git push; then
+              echo "Push geslaagd (poging $attempt)."
+              exit 0
+            fi
+            echo "Push race verloren — opnieuw proberen ($attempt)."
+            sleep 5
+          done
+          echo "Push mislukt na 3 pogingen." && exit 1
