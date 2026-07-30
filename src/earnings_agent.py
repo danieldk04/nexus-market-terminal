@@ -66,6 +66,8 @@ SKIP_TOKENS = (
     "ETF", "INDEX", "TRACKER", "OBLIGATIE", "BOND",
     "VANGUARD", "ISHARES", "AMUNDI", "XTRACKERS", "SPDR", "INVESCO",
 )
+_DATES_WARNED = False   # zie _from_earnings_dates: waarschuw hooguit één keer
+
 SKIP_TICKERS = {
     "VWRL.AS", "VUSA.AS", "VHYL.AS", "VWCE.DE", "VWCE", "VHYL", "IWDA.AS",
     "TDIV.AS", "TDIV", "CSP1", "CSPX.AS", "SPY", "QQQ", "VOO",
@@ -256,7 +258,16 @@ def _from_earnings_dates(t) -> list[dict]:
     try:
         getter = getattr(t, "get_earnings_dates", None)
         df = getter(limit=24) if getter else t.earnings_dates
-    except Exception:
+    except Exception as e:
+        # Eén keer luidruchtig: als deze bron structureel wegvalt (bijv. lxml
+        # ontbreekt, want yfinance scrapet dit via pandas.read_html) verliezen
+        # we alle rapportagedatums en dus de koersreacties — dat mag niet
+        # stilletjes gebeuren.
+        global _DATES_WARNED
+        if not _DATES_WARNED:
+            _DATES_WARNED = True
+            log.warning("earnings_dates niet beschikbaar (%s: %s) — terugval op "
+                        "kwartaaleinde, zónder koersreactie.", type(e).__name__, e)
         return []
     if df is None or not hasattr(df, "empty") or df.empty:
         return []

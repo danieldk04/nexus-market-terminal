@@ -30,7 +30,9 @@ jobs:
           cache: pip
 
       - name: Installeer dependencies
-        run: pip install yfinance pandas requests anthropic
+        # lxml en beautifulsoup4 zijn niet optioneel: yfinance haalt de échte
+        # rapportagedatums met pandas.read_html op, en dat valt zonder lxml om.
+        run: pip install yfinance pandas requests anthropic lxml beautifulsoup4
 
       - name: Earnings Agent (kalender + resultaten)
         env:
