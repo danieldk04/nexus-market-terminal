@@ -231,8 +231,66 @@ def _next_earnings_date(t, info: dict) -> tuple:
     return nxt, is_estimate, eps_est, rev_est
 
 
-def _earnings_history(t) -> list[dict]:
-    """Laatste kwartaalrapportages: [{date, eps_actual, eps_estimate, surprise_pct}] oud→nieuw."""
+def _mk_row(d, actual, estimate, surprise, is_report_date: bool) -> dict:
+    if surprise is not None and abs(surprise) <= 1.5 and actual and estimate:
+        # yfinance levert soms een fractie (0.05) i.p.v. procenten (5.0)
+        surprise = surprise * 100
+    if surprise is None and actual is not None and estimate:
+        surprise = (actual - estimate) / abs(estimate) * 100
+    return {
+        "date":           d.isoformat() if d else None,
+        "eps_actual":     _round(actual, 3),
+        "eps_estimate":   _round(estimate, 3),
+        "surprise_pct":   _round(surprise, 1),
+        "is_report_date": is_report_date,
+    }
+
+
+def _from_earnings_dates(t) -> list[dict]:
+    """
+    Historie op basis van de échte rapportagedatum.
+    Ticker.earnings_dates is geïndexeerd op het moment van publicatie — dat is
+    wat we nodig hebben om de koersreactie te kunnen meten.
+    """
+    df = None
+    try:
+        getter = getattr(t, "get_earnings_dates", None)
+        df = getter(limit=24) if getter else t.earnings_dates
+    except Exception:
+        return []
+    if df is None or not hasattr(df, "empty") or df.empty:
+        return []
+
+    def pick(r, *names):
+        for n in names:
+            if n in r.index:
+                v = _num(r.get(n))
+                if v is not None:
+                    return v
+        return None
+
+    rows = []
+    for idx, r in df.iterrows():
+        d = _to_date(idx)
+        actual = pick(r, "Reported EPS", "reportedEPS", "epsActual")
+        if d is None or actual is None:
+            continue   # toekomstige of lege rijen
+        rows.append(_mk_row(
+            d, actual,
+            pick(r, "EPS Estimate", "epsEstimate"),
+            pick(r, "Surprise(%)", "surprisePercent"),
+            True,
+        ))
+    rows.sort(key=lambda r: r["date"])
+    return rows
+
+
+def _from_earnings_history(t) -> list[dict]:
+    """
+    Terugval: Ticker.earnings_history is geïndexeerd op kwartaaleinde, niet op
+    de publicatiedatum. Bruikbaar voor EPS en surprise, maar niet om er een
+    koersreactie aan te hangen — vandaar is_report_date=False.
+    """
     try:
         hist = t.earnings_history
     except Exception:
@@ -243,24 +301,19 @@ def _earnings_history(t) -> list[dict]:
     rows = []
     for idx, r in hist.iterrows():
         d = _to_date(idx) or _to_date(r.get("quarter") if hasattr(r, "get") else None)
-        actual   = _num(r.get("epsActual"))
-        estimate = _num(r.get("epsEstimate"))
-        surprise = _num(r.get("surprisePercent"))
-        if surprise is not None and abs(surprise) <= 1.5 and actual and estimate:
-            # yfinance levert soms een fractie (0.05) i.p.v. procenten (5.0)
-            surprise = surprise * 100
-        if surprise is None and actual is not None and estimate:
-            surprise = (actual - estimate) / abs(estimate) * 100
-        rows.append({
-            "date":         d.isoformat() if d else None,
-            "eps_actual":   _round(actual, 3),
-            "eps_estimate": _round(estimate, 3),
-            "surprise_pct": _round(surprise, 1),
-        })
-
-    rows = [r for r in rows if r["date"]]
+        if d is None:
+            continue
+        rows.append(_mk_row(
+            d, _num(r.get("epsActual")), _num(r.get("epsEstimate")),
+            _num(r.get("surprisePercent")), False,
+        ))
     rows.sort(key=lambda r: r["date"])
     return rows
+
+
+def _earnings_history(t) -> list[dict]:
+    """Laatste kwartaalrapportages, oud→nieuw. Bij voorkeur op rapportagedatum."""
+    return _from_earnings_dates(t) or _from_earnings_history(t)
 
 
 def _beat_stats(history: list[dict]) -> tuple:
@@ -420,7 +473,10 @@ def analyse_ticker(entry: dict, today) -> dict | None:
         revenue = revenue_yoy = reaction = None
         if age <= REPORTED_LOOKBACK_DAYS:
             revenue, revenue_yoy = _revenue_snapshot(t)
-            reaction = _price_reaction(t, last_date)
+            # Alleen zinvol als we de échte publicatiedatum hebben; bij een
+            # kwartaaleinde-datum zouden we een willekeurige dag meten.
+            if last.get("is_report_date"):
+                reaction = _price_reaction(t, last_date)
 
         verdict, summary = _verdict(last["surprise_pct"], revenue_yoy, reaction)
         record["last"] = {
