@@ -312,7 +312,7 @@
     {
       "date": "2026-08-01",
       "degiro": 16445.02,
-      "tr": 8394.8,
+      "tr": 8359.08,
       "nexus": 5893.33,
       "bux": 1694.3
     },
@@ -814,28 +814,28 @@
     }
   ],
   "last_news": [
-    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen",
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
+    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
-    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
-    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
+    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
+    "Belegger koopt vlak voor sluiten van beurs 23.000 aandelen van Twents bedrijf",
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?"
   ],
   "tr_summary": {
-    "total": 8394.8,
+    "total": 8359.08,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4517.8,
-        "price": 54710.8203,
+        "value": 4482.08,
+        "price": 54278.2812,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 53.8
+        "weight": 53.6
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -851,7 +851,7 @@
         "price": 55.07,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.0
+        "weight": 15.1
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -871,7 +871,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-01T09:20:19.519248+00:00",
+  "dashboard_updated": "2026-08-01T19:01:13.063705+00:00",
   "degiro_summary": {
     "total": 16445.02,
     "total_pl_pct": 34.04,
@@ -925,20 +925,20 @@
   },
   "news_summary": [
     {
-      "theme": "Tech-sector onder druk",
-      "summary": "Techaandelen verliezen massaal aan waarde met name in de VS, waarbij grote bedrijven als ASML ook terugvallen door dalende chipvraag. Dit raakt direct S&P500- en World-ETF-beleggers die zwaar in techaandelen zijn ge\u00efnvesteerd."
+      "theme": "Technologie sector onder druk",
+      "summary": "Tech-aandelen verliezen massief waarde met honderden miljarden aan marktkapitalisatie verdwenen. Dit raakt direct je S&P500 en World ETF posities, aangezien tech een groot gewicht heeft in deze indices."
     },
     {
-      "theme": "SpaceX beursintroductie geslaagd",
-      "summary": "SpaceX maakt een sterke debuut op de beurs met een waardering van 1.000 miljard dollar en haalt 75 miljard op tegen 135 dollar per aandeel, waardoor Elon Musk miljardair wordt. Dit signaleert vertrouwen van grote beleggers in groeigrote technologiebedrijven ondanks algemene marktvolatiliteit."
+      "theme": "SpaceX beursintroductie volatiel",
+      "summary": "SpaceX noteert onder introductieprijs na IPO tegen 135 dollar, ondanks sterke eerste dag waarin miljarden opgehaald werden. Voor beleggers met tech-exposure relevant als indicator van marktsentiment naar groei- en speculatieve aandelen."
     },
     {
-      "theme": "Geopolitieke spanningen en herstel",
-      "summary": "Oorlogsrisico's (Iran-conflict) drukken op Aziatische markten terwijl Amerikaanse en Europese beurzen herstellen, wat voor gediversificeerde ETF-beleggers zorgt voor gemengde signalen. De AEX volgt de Amerikaanse stijging, maar globale onrust blijft aanwezig."
+      "theme": "Chip-sector wankelt, koopjes ontstaan",
+      "summary": "Chipmakers zoals ASML dalen terwijl beleggers massaal verkopen, maar dit cre\u00ebert potenti\u00eble koopkansen in 'saaie' waardenaandelen. Dit be\u00efnvloedt je technologie-blootstelling en kan herbalonieringskansen bieden."
     },
     {
-      "theme": "Volatiliteit en marktsentiment omslaat",
-      "summary": "De beurs vertoont gooi- en smijtdagen met onrust en dalende koersen in meerdere sectoren, beschreven als 'code oranje', maar tegelijkertijd ontstaan er nog steeds koopkansen in 'saaie' aandelen. Dit geeft beleggers tegenstrijdige signalen tussen risico's en beleggingskansen."
+      "theme": "Brede markt gemengd, AEX volgt VS",
+      "summary": "De AEX stijgt 1% en volgt Amerikaanse beurs, terwijl sommige sectoren profiteren (hardware zoals Dell) en andere zwak presteren. Dit onderstreept het belang van diversificatie in je ETF-holdings en het monitoren van sectorrotatie."
     }
   ],
   "bux_summary": {
@@ -967,8 +967,8 @@
         "price": 121.07,
         "pl_pct": -26.88,
         "pl_eur": -89.0,
-        "div_yield": 0.0422,
-        "annual_div_eur": 10.22,
+        "div_yield": 0.0424,
+        "annual_div_eur": 10.27,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 14.3
@@ -993,7 +993,7 @@
         "price": 4.11,
         "pl_pct": 25.34,
         "pl_eur": 0.83,
-        "div_yield": 0.0454,
+        "div_yield": 0.046,
         "annual_div_eur": 0.19,
         "first_buy_date": null,
         "sector": "Communication Services",
