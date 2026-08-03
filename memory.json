@@ -310,6 +310,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-08-03",
+      "degiro": 16444.8,
+      "tr": 8358.02,
+      "nexus": 5893.33,
+      "bux": 1693.7
+    },
+    {
       "date": "2026-08-02",
       "degiro": 16445.02,
       "tr": 8411.37,
@@ -824,25 +831,25 @@
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen",
+    "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
     "X-Fab ontploft op beurs door hype op X, handel meermaals stilgelegd",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
-    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?"
+    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
   ],
   "tr_summary": {
-    "total": 8411.37,
+    "total": 8358.02,
     "total_pl_pct": null,
     "total_invested": null,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 4534.37,
-        "price": 54911.4883,
+        "value": 4481.02,
+        "price": 54265.3516,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 53.9
+        "weight": 53.6
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -850,7 +857,7 @@
         "price": 153.1728,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.0
+        "weight": 15.1
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -858,7 +865,7 @@
         "price": 55.07,
         "pl_pct": null,
         "pl_eur": null,
-        "weight": 15.0
+        "weight": 15.1
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -878,11 +885,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-02T19:01:06.866953+00:00",
+  "dashboard_updated": "2026-08-03T07:01:11.389873+00:00",
   "degiro_summary": {
-    "total": 16445.02,
+    "total": 16444.8,
     "total_pl_pct": 34.04,
-    "total_invested": 12268.35,
+    "total_invested": 12268.23,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -919,9 +926,9 @@
       },
       {
         "name": "V",
-        "value": 635.24,
+        "value": 635.02,
         "pl_pct": 81.3,
-        "pl_eur": 284.86,
+        "pl_eur": 284.76,
         "div_yield": 0.0073,
         "annual_div_eur": 4.64,
         "first_buy_date": null,
@@ -933,34 +940,34 @@
   "news_summary": [
     {
       "theme": "Technologie-sector onder druk",
-      "summary": "Techaandelen verliezen massaal waarde met honderden miljarden aan beurswaarde verdwenen. Dit raakt direct S&P500 en World ETF-beleggers, gezien het grote aandeel van techbedrijven in deze indexen, en veroorzaakt volatiliteit in chipbedrijven als ASML."
+      "summary": "Techaandelen verliezen massaal waarde met honderden miljarden aan marktkapitalisatie. Dit raakt direct S&P500 en World ETF-beleggers, aangezien tech een groot gewicht in deze indices heeft."
     },
     {
-      "theme": "SpaceX beursintroductie",
-      "summary": "SpaceX komt naar de beurs tegen 135 dollar per aandeel en haalt 75 miljard op, maar ziet koersen meteen dalen en ondergaan volatiliteit. Voor beleggers relevant vanwege het belang van groei- en ruimtevaartaandelen in diversificatiestrategie\u00ebn."
+      "theme": "SpaceX beursgang & Musk-hype",
+      "summary": "SpaceX komt naar de beurs aan $135 per aandeel, Musk wordt eerste miljardair en het aandeel presteert wisselvallig met sterke schommelingen. Dit symboliseert de volatiliteit rond groei-aandelen en high-risk bedrijven."
     },
     {
-      "theme": "Geopolitieke onrust",
-      "summary": "Oorlogen en spanningen (Iran, Israel) sorteren effect op Aziatische markten, hoewel Europese beurzen enigszins herstellen. Dit be\u00efnvloedt de risicopremie en volatiliteit van World en AEX-posities."
+      "theme": "Chip- en chipapparatuurbedrijven zwak",
+      "summary": "ASML en andere chip-aandelen kelderen door afnemende vraag naar chipstocks, met meermaals stilgelegde handel. Dit brengt risico voor gediversifieerde portefeuilles met tech-exposure."
     },
     {
-      "theme": "Marktvolatiliteit en sentiment",
-      "summary": "De beurs vertoont sterke schommelingen ('gooi- en smijtdagen') met code oranje-signalen, dalende koersen en cryptomarkt onder druk, terwijl beleggers voorzichtig blijven met sparen. Dit wijst op marktoncertaintiteit die alle hoofdindexen treft."
+      "theme": "Geopolitieke onrust en defensieve keuzes",
+      "summary": "Oorlogen (Iran) veroorzaken koersdalingen in Azi\u00eb en crypto, terwijl beleggers defensieve aandelen zoeken. Dit cre\u00ebert kansen in 'saaie' dividendrenders maar signaleert marktangst die ook AEX en World-indices kan be\u00efnvloeden."
     }
   ],
   "bux_summary": {
-    "total": 1694.3,
-    "total_pl_pct": -36.95,
+    "total": 1693.7,
+    "total_pl_pct": -36.97,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1415.48,
-        "price": 269.97,
-        "pl_pct": -34.86,
-        "pl_eur": -757.59,
+        "value": 1414.99,
+        "price": 269.88,
+        "pl_pct": -34.89,
+        "pl_eur": -758.08,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -970,12 +977,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 242.14,
-        "price": 121.07,
-        "pl_pct": -26.88,
-        "pl_eur": -89.0,
+        "value": 242.05,
+        "price": 121.03,
+        "pl_pct": -26.9,
+        "pl_eur": -89.09,
         "div_yield": 0.0424,
-        "annual_div_eur": 10.27,
+        "annual_div_eur": 10.26,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 14.3
@@ -983,10 +990,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 32.57,
-        "price": 32.57,
-        "pl_pct": -81.86,
-        "pl_eur": -147.0,
+        "value": 32.55,
+        "price": 32.55,
+        "pl_pct": -81.87,
+        "pl_eur": -147.02,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
