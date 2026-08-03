@@ -615,6 +615,7 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 
             /* Niets mag horizontaal buiten het scherm vallen */
             .ph { flex-wrap: wrap; gap: 6px; }
+            .ph > * { min-width: 0; max-width: 100%; }
             .rbtn-row { overflow-x: auto; flex-wrap: nowrap; max-width: 100%; scrollbar-width: none; }
             .rbtn-row::-webkit-scrollbar { display: none; }
             .heat-tbl { display: block; overflow-x: auto; white-space: nowrap; }
