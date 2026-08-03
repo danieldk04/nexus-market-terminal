@@ -4610,16 +4610,17 @@ function wlCard(w,pending){
             </div>
         </div>
 
-        ${v.one_liner?`<div class="wlc-line">${wlEsc(v.one_liner)}</div>`:''}
+        ${v.one_liner?`<div class="wlc-line">${wlEsc(v.one_liner)}</div>`
+          :`<div class="wlc-line" style="color:var(--muted)">Nog geen oordeel — druk op <b>↻</b> om dit aandeel door te rekenen.</div>`}
 
-        <div class="wlc-chips">
+        ${(v.niche||v.theme||v.moat||w.sentiment?.label)?`<div class="wlc-chips">
             ${v.niche?`<span class="wlc-chip">Niche: <b>${wlEsc(v.niche)}</b></span>`:''}
             ${v.theme?`<span class="wlc-chip">Thema: <b>${wlEsc(v.theme)}</b></span>`:''}
             ${v.moat?`<span class="wlc-chip">Moat: <b>${wlEsc(v.moat.toLowerCase())}</b></span>`:''}
             ${w.sentiment?.label?`<span class="wlc-chip">Stemming: <b>${wlEsc(w.sentiment.label.toLowerCase())}</b></span>`:''}
-        </div>
+        </div>`:''}
 
-        <div class="wlc-spark"><canvas data-spark="${wlEsc(w.ticker)}"></canvas></div>
+        ${hasSpark?`<div class="wlc-spark"><canvas data-spark="${wlEsc(w.ticker)}"></canvas></div>`:''}
 
         <div class="wlc-metrics">
             <div class="wlc-m"><span class="wlc-m-l">Waardering</span>
