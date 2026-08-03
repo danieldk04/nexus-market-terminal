@@ -607,50 +607,68 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     </div>
 </header>
 
-<!-- ═══ TAB NAV ═══ -->
-<nav class="tnav" id="tnav">
-    <div class="tnav-grp">
-        <button class="tbtn active" data-tab="dashboard">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
-            <span class="tbtn-lbl">Dashboard</span>
-        </button>
-        <button class="tbtn" data-tab="portfolio">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>
-            <span class="tbtn-lbl">Portfolio</span>
-        </button>
-    </div>
-    <div class="tnav-sep"></div>
-    <div class="tnav-grp">
-        <button class="tbtn" data-tab="bot" data-bot="1">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 3v2M8 11v2M3 8h2M11 8h2"/></svg>
-            <span class="tbtn-lbl">Bot</span>
-        </button>
-        <button class="tbtn tbtn-mobile-hide" data-tab="learn" data-bot="1">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2L2 5v4c0 3 2.5 5.5 6 6 3.5-.5 6-3 6-6V5L8 2z"/></svg>
-            <span class="tbtn-lbl">Leermemory</span>
-        </button>
-        <button class="tbtn" data-tab="backtest" data-bot="1">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 14h14M3 14V8M7 14V4M11 14V9M15 14V2"/></svg>
-            <span class="tbtn-lbl">Backtest</span>
+<div id="sb-backdrop" onclick="sbClose()"></div>
+
+<div class="shell">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside id="sidebar">
+    <div class="sb-brand">
+        <div class="logo">NEXUS<span> PRO</span></div>
+        <button class="hmb" onclick="sbClose()" aria-label="Sluiten" style="display:flex">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>
         </button>
     </div>
-    <div class="tnav-sep"></div>
-    <div class="tnav-grp">
-        <button class="tbtn" data-tab="nieuws">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><path d="M4 6h8M4 9h6"/></svg>
-            <span class="tbtn-lbl">Nieuws</span>
-        </button>
-        <button class="tbtn" data-tab="cijfers">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="3" width="13" height="11.5" rx="1"/><path d="M1.5 6.5h13M5 1.5v3M11 1.5v3"/></svg>
-            <span class="tbtn-lbl">Cijfers</span>
-        </button>
-        <button class="tbtn" data-tab="analyse">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1,12 5,7 9,9 15,3"/></svg>
-            <span class="tbtn-lbl">Analyse</span>
-        </button>
-    </div>
-    <div class="tnav-sep"></div>
-    <div class="tnav-grp">
+
+    <div class="sb-grp">Overzicht</div>
+    <button class="tbtn active" data-tab="dashboard">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        <span class="tbtn-lbl">Dashboard</span>
+    </button>
+
+    <div class="sb-grp">Portfolio</div>
+    <button class="tbtn" data-tab="portfolio">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>
+        <span class="tbtn-lbl">Posities &amp; verdeling</span>
+    </button>
+
+    <div class="sb-grp">Watchlist</div>
+    <button class="tbtn" data-tab="watchlist">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8s2.5-4.5 7-4.5S15 8 15 8s-2.5 4.5-7 4.5S1 8 1 8z"/><circle cx="8" cy="8" r="1.8"/></svg>
+        <span class="tbtn-lbl">Mijn watchlist</span>
+        <span class="tbtn-count" id="sb-wl-count" style="display:none">0</span>
+    </button>
+    <button class="tbtn" data-tab="analyse">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1,12 5,7 9,9 15,3"/></svg>
+        <span class="tbtn-lbl">Koers &amp; analyse</span>
+    </button>
+
+    <div class="sb-grp">Bot</div>
+    <button class="tbtn" data-tab="bot" data-bot="1">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 3v2M8 11v2M3 8h2M11 8h2"/></svg>
+        <span class="tbtn-lbl">Posities &amp; kandidaten</span>
+    </button>
+    <button class="tbtn" data-tab="learn" data-bot="1">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2L2 5v4c0 3 2.5 5.5 6 6 3.5-.5 6-3 6-6V5L8 2z"/></svg>
+        <span class="tbtn-lbl">Leermemory</span>
+    </button>
+    <button class="tbtn" data-tab="backtest" data-bot="1">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 14h14M3 14V8M7 14V4M11 14V9M15 14V2"/></svg>
+        <span class="tbtn-lbl">Backtest</span>
+    </button>
+
+    <div class="sb-grp">Markt</div>
+    <button class="tbtn" data-tab="nieuws">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><path d="M4 6h8M4 9h6"/></svg>
+        <span class="tbtn-lbl">Nieuws &amp; macro</span>
+    </button>
+    <button class="tbtn" data-tab="cijfers">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="3" width="13" height="11.5" rx="1"/><path d="M1.5 6.5h13M5 1.5v3M11 1.5v3"/></svg>
+        <span class="tbtn-lbl">Kwartaalcijfers</span>
+    </button>
+
+    <div class="sb-spacer"></div>
+    <div class="sb-foot">
         <button class="tbtn" data-tab="gids">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6.2 6.1a1.8 1.8 0 1 1 2.4 1.7c-.5.2-.9.6-.9 1.2v.3"/><circle cx="8" cy="11.6" r=".2" fill="currentColor" stroke-width="1"/></svg>
             <span class="tbtn-lbl">Uitleg</span>
@@ -659,8 +677,14 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1v9M8 10l-3-3M8 10l3-3M2 12v2h12v-2"/></svg>
             <span class="tbtn-lbl">Import</span>
         </button>
+        <button class="tbtn" data-tab="settings">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.2v1.6M8 13.2v1.6M14.8 8h-1.6M2.8 8H1.2M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1M12.8 12.8l-1.1-1.1M4.3 4.3L3.2 3.2"/></svg>
+            <span class="tbtn-lbl">Instellingen</span>
+        </button>
     </div>
-</nav>
+</aside>
+
+<main id="main">
 
 <!-- ═══════════════════════════════════════
      TAB: DASHBOARD
