@@ -4662,8 +4662,10 @@ function wlDrawSparks(){
         const data=(item?.spark&&item.spark.length>3)?item.spark:(priceCache[t]?.hist||[]);
         if(!data||data.length<3) return;
         const dpr=window.devicePixelRatio||1;
-        const w=cv.parentElement.clientWidth, h=cv.parentElement.clientHeight-4;
-        if(!w||!h) return;
+        const box=cv.parentElement, cs=getComputedStyle(box);
+        const w=box.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+        const h=box.clientHeight-parseFloat(cs.paddingBottom);
+        if(w<10||h<10) return;
         cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';
         const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
         const min=Math.min(...data),max=Math.max(...data),rng=(max-min)||1;
