@@ -652,6 +652,11 @@ def main():
             raw = run_ai_analysis(client, fund, sent)
             verdict = parse_verdict(raw)
             analysis_text = strip_json_block(raw)
+            if not verdict and analysis_text:
+                try:
+                    verdict = rescue_verdict(client, fund, analysis_text)
+                except Exception as e:
+                    print(f"  Tweede poging mislukt: {e}")
             print("\n--- OORDEEL ---")
             print(json.dumps(verdict, indent=2, ensure_ascii=False) if verdict
                   else "Geen gestructureerd oordeel teruggekregen.")
