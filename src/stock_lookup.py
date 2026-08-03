@@ -302,10 +302,18 @@ def fetch_fundamentals(ticker_symbol):
     rev_growth = (info.get("revenueGrowth", 0) or 0) * 100
     gross_margin = (info.get("grossMargins", 0) or 0) * 100
     profit_margin = (info.get("profitMargins", 0) or 0) * 100
-    fcf = info.get("freeCashflow")
     beta = info.get("beta", 1.0) or 1.0
     market_cap = info.get("marketCap", 0) or 0
     currency = info.get("currency", "USD")
+
+    # Vrije kasstroom: eigen TTM-berekening gaat vóór Yahoo's onbetrouwbare veld
+    fcf_yahoo = info.get("freeCashflow")
+    fcf_ttm = compute_ttm_fcf(t)
+    fcf = fcf_ttm if fcf_ttm else fcf_yahoo
+    fcf_source = "kasstroomoverzicht (TTM)" if fcf_ttm else "Yahoo"
+    if fcf_ttm:
+        info = dict(info)
+        info["freeCashflow"] = fcf_ttm
 
     roic = compute_roic(info)
     roce = compute_roce(info)
