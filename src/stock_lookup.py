@@ -179,34 +179,42 @@ def fetch_quarters(t):
 
         cols = list(qf.columns)  # nieuw → oud
         quarters = []
-        for i, col in enumerate(cols[:4]):
+        for i, col in enumerate(cols[:6]):
             r = _num(rev.get(col)) if rev is not None else None
             n = _num(ni.get(col)) if ni is not None else None
-            # jaar-op-jaar: 4 kwartalen terug
-            r_yoy = n_yoy = None
-            if i + 4 < len(cols):
-                prev_col = cols[i + 4]
-                pr = _num(rev.get(prev_col)) if rev is not None else None
-                pn = _num(ni.get(prev_col)) if ni is not None else None
-                if r is not None and pr and pr > 0:
-                    r_yoy = round((r / pr - 1) * 100, 1)
-                if n is not None and pn and pn > 0:
-                    n_yoy = round((n / pn - 1) * 100, 1)
+
+            def _growth(series, idx):
+                if series is None or idx >= len(cols):
+                    return None
+                cur = _num(series.get(cols[i]))
+                prv = _num(series.get(cols[idx]))
+                if cur is not None and prv and prv > 0:
+                    return round((cur / prv - 1) * 100, 1)
+                return None
+
             quarters.append({
                 "period": col.strftime("%Y-%m") if hasattr(col, "strftime") else str(col)[:7],
                 "revenue_m": round(r / 1e6, 1) if r is not None else None,
                 "net_income_m": round(n / 1e6, 1) if n is not None else None,
-                "rev_yoy": r_yoy,
-                "eps_yoy": n_yoy,
+                "rev_yoy": _growth(rev, i + 4),
+                "eps_yoy": _growth(ni, i + 4),
+                "rev_qoq": _growth(rev, i + 1),
+                "eps_qoq": _growth(ni, i + 1),
             })
 
         out["quarters"] = quarters
-        rev_y = [q["rev_yoy"] for q in quarters if q["rev_yoy"] is not None]
-        eps_y = [q["eps_yoy"] for q in quarters if q["eps_yoy"] is not None]
-        if len(rev_y) >= 2:
-            out["rev_accel"] = rev_y[0] > rev_y[1]
-        if len(eps_y) >= 2:
-            out["eps_accel"] = eps_y[0] > eps_y[1]
+
+        def _accel(key_yoy, key_qoq):
+            yoy = [q[key_yoy] for q in quarters if q[key_yoy] is not None]
+            if len(yoy) >= 2:
+                return yoy[0] > yoy[1]
+            qoq = [q[key_qoq] for q in quarters if q[key_qoq] is not None]
+            if len(qoq) >= 2:
+                return qoq[0] > qoq[1]
+            return None
+
+        out["rev_accel"] = _accel("rev_yoy", "rev_qoq")
+        out["eps_accel"] = _accel("eps_yoy", "eps_qoq")
     except Exception:
         pass
     return out
