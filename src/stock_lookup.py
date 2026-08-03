@@ -536,7 +536,10 @@ def parse_verdict(text):
 
 
 def strip_json_block(text):
-    return re.sub(r"```json\s*\{.*?\}\s*```", "", text or "", flags=re.S).strip()
+    out = re.sub(r"```json\s*\{.*?\}\s*```", "", text or "", flags=re.S)
+    # Ook een blok dat halverwege is afgekapt hoort niet in de leesbare analyse
+    out = re.sub(r"```json\s*\{.*\Z", "", out, flags=re.S)
+    return out.strip()
 
 
 def _text_of(message):
