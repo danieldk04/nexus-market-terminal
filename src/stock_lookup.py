@@ -105,10 +105,55 @@ def compute_5yr_data(t):
     return result
 
 
+def compute_ttm_fcf(t):
+    """
+    Vrije kasstroom over de laatste vier kwartalen, uit het kasstroomoverzicht.
+    Yahoo's eigen `freeCashflow` slaat er bij grote bedrijven regelmatig fors
+    naast (bij MSFT een factor 4), en die waarde bepaalt de hele waardering.
+    Daarom rekenen we hem hier zelf: operationele kasstroom minus investeringen.
+    """
+    for attr in ("quarterly_cashflow", "quarterly_cash_flow"):
+        try:
+            cf = getattr(t, attr, None)
+            if cf is None or cf.empty:
+                continue
+
+            def _row(names):
+                for n in names:
+                    hit = [k for k in cf.index if str(k) == n]
+                    if hit:
+                        return cf.loc[hit[0]]
+                for n in names:
+                    hit = [k for k in cf.index if n in str(k)]
+                    if hit:
+                        return cf.loc[hit[0]]
+                return None
+
+            direct = _row(["Free Cash Flow"])
+            if direct is not None:
+                vals = [_num(v) for v in direct.tolist()[:4]]
+                vals = [v for v in vals if v is not None]
+                if len(vals) == 4:
+                    return sum(vals)
+
+            ocf = _row(["Operating Cash Flow", "Total Cash From Operating Activities"])
+            capex = _row(["Capital Expenditure", "Capital Expenditures"])
+            if ocf is not None and capex is not None:
+                o = [_num(v) for v in ocf.tolist()[:4]]
+                c = [_num(v) for v in capex.tolist()[:4]]
+                if all(v is not None for v in o + c) and len(o) == 4:
+                    # capex staat negatief in het overzicht
+                    return sum(o) + sum(c) if sum(c) < 0 else sum(o) - sum(c)
+        except Exception:
+            continue
+    return None
+
+
 def fetch_quarters(t):
     """
-    Laatste 4 kwartalen omzet + winst, met groei t.o.v. hetzelfde kwartaal
-    een jaar eerder. Dit is wat 'versnelt het bedrijf of niet' zichtbaar maakt.
+    Laatste kwartalen omzet + winst, met groei t.o.v. hetzelfde kwartaal een jaar
+    eerder én t.o.v. het vorige kwartaal. Dit maakt zichtbaar of het bedrijf
+    versnelt of juist afkoelt.
     """
     out = {"quarters": [], "rev_accel": None, "eps_accel": None}
     try:
