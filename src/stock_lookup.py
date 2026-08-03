@@ -328,9 +328,17 @@ def fetch_fundamentals(ticker_symbol):
     if analyst_target and price and price > 0:
         analyst_upside = round(((analyst_target / price) - 1) * 100, 1)
 
-    div_yield = info.get("dividendYield")
-    if div_yield and div_yield < 1:
+    # Dividendrendement: Yahoo mengt fracties en procenten door elkaar, wat in de
+    # oude versie tot rendementen van 78% en 540% leidde. De trailing-variant is
+    # altijd een fractie en dus betrouwbaar; anders normaliseren we zelf.
+    div_yield = info.get("trailingAnnualDividendYield")
+    if div_yield:
         div_yield = div_yield * 100
+    else:
+        raw = info.get("dividendYield")
+        div_yield = (raw * 100 if raw and raw < 0.25 else raw) if raw else None
+    if div_yield and div_yield > 30:
+        div_yield = None  # onmogelijk hoog → data is stuk
 
     five_yr = compute_5yr_data(t)
     dcf = compute_dcf(info)
