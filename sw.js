@@ -39,6 +39,10 @@ function networkFirst(request) {
 }
 
 self.addEventListener('fetch', e => {
+  /* Alleen GET-verkeer afhandelen. POST-verzoeken (zoals het starten van een
+     watchlist-analyse via de GitHub API) kunnen niet gecached worden. */
+  if (e.request.method !== 'GET') return;
+
   const url = new URL(e.request.url);
 
   /* pro.html: network-first zodat dashboard-updates altijd doorkomen.
