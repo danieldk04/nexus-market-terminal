@@ -4883,6 +4883,8 @@ function renderAll(){
     else if(activeTab==='learn'){try{renderLearnTab();needRender.delete('learn');}catch(e){console.error(e);}}
     else if(activeTab==='cijfers'){try{renderEarningsTab();needRender.delete('cijfers');}catch(e){console.error(e);}}
     else if(activeTab==='analyse'){try{renderChartsTab();}catch(e){console.error(e);}}
+    else if(activeTab==='watchlist'){try{renderWatchlistTab();}catch(e){console.error(e);}}
+    try{wlUpdateCount();}catch(e){console.error(e);}
 }
 
 async function init(){
@@ -4891,6 +4893,9 @@ async function init(){
     if(!M){await new Promise(r=>setTimeout(r,3000));M=await fetchJSON('memory.json');}
     globalData=B;
     renderAll();
+    /* watchlist: koersen ophalen en lopende analyses hervatten */
+    wlLoadPrices();
+    if(Object.keys(wlPending()).length) wlStartPolling();
     setInterval(async()=>{
         const rl=document.getElementById('refresh-lbl');
         if(rl) rl.style.display='inline';
