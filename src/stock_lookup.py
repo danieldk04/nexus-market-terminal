@@ -342,6 +342,9 @@ def fetch_fundamentals(ticker_symbol):
 
     five_yr = compute_5yr_data(t)
     dcf = compute_dcf(info)
+    dividend = check_dividend_sustainability(info)
+    if dividend:
+        dividend["yield"] = div_yield
     quarters = fetch_quarters(t)
     tech = fetch_technicals(t, price)
 
