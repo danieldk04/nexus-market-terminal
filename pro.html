@@ -4123,8 +4123,30 @@ function switchTab(name,skipRender=false){
     if(name==='cijfers'&&needRender.has('cijfers')){renderEarningsTab();needRender.delete('cijfers');}
     if(name==='backtest'){renderBacktestTab();}
     if(name==='analyse'){renderChartsTab();}
+    if(name==='watchlist'){renderWatchlistTab();}
+    if(name==='settings'){renderSettingsTab();}
+    window.scrollTo({top:0,behavior:'instant'});
 }
-document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>{switchTab(b.dataset.tab);sbClose();}));
+
+/* ══════════════════════════════════════════════════════
+   SIDEBAR / HAMBURGERMENU
+══════════════════════════════════════════════════════ */
+function sbToggle(){
+    const sb=document.getElementById('sidebar');
+    sb.classList.contains('open')?sbClose():sbOpen();
+}
+function sbOpen(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sb-backdrop').classList.add('show');
+    document.body.style.overflow='hidden';
+}
+function sbClose(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sb-backdrop').classList.remove('show');
+    document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')sbClose();});
 
 /* ══════════════════════════════════════════════════════
    COMPOUND INTEREST CALCULATOR
