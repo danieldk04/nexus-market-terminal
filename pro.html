@@ -4592,6 +4592,7 @@ function wlCard(w,pending){
     const chg=live?.change;
     const ccy=w.currency==='EUR'?'€':w.currency==='GBp'?'p':'$';
     const upside=wlUpsideOf(w);
+    const hasSpark=(w.spark?.length>3)||(live?.hist?.length>3);
 
     return `<div class="wlc ${pending?'wlc-pending':''}" style="border-top-color:${meta.color}">
         <div class="wlc-top">
