@@ -539,11 +539,15 @@ def strip_json_block(text):
     return re.sub(r"```json\s*\{.*?\}\s*```", "", text or "", flags=re.S).strip()
 
 
+def _text_of(message):
+    return "".join(b.text for b in message.content if getattr(b, "type", "") == "text")
+
+
 def run_ai_analysis(client, fund, sent):
     print(f"AI-analyse starten voor {fund['ticker']} ({MODEL})...")
     message = client.messages.create(
         model=MODEL,
-        max_tokens=2000,
+        max_tokens=4000,
         system=[{
             "type": "text",
             "text": SYSTEM_PROMPT,
@@ -551,7 +555,30 @@ def run_ai_analysis(client, fund, sent):
         }],
         messages=[{"role": "user", "content": build_prompt(fund, sent)}],
     )
-    return "".join(b.text for b in message.content if getattr(b, "type", "") == "text")
+    raw = _text_of(message)
+    print(f"  antwoord: {len(raw)} tekens, stop_reason={message.stop_reason}")
+    return raw
+
+
+def rescue_verdict(client, fund, analysis_text):
+    """
+    Vangnet: als het gestructureerde oordeel ontbreekt of halverwege is
+    afgekapt, vragen we het in een tweede, korte aanroep alsnog op. De analyse
+    zelf gaat mee als context, zodat het oordeel er niet los van staat.
+    """
+    print("  Oordeel ontbreekt — tweede poging voor alleen het JSON-blok...")
+    message = client.messages.create(
+        model=MODEL,
+        max_tokens=1200,
+        system=[{"type": "text", "text": SYSTEM_PROMPT}],
+        messages=[{"role": "user", "content":
+            f"Dit is jouw analyse van {fund['ticker']} ({fund['name']}), "
+            f"huidige koers {fund['price']} {fund['currency']}:\n\n"
+            f"{analysis_text}\n\n"
+            f"Geef nu uitsluitend het gestructureerde oordeel terug. Geen inleiding, "
+            f"geen toelichting, alleen het JSON-blok.\n{JSON_INSTRUCTIE}"}],
+    )
+    return parse_verdict(_text_of(message))
 
 
 # ── opslag ────────────────────────────────────────────────────────────────────
