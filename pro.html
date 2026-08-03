@@ -539,80 +539,46 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         .pm-val   { font-family: var(--mono); font-weight: 600; }
         .pm-analysis { padding: 12px; font-size: 0.72rem; line-height: 1.65; color: #9ca3af; white-space: pre-wrap; }
 
-        /* ─── MOBILE BOTTOM NAV ─── */
-        .mobile-nav {
-            display: none;
+        /* ─── TABLET: smallere sidebar ─── */
+        @media (max-width: 1100px) and (min-width: 901px) {
+            #sidebar { width: 178px; }
+            .tbtn { font-size: .76rem; padding: 8px 9px; gap: 8px; }
         }
-        @media (max-width: 767px) {
-            .mobile-nav {
-                display: flex;
-                position: fixed;
-                bottom: 0; left: 0; right: 0;
-                background: var(--surface);
-                border-top: 1px solid var(--border2);
-                z-index: 200;
-                height: 58px;
-            }
-            .mobile-nav-btn {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 3px;
-                background: transparent;
-                border: none;
-                color: var(--muted);
-                font-family: var(--mono);
-                font-size: 0.52rem;
-                letter-spacing: 0.05em;
-                cursor: pointer;
-                transition: color 0.15s;
-                padding: 6px 0;
-            }
-            .mobile-nav-btn .nav-icon { font-size: 1.1rem; line-height: 1; }
-            .mobile-nav-btn.active { color: var(--accent); }
-            .mobile-nav-btn.active .nav-dot {
-                width: 4px; height: 4px; border-radius: 50%;
-                background: var(--accent); margin: 0 auto; margin-top: 2px;
-            }
 
+        /* ─── MOBIEL: sidebar wordt uitschuifmenu ─── */
+        @media (max-width: 900px) {
+            .hmb { display: flex; }
+            #sidebar {
+                position: fixed; top: 0; left: 0;
+                width: 268px; max-width: 84vw; height: 100vh;
+                border-right: 1px solid var(--border);
+                transform: translateX(-100%);
+                transition: transform .24s cubic-bezier(.4,0,.2,1);
+                box-shadow: 0 8px 32px rgba(15,23,42,.18);
+                padding: 0 12px 28px; z-index: 320;
+            }
+            #sidebar.open { transform: none; }
+            .sb-brand {
+                display: flex; align-items: center; justify-content: space-between;
+                height: var(--hh); margin: 0 -12px 6px; padding: 0 10px 0 16px;
+                border-bottom: 1px solid var(--border);
+            }
+            .tbtn { padding: 11px 12px; font-size: .85rem; }
+            .sb-grp { padding: 15px 12px 5px; }
+        }
+
+        @media (max-width: 767px) {
             /* Header: compact op mobiel */
             html, body { height: auto; overflow: visible; overflow-x: hidden; }
-            body { overflow-y: auto; padding-bottom: 58px; }
-            header {
-                height: auto; padding: 8px 12px;
-                flex-wrap: nowrap; gap: 8px;
-            }
+            body { overflow-y: auto; }
+            header { padding: 0 12px; gap: 8px; }
             .search-wrap { display: none; }
             .header-stats { display: none; }
-            .header-right { gap: 8px; }
             .sync-time { display: none; }
-            /* Compacte mobiele header-stats als losse rij */
-            .mobile-header-stats {
-                display: flex;
-                gap: 10px;
-                align-items: center;
-            }
-            .mhs { text-align: center; }
-            .mhs-label { font-size: 0.48rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; }
-            .mhs-value { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; }
-
-            /* Dashboard: verberg alles op mobiel standaard */
-            .dashboard {
-                display: block;
-                padding: 8px;
-                height: auto;
-                overflow: visible;
-            }
-            .dashboard > * { display: none; }
-
-            /* Mobiele panels: elk neemt volledige breedte */
-            .mobile-active { display: block !important; }
-            .right-col.mobile-active { display: flex !important; flex-direction: column; gap: 8px; }
-            .main-view.mobile-active { display: flex !important; flex-direction: column; gap: 8px; }
+            #clock { display: none; }
 
             /* Panel aanpassingen mobiel */
+            .pw { padding: 10px; gap: 10px; }
             .panel { overflow: visible; border-radius: 8px; }
             .scroll-area { overflow-y: auto; flex: none; max-height: 65vh; }
             #tv-container { height: 280px !important; min-height: 280px; flex: none !important; }
