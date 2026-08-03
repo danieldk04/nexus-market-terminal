@@ -1,5 +1,5 @@
 /* NEXUS PRO — Service Worker */
-const CACHE = 'nexus-pro-v2';
+const CACHE = 'nexus-pro-v3';
 
 /* App-shell: gecached bij installatie voor offline fallback */
 const SHELL = [
