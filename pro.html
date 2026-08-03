@@ -1392,6 +1392,94 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
 
 </div></div>
 
+<!-- ═══════════════════════════════════════
+     TAB: WATCHLIST
+═══════════════════════════════════════ -->
+<div id="tab-watchlist" class="tc"><div class="pw">
+
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Aandeel toevoegen</span>
+            <span class="ptag" id="wl-status-tag">—</span>
+        </div>
+        <div class="wl-add">
+            <input id="wl-input" class="wl-input" type="text" placeholder="Ticker, bijv. ASML.AS of NVDA"
+                   autocapitalize="characters" autocomplete="off" spellcheck="false"
+                   onkeydown="if(event.key==='Enter')wlAdd()">
+            <button class="wl-btn" id="wl-add-btn" onclick="wlAdd()">Analyseren &amp; toevoegen</button>
+        </div>
+        <div id="wl-feedback" class="wl-feedback" style="display:none"></div>
+    </div>
+
+    <div class="panel">
+        <div class="ph">
+            <span class="pt">Mijn watchlist</span>
+            <span class="ptag" id="wl-count-tag">—</span>
+        </div>
+        <div class="fbar"><div class="fbar-row" id="wl-sortbar"></div></div>
+        <div id="wl-grid" class="wl-cards">
+            <div class="loading"><div class="spin"></div>Laden…</div>
+        </div>
+    </div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════
+     TAB: INSTELLINGEN
+═══════════════════════════════════════ -->
+<div id="tab-settings" class="tc"><div class="pw">
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Koppeling met GitHub</span><span class="ptag" id="set-token-tag">—</span></div>
+        <div style="padding:16px">
+            <div style="font-size:.78rem;color:var(--text);line-height:1.6;margin-bottom:14px">
+                Met een persoonlijke toegangssleutel kan de app zelf een analyse starten zodra je een aandeel
+                aan je watchlist toevoegt. De sleutel blijft op dit apparaat staan en wordt nergens anders heen gestuurd.
+            </div>
+            <div style="font-size:.72rem;color:var(--muted);line-height:1.65;margin-bottom:14px">
+                <b style="color:var(--text)">Sleutel aanmaken:</b> ga naar
+                <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--accent)">GitHub → Fine-grained tokens</a>,
+                kies als repository <code style="font-family:var(--mono);background:var(--bg);padding:1px 5px;border-radius:4px">nexus-market-terminal</code>,
+                en zet onder Permissions <b>Actions</b> op <b>Read and write</b>. Kopieer de sleutel en plak hem hieronder.
+            </div>
+            <label class="cic-label">Persoonlijke toegangssleutel</label>
+            <div class="wl-add" style="padding:0;border:none">
+                <input id="set-token" class="wl-input" type="password" placeholder="github_pat_… of ghp_…" autocomplete="off" spellcheck="false">
+                <button class="wl-btn" onclick="setSaveToken()">Opslaan</button>
+                <button class="wl-btn wl-btn-ghost" onclick="setClearToken()">Wissen</button>
+            </div>
+            <div id="set-token-msg" class="wl-feedback" style="display:none;margin-top:12px"></div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Repository</span></div>
+        <div style="padding:16px">
+            <label class="cic-label">Eigenaar / repository</label>
+            <div class="wl-add" style="padding:0;border:none">
+                <input id="set-repo" class="wl-input" type="text" placeholder="danieldk04/nexus-market-terminal" autocomplete="off" spellcheck="false">
+                <button class="wl-btn" onclick="setSaveRepo()">Opslaan</button>
+            </div>
+            <div style="font-size:.7rem;color:var(--muted);margin-top:10px">
+                Alleen aanpassen als je de app naar een andere repository verhuist.
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Onderhoud</span></div>
+        <div style="padding:16px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="wl-btn wl-btn-ghost" onclick="location.reload(true)">Gegevens opnieuw laden</button>
+            <a class="wl-btn wl-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center"
+               href="https://github.com/danieldk04/nexus-market-terminal/actions" target="_blank">Alle achtergrondtaken openen</a>
+        </div>
+    </div>
+
+</div></div>
+
+</main>
+</div><!-- /shell -->
+
 <!-- ═══ SCRIPT ═══ -->
 <script>
 /* ══════════════════════════════════════════════════════
