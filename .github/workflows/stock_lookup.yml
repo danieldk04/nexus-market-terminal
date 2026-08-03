@@ -7,9 +7,21 @@ on:
         description: 'Aandeel ticker (bijv. AAPL, MSFT, ASML.AS)'
         required: true
         type: string
+      action:
+        description: 'Toevoegen of verwijderen'
+        required: false
+        default: 'add'
+        type: choice
+        options:
+          - add
+          - remove
 
 permissions:
   contents: write
+
+concurrency:
+  group: nexus-watchlist
+  cancel-in-progress: false
 
 jobs:
   lookup:
@@ -34,14 +46,18 @@ jobs:
       - name: Stock Lookup
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
           LOOKUP_TICKER: ${{ inputs.ticker }}
+          LOOKUP_ACTION: ${{ inputs.action }}
           PYTHONPATH: src
-        run: python src/stock_lookup.py ${{ inputs.ticker }}
+        run: python src/stock_lookup.py "${{ inputs.ticker }}"
 
       - name: Commit resultaat
         run: |
           git config user.name  "nexus-lookup-bot"
           git config user.email "nexus@bot.local"
           git add data.json
-          git diff --cached --quiet || git commit -m "Lookup: ${{ inputs.ticker }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git diff --cached --quiet || git commit -m "Watchlist ${{ inputs.action }}: ${{ inputs.ticker }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase --autostash origin ${{ github.ref_name }} || true
           git push
