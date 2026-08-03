@@ -4363,6 +4363,510 @@ function renderCompoundInterestCalculator(){
 /* ══════════════════════════════════════════════════════
    INIT & RENDER ALL
 ══════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   WATCHLIST
+══════════════════════════════════════════════════════ */
+const WL_WORKFLOW='stock_lookup.yml';
+const WL_DEFAULT_REPO='danieldk04/nexus-market-terminal';
+const WL_POLL_MS=15000, WL_TIMEOUT_MS=9*60*1000;
+
+let wlSort='score', wlOpen=null, wlPollTimer=null;
+
+function wlEsc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function ghToken(){return localStorage.getItem('nx_gh_token')||'';}
+function ghRepo(){return localStorage.getItem('nx_gh_repo')||WL_DEFAULT_REPO;}
+
+/* pending = aandelen waarvoor de analyse nog draait, blijft staan na herladen */
+function wlPending(){try{return JSON.parse(localStorage.getItem('nx_wl_pending')||'{}');}catch{return{};}}
+function wlSetPending(p){localStorage.setItem('nx_wl_pending',JSON.stringify(p));}
+function wlMarkPending(ticker,action){const p=wlPending();p[ticker]={action,since:Date.now()};wlSetPending(p);}
+function wlClearPending(ticker){const p=wlPending();delete p[ticker];wlSetPending(p);}
+
+function wlItems(){return globalData?.watchlist||[];}
+
+function wlFeedback(msg,kind='info'){
+    const el=document.getElementById('wl-feedback');
+    if(!el) return;
+    if(!msg){el.style.display='none';return;}
+    el.className='wl-feedback wl-fb-'+kind;
+    el.innerHTML=msg;
+    el.style.display='block';
+}
+
+/* ── GitHub Actions aansturen ── */
+async function ghDispatch(ticker,action){
+    const token=ghToken();
+    if(!token) throw new Error('NO_TOKEN');
+    const r=await fetch(`https://api.github.com/repos/${ghRepo()}/actions/workflows/${WL_WORKFLOW}/dispatches`,{
+        method:'POST',
+        headers:{
+            'Authorization':'Bearer '+token,
+            'Accept':'application/vnd.github+json',
+            'X-GitHub-Api-Version':'2022-11-28',
+            'Content-Type':'application/json',
+        },
+        body:JSON.stringify({ref:'main',inputs:{ticker,action}}),
+    });
+    if(r.status===204) return true;
+    let detail='';
+    try{detail=(await r.json())?.message||'';}catch{}
+    if(r.status===401||r.status===403) throw new Error('AUTH:'+detail);
+    if(r.status===404) throw new Error('NOTFOUND:'+detail);
+    throw new Error(`HTTP ${r.status}: ${detail}`);
+}
+
+async function wlAdd(){
+    const input=document.getElementById('wl-input');
+    const raw=(input.value||'').trim().toUpperCase();
+    if(!raw){input.focus();return;}
+    if(!/^[A-Z0-9.\-]{1,12}$/.test(raw)){
+        wlFeedback('Dat lijkt geen geldige ticker. Gebruik bijvoorbeeld <b>NVDA</b>, <b>ASML.AS</b> of <b>BRK-B</b>.','err');
+        return;
+    }
+    if(wlItems().some(w=>w.ticker===raw)){
+        wlFeedback(`<b>${raw}</b> staat al op je watchlist. Gebruik “Vernieuwen” op de kaart om de analyse opnieuw te draaien.`,'info');
+        return;
+    }
+    await wlRun(raw,'add');
+    input.value='';
+}
+
+async function wlRefresh(ticker){await wlRun(ticker,'add');}
+
+async function wlRemove(ticker){
+    if(!confirm(`${ticker} van je watchlist verwijderen?`)) return;
+    await wlRun(ticker,'remove');
+}
+
+async function wlRun(ticker,action){
+    const btn=document.getElementById('wl-add-btn');
+    if(btn) btn.disabled=true;
+    const verb=action==='remove'?'verwijderen':'analyseren';
+    wlFeedback(`<div class="loading" style="padding:0;justify-content:flex-start"><div class="spin"></div>Bezig met ${verb} van <b>${ticker}</b>…</div>`,'info');
+    try{
+        await ghDispatch(ticker,action);
+        wlMarkPending(ticker,action);
+        wlFeedback(action==='remove'
+            ? `<b>${ticker}</b> wordt verwijderd. Dat duurt ongeveer een minuut.`
+            : `<b>${ticker}</b> wordt doorgerekend: cijfers, kwartaalresultaten, sentiment en mijn oordeel. Dit duurt meestal 1 tot 3 minuten — je kunt gewoon verder werken.`,'ok');
+        wlStartPolling();
+        renderWatchlistTab();
+    }catch(e){
+        const m=String(e.message||e);
+        if(m==='NO_TOKEN'){
+            wlFeedback('Er is nog geen koppeling met GitHub. Ga naar <b>Instellingen</b> en plak daar je persoonlijke toegangssleutel — daarna vult de app alles vanzelf in.','err');
+        }else if(m.startsWith('AUTH')){
+            wlFeedback('De toegangssleutel werkt niet of heeft te weinig rechten. Controleer bij Instellingen of hij <b>Actions: Read and write</b> heeft op deze repository.','err');
+        }else if(m.startsWith('NOTFOUND')){
+            wlFeedback(`De achtergrondtaak is niet gevonden in <b>${wlEsc(ghRepo())}</b>. Controleer de repository bij Instellingen.`,'err');
+        }else{
+            wlFeedback('Starten mislukt: '+wlEsc(m),'err');
+        }
+    }finally{
+        if(btn) btn.disabled=false;
+    }
+}
+
+/* ── wachten tot data.json is bijgewerkt ── */
+function wlStartPolling(){
+    if(wlPollTimer) return;
+    wlPollTimer=setInterval(async()=>{
+        const pend=wlPending();
+        const tickers=Object.keys(pend);
+        if(!tickers.length){clearInterval(wlPollTimer);wlPollTimer=null;return;}
+
+        const fresh=await fetchJSON('data.json');
+        if(fresh){
+            B=fresh;globalData=fresh;
+            const list=fresh.watchlist||[];
+            let changed=false;
+            tickers.forEach(t=>{
+                const {action,since}=pend[t];
+                const entry=list.find(w=>w.ticker===t);
+                const done=action==='remove' ? !entry : (entry && new Date(entry.lookup_at||0).getTime()>since-120000);
+                if(done){
+                    wlClearPending(t);changed=true;
+                    wlFeedback(action==='remove'
+                        ? `<b>${t}</b> is van je watchlist gehaald.`
+                        : `<b>${t}</b> staat er nu op, compleet met oordeel en cijfers.`,'ok');
+                }else if(Date.now()-since>WL_TIMEOUT_MS){
+                    wlClearPending(t);changed=true;
+                    wlFeedback(`Het doorrekenen van <b>${t}</b> duurt ongewoon lang. Kijk bij <a href="https://github.com/${wlEsc(ghRepo())}/actions" target="_blank" style="color:inherit;text-decoration:underline">de achtergrondtaken</a> wat er misging.`,'err');
+                }
+            });
+            if(changed||activeTab==='watchlist') renderWatchlistTab();
+            if(changed) wlUpdateCount();
+        }
+    },WL_POLL_MS);
+}
+
+/* ── weergave ── */
+function wlUpdateCount(){
+    const n=wlItems().length;
+    const badge=document.getElementById('sb-wl-count');
+    if(badge){badge.textContent=n;badge.style.display=n?'inline-block':'none';}
+}
+
+const WL_SORTS=[
+    {k:'score',   l:'Hoogste cijfer'},
+    {k:'added',   l:'Nieuwste eerst'},
+    {k:'upside',  l:'Meeste opwaarts'},
+    {k:'ticker',  l:'Naam A-Z'},
+];
+
+function wlSetSort(k){wlSort=k;renderWatchlistTab();}
+
+function wlScoreOf(w){return w.verdict?.score ?? null;}
+function wlUpsideOf(w){
+    const t=w.verdict?.target_price;
+    if(t&&w.price) return (t/w.price-1)*100;
+    return w.analyst_upside ?? null;
+}
+
+function renderWatchlistTab(){
+    wlUpdateCount();
+    const items=wlItems().slice();
+    const pend=wlPending();
+
+    // sorteerknoppen
+    document.getElementById('wl-sortbar').innerHTML=WL_SORTS.map(s=>
+        `<button class="fbtn ${wlSort===s.k?'active':''}" onclick="wlSetSort('${s.k}')">${s.l}</button>`).join('');
+
+    items.sort((a,b)=>{
+        if(wlSort==='score')  return (wlScoreOf(b)??-1)-(wlScoreOf(a)??-1);
+        if(wlSort==='upside') return (wlUpsideOf(b)??-999)-(wlUpsideOf(a)??-999);
+        if(wlSort==='ticker') return a.ticker.localeCompare(b.ticker);
+        return new Date(b.added_at||b.lookup_at||0)-new Date(a.added_at||a.lookup_at||0);
+    });
+
+    const tag=document.getElementById('wl-count-tag');
+    if(tag) tag.textContent=items.length?`${items.length} aandeel${items.length===1?'':'en'}`:'leeg';
+
+    const statusTag=document.getElementById('wl-status-tag');
+    if(statusTag){
+        const n=Object.keys(pend).length;
+        statusTag.textContent=n?`${n} in behandeling`:(ghToken()?'klaar voor gebruik':'koppeling nodig');
+        statusTag.style.color=n?'var(--accent)':(ghToken()?'var(--muted2)':'var(--yellow)');
+    }
+
+    const grid=document.getElementById('wl-grid');
+    const pendingCards=Object.entries(pend)
+        .filter(([t,p])=>p.action!=='remove'&&!items.some(w=>w.ticker===t))
+        .map(([t])=>wlPendingCard(t)).join('');
+
+    if(!items.length&&!pendingCards){
+        grid.innerHTML=`<div class="empty" style="grid-column:1/-1">
+            <strong>Je watchlist is nog leeg</strong>
+            Typ hierboven een ticker en ik reken het bedrijf helemaal door:
+            waardering, kwartaalcijfers, sentiment, niche, thema en een cijfer van 1 tot 10.</div>`;
+    }else{
+        grid.innerHTML=pendingCards+items.map(w=>wlCard(w,pend[w.ticker])).join('');
+    }
+
+    wlRenderDetail();
+    requestAnimationFrame(wlDrawSparks);
+}
+
+function wlPendingCard(ticker){
+    return `<div class="wlc wlc-pending">
+        <div class="wlc-top">
+            <div class="wlc-id"><div class="wlc-tk">${wlEsc(ticker)}</div>
+                <div class="wlc-nm">Cijfers en oordeel worden opgehaald…</div></div>
+            <div class="wlc-score" style="border-color:var(--border2)"><div class="spin"></div></div>
+        </div>
+        <div class="wlc-line" style="color:var(--muted)">Dit duurt meestal 1 tot 3 minuten. De kaart vult zichzelf zodra het klaar is.</div>
+    </div>`;
+}
+
+function wlValColor(v){return v==='GOEDKOOP'?'var(--green)':v==='DUUR'?'var(--red)':'var(--yellow)';}
+function wlVerdictCls(v){return v==='KOOP'?'wl-v-koop':v==='MIJDEN'?'wl-v-mijden':'wl-v-houd';}
+
+function wlCard(w,pending){
+    const v=w.verdict||{};
+    const sc=v.score;
+    const col=sc==null?'var(--muted2)':sc>=7?'var(--green)':sc>=5?'var(--yellow)':'var(--red)';
+    const bg =sc==null?'var(--bg)':sc>=7?'rgba(5,150,105,.10)':sc>=5?'rgba(217,119,6,.10)':'rgba(220,38,38,.10)';
+    const meta=sectorMeta(w.industry_group,w.sector);
+    const live=priceCache[w.ticker];
+    const price=live?.price||w.price;
+    const chg=live?.change;
+    const ccy=w.currency==='EUR'?'€':w.currency==='GBp'?'p':'$';
+    const upside=wlUpsideOf(w);
+
+    return `<div class="wlc ${pending?'wlc-pending':''}" style="border-top-color:${meta.color}">
+        <div class="wlc-top">
+            <div class="wlc-id">
+                <div class="wlc-tk">${wlEsc(w.ticker)}</div>
+                <div class="wlc-nm">${wlEsc(w.name||'')}</div>
+                <div class="wlc-px">
+                    <span class="wlc-px-v">${ccy}${(price||0).toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+                    ${chg!=null?`<span class="wlc-px-c" style="color:${chg>=0?'var(--green)':'var(--red)'}">${chg>=0?'+':''}${chg.toFixed(2)}%</span>`:''}
+                    ${v.verdict?`<span class="wl-verdict ${wlVerdictCls(v.verdict)}" style="margin-left:2px">${wlEsc(v.verdict)}</span>`:''}
+                </div>
+            </div>
+            <div class="wlc-score" style="background:${bg};border-color:${col}">
+                <div class="wlc-score-n" style="color:${col}">${sc!=null?sc.toFixed(1):'–'}</div>
+                <div class="wlc-score-l" style="color:${col}">op 10</div>
+            </div>
+        </div>
+
+        ${v.one_liner?`<div class="wlc-line">${wlEsc(v.one_liner)}</div>`:''}
+
+        <div class="wlc-chips">
+            ${v.niche?`<span class="wlc-chip">Niche: <b>${wlEsc(v.niche)}</b></span>`:''}
+            ${v.theme?`<span class="wlc-chip">Thema: <b>${wlEsc(v.theme)}</b></span>`:''}
+            ${v.moat?`<span class="wlc-chip">Moat: <b>${wlEsc(v.moat.toLowerCase())}</b></span>`:''}
+            ${w.sentiment?.label?`<span class="wlc-chip">Stemming: <b>${wlEsc(w.sentiment.label.toLowerCase())}</b></span>`:''}
+        </div>
+
+        <div class="wlc-spark"><canvas data-spark="${wlEsc(w.ticker)}"></canvas></div>
+
+        <div class="wlc-metrics">
+            <div class="wlc-m"><span class="wlc-m-l">Waardering</span>
+                <span class="wlc-m-v" style="color:${v.valuation?wlValColor(v.valuation):'var(--muted)'};font-size:.62rem">${v.valuation?wlEsc(v.valuation):'–'}</span></div>
+            <div class="wlc-m"><span class="wlc-m-l">K/W</span>
+                <span class="wlc-m-v">${w.pe_ratio?w.pe_ratio.toFixed(1):'–'}</span></div>
+            <div class="wlc-m"><span class="wlc-m-l">Koersdoel</span>
+                <span class="wlc-m-v">${v.target_price?ccy+Math.round(v.target_price):'–'}</span></div>
+            <div class="wlc-m"><span class="wlc-m-l">Opwaarts</span>
+                <span class="wlc-m-v" style="color:${upside==null?'var(--muted)':upside>0?'var(--green)':'var(--red)'}">${upside==null?'–':(upside>0?'+':'')+upside.toFixed(0)+'%'}</span></div>
+        </div>
+
+        <div class="wlc-foot">
+            <span class="wlc-when">${w.lookup_at?'Bijgewerkt '+wlAgo(w.lookup_at):''}</span>
+            <div class="wlc-acts">
+                <button class="wlc-act" onclick="wlToggleDetail('${w.ticker}')">${wlOpen===w.ticker?'Sluiten':'Details'}</button>
+                <button class="wlc-act" onclick="selectStock('${w.ticker}','watchlist')">Koers</button>
+                <button class="wlc-act" onclick="wlRefresh('${w.ticker}')" title="Analyse opnieuw draaien">↻</button>
+                <button class="wlc-act wlc-act-danger" onclick="wlRemove('${w.ticker}')" title="Verwijderen">✕</button>
+            </div>
+        </div>
+    </div>`;
+}
+
+function wlAgo(iso){
+    const d=(Date.now()-new Date(iso).getTime())/1000;
+    if(d<3600) return Math.max(1,Math.round(d/60))+' min geleden';
+    if(d<86400) return Math.round(d/3600)+' uur geleden';
+    const days=Math.round(d/86400);
+    return days===1?'gisteren':days+' dagen geleden';
+}
+
+/* ── mini-grafiekjes ── */
+function wlDrawSparks(){
+    document.querySelectorAll('#wl-grid canvas[data-spark]').forEach(cv=>{
+        const t=cv.dataset.spark;
+        const item=wlItems().find(w=>w.ticker===t);
+        const data=(item?.spark&&item.spark.length>3)?item.spark:(priceCache[t]?.hist||[]);
+        if(!data||data.length<3) return;
+        const dpr=window.devicePixelRatio||1;
+        const w=cv.parentElement.clientWidth, h=cv.parentElement.clientHeight-4;
+        if(!w||!h) return;
+        cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';
+        const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+        const min=Math.min(...data),max=Math.max(...data),rng=(max-min)||1;
+        const up=data[data.length-1]>=data[0];
+        const col=up?'#059669':'#dc2626';
+        const x=i=>(i/(data.length-1))*w;
+        const y=v=>h-3-((v-min)/rng)*(h-8);
+        const grad=ctx.createLinearGradient(0,0,0,h);
+        grad.addColorStop(0,up?'rgba(5,150,105,.18)':'rgba(220,38,38,.18)');
+        grad.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.beginPath();ctx.moveTo(0,y(data[0]));
+        data.forEach((v,i)=>ctx.lineTo(x(i),y(v)));
+        ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+        ctx.beginPath();ctx.moveTo(0,y(data[0]));
+        data.forEach((v,i)=>ctx.lineTo(x(i),y(v)));
+        ctx.strokeStyle=col;ctx.lineWidth=1.6;ctx.lineJoin='round';ctx.stroke();
+    });
+}
+window.addEventListener('resize',()=>{if(activeTab==='watchlist')wlDrawSparks();});
+
+/* ── detailpaneel ── */
+function wlToggleDetail(ticker){
+    wlOpen=wlOpen===ticker?null:ticker;
+    renderWatchlistTab();
+    if(wlOpen) document.getElementById('wl-detail')?.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function wlRenderDetail(){
+    const box=document.getElementById('wl-detail');
+    if(!box) return;
+    const w=wlItems().find(x=>x.ticker===wlOpen);
+    if(!w){box.innerHTML='';return;}
+    const v=w.verdict||{};
+    const ccy=w.currency==='EUR'?'€':'$';
+
+    const qRows=(w.quarters||[]).map(q=>`<tr>
+        <td>${wlEsc(q.period)}</td>
+        <td>${q.revenue_m!=null?(q.revenue_m/1000).toFixed(1)+' mrd':'–'}</td>
+        <td style="color:${q.rev_yoy==null?'var(--muted)':q.rev_yoy>=0?'var(--green)':'var(--red)'}">${q.rev_yoy!=null?(q.rev_yoy>0?'+':'')+q.rev_yoy+'%':'–'}</td>
+        <td>${q.net_income_m!=null?(q.net_income_m/1000).toFixed(1)+' mrd':'–'}</td>
+        <td style="color:${q.eps_yoy==null?'var(--muted)':q.eps_yoy>=0?'var(--green)':'var(--red)'}">${q.eps_yoy!=null?(q.eps_yoy>0?'+':'')+q.eps_yoy+'%':'–'}</td>
+    </tr>`).join('');
+
+    const facts=[
+        ['Koers',`${ccy}${(w.price||0).toFixed(2)}`],
+        ['Marktwaarde',w.market_cap?(w.market_cap/1e9).toFixed(1)+' mrd':'–'],
+        ['K/W',w.pe_ratio?w.pe_ratio.toFixed(1):'–'],
+        ['Verwacht K/W',w.forward_pe?w.forward_pe.toFixed(1):'–'],
+        ['K/vrije kasstroom',w.pfcf?w.pfcf.toFixed(1):'–'],
+        ['Rendement op kapitaal',w.roic!=null?w.roic.toFixed(1)+'%':(w.roe?w.roe.toFixed(1)+'% (ROE)':'–')],
+        ['Winstmarge',w.profit_margin!=null?w.profit_margin.toFixed(1)+'%':'–'],
+        ['Schuld/eigen vermogen',w.debt_to_equity!=null?w.debt_to_equity.toFixed(2):'–'],
+        ['Omzetgroei',w.revenue_growth!=null?w.revenue_growth.toFixed(1)+'%':'–'],
+        ['Dividend',w.div_yield?w.div_yield.toFixed(2)+'%':'geen'],
+        ['Koers vs 12mnd top',w.from_52w_high!=null?w.from_52w_high.toFixed(1)+'%':'–'],
+        ['Rendement 12 mnd',w.return_52w!=null?(w.return_52w>0?'+':'')+w.return_52w.toFixed(1)+'%':'–'],
+    ];
+
+    box.innerHTML=`<div class="panel" style="margin:0 14px 4px;border-color:var(--accent)">
+        <div class="ph" style="background:#f8fafc">
+            <span class="pt">${wlEsc(w.ticker)} — ${wlEsc(w.name||'')}</span>
+            <span class="ptag" style="cursor:pointer" onclick="wlToggleDetail('${w.ticker}')">sluiten ✕</span>
+        </div>
+
+        ${v.one_liner?`<div class="wld-sect" style="background:linear-gradient(135deg,#eff6ff,#fafbff)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <div class="wlc-score" style="background:#fff;border-color:${v.score>=7?'var(--green)':v.score>=5?'var(--yellow)':'var(--red)'}">
+                    <div class="wlc-score-n" style="color:${v.score>=7?'var(--green)':v.score>=5?'var(--yellow)':'var(--red)'}">${v.score!=null?v.score.toFixed(1):'–'}</div>
+                    <div class="wlc-score-l" style="color:var(--muted)">op 10</div>
+                </div>
+                <div style="flex:1;min-width:180px">
+                    <div style="font-size:.9rem;font-weight:600;line-height:1.45">${wlEsc(v.one_liner)}</div>
+                    <div style="margin-top:7px;display:flex;gap:6px;flex-wrap:wrap">
+                        ${v.verdict?`<span class="wl-verdict ${wlVerdictCls(v.verdict)}">${wlEsc(v.verdict)}</span>`:''}
+                        ${v.valuation?`<span class="wlc-chip">Prijs: <b>${wlEsc(v.valuation.toLowerCase())}</b>${v.valuation_note?' — '+wlEsc(v.valuation_note):''}</span>`:''}
+                        ${v.risk?`<span class="wlc-chip">Risico: <b>${wlEsc(v.risk.toLowerCase())}</b></span>`:''}
+                        ${v.quality!=null?`<span class="wlc-chip">Kwaliteit bedrijf: <b>${v.quality}/10</b></span>`:''}
+                    </div>
+                </div>
+            </div>
+            ${v.watch?`<div style="margin-top:11px;font-size:.75rem;color:var(--muted)"><b style="color:var(--text)">Houd in de gaten:</b> ${wlEsc(v.watch)}</div>`:''}
+        </div>`:''}
+
+        ${(v.bull?.length||v.bear?.length)?`<div class="wld-sect">
+            <div class="wld-bb">
+                <div class="wld-bull"><div class="wld-h" style="color:var(--green)">Wat ervoor pleit</div>
+                    ${(v.bull||[]).map(b=>`<div class="wld-li">${wlEsc(b)}</div>`).join('')||'<div class="wld-li" style="color:var(--muted)">–</div>'}</div>
+                <div class="wld-bear"><div class="wld-h" style="color:var(--red)">Wat ertegen pleit</div>
+                    ${(v.bear||[]).map(b=>`<div class="wld-li">${wlEsc(b)}</div>`).join('')||'<div class="wld-li" style="color:var(--muted)">–</div>'}</div>
+            </div>
+        </div>`:''}
+
+        <div class="wld-sect">
+            <div class="wld-h">De cijfers</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px">
+                ${facts.map(([l,val])=>`<div style="background:var(--bg);border-radius:6px;padding:7px 9px">
+                    <div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">${l}</div>
+                    <div style="font-family:var(--mono);font-size:.82rem;font-weight:700;margin-top:2px">${val}</div></div>`).join('')}
+            </div>
+        </div>
+
+        ${qRows?`<div class="wld-sect">
+            <div class="wld-h">Kwartaalcijfers</div>
+            <div style="overflow-x:auto"><table class="wld-q">
+                <thead><tr><th>Kwartaal</th><th>Omzet</th><th>t.o.v. jaar terug</th><th>Winst</th><th>t.o.v. jaar terug</th></tr></thead>
+                <tbody>${qRows}</tbody></table></div>
+            ${(w.rev_accel!=null||w.eps_accel!=null)?`<div style="margin-top:9px;font-size:.7rem;color:var(--muted)">
+                Omzetgroei ${w.rev_accel?'<b style="color:var(--green)">versnelt</b>':'<b style="color:var(--yellow)">vlakt af</b>'} ·
+                Winstgroei ${w.eps_accel?'<b style="color:var(--green)">versnelt</b>':'<b style="color:var(--yellow)">vlakt af</b>'}</div>`:''}
+        </div>`:''}
+
+        ${w.dcf?`<div class="wld-sect">
+            <div class="wld-h">Berekende waarde</div>
+            <div style="font-size:.76rem;line-height:1.6">
+                Op basis van de vrije kasstroom komt dit bedrijf uit op <b>${ccy}${w.dcf.dcf_per_share}</b> per aandeel
+                (${w.dcf.dcf_upside>0?'<span style="color:var(--green)">'+w.dcf.dcf_upside+'% boven':'<span style="color:var(--red)">'+Math.abs(w.dcf.dcf_upside)+'% onder'} de huidige koers</span>).
+                Met een veiligheidsmarge zou je pas onder <b>${ccy}${w.dcf.mos_price}</b> instappen.
+                <div style="color:var(--muted);margin-top:5px;font-size:.7rem">Dit is een bewust voorzichtige berekening — bij snelgroeiende bedrijven valt hij vaak te laag uit.</div>
+            </div>
+        </div>`:''}
+
+        ${w.sentiment?.label?`<div class="wld-sect">
+            <div class="wld-h">Stemming in de markt</div>
+            <div style="font-size:.76rem;line-height:1.6">
+                Beleggers zijn op dit moment <b>${wlEsc(w.sentiment.label.toLowerCase())}</b> over dit aandeel${
+                w.sentiment.bull_ratio!=null?` (${Math.round(w.sentiment.bull_ratio*100)}% van de berichten is positief)`:''}.
+                ${w.sentiment.news_count?`Gebaseerd op ${w.sentiment.news_count} nieuwsberichten${w.sentiment.reddit_mentions?` en ${w.sentiment.reddit_mentions} Reddit-vermeldingen`:''}.`:''}
+            </div>
+        </div>`:''}
+
+        ${w.tier2?.analysis?`<div class="wld-sect">
+            <div class="wld-h">Mijn volledige analyse</div>
+            <div style="font-size:.78rem;line-height:1.7">${mdToHtml(w.tier2.analysis)}</div>
+            <div style="margin-top:10px;font-size:.62rem;color:var(--muted2)">Geschreven ${wlAgo(w.tier2.last_run)} · ${wlEsc(w.tier2.model||'')}</div>
+        </div>`:''}
+    </div>`;
+}
+
+/* ── live koersen bijwerken voor de watchlist ── */
+async function wlLoadPrices(){
+    const items=wlItems();
+    for(const w of items.slice(0,20)){
+        try{await fetchPrice(w.ticker);}catch{}
+    }
+    if(activeTab==='watchlist') renderWatchlistTab();
+}
+
+/* ══════════════════════════════════════════════════════
+   INSTELLINGEN
+══════════════════════════════════════════════════════ */
+function renderSettingsTab(){
+    const t=ghToken();
+    const inp=document.getElementById('set-token');
+    if(inp&&!inp.value&&t) inp.placeholder='••••••••••••  (sleutel opgeslagen)';
+    const repo=document.getElementById('set-repo');
+    if(repo&&!repo.value) repo.value=ghRepo();
+    const tag=document.getElementById('set-token-tag');
+    if(tag){
+        tag.textContent=t?'gekoppeld':'niet gekoppeld';
+        tag.style.color=t?'var(--green)':'var(--yellow)';
+    }
+}
+
+function setMsg(msg,kind){
+    const el=document.getElementById('set-token-msg');
+    if(!el) return;
+    el.className='wl-feedback wl-fb-'+kind;
+    el.innerHTML=msg;el.style.display='block';
+}
+
+async function setSaveToken(){
+    const inp=document.getElementById('set-token');
+    const val=(inp.value||'').trim();
+    if(!val){setMsg('Vul eerst een sleutel in.','err');return;}
+    localStorage.setItem('nx_gh_token',val);
+    inp.value='';
+    setMsg('<div class="loading" style="padding:0;justify-content:flex-start"><div class="spin"></div>Sleutel controleren…</div>','info');
+    try{
+        const r=await fetch(`https://api.github.com/repos/${ghRepo()}/actions/workflows/${WL_WORKFLOW}`,{
+            headers:{'Authorization':'Bearer '+val,'Accept':'application/vnd.github+json'}});
+        if(r.ok) setMsg('Gelukt — de app kan nu zelf analyses starten. Ga naar <b>Watchlist</b> en voeg een aandeel toe.','ok');
+        else if(r.status===401) setMsg('Deze sleutel wordt niet geaccepteerd. Controleer of je hem volledig hebt geplakt en of hij niet verlopen is.','err');
+        else if(r.status===403) setMsg('De sleutel werkt, maar heeft geen rechten op Actions. Zet <b>Actions</b> op <b>Read and write</b> bij de instellingen van de sleutel.','err');
+        else if(r.status===404) setMsg(`Repository <b>${wlEsc(ghRepo())}</b> of de achtergrondtaak niet gevonden. Controleer de repository hieronder.`,'err');
+        else setMsg('Onverwachte reactie van GitHub (code '+r.status+'). De sleutel is wel opgeslagen.','err');
+    }catch{
+        setMsg('Kon GitHub niet bereiken. De sleutel is opgeslagen; probeer straks opnieuw.','err');
+    }
+    renderSettingsTab();
+}
+
+function setClearToken(){
+    localStorage.removeItem('nx_gh_token');
+    document.getElementById('set-token').value='';
+    setMsg('De sleutel is van dit apparaat gewist.','info');
+    renderSettingsTab();
+}
+
+function setSaveRepo(){
+    const v=(document.getElementById('set-repo').value||'').trim().replace(/^https?:\/\/github\.com\//,'').replace(/\/$/,'');
+    if(!/^[\w.\-]+\/[\w.\-]+$/.test(v)){setMsg('Gebruik de vorm <b>eigenaar/repository</b>.','err');return;}
+    localStorage.setItem('nx_gh_repo',v);
+    setMsg('Repository opgeslagen: <b>'+wlEsc(v)+'</b>','ok');
+}
+
 function renderAll(){
     allPos=buildPositions();
     try{renderDashboard();}catch(e){console.error('renderDashboard fout:',e);}
