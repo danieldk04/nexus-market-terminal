@@ -4379,6 +4379,9 @@ function renderCompoundInterestCalculator(){
 const WL_WORKFLOW='stock_lookup.yml';
 const WL_DEFAULT_REPO='danieldk04/nexus-market-terminal';
 const WL_POLL_MS=15000, WL_TIMEOUT_MS=9*60*1000;
+/* zolang de taak bij GitHub in de wachtrij staat blijven we wachten, maar niet
+   eindeloos — GitHub laat een wachtende taak zelf na 24 uur vervallen */
+const WL_HARD_TIMEOUT_MS=60*60*1000;
 
 let wlSort='score', wlOpen=null, wlPollTimer=null;
 
@@ -4610,6 +4613,31 @@ async function wlRun(ticker,action){
     }
 }
 
+/* ── stand van zaken bij GitHub Actions ──
+   Een dispatch levert geen run-id op, dus we kijken naar de runs van deze
+   workflow die ná het startmoment zijn aangemaakt. Zo weten we of er echt
+   gerekend wordt, of dat de taak alleen maar wacht op een vrije runner. */
+async function wlRunState(since){
+    const token=ghToken();
+    if(!token) return null;
+    try{
+        const r=await fetch(`https://api.github.com/repos/${ghRepo()}/actions/workflows/${WL_WORKFLOW}/runs?per_page=10`,{
+            headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}});
+        if(!r.ok) return null;
+        const runs=((await r.json()).workflow_runs||[])
+            .filter(w=>new Date(w.created_at).getTime()>=since-120000);
+        if(!runs.length) return {queued:0,running:0,failed:0,done:0};
+        return {
+            queued : runs.filter(w=>w.status==='queued'||w.status==='waiting'||w.status==='pending').length,
+            running: runs.filter(w=>w.status==='in_progress').length,
+            failed : runs.filter(w=>w.status==='completed'&&w.conclusion!=='success').length,
+            done   : runs.filter(w=>w.status==='completed'&&w.conclusion==='success').length,
+        };
+    }catch{return null;}
+}
+
+const WL_ACTIONS_URL=()=>`https://github.com/${ghRepo()}/actions`;
+
 /* ── wachten tot data.json is bijgewerkt ── */
 function wlStartPolling(){
     if(wlPollTimer) return;
@@ -4619,27 +4647,47 @@ function wlStartPolling(){
         if(!tickers.length){clearInterval(wlPollTimer);wlPollTimer=null;return;}
 
         const fresh=await fetchJSON('data.json');
-        if(fresh){
-            B=fresh;globalData=fresh;
-            const list=fresh.watchlist||[];
-            let changed=false;
-            tickers.forEach(t=>{
-                const {action,since}=pend[t];
-                const entry=list.find(w=>w.ticker===t);
-                const done=action==='remove' ? !entry : (entry && new Date(entry.lookup_at||0).getTime()>since-120000);
-                if(done){
-                    wlClearPending(t);changed=true;
-                    wlFeedback(action==='remove'
-                        ? `<b>${t}</b> is van je watchlist gehaald.`
-                        : `<b>${t}</b> staat er nu op, compleet met oordeel en cijfers.`,'ok');
-                }else if(Date.now()-since>WL_TIMEOUT_MS){
-                    wlClearPending(t);changed=true;
-                    wlFeedback(`Het doorrekenen van <b>${t}</b> duurt ongewoon lang. Kijk bij <a href="https://github.com/${wlEsc(ghRepo())}/actions" target="_blank" style="color:inherit;text-decoration:underline">de achtergrondtaken</a> wat er misging.`,'err');
-                }
-            });
-            if(changed||activeTab==='watchlist') renderWatchlistTab();
-            if(changed) wlUpdateCount();
+        if(!fresh) return;
+        B=fresh;globalData=fresh;
+        const list=fresh.watchlist||[];
+        let changed=false;
+        const slow=[];
+        tickers.forEach(t=>{
+            const {action,since}=pend[t];
+            const entry=list.find(w=>w.ticker===t);
+            const done=action==='remove' ? !entry : (entry && new Date(entry.lookup_at||0).getTime()>since-120000);
+            if(done){
+                wlClearPending(t);changed=true;
+                wlFeedback(action==='remove'
+                    ? `<b>${t}</b> is van je watchlist gehaald.`
+                    : `<b>${t}</b> staat er nu op, compleet met oordeel en cijfers.`,'ok');
+            }else if(Date.now()-since>WL_TIMEOUT_MS){
+                slow.push(t);
+            }
+        });
+
+        /* Duurt het lang, dan eerst kijken wát er aan de hand is: een taak die
+           bij GitHub in de wachtrij staat is niet mislukt — die start vanzelf
+           zodra er een runner vrijkomt, en verdient geen foutmelding. */
+        if(slow.length){
+            const since=Math.min(...slow.map(t=>pend[t].since));
+            const st=await wlRunState(since);
+            const wachtend=st&&(st.queued||st.running);
+            if(wachtend&&Date.now()-since<WL_HARD_TIMEOUT_MS){
+                const min=Math.round((Date.now()-since)/60000);
+                wlFeedback(st.queued
+                    ? `<b>${slow.join(', ')}</b> staat al ${min} min in de wachtrij bij GitHub: er is nog geen runner vrij. Dit ligt niet aan de app — hij start vanzelf zodra er eentje vrijkomt. Je kunt dit venster gerust sluiten.`
+                    : `<b>${slow.join(', ')}</b> wordt nu doorgerekend (${min} min bezig). Nog even geduld.`,'info');
+            }else{
+                slow.forEach(t=>{wlClearPending(t);changed=true;});
+                wlFeedback(st&&st.failed
+                    ? `De achtergrondtaak voor <b>${slow.join(', ')}</b> is mislukt. Kijk bij <a href="${WL_ACTIONS_URL()}" target="_blank" style="color:inherit;text-decoration:underline">de achtergrondtaken</a> wat er misging.`
+                    : `Het doorrekenen van <b>${slow.join(', ')}</b> duurt ongewoon lang. Kijk bij <a href="${WL_ACTIONS_URL()}" target="_blank" style="color:inherit;text-decoration:underline">de achtergrondtaken</a> wat er misging.`,'err');
+            }
         }
+
+        if(changed||activeTab==='watchlist') renderWatchlistTab();
+        if(changed) wlUpdateCount();
     },WL_POLL_MS);
 }
 
