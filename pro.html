@@ -1448,6 +1448,7 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
                    onkeydown="if(event.key==='Enter')wlAdd()">
             <button class="wl-btn" id="wl-add-btn" onclick="wlAdd()">Analyseren &amp; toevoegen</button>
         </div>
+        <div id="wl-connect" style="display:none"></div>
         <div id="wl-feedback" class="wl-feedback" style="display:none"></div>
     </div>
 
@@ -4382,8 +4383,135 @@ const WL_POLL_MS=15000, WL_TIMEOUT_MS=9*60*1000;
 let wlSort='score', wlOpen=null, wlPollTimer=null;
 
 function wlEsc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function ghToken(){return localStorage.getItem('nx_gh_token')||'';}
-function ghRepo(){return localStorage.getItem('nx_gh_repo')||WL_DEFAULT_REPO;}
+/* ── opslag die niet stilletjes faalt ──
+   Safari (privémodus, PWA-vensters, opgeruimde website-data) kan localStorage
+   weigeren of leegmaken. Dan werd de sleutel wél "opgeslagen" maar was hij weg,
+   en zei de app "koppeling nodig" terwijl de gebruiker net gekoppeld had.
+   Daarom: cookie als tweede kopie + geheugen als laatste redmiddel. */
+const nxMem={};
+function nxCookieGet(k){
+    const m=document.cookie.match(new RegExp('(?:^|; )'+k+'=([^;]*)'));
+    return m?decodeURIComponent(m[1]):'';
+}
+function nxCookieSet(k,v){
+    try{document.cookie=`${k}=${encodeURIComponent(v)}; path=/; max-age=31536000; SameSite=Strict`;}catch{}
+}
+function nxCookieDel(k){
+    try{document.cookie=`${k}=; path=/; max-age=0; SameSite=Strict`;}catch{}
+}
+function nxGet(k){
+    let v='';
+    try{v=localStorage.getItem(k)||'';}catch{}
+    if(!v) v=nxCookieGet(k);
+    if(!v) v=nxMem[k]||'';
+    return v;
+}
+/* geeft false terug als niets van de opslag het overleefde */
+function nxSet(k,v){
+    nxMem[k]=v;
+    let ok=false;
+    try{localStorage.setItem(k,v);ok=(localStorage.getItem(k)===v);}catch{}
+    nxCookieSet(k,v);
+    return ok||nxCookieGet(k)===v;
+}
+function nxDel(k){
+    delete nxMem[k];
+    try{localStorage.removeItem(k);}catch{}
+    nxCookieDel(k);
+}
+/* plakken op iOS levert vaak spaties, regeleindes, aanhalingstekens of
+   onzichtbare tekens op — die maken een geldige sleutel ongeldig */
+function nxCleanToken(s){
+    return String(s||'').replace(/[\s\u200b-\u200d\ufeff]/g,'').replace(/^["'<]+|["'>]+$/g,'');
+}
+
+function ghToken(){return nxCleanToken(nxGet('nx_gh_token'));}
+function ghRepo(){return nxGet('nx_gh_repo')||WL_DEFAULT_REPO;}
+
+/* ── status van de koppeling ──
+   'none' geen sleutel · 'ok' werkt · 'auth' geweigerd/verlopen · 'perm' te weinig
+   rechten · 'repo' repository of workflow niet gevonden · 'offline' niet bereikbaar */
+let wlLink={state:'checking',checked:0};
+let wlLinkError=false;   /* staat er nu een koppelingsfout in de terugkoppeling? */
+const WL_LINK_TTL=5*60*1000;
+
+async function wlCheckLink(force){
+    const token=ghToken();
+    if(!token){wlLink={state:'none',checked:Date.now()};return wlLink;}
+    if(!force&&wlLink.state!=='checking'&&Date.now()-wlLink.checked<WL_LINK_TTL) return wlLink;
+    let state='offline';
+    try{
+        const r=await fetch(`https://api.github.com/repos/${ghRepo()}/actions/workflows/${WL_WORKFLOW}`,{
+            headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}});
+        state=r.ok?'ok':r.status===401?'auth':r.status===403?'perm':r.status===404?'repo':'offline';
+    }catch{}
+    wlLink={state,checked:Date.now()};
+    return wlLink;
+}
+
+const WL_LINK_TAG={checking:['koppeling controleren…','var(--muted2)'],
+    ok:['klaar voor gebruik','var(--muted2)'],none:['koppeling nodig','var(--yellow)'],
+    auth:['sleutel verlopen','var(--red)'],perm:['te weinig rechten','var(--red)'],
+    repo:['repository klopt niet','var(--red)'],offline:['GitHub niet bereikbaar','var(--yellow)']};
+
+const WL_LINK_MSG={
+    none:'Er is nog geen koppeling met GitHub op dit apparaat. Plak hieronder je persoonlijke toegangssleutel — daarna vult de app alles vanzelf in.',
+    auth:'De opgeslagen sleutel wordt niet meer geaccepteerd (verlopen of ingetrokken). Maak een nieuwe aan en plak hem hieronder.',
+    perm:'De sleutel werkt, maar heeft geen rechten op Actions. Zet <b>Actions</b> op <b>Read and write</b> voor deze repository, of plak hieronder een nieuwe sleutel.',
+    repo:'De repository of de achtergrondtaak is niet gevonden. Controleer de repository bij <b>Instellingen</b>.',
+    offline:'GitHub is nu niet bereikbaar, dus de koppeling kon niet gecontroleerd worden. Je kunt het gewoon proberen.',
+};
+
+/* sleutel opslaan + meteen controleren; msg(tekst,soort) toont de terugkoppeling */
+async function wlSaveToken(raw,msg){
+    const val=nxCleanToken(raw);
+    if(!val){msg('Vul eerst een sleutel in.','err');return{stored:false,state:'none'};}
+    const stored=nxSet('nx_gh_token',val);
+    if(!stored){
+        msg('Dit apparaat wil niets bewaren (privémodus of website-data uitgeschakeld). De sleutel geldt nu alleen voor dit venster — sluit je het, dan is hij weg.','err');
+    }else{
+        msg('<div class="loading" style="padding:0;justify-content:flex-start"><div class="spin"></div>Sleutel controleren…</div>','info');
+    }
+    const {state}=await wlCheckLink(true);
+    if(state==='ok') msg('Gelukt — de app kan nu zelf analyses starten. Ga naar <b>Watchlist</b> en voeg een aandeel toe.','ok');
+    else if(state==='auth') msg('Deze sleutel wordt niet geaccepteerd. Controleer of je hem volledig hebt geplakt en of hij niet verlopen is.','err');
+    else if(state==='perm') msg('De sleutel werkt, maar heeft geen rechten op Actions. Zet <b>Actions</b> op <b>Read and write</b> bij de instellingen van de sleutel.','err');
+    else if(state==='repo') msg(`Repository <b>${wlEsc(ghRepo())}</b> of de achtergrondtaak niet gevonden. Controleer de repository bij Instellingen.`,'err');
+    else msg('Kon GitHub niet bereiken. De sleutel is opgeslagen; probeer het straks opnieuw.','err');
+    if(document.getElementById('wl-status-tag')) renderWatchlistTab();
+    return{stored,state};
+}
+
+async function wlConnectSave(){
+    const inp=document.getElementById('wl-token');
+    if(!inp) return;
+    await wlSaveToken(inp.value,(m,k)=>wlFeedback(m,k));
+    inp.value='';
+}
+
+/* paneel onder het invoerveld: alleen zichtbaar als de koppeling niet werkt */
+function wlRenderConnect(){
+    const box=document.getElementById('wl-connect');
+    if(!box) return;
+    const st=wlLink.state;
+    if(st==='ok'||st==='offline'||st==='checking'){box.style.display='none';box.innerHTML='';return;}
+    box.style.display='block';
+    const showInput=st!=='repo';
+    box.innerHTML=`<div class="wl-feedback wl-fb-${st==='none'?'info':'err'}" style="display:block">
+        ${WL_LINK_MSG[st]}
+        ${showInput?`<div class="wl-add" style="margin:10px 0 0;padding:0">
+            <input id="wl-token" class="wl-input" type="password" placeholder="github_pat_… of ghp_…"
+                   autocomplete="off" spellcheck="false" style="text-transform:none"
+                   onkeydown="if(event.key==='Enter')wlConnectSave()">
+            <button class="wl-btn" onclick="wlConnectSave()">Koppelen</button>
+        </div>
+        <div style="margin-top:8px;font-size:.7rem">
+            <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--accent)">Nieuwe sleutel maken</a>
+            · <a href="#" onclick="switchTab('settings');return false" style="color:var(--accent)">Instellingen openen</a>
+        </div>`:`<div style="margin-top:8px;font-size:.7rem">
+            <a href="#" onclick="switchTab('settings');return false" style="color:var(--accent)">Instellingen openen</a></div>`}
+    </div>`;
+}
 
 /* pending = aandelen waarvoor de analyse nog draait, blijft staan na herladen */
 function wlPending(){try{return JSON.parse(localStorage.getItem('nx_wl_pending')||'{}');}catch{return{};}}
@@ -4396,7 +4524,7 @@ function wlItems(){return globalData?.watchlist||[];}
 function wlFeedback(msg,kind='info'){
     const el=document.getElementById('wl-feedback');
     if(!el) return;
-    if(!msg){el.style.display='none';return;}
+    if(!msg){el.style.display='none';el.innerHTML='';return;}
     el.className='wl-feedback wl-fb-'+kind;
     el.innerHTML=msg;
     el.style.display='block';
@@ -4462,12 +4590,18 @@ async function wlRun(ticker,action){
         renderWatchlistTab();
     }catch(e){
         const m=String(e.message||e);
-        if(m==='NO_TOKEN'){
-            wlFeedback('Er is nog geen koppeling met GitHub. Ga naar <b>Instellingen</b> en plak daar je persoonlijke toegangssleutel — daarna vult de app alles vanzelf in.','err');
-        }else if(m.startsWith('AUTH')){
-            wlFeedback('De toegangssleutel werkt niet of heeft te weinig rechten. Controleer bij Instellingen of hij <b>Actions: Read and write</b> heeft op deze repository.','err');
-        }else if(m.startsWith('NOTFOUND')){
-            wlFeedback(`De achtergrondtaak is niet gevonden in <b>${wlEsc(ghRepo())}</b>. Controleer de repository bij Instellingen.`,'err');
+        if(m==='NO_TOKEN'||m.startsWith('AUTH')||m.startsWith('NOTFOUND')){
+            /* koppelingsprobleem: haal de echte oorzaak op en toon hem in het
+               koppelpaneel in plaats van altijd "ga naar Instellingen" */
+            wlLinkError=true;
+            wlLink={state:m==='NO_TOKEN'?'none':m.startsWith('NOTFOUND')?'repo':'auth',checked:0};
+            wlFeedback(null);
+            await wlCheckLink(true);
+            if(wlLink.state==='ok'){
+                wlLinkError=false;
+                wlFeedback('Starten is niet gelukt, terwijl de koppeling wél werkt. Probeer het zo nog eens.','err');
+            }
+            renderWatchlistTab();
         }else{
             wlFeedback('Starten mislukt: '+wlEsc(m),'err');
         }
@@ -4554,9 +4688,16 @@ function renderWatchlistTab(){
     const statusTag=document.getElementById('wl-status-tag');
     if(statusTag){
         const n=Object.keys(pend).length;
-        statusTag.textContent=n?`${n} in behandeling`:(ghToken()?'klaar voor gebruik':'koppeling nodig');
-        statusTag.style.color=n?'var(--accent)':(ghToken()?'var(--muted2)':'var(--yellow)');
+        const [label,color]=WL_LINK_TAG[wlLink.state]||WL_LINK_TAG.none;
+        statusTag.textContent=n?`${n} in behandeling`:label;
+        statusTag.style.color=n?'var(--accent)':color;
     }
+    wlRenderConnect();
+    /* een oude koppelingsfout mag niet blijven staan zodra de koppeling weer werkt */
+    if(wlLink.state==='ok'&&wlLinkError){wlLinkError=false;wlFeedback(null);}
+    /* koppeling (opnieuw) nakijken bij het openen van het tabblad */
+    const shown=wlLink.state;
+    wlCheckLink().then(()=>{if(wlLink.state!==shown) renderWatchlistTab();});
 
     const grid=document.getElementById('wl-grid');
     const pendingCards=Object.entries(pend)
@@ -4833,8 +4974,16 @@ function renderSettingsTab(){
     if(repo&&!repo.value) repo.value=ghRepo();
     const tag=document.getElementById('set-token-tag');
     if(tag){
-        tag.textContent=t?'gekoppeld':'niet gekoppeld';
-        tag.style.color=t?'var(--green)':'var(--yellow)';
+        const st=t?wlLink.state:'none';
+        const label={ok:'gekoppeld',auth:'sleutel verlopen',perm:'te weinig rechten',
+            repo:'repository klopt niet',offline:'niet te controleren',
+            checking:'controleren…',none:'niet gekoppeld'}[st];
+        tag.textContent=label;
+        tag.style.color=st==='ok'?'var(--green)':(st==='auth'||st==='perm'||st==='repo')?'var(--red)':'var(--yellow)';
+    }
+    if(t&&wlLink.state==='checking'){
+        const shown=wlLink.state;
+        wlCheckLink().then(()=>{if(wlLink.state!==shown) renderSettingsTab();});
     }
 }
 
@@ -4847,36 +4996,27 @@ function setMsg(msg,kind){
 
 async function setSaveToken(){
     const inp=document.getElementById('set-token');
-    const val=(inp.value||'').trim();
+    const val=nxCleanToken(inp.value);
     if(!val){setMsg('Vul eerst een sleutel in.','err');return;}
-    localStorage.setItem('nx_gh_token',val);
-    inp.value='';
-    setMsg('<div class="loading" style="padding:0;justify-content:flex-start"><div class="spin"></div>Sleutel controleren…</div>','info');
-    try{
-        const r=await fetch(`https://api.github.com/repos/${ghRepo()}/actions/workflows/${WL_WORKFLOW}`,{
-            headers:{'Authorization':'Bearer '+val,'Accept':'application/vnd.github+json'}});
-        if(r.ok) setMsg('Gelukt — de app kan nu zelf analyses starten. Ga naar <b>Watchlist</b> en voeg een aandeel toe.','ok');
-        else if(r.status===401) setMsg('Deze sleutel wordt niet geaccepteerd. Controleer of je hem volledig hebt geplakt en of hij niet verlopen is.','err');
-        else if(r.status===403) setMsg('De sleutel werkt, maar heeft geen rechten op Actions. Zet <b>Actions</b> op <b>Read and write</b> bij de instellingen van de sleutel.','err');
-        else if(r.status===404) setMsg(`Repository <b>${wlEsc(ghRepo())}</b> of de achtergrondtaak niet gevonden. Controleer de repository hieronder.`,'err');
-        else setMsg('Onverwachte reactie van GitHub (code '+r.status+'). De sleutel is wel opgeslagen.','err');
-    }catch{
-        setMsg('Kon GitHub niet bereiken. De sleutel is opgeslagen; probeer straks opnieuw.','err');
-    }
+    const res=await wlSaveToken(val,setMsg);
+    if(res.stored) inp.value='';
     renderSettingsTab();
 }
 
 function setClearToken(){
-    localStorage.removeItem('nx_gh_token');
+    nxDel('nx_gh_token');
     document.getElementById('set-token').value='';
     setMsg('De sleutel is van dit apparaat gewist.','info');
+    wlLink={state:'none',checked:0};
     renderSettingsTab();
+    if(document.getElementById('wl-status-tag')) renderWatchlistTab();
 }
 
 function setSaveRepo(){
     const v=(document.getElementById('set-repo').value||'').trim().replace(/^https?:\/\/github\.com\//,'').replace(/\/$/,'');
     if(!/^[\w.\-]+\/[\w.\-]+$/.test(v)){setMsg('Gebruik de vorm <b>eigenaar/repository</b>.','err');return;}
-    localStorage.setItem('nx_gh_repo',v);
+    nxSet('nx_gh_repo',v);
+    wlLink={state:'none',checked:0};
     setMsg('Repository opgeslagen: <b>'+wlEsc(v)+'</b>','ok');
 }
 
