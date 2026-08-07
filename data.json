@@ -5784,290 +5784,19 @@
     },
     "filings_at": "2026-08-06T08:26:09.618503+00:00",
     "earnings": {
-        "generated_at": "2026-08-06T08:27:29.782737+00:00",
+        "generated_at": "2026-08-07T06:50:38.395665+00:00",
         "horizon_days": 75,
         "stats": {
             "tracked": 70,
             "upcoming_7d": 3,
             "upcoming_30d": 8,
-            "reported": 44,
-            "beats": 33,
-            "misses": 7,
+            "reported": 57,
+            "beats": 44,
+            "misses": 9,
             "inline": 4,
-            "avg_surprise": 17.9
+            "avg_surprise": 19.1
         },
         "calendar": [
-            {
-                "ticker": "ABNB",
-                "name": "Airbnb, Inc.",
-                "sector": "Consumer Cyclical",
-                "tags": [
-                    "bot",
-                    "kandidaat"
-                ],
-                "price": 152.49,
-                "currency": "USD",
-                "market_cap": 90503561216.0,
-                "beat_rate": 25,
-                "avg_surprise": -3.6,
-                "next_date": "2026-08-06",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 1.223,
-                "rev_estimate": 3575583050.0,
-                "last": {
-                    "date": "2026-05-07",
-                    "eps_actual": 0.26,
-                    "eps_estimate": 0.3,
-                    "surprise_pct": -14.1,
-                    "is_report_date": true,
-                    "days_ago": 91,
-                    "eps_yoy": 8.3,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": null,
-                    "verdict": "MISS",
-                    "summary": "Eps -14.1% onder verwachting"
-                },
-                "history": [
-                    {
-                        "date": "2024-08-06",
-                        "eps_actual": 0.86,
-                        "eps_estimate": 0.91,
-                        "surprise_pct": -5.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2024-11-07",
-                        "eps_actual": 2.13,
-                        "eps_estimate": 2.13,
-                        "surprise_pct": -23.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-02-13",
-                        "eps_actual": 0.73,
-                        "eps_estimate": 0.58,
-                        "surprise_pct": 25.1,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-05-01",
-                        "eps_actual": 0.24,
-                        "eps_estimate": 0.24,
-                        "surprise_pct": 0.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-08-06",
-                        "eps_actual": 1.03,
-                        "eps_estimate": 0.94,
-                        "surprise_pct": 9.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-11-06",
-                        "eps_actual": 2.21,
-                        "eps_estimate": 2.32,
-                        "surprise_pct": -4.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-12",
-                        "eps_actual": 0.56,
-                        "eps_estimate": 0.66,
-                        "surprise_pct": -15.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-05-07",
-                        "eps_actual": 0.26,
-                        "eps_estimate": 0.3,
-                        "surprise_pct": -14.1,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "KVUE",
-                "name": "Kenvue Inc.",
-                "sector": "Consumer Defensive",
-                "tags": [
-                    "kandidaat"
-                ],
-                "price": 19.67,
-                "currency": "USD",
-                "market_cap": 37766569984.0,
-                "beat_rate": 100,
-                "avg_surprise": 28.1,
-                "next_date": "2026-08-06",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 0.319,
-                "rev_estimate": 3969291110.0,
-                "last": {
-                    "date": "2026-05-07",
-                    "eps_actual": 0.32,
-                    "eps_estimate": 0.26,
-                    "surprise_pct": 23.0,
-                    "is_report_date": true,
-                    "days_ago": 91,
-                    "eps_yoy": 33.3,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +23.0% boven verwachting"
-                },
-                "history": [
-                    {
-                        "date": "2024-08-06",
-                        "eps_actual": 0.32,
-                        "eps_estimate": 0.28,
-                        "surprise_pct": 15.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2024-11-07",
-                        "eps_actual": 0.28,
-                        "eps_estimate": 0.27,
-                        "surprise_pct": 3.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-02-06",
-                        "eps_actual": 0.26,
-                        "eps_estimate": 0.26,
-                        "surprise_pct": 149.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-05-08",
-                        "eps_actual": 0.24,
-                        "eps_estimate": 0.23,
-                        "surprise_pct": 5.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-08-07",
-                        "eps_actual": 0.29,
-                        "eps_estimate": 0.28,
-                        "surprise_pct": 2.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-11-03",
-                        "eps_actual": 0.28,
-                        "eps_estimate": 0.26,
-                        "surprise_pct": 5.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-17",
-                        "eps_actual": 0.27,
-                        "eps_estimate": 0.22,
-                        "surprise_pct": 21.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-05-07",
-                        "eps_actual": 0.32,
-                        "eps_estimate": 0.26,
-                        "surprise_pct": 23.0,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "AFL",
-                "name": "AFLAC Incorporated",
-                "sector": "Financial Services",
-                "tags": [
-                    "bot"
-                ],
-                "price": 125.56,
-                "currency": "USD",
-                "market_cap": null,
-                "beat_rate": 50,
-                "avg_surprise": -1.0,
-                "next_date": "2026-08-06",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 1.758,
-                "rev_estimate": 4244666670.0,
-                "last": {
-                    "date": "2026-04-29",
-                    "eps_actual": 1.75,
-                    "eps_estimate": 1.8,
-                    "surprise_pct": -2.5,
-                    "is_report_date": true,
-                    "days_ago": 99,
-                    "eps_yoy": 5.4,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": null,
-                    "verdict": "MISS",
-                    "summary": "Eps -2.5% onder verwachting"
-                },
-                "history": [
-                    {
-                        "date": "2024-07-31",
-                        "eps_actual": 1.83,
-                        "eps_estimate": 1.6,
-                        "surprise_pct": 14.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2024-10-30",
-                        "eps_actual": 2.16,
-                        "eps_estimate": 1.68,
-                        "surprise_pct": 28.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-02-05",
-                        "eps_actual": 1.56,
-                        "eps_estimate": 1.62,
-                        "surprise_pct": -3.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-30",
-                        "eps_actual": 1.66,
-                        "eps_estimate": 1.67,
-                        "surprise_pct": -82.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-08-05",
-                        "eps_actual": 1.78,
-                        "eps_estimate": 1.71,
-                        "surprise_pct": 4.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-11-04",
-                        "eps_actual": 2.49,
-                        "eps_estimate": 1.78,
-                        "surprise_pct": 40.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-04",
-                        "eps_actual": 1.57,
-                        "eps_estimate": 1.69,
-                        "surprise_pct": -7.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-29",
-                        "eps_actual": 1.75,
-                        "eps_estimate": 1.8,
-                        "surprise_pct": -2.5,
-                        "is_report_date": true
-                    }
-                ]
-            },
             {
                 "ticker": "BRK-B",
                 "name": "Berkshire Hathaway Inc. New",
@@ -6075,13 +5804,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 518.85,
+                "price": 524.61,
                 "currency": "USD",
-                "market_cap": 1119083560960.0,
+                "market_cap": 1131506958336.0,
                 "beat_rate": 62,
                 "avg_surprise": 8.0,
                 "next_date": "2026-08-08",
-                "days_until": 2,
+                "days_until": 1,
                 "date_estimate": false,
                 "eps_estimate": 5.133,
                 "rev_estimate": 98784000000.0,
@@ -6091,7 +5820,7 @@
                     "eps_estimate": 5.05,
                     "surprise_pct": 4.2,
                     "is_report_date": true,
-                    "days_ago": 96,
+                    "days_ago": 97,
                     "eps_yoy": 17.7,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6165,13 +5894,13 @@
                 "tags": [
                     "bot"
                 ],
-                "price": 72.0,
+                "price": 71.9,
                 "currency": "USD",
-                "market_cap": 11218367488.0,
+                "market_cap": 11202786304.0,
                 "beat_rate": 62,
                 "avg_surprise": -21.8,
                 "next_date": "2026-08-12",
-                "days_until": 6,
+                "days_until": 5,
                 "date_estimate": true,
                 "eps_estimate": 0.519,
                 "rev_estimate": 314682190.0,
@@ -6181,7 +5910,7 @@
                     "eps_estimate": 0.53,
                     "surprise_pct": -82.0,
                     "is_report_date": true,
-                    "days_ago": 92,
+                    "days_ago": 93,
                     "eps_yoy": -5.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6255,13 +5984,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 943.7,
+                "price": 933.2,
                 "currency": "EUR",
-                "market_cap": 29761177600.0,
+                "market_cap": 29430040576.0,
                 "beat_rate": 33,
                 "avg_surprise": -19.4,
                 "next_date": "2026-08-13",
-                "days_until": 7,
+                "days_until": 6,
                 "date_estimate": false,
                 "eps_estimate": 46.556,
                 "rev_estimate": 621045000.0,
@@ -6271,7 +6000,7 @@
                     "eps_estimate": 1.56,
                     "surprise_pct": -32.0,
                     "is_report_date": true,
-                    "days_ago": 1976,
+                    "days_ago": 1977,
                     "eps_yoy": null,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6311,15 +6040,15 @@
                     "bot",
                     "kandidaat"
                 ],
-                "price": 310.67,
+                "price": 308.98,
                 "currency": "USD",
-                "market_cap": 17309894656.0,
+                "market_cap": 17215731712.0,
                 "beat_rate": 75,
                 "avg_surprise": 8.7,
                 "next_date": "2026-08-19",
-                "days_until": 13,
+                "days_until": 12,
                 "date_estimate": false,
-                "eps_estimate": 3.054,
+                "eps_estimate": 3.094,
                 "rev_estimate": 779442860.0,
                 "last": {
                     "date": "2026-05-20",
@@ -6327,7 +6056,7 @@
                     "eps_estimate": 2.82,
                     "surprise_pct": 148.0,
                     "is_report_date": true,
-                    "days_ago": 78,
+                    "days_ago": 79,
                     "eps_yoy": 18.2,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6401,23 +6130,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 112.34,
+                "price": 112.07,
                 "currency": "USD",
-                "market_cap": 894010589184.0,
+                "market_cap": 891861925888.0,
                 "beat_rate": 88,
                 "avg_surprise": 4.5,
                 "next_date": "2026-08-20",
-                "days_until": 14,
+                "days_until": 13,
                 "date_estimate": false,
                 "eps_estimate": 0.742,
-                "rev_estimate": 186918246110.0,
+                "rev_estimate": 186898094270.0,
                 "last": {
                     "date": "2026-05-21",
                     "eps_actual": 0.66,
                     "eps_estimate": 0.66,
                     "surprise_pct": 19.0,
                     "is_report_date": true,
-                    "days_ago": 77,
+                    "days_ago": 78,
                     "eps_yoy": 8.2,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6492,13 +6221,13 @@
                     "watchlist",
                     "mega-cap"
                 ],
-                "price": 219.22,
+                "price": 218.99,
                 "currency": "USD",
-                "market_cap": 5309727768576.0,
+                "market_cap": 5304156684288.0,
                 "beat_rate": 100,
                 "avg_surprise": 5.7,
                 "next_date": "2026-08-26",
-                "days_until": 20,
+                "days_until": 19,
                 "date_estimate": false,
                 "eps_estimate": 2.083,
                 "rev_estimate": 91846098240.0,
@@ -6508,7 +6237,7 @@
                     "eps_estimate": 1.77,
                     "surprise_pct": 5.5,
                     "is_report_date": true,
-                    "days_ago": 78,
+                    "days_ago": 79,
                     "eps_yoy": 130.9,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6582,13 +6311,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 192.98,
+                "price": 186.77,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 88,
                 "avg_surprise": 8.3,
                 "next_date": "2026-08-26",
-                "days_until": 20,
+                "days_until": 19,
                 "date_estimate": false,
                 "eps_estimate": 3.27,
                 "rev_estimate": 11315611360.0,
@@ -6598,7 +6327,7 @@
                     "eps_estimate": 3.13,
                     "surprise_pct": 24.1,
                     "is_report_date": true,
-                    "days_ago": 71,
+                    "days_ago": 72,
                     "eps_yoy": 50.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6672,13 +6401,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 418.28,
+                "price": 420.56,
                 "currency": "USD",
-                "market_cap": 1990000640000.0,
+                "market_cap": 2000871751680.0,
                 "beat_rate": 100,
                 "avg_surprise": 26.2,
                 "next_date": "2026-09-02",
-                "days_until": 27,
+                "days_until": 26,
                 "date_estimate": false,
                 "eps_estimate": 3.238,
                 "rev_estimate": 29435187950.0,
@@ -6688,7 +6417,7 @@
                     "eps_estimate": 2.4,
                     "surprise_pct": 1.7,
                     "is_report_date": true,
-                    "days_ago": 64,
+                    "days_ago": 65,
                     "eps_yoy": 54.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6762,13 +6491,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 144.39,
+                "price": 143.47,
                 "currency": "USD",
-                "market_cap": 415911215104.0,
+                "market_cap": 413261168640.0,
                 "beat_rate": 62,
                 "avg_surprise": -26.9,
                 "next_date": "2026-09-09",
-                "days_until": 34,
+                "days_until": 33,
                 "date_estimate": true,
                 "eps_estimate": 1.739,
                 "rev_estimate": 19124084550.0,
@@ -6778,7 +6507,7 @@
                     "eps_estimate": 1.96,
                     "surprise_pct": 7.5,
                     "is_report_date": true,
-                    "days_ago": 57,
+                    "days_ago": 58,
                     "eps_yoy": 24.1,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6852,13 +6581,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 259.32,
+                "price": 260.24,
                 "currency": "USD",
-                "market_cap": 103079706624.0,
+                "market_cap": 103445397504.0,
                 "beat_rate": 100,
                 "avg_surprise": 2.4,
                 "next_date": "2026-09-10",
-                "days_until": 35,
+                "days_until": 34,
                 "date_estimate": false,
                 "eps_estimate": 6.079,
                 "rev_estimate": 6695163470.0,
@@ -6868,7 +6597,7 @@
                     "eps_estimate": 5.81,
                     "surprise_pct": 2.5,
                     "is_report_date": true,
-                    "days_ago": 56,
+                    "days_ago": 57,
                     "eps_yoy": 17.8,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -6942,13 +6671,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 941.99,
+                "price": 949.15,
                 "currency": "USD",
-                "market_cap": 417752612864.0,
+                "market_cap": 420927930368.0,
                 "beat_rate": 75,
                 "avg_surprise": 46.6,
                 "next_date": "2026-09-24",
-                "days_until": 49,
+                "days_until": 48,
                 "date_estimate": false,
                 "eps_estimate": 6.552,
                 "rev_estimate": 94498671070.0,
@@ -6958,7 +6687,7 @@
                     "eps_estimate": 4.97,
                     "surprise_pct": -85.0,
                     "is_report_date": true,
-                    "days_ago": 70,
+                    "days_ago": 71,
                     "eps_yoy": 15.2,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -7033,13 +6762,13 @@
                     "portfolio",
                     "mega-cap"
                 ],
-                "price": 138.78,
+                "price": 138.44,
                 "currency": "USD",
-                "market_cap": 189573480448.0,
+                "market_cap": 189109043200.0,
                 "beat_rate": 75,
                 "avg_surprise": 36.7,
                 "next_date": "2026-10-08",
-                "days_until": 63,
+                "days_until": 62,
                 "date_estimate": true,
                 "eps_estimate": 2.3,
                 "rev_estimate": 25009337460.0,
@@ -7049,7 +6778,7 @@
                     "eps_estimate": 2.21,
                     "surprise_pct": -37.0,
                     "is_report_date": true,
-                    "days_ago": 28,
+                    "days_ago": 29,
                     "eps_yoy": 3.8,
                     "revenue": 24181000000.0,
                     "revenue_yoy": 6.4,
@@ -7123,13 +6852,13 @@
                 "tags": [
                     "kandidaat"
                 ],
-                "price": 93.14,
+                "price": 91.98,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 88,
                 "avg_surprise": -4.3,
                 "next_date": "2026-10-08",
-                "days_until": 63,
+                "days_until": 62,
                 "date_estimate": true,
                 "eps_estimate": 2.228,
                 "rev_estimate": 19019708820.0,
@@ -7139,7 +6868,7 @@
                     "eps_estimate": 1.49,
                     "surprise_pct": 4.5,
                     "is_report_date": true,
-                    "days_ago": 27,
+                    "days_ago": 28,
                     "eps_yoy": -25.7,
                     "revenue": 19757000000.0,
                     "revenue_yoy": 18.7,
@@ -7213,23 +6942,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 257.59,
+                "price": 256.98,
                 "currency": "USD",
-                "market_cap": 620765773824.0,
+                "market_cap": 619295735808.0,
                 "beat_rate": 88,
                 "avg_surprise": 47.9,
                 "next_date": "2026-10-13",
-                "days_until": 68,
+                "days_until": 67,
                 "date_estimate": false,
-                "eps_estimate": 2.972,
-                "rev_estimate": 25321482070.0,
+                "eps_estimate": 2.427,
+                "rev_estimate": 25172333330.0,
                 "last": {
                     "date": "2026-07-15",
                     "eps_actual": 2.9,
                     "eps_estimate": 2.85,
                     "surprise_pct": 1.6,
                     "is_report_date": true,
-                    "days_ago": 22,
+                    "days_ago": 23,
                     "eps_yoy": 4.7,
                     "revenue": 25310000000.0,
                     "revenue_yoy": 6.6,
@@ -7303,13 +7032,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 1060.38,
+                "price": 1032.58,
                 "currency": "USD",
-                "market_cap": 312819974144.0,
+                "market_cap": 300657737728.0,
                 "beat_rate": 100,
                 "avg_surprise": 20.8,
                 "next_date": "2026-10-13",
-                "days_until": 68,
+                "days_until": 67,
                 "date_estimate": false,
                 "eps_estimate": 16.412,
                 "rev_estimate": 17738494740.0,
@@ -7319,7 +7048,7 @@
                     "eps_estimate": 14.54,
                     "surprise_pct": 44.3,
                     "is_report_date": true,
-                    "days_ago": 23,
+                    "days_ago": 24,
                     "eps_yoy": 92.3,
                     "revenue": 20338000000.0,
                     "revenue_yoy": 39.5,
@@ -7393,23 +7122,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 359.24,
+                "price": 356.3,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 88,
                 "avg_surprise": 7.8,
                 "next_date": "2026-10-13",
-                "days_until": 68,
+                "days_until": 67,
                 "date_estimate": false,
-                "eps_estimate": 5.898,
-                "rev_estimate": 50769127630.0,
+                "eps_estimate": 5.906,
+                "rev_estimate": 50778502630.0,
                 "last": {
                     "date": "2026-07-14",
                     "eps_actual": 6.14,
                     "eps_estimate": 5.8,
                     "surprise_pct": 5.9,
                     "is_report_date": true,
-                    "days_ago": 23,
+                    "days_ago": 24,
                     "eps_yoy": 23.8,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -7483,23 +7212,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 1456.6,
+                "price": 1494.0,
                 "currency": "EUR",
-                "market_cap": 559480045568.0,
+                "market_cap": 573845405696.0,
                 "beat_rate": 88,
                 "avg_surprise": 5.5,
                 "next_date": "2026-10-14",
-                "days_until": 69,
+                "days_until": 68,
                 "date_estimate": false,
                 "eps_estimate": 10.583,
-                "rev_estimate": 11571902950.0,
+                "rev_estimate": 11660138250.0,
                 "last": {
                     "date": "2026-07-13",
                     "eps_actual": 7.58,
                     "eps_estimate": 6.9,
                     "surprise_pct": 9.9,
                     "is_report_date": true,
-                    "days_ago": 24,
+                    "days_ago": 25,
                     "eps_yoy": 28.5,
                     "revenue": 9326500000.0,
                     "revenue_yoy": 21.3,
@@ -7573,23 +7302,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 63.25,
+                "price": 63.0,
                 "currency": "USD",
-                "market_cap": 442291355648.0,
+                "market_cap": 440543150080.0,
                 "beat_rate": 100,
                 "avg_surprise": 7.2,
                 "next_date": "2026-10-14",
-                "days_until": 69,
+                "days_until": 68,
                 "date_estimate": false,
-                "eps_estimate": 1.194,
-                "rev_estimate": 31254361010.0,
+                "eps_estimate": 1.198,
+                "rev_estimate": 31312616560.0,
                 "last": {
                     "date": "2026-07-14",
                     "eps_actual": 1.21,
                     "eps_estimate": 1.12,
                     "surprise_pct": 7.7,
                     "is_report_date": true,
-                    "days_ago": 23,
+                    "days_ago": 24,
                     "eps_yoy": 36.0,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -7663,13 +7392,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 381.22,
+                "price": 374.55,
                 "currency": "USD",
-                "market_cap": 395539578880.0,
+                "market_cap": 388619010048.0,
                 "beat_rate": 100,
                 "avg_surprise": 30.3,
                 "next_date": "2026-10-20",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": false,
                 "eps_estimate": 1.986,
                 "rev_estimate": 12849035380.0,
@@ -7679,7 +7408,7 @@
                     "eps_estimate": 1.86,
                     "surprise_pct": 8.6,
                     "is_report_date": true,
-                    "days_ago": 21,
+                    "days_ago": 22,
                     "eps_yoy": 21.7,
                     "revenue": 13348000000.0,
                     "revenue_yoy": 21.1,
@@ -7753,13 +7482,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 86.83,
+                "price": 86.85,
                 "currency": "USD",
-                "market_cap": 373590327296.0,
+                "market_cap": 373676376064.0,
                 "beat_rate": 100,
                 "avg_surprise": 4.2,
                 "next_date": "2026-10-20",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": false,
                 "eps_estimate": 0.879,
                 "rev_estimate": 12901487840.0,
@@ -7769,7 +7498,7 @@
                     "eps_estimate": 0.93,
                     "surprise_pct": 4.0,
                     "is_report_date": true,
-                    "days_ago": 9,
+                    "days_ago": 10,
                     "eps_yoy": 11.5,
                     "revenue": 13380000000.0,
                     "revenue_yoy": 6.7,
@@ -7843,13 +7572,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 74.2,
+                "price": 73.69,
                 "currency": "USD",
-                "market_cap": 308964294656.0,
+                "market_cap": 306840731648.0,
                 "beat_rate": 75,
                 "avg_surprise": 36.3,
                 "next_date": "2026-10-20",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": true,
                 "eps_estimate": 0.821,
                 "rev_estimate": 12876047060.0,
@@ -7859,7 +7588,7 @@
                     "eps_estimate": 0.79,
                     "surprise_pct": 145.0,
                     "is_report_date": true,
-                    "days_ago": 21,
+                    "days_ago": 22,
                     "eps_yoy": 11.1,
                     "revenue": 12559938000.0,
                     "revenue_yoy": 13.4,
@@ -7925,9 +7654,911 @@
                         "is_report_date": true
                     }
                 ]
+            },
+            {
+                "ticker": "TSLA",
+                "name": "Tesla, Inc.",
+                "sector": "Consumer Cyclical",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 319.53,
+                "currency": "USD",
+                "market_cap": 1261998964736.0,
+                "beat_rate": 38,
+                "avg_surprise": -18.9,
+                "next_date": "2026-10-21",
+                "days_until": 75,
+                "date_estimate": false,
+                "eps_estimate": 0.456,
+                "rev_estimate": 27541445790.0,
+                "last": {
+                    "date": "2026-07-22",
+                    "eps_actual": 0.33,
+                    "eps_estimate": 0.54,
+                    "surprise_pct": -38.4,
+                    "is_report_date": true,
+                    "days_ago": 16,
+                    "eps_yoy": -17.5,
+                    "revenue": 28236000000.0,
+                    "revenue_yoy": 25.5,
+                    "reaction_pct": -14.5,
+                    "verdict": "MISS",
+                    "summary": "Eps -38.4% onder verwachting, omzetgroei +25.5% j-o-j, markt afgestraft (-14.5% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-10-23",
+                        "eps_actual": 0.72,
+                        "eps_estimate": 0.6,
+                        "surprise_pct": 20.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-01-29",
+                        "eps_actual": 0.73,
+                        "eps_estimate": 0.77,
+                        "surprise_pct": -5.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-22",
+                        "eps_actual": 0.27,
+                        "eps_estimate": 0.41,
+                        "surprise_pct": -34.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-23",
+                        "eps_actual": 0.4,
+                        "eps_estimate": 0.4,
+                        "surprise_pct": -111.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-22",
+                        "eps_actual": 0.5,
+                        "eps_estimate": 0.56,
+                        "surprise_pct": -10.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-01-28",
+                        "eps_actual": 0.5,
+                        "eps_estimate": 0.45,
+                        "surprise_pct": 11.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-22",
+                        "eps_actual": 0.41,
+                        "eps_estimate": 0.35,
+                        "surprise_pct": 17.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-22",
+                        "eps_actual": 0.33,
+                        "eps_estimate": 0.54,
+                        "surprise_pct": -38.4,
+                        "is_report_date": true
+                    }
+                ]
             }
         ],
         "reported": [
+            {
+                "ticker": "ABNB",
+                "name": "Airbnb, Inc.",
+                "sector": "Consumer Cyclical",
+                "tags": [
+                    "bot",
+                    "kandidaat"
+                ],
+                "price": 151.64,
+                "currency": "USD",
+                "market_cap": 89999081472.0,
+                "beat_rate": 38,
+                "avg_surprise": -1.7,
+                "next_date": "2026-08-06",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 2.753,
+                "rev_estimate": 4605467220.0,
+                "last": {
+                    "date": "2026-08-06",
+                    "eps_actual": 1.37,
+                    "eps_estimate": 1.25,
+                    "surprise_pct": 9.5,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 33.0,
+                    "revenue": 2678000000.0,
+                    "revenue_yoy": 17.9,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +9.5% boven verwachting, omzetgroei +17.9% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2024-11-07",
+                        "eps_actual": 2.13,
+                        "eps_estimate": 2.13,
+                        "surprise_pct": -23.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-13",
+                        "eps_actual": 0.73,
+                        "eps_estimate": 0.58,
+                        "surprise_pct": 25.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "eps_actual": 0.24,
+                        "eps_estimate": 0.24,
+                        "surprise_pct": 0.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-06",
+                        "eps_actual": 1.03,
+                        "eps_estimate": 0.94,
+                        "surprise_pct": 9.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-06",
+                        "eps_actual": 2.21,
+                        "eps_estimate": 2.32,
+                        "surprise_pct": -4.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-12",
+                        "eps_actual": 0.56,
+                        "eps_estimate": 0.66,
+                        "surprise_pct": -15.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-07",
+                        "eps_actual": 0.26,
+                        "eps_estimate": 0.3,
+                        "surprise_pct": -14.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-06",
+                        "eps_actual": 1.37,
+                        "eps_estimate": 1.25,
+                        "surprise_pct": 9.5,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "AFL",
+                "name": "AFLAC Incorporated",
+                "sector": "Financial Services",
+                "tags": [
+                    "bot"
+                ],
+                "price": 126.66,
+                "currency": "USD",
+                "market_cap": null,
+                "beat_rate": 38,
+                "avg_surprise": -8.4,
+                "next_date": "2026-08-06",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 1.778,
+                "rev_estimate": 4213666670.0,
+                "last": {
+                    "date": "2026-08-06",
+                    "eps_actual": 1.75,
+                    "eps_estimate": 1.76,
+                    "surprise_pct": -45.0,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": -1.7,
+                    "revenue": 4408000000.0,
+                    "revenue_yoy": 27.7,
+                    "reaction_pct": null,
+                    "verdict": "MISS",
+                    "summary": "Eps -45.0% onder verwachting, omzetgroei +27.7% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2024-10-30",
+                        "eps_actual": 2.16,
+                        "eps_estimate": 1.68,
+                        "surprise_pct": 28.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-05",
+                        "eps_actual": 1.56,
+                        "eps_estimate": 1.62,
+                        "surprise_pct": -3.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-30",
+                        "eps_actual": 1.66,
+                        "eps_estimate": 1.67,
+                        "surprise_pct": -82.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-05",
+                        "eps_actual": 1.78,
+                        "eps_estimate": 1.71,
+                        "surprise_pct": 4.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-04",
+                        "eps_actual": 2.49,
+                        "eps_estimate": 1.78,
+                        "surprise_pct": 40.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-04",
+                        "eps_actual": 1.57,
+                        "eps_estimate": 1.69,
+                        "surprise_pct": -7.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-29",
+                        "eps_actual": 1.75,
+                        "eps_estimate": 1.8,
+                        "surprise_pct": -2.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-06",
+                        "eps_actual": 1.75,
+                        "eps_estimate": 1.76,
+                        "surprise_pct": -45.0,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "KVUE",
+                "name": "Kenvue Inc.",
+                "sector": "Consumer Defensive",
+                "tags": [
+                    "kandidaat"
+                ],
+                "price": 19.18,
+                "currency": "USD",
+                "market_cap": 36825767936.0,
+                "beat_rate": 88,
+                "avg_surprise": 25.8,
+                "next_date": "2026-08-06",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 0.303,
+                "rev_estimate": 3882076000.0,
+                "last": {
+                    "date": "2026-08-06",
+                    "eps_actual": 0.31,
+                    "eps_estimate": 0.32,
+                    "surprise_pct": -2.8,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 6.9,
+                    "revenue": 3909000000.0,
+                    "revenue_yoy": 4.5,
+                    "reaction_pct": null,
+                    "verdict": "MISS",
+                    "summary": "Eps -2.8% onder verwachting, omzetgroei +4.5% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2024-11-07",
+                        "eps_actual": 0.28,
+                        "eps_estimate": 0.27,
+                        "surprise_pct": 3.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-06",
+                        "eps_actual": 0.26,
+                        "eps_estimate": 0.26,
+                        "surprise_pct": 149.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-08",
+                        "eps_actual": 0.24,
+                        "eps_estimate": 0.23,
+                        "surprise_pct": 5.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-07",
+                        "eps_actual": 0.29,
+                        "eps_estimate": 0.28,
+                        "surprise_pct": 2.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-03",
+                        "eps_actual": 0.28,
+                        "eps_estimate": 0.26,
+                        "surprise_pct": 5.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-17",
+                        "eps_actual": 0.27,
+                        "eps_estimate": 0.22,
+                        "surprise_pct": 21.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-07",
+                        "eps_actual": 0.32,
+                        "eps_estimate": 0.26,
+                        "surprise_pct": 23.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-06",
+                        "eps_actual": 0.31,
+                        "eps_estimate": 0.32,
+                        "surprise_pct": -2.8,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "HST",
+                "name": "Host Hotels & Resorts, Inc.",
+                "sector": "Real Estate",
+                "tags": [
+                    "bot",
+                    "kandidaat"
+                ],
+                "price": 23.38,
+                "currency": "USD",
+                "market_cap": null,
+                "beat_rate": 100,
+                "avg_surprise": 81.7,
+                "next_date": "2026-11-04",
+                "days_until": 89,
+                "date_estimate": true,
+                "eps_estimate": 0.072,
+                "rev_estimate": 1350966890.0,
+                "last": {
+                    "date": "2026-08-05",
+                    "eps_actual": 0.35,
+                    "eps_estimate": 0.34,
+                    "surprise_pct": 4.4,
+                    "is_report_date": true,
+                    "days_ago": 2,
+                    "eps_yoy": 9.4,
+                    "revenue": 1645000000.0,
+                    "revenue_yoy": 3.2,
+                    "reaction_pct": -7.0,
+                    "verdict": "BEAT",
+                    "summary": "Eps +4.4% boven verwachting, omzetgroei +3.2% j-o-j, markt afgestraft (-7.0% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-11-06",
+                        "eps_actual": 0.12,
+                        "eps_estimate": 0.1,
+                        "surprise_pct": 16.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-19",
+                        "eps_actual": 0.15,
+                        "eps_estimate": 0.13,
+                        "surprise_pct": 19.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-30",
+                        "eps_actual": 0.35,
+                        "eps_estimate": 0.28,
+                        "surprise_pct": 25.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-30",
+                        "eps_actual": 0.32,
+                        "eps_estimate": 0.23,
+                        "surprise_pct": 40.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-05",
+                        "eps_actual": 0.23,
+                        "eps_estimate": 0.04,
+                        "surprise_pct": 428.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-17",
+                        "eps_actual": 0.2,
+                        "eps_estimate": 0.19,
+                        "surprise_pct": 4.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-06",
+                        "eps_actual": 0.72,
+                        "eps_estimate": 0.33,
+                        "surprise_pct": 116.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-05",
+                        "eps_actual": 0.35,
+                        "eps_estimate": 0.34,
+                        "surprise_pct": 4.4,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "EBAY",
+                "name": "eBay Inc.",
+                "sector": "Consumer Cyclical",
+                "tags": [
+                    "kandidaat"
+                ],
+                "price": 110.14,
+                "currency": "USD",
+                "market_cap": 48902160384.0,
+                "beat_rate": 100,
+                "avg_surprise": 14.3,
+                "next_date": "2026-11-04",
+                "days_until": 89,
+                "date_estimate": true,
+                "eps_estimate": 1.435,
+                "rev_estimate": 2988993310.0,
+                "last": {
+                    "date": "2026-08-05",
+                    "eps_actual": 1.6,
+                    "eps_estimate": 1.51,
+                    "surprise_pct": 6.2,
+                    "is_report_date": true,
+                    "days_ago": 2,
+                    "eps_yoy": 16.8,
+                    "revenue": 3089000000.0,
+                    "revenue_yoy": 19.5,
+                    "reaction_pct": -0.9,
+                    "verdict": "BEAT",
+                    "summary": "Eps +6.2% boven verwachting, omzetgroei +19.5% j-o-j, markt afgestraft (-0.9% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-10-30",
+                        "eps_actual": 1.19,
+                        "eps_estimate": 1.18,
+                        "surprise_pct": 84.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-26",
+                        "eps_actual": 1.25,
+                        "eps_estimate": 1.2,
+                        "surprise_pct": 4.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-30",
+                        "eps_actual": 1.38,
+                        "eps_estimate": 1.34,
+                        "surprise_pct": 3.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-30",
+                        "eps_actual": 1.37,
+                        "eps_estimate": 1.3,
+                        "surprise_pct": 5.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-29",
+                        "eps_actual": 1.36,
+                        "eps_estimate": 1.33,
+                        "surprise_pct": 1.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-18",
+                        "eps_actual": 1.41,
+                        "eps_estimate": 1.35,
+                        "surprise_pct": 4.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-29",
+                        "eps_actual": 1.66,
+                        "eps_estimate": 1.58,
+                        "surprise_pct": 5.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-05",
+                        "eps_actual": 1.6,
+                        "eps_estimate": 1.51,
+                        "surprise_pct": 6.2,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "EXPE",
+                "name": "Expedia Group, Inc.",
+                "sector": "Consumer Cyclical",
+                "tags": [
+                    "kandidaat"
+                ],
+                "price": 306.57,
+                "currency": "USD",
+                "market_cap": 36795170816.0,
+                "beat_rate": 100,
+                "avg_surprise": 14.8,
+                "next_date": "2026-11-05",
+                "days_until": 90,
+                "date_estimate": true,
+                "eps_estimate": 8.443,
+                "rev_estimate": 4664454350.0,
+                "last": {
+                    "date": "2026-08-05",
+                    "eps_actual": 5.76,
+                    "eps_estimate": 5.25,
+                    "surprise_pct": 9.7,
+                    "is_report_date": true,
+                    "days_ago": 2,
+                    "eps_yoy": 35.8,
+                    "revenue": 3426000000.0,
+                    "revenue_yoy": 14.7,
+                    "reaction_pct": -4.1,
+                    "verdict": "BEAT",
+                    "summary": "Eps +9.7% boven verwachting, omzetgroei +14.7% j-o-j, markt afgestraft (-4.1% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-11-07",
+                        "eps_actual": 6.13,
+                        "eps_estimate": 6.12,
+                        "surprise_pct": 17.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-06",
+                        "eps_actual": 2.39,
+                        "eps_estimate": 2.1,
+                        "surprise_pct": 13.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-08",
+                        "eps_actual": 0.4,
+                        "eps_estimate": 0.36,
+                        "surprise_pct": 11.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-07",
+                        "eps_actual": 4.24,
+                        "eps_estimate": 4.13,
+                        "surprise_pct": 2.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-06",
+                        "eps_actual": 7.57,
+                        "eps_estimate": 6.95,
+                        "surprise_pct": 9.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-12",
+                        "eps_actual": 3.78,
+                        "eps_estimate": 3.37,
+                        "surprise_pct": 12.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-07",
+                        "eps_actual": 1.96,
+                        "eps_estimate": 1.38,
+                        "surprise_pct": 42.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-05",
+                        "eps_actual": 5.76,
+                        "eps_estimate": 5.25,
+                        "surprise_pct": 9.7,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "GPN",
+                "name": "Global Payments Inc.",
+                "sector": "Industrials",
+                "tags": [
+                    "kandidaat"
+                ],
+                "price": 87.69,
+                "currency": "USD",
+                "market_cap": 23204386816.0,
+                "beat_rate": 62,
+                "avg_surprise": 21.7,
+                "next_date": "2026-11-03",
+                "days_until": 88,
+                "date_estimate": true,
+                "eps_estimate": 3.647,
+                "rev_estimate": 3205486380.0,
+                "last": {
+                    "date": "2026-08-05",
+                    "eps_actual": 3.46,
+                    "eps_estimate": 3.44,
+                    "surprise_pct": 63.0,
+                    "is_report_date": true,
+                    "days_ago": 2,
+                    "eps_yoy": 11.6,
+                    "revenue": null,
+                    "revenue_yoy": null,
+                    "reaction_pct": 0.2,
+                    "verdict": "BEAT",
+                    "summary": "Eps +63.0% boven verwachting, markt beloond (+0.2% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-10-30",
+                        "eps_actual": 3.08,
+                        "eps_estimate": 3.1,
+                        "surprise_pct": -63.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-13",
+                        "eps_actual": 2.95,
+                        "eps_estimate": 2.96,
+                        "surprise_pct": -22.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-06",
+                        "eps_actual": 2.69,
+                        "eps_estimate": 2.72,
+                        "surprise_pct": -98.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-06",
+                        "eps_actual": 3.1,
+                        "eps_estimate": 3.06,
+                        "surprise_pct": 147.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-04",
+                        "eps_actual": 3.26,
+                        "eps_estimate": 3.23,
+                        "surprise_pct": 79.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-18",
+                        "eps_actual": 3.18,
+                        "eps_estimate": 3.16,
+                        "surprise_pct": 62.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-06",
+                        "eps_actual": 2.96,
+                        "eps_estimate": 2.81,
+                        "surprise_pct": 5.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-05",
+                        "eps_actual": 3.46,
+                        "eps_estimate": 3.44,
+                        "surprise_pct": 63.0,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "MELI",
+                "name": "MercadoLibre, Inc.",
+                "sector": "Consumer Cyclical",
+                "tags": [
+                    "watchlist"
+                ],
+                "price": 1830.0,
+                "currency": "USD",
+                "market_cap": 92775145472.0,
+                "beat_rate": 38,
+                "avg_surprise": 5.0,
+                "next_date": "2026-11-04",
+                "days_until": 89,
+                "date_estimate": false,
+                "eps_estimate": 9.107,
+                "rev_estimate": 9752624920.0,
+                "last": {
+                    "date": "2026-08-05",
+                    "eps_actual": 9.19,
+                    "eps_estimate": 8.94,
+                    "surprise_pct": 2.8,
+                    "is_report_date": true,
+                    "days_ago": 2,
+                    "eps_yoy": -10.9,
+                    "revenue": 8845000000.0,
+                    "revenue_yoy": 49.0,
+                    "reaction_pct": -4.8,
+                    "verdict": "BEAT",
+                    "summary": "Eps +2.8% boven verwachting, omzetgroei +49.0% j-o-j, markt afgestraft (-4.8% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-11-06",
+                        "eps_actual": 7.83,
+                        "eps_estimate": 9.85,
+                        "surprise_pct": -20.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-20",
+                        "eps_actual": 12.61,
+                        "eps_estimate": 7.61,
+                        "surprise_pct": 65.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-07",
+                        "eps_actual": 9.74,
+                        "eps_estimate": 7.99,
+                        "surprise_pct": 21.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-04",
+                        "eps_actual": 10.31,
+                        "eps_estimate": 11.75,
+                        "surprise_pct": -12.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-28",
+                        "eps_actual": 8.32,
+                        "eps_estimate": 9.37,
+                        "surprise_pct": -11.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-24",
+                        "eps_actual": 11.03,
+                        "eps_estimate": 11.43,
+                        "surprise_pct": -3.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-07",
+                        "eps_actual": 8.23,
+                        "eps_estimate": 8.47,
+                        "surprise_pct": -2.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-05",
+                        "eps_actual": 9.19,
+                        "eps_estimate": 8.94,
+                        "surprise_pct": 2.8,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "LLY",
+                "name": "Eli Lilly and Company",
+                "sector": "Healthcare",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 1191.94,
+                "currency": "USD",
+                "market_cap": 1062902169600.0,
+                "beat_rate": 75,
+                "avg_surprise": 9.6,
+                "next_date": "2026-10-29",
+                "days_until": 83,
+                "date_estimate": false,
+                "eps_estimate": 9.716,
+                "rev_estimate": 22102449920.0,
+                "last": {
+                    "date": "2026-08-05",
+                    "eps_actual": 8.38,
+                    "eps_estimate": 6.58,
+                    "surprise_pct": 27.3,
+                    "is_report_date": true,
+                    "days_ago": 2,
+                    "eps_yoy": 32.8,
+                    "revenue": 19799000000.0,
+                    "revenue_yoy": 55.5,
+                    "reaction_pct": 1.9,
+                    "verdict": "BEAT",
+                    "summary": "Eps +27.3% boven verwachting, omzetgroei +55.5% j-o-j, markt beloond (+1.9% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-10-30",
+                        "eps_actual": 1.18,
+                        "eps_estimate": 1.47,
+                        "surprise_pct": -19.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-06",
+                        "eps_actual": 5.32,
+                        "eps_estimate": 5.07,
+                        "surprise_pct": 5.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "eps_actual": 3.34,
+                        "eps_estimate": 3.46,
+                        "surprise_pct": -3.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-07",
+                        "eps_actual": 6.31,
+                        "eps_estimate": 5.59,
+                        "surprise_pct": 12.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 7.02,
+                        "eps_estimate": 5.89,
+                        "surprise_pct": 19.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-04",
+                        "eps_actual": 7.54,
+                        "eps_estimate": 6.91,
+                        "surprise_pct": 9.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 8.55,
+                        "eps_estimate": 6.79,
+                        "surprise_pct": 25.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-05",
+                        "eps_actual": 8.38,
+                        "eps_estimate": 6.58,
+                        "surprise_pct": 27.3,
+                        "is_report_date": true
+                    }
+                ]
+            },
             {
                 "ticker": "BR",
                 "name": "Broadridge Financial Solutions,",
@@ -7935,29 +8566,29 @@
                 "tags": [
                     "bot"
                 ],
-                "price": 163.41,
+                "price": 164.75,
                 "currency": "USD",
-                "market_cap": 18632302592.0,
+                "market_cap": 18785091584.0,
                 "beat_rate": 100,
                 "avg_surprise": 39.6,
                 "next_date": "2026-11-03",
-                "days_until": 89,
+                "days_until": 88,
                 "date_estimate": true,
-                "eps_estimate": 3.757,
-                "rev_estimate": 2167153330.0,
+                "eps_estimate": 1.377,
+                "rev_estimate": 1649800000.0,
                 "last": {
                     "date": "2026-08-04",
                     "eps_actual": 3.82,
                     "eps_estimate": 3.76,
                     "surprise_pct": 1.7,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 7.6,
-                    "revenue": 1953600000.0,
-                    "revenue_yoy": 7.8,
+                    "revenue": 2219900000.0,
+                    "revenue_yoy": 7.5,
                     "reaction_pct": -3.0,
                     "verdict": "INLINE",
-                    "summary": "Eps in lijn (+1.7%), omzetgroei +7.8% j-o-j, markt afgestraft (-3.0% dag erna)"
+                    "summary": "Eps in lijn (+1.7%), omzetgroei +7.5% j-o-j, markt afgestraft (-3.0% dag erna)"
                 },
                 "history": [
                     {
@@ -8025,23 +8656,23 @@
                 "tags": [
                     "bot"
                 ],
-                "price": 24.87,
+                "price": 24.43,
                 "currency": "USD",
-                "market_cap": 16682531840.0,
+                "market_cap": 16387384320.0,
                 "beat_rate": 75,
                 "avg_surprise": 5.8,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": true,
-                "eps_estimate": 0.198,
-                "rev_estimate": 542660820.0,
+                "eps_estimate": 0.21,
+                "rev_estimate": 544176500.0,
                 "last": {
                     "date": "2026-08-04",
                     "eps_actual": 0.22,
                     "eps_estimate": 0.2,
                     "surprise_pct": 13.5,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 22.2,
                     "revenue": 550801000.0,
                     "revenue_yoy": null,
@@ -8109,29 +8740,390 @@
                 ]
             },
             {
+                "ticker": "EMR",
+                "name": "Emerson Electric Company",
+                "sector": "Industrials",
+                "tags": [
+                    "bot",
+                    "kandidaat"
+                ],
+                "price": 156.91,
+                "currency": "USD",
+                "market_cap": 87524401152.0,
+                "beat_rate": 100,
+                "avg_surprise": 28.5,
+                "next_date": "2026-11-04",
+                "days_until": 89,
+                "date_estimate": true,
+                "eps_estimate": 1.836,
+                "rev_estimate": 5104209930.0,
+                "last": {
+                    "date": "2026-08-04",
+                    "eps_actual": 1.71,
+                    "eps_estimate": 1.68,
+                    "surprise_pct": 2.0,
+                    "is_report_date": true,
+                    "days_ago": 3,
+                    "eps_yoy": 12.5,
+                    "revenue": 4873000000.0,
+                    "revenue_yoy": 7.0,
+                    "reaction_pct": 2.3,
+                    "verdict": "BEAT",
+                    "summary": "Eps +2.0% boven verwachting, omzetgroei +7.0% j-o-j, markt beloond (+2.3% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-11-05",
+                        "eps_actual": 1.48,
+                        "eps_estimate": 1.47,
+                        "surprise_pct": 69.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-05",
+                        "eps_actual": 1.38,
+                        "eps_estimate": 1.28,
+                        "surprise_pct": 8.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-07",
+                        "eps_actual": 1.48,
+                        "eps_estimate": 1.41,
+                        "surprise_pct": 4.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-06",
+                        "eps_actual": 1.52,
+                        "eps_estimate": 1.51,
+                        "surprise_pct": 69.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-05",
+                        "eps_actual": 1.62,
+                        "eps_estimate": 1.62,
+                        "surprise_pct": 28.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-03",
+                        "eps_actual": 1.46,
+                        "eps_estimate": 1.41,
+                        "surprise_pct": 3.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-05",
+                        "eps_actual": 1.54,
+                        "eps_estimate": 1.53,
+                        "surprise_pct": 44.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-04",
+                        "eps_actual": 1.71,
+                        "eps_estimate": 1.68,
+                        "surprise_pct": 2.0,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "AIZ",
+                "name": "Assurant, Inc.",
+                "sector": "Financial Services",
+                "tags": [
+                    "bot"
+                ],
+                "price": 296.4,
+                "currency": "USD",
+                "market_cap": null,
+                "beat_rate": 100,
+                "avg_surprise": 17.2,
+                "next_date": "2026-11-03",
+                "days_until": 88,
+                "date_estimate": true,
+                "eps_estimate": 4.467,
+                "rev_estimate": 3464050000.0,
+                "last": {
+                    "date": "2026-08-04",
+                    "eps_actual": 6.41,
+                    "eps_estimate": 5.18,
+                    "surprise_pct": 23.7,
+                    "is_report_date": true,
+                    "days_ago": 3,
+                    "eps_yoy": 25.7,
+                    "revenue": 3420100000.0,
+                    "revenue_yoy": 11.3,
+                    "reaction_pct": 7.2,
+                    "verdict": "BEAT",
+                    "summary": "Eps +23.7% boven verwachting, omzetgroei +11.3% j-o-j, markt beloond (+7.2% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-11-05",
+                        "eps_actual": 3.0,
+                        "eps_estimate": 2.64,
+                        "surprise_pct": 13.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-11",
+                        "eps_actual": 4.79,
+                        "eps_estimate": 4.13,
+                        "surprise_pct": 15.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-06",
+                        "eps_actual": 3.39,
+                        "eps_estimate": 2.78,
+                        "surprise_pct": 22.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-05",
+                        "eps_actual": 5.1,
+                        "eps_estimate": 4.45,
+                        "surprise_pct": 14.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-04",
+                        "eps_actual": 5.73,
+                        "eps_estimate": 4.28,
+                        "surprise_pct": 34.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-10",
+                        "eps_actual": 5.61,
+                        "eps_estimate": 5.5,
+                        "surprise_pct": 1.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-05",
+                        "eps_actual": 5.95,
+                        "eps_estimate": 5.33,
+                        "surprise_pct": 11.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-04",
+                        "eps_actual": 6.41,
+                        "eps_estimate": 5.18,
+                        "surprise_pct": 23.7,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "DOC",
+                "name": "Healthpeak Properties, Inc.",
+                "sector": "Real Estate",
+                "tags": [
+                    "kandidaat"
+                ],
+                "price": 21.1,
+                "currency": "USD",
+                "market_cap": 14958787584.0,
+                "beat_rate": 62,
+                "avg_surprise": 32.2,
+                "next_date": "2026-10-22",
+                "days_until": 76,
+                "date_estimate": true,
+                "eps_estimate": -0.15,
+                "rev_estimate": 729607460.0,
+                "last": {
+                    "date": "2026-08-04",
+                    "eps_actual": 0.08,
+                    "eps_estimate": 0.03,
+                    "surprise_pct": 198.6,
+                    "is_report_date": true,
+                    "days_ago": 3,
+                    "eps_yoy": 33.3,
+                    "revenue": null,
+                    "revenue_yoy": null,
+                    "reaction_pct": 0.8,
+                    "verdict": "BEAT",
+                    "summary": "Eps +198.6% boven verwachting, markt beloond (+0.8% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-10-24",
+                        "eps_actual": 0.05,
+                        "eps_estimate": 0.05,
+                        "surprise_pct": -8.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-03",
+                        "eps_actual": 0.05,
+                        "eps_estimate": 0.05,
+                        "surprise_pct": -4.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-24",
+                        "eps_actual": 0.06,
+                        "eps_estimate": 0.05,
+                        "surprise_pct": 40.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-24",
+                        "eps_actual": 0.06,
+                        "eps_estimate": 0.06,
+                        "surprise_pct": 12.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-23",
+                        "eps_actual": -0.18,
+                        "eps_estimate": 0.06,
+                        "surprise_pct": -403.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-02",
+                        "eps_actual": 0.1,
+                        "eps_estimate": 0.06,
+                        "surprise_pct": 59.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-05",
+                        "eps_actual": 0.28,
+                        "eps_estimate": 0.06,
+                        "surprise_pct": 363.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-04",
+                        "eps_actual": 0.08,
+                        "eps_estimate": 0.03,
+                        "surprise_pct": 198.6,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "AMD",
+                "name": "Advanced Micro Devices, Inc.",
+                "sector": "Technology",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 489.28,
+                "currency": "USD",
+                "market_cap": 798737367040.0,
+                "beat_rate": 88,
+                "avg_surprise": 7.2,
+                "next_date": "2026-11-03",
+                "days_until": 88,
+                "date_estimate": true,
+                "eps_estimate": 1.925,
+                "rev_estimate": 12992722440.0,
+                "last": {
+                    "date": "2026-08-04",
+                    "eps_actual": 1.66,
+                    "eps_estimate": 1.61,
+                    "surprise_pct": 3.2,
+                    "is_report_date": true,
+                    "days_ago": 3,
+                    "eps_yoy": 245.8,
+                    "revenue": 10253000000.0,
+                    "revenue_yoy": 37.8,
+                    "reaction_pct": -7.0,
+                    "verdict": "BEAT",
+                    "summary": "Eps +3.2% boven verwachting, omzetgroei +37.8% j-o-j, markt afgestraft (-7.0% dag erna)"
+                },
+                "history": [
+                    {
+                        "date": "2024-10-29",
+                        "eps_actual": 0.92,
+                        "eps_estimate": 0.92,
+                        "surprise_pct": 46.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-02-04",
+                        "eps_actual": 1.09,
+                        "eps_estimate": 1.09,
+                        "surprise_pct": 36.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-06",
+                        "eps_actual": 0.96,
+                        "eps_estimate": 0.93,
+                        "surprise_pct": 2.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-05",
+                        "eps_actual": 0.48,
+                        "eps_estimate": 0.48,
+                        "surprise_pct": -55.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-11-04",
+                        "eps_actual": 1.2,
+                        "eps_estimate": 1.17,
+                        "surprise_pct": 2.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-03",
+                        "eps_actual": 1.53,
+                        "eps_estimate": 1.32,
+                        "surprise_pct": 16.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-05",
+                        "eps_actual": 1.37,
+                        "eps_estimate": 1.29,
+                        "surprise_pct": 5.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-04",
+                        "eps_actual": 1.66,
+                        "eps_estimate": 1.61,
+                        "surprise_pct": 3.2,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
                 "ticker": "MRK",
                 "name": "Merck & Company, Inc.",
                 "sector": "Healthcare",
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 128.33,
+                "price": 128.37,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 100,
                 "avg_surprise": 29.3,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": false,
-                "eps_estimate": 2.272,
-                "rev_estimate": 17332651740.0,
+                "eps_estimate": 2.261,
+                "rev_estimate": 17303337310.0,
                 "last": {
                     "date": "2026-08-04",
                     "eps_actual": -0.13,
                     "eps_estimate": -0.26,
                     "surprise_pct": 49.4,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": -106.1,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -8205,23 +9197,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 274.0,
+                "price": 276.26,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 62,
                 "avg_surprise": 16.5,
                 "next_date": "2026-11-05",
-                "days_until": 91,
+                "days_until": 90,
                 "date_estimate": true,
-                "eps_estimate": 3.321,
-                "rev_estimate": 7126506110.0,
+                "eps_estimate": 3.411,
+                "rev_estimate": 7305973900.0,
                 "last": {
                     "date": "2026-08-04",
                     "eps_actual": 3.38,
                     "eps_estimate": 3.32,
                     "surprise_pct": 1.8,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 6.0,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -8295,23 +9287,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 871.08,
+                "price": 856.96,
                 "currency": "USD",
-                "market_cap": null,
+                "market_cap": 393923002368.0,
                 "beat_rate": 62,
                 "avg_surprise": 7.9,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": false,
-                "eps_estimate": 6.197,
-                "rev_estimate": 19199012500.0,
+                "eps_estimate": 6.894,
+                "rev_estimate": 20258107290.0,
                 "last": {
                     "date": "2026-08-04",
                     "eps_actual": 8.17,
                     "eps_estimate": 6.2,
                     "surprise_pct": 31.8,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 73.1,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -8386,23 +9378,23 @@
                     "watchlist",
                     "mega-cap"
                 ],
-                "price": 158.43,
+                "price": 155.92,
                 "currency": "USD",
-                "market_cap": 379806121984.0,
+                "market_cap": 374684876800.0,
                 "beat_rate": 100,
                 "avg_surprise": 28.9,
                 "next_date": "2026-11-02",
-                "days_until": 88,
+                "days_until": 87,
                 "date_estimate": true,
-                "eps_estimate": 0.408,
-                "rev_estimate": 2171235880.0,
+                "eps_estimate": 0.412,
+                "rev_estimate": 2176935820.0,
                 "last": {
                     "date": "2026-08-03",
                     "eps_actual": 0.41,
                     "eps_estimate": 0.35,
                     "surprise_pct": 18.5,
                     "is_report_date": true,
-                    "days_ago": 3,
+                    "days_ago": 4,
                     "eps_yoy": 156.2,
                     "revenue": 1632583000.0,
                     "revenue_yoy": 84.7,
@@ -8476,15 +9468,15 @@
                 "tags": [
                     "bot"
                 ],
-                "price": 34.92,
+                "price": 34.0,
                 "currency": "USD",
-                "market_cap": 17742045184.0,
+                "market_cap": 17274613760.0,
                 "beat_rate": 62,
                 "avg_surprise": -5.8,
                 "next_date": "2026-07-31",
-                "days_until": -6,
+                "days_until": -7,
                 "date_estimate": false,
-                "eps_estimate": 0.771,
+                "eps_estimate": 0.768,
                 "rev_estimate": 2425000000.0,
                 "last": {
                     "date": "2026-07-31",
@@ -8492,7 +9484,7 @@
                     "eps_estimate": 0.66,
                     "surprise_pct": 8.3,
                     "is_report_date": true,
-                    "days_ago": 6,
+                    "days_ago": 7,
                     "eps_yoy": 46.9,
                     "revenue": 2358400000.0,
                     "revenue_yoy": 14.3,
@@ -8566,23 +9558,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 246.2,
+                "price": 243.87,
                 "currency": "USD",
-                "market_cap": 435064274944.0,
+                "market_cap": 430946877440.0,
                 "beat_rate": 88,
                 "avg_surprise": 6.7,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": true,
-                "eps_estimate": 3.873,
-                "rev_estimate": 17289266670.0,
+                "eps_estimate": 3.844,
+                "rev_estimate": 17311900150.0,
                 "last": {
                     "date": "2026-07-31",
                     "eps_actual": 3.65,
                     "eps_estimate": 3.61,
                     "surprise_pct": 115.0,
                     "is_report_date": true,
-                    "days_ago": 6,
+                    "days_ago": 7,
                     "eps_yoy": 22.9,
                     "revenue": 15002000000.0,
                     "revenue_yoy": 12.4,
@@ -8656,23 +9648,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 151.63,
+                "price": 154.84,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 100,
                 "avg_surprise": 34.4,
                 "next_date": "2026-10-30",
-                "days_until": 85,
+                "days_until": 84,
                 "date_estimate": true,
-                "eps_estimate": 3.569,
-                "rev_estimate": 97401085350.0,
+                "eps_estimate": 3.527,
+                "rev_estimate": 97097176380.0,
                 "last": {
                     "date": "2026-07-31",
                     "eps_actual": 4.11,
                     "eps_estimate": 3.63,
                     "surprise_pct": 13.3,
                     "is_report_date": true,
-                    "days_ago": 6,
+                    "days_ago": 7,
                     "eps_yoy": 150.6,
                     "revenue": 83161000000.0,
                     "revenue_yoy": 2.6,
@@ -8746,15 +9738,15 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 186.41,
+                "price": 189.23,
                 "currency": "USD",
-                "market_cap": 371253739520.0,
+                "market_cap": 371269238784.0,
                 "beat_rate": 88,
                 "avg_surprise": 25.3,
                 "next_date": "2026-10-30",
-                "days_until": 85,
+                "days_until": 84,
                 "date_estimate": true,
-                "eps_estimate": 4.516,
+                "eps_estimate": 4.495,
                 "rev_estimate": 57779843130.0,
                 "last": {
                     "date": "2026-07-31",
@@ -8762,7 +9754,7 @@
                     "eps_estimate": 5.57,
                     "surprise_pct": 8.8,
                     "is_report_date": true,
-                    "days_ago": 6,
+                    "days_ago": 7,
                     "eps_yoy": 242.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -8836,13 +9828,13 @@
                 "tags": [
                     "bot"
                 ],
-                "price": 82.66,
+                "price": 83.02,
                 "currency": "USD",
-                "market_cap": 31192641536.0,
+                "market_cap": 31328489472.0,
                 "beat_rate": 75,
                 "avg_surprise": 5.7,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": true,
                 "eps_estimate": 0.671,
                 "rev_estimate": 1328686570.0,
@@ -8852,7 +9844,7 @@
                     "eps_estimate": 0.61,
                     "surprise_pct": 15.1,
                     "is_report_date": true,
-                    "days_ago": 7,
+                    "days_ago": 8,
                     "eps_yoy": 45.8,
                     "revenue": 1308400000.0,
                     "revenue_yoy": 13.1,
@@ -8927,13 +9919,13 @@
                     "watchlist",
                     "mega-cap"
                 ],
-                "price": 311.0,
+                "price": 312.41,
                 "currency": "USD",
-                "market_cap": 4538790051840.0,
+                "market_cap": 4559367831552.0,
                 "beat_rate": 100,
                 "avg_surprise": 4.6,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": true,
                 "eps_estimate": 1.976,
                 "rev_estimate": 113256580210.0,
@@ -8943,7 +9935,7 @@
                     "eps_estimate": 1.89,
                     "surprise_pct": 6.7,
                     "is_report_date": true,
-                    "days_ago": 7,
+                    "days_ago": 8,
                     "eps_yoy": 28.7,
                     "revenue": 109417000000.0,
                     "revenue_yoy": 16.4,
@@ -9017,23 +10009,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 272.65,
+                "price": 272.26,
                 "currency": "USD",
-                "market_cap": 2940888154112.0,
+                "market_cap": 2936681791488.0,
                 "beat_rate": 100,
                 "avg_surprise": 53.2,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": true,
-                "eps_estimate": 1.941,
-                "rev_estimate": 201948612740.0,
+                "eps_estimate": 1.945,
+                "rev_estimate": 201818923610.0,
                 "last": {
                     "date": "2026-07-30",
                     "eps_actual": 5.75,
                     "eps_estimate": 1.83,
                     "surprise_pct": 215.0,
                     "is_report_date": true,
-                    "days_ago": 7,
+                    "days_ago": 8,
                     "eps_yoy": 242.3,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9107,23 +10099,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 570.48,
+                "price": 575.95,
                 "currency": "USD",
-                "market_cap": 499746111488.0,
+                "market_cap": 504537939968.0,
                 "beat_rate": 100,
                 "avg_surprise": 4.8,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": true,
-                "eps_estimate": 5.148,
-                "rev_estimate": 9650729570.0,
+                "eps_estimate": 5.146,
+                "rev_estimate": 9649807860.0,
                 "last": {
                     "date": "2026-07-30",
                     "eps_actual": 5.04,
                     "eps_estimate": 4.78,
                     "surprise_pct": 5.5,
                     "is_report_date": true,
-                    "days_ago": 7,
+                    "days_ago": 8,
                     "eps_yoy": 21.4,
                     "revenue": 9277000000.0,
                     "revenue_yoy": 14.1,
@@ -9198,23 +10190,23 @@
                     "bot",
                     "kandidaat"
                 ],
-                "price": 153.65,
+                "price": 154.55,
                 "currency": "USD",
-                "market_cap": 93072171008.0,
+                "market_cap": 93617340416.0,
                 "beat_rate": 100,
                 "avg_surprise": 5.4,
                 "next_date": "2026-07-29",
-                "days_until": -8,
+                "days_until": -9,
                 "date_estimate": false,
-                "eps_estimate": 1.575,
-                "rev_estimate": 7024632550.0,
+                "eps_estimate": 1.574,
+                "rev_estimate": 7020405510.0,
                 "last": {
                     "date": "2026-07-29",
                     "eps_actual": 1.42,
                     "eps_estimate": 1.3,
                     "surprise_pct": 9.0,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": 35.2,
                     "revenue": 6614000000.0,
                     "revenue_yoy": 9.3,
@@ -9288,23 +10280,23 @@
                 "tags": [
                     "kandidaat"
                 ],
-                "price": 236.98,
+                "price": 233.71,
                 "currency": "USD",
-                "market_cap": 17470140416.0,
+                "market_cap": 17229076480.0,
                 "beat_rate": 100,
                 "avg_surprise": 22.1,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": true,
                 "eps_estimate": 2.237,
-                "rev_estimate": 931627570.0,
+                "rev_estimate": 932336620.0,
                 "last": {
                     "date": "2026-07-29",
                     "eps_actual": 2.32,
                     "eps_estimate": 2.11,
                     "surprise_pct": 9.9,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": 12.1,
                     "revenue": 920600000.0,
                     "revenue_yoy": 6.4,
@@ -9378,23 +10370,23 @@
                 "tags": [
                     "kandidaat"
                 ],
-                "price": 1056.2,
+                "price": 1052.86,
                 "currency": "USD",
-                "market_cap": 104217034752.0,
+                "market_cap": 103887470592.0,
                 "beat_rate": 75,
                 "avg_surprise": 5.8,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": true,
-                "eps_estimate": 4.102,
-                "rev_estimate": 2569100410.0,
+                "eps_estimate": 4.118,
+                "rev_estimate": 2569089990.0,
                 "last": {
                     "date": "2026-07-29",
                     "eps_actual": 5.1,
                     "eps_estimate": 4.8,
                     "surprise_pct": 6.3,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": 34.6,
                     "revenue": 2625000000.0,
                     "revenue_yoy": 16.4,
@@ -9468,13 +10460,13 @@
                 "tags": [
                     "watchlist"
                 ],
-                "price": 92.8,
+                "price": 90.71,
                 "currency": "USD",
-                "market_cap": 83434840064.0,
+                "market_cap": 81555750912.0,
                 "beat_rate": 100,
                 "avg_surprise": 33.0,
                 "next_date": "2026-11-04",
-                "days_until": 90,
+                "days_until": 89,
                 "date_estimate": false,
                 "eps_estimate": 0.605,
                 "rev_estimate": 1344935000.0,
@@ -9484,7 +10476,7 @@
                     "eps_estimate": 0.43,
                     "surprise_pct": 43.7,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": 47.6,
                     "revenue": 1308000000.0,
                     "revenue_yoy": 32.3,
@@ -9558,23 +10550,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 487.46,
+                "price": 499.86,
                 "currency": "USD",
-                "market_cap": 3619656564736.0,
+                "market_cap": 3711733071872.0,
                 "beat_rate": 100,
                 "avg_surprise": 7.5,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": true,
                 "eps_estimate": 4.713,
-                "rev_estimate": 90624898800.0,
+                "rev_estimate": 90662601500.0,
                 "last": {
                     "date": "2026-07-29",
                     "eps_actual": 4.74,
                     "eps_estimate": 4.24,
                     "surprise_pct": 11.8,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": 29.9,
                     "revenue": 90007000000.0,
                     "revenue_yoy": 17.7,
@@ -9648,23 +10640,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 588.77,
+                "price": 589.9,
                 "currency": "USD",
-                "market_cap": 1499895300096.0,
+                "market_cap": 1502773903360.0,
                 "beat_rate": 88,
                 "avg_surprise": 11.0,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": true,
-                "eps_estimate": 6.856,
-                "rev_estimate": 63276705170.0,
+                "eps_estimate": 6.976,
+                "rev_estimate": 63311539210.0,
                 "last": {
                     "date": "2026-07-29",
                     "eps_actual": 6.18,
                     "eps_estimate": 7.22,
                     "surprise_pct": -14.4,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": -13.4,
                     "revenue": 60801000000.0,
                     "revenue_yoy": 28.0,
@@ -9738,13 +10730,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 146.8,
+                "price": 146.97,
                 "currency": "USD",
-                "market_cap": 341226782720.0,
+                "market_cap": 341621932032.0,
                 "beat_rate": 100,
                 "avg_surprise": 42.8,
                 "next_date": "2026-10-22",
-                "days_until": 77,
+                "days_until": 76,
                 "date_estimate": false,
                 "eps_estimate": 1.887,
                 "rev_estimate": 22749226910.0,
@@ -9754,7 +10746,7 @@
                     "eps_estimate": 1.41,
                     "surprise_pct": 1.6,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": -3.4,
                     "revenue": 21204000000.0,
                     "revenue_yoy": 1.5,
@@ -9828,23 +10820,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 30.9,
+                "price": 30.82,
                 "currency": "EUR",
-                "market_cap": 88298889216.0,
+                "market_cap": 88084578304.0,
                 "beat_rate": 88,
                 "avg_surprise": 15.0,
                 "next_date": "2026-10-29",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": false,
                 "eps_estimate": 0.679,
-                "rev_estimate": 6292128330.0,
+                "rev_estimate": 6302124330.0,
                 "last": {
                     "date": "2026-07-29",
                     "eps_actual": 0.68,
                     "eps_estimate": 0.65,
                     "surprise_pct": 5.2,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": 21.4,
                     "revenue": 6256000000.0,
                     "revenue_yoy": 9.7,
@@ -9919,23 +10911,23 @@
                     "portfolio",
                     "mega-cap"
                 ],
-                "price": 368.54,
+                "price": 370.47,
                 "currency": "USD",
-                "market_cap": 688081600512.0,
+                "market_cap": 691685031936.0,
                 "beat_rate": 100,
                 "avg_surprise": 17.7,
                 "next_date": "2026-10-27",
-                "days_until": 82,
+                "days_until": 81,
                 "date_estimate": true,
-                "eps_estimate": 3.438,
-                "rev_estimate": 12092839050.0,
+                "eps_estimate": 3.437,
+                "rev_estimate": 12093946190.0,
                 "last": {
                     "date": "2026-07-28",
                     "eps_actual": 3.32,
                     "eps_estimate": 3.23,
                     "surprise_pct": 2.8,
                     "is_report_date": true,
-                    "days_ago": 9,
+                    "days_ago": 10,
                     "eps_yoy": 11.4,
                     "revenue": 11633000000.0,
                     "revenue_yoy": 14.4,
@@ -10009,13 +11001,13 @@
                 "tags": [
                     "portfolio"
                 ],
-                "price": 38.95,
+                "price": 39.67,
                 "currency": "USD",
-                "market_cap": 5147034112.0,
+                "market_cap": 5242178048.0,
                 "beat_rate": 62,
                 "avg_surprise": 0.1,
                 "next_date": "2026-10-27",
-                "days_until": 82,
+                "days_until": 81,
                 "date_estimate": false,
                 "eps_estimate": 0.504,
                 "rev_estimate": 304754690.0,
@@ -10025,7 +11017,7 @@
                     "eps_estimate": 0.46,
                     "surprise_pct": -76.0,
                     "is_report_date": true,
-                    "days_ago": 9,
+                    "days_ago": 10,
                     "eps_yoy": -33.3,
                     "revenue": 291854000.0,
                     "revenue_yoy": -19.6,
@@ -10099,13 +11091,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 86.83,
+                "price": 86.85,
                 "currency": "USD",
-                "market_cap": 373590327296.0,
+                "market_cap": 373676376064.0,
                 "beat_rate": 100,
                 "avg_surprise": 4.2,
                 "next_date": "2026-10-20",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": false,
                 "eps_estimate": 0.879,
                 "rev_estimate": 12901487840.0,
@@ -10115,7 +11107,7 @@
                     "eps_estimate": 0.93,
                     "surprise_pct": 4.0,
                     "is_report_date": true,
-                    "days_ago": 9,
+                    "days_ago": 10,
                     "eps_yoy": 11.5,
                     "revenue": 13380000000.0,
                     "revenue_yoy": 6.7,
@@ -10189,23 +11181,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 240.19,
+                "price": 232.19,
                 "currency": "USD",
-                "market_cap": 189838983168.0,
+                "market_cap": 183516020736.0,
                 "beat_rate": 50,
                 "avg_surprise": 278.6,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": false,
-                "eps_estimate": -0.149,
-                "rev_estimate": 24866169120.0,
+                "eps_estimate": -0.142,
+                "rev_estimate": 24931542020.0,
                 "last": {
                     "date": "2026-07-28",
                     "eps_actual": -0.76,
                     "eps_estimate": -0.31,
                     "surprise_pct": -141.5,
                     "is_report_date": true,
-                    "days_ago": 9,
+                    "days_ago": 10,
                     "eps_yoy": null,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10279,13 +11271,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 23.1,
+                "price": 22.97,
                 "currency": "EUR",
-                "market_cap": 22578575360.0,
+                "market_cap": 22451507200.0,
                 "beat_rate": 75,
                 "avg_surprise": 13.0,
                 "next_date": "2026-07-27",
-                "days_until": -10,
+                "days_until": -11,
                 "date_estimate": false,
                 "eps_estimate": 0.345,
                 "rev_estimate": 4434244270.0,
@@ -10295,7 +11287,7 @@
                     "eps_estimate": 0.35,
                     "surprise_pct": 38.9,
                     "is_report_date": true,
-                    "days_ago": 11,
+                    "days_ago": 12,
                     "eps_yoy": 36.1,
                     "revenue": 4360000000.0,
                     "revenue_yoy": 0.5,
@@ -10369,23 +11361,23 @@
                 "tags": [
                     "kandidaat"
                 ],
-                "price": 194.93,
+                "price": 192.56,
                 "currency": "USD",
-                "market_cap": 73357844480.0,
+                "market_cap": 72465948672.0,
                 "beat_rate": 75,
                 "avg_surprise": 14.4,
                 "next_date": "2026-10-22",
-                "days_until": 77,
+                "days_until": 76,
                 "date_estimate": false,
                 "eps_estimate": 0.575,
-                "rev_estimate": 1758841160.0,
+                "rev_estimate": 1759007410.0,
                 "last": {
                     "date": "2026-07-23",
                     "eps_actual": 0.62,
                     "eps_estimate": 0.73,
                     "surprise_pct": -15.0,
                     "is_report_date": true,
-                    "days_ago": 14,
+                    "days_ago": 15,
                     "eps_yoy": 59.0,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10459,13 +11451,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 248.12,
+                "price": 240.74,
                 "currency": "USD",
-                "market_cap": 78639153152.0,
+                "market_cap": 76300140544.0,
                 "beat_rate": 100,
                 "avg_surprise": 6.3,
                 "next_date": "2026-10-22",
-                "days_until": 77,
+                "days_until": 76,
                 "date_estimate": true,
                 "eps_estimate": 2.146,
                 "rev_estimate": 5020083960.0,
@@ -10475,7 +11467,7 @@
                     "eps_estimate": 1.82,
                     "surprise_pct": 7.2,
                     "is_report_date": true,
-                    "days_ago": 14,
+                    "days_ago": 15,
                     "eps_yoy": -64.5,
                     "revenue": 9719000000.0,
                     "revenue_yoy": 4.3,
@@ -10549,13 +11541,13 @@
                 "tags": [
                     "watchlist"
                 ],
-                "price": 117.22,
+                "price": 117.35,
                 "currency": "USD",
-                "market_cap": 121189310464.0,
+                "market_cap": 121323708416.0,
                 "beat_rate": 100,
                 "avg_surprise": 13.6,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": true,
                 "eps_estimate": 1.026,
                 "rev_estimate": 4095770420.0,
@@ -10565,7 +11557,7 @@
                     "eps_estimate": 0.86,
                     "surprise_pct": 5.0,
                     "is_report_date": true,
-                    "days_ago": 15,
+                    "days_ago": 16,
                     "eps_yoy": 9.8,
                     "revenue": 3987000000.0,
                     "revenue_yoy": 24.0,
@@ -10639,13 +11631,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 362.43,
+                "price": 357.75,
                 "currency": "USD",
-                "market_cap": 4432495378432.0,
+                "market_cap": 4375259381760.0,
                 "beat_rate": 100,
                 "avg_surprise": 65.1,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": false,
                 "eps_estimate": 2.994,
                 "rev_estimate": 126982452080.0,
@@ -10655,7 +11647,7 @@
                     "eps_estimate": 2.9,
                     "surprise_pct": 214.2,
                     "is_report_date": true,
-                    "days_ago": 15,
+                    "days_ago": 16,
                     "eps_yoy": 294.4,
                     "revenue": 119796000000.0,
                     "revenue_yoy": 24.2,
@@ -10729,13 +11721,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 321.55,
+                "price": 319.53,
                 "currency": "USD",
-                "market_cap": 1269976924160.0,
+                "market_cap": 1261998964736.0,
                 "beat_rate": 38,
                 "avg_surprise": -18.9,
                 "next_date": "2026-10-21",
-                "days_until": 76,
+                "days_until": 75,
                 "date_estimate": false,
                 "eps_estimate": 0.456,
                 "rev_estimate": 27541445790.0,
@@ -10745,7 +11737,7 @@
                     "eps_estimate": 0.54,
                     "surprise_pct": -38.4,
                     "is_report_date": true,
-                    "days_ago": 15,
+                    "days_ago": 16,
                     "eps_yoy": -17.5,
                     "revenue": 28236000000.0,
                     "revenue_yoy": 25.5,
@@ -10819,13 +11811,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 74.2,
+                "price": 73.69,
                 "currency": "USD",
-                "market_cap": 308964294656.0,
+                "market_cap": 306840731648.0,
                 "beat_rate": 75,
                 "avg_surprise": 36.3,
                 "next_date": "2026-10-20",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": true,
                 "eps_estimate": 0.821,
                 "rev_estimate": 12876047060.0,
@@ -10835,7 +11827,7 @@
                     "eps_estimate": 0.79,
                     "surprise_pct": 145.0,
                     "is_report_date": true,
-                    "days_ago": 21,
+                    "days_ago": 22,
                     "eps_yoy": 11.1,
                     "revenue": 12559938000.0,
                     "revenue_yoy": 13.4,
@@ -10909,13 +11901,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 412.75,
+                "price": 403.97,
                 "currency": "USD",
-                "market_cap": 374836592640.0,
+                "market_cap": 366863089664.0,
                 "beat_rate": 75,
                 "avg_surprise": 4.5,
                 "next_date": "2026-10-27",
-                "days_until": 82,
+                "days_until": 81,
                 "date_estimate": false,
                 "eps_estimate": 4.119,
                 "rev_estimate": 111489442600.0,
@@ -10925,7 +11917,7 @@
                     "eps_estimate": 4.92,
                     "surprise_pct": 29.8,
                     "is_report_date": true,
-                    "days_ago": 21,
+                    "days_ago": 22,
                     "eps_yoy": 56.4,
                     "revenue": 111721000000.0,
                     "revenue_yoy": 2.0,
@@ -10999,13 +11991,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 381.22,
+                "price": 374.55,
                 "currency": "USD",
-                "market_cap": 395539578880.0,
+                "market_cap": 388619010048.0,
                 "beat_rate": 100,
                 "avg_surprise": 30.3,
                 "next_date": "2026-10-20",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": false,
                 "eps_estimate": 1.986,
                 "rev_estimate": 12849035380.0,
@@ -11015,7 +12007,7 @@
                     "eps_estimate": 1.86,
                     "surprise_pct": 8.6,
                     "is_report_date": true,
-                    "days_ago": 21,
+                    "days_ago": 22,
                     "eps_yoy": 21.7,
                     "revenue": 13348000000.0,
                     "revenue_yoy": 21.1,
@@ -11089,13 +12081,13 @@
                 "tags": [
                     "portfolio"
                 ],
-                "price": 4.03,
+                "price": 4.07,
                 "currency": "EUR",
-                "market_cap": 15438612480.0,
+                "market_cap": 15615009792.0,
                 "beat_rate": 12,
                 "avg_surprise": 6.7,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": false,
                 "eps_estimate": 0.062,
                 "rev_estimate": 1476307170.0,
@@ -11105,7 +12097,7 @@
                     "eps_estimate": 0.06,
                     "surprise_pct": -19.0,
                     "is_report_date": true,
-                    "days_ago": 22,
+                    "days_ago": 23,
                     "eps_yoy": 25.0,
                     "revenue": 1463000000.0,
                     "revenue_yoy": 0.5,
@@ -11179,23 +12171,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 257.59,
+                "price": 256.98,
                 "currency": "USD",
-                "market_cap": 620765773824.0,
+                "market_cap": 619295735808.0,
                 "beat_rate": 88,
                 "avg_surprise": 47.9,
                 "next_date": "2026-10-13",
-                "days_until": 68,
+                "days_until": 67,
                 "date_estimate": false,
-                "eps_estimate": 2.972,
-                "rev_estimate": 25321482070.0,
+                "eps_estimate": 2.427,
+                "rev_estimate": 25172333330.0,
                 "last": {
                     "date": "2026-07-15",
                     "eps_actual": 2.9,
                     "eps_estimate": 2.85,
                     "surprise_pct": 1.6,
                     "is_report_date": true,
-                    "days_ago": 22,
+                    "days_ago": 23,
                     "eps_yoy": 4.7,
                     "revenue": 25310000000.0,
                     "revenue_yoy": 6.6,
@@ -11269,23 +12261,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 359.24,
+                "price": 356.3,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 88,
                 "avg_surprise": 7.8,
                 "next_date": "2026-10-13",
-                "days_until": 68,
+                "days_until": 67,
                 "date_estimate": false,
-                "eps_estimate": 5.898,
-                "rev_estimate": 50769127630.0,
+                "eps_estimate": 5.906,
+                "rev_estimate": 50778502630.0,
                 "last": {
                     "date": "2026-07-14",
                     "eps_actual": 6.14,
                     "eps_estimate": 5.8,
                     "surprise_pct": 5.9,
                     "is_report_date": true,
-                    "days_ago": 23,
+                    "days_ago": 24,
                     "eps_yoy": 23.8,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -11359,23 +12351,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 63.25,
+                "price": 63.0,
                 "currency": "USD",
-                "market_cap": 442291355648.0,
+                "market_cap": 440543150080.0,
                 "beat_rate": 100,
                 "avg_surprise": 7.2,
                 "next_date": "2026-10-14",
-                "days_until": 69,
+                "days_until": 68,
                 "date_estimate": false,
-                "eps_estimate": 1.194,
-                "rev_estimate": 31254361010.0,
+                "eps_estimate": 1.198,
+                "rev_estimate": 31312616560.0,
                 "last": {
                     "date": "2026-07-14",
                     "eps_actual": 1.21,
                     "eps_estimate": 1.12,
                     "surprise_pct": 7.7,
                     "is_report_date": true,
-                    "days_ago": 23,
+                    "days_ago": 24,
                     "eps_yoy": 36.0,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -11449,13 +12441,13 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 1060.38,
+                "price": 1032.58,
                 "currency": "USD",
-                "market_cap": 312819974144.0,
+                "market_cap": 300657737728.0,
                 "beat_rate": 100,
                 "avg_surprise": 20.8,
                 "next_date": "2026-10-13",
-                "days_until": 68,
+                "days_until": 67,
                 "date_estimate": false,
                 "eps_estimate": 16.412,
                 "rev_estimate": 17738494740.0,
@@ -11465,7 +12457,7 @@
                     "eps_estimate": 14.54,
                     "surprise_pct": 44.3,
                     "is_report_date": true,
-                    "days_ago": 23,
+                    "days_ago": 24,
                     "eps_yoy": 92.3,
                     "revenue": 20338000000.0,
                     "revenue_yoy": 39.5,
@@ -11539,23 +12531,23 @@
                 "tags": [
                     "mega-cap"
                 ],
-                "price": 1456.6,
+                "price": 1494.0,
                 "currency": "EUR",
-                "market_cap": 559480045568.0,
+                "market_cap": 573845405696.0,
                 "beat_rate": 88,
                 "avg_surprise": 5.5,
                 "next_date": "2026-10-14",
-                "days_until": 69,
+                "days_until": 68,
                 "date_estimate": false,
                 "eps_estimate": 10.583,
-                "rev_estimate": 11571902950.0,
+                "rev_estimate": 11660138250.0,
                 "last": {
                     "date": "2026-07-13",
                     "eps_actual": 7.58,
                     "eps_estimate": 6.9,
                     "surprise_pct": 9.9,
                     "is_report_date": true,
-                    "days_ago": 24,
+                    "days_ago": 25,
                     "eps_yoy": 28.5,
                     "revenue": 9326500000.0,
                     "revenue_yoy": 21.3,
@@ -11629,13 +12621,13 @@
                 "tags": [
                     "kandidaat"
                 ],
-                "price": 93.14,
+                "price": 91.98,
                 "currency": "USD",
                 "market_cap": null,
                 "beat_rate": 88,
                 "avg_surprise": -4.3,
                 "next_date": "2026-10-08",
-                "days_until": 63,
+                "days_until": 62,
                 "date_estimate": true,
                 "eps_estimate": 2.228,
                 "rev_estimate": 19019708820.0,
@@ -11645,7 +12637,7 @@
                     "eps_estimate": 1.49,
                     "surprise_pct": 4.5,
                     "is_report_date": true,
-                    "days_ago": 27,
+                    "days_ago": 28,
                     "eps_yoy": -25.7,
                     "revenue": 19757000000.0,
                     "revenue_yoy": 18.7,
@@ -11720,13 +12712,13 @@
                     "portfolio",
                     "mega-cap"
                 ],
-                "price": 138.78,
+                "price": 138.44,
                 "currency": "USD",
-                "market_cap": 189573480448.0,
+                "market_cap": 189109043200.0,
                 "beat_rate": 75,
                 "avg_surprise": 36.7,
                 "next_date": "2026-10-08",
-                "days_until": 63,
+                "days_until": 62,
                 "date_estimate": true,
                 "eps_estimate": 2.3,
                 "rev_estimate": 25009337460.0,
@@ -11736,7 +12728,7 @@
                     "eps_estimate": 2.21,
                     "surprise_pct": -37.0,
                     "is_report_date": true,
-                    "days_ago": 28,
+                    "days_ago": 29,
                     "eps_yoy": 3.8,
                     "revenue": 24181000000.0,
                     "revenue_yoy": 6.4,
@@ -11810,23 +12802,23 @@
                 "tags": [
                     "kandidaat"
                 ],
-                "price": 310.72,
+                "price": 315.87,
                 "currency": "USD",
-                "market_cap": 73510502400.0,
+                "market_cap": 74728898560.0,
                 "beat_rate": 75,
                 "avg_surprise": 4.3,
                 "next_date": "2026-10-28",
-                "days_until": 83,
+                "days_until": 82,
                 "date_estimate": false,
-                "eps_estimate": 4.14,
-                "rev_estimate": 22651050000.0,
+                "eps_estimate": 4.377,
+                "rev_estimate": 22390366670.0,
                 "last": {
                     "date": "2026-06-23",
                     "eps_actual": 6.31,
                     "eps_estimate": 5.92,
                     "surprise_pct": 6.5,
                     "is_report_date": true,
-                    "days_ago": 44,
+                    "days_ago": 45,
                     "eps_yoy": 4.0,
                     "revenue": 25007000000.0,
                     "revenue_yoy": 12.5,
@@ -11895,11 +12887,11 @@
             }
         ],
         "ai_summary": {
-            "text": "## Wat opviel\n\n- **PLTR** is de uitblinker: +84,7% omzetgroei, EPS-beat van 18,5% \u00e9n een koerssprong van 29,5% \u2014 markt gelooft dat dit geen eenmalige meevaller is.\n- **CAT** sloeg consensus met 31,8%, maar koers daalde licht (-0,6%); **AAPL** beatte met sterke omzetgroei (+16,4%) maar verloor 7,4% \u2014 klassiek \"sell the news\" bij zwaargewichten met hoge lat.\n- **ABBV** rapporteerde een EPS-surprise van 115% maar koers daalde 2,3%; de omzetgroei (+12,4%) \u00e9n beat-rate (88%) suggereren dat de markt vermoedelijk guidance of pijplijnnieuws kritischer beoordeelt.\n\n## Om op te letten\n\n- **NVDA** (26 aug): beat-rate 100%, EPS-verwachting $2,08 \u2014 elke tegenvaller in datacenter-vraag of guidance raakt de hele AI-sector. Grootste systeemrisico van de lijst.\n- **WMT** (20 aug): beat-rate 88%, bellwether voor consumentenbestedingen \u2014 relevant voor macro-inschatting.\n- **ADYEN** (13 aug): beat-rate slechts 33% \u2014 laagste van de komende reeks; Europese betaalvolumes en margedruk zijn het echte verhaal.",
+            "text": "## Wat opviel\n\n- **LLY** was de absolute uitblinker: 27% EPS-surprise bij 55% omzetgroei, maar de koers steeg slechts 1,9% \u2014 de lat ligt hoog en de markt prijst veel in. Bij **ABNB** en **EXPE** gold hetzelfde: solide beats, maar koersen daalden of bleven vlak \u2014 reistravel-sector krijgt geen krediet meer voor groei.\n- **HST** laat het meest verontrustende patroon zien: 100% beat-rate historisch, nette beat nu, toch -7% koersreactie \u2014 dat wijst op negatieve guidance of zorgen over RevPAR-uitloop in H2.\n- **AFL** miste op EPS met een -45% surprisecijfer, wat duidt op een structurele schatter-mismatch \u2014 niet per se paniek, maar het verdient nader bekijken bij de volgende positiereview.\n\n## Om op te letten\n\n- **NVDA** (26 aug): 100% beat-rate, consensus op $2,08 EPS \u2014 elke aanwijzing over Blackwell-vraag en datacenter-capex bepaalt de toon voor de hele techmarkt.\n- **WMT** (20 aug): 88% beat-rate en graadmeter voor consumentenuitgaven; guidance over prijsdruk en tariefimpact is crucialer dan het EPS-getal zelf.\n- **ADYEN** (13 aug): laagste beat-rate (33%) van de lijst \u2014 verwachtingen zijn structureel moeilijk te managen; een teleurstelling raakt direct Europese fintechsentiment.",
             "model": "claude-sonnet-4-6",
-            "generated_at": "2026-08-06T08:27:40.012194+00:00"
+            "generated_at": "2026-08-07T06:50:50.264968+00:00"
         }
     },
-    "earnings_at": "2026-08-06T08:27:29.782737+00:00",
+    "earnings_at": "2026-08-07T06:50:38.395665+00:00",
     "ticker_updated_at": "2026-08-07T06:38:33.229211+00:00"
 }
