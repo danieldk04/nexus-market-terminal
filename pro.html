@@ -4478,6 +4478,30 @@ async function wlRun(ticker,action){
     }
 }
 
+/* ── de bijbehorende achtergrondtaak opzoeken + status lezen ── */
+async function ghApi(path){
+    const token=ghToken();
+    if(!token) return null;
+    try{
+        const r=await fetch(`https://api.github.com/repos/${ghRepo()}${path}`,{
+            headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},
+        });
+        if(!r.ok) return null;
+        return await r.json();
+    }catch{return null;}
+}
+
+/* de dispatch geeft geen run-id terug; even wachten tot de run zichtbaar is */
+async function ghFindRun(ticker){
+    for(let i=0;i<6;i++){
+        await new Promise(r=>setTimeout(r,2500));
+        const j=await ghApi(`/actions/workflows/${WL_WORKFLOW}/runs?event=workflow_dispatch&per_page=5`);
+        const run=(j?.workflow_runs||[]).find(r=>Date.now()-new Date(r.created_at).getTime()<5*60*1000);
+        if(run) return run.id;
+    }
+    return null;
+}
+
 /* ── wachten tot data.json is bijgewerkt ── */
 function wlStartPolling(){
     if(wlPollTimer) return;
