@@ -4388,7 +4388,8 @@ function ghRepo(){return localStorage.getItem('nx_gh_repo')||WL_DEFAULT_REPO;}
 /* pending = aandelen waarvoor de analyse nog draait, blijft staan na herladen */
 function wlPending(){try{return JSON.parse(localStorage.getItem('nx_wl_pending')||'{}');}catch{return{};}}
 function wlSetPending(p){localStorage.setItem('nx_wl_pending',JSON.stringify(p));}
-function wlMarkPending(ticker,action){const p=wlPending();p[ticker]={action,since:Date.now()};wlSetPending(p);}
+function wlMarkPending(ticker,action,runId){const p=wlPending();p[ticker]={action,since:Date.now(),runId:runId||null};wlSetPending(p);}
+function wlSetRunId(ticker,runId){const p=wlPending();if(p[ticker]){p[ticker].runId=runId;wlSetPending(p);}}
 function wlClearPending(ticker){const p=wlPending();delete p[ticker];wlSetPending(p);}
 
 function wlItems(){return globalData?.watchlist||[];}
