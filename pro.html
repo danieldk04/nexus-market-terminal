@@ -4456,6 +4456,7 @@ async function wlRun(ticker,action){
     try{
         await ghDispatch(ticker,action);
         wlMarkPending(ticker,action);
+        ghFindRun(ticker).then(id=>{if(id) wlSetRunId(ticker,id);});
         wlFeedback(action==='remove'
             ? `<b>${ticker}</b> wordt verwijderd. Dat duurt ongeveer een minuut.`
             : `<b>${ticker}</b> wordt doorgerekend: cijfers, kwartaalresultaten, sentiment en mijn oordeel. Dit duurt meestal 1 tot 3 minuten — je kunt gewoon verder werken.`,'ok');
