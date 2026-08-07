@@ -4515,8 +4515,8 @@ function wlStartPolling(){
             B=fresh;globalData=fresh;
             const list=fresh.watchlist||[];
             let changed=false;
-            tickers.forEach(t=>{
-                const {action,since}=pend[t];
+            for(const t of tickers){
+                const {action,since,runId}=pend[t];
                 const entry=list.find(w=>w.ticker===t);
                 const done=action==='remove' ? !entry : (entry && new Date(entry.lookup_at||0).getTime()>since-120000);
                 if(done){
@@ -4524,11 +4524,32 @@ function wlStartPolling(){
                     wlFeedback(action==='remove'
                         ? `<b>${t}</b> is van je watchlist gehaald.`
                         : `<b>${t}</b> staat er nu op, compleet met oordeel en cijfers.`,'ok');
-                }else if(Date.now()-since>WL_TIMEOUT_MS){
-                    wlClearPending(t);changed=true;
-                    wlFeedback(`Het doorrekenen van <b>${t}</b> duurt ongewoon lang. Kijk bij <a href="https://github.com/${wlEsc(ghRepo())}/actions" target="_blank" style="color:inherit;text-decoration:underline">de achtergrondtaken</a> wat er misging.`,'err');
+                    continue;
                 }
-            });
+                if(Date.now()-since<=WL_TIMEOUT_MS) continue;
+
+                /* duurt lang: vraag de echte status op voordat we opgeven */
+                const run=runId?await ghApi(`/actions/runs/${runId}`):null;
+                const link=`<a href="${run?.html_url||('https://github.com/'+wlEsc(ghRepo())+'/actions')}" target="_blank" style="color:inherit;text-decoration:underline">de achtergrondtaak</a>`;
+
+                if(run && run.status==='queued'){
+                    /* GitHub heeft nog geen vrije server — gewoon blijven wachten */
+                    wlFeedback(`<b>${t}</b> staat nog in de wachtrij bij GitHub; er is even geen vrije server. Zodra hij start gaat het vanzelf verder.`,'info');
+                    continue;
+                }
+                if(run && run.status!=='completed'){
+                    wlFeedback(`<b>${t}</b> wordt nog doorgerekend, het duurt wat langer dan normaal. Volg ${link}.`,'info');
+                    continue;
+                }
+                wlClearPending(t);changed=true;
+                if(run && run.conclusion==='cancelled'){
+                    wlFeedback(`Het doorrekenen van <b>${t}</b> is afgebroken doordat GitHub geen vrije server had. Klik op “Vernieuwen” of voeg <b>${t}</b> opnieuw toe — meestal lukt het dan wel.`,'err');
+                }else if(run && run.conclusion==='failure'){
+                    wlFeedback(`Het doorrekenen van <b>${t}</b> is mislukt. Bekijk ${link} voor de reden.`,'err');
+                }else{
+                    wlFeedback(`Het doorrekenen van <b>${t}</b> duurt ongewoon lang. Kijk bij ${link} wat er misging.`,'err');
+                }
+            }
             if(changed||activeTab==='watchlist') renderWatchlistTab();
             if(changed) wlUpdateCount();
         }
