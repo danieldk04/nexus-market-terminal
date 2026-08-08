@@ -2886,10 +2886,10 @@ function renderInvestmentTimeline(){
         const pvhFiltered=filterRange(pvh,invRange).length>=2?filterRange(pvh,invRange):pvh;
         chartLabels=pvhFiltered.map(p=>p.date);
         chartLine=pvhFiltered.map(p=>p.value);
-        chartInvested=pvhFiltered.map(p=>{
-            const match=fullTl.filter(t=>t.date<=p.date.slice(0,7));
-            return match.length?match[match.length-1].invested:null;
-        });
+        // Inleg-lijn moet dezelfde brokers dekken als de waardelijn (DEGIRO + TR + BUX).
+        // Eerder stond hier alleen de DEGIRO-inleg, waardoor de grafiek een gigantische
+        // "winst" liet zien die nergens in de cijfers terugkwam.
+        chartInvested=pvhFiltered.map(p=>investedAtDate(p.date));
     } else {
         chartLabels=tl.map(t=>t.date);
         chartLine=tl.map(t=>t.invested);
