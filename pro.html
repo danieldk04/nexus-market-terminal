@@ -2735,6 +2735,15 @@ function investmentContext(){
     const allInvested=(D.total_invested||totalInvested)+trInv+buxInv;
     const dailyHist=(M?.portfolio_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
     const pvh=(M?.portfolio_value_history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    // De maandreeks wordt maar af en toe herbouwd, dus de LOPENDE maand staat er vaak nog met een
+    // verouderde waarde in. Dat botste met de live brokerstanden: de tijdlijn eindigde dan duizenden
+    // euro's onder de werkelijke portefeuille, waardoor "Rendement Max" negatief werd terwijl
+    // "Totaal rendement" positief was. De laatste maand krijgt daarom altijd de live waarde.
+    const nowYm=new Date().toISOString().slice(0,7);
+    if(currentPortfolio>0){
+        if(pvh.length&&pvh[pvh.length-1].date===nowYm) pvh[pvh.length-1]={date:nowYm,value:currentPortfolio};
+        else if(pvh.length&&pvh[pvh.length-1].date<nowYm) pvh.push({date:nowYm,value:currentPortfolio});
+    }
     function findFirstSeen(key){
         for(const p of dailyHist){ if((p[key]||0)>0) return p.date; }
         return null;
