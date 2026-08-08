@@ -421,6 +421,11 @@ def fetch_tr_portfolio(prev_cost_basis: dict | None = None) -> dict | None:
     total_invested = sum(p["cost_eur"] for p in positions if p.get("cost_eur"))
     total_pl_pct   = round((total / total_invested - 1) * 100, 2) if total_invested > 0 else None
 
+    missing = [p["isin"] for p in positions if p.get("cost_eur") is None]
+    if missing:
+        log.warning(f"TR kostprijs nog onbekend voor: {missing} — eenmalig Ø aankoopprijs "
+                    f"als 3e kolom in TR_HOLDINGS zetten, daarna houdt het register zichzelf bij.")
+
     log.info(f"Trade Republic: {len(positions)} posities, totaal €{total:.2f}, P&L {total_pl_pct}%")
     return {
         "positions":      positions,
@@ -428,4 +433,5 @@ def fetch_tr_portfolio(prev_cost_basis: dict | None = None) -> dict | None:
         "total_invested": round(total_invested, 2) if total_invested else None,
         "total_pl_pct":   total_pl_pct,
         "interest_total": interest_total,
+        "cost_basis":     cost_basis,
     }
