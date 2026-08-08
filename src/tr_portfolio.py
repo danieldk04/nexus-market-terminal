@@ -298,16 +298,57 @@ def _fetch_price_eur(isin: str) -> tuple[str | None, float | None]:
     return None, None
 
 
-def fetch_tr_portfolio() -> dict | None:
+def _update_cost_basis(prev: dict, isin: str, shares_now: float,
+                       price_now: float, seed_avg: float | None) -> dict | None:
+    """
+    Meegroeiend kostprijs-register per positie.
+
+    Trade Republic levert geen kostprijs-historie, en handmatig bijhouden is onwerkbaar als je
+    elke maand bijkoopt. Daarom onthouden we per ISIN {shares, cost_eur} en kijken we bij elke
+    run of het aantal aandelen veranderd is:
+
+      • meer aandelen  → bijgekocht: kostprijs += aantal_erbij × koers van vandaag
+      • minder aandelen→ verkocht:   kostprijs wordt evenredig verlaagd (gemiddelde blijft gelijk)
+      • gelijk         → niets doen
+
+    Omdat de bot dagelijks draait, wordt een aankoop binnen 24 uur opgepikt en is de gebruikte
+    koers vrijwel gelijk aan de werkelijke aankoopkoers. De eerste keer moet het register wél
+    gevuld worden met de échte gemiddelde aankoopprijs (seed_avg) — daarna gaat het vanzelf.
+    """
+    TOL = 1e-6
+    old = prev.get(isin) if isinstance(prev, dict) else None
+
+    if not old or not old.get("shares"):
+        if seed_avg and seed_avg > 0:
+            return {"shares": shares_now, "cost_eur": round(shares_now * seed_avg, 2),
+                    "source": "seed"}
+        return None  # nog geen startpunt bekend → kostprijs blijft onbekend
+
+    old_shares = float(old.get("shares") or 0)
+    cost       = float(old.get("cost_eur") or 0)
+    delta      = shares_now - old_shares
+
+    if delta > TOL:
+        cost += delta * price_now
+    elif delta < -TOL and old_shares > 0:
+        cost *= max(shares_now, 0) / old_shares
+
+    return {"shares": shares_now, "cost_eur": round(cost, 2), "source": "ledger"}
+
+
+def fetch_tr_portfolio(prev_cost_basis: dict | None = None) -> dict | None:
     """
     Bouw Trade Republic portfolio op vanuit TR_HOLDINGS + yfinance prijzen.
-    Gemiddelde aankoopprijzen komen uit TR_TRANSACTIONS_CSV (automatisch berekend)
-    of als fallback uit de handmatige 3e kolom in TR_HOLDINGS.
+    Gemiddelde aankoopprijzen komen uit het meegroeiende kostprijs-register (zie
+    _update_cost_basis), met als startpunt TR_TRANSACTIONS_CSV of de handmatige 3e
+    kolom in TR_HOLDINGS.
     Geeft None terug als TR_HOLDINGS niet beschikbaar is.
     """
     holdings = _parse_tr_holdings()
     if not holdings:
         return None
+    prev_cost_basis = prev_cost_basis or {}
+    cost_basis: dict[str, dict] = {}
 
     # Laad gemiddelde aankoopprijzen + rente-inkomsten uit CSV-transactiehistorie
     csv_avg       = _parse_tr_transactions_csv()
