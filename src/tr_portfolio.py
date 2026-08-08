@@ -406,7 +406,9 @@ def fetch_tr_portfolio(prev_cost_basis: dict | None = None) -> dict | None:
             "cost_eur":  round(cost_eur, 2) if cost_eur else None,
             "pl_pct":    pl_pct,
             "pl_eur":    pl_eur,
-            "avg_source": "csv" if isin in csv_avg else ("manual" if h.get("avg_price") else None),
+            "avg_source": ("ledger" if cost_basis.get(isin, {}).get("source") == "ledger"
+                           else "csv" if isin in csv_avg
+                           else "manual" if h.get("avg_price") else None),
         })
         time.sleep(0.1)
 
