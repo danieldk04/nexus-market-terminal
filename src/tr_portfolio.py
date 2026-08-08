@@ -377,8 +377,14 @@ def fetch_tr_portfolio(prev_cost_basis: dict | None = None) -> dict | None:
         value  = shares * price
         total += value
 
-        # Prioriteit: CSV-berekend gemiddelde > handmatig in TR_HOLDINGS
-        avg_price = csv_avg.get(isin) or h.get("avg_price")
+        # Prioriteit: register (groeit automatisch mee) > CSV-gemiddelde > handmatig
+        seed_avg = csv_avg.get(isin) or h.get("avg_price")
+        entry    = _update_cost_basis(prev_cost_basis, isin, shares, price, seed_avg)
+        if entry:
+            cost_basis[isin] = entry
+            avg_price = entry["cost_eur"] / shares if shares else None
+        else:
+            avg_price = seed_avg
 
         if avg_price and avg_price > 0:
             cost_eur = shares * avg_price
