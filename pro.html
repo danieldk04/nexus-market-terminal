@@ -2757,8 +2757,11 @@ function investmentContext(){
         // Vóór de eerste bekende DEGIRO-transactie was er simpelweg nog niets belegd (0),
         // niet het HUIDIGE bedrag — anders herhaalt zich exact hetzelfde probleem als bij TR/BUX.
         const degiroAtDate=match.length?match[match.length-1].invested:(fullTl.length?0:(D.total_invested||totalInvested));
-        const trPart=(!trFirstSeen||dateStr>=trFirstSeen)?trInv:0;
-        const buxPart=(!buxFirstSeen||dateStr>=buxFirstSeen)?buxInv:0;
+        // Vergelijk op maandniveau: de maandreeks heeft datums als "2026-05", en die is als tekst
+        // altijd kleiner dan "2026-05-19". Zonder deze afkapping telde de inleg van TR/BUX pas een
+        // maand ná hun eerste snapshot mee, terwijl hun waarde er al wél in zat → nepverlies.
+        const trPart=(!trFirstSeen||ym>=trFirstSeen.slice(0,7))?trInv:0;
+        const buxPart=(!buxFirstSeen||ym>=buxFirstSeen.slice(0,7))?buxInv:0;
         return degiroAtDate+trPart+buxPart;
     }
     return {fullTl,D,T,BX,currentPortfolio,trInv,buxInv,totalInvested,allInvested,costBasisEstimated,dailyHist,pvh,investedAtDate};
