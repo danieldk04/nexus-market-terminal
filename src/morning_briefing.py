@@ -1693,7 +1693,7 @@ def run_morning_briefing():
         degiro = fetch_degiro_manual()
 
     log.info("Trade Republic portfolio ophalen...")
-    tr = fetch_tr_portfolio()
+    tr = fetch_tr_portfolio(prev_cost_basis=_load_json(MEMORY_PATH, {}).get("tr_cost_basis"))
 
     log.info("BUX portfolio ophalen...")
     bux = fetch_bux_manual()
