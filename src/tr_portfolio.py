@@ -48,10 +48,13 @@ ISIN_TO_TICKER: dict[str, str] = {k: v[0] for k, v in ISIN_TO_TICKERS.items()}
 
 # Proxy-schaling voor ISINs die geen eigen Yahoo Finance ticker hebben.
 # ratio = eigen_NAV / proxy_NAV  →  pas aan als NAV sterk verschuift.
-# SXR8.DE (iShares Core S&P 500 EUR, Xetra) ≈ €590
-# Amundi S&P 500 (LU1681048804) ≈ €130  →  ratio = 130/590 ≈ 0.220
+# IJKING (2026-08): geverifieerd tegen de échte TR-aankoopkoersen uit de transactie-export,
+# afgezet tegen de SXR8.DE-slotkoers van diezelfde dag:
+#   02-03 116.56/629.62=0.18513 · 02-04 112.845/611.58=0.18451 · 02-06 130.15/703.94=0.18489
+#   02-07 131.17/704.54=0.18618 · 03-08 131.285/709.52=0.18503
+# De oude waarde 0.220 was een ruwe schatting en waardeerde deze positie ~19% te hoog.
 PROXY_RATIO: dict[str, float] = {
-    "LU1681048804": 0.220,
+    "LU1681048804": 0.1850,
 }
 
 DISPLAY_NAMES: dict[str, str] = {
