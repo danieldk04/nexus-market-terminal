@@ -147,6 +147,10 @@ def save_dashboard_data(news: list[str], degiro: dict | None, tr: dict | None,
             ],
         }
     if tr:
+        # Kostprijs-register bewaren: dit is de enige plek waar de aankoophistorie van Trade
+        # Republic leeft, dus nooit overschrijven met een lege dict bij een mislukte run.
+        if tr.get("cost_basis"):
+            mem["tr_cost_basis"] = tr["cost_basis"]
         mem["tr_summary"] = {
             "total":          tr.get("total"),
             "total_pl_pct":   tr.get("total_pl_pct"),
