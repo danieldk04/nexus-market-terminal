@@ -1402,6 +1402,17 @@ def _build_portfolio_value_history() -> list[dict]:
     _mem_check = _load_json(MEMORY_PATH, {})
     _existing  = _mem_check.get("portfolio_value_history", [])
     if _existing and _existing[-1]["date"] >= date.today().strftime("%Y-%m"):
+        # Wel altijd de LOPENDE maand bijwerken met de nieuwste dagsnapshot. Zonder dit bleef de
+        # tijdlijn wekenlang op de waarde van de 1e van de maand staan, terwijl de KPI's de live
+        # brokerstanden gebruiken — dat gaf tegenstrijdige rendementen op het dashboard.
+        _cur_ym = _existing[-1]["date"]
+        for _snap in _mem_check.get(HISTORY_KEY, []):
+            if _snap["date"][:7] != _cur_ym:
+                continue
+            _tot = (_snap.get("degiro") or 0) + (_snap.get("tr") or 0) + (_snap.get("bux") or 0)
+            if _tot > 0:
+                _existing[-1]["value"] = round(_tot, 2)
+            break
         log.info(f"portfolio_value_history: al actueel ({_existing[-1]['date']}), skip rebuild.")
         return _existing
 
