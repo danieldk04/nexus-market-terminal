@@ -137,7 +137,7 @@
       "date": "2026-06-24",
       "ticker": "DECK",
       "sector": "Consumer Cyclical",
-      "insight": "Trailing-stop DECK: prijs $103.63 ≤ bodem $103.88 (+9.7% geboekt).",
+      "insight": "Trailing-stop DECK: prijs $103.63 \u2264 bodem $103.88 (+9.7% geboekt).",
       "type": "POSITIVE_LEARNING"
     },
     {
@@ -165,35 +165,35 @@
       "date": "2026-07-15",
       "ticker": "PGR",
       "sector": "Financials",
-      "insight": "Trailing-stop PGR: prijs $206.09 ≤ bodem $220.27 (+4.5% geboekt).",
+      "insight": "Trailing-stop PGR: prijs $206.09 \u2264 bodem $220.27 (+4.5% geboekt).",
       "type": "POSITIVE_LEARNING"
     },
     {
       "date": "2026-07-21",
       "ticker": "MNST",
       "sector": "Consumer Defensive",
-      "insight": "Stop-loss MNST (ATR-stop ($95.45 ≤ $95.59)). Sector Consumer Defensive voorzichtig.",
+      "insight": "Stop-loss MNST (ATR-stop ($95.45 \u2264 $95.59)). Sector Consumer Defensive voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-07-22",
       "ticker": "ABNB",
       "sector": "Consumer Cyclical",
-      "insight": "Stop-loss ABNB (ATR-stop ($140.88 ≤ $141.51)). Sector Consumer Cyclical voorzichtig.",
+      "insight": "Stop-loss ABNB (ATR-stop ($140.88 \u2264 $141.51)). Sector Consumer Cyclical voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-07-23",
       "ticker": "DECK",
       "sector": "Consumer Cyclical",
-      "insight": "Stop-loss DECK (ATR-stop ($97.70 ≤ $101.52)). Sector Consumer Cyclical voorzichtig.",
+      "insight": "Stop-loss DECK (ATR-stop ($97.70 \u2264 $101.52)). Sector Consumer Cyclical voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-07-23",
       "ticker": "DLTR",
       "sector": "Consumer Defensive",
-      "insight": "Stop-loss DLTR (ATR-stop ($117.78 ≤ $121.40)). Sector Consumer Defensive voorzichtig.",
+      "insight": "Stop-loss DLTR (ATR-stop ($117.78 \u2264 $121.40)). Sector Consumer Defensive voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
@@ -214,7 +214,7 @@
       "date": "2026-07-29",
       "ticker": "KVUE",
       "sector": "Consumer Defensive",
-      "insight": "Rotatie (POSITIVE_LEARNING): KVUE (score=4.4, +4.8%, 14d) → NDSN (score=5.4).",
+      "insight": "Rotatie (POSITIVE_LEARNING): KVUE (score=4.4, +4.8%, 14d) \u2192 NDSN (score=5.4).",
       "type": "POSITIVE_LEARNING"
     },
     {
@@ -228,42 +228,42 @@
       "date": "2026-07-30",
       "ticker": "HWM",
       "sector": "Industrials",
-      "insight": "Stop-loss HWM (ATR-stop ($272.79 ≤ $274.23)). Sector Industrials voorzichtig.",
+      "insight": "Stop-loss HWM (ATR-stop ($272.79 \u2264 $274.23)). Sector Industrials voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-07-30",
       "ticker": "MO",
       "sector": "Consumer Defensive",
-      "insight": "Stop-loss MO (ATR-stop ($67.89 ≤ $69.84)). Sector Consumer Defensive voorzichtig.",
+      "insight": "Stop-loss MO (ATR-stop ($67.89 \u2264 $69.84)). Sector Consumer Defensive voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-07-30",
       "ticker": "EG",
       "sector": "Financials",
-      "insight": "Stop-loss EG (ATR-stop ($375.74 ≤ $377.17)). Sector Financials voorzichtig.",
+      "insight": "Stop-loss EG (ATR-stop ($375.74 \u2264 $377.17)). Sector Financials voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-07-30",
       "ticker": "L",
       "sector": "Financials",
-      "insight": "Stop-loss L (ATR-stop ($116.15 ≤ $116.20)). Sector Financials voorzichtig.",
+      "insight": "Stop-loss L (ATR-stop ($116.15 \u2264 $116.20)). Sector Financials voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-08-03",
       "ticker": "EBAY",
       "sector": "Consumer Cyclical",
-      "insight": "Stop-loss EBAY (ATR-stop ($108.31 ≤ $108.56)). Sector Consumer Cyclical voorzichtig.",
+      "insight": "Stop-loss EBAY (ATR-stop ($108.31 \u2264 $108.56)). Sector Consumer Cyclical voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
       "date": "2026-08-04",
       "ticker": "DOC",
       "sector": "Real Estate",
-      "insight": "Stop-loss DOC (ATR-stop ($21.64 ≤ $21.66)). Sector Real Estate voorzichtig.",
+      "insight": "Stop-loss DOC (ATR-stop ($21.64 \u2264 $21.66)). Sector Real Estate voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     },
     {
@@ -284,7 +284,7 @@
       "date": "2026-08-07",
       "ticker": "KIM",
       "sector": "Real Estate",
-      "insight": "Stop-loss KIM (ATR-stop ($24.43 ≤ $24.55)). Sector Real Estate voorzichtig.",
+      "insight": "Stop-loss KIM (ATR-stop ($24.43 \u2264 $24.55)). Sector Real Estate voorzichtig.",
       "type": "NEGATIVE_LEARNING"
     }
   ],
@@ -348,7 +348,7 @@
     {
       "date": "2026-08-08",
       "degiro": 16897.12,
-      "tr": 12338.17,
+      "tr": 12018.88,
       "nexus": 5764.62,
       "bux": 1770.73
     },
@@ -899,27 +899,27 @@
     }
   ],
   "last_news": [
+    "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
+    "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyoncé en Drake valt tegen",
-    "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: ‘Het is code oranje’"
+    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen"
   ],
   "tr_summary": {
-    "total": 12013.5,
-    "total_pl_pct": -0.08,
+    "total": 12018.88,
+    "total_pl_pct": -0.04,
     "total_invested": 12023.54,
-    "interest_total": 124.36,
+    "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 6175.73,
-        "price": 56206.3281,
-        "pl_pct": -4.87,
-        "pl_eur": -316.3,
+        "value": 6181.12,
+        "price": 56255.3984,
+        "pl_pct": -4.79,
+        "pl_eur": -310.91,
         "weight": 51.4
       },
       {
@@ -931,20 +931,20 @@
         "weight": 17.4
       },
       {
-        "name": "CSP1 (S&P 500 EUR)",
-        "value": 1716.18,
-        "price": 133.7624,
-        "pl_pct": 7.26,
-        "pl_eur": 116.18,
-        "weight": 14.3
-      },
-      {
         "name": "VWCE (All-World Acc)",
         "value": 1845.61,
         "price": 168.38,
         "pl_pct": 6.59,
         "pl_eur": 114.1,
         "weight": 15.4
+      },
+      {
+        "name": "CSP1 (S&P 500 EUR)",
+        "value": 1716.18,
+        "price": 133.7624,
+        "pl_pct": 7.26,
+        "pl_eur": 116.18,
+        "weight": 14.3
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -956,7 +956,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-08T07:58:46.560557+00:00",
+  "dashboard_updated": "2026-08-08T19:01:03.435672+00:00",
   "degiro_summary": {
     "total": 16897.12,
     "total_pl_pct": 37.74,
@@ -1000,8 +1000,8 @@
         "value": 627.05,
         "pl_pct": 79.5,
         "pl_eur": 277.72,
-        "div_yield": 0.0072,
-        "annual_div_eur": 4.51,
+        "div_yield": 0.0074,
+        "annual_div_eur": 4.64,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.7
@@ -1010,20 +1010,20 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO en Musk-effect",
-      "summary": "SpaceX gaat naar de beurs tegen 135 dollar per aandeel, wat Musk 75 miljard oplevert en hem potentieel eerste biljonair maakt. Voor beleggers relevant omdat tech-IPO's de marktsentiment bepalen en SpaceX-koers na eerste dag al volatiel is, wat bredere tech-sector beïnvloedt."
+      "theme": "SpaceX beursgang en Musk-miljarden",
+      "summary": "SpaceX is ge\u00efntroduceerd op $135 per aandeel, waarmee Elon Musk miljarden ophaalt en de eerste biljonair wordt. Dit be\u00efnvloedt tech-sentiment en S&P500-posities, gezien SpaceX' impact op de Amerikaanse groewaarden."
     },
     {
-      "theme": "Tech-sector onder druk",
-      "summary": "Chipaandelen en tech-bedrijven zoals ASML dalen omdat beleggers hun posities afbouwen, terwijl SpaceX en andere tech-aandelen volatiel zijn. Dit raakt direct alle S&P500- en World-ETF-bezitters die significant tech-exposure hebben."
+      "theme": "Technologie koersval miljarden waard",
+      "summary": "Techaandelen, inclusief chipbedrijven zoals ASML, verliezen massaal waarde door omgeslagen beleggersstemmming. Dit raakt direct S&P500- en World-ETF posities waar tech zwaar in weegt."
     },
     {
-      "theme": "Marktvolatiliteit en geopolitiek",
-      "summary": "Oorlogsrisico's (Iran) en economische onzekerheid veroorzaken dalende koersen in Azië en volatiliteit in cryptovaluta, terwijl beleggers voorzichtiger worden. Dit wijst op stijgende systeemrisico's die bredere index-posities kunnen belasten."
+      "theme": "Geografische verschillen in marktsentiment",
+      "summary": "Europese aandelen herstellen terwijl Aziatische aandelen onder druk staan door geopolitieke spanning (Iran-oorlog). Dit cre\u00ebert onevenwichtigheid in geografisch gediversifieerde World-ETF portefeuilles."
     },
     {
-      "theme": "Selectieve waardekansen",
-      "summary": "Terwijl populaire aandelen (Taylor Swift-label, tech) dalen, bieden 'saaie' defensieve aandelen en Dell (hardwaresprong) waardekansen voor contrair ingestelde beleggers. Dit suggereert sector-rotatie weg van groei naar waarde en stabiliteit."
+      "theme": "Defensieve waarden en waardemogelijkheden",
+      "summary": "Te midden van volatiliteit bieden 'saaie' defensieve aandelen koopkansen, terwijl Nederlandse beleggers massaal blijven sparen ondanks rijkdom. Dit suggereert ondergewogen waardeposities in AEX-holdings."
     }
   ],
   "bux_summary": {
@@ -1052,8 +1052,8 @@
         "price": 120.24,
         "pl_pct": -27.38,
         "pl_eur": -90.66,
-        "div_yield": 0.0428,
-        "annual_div_eur": 10.29,
+        "div_yield": 0.0426,
+        "annual_div_eur": 10.24,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 13.6
@@ -1078,7 +1078,7 @@
         "price": 4.04,
         "pl_pct": 23.23,
         "pl_eur": 0.76,
-        "div_yield": 0.0464,
+        "div_yield": 0.0468,
         "annual_div_eur": 0.19,
         "first_buy_date": null,
         "sector": "Communication Services",
@@ -2346,7 +2346,7 @@
     },
     {
       "date": "2026-08",
-      "value": 26531.63
+      "value": 30686.73
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2406,27 +2406,27 @@
     "BTC": {
       "shares": 0.109876,
       "cost_eur": 6492.03,
-      "source": "seed"
+      "source": "ledger"
     },
     "IE00BK5BR626": {
       "shares": 2.306539,
       "cost_eur": 200.0,
-      "source": "seed"
+      "source": "ledger"
     },
     "LU1681048804": {
       "shares": 12.830034,
       "cost_eur": 1600.0,
-      "source": "seed"
+      "source": "ledger"
     },
     "IE00BK5BQT80": {
       "shares": 10.960972,
       "cost_eur": 1731.51,
-      "source": "seed"
+      "source": "ledger"
     },
     "NL0011683594": {
       "shares": 37.779925,
       "cost_eur": 2000.0,
-      "source": "seed"
+      "source": "ledger"
     }
   }
 }
