@@ -5076,36 +5076,39 @@ function aiSearchShapeCount(){
    maar de eerste regel staat er na een seconde in plaats van na tien — en dat
    is het verschil dat je voelt. De opbouw van het resultaat blijft gelijk aan
    generateContent, zodat aiExtract en de foutafhandeling onveranderd werken. */
-/* Modellen die thinkingConfig weigeren. Denkstappen kosten tijd én tokens;
-   uitzetten scheelt seconden, maar niet elk model accepteert het veld. */
-function aiNoThinkCfg(){
-    try{ return JSON.parse(localStorage.getItem(AI_LS.nothink)||'[]'); }catch{ return []; }
+/* Denkstappen kosten seconden en tokens, en deze vragen gaan over data die al
+   in de prompt staat. Alleen: hóé je ze tempert verschilt per modelfamilie en
+   Google documenteert dat sneller dan het verandert. Dus niet gokken maar
+   uitproberen — precies zoals bij de zoektool — en per model onthouden wat
+   werkte. Laatste optie is "gewoon laten denken": dat werkt altijd. */
+const AI_SPEED_CFG=[{thinkingBudget:0},{thinkingLevel:'low'},null];
+function aiSpeedIdx(m){
+    try{ return JSON.parse(localStorage.getItem(AI_LS.nothink)||'{}')[m]??0; }catch{ return 0; }
 }
-function aiMarkNoThinkCfg(m){
-    const l=aiNoThinkCfg();
-    if(m&&!l.includes(m)){ l.push(m); localStorage.setItem(AI_LS.nothink,JSON.stringify(l)); }
+function aiSetSpeedIdx(m,i){
+    let o={}; try{ o=JSON.parse(localStorage.getItem(AI_LS.nothink)||'{}'); }catch{}
+    if(!m||o[m]===i) return;
+    o[m]=i; localStorage.setItem(AI_LS.nothink,JSON.stringify(o));
+}
+/* Een 400 over de zoektool moet niet de denkinstelling de schuld geven. */
+function aiIsSearchError(msg){
+    return /search|grounding|tool/i.test(String(msg||''));
 }
 
 async function aiCallGemini(useSearch,onChunk){
-    const maakBody=denken=>{
+    const doe=async cfg=>{
         const b={
             systemInstruction:{parts:[{text:aiSystemPrompt()}]},
             contents:AI.turns,
             generationConfig:{temperature:0.3,maxOutputTokens:2600},
         };
-        // Geen denkstappen: dit is een vraag over data die al in de prompt zit,
-        // geen puzzel. Scheelt wachttijd en voorkomt dat het denkbudget de
-        // hele tokenlimiet opsoupeert — dan komt er een leeg antwoord terug.
-        if(!denken) b.generationConfig.thinkingConfig={thinkingBudget:0};
+        if(cfg) b.generationConfig.thinkingConfig=cfg;
         if(useSearch) b.tools=[AI_SEARCH_TOOLS[AI.searchShape]||AI_SEARCH_TOOLS[0]];
-        return b;
-    };
 
-    const doe=async denken=>{
         const r=await fetch(`${AI_BASE}/models/${encodeURIComponent(AI.model)}:streamGenerateContent?alt=sse&key=${encodeURIComponent(AI.key)}`,{
             method:'POST',
             headers:{'content-type':'application/json'},
-            body:JSON.stringify(maakBody(denken)),
+            body:JSON.stringify(b),
         });
         aiBumpUsage();   // ook mislukte calls tellen mee voor je quotum
         if(!r.ok){
@@ -5117,15 +5120,17 @@ async function aiCallGemini(useSearch,onChunk){
         return r;
     };
 
-    let r;
-    const magDenkenUit=!aiNoThinkCfg().includes(AI.model);
-    try{ r=await doe(!magDenkenUit); }
-    catch(err){
-        // Model kent thinkingConfig niet? Eén keer vaststellen, dan onthouden.
-        if(magDenkenUit&&err.status===400&&/thinking|thought/i.test(err.message||'')){
-            aiMarkNoThinkCfg(AI.model);
-            r=await doe(true);
-        }else throw err;
+    // Denkinstelling uitproberen. Een 400 zegt vaak alleen "invalid argument",
+    // dus niet op de tekst afgaan maar op wat er daadwerkelijk werkt.
+    let r, i=aiSpeedIdx(AI.model);
+    for(;;){
+        try{ r=await doe(AI_SPEED_CFG[i]); aiSetSpeedIdx(AI.model,i); break; }
+        catch(err){
+            if(err.status===400&&AI_SPEED_CFG[i]&&!aiIsSearchError(err.message)&&i<AI_SPEED_CFG.length-1){
+                i++; continue;
+            }
+            throw err;
+        }
     }
 
     let tekst='', finish='', chunks=[];
