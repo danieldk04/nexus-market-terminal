@@ -430,6 +430,58 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     .ern-split{grid-template-columns:1fr!important}
 }
 
+/* ─── AI ASSISTENT ─── */
+#ai-fab{position:fixed;bottom:22px;right:22px;z-index:420;width:52px;height:52px;border-radius:50%;border:none;background:var(--accent);color:#fff;box-shadow:var(--sh-md);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s,box-shadow .15s}
+#ai-fab:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.35)}
+#ai-fab svg{width:22px;height:22px}
+#ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);z-index:430;background:var(--surface);border-left:1px solid var(--border);box-shadow:-8px 0 32px rgba(0,0,0,.12);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .22s ease}
+#ai-panel.open{transform:translateX(0)}
+.ai-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.ai-title{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ai-head-btns{display:flex;gap:4px}
+.ai-icon-btn{background:none;border:none;color:var(--muted);cursor:pointer;padding:5px;border-radius:5px;display:flex;line-height:0}
+.ai-icon-btn:hover{background:var(--bg);color:var(--text)}
+.ai-icon-btn svg{width:15px;height:15px}
+.ai-icon-btn.on{color:var(--accent);background:#eff6ff}
+.ai-log{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.ai-msg{font-size:.78rem;line-height:1.55;max-width:100%}
+.ai-msg.user{align-self:flex-end;background:var(--accent);color:#fff;padding:8px 12px;border-radius:12px 12px 3px 12px;max-width:85%;white-space:pre-wrap}
+.ai-msg.bot{color:var(--text)}
+.ai-msg.err{color:var(--red);background:#fef2f2;border:1px solid #fecaca;padding:9px 12px;border-radius:var(--r-sm);font-size:.74rem}
+.ai-msg.note{color:var(--muted);font-size:.68rem;font-style:italic}
+.ai-sources{margin-top:8px;padding-top:7px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:3px}
+.ai-source{font-size:.63rem;color:var(--muted)}
+.ai-source a{color:var(--accent);text-decoration:none}
+.ai-source a:hover{text-decoration:underline}
+.ai-think{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:.72rem}
+.ai-foot{border-top:1px solid var(--border);padding:10px 12px;flex-shrink:0;background:#f8fafc}
+.ai-inrow{display:flex;gap:7px;align-items:flex-end}
+.ai-input{flex:1;resize:none;border:1px solid var(--border2);border-radius:var(--r-sm);padding:8px 10px;font-family:'Inter',sans-serif;font-size:.78rem;line-height:1.4;max-height:110px;background:var(--surface);color:var(--text)}
+.ai-input:focus{outline:none;border-color:var(--accent)}
+.ai-send{background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);width:34px;height:34px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ai-send:disabled{background:var(--border2);cursor:not-allowed}
+.ai-send svg{width:15px;height:15px}
+.ai-hint{font-size:.6rem;color:var(--muted2);margin-top:6px;display:flex;justify-content:space-between;gap:8px}
+.ai-sugg{display:flex;flex-wrap:wrap;gap:5px;padding:0 16px 12px}
+.ai-sugg button{font-size:.66rem;padding:5px 9px;border-radius:14px;border:1px solid var(--border2);background:var(--surface);color:var(--muted);cursor:pointer;text-align:left}
+.ai-sugg button:hover{border-color:var(--accent);color:var(--accent)}
+.ai-setup{padding:16px;font-size:.76rem;line-height:1.6;color:var(--muted)}
+.ai-setup h4{font-size:.8rem;color:var(--text);margin-bottom:8px}
+.ai-setup ol{margin:8px 0 12px 16px}
+.ai-setup li{margin-bottom:5px}
+.ai-setup a{color:var(--accent)}
+.ai-field{width:100%;padding:8px 10px;border:1px solid var(--border2);border-radius:var(--r-sm);font-family:var(--mono);font-size:.74rem;margin-bottom:8px;background:var(--surface);color:var(--text)}
+.ai-field:focus{outline:none;border-color:var(--accent)}
+.ai-btn{padding:8px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-size:.75rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.ai-btn.sec{background:transparent;color:var(--muted);border:1px solid var(--border2)}
+.ai-toggle{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-top:1px solid var(--border);font-size:.72rem;color:var(--text);cursor:pointer}
+.ai-toggle input{margin-top:2px;flex-shrink:0}
+.ai-toggle span{color:var(--muted);font-size:.68rem;display:block;margin-top:2px;line-height:1.45}
+@media(max-width:700px){
+    #ai-fab{bottom:16px;right:16px;width:46px;height:46px}
+    #ai-panel{width:100vw}
+}
+
 /* ─── TV CHART ─── */
 .chips{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;border-bottom:1px solid var(--border)}
 .chip{padding:4px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.68rem;font-weight:600;cursor:pointer;font-family:var(--mono);transition:all .15s}
@@ -4382,6 +4434,548 @@ function renderCompoundInterestCalculator(){
 }
 
 /* ══════════════════════════════════════════════════════
+   AI ASSISTENT — Google Gemini, rechtstreeks vanuit de browser
+
+   Waarom deze opzet:
+   • De sleutel staat in localStorage op dit apparaat, nooit in de repo.
+     Een gratis-tier sleutel heeft geen creditcard — het ergste wat een lek
+     kost is je dagquotum, niet je geld.
+   • Platte fetch, niet Google's JS-SDK: het endpoint staat alleen
+     'content-type' toe in de CORS-preflight, en de SDK stuurt extra headers.
+   • Bedragen gaan standaard NIET mee. Op de gratis tier mag Google de data
+     gebruiken om modellen te trainen; wegingen en rendementen in procenten
+     beantwoorden dezelfde vragen zonder je vermogen weg te geven.
+══════════════════════════════════════════════════════ */
+const AI_BASE  = 'https://generativelanguage.googleapis.com/v1beta';
+const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-search',
+                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage'};
+const AI = {
+    key:     localStorage.getItem(AI_LS.key)     || '',
+    model:   localStorage.getItem(AI_LS.model)   || 'gemini-2.5-flash',
+    search:  localStorage.getItem(AI_LS.search)  === '1',
+    amounts: localStorage.getItem(AI_LS.amounts) === '1',
+    turns:   [],          // Gemini contents[]
+    busy:    false,
+    open:    false,
+};
+
+const AI_SUGGESTIONS = [
+    'Hoe presteert mijn portfolio tegenover de S&P 500?',
+    'Welke kwartaalcijfers komen er deze week aan die mij raken?',
+    'Wat is op dit moment mijn grootste risico?',
+    'Waarom is TSMC in juli gedaald?',
+];
+
+/* ── helpers ── */
+function aiEsc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function aiN(v,d=1){return (v==null||isNaN(v))?'n/b':Number(v).toFixed(d);}
+function aiPct(v,d=1){return (v==null||isNaN(v))?'n/b':(v>=0?'+':'')+Number(v).toFixed(d)+'%';}
+
+function aiUsage(){
+    const today=new Date().toISOString().slice(0,10);
+    let u={};
+    try{u=JSON.parse(localStorage.getItem(AI_LS.usage)||'{}');}catch{}
+    return u.date===today?u:{date:today,n:0};
+}
+function aiBumpUsage(){
+    const u=aiUsage(); u.n++;
+    localStorage.setItem(AI_LS.usage,JSON.stringify(u));
+    return u.n;
+}
+
+/* ══ Dashboard-context ══
+   Alles wat de bot over jouw situatie mag weten, compact en in procenten. */
+function aiContext(){
+    const L=[];
+    const money=AI.amounts;
+    L.push(`Datum: ${new Date().toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}`);
+    L.push(`Data bijgewerkt: ${B?.generated_at||'onbekend'} (scanner), ${M?.dashboard_updated||'onbekend'} (portfolio)`);
+
+    /* — eigen posities — */
+    const pos=(typeof allPos!=='undefined'?allPos:[])||[];
+    if(pos.length){
+        L.push('\n## MIJN POSITIES');
+        if(!money) L.push('(bedragen bewust weggelaten; wegingen zijn % van totale portefeuille)');
+        pos.slice().sort((a,b)=>(b.weight_total||0)-(a.weight_total||0)).forEach(p=>{
+            const bits=[`${p.ticker||p.name} (${p.broker})`,
+                        `weging ${aiN(p.weight_total)}%`,
+                        `rendement ${aiPct(p.pl_pct)}`];
+            if(p.type)     bits.push(p.type);
+            if(p.sector)   bits.push(p.sector);
+            if(p.div_yield)bits.push(`dividend ${aiN(p.div_yield*100,2)}%`);
+            if(money)      bits.push(`waarde €${Math.round(p.value)}`);
+            L.push('- '+bits.join(' · '));
+        });
+        const tot=pos.reduce((s,p)=>s+(p.value||0),0);
+        const inv=(M?.degiro_summary?.total_invested||0)+(M?.tr_summary?.total_invested||0)+(M?.bux_summary?.total_invested||0);
+        if(inv>0) L.push(`Totaal rendement op inleg: ${aiPct((tot/inv-1)*100)}`);
+        if(money) L.push(`Totale portefeuillewaarde: €${Math.round(tot)}`);
+    }
+
+    /* — benchmark YTD (zelfde berekening als het Benchmark-paneel) — */
+    const ph=(M?.portfolio_history||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
+    if(ph.length>=2){
+        const ytdStart=`${new Date().getFullYear()}-01-01`;
+        const snap=ph.slice().reverse().find(h=>h.date>=ytdStart)||ph[ph.length-1];
+        const now=(ph[0].degiro||0)+(ph[0].tr||0)+(ph[0].bux||0);
+        const base=(snap.degiro||0)+(snap.tr||0)+(snap.bux||0);
+        const bh=M?.benchmark_history||{};
+        L.push('\n## BENCHMARK YTD');
+        if(base>0) L.push(`- Mijn portfolio: ${aiPct((now/base-1)*100,2)}`);
+        L.push(`- S&P 500: ${aiPct(bh.sp500_ytd,2)} | AEX: ${aiPct(bh.aex_ytd,2)} | MSCI World: ${aiPct(bh.msci_ytd,2)}`);
+    }
+
+    /* — bot — */
+    const pf=B?.portfolio||{};
+    if(pf.return_pct!=null){
+        L.push('\n## BOT (papieren portefeuille, los van mijn echte geld)');
+        L.push(`- Rendement sinds start: ${aiPct(pf.return_pct)}`);
+        const at=B?.active_trades||[];
+        if(at.length){
+            L.push(`- ${at.length} open posities:`);
+            at.slice(0,12).forEach(t=>L.push(`  · ${t.ticker} (${t.name||''}) score ${aiN(t.score)} · P&L ${aiPct(t.pl_pct)}`));
+        }
+        const pm=M?.post_mortem||{};
+        if(pm.win_rate!=null) L.push(`- Win rate: ${aiN(pm.win_rate)}% over ${pm.total_closed||'?'} gesloten trades`);
+    }
+
+    /* — scanner — */
+    const cands=(B?.top_candidates||[]).slice(0,10);
+    if(cands.length){
+        L.push('\n## SCANNER TOP-KANDIDATEN (niet gekocht, alleen gerangschikt)');
+        cands.forEach(c=>{
+            const bits=[`${c.ticker} (${c.name||''})`, c.sector||'', `score ${aiN(c.score)}`,
+                        `groei ${aiN(c.s_growth)}`, `momentum ${aiN(c.s_momentum)}`];
+            if(c.dcf?.dcf_upside!=null) bits.push(`DCF-upside ${aiPct(c.dcf.dcf_upside)}`);
+            if(c.analyst_upside!=null)  bits.push(`analisten ${aiPct(c.analyst_upside)}`);
+            L.push('- '+bits.filter(Boolean).join(' · '));
+        });
+    }
+
+    /* — kwartaalcijfers — */
+    const e=B?.earnings;
+    if(e){
+        const s=e.stats||{};
+        L.push('\n## KWARTAALCIJFERS');
+        L.push(`- ${s.upcoming_7d||0} rapportages komende 7 dagen, ${s.upcoming_30d||0} komende 30 dagen`);
+        L.push(`- Recent: ${s.beats||0} beats / ${s.misses||0} misses / ${s.inline||0} in lijn, gem. surprise ${aiPct(s.avg_surprise)}`);
+        (e.calendar||[]).slice(0,10).forEach(r=>
+            L.push(`  · KOMT: ${r.ticker} op ${r.next_date} (over ${r.days_until}d) · beat-rate ${r.beat_rate??'n/b'}% · ${(r.tags||[]).join('/')}`));
+        (e.reported||[]).slice(0,10).forEach(r=>{
+            const l=r.last||{};
+            L.push(`  · GEWEEST: ${r.ticker} op ${l.date} — ${l.verdict} · EPS-surprise ${aiPct(l.surprise_pct)} · omzet j-o-j ${aiPct(l.revenue_yoy)} · koersreactie ${aiPct(l.reaction_pct)}`);
+        });
+    }
+
+    /* — macro & nieuws — */
+    const mac=B?.macro||{};
+    if(mac.vix!=null||mac.treasury_10y!=null)
+        L.push(`\n## MACRO\n- VIX ${aiN(mac.vix,2)} · US 10-jaars ${aiN(mac.treasury_10y,2)}%`);
+    const rot=M?.sector_rotation;
+    if(rot&&typeof rot==='object'){
+        const top=Object.entries(rot).sort((a,b)=>b[1]-a[1]).slice(0,5);
+        if(top.length) L.push(`- Sectorrotatie (sterkst eerst): ${top.map(([k,v])=>`${k} ${aiPct(v)}`).join(', ')}`);
+    }
+    const news=(M?.last_news||[]).slice(0,12);
+    if(news.length){
+        L.push('\n## RECENTE HEADLINES (via morning briefing)');
+        news.forEach(n=>L.push('- '+(typeof n==='string'?n:(n.headline||n.title||''))));
+    }
+
+    /* — geleerde lessen — */
+    const lessons=(M?.lessons||[]).slice(-6);
+    if(lessons.length){
+        L.push('\n## GELEERDE LESSEN VAN DE BOT');
+        lessons.forEach(l=>L.push('- '+(typeof l==='string'?l:(l.lesson||l.text||''))));
+    }
+
+    return L.join('\n');
+}
+
+function aiSystemPrompt(){
+    return [
+        'Je bent de assistent binnen het NEXUS-dashboard van Daniël, een Nederlandse particuliere belegger.',
+        'Je antwoordt in het Nederlands, kort en concreet, zonder disclaimers of beleggingsadvies-formaliteiten.',
+        '',
+        'REGELS:',
+        '- Gebruik de dashboarddata hieronder als waarheid over zijn situatie. Verzin nooit posities, koersen of cijfers.',
+        '- Staat een getal er niet bij, zeg dan dat je het niet hebt — gok niet.',
+        '- Onderscheid duidelijk tussen zijn ECHTE posities en de papieren botportefeuille; die twee zijn niet hetzelfde.',
+        '- Bedragen ontbreken bewust; werk met percentages en wegingen. Vraag er niet om.',
+        '- Bij vragen over koersbewegingen: koppel aan de data die je hebt (kwartaalcijfers, macro, headlines).',
+        '  Weet je de oorzaak niet, zeg dat dan en noem wat je wél ziet.',
+        '- Kort waar het kan. Geen opsomming van alles wat je weet, alleen antwoord op de vraag.',
+        '',
+        '=== DASHBOARDDATA ===',
+        aiContext(),
+    ].join('\n');
+}
+
+/* ══ Ticker-verrijking ══
+   Noemt de vraag een aandeel? Haal dan koersverloop + nieuws op vóór we het
+   model bellen. Deterministisch — geen function-calling protocol nodig. */
+const AI_STOPWORDS=new Set(['DE','HET','EEN','IK','MIJN','WAT','HOE','WAAROM','IS','ZIJN','DIE','DAT','VAN','IN','OP','EN','OF','MET','VOOR','NAAR','ALS','TE','ER','NIET','WEL','JE','JIJ','AI','ETF','EUR','USD','S&P','YTD','P&L','VIX','NEXUS','BOT']);
+
+async function aiProxyJson(url){
+    const tries=[
+        ()=>fetch(url,{signal:AbortSignal.timeout(6000)}),
+        ()=>fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,{signal:AbortSignal.timeout(9000)}),
+        ()=>fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,{signal:AbortSignal.timeout(9000)}),
+        ()=>fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`,{signal:AbortSignal.timeout(9000)}),
+    ];
+    for(const t of tries){
+        try{
+            const r=await t(); if(!r.ok) continue;
+            const j=JSON.parse(await r.text());
+            if(j&&typeof j==='object') return j;
+        }catch{}
+    }
+    return null;
+}
+
+function aiCandidateTerms(q){
+    const known=new Set();
+    (B?.top_candidates||[]).forEach(c=>c.ticker&&known.add(c.ticker.toUpperCase()));
+    (B?.active_trades||[]).forEach(t=>t.ticker&&known.add(t.ticker.toUpperCase()));
+    ((typeof allPos!=='undefined'?allPos:[])||[]).forEach(p=>p.ticker&&known.add(p.ticker.toUpperCase()));
+
+    const out=[];
+    const words=q.match(/[A-Za-z][A-Za-z.\-&]{1,14}/g)||[];
+    for(const w of words){
+        const u=w.toUpperCase();
+        if(AI_STOPWORDS.has(u)) continue;
+        if(known.has(u)){ if(!out.includes(u)) out.push(u); continue; }
+        // Hoofdletterwoorden en all-caps tokens zijn kandidaat-bedrijfsnamen
+        if((/^[A-Z][A-Z.\-&]{1,9}$/.test(w)||/^[A-Z][a-z]{2,}$/.test(w)) && !out.includes(w)) out.push(w);
+    }
+    return out.slice(0,3);
+}
+
+async function aiResolveTicker(term){
+    const j=await aiProxyJson(`https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(term)}&quotesCount=1&newsCount=0`);
+    const q=j?.quotes?.find(x=>x.symbol);
+    return q?{symbol:q.symbol,name:q.shortname||q.longname||term}:null;
+}
+
+async function aiTickerBrief(sym,name){
+    const [chart,news]=await Promise.all([
+        aiProxyJson(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1d&range=6mo`),
+        aiProxyJson(`https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(sym)}&quotesCount=0&newsCount=8`),
+    ]);
+    const L=[`\n## MARKTDATA: ${sym} (${name})`];
+    const res=chart?.chart?.result?.[0];
+    if(res){
+        const closes=(res.indicators?.quote?.[0]?.close||[]).filter(v=>v!=null);
+        const stamps=res.timestamp||[];
+        if(closes.length>5){
+            const last=closes[closes.length-1], first=closes[0];
+            const hi=Math.max(...closes), lo=Math.min(...closes);
+            L.push(`- Koers nu ${aiN(last,2)} ${res.meta?.currency||''} · 6 maanden: ${aiPct((last/first-1)*100)} · hoog ${aiN(hi,2)} / laag ${aiN(lo,2)}`);
+            // Maandrendementen, zodat "waarom in juli gedaald" beantwoordbaar is
+            const byMonth={};
+            stamps.forEach((ts,i)=>{
+                const c=res.indicators?.quote?.[0]?.close?.[i];
+                if(c==null) return;
+                const d=new Date(ts*1000), k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+                (byMonth[k]=byMonth[k]||[]).push(c);
+            });
+            const months=Object.keys(byMonth).sort().map(k=>{
+                const a=byMonth[k]; return `${k}: ${aiPct((a[a.length-1]/a[0]-1)*100)}`;
+            });
+            if(months.length) L.push(`- Per maand: ${months.join(' · ')}`);
+        }
+    }
+    const items=(news?.news||[]).slice(0,8);
+    if(items.length){
+        L.push('- Recent nieuws:');
+        items.forEach(n=>{
+            const d=n.providerPublishTime?new Date(n.providerPublishTime*1000).toISOString().slice(0,10):'';
+            L.push(`  · ${d} ${n.title||''}${n.publisher?` (${n.publisher})`:''}`);
+        });
+    }
+    if(L.length===1) L.push('- Geen marktdata opgehaald voor dit symbool.');
+    return L.join('\n');
+}
+
+async function aiEnrich(question){
+    const terms=aiCandidateTerms(question);
+    if(!terms.length) return '';
+    const seen=new Set(), blocks=[];
+    for(const t of terms){
+        if(blocks.length>=2) break;
+        const hit=await aiResolveTicker(t);
+        if(!hit||seen.has(hit.symbol)) continue;
+        seen.add(hit.symbol);
+        blocks.push(await aiTickerBrief(hit.symbol,hit.name));
+    }
+    return blocks.join('\n');
+}
+
+/* ══ Gemini-aanroep ══ */
+async function aiCallGemini(useSearch){
+    const body={
+        systemInstruction:{parts:[{text:aiSystemPrompt()}]},
+        contents:AI.turns,
+        generationConfig:{temperature:0.3,maxOutputTokens:1600},
+    };
+    if(useSearch) body.tools=[{google_search:{}}];
+
+    const r=await fetch(`${AI_BASE}/models/${encodeURIComponent(AI.model)}:generateContent?key=${encodeURIComponent(AI.key)}`,{
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify(body),
+    });
+    const j=await r.json().catch(()=>null);
+    if(!r.ok){
+        const msg=j?.error?.message||`HTTP ${r.status}`;
+        const err=new Error(msg); err.status=r.status; err.raw=j;
+        throw err;
+    }
+    return j;
+}
+
+function aiExtract(j){
+    const cand=j?.candidates?.[0];
+    const text=(cand?.content?.parts||[]).map(p=>p.text).filter(Boolean).join('\n').trim();
+    const chunks=cand?.groundingMetadata?.groundingChunks||[];
+    const sources=chunks.map(c=>c.web).filter(w=>w?.uri).map(w=>({uri:w.uri,title:w.title||w.uri}));
+    return {text,sources,finish:cand?.finishReason};
+}
+
+/* ══ UI ══ */
+function aiToggle(){
+    AI.open=!AI.open;
+    const p=document.getElementById('ai-panel');
+    p.classList.toggle('open',AI.open);
+    p.setAttribute('aria-hidden',String(!AI.open));
+    if(AI.open){
+        if(!AI.key) aiOpenSettings();
+        else{ aiRenderChrome(); setTimeout(()=>document.getElementById('ai-input')?.focus(),220); }
+    }
+}
+
+function aiRenderChrome(){
+    document.getElementById('ai-foot').style.display='block';
+    document.getElementById('ai-search-btn').classList.toggle('on',AI.search);
+    const mode=document.getElementById('ai-mode-lbl');
+    if(mode) mode.textContent=`${AI.model}${AI.search?' · webzoeken aan':''}${AI.amounts?' · bedragen aan':''}`;
+    const cost=document.getElementById('ai-cost-lbl');
+    if(cost) cost.textContent=`${aiUsage().n} vragen vandaag`;
+    aiRenderSuggestions();
+}
+
+function aiRenderSuggestions(){
+    const el=document.getElementById('ai-sugg');
+    if(!el) return;
+    el.innerHTML=AI.turns.length?'':AI_SUGGESTIONS
+        .map(s=>`<button onclick="aiAsk(this.textContent)">${aiEsc(s)}</button>`).join('');
+}
+
+function aiLog(html,cls=''){
+    const log=document.getElementById('ai-log');
+    const d=document.createElement('div');
+    d.className='ai-msg '+cls;
+    d.innerHTML=html;
+    log.appendChild(d);
+    log.scrollTop=log.scrollHeight;
+    return d;
+}
+
+function aiGrow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,110)+'px';}
+function aiKey(ev){if(ev.key==='Enter'&&!ev.shiftKey){ev.preventDefault();aiSubmit();}}
+function aiSubmit(){
+    const el=document.getElementById('ai-input');
+    const q=el.value.trim();
+    if(!q) return;
+    el.value=''; aiGrow(el);
+    aiAsk(q);
+}
+
+function aiToggleSearch(){
+    AI.search=!AI.search;
+    localStorage.setItem(AI_LS.search,AI.search?'1':'0');
+    aiRenderChrome();
+    aiLog(AI.search
+        ? 'Webzoeken staat aan — de assistent mag Google raadplegen voor actueel nieuws.'
+        : 'Webzoeken staat uit — de assistent gebruikt alleen dashboarddata en Yahoo Finance.','note');
+}
+
+function aiClear(){
+    AI.turns=[];
+    document.getElementById('ai-log').innerHTML='';
+    aiRenderSuggestions();
+}
+
+async function aiAsk(question){
+    if(AI.busy) return;
+    if(!AI.key){ aiOpenSettings(); return; }
+    AI.busy=true;
+    document.getElementById('ai-send').disabled=true;
+    document.getElementById('ai-sugg').innerHTML='';
+    aiLog(aiEsc(question),'user');
+
+    const thinking=aiLog('<div class="ai-think"><div class="spin"></div><span>Denkt na…</span></div>');
+
+    try{
+        // Marktdata ophalen als de vraag een aandeel noemt
+        let enrichment='';
+        try{ enrichment=await aiEnrich(question); }catch{}
+        if(enrichment) thinking.querySelector('span').textContent='Marktdata opgehaald, formuleert antwoord…';
+
+        AI.turns.push({role:'user',parts:[{text:enrichment?`${question}\n${enrichment}`:question}]});
+
+        let j, usedSearch=AI.search, degraded=false;
+        try{
+            j=await aiCallGemini(usedSearch);
+        }catch(err){
+            // Ondersteunt dit model/deze sleutel geen grounding? Opnieuw zonder.
+            if(usedSearch&&(err.status===400||err.status===403)){
+                usedSearch=false; degraded=true;
+                j=await aiCallGemini(false);
+            }else throw err;
+        }
+
+        const {text,sources,finish}=aiExtract(j);
+        AI.turns.push({role:'model',parts:[{text:text||'(leeg antwoord)'}]});
+        aiBumpUsage();
+        thinking.remove();
+
+        if(!text){
+            aiLog(finish==='SAFETY'
+                ? 'Het model heeft deze vraag geweigerd te beantwoorden.'
+                : `Leeg antwoord ontvangen${finish?` (${aiEsc(finish)})`:''}.`,'err');
+        }else{
+            let html=mdToHtml(text);
+            if(sources.length){
+                html+='<div class="ai-sources">'+sources.slice(0,6)
+                    .map(s=>`<div class="ai-source">↗ <a href="${aiEsc(s.uri)}" target="_blank" rel="noopener">${aiEsc(s.title)}</a></div>`)
+                    .join('')+'</div>';
+            }
+            aiLog(html,'bot');
+            if(finish==='MAX_TOKENS') aiLog('Antwoord afgekapt op de lengtelimiet.','note');
+        }
+        if(degraded) aiLog('Webzoeken werkte niet voor dit model — zonder gezocht beantwoord.','note');
+    }catch(err){
+        thinking.remove();
+        AI.turns.pop();   // mislukte beurt niet in de historie laten staan
+        aiLog(aiErrorText(err),'err');
+    }finally{
+        AI.busy=false;
+        document.getElementById('ai-send').disabled=false;
+        aiRenderChrome();
+    }
+}
+
+function aiErrorText(err){
+    const m=String(err?.message||err);
+    if(err?.status===429) return 'Dagelijkse of per-minuut limiet van de gratis tier bereikt. Even wachten, of morgen verder.';
+    if(err?.status===403) return 'Sleutel geweigerd (403). Controleer of de sleutel geldig is en de Gemini API aanstaat.';
+    if(err?.status===400&&/API key/i.test(m)) return 'Ongeldige API-sleutel. Open de instellingen en plak hem opnieuw.';
+    if(err?.status===404) return `Model "${aiEsc(AI.model)}" bestaat niet voor deze sleutel. Kies een ander model in de instellingen.`;
+    if(/Failed to fetch|NetworkError/i.test(m)) return 'Geen verbinding met Google. Check je netwerk.';
+    return 'Fout: '+aiEsc(m);
+}
+
+/* ══ Instellingen ══ */
+function aiOpenSettings(){
+    document.getElementById('ai-foot').style.display='none';
+    document.getElementById('ai-sugg').innerHTML='';
+    document.getElementById('ai-log').innerHTML=`
+      <div class="ai-setup">
+        <h4>Assistent instellen</h4>
+        <p>Draait op Google Gemini's gratis tier. Je hebt een eigen API-sleutel nodig:</p>
+        <ol>
+          <li>Ga naar <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></li>
+          <li>Klik "Create API key" (gratis, geen creditcard)</li>
+          <li>Plak hem hieronder</li>
+        </ol>
+        <input class="ai-field" id="ai-key-in" type="password" placeholder="AIza…" value="${aiEsc(AI.key)}" autocomplete="off">
+        <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px">
+          <select class="ai-field" id="ai-model-in" style="margin:0;flex:1;font-family:'Inter',sans-serif">
+            <option value="${aiEsc(AI.model)}">${aiEsc(AI.model)}</option>
+          </select>
+          <button class="ai-btn sec" onclick="aiLoadModels()" style="white-space:nowrap">Modellen ophalen</button>
+        </div>
+        <div id="ai-model-msg" style="font-size:.68rem;color:var(--muted);margin:-4px 0 10px"></div>
+
+        <label class="ai-toggle">
+          <input type="checkbox" id="ai-amounts-in" ${AI.amounts?'checked':''}>
+          <div>Euro-bedragen meesturen
+            <span>Uit: alleen wegingen en rendementen in procenten. Op de gratis tier mag Google
+            meegestuurde data gebruiken om modellen te trainen — laat dit uit tenzij je een reden hebt.</span>
+          </div>
+        </label>
+        <label class="ai-toggle">
+          <input type="checkbox" id="ai-search-in" ${AI.search?'checked':''}>
+          <div>Webzoeken toestaan
+            <span>Laat de assistent Google raadplegen voor vragen over gebeurtenissen en nieuws.
+            Ook gratis binnen de dagquota. Kan per gesprek aan/uit met het vergrootglas.</span>
+          </div>
+        </label>
+
+        <div style="display:flex;gap:7px;margin-top:14px">
+          <button class="ai-btn" onclick="aiSaveSettings()">Opslaan</button>
+          ${AI.key?'<button class="ai-btn sec" onclick="aiForget()">Sleutel wissen</button>':''}
+        </div>
+        <p style="font-size:.66rem;margin-top:12px;color:var(--muted2);line-height:1.5">
+          De sleutel blijft in localStorage op dit apparaat en gaat nooit naar GitHub.
+          Een gratis-tier sleutel heeft geen betaalgegevens — het ergste wat een lek kost is je dagquotum.
+        </p>
+      </div>`;
+}
+
+async function aiLoadModels(){
+    const key=document.getElementById('ai-key-in').value.trim()||AI.key;
+    const msg=document.getElementById('ai-model-msg');
+    if(!key){ msg.textContent='Plak eerst een sleutel.'; return; }
+    msg.textContent='Ophalen…';
+    try{
+        const r=await fetch(`${AI_BASE}/models?key=${encodeURIComponent(key)}&pageSize=100`,{headers:{'content-type':'application/json'}});
+        const j=await r.json();
+        if(!r.ok) throw new Error(j?.error?.message||`HTTP ${r.status}`);
+        const usable=(j.models||[])
+            .filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
+            .map(m=>m.name.replace(/^models\//,''))
+            .filter(n=>!/embedding|aqa|imagen|veo|tts/i.test(n))
+            .sort();
+        if(!usable.length) throw new Error('Geen bruikbare modellen gevonden voor deze sleutel.');
+        const sel=document.getElementById('ai-model-in');
+        // Flash-modellen bovenaan: die zitten in de gratis tier
+        const flash=usable.filter(n=>/flash/i.test(n)), rest=usable.filter(n=>!/flash/i.test(n));
+        sel.innerHTML=[...flash,...rest].map(n=>
+            `<option value="${aiEsc(n)}"${n===AI.model?' selected':''}>${aiEsc(n)}${/flash/i.test(n)?' — gratis tier':''}</option>`).join('');
+        if(!usable.includes(AI.model)&&flash.length) sel.value=flash[0];
+        msg.textContent=`${usable.length} modellen beschikbaar. Flash-varianten vallen onder de gratis tier.`;
+    }catch(err){
+        msg.textContent='Mislukt: '+(err?.message||err);
+    }
+}
+
+function aiSaveSettings(){
+    const key=document.getElementById('ai-key-in').value.trim();
+    if(!key){ document.getElementById('ai-model-msg').textContent='Sleutel mag niet leeg zijn.'; return; }
+    AI.key=key;
+    AI.model=document.getElementById('ai-model-in').value||AI.model;
+    AI.amounts=document.getElementById('ai-amounts-in').checked;
+    AI.search=document.getElementById('ai-search-in').checked;
+    localStorage.setItem(AI_LS.key,AI.key);
+    localStorage.setItem(AI_LS.model,AI.model);
+    localStorage.setItem(AI_LS.amounts,AI.amounts?'1':'0');
+    localStorage.setItem(AI_LS.search,AI.search?'1':'0');
+    document.getElementById('ai-log').innerHTML='';
+    AI.turns=[];
+    aiRenderChrome();
+    aiLog('Klaar. Vraag maar raak — ik heb je posities, de scanner, de kwartaalcijfers en de macro-cijfers bij de hand.','note');
+    setTimeout(()=>document.getElementById('ai-input')?.focus(),50);
+}
+
+function aiForget(){
+    ['key','model','amounts','search'].forEach(k=>localStorage.removeItem(AI_LS[k]));
+    AI.key=''; AI.turns=[];
+    aiOpenSettings();
+}
+
+/* ══════════════════════════════════════════════════════
    INIT & RENDER ALL
 ══════════════════════════════════════════════════════ */
 /* ══════════════════════════════════════════════════════
@@ -5275,6 +5869,53 @@ _wireImportDropzone('bux-drop','bux-file','bux-paste');
     </div>
     <button class="pwa-btn" onclick="_pwaInstall()">Installeren</button>
     <button class="pwa-close" onclick="_pwaDismiss()" aria-label="Sluiten">✕</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     AI ASSISTENT
+═══════════════════════════════════════ -->
+<button id="ai-fab" onclick="aiToggle()" aria-label="Assistent openen" title="Vraag de assistent">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20.5l1.5-4.4A8.4 8.4 0 0 1 3.6 11.5a8.4 8.4 0 0 1 8.4-8.4 8.4 8.4 0 0 1 9 8.4z"/>
+    </svg>
+</button>
+
+<div id="ai-panel" aria-hidden="true">
+    <div class="ai-head">
+        <span class="ai-title">Nexus Assistent</span>
+        <div class="ai-head-btns">
+            <button class="ai-icon-btn" id="ai-search-btn" onclick="aiToggleSearch()" title="Webzoeken aan/uit">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+            </button>
+            <button class="ai-icon-btn" onclick="aiClear()" title="Gesprek wissen">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 4h11M6 4V2.5h4V4M4 4l.7 9.5h6.6L12 4"/></svg>
+            </button>
+            <button class="ai-icon-btn" onclick="aiOpenSettings()" title="Instellingen">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v1.8M8 12.7v1.8M14.5 8h-1.8M3.3 8H1.5M12.6 3.4l-1.3 1.3M4.7 11.3l-1.3 1.3M12.6 12.6l-1.3-1.3M4.7 4.7L3.4 3.4"/></svg>
+            </button>
+            <button class="ai-icon-btn" onclick="aiToggle()" title="Sluiten">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="ai-log" id="ai-log"></div>
+
+    <div class="ai-sugg" id="ai-sugg"></div>
+
+    <div class="ai-foot" id="ai-foot">
+        <div class="ai-inrow">
+            <textarea class="ai-input" id="ai-input" rows="1" placeholder="Vraag iets over je dashboard…"
+                      onkeydown="aiKey(event)" oninput="aiGrow(this)"></textarea>
+            <button class="ai-send" id="ai-send" onclick="aiSubmit()" aria-label="Versturen">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+            </button>
+        </div>
+        <div class="ai-hint">
+            <span id="ai-mode-lbl"></span>
+            <span id="ai-cost-lbl"></span>
+        </div>
+    </div>
 </div>
 
 </body>
