@@ -1671,6 +1671,17 @@ function mdToHtml(md){
         .replace(/\n{2,}/g,'<br><br>')
         .replace(/\n/g,' ');
 }
+function tier2Sentiment(t2){
+    /* De opgeslagen sentiment_score was lang fout (substring-check op "BULLISH",
+       dat woord staat in élke analyse). Lees daarom het verdict uit de tekst;
+       val alleen terug op het veld als de tekst ontbreekt. */
+    const a=t2?.analysis||'';
+    let m=a.match(/\*{0,2}SENTIMENT\s+SCORE:?\*{0,2}\s*:?\s*\[?\s*(BULLISH|BEARISH|NEUTRAAL|NEUTRAL)/i);
+    if(m) return m[1].toUpperCase()==='NEUTRAL'?'NEUTRAAL':m[1].toUpperCase();
+    m=a.match(/\*{0,2}ACTIE:?\*{0,2}\s*:?\s*\[?\s*(KOOP|HOUD|MIJDEN)/i);
+    if(m){const k=m[1].toUpperCase();return k==='KOOP'?'BULLISH':k==='MIJDEN'?'BEARISH':'NEUTRAAL';}
+    return a?'NEUTRAAL':(t2?.sentiment_score||'');
+}
 function sectorMeta(group,sector){
     const MAP={
         'Tech & AI':         {color:'#2563eb',cls:'sector-tech',   label:'Tech & AI'},
@@ -1944,7 +1955,7 @@ function stockCard(c, source) {
     const sm        = c.s_momentum;
     const dcf       = c.dcf || {};
     const upside    = dcf.dcf_upside;
-    const sentiment = c.tier2?.sentiment_score || '';
+    const sentiment = tier2Sentiment(c.tier2);
 
     // Score kleur + label
     const scColor  = sc >= 7 ? '#4ade80' : sc >= 5 ? '#fbbf24' : '#f87171';
@@ -2287,7 +2298,7 @@ function renderAnalysis(data) {
     if (data.tier2?.analysis) {
         const date      = data.tier2.last_run ? new Date(data.tier2.last_run).toLocaleDateString('nl-NL') : '?';
         const model     = data.tier2.model || 'AI';
-        const sentiment = data.tier2.sentiment_score || '';
+        const sentiment = tier2Sentiment(data.tier2);
         const newsUsed  = data.tier2.news_used ? '📰' : '';
         const filingUsed= data.tier2.filing_used ? '📄' : '';
 
@@ -3280,7 +3291,7 @@ function _valuationRating(c){
 function _verdictRating(c){
     const sc=c.score||0;
     const dcfUp=c.dcf?.dcf_upside;
-    const sentiment=c.tier2?.sentiment_score;
+    const sentiment=tier2Sentiment(c.tier2);
     if(sentiment==='BULLISH') return {lbl:'KOOP',clr:'#059669',bg:'#ecfdf5',ord:0};
     if(sentiment==='BEARISH') return {lbl:'MIJDEN',clr:'#dc2626',bg:'#fef2f2',ord:2};
     // KOOP: convergence score decent AND DCF not massively overvalued,
@@ -4537,6 +4548,24 @@ function aiContext(){
         }
         const pm=M?.post_mortem||{};
         if(pm.win_rate!=null) L.push(`- Win rate: ${aiN(pm.win_rate)}% over ${pm.total_closed||'?'} gesloten trades`);
+        const secs=a=>Array.isArray(a)?a.map(x=>Array.isArray(x)?`${x[0]} (${x[1]}x)`:x).join(', '):'';
+        if(pm.best_sectors?.length)  L.push(`- Sectoren met de meeste winners: ${secs(pm.best_sectors)}`);
+        if(pm.worst_sectors?.length) L.push(`- Sectoren met de meeste verliezers: ${secs(pm.worst_sectors)}`);
+        if(pm.repeat_losers?.length) L.push(`- Tickers die herhaaldelijk verlies gaven: ${pm.repeat_losers.join(', ')}`);
+    }
+
+    /* — watchlist — */
+    const wl=B?.watchlist||[];
+    if(wl.length){
+        L.push('\n## MIJN WATCHLIST (volg ik, nog niet gekocht)');
+        wl.forEach(w=>{
+            const bits=[`${w.ticker} (${w.name||''})`];
+            if(w.sector)         bits.push(w.sector);
+            if(w.pe_ratio!=null) bits.push(`P/E ${aiN(w.pe_ratio)}`);
+            if(w.roe!=null)      bits.push(`ROE ${aiN(w.roe)}%`);
+            if(w.analyst_upside!=null) bits.push(`analisten ${aiPct(w.analyst_upside)}`);
+            L.push('- '+bits.join(' · '));
+        });
     }
 
     /* — scanner — */
@@ -4549,6 +4578,28 @@ function aiContext(){
             if(c.dcf?.dcf_upside!=null) bits.push(`DCF-upside ${aiPct(c.dcf.dcf_upside)}`);
             if(c.analyst_upside!=null)  bits.push(`analisten ${aiPct(c.analyst_upside)}`);
             L.push('- '+bits.filter(Boolean).join(' · '));
+        });
+    }
+
+    /* — Tier-2 oordelen —
+       De volledige bull/bear-analyses zijn ~2900 tekens per stuk; alle twaalf
+       meesturen zou de context verdrievoudigen. Hier alleen het verdict; de
+       volledige analyse wordt bijgeladen zodra een vraag die ticker noemt. */
+    const t2=(B?.top_candidates||[]).filter(c=>c.tier2?.analysis);
+    if(t2.length){
+        L.push('\n## AI-OORDELEN VAN DE BOT (Tier-2 bull vs bear)');
+        L.push('(volledige analyse beschikbaar — noem de ticker in je vraag)');
+        t2.forEach(c=>{
+            const a=c.tier2.analysis;
+            const f=re=>{const m=a.match(re);return m?m[1].trim():null;};
+            const bits=[`${c.ticker}: ${tier2Sentiment(c.tier2)||'?'}`];
+            const act=f(/\*\*ACTIE:\*\*\s*(.+)/), con=f(/\*\*CONVICTION:\*\*\s*(.+)/),
+                  doel=f(/\*\*KOERSDOEL[^:]*:\*\*\s*(.+)/), inst=f(/\*\*INSTAPMOMENT:\*\*\s*(.+)/);
+            if(act)  bits.push(`actie ${act}`);
+            if(con)  bits.push(`conviction ${con}`);
+            if(doel) bits.push(`koersdoel ${doel}`);
+            if(inst) bits.push(`instap: ${inst.slice(0,70)}`);
+            L.push('- '+bits.join(' · '));
         });
     }
 
@@ -4565,6 +4616,7 @@ function aiContext(){
             const l=r.last||{};
             L.push(`  · GEWEEST: ${r.ticker} op ${l.date} — ${l.verdict} · EPS-surprise ${aiPct(l.surprise_pct)} · omzet j-o-j ${aiPct(l.revenue_yoy)} · koersreactie ${aiPct(l.reaction_pct)}`);
         });
+        if(e.ai_summary?.text) L.push('\nDuiding van het cijferseizoen:\n'+e.ai_summary.text);
     }
 
     /* — macro & nieuws — */
@@ -4582,11 +4634,17 @@ function aiContext(){
         news.forEach(n=>L.push('- '+(typeof n==='string'?n:(n.headline||n.title||''))));
     }
 
-    /* — geleerde lessen — */
-    const lessons=(M?.lessons||[]).slice(-6);
+    /* — geleerde lessen (memory.json gebruikt het veld 'insight') — */
+    const lessons=(M?.lessons||[]).slice(-10);
     if(lessons.length){
-        L.push('\n## GELEERDE LESSEN VAN DE BOT');
-        lessons.forEach(l=>L.push('- '+(typeof l==='string'?l:(l.lesson||l.text||''))));
+        L.push(`\n## GELEERDE LESSEN VAN DE BOT (laatste ${lessons.length} van ${M.lessons.length})`);
+        lessons.forEach(l=>{
+            if(typeof l==='string'){ L.push('- '+l); return; }
+            const txt=l.insight||l.lesson||l.text||'';
+            if(!txt) return;
+            const meta=[l.date,l.ticker,l.type].filter(Boolean).join(' · ');
+            L.push(`- ${txt}${meta?`  [${meta}]`:''}`);
+        });
     }
 
     return L.join('\n');
@@ -4637,6 +4695,7 @@ function aiCandidateTerms(q){
     const known=new Set();
     (B?.top_candidates||[]).forEach(c=>c.ticker&&known.add(c.ticker.toUpperCase()));
     (B?.active_trades||[]).forEach(t=>t.ticker&&known.add(t.ticker.toUpperCase()));
+    (B?.watchlist||[]).forEach(w=>w.ticker&&known.add(w.ticker.toUpperCase()));
     ((typeof allPos!=='undefined'?allPos:[])||[]).forEach(p=>p.ticker&&known.add(p.ticker.toUpperCase()));
 
     const out=[];
@@ -4697,6 +4756,15 @@ async function aiTickerBrief(sym,name){
     return L.join('\n');
 }
 
+/* Volledige Tier-2 analyse van een genoemde ticker — te groot voor de vaste
+   context, maar precies wat je wilt zodra de vraag over dát aandeel gaat. */
+function aiDeepDive(sym){
+    const base=String(sym||'').toUpperCase().split('.')[0];
+    const c=(B?.top_candidates||[]).find(x=>
+        x.tier2?.analysis && String(x.ticker).toUpperCase().split('.')[0]===base);
+    return c?`\n## VOLLEDIGE BOT-ANALYSE: ${c.ticker}\n${c.tier2.analysis}`:'';
+}
+
 async function aiEnrich(question){
     const terms=aiCandidateTerms(question);
     if(!terms.length) return '';
@@ -4707,6 +4775,15 @@ async function aiEnrich(question){
         if(!hit||seen.has(hit.symbol)) continue;
         seen.add(hit.symbol);
         blocks.push(await aiTickerBrief(hit.symbol,hit.name));
+        const deep=aiDeepDive(hit.symbol)||aiDeepDive(t);
+        if(deep) blocks.push(deep);
+    }
+    // Ook zonder Yahoo-treffer: noemt de vraag een kandidaat met analyse, stuur die mee
+    if(!blocks.length){
+        for(const t of terms){
+            const deep=aiDeepDive(t);
+            if(deep){ blocks.push(deep); break; }
+        }
     }
     return blocks.join('\n');
 }

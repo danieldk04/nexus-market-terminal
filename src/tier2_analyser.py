@@ -4,6 +4,7 @@ Analyseert top 10 kandidaten met: fundamentals, DCF, nieuws, SEC filings, sentim
 """
 import json
 import os
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import anthropic
@@ -130,12 +131,28 @@ def build_bull_bear_prompt(c: dict, sentiment_text: str, filing_ctx: str) -> str
 
 
 def extract_sentiment_score(analysis_text: str) -> str:
-    """Haal sentiment label uit de analyse-tekst."""
-    upper = analysis_text.upper()
-    if "BULLISH" in upper:
-        return "BULLISH"
-    if "BEARISH" in upper:
-        return "BEARISH"
+    """
+    Haal het sentiment-label uit de VERDICT-sectie van de analyse.
+
+    Let op: een simpele 'BULLISH' in de tekst-check werkt hier NIET. Elke
+    analyse bevat dat woord ergens — in de bull case, in de crowd-sentiment
+    paragraaf — dus die check gaf altijd BULLISH terug, ook bij een verdict
+    van MIJDEN/BEARISH. We lezen daarom expliciet de SENTIMENT SCORE-regel.
+    """
+    m = re.search(
+        r"\*{0,2}SENTIMENT\s+SCORE:?\*{0,2}\s*:?\s*\[?\s*(BULLISH|BEARISH|NEUTRAAL|NEUTRAL)",
+        analysis_text,
+        re.IGNORECASE,
+    )
+    if m:
+        label = m.group(1).upper()
+        return "NEUTRAAL" if label == "NEUTRAL" else label
+
+    # Geen expliciete regel: leun op de ACTIE-regel uit het verdict.
+    m = re.search(r"\*{0,2}ACTIE:?\*{0,2}\s*:?\s*\[?\s*(KOOP|HOUD|MIJDEN)", analysis_text, re.IGNORECASE)
+    if m:
+        return {"KOOP": "BULLISH", "MIJDEN": "BEARISH"}.get(m.group(1).upper(), "NEUTRAAL")
+
     return "NEUTRAAL"
 
 
