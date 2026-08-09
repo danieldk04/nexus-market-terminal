@@ -4469,7 +4469,7 @@ function renderCompoundInterestCalculator(){
 ══════════════════════════════════════════════════════ */
 const AI_BASE  = 'https://generativelanguage.googleapis.com/v1beta';
 const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-search',
-                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape'};
+                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape', nosearch:'nexus-ai-no-search'};
 const AI = {
     key:     localStorage.getItem(AI_LS.key)     || '',
     model:   localStorage.getItem(AI_LS.model)   || '',   // leeg = automatisch kiezen
@@ -4837,6 +4837,18 @@ function aiIsChatModel(n){
     return /^gemini-/i.test(n) && !AI_NOT_CHAT.test(n);
 }
 
+/* Modellen waarvan we hebben vastgesteld dat ze geen zoektool accepteren.
+   Zonder dit geheugen probeert elke vraag opnieuw drie tool-vormen — vier
+   API-calls voor één vraag, en op de gratis tier tikt elke mislukte call
+   gewoon mee voor je quotum. */
+function aiNoSearchModels(){
+    try{ return JSON.parse(localStorage.getItem(AI_LS.nosearch)||'[]'); }catch{ return []; }
+}
+function aiMarkNoSearch(m){
+    const l=aiNoSearchModels();
+    if(m&&!l.includes(m)){ l.push(m); localStorage.setItem(AI_LS.nosearch,JSON.stringify(l)); }
+}
+
 function aiBadModels(){
     try{ return JSON.parse(localStorage.getItem(AI_LS.bad)||'[]'); }catch{ return []; }
 }
@@ -4895,6 +4907,12 @@ async function aiEnsureModel(){
    volgorde en onthouden welke aansloeg. */
 const AI_SEARCH_TOOLS=[{google_search:{}},{googleSearch:{}},{google_search_retrieval:{}}];
 
+/* google_search_retrieval is de Gemini 1.5-vorm; bij een 2.x+ model heeft
+   die geen zin, dus die proberen we daar niet — scheelt een verspilde call. */
+function aiSearchShapeCount(){
+    return /^gemini-1/i.test(AI.model||'') ? AI_SEARCH_TOOLS.length : 2;
+}
+
 /* ══ Gemini-aanroep ══ */
 async function aiCallGemini(useSearch){
     const body={
@@ -4909,6 +4927,7 @@ async function aiCallGemini(useSearch){
         headers:{'content-type':'application/json'},
         body:JSON.stringify(body),
     });
+    aiBumpUsage();   // ook mislukte calls tellen mee voor je quotum
     const j=await r.json().catch(()=>null);
     if(!r.ok){
         const msg=j?.error?.message||`HTTP ${r.status}`;
@@ -4945,7 +4964,7 @@ function aiRenderChrome(){
     if(mode) mode.textContent=`${AI.model}${AI.search?' · webzoeken aan':''}${AI.amounts?' · bedragen aan':''}`;
     const cost=document.getElementById('ai-cost-lbl');
     const n=aiUsage().n;
-    if(cost) cost.textContent=`${n} ${n===1?'vraag':'vragen'} vandaag`;
+    if(cost) cost.textContent=`${n} ${n===1?'aanroep':'aanroepen'} vandaag`;
     aiRenderSuggestions();
 }
 
@@ -5019,7 +5038,9 @@ async function aiAsk(question){
         // Blijf modellen proberen zolang het model zelf het probleem is.
         // Google's modellenlijst is niet betrouwbaar: sommige modellen claimen
         // generateContent maar weigeren het bij de aanroep.
-        let j, usedSearch=AI.search, degraded=false, switched=[], models=null, swaps=0, searchErr='';
+        let usedSearch=AI.search;
+        if(usedSearch&&aiNoSearchModels().includes(AI.model)) usedSearch=false;   // eerder al vastgesteld
+        let j, degraded=false, switched=[], models=null, swaps=0, searchErr='';
         for(;;){
             try{
                 j=await aiCallGemini(usedSearch);
@@ -5030,11 +5051,12 @@ async function aiAsk(question){
                     // Eerst de andere zoektool-vormen proberen; pas als geen
                     // enkele werkt zoeken uitzetten. Het model zelf is dan nog
                     // niet verdacht — dat testen we in de volgende ronde.
-                    if(AI.searchShape<AI_SEARCH_TOOLS.length-1){
+                    if(AI.searchShape<aiSearchShapeCount()-1){
                         AI.searchShape++;
                         continue;
                     }
                     AI.searchShape=0;
+                    aiMarkNoSearch(AI.model);   // niet elke vraag opnieuw proberen
                     usedSearch=false; degraded=true; searchErr=err.message||'';
                     continue;
                 }
@@ -5058,7 +5080,6 @@ async function aiAsk(question){
 
         const {text,sources,finish}=aiExtract(j);
         AI.turns.push({role:'model',parts:[{text:text||'(leeg antwoord)'}]});
-        aiBumpUsage();
         thinking.remove();
 
         if(!text){
@@ -5075,7 +5096,7 @@ async function aiAsk(question){
             aiLog(html,'bot');
             if(finish==='MAX_TOKENS') aiLog('Antwoord afgekapt op de lengtelimiet.','note');
         }
-        if(degraded) aiLog('Webzoeken werkte niet voor dit model — zonder gezocht beantwoord.'+
+        if(degraded) aiLog(`Webzoeken werkt niet met ${aiEsc(AI.model)} — voortaan overgeslagen voor dit model.`+
             (searchErr?` (${aiEsc(searchErr.slice(0,140))})`:''),'note');
     }catch(err){
         thinking.remove();
@@ -5088,9 +5109,31 @@ async function aiAsk(question){
     }
 }
 
+/* Google's 429 zegt in de details welk quotum vol zit (per dag of per minuut)
+   en hoe lang je moet wachten. Dat is het verschil tussen "even 30 seconden"
+   en "morgen verder", dus lees het uit in plaats van te gokken. */
+function aiQuotaInfo(err){
+    const det=err?.raw?.error?.details||[];
+    const q=det.find(d=>/QuotaFailure/.test(d['@type']||''))?.violations?.[0]||{};
+    const retry=det.find(d=>/RetryInfo/.test(d['@type']||''))?.retryDelay||'';
+    const id=`${q.quotaId||''} ${q.quotaMetric||''}`;
+    return {
+        perDag:    /PerDay|per_day/i.test(id),
+        perMinuut: /PerMinute|per_minute/i.test(id),
+        model:     q.quotaDimensions?.model||'',
+        wacht:     Number(String(retry).match(/(\d+)/)?.[1]||0),
+    };
+}
+
 function aiErrorText(err){
     const m=String(err?.message||err);
-    if(err?.status===429) return 'Dagelijkse of per-minuut limiet van de gratis tier bereikt. Even wachten, of morgen verder.';
+    if(err?.status===429){
+        const q=aiQuotaInfo(err);
+        if(q.perDag) return `Daglimiet bereikt voor ${aiEsc(q.model||AI.model)}. Morgen weer, of kies een ander model in de instellingen — elk model heeft een eigen quotum.`;
+        if(q.wacht)  return `Even te snel achter elkaar. Wacht ${q.wacht} seconden en probeer opnieuw.`;
+        if(q.perMinuut) return 'Per-minuut limiet bereikt. Wacht een halve minuut en probeer opnieuw.';
+        return 'Limiet van de gratis tier bereikt. Wacht even, of kies een ander model in de instellingen — elk model heeft een eigen quotum.';
+    }
     if(err?.status===403) return 'Sleutel geweigerd (403). Controleer of de sleutel geldig is en de Gemini API aanstaat.';
     if(err?.status===400&&/API key/i.test(m)) return 'Ongeldige API-sleutel. Open de instellingen en plak hem opnieuw.';
     if(err?.status===404) return `Model "${aiEsc(AI.model)}" bestaat niet voor deze sleutel. Kies een ander model in de instellingen.`;
@@ -5187,7 +5230,7 @@ function aiSaveSettings(){
 }
 
 function aiForget(){
-    ['key','model','amounts','search'].forEach(k=>localStorage.removeItem(AI_LS[k]));
+    ['key','model','amounts','search','bad','shape','nosearch'].forEach(k=>localStorage.removeItem(AI_LS[k]));
     AI.key=''; AI.turns=[];
     aiOpenSettings();
 }
