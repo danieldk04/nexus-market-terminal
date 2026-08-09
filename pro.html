@@ -4462,7 +4462,7 @@ const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-s
                   amounts:'nexus-ai-amounts', usage:'nexus-ai-usage'};
 const AI = {
     key:     localStorage.getItem(AI_LS.key)     || '',
-    model:   localStorage.getItem(AI_LS.model)   || 'gemini-2.5-flash',
+    model:   localStorage.getItem(AI_LS.model)   || '',   // leeg = automatisch kiezen
     search:  localStorage.getItem(AI_LS.search)  === '1',
     amounts: localStorage.getItem(AI_LS.amounts) === '1',
     turns:   [],          // Gemini contents[]
@@ -4788,6 +4788,51 @@ async function aiEnrich(question){
     return blocks.join('\n');
 }
 
+/* ══ Modelontdekking ══
+   Modelnamen bij Google veranderen en verschillen per sleutel/project, dus
+   nooit hardcoden: vraag de sleutel zelf wat hij mag gebruiken. */
+async function aiFetchModels(key){
+    const r=await fetch(`${AI_BASE}/models?key=${encodeURIComponent(key)}&pageSize=200`,
+                        {headers:{'content-type':'application/json'}});
+    const j=await r.json().catch(()=>null);
+    if(!r.ok){
+        const e=new Error(j?.error?.message||`HTTP ${r.status}`); e.status=r.status; throw e;
+    }
+    return (j.models||[])
+        .filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
+        .map(m=>m.name.replace(/^models\//,''))
+        .filter(n=>!/embedding|aqa|imagen|veo|tts|image-generation/i.test(n))
+        .sort();
+}
+
+/* Voorkeur: gewone flash — zit in de gratis tier en is sterk genoeg voor
+   analyse. Lite heeft ruimer dagquotum maar levert zwakkere antwoorden; 250
+   vragen per dag is voor één gebruiker ruim voldoende, dus lite is terugval.
+   Preview- en experimentele builds vermijden: die verdwijnen zonder waarschuwing. */
+function aiPickBest(list){
+    if(!list?.length) return '';
+    const score=n=>{
+        let s=0;
+        if(/flash/i.test(n))                s+=100;
+        if(/lite/i.test(n))                 s-=20;
+        if(/preview|exp\b|experimental/i.test(n)) s-=50;
+        if(/thinking/i.test(n))             s-=10;
+        const v=n.match(/(\d+)(?:[.-](\d+))?/);
+        if(v) s+=Number(v[1])*3+Number(v[2]||0);
+        return s;
+    };
+    return list.slice().sort((a,b)=>score(b)-score(a)||a.length-b.length)[0];
+}
+
+async function aiEnsureModel(){
+    if(AI.model) return AI.model;
+    const list=await aiFetchModels(AI.key);
+    AI.model=aiPickBest(list);
+    if(!AI.model) throw new Error('Geen bruikbaar model gevonden voor deze sleutel.');
+    localStorage.setItem(AI_LS.model,AI.model);
+    return AI.model;
+}
+
 /* ══ Gemini-aanroep ══ */
 async function aiCallGemini(useSearch){
     const body={
@@ -4894,6 +4939,13 @@ async function aiAsk(question){
     const thinking=aiLog('<div class="ai-think"><div class="spin"></div><span>Denkt na…</span></div>');
 
     try{
+        // Nog geen model gekozen? Vraag de sleutel wat er beschikbaar is.
+        if(!AI.model){
+            thinking.querySelector('span').textContent='Beschikbare modellen ophalen…';
+            await aiEnsureModel();
+            aiLog(`Model automatisch gekozen: <code>${aiEsc(AI.model)}</code>`,'note');
+        }
+
         // Marktdata ophalen als de vraag een aandeel noemt
         let enrichment='';
         try{ enrichment=await aiEnrich(question); }catch{}
@@ -4901,16 +4953,29 @@ async function aiAsk(question){
 
         AI.turns.push({role:'user',parts:[{text:enrichment?`${question}\n${enrichment}`:question}]});
 
-        let j, usedSearch=AI.search, degraded=false;
+        let j, usedSearch=AI.search, degraded=false, switched='';
         try{
             j=await aiCallGemini(usedSearch);
         }catch(err){
-            // Ondersteunt dit model/deze sleutel geen grounding? Opnieuw zonder.
-            if(usedSearch&&(err.status===400||err.status===403)){
+            if(err.status===404){
+                // Model bestaat niet (meer) voor deze sleutel: zoek een werkend
+                // model op en probeer het nog één keer, in plaats van de
+                // gebruiker naar de instellingen te sturen.
+                const bad=AI.model;
+                thinking.querySelector('span').textContent='Model niet beschikbaar, ander model zoeken…';
+                const list=await aiFetchModels(AI.key);
+                const next=aiPickBest(list.filter(n=>n!==bad));
+                if(!next) throw new Error(`Geen bruikbaar model voor deze sleutel. Beschikbaar: ${list.join(', ')||'niets'}`);
+                AI.model=next; localStorage.setItem(AI_LS.model,next);
+                switched=`${bad} → ${next}`;
+                j=await aiCallGemini(usedSearch);
+            }else if(usedSearch&&(err.status===400||err.status===403)){
+                // Ondersteunt dit model/deze sleutel geen grounding? Opnieuw zonder.
                 usedSearch=false; degraded=true;
                 j=await aiCallGemini(false);
             }else throw err;
         }
+        if(switched) aiLog(`Model gewisseld: ${aiEsc(switched)}`,'note');
 
         const {text,sources,finish}=aiExtract(j);
         AI.turns.push({role:'model',parts:[{text:text||'(leeg antwoord)'}]});
@@ -4966,10 +5031,10 @@ function aiOpenSettings(){
           <li>Klik "Create API key" (gratis, geen creditcard)</li>
           <li>Plak hem hieronder</li>
         </ol>
-        <input class="ai-field" id="ai-key-in" type="password" placeholder="AIza…" value="${aiEsc(AI.key)}" autocomplete="off">
+        <input class="ai-field" id="ai-key-in" type="password" placeholder="AQ.… of AIza…" value="${aiEsc(AI.key)}" autocomplete="off">
         <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px">
           <select class="ai-field" id="ai-model-in" style="margin:0;flex:1;font-family:'Inter',sans-serif">
-            <option value="${aiEsc(AI.model)}">${aiEsc(AI.model)}</option>
+            <option value="${aiEsc(AI.model)}">${AI.model?aiEsc(AI.model):"automatisch kiezen"}</option>
           </select>
           <button class="ai-btn sec" onclick="aiLoadModels()" style="white-space:nowrap">Modellen ophalen</button>
         </div>
@@ -5007,24 +5072,18 @@ async function aiLoadModels(){
     if(!key){ msg.textContent='Plak eerst een sleutel.'; return; }
     msg.textContent='Ophalen…';
     try{
-        const r=await fetch(`${AI_BASE}/models?key=${encodeURIComponent(key)}&pageSize=100`,{headers:{'content-type':'application/json'}});
-        const j=await r.json();
-        if(!r.ok) throw new Error(j?.error?.message||`HTTP ${r.status}`);
-        const usable=(j.models||[])
-            .filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
-            .map(m=>m.name.replace(/^models\//,''))
-            .filter(n=>!/embedding|aqa|imagen|veo|tts/i.test(n))
-            .sort();
+        const usable=await aiFetchModels(key);
         if(!usable.length) throw new Error('Geen bruikbare modellen gevonden voor deze sleutel.');
         const sel=document.getElementById('ai-model-in');
-        // Flash-modellen bovenaan: die zitten in de gratis tier
+        const best=aiPickBest(usable);
         const flash=usable.filter(n=>/flash/i.test(n)), rest=usable.filter(n=>!/flash/i.test(n));
         sel.innerHTML=[...flash,...rest].map(n=>
-            `<option value="${aiEsc(n)}"${n===AI.model?' selected':''}>${aiEsc(n)}${/flash/i.test(n)?' — gratis tier':''}</option>`).join('');
-        if(!usable.includes(AI.model)&&flash.length) sel.value=flash[0];
-        msg.textContent=`${usable.length} modellen beschikbaar. Flash-varianten vallen onder de gratis tier.`;
+            `<option value="${aiEsc(n)}"${n===(AI.model||best)?' selected':''}>${aiEsc(n)}${/flash/i.test(n)?' — gratis tier':''}</option>`).join('');
+        if(!usable.includes(AI.model)) sel.value=best;
+        msg.textContent=`${usable.length} beschikbaar · aanbevolen ${best}. Flash-varianten vallen onder de gratis tier.`;
     }catch(err){
-        msg.textContent='Mislukt: '+(err?.message||err);
+        msg.textContent='Mislukt: '+(err?.message||err)+(err?.status===403
+            ? ' — staat de Generative Language API aan voor dit Cloud-project?' : '');
     }
 }
 
@@ -5032,7 +5091,7 @@ function aiSaveSettings(){
     const key=document.getElementById('ai-key-in').value.trim();
     if(!key){ document.getElementById('ai-model-msg').textContent='Sleutel mag niet leeg zijn.'; return; }
     AI.key=key;
-    AI.model=document.getElementById('ai-model-in').value||AI.model;
+    AI.model=document.getElementById('ai-model-in').value||'';   // leeg = bij eerste vraag ontdekken
     AI.amounts=document.getElementById('ai-amounts-in').checked;
     AI.search=document.getElementById('ai-search-in').checked;
     localStorage.setItem(AI_LS.key,AI.key);
@@ -5043,6 +5102,7 @@ function aiSaveSettings(){
     AI.turns=[];
     aiRenderChrome();
     aiLog('Klaar. Vraag maar raak — ik heb je posities, de scanner, de kwartaalcijfers en de macro-cijfers bij de hand.','note');
+    if(!AI.model) aiLog('Nog geen model gekozen — ik pak automatisch een werkend model bij je eerste vraag.','note');
     setTimeout(()=>document.getElementById('ai-input')?.focus(),50);
 }
 
