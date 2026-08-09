@@ -4469,7 +4469,7 @@ function renderCompoundInterestCalculator(){
 ══════════════════════════════════════════════════════ */
 const AI_BASE  = 'https://generativelanguage.googleapis.com/v1beta';
 const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-search',
-                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape', nosearch:'nexus-ai-no-search'};
+                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape', nosearch:'nexus-ai-no-search', spent:'nexus-ai-spent'};
 const AI = {
     key:     localStorage.getItem(AI_LS.key)     || '',
     model:   localStorage.getItem(AI_LS.model)   || '',   // leeg = automatisch kiezen
@@ -4841,6 +4841,22 @@ function aiIsChatModel(n){
    Zonder dit geheugen probeert elke vraag opnieuw drie tool-vormen — vier
    API-calls voor één vraag, en op de gratis tier tikt elke mislukte call
    gewoon mee voor je quotum. */
+/* Quota gelden PER MODEL en resetten dagelijks. Een model dat vandaag op is
+   onthouden we, zodat we er niet steeds opnieuw tegenaan lopen. */
+function aiSpentModels(){
+    const today=new Date().toISOString().slice(0,10);
+    try{
+        const o=JSON.parse(localStorage.getItem(AI_LS.spent)||'{}');
+        return o.date===today?(o.models||[]):[];
+    }catch{ return []; }
+}
+function aiMarkSpent(m){
+    const today=new Date().toISOString().slice(0,10);
+    const l=aiSpentModels();
+    if(m&&!l.includes(m)) l.push(m);
+    localStorage.setItem(AI_LS.spent,JSON.stringify({date:today,models:l}));
+}
+
 function aiNoSearchModels(){
     try{ return JSON.parse(localStorage.getItem(AI_LS.nosearch)||'[]'); }catch{ return []; }
 }
@@ -4875,11 +4891,16 @@ function aiModelScore(n){
     return s;
 }
 
-function aiPickBest(list,exclude=[]){
-    const bad=new Set([...aiBadModels(),...exclude]);
-    const pool=(list||[]).filter(n=>aiIsChatModel(n)&&!bad.has(n));
+function aiPickBest(list,exclude=[],opts={}){
+    const bad=new Set([...aiBadModels(),...aiSpentModels(),...exclude]);
+    let pool=(list||[]).filter(n=>aiIsChatModel(n)&&!bad.has(n));
+    // Alles op? Dan liever een uitgeput model dan helemaal niets.
+    if(!pool.length) pool=(list||[]).filter(n=>aiIsChatModel(n)&&!aiBadModels().includes(n)&&!exclude.includes(n));
     if(!pool.length) return '';
-    return pool.slice().sort((a,b)=>aiModelScore(b)-aiModelScore(a)||a.length-b.length)[0];
+    // Na een quotumfout: lite-varianten hebben doorgaans het ruimste quotum,
+    // dus daar draaien we de voorkeur om.
+    const sc=n=>aiModelScore(n)+(opts.preferLite&&/lite/i.test(n)?60:0);
+    return pool.slice().sort((a,b)=>sc(b)-sc(a)||a.length-b.length)[0];
 }
 
 /* Fouten die betekenen: dit model kan geen gewone chat. Andere kiezen.
@@ -5040,7 +5061,7 @@ async function aiAsk(question){
         // generateContent maar weigeren het bij de aanroep.
         let usedSearch=AI.search;
         if(usedSearch&&aiNoSearchModels().includes(AI.model)) usedSearch=false;   // eerder al vastgesteld
-        let j, degraded=false, switched=[], models=null, swaps=0, searchErr='';
+        let j, degraded=false, switched=[], models=null, swaps=0, quotaSwaps=0, searchErr='';
         for(;;){
             try{
                 j=await aiCallGemini(usedSearch);
@@ -5058,6 +5079,19 @@ async function aiAsk(question){
                     AI.searchShape=0;
                     aiMarkNoSearch(AI.model);   // niet elke vraag opnieuw proberen
                     usedSearch=false; degraded=true; searchErr=err.message||'';
+                    continue;
+                }
+                if(err.status===429&&quotaSwaps++<2){
+                    // Quota gelden per model, dus een ander model kan gewoon nog.
+                    const op=AI.model;
+                    aiMarkSpent(op);
+                    thinking.querySelector('span').textContent='Quotum op, ander model proberen…';
+                    models=models||await aiFetchModels(AI.key);
+                    const next=aiPickBest(models,[],{preferLite:true});
+                    if(!next||next===op) throw err;
+                    AI.model=next; localStorage.setItem(AI_LS.model,next);
+                    switched.push(`${op} → ${next}`);
+                    if(aiNoSearchModels().includes(next)) usedSearch=false;
                     continue;
                 }
                 if(aiModelUnusable(err)&&swaps++<3){
@@ -5129,16 +5163,20 @@ function aiErrorText(err){
     const m=String(err?.message||err);
     if(err?.status===429){
         const q=aiQuotaInfo(err);
-        if(q.perDag) return `Daglimiet bereikt voor ${aiEsc(q.model||AI.model)}. Morgen weer, of kies een ander model in de instellingen — elk model heeft een eigen quotum.`;
-        if(q.wacht)  return `Even te snel achter elkaar. Wacht ${q.wacht} seconden en probeer opnieuw.`;
+        const op=aiSpentModels();
+        const opTekst=op.length>1?` Vandaag al op: ${aiEsc(op.join(', '))}.`:'';
+        if(q.perDag)    return `Daglimiet bereikt voor ${aiEsc(q.model||AI.model)}.${opTekst} Morgen weer, of kies een ander model in de instellingen.`;
+        if(q.wacht)     return `Even te snel achter elkaar. Wacht ${q.wacht} seconden en probeer opnieuw.`;
         if(q.perMinuut) return 'Per-minuut limiet bereikt. Wacht een halve minuut en probeer opnieuw.';
-        return 'Limiet van de gratis tier bereikt. Wacht even, of kies een ander model in de instellingen — elk model heeft een eigen quotum.';
+        // Geen bruikbare details: laat Google zelf aan het woord in plaats van te gokken.
+        return `Quotum bereikt op alle geprobeerde modellen.${opTekst}`+
+               `<br><br><span style="font-size:.68rem;opacity:.8">Google zegt: ${aiEsc(m.slice(0,300))}</span>`;
     }
     if(err?.status===403) return 'Sleutel geweigerd (403). Controleer of de sleutel geldig is en de Gemini API aanstaat.';
     if(err?.status===400&&/API key/i.test(m)) return 'Ongeldige API-sleutel. Open de instellingen en plak hem opnieuw.';
     if(err?.status===404) return `Model "${aiEsc(AI.model)}" bestaat niet voor deze sleutel. Kies een ander model in de instellingen.`;
     if(/Failed to fetch|NetworkError/i.test(m)) return 'Geen verbinding met Google. Check je netwerk.';
-    return 'Fout: '+aiEsc(m);
+    return `Fout${err?.status?` (${err.status})`:''}: ${aiEsc(m.slice(0,300))}`;
 }
 
 /* ══ Instellingen ══ */
@@ -5230,7 +5268,7 @@ function aiSaveSettings(){
 }
 
 function aiForget(){
-    ['key','model','amounts','search','bad','shape','nosearch'].forEach(k=>localStorage.removeItem(AI_LS[k]));
+    ['key','model','amounts','search','bad','shape','nosearch','spent'].forEach(k=>localStorage.removeItem(AI_LS[k]));
     AI.key=''; AI.turns=[];
     aiOpenSettings();
 }
