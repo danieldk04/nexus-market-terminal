@@ -4889,12 +4889,19 @@ function aiMarkSpent(m){
    details", betekent iets anders dan een vol dagquotum: dit model zit
    helemaal niet in de gratis tier. Dat gaat morgen niet vanzelf over, dus
    onthouden we het blijvend en slaan we het model voortaan over. */
+/* v2: de eerste versie kon een model ten onrechte als betaald bestempelen als
+   in werkelijkheid het zoekquotum de 429 veroorzaakte. Sindsdien proberen we
+   eerst zonder zoeken. Oude lijsten (platte array) daarom weggooien. */
 function aiNoFreeModels(){
-    try{ return JSON.parse(localStorage.getItem(AI_LS.nofree)||'[]'); }catch{ return []; }
+    try{
+        const o=JSON.parse(localStorage.getItem(AI_LS.nofree)||'{}');
+        if(Array.isArray(o)){ localStorage.removeItem(AI_LS.nofree); return []; }
+        return o.v===2?(o.models||[]):[];
+    }catch{ return []; }
 }
 function aiMarkNoFree(m){
     const l=aiNoFreeModels();
-    if(m&&!l.includes(m)){ l.push(m); localStorage.setItem(AI_LS.nofree,JSON.stringify(l)); }
+    if(m&&!l.includes(m)){ l.push(m); localStorage.setItem(AI_LS.nofree,JSON.stringify({v:2,models:l})); }
 }
 /* Onderscheid: "jouw quotum is op" (wacht) vs "dit model kost geld" (kies iets anders). */
 function aiQuotaIsPlan(err){
