@@ -2452,15 +2452,25 @@ function renderBenchmarkPanel(){
     const ytdBase=(ytdSnap.degiro||0)+(ytdSnap.tr||0)+(ytdSnap.bux||0);
     const portYtd=ytdBase>0?((now/ytdBase-1)*100):null;
 
+    // De historie begint vaak ná 1 januari; dan is dit géén YTD en niet
+    // vergelijkbaar met de index-cijfers. Zeg dat er dan bij i.p.v. te doen
+    // alsof het om dezelfde periode gaat.
+    const partieel=ytdSnap.date>ytdStart&&ytdSnap.date.slice(0,7)!==ytdStart.slice(0,7);
+    const vanaf=partieel?new Date(ytdSnap.date).toLocaleDateString('nl-NL',{day:'numeric',month:'short'}):null;
+
     const bh=M?.benchmark_history||{};
     const rows=[
-        {name:'Mijn Portfolio', ytd:portYtd, color:'#2563eb'},
+        {name:partieel?`Mijn Portfolio (vanaf ${vanaf})`:'Mijn Portfolio', ytd:portYtd, color:'#2563eb'},
         {name:'S&P 500',        ytd:bh.sp500_ytd||null, color:'#059669'},
         {name:'AEX',            ytd:bh.aex_ytd||null,   color:'#d97706'},
         {name:'MSCI World',     ytd:bh.msci_ytd||null,  color:'#7c3aed'},
     ];
 
     const maxAbs=Math.max(...rows.map(r=>Math.abs(r.ytd||0)),1);
+    const waarschuwing=partieel
+        ? `<div style="font-size:.62rem;color:var(--muted);margin-top:9px;padding-top:7px;border-top:1px solid var(--border);line-height:1.45">
+             Je portefeuillehistorie start op ${vanaf}, de indices lopen vanaf 1 januari — verschillende periodes, dus niet één op één te vergelijken.
+           </div>` : '';
     el.innerHTML=rows.map(r=>{
         if(r.ytd==null) return `<div class="bmark-row"><div class="bmark-name">${r.name}</div><div style="flex:1;font-size:.7rem;color:var(--muted)">n/b na briefing</div></div>`;
         const barW=Math.abs(r.ytd)/maxAbs*100;
@@ -2470,7 +2480,7 @@ function renderBenchmarkPanel(){
             <div class="bmark-bar-wrap"><div class="bmark-bar" style="width:${barW}%;background:${r.color};opacity:${r.ytd>=0?'.8':'.5'}"></div></div>
             <div class="bmark-val ${cls}">${r.ytd>=0?'+':''}${r.ytd.toFixed(2)}%</div>
         </div>`;
-    }).join('');
+    }).join('')+waarschuwing;
 }
 
 function renderDividendPanel(elId){
@@ -4459,11 +4469,12 @@ function renderCompoundInterestCalculator(){
 ══════════════════════════════════════════════════════ */
 const AI_BASE  = 'https://generativelanguage.googleapis.com/v1beta';
 const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-search',
-                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models'};
+                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape'};
 const AI = {
     key:     localStorage.getItem(AI_LS.key)     || '',
     model:   localStorage.getItem(AI_LS.model)   || '',   // leeg = automatisch kiezen
     search:  localStorage.getItem(AI_LS.search)  === '1',
+    searchShape: Number(localStorage.getItem(AI_LS.shape)||0),   // welke zoektool-vorm werkt
     amounts: localStorage.getItem(AI_LS.amounts) === '1',
     turns:   [],          // Gemini contents[]
     busy:    false,
@@ -4523,17 +4534,29 @@ function aiContext(){
         if(money) L.push(`Totale portefeuillewaarde: €${Math.round(tot)}`);
     }
 
-    /* — benchmark YTD (zelfde berekening als het Benchmark-paneel) — */
+    /* — benchmark —
+       Let op: de portefeuillehistorie begint pas op de eerste snapshot, vaak
+       ná 1 januari. De indexcijfers zijn wél echte year-to-date. Die twee zijn
+       dan niet vergelijkbaar; dat moet expliciet in de context staan, anders
+       trekt het model ze van elkaar af en meldt een voorsprong die er niet is. */
     const ph=(M?.portfolio_history||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
     if(ph.length>=2){
+        const tot=h=>(h.degiro||0)+(h.tr||0)+(h.bux||0);
         const ytdStart=`${new Date().getFullYear()}-01-01`;
         const snap=ph.slice().reverse().find(h=>h.date>=ytdStart)||ph[ph.length-1];
-        const now=(ph[0].degiro||0)+(ph[0].tr||0)+(ph[0].bux||0);
-        const base=(snap.degiro||0)+(snap.tr||0)+(snap.bux||0);
+        const trueYtd=snap.date<=ytdStart||snap.date.slice(0,7)===ytdStart.slice(0,7);
+        const now=tot(ph[0]), base=tot(snap);
         const bh=M?.benchmark_history||{};
-        L.push('\n## BENCHMARK YTD');
-        if(base>0) L.push(`- Mijn portfolio: ${aiPct((now/base-1)*100,2)}`);
-        L.push(`- S&P 500: ${aiPct(bh.sp500_ytd,2)} | AEX: ${aiPct(bh.aex_ytd,2)} | MSCI World: ${aiPct(bh.msci_ytd,2)}`);
+        L.push('\n## RENDEMENT VS INDICES');
+        if(base>0){
+            const dagen=Math.round((new Date(ph[0].date)-new Date(snap.date))/864e5);
+            L.push(`- Mijn portfolio: ${aiPct((now/base-1)*100,2)} gemeten van ${snap.date} tot ${ph[0].date} (${dagen} dagen)`);
+        }
+        L.push(`- Indices year-to-date (sinds 1 januari): S&P 500 ${aiPct(bh.sp500_ytd,2)} · AEX ${aiPct(bh.aex_ytd,2)} · MSCI World ${aiPct(bh.msci_ytd,2)}`);
+        if(!trueYtd) L.push(
+            `- LET OP: mijn portefeuillehistorie begint pas op ${snap.date}, dus mijn cijfer dekt een KORTERE periode `+
+            `dan de index-cijfers. Trek ze niet van elkaar af en noem geen voorsprong in procentpunten; `+
+            `zeg dat de periodes verschillen als ik hierom vraag.`);
     }
 
     /* — bot — */
@@ -4867,6 +4890,11 @@ async function aiEnsureModel(){
     return AI.model;
 }
 
+/* De naam van de zoektool verschilt per modelgeneratie en API-versie. Welke
+   vorm werkt is niet uit de modellenlijst af te leiden, dus proberen we ze op
+   volgorde en onthouden welke aansloeg. */
+const AI_SEARCH_TOOLS=[{google_search:{}},{googleSearch:{}},{google_search_retrieval:{}}];
+
 /* ══ Gemini-aanroep ══ */
 async function aiCallGemini(useSearch){
     const body={
@@ -4874,7 +4902,7 @@ async function aiCallGemini(useSearch){
         contents:AI.turns,
         generationConfig:{temperature:0.3,maxOutputTokens:1600},
     };
-    if(useSearch) body.tools=[{google_search:{}}];
+    if(useSearch) body.tools=[AI_SEARCH_TOOLS[AI.searchShape]||AI_SEARCH_TOOLS[0]];
 
     const r=await fetch(`${AI_BASE}/models/${encodeURIComponent(AI.model)}:generateContent?key=${encodeURIComponent(AI.key)}`,{
         method:'POST',
@@ -4916,7 +4944,8 @@ function aiRenderChrome(){
     const mode=document.getElementById('ai-mode-lbl');
     if(mode) mode.textContent=`${AI.model}${AI.search?' · webzoeken aan':''}${AI.amounts?' · bedragen aan':''}`;
     const cost=document.getElementById('ai-cost-lbl');
-    if(cost) cost.textContent=`${aiUsage().n} vragen vandaag`;
+    const n=aiUsage().n;
+    if(cost) cost.textContent=`${n} ${n===1?'vraag':'vragen'} vandaag`;
     aiRenderSuggestions();
 }
 
@@ -4990,16 +5019,23 @@ async function aiAsk(question){
         // Blijf modellen proberen zolang het model zelf het probleem is.
         // Google's modellenlijst is niet betrouwbaar: sommige modellen claimen
         // generateContent maar weigeren het bij de aanroep.
-        let j, usedSearch=AI.search, degraded=false, switched=[], models=null, swaps=0;
+        let j, usedSearch=AI.search, degraded=false, switched=[], models=null, swaps=0, searchErr='';
         for(;;){
             try{
                 j=await aiCallGemini(usedSearch);
+                if(usedSearch) localStorage.setItem(AI_LS.shape,String(AI.searchShape));
                 break;
             }catch(err){
                 if(usedSearch&&(err.status===400||err.status===403)){
-                    // Ondersteunt dit model/deze sleutel geen grounding? Eerst
-                    // zonder proberen — pas als het dán nog faalt is het model fout.
-                    usedSearch=false; degraded=true;
+                    // Eerst de andere zoektool-vormen proberen; pas als geen
+                    // enkele werkt zoeken uitzetten. Het model zelf is dan nog
+                    // niet verdacht — dat testen we in de volgende ronde.
+                    if(AI.searchShape<AI_SEARCH_TOOLS.length-1){
+                        AI.searchShape++;
+                        continue;
+                    }
+                    AI.searchShape=0;
+                    usedSearch=false; degraded=true; searchErr=err.message||'';
                     continue;
                 }
                 if(aiModelUnusable(err)&&swaps++<3){
@@ -5039,7 +5075,8 @@ async function aiAsk(question){
             aiLog(html,'bot');
             if(finish==='MAX_TOKENS') aiLog('Antwoord afgekapt op de lengtelimiet.','note');
         }
-        if(degraded) aiLog('Webzoeken werkte niet voor dit model — zonder gezocht beantwoord.','note');
+        if(degraded) aiLog('Webzoeken werkte niet voor dit model — zonder gezocht beantwoord.'+
+            (searchErr?` (${aiEsc(searchErr.slice(0,140))})`:''),'note');
     }catch(err){
         thinking.remove();
         AI.turns.pop();   // mislukte beurt niet in de historie laten staan
