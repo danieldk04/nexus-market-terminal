@@ -4469,7 +4469,7 @@ function renderCompoundInterestCalculator(){
 ══════════════════════════════════════════════════════ */
 const AI_BASE  = 'https://generativelanguage.googleapis.com/v1beta';
 const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-search',
-                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape', nosearch:'nexus-ai-no-search', spent:'nexus-ai-spent', nofree:'nexus-ai-no-free'};
+                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape', nosearch:'nexus-ai-no-search', spent:'nexus-ai-spent', nofree:'nexus-ai-no-free', searchspent:'nexus-ai-search-spent'};
 const AI = {
     key:     localStorage.getItem(AI_LS.key)     || '',
     model:   localStorage.getItem(AI_LS.model)   || '',   // leeg = automatisch kiezen
@@ -4587,6 +4587,15 @@ function aiContext(){
             if(w.pe_ratio!=null) bits.push(`P/E ${aiN(w.pe_ratio)}`);
             if(w.roe!=null)      bits.push(`ROE ${aiN(w.roe)}%`);
             if(w.analyst_upside!=null) bits.push(`analisten ${aiPct(w.analyst_upside)}`);
+            // Het oordeel van de bot is het antwoord op "is X een koop?" — dat
+            // hoort erbij, anders zegt de assistent "geen advies beschikbaar"
+            // terwijl het gewoon in het dashboard staat.
+            if(w.verdict?.verdict){
+                bits.push(`OORDEEL BOT: ${w.verdict.verdict}`);
+                if(w.verdict.score!=null) bits.push(`score ${aiN(w.verdict.score)}/10`);
+                if(w.verdict.one_liner)   bits.push(`"${w.verdict.one_liner}"`);
+            }
+            if(w.tier2?.analysis) bits.push(`Tier-2 ${tier2Sentiment(w.tier2)||'?'} (volledige analyse beschikbaar — noem de ticker)`);
             L.push('- '+bits.join(' · '));
         });
     }
@@ -4721,12 +4730,22 @@ function aiCandidateTerms(q){
     (B?.watchlist||[]).forEach(w=>w.ticker&&known.add(w.ticker.toUpperCase()));
     ((typeof allPos!=='undefined'?allPos:[])||[]).forEach(p=>p.ticker&&known.add(p.ticker.toUpperCase()));
 
+    /* Bedrijfsnamen uit het dashboard, zodat "palantir" net zo goed werkt als
+       "PLTR". Zonder dit vindt alleen een hoofdletterwoord iets, en typt
+       vrijwel niemand zijn vraag zo. */
+    const byName=new Map();
+    [...(B?.top_candidates||[]),...(B?.watchlist||[]),...(B?.active_trades||[])].forEach(x=>{
+        const eerste=String(x.name||'').split(/[\s,.]+/)[0].toUpperCase();
+        if(eerste.length>=4&&x.ticker&&!byName.has(eerste)) byName.set(eerste,x.ticker.toUpperCase());
+    });
+
     const out=[];
     const words=q.match(/[A-Za-z][A-Za-z.\-&]{1,14}/g)||[];
     for(const w of words){
         const u=w.toUpperCase();
         if(AI_STOPWORDS.has(u)) continue;
         if(known.has(u)){ if(!out.includes(u)) out.push(u); continue; }
+        if(byName.has(u)){ const t=byName.get(u); if(!out.includes(t)) out.push(t); continue; }
         // Hoofdletterwoorden en all-caps tokens zijn kandidaat-bedrijfsnamen
         if((/^[A-Z][A-Z.\-&]{1,9}$/.test(w)||/^[A-Z][a-z]{2,}$/.test(w)) && !out.includes(w)) out.push(w);
     }
@@ -4783,8 +4802,17 @@ async function aiTickerBrief(sym,name){
    context, maar precies wat je wilt zodra de vraag over dát aandeel gaat. */
 function aiDeepDive(sym){
     const base=String(sym||'').toUpperCase().split('.')[0];
-    const c=(B?.top_candidates||[]).find(x=>
-        x.tier2?.analysis && String(x.ticker).toUpperCase().split('.')[0]===base);
+    // Ook de watchlist doorzoeken: daar staan analyses van aandelen die niet
+    // (meer) in de scanner-top staan, zoals PLTR.
+    const pool=[...(B?.top_candidates||[]),...(B?.watchlist||[])].filter(x=>x.tier2?.analysis);
+    // Op ticker, en anders op bedrijfsnaam: iemand vraagt "is palantir een
+    // buy", niet "is PLTR een buy". Zonder naamherkenning hangt het bijladen
+    // af van Yahoo, en dat is een externe dienst die ook plat kan liggen.
+    const c=pool.find(x=>String(x.ticker).toUpperCase().split('.')[0]===base)
+         || (base.length>=4 && pool.find(x=>{
+                const n=String(x.name||'').toUpperCase();
+                return n && (n.startsWith(base) || n.split(/[\s,.]+/)[0]===base);
+            }));
     return c?`\n## VOLLEDIGE BOT-ANALYSE: ${c.ticker}\n${c.tier2.analysis}`:'';
 }
 
@@ -4873,6 +4901,20 @@ function aiQuotaIsPlan(err){
     const det=err?.raw?.error?.details||[];
     if(det.some(d=>/QuotaFailure|RetryInfo/.test(d['@type']||''))) return false;
     return /billing|plan/i.test(String(err?.message||''));
+}
+
+/* Het zoekquotum is op voor vandaag. Dat geldt voor de hele sleutel, niet per
+   model, dus opnieuw proberen kost elke vraag een verspilde call — precies wat
+   Daniël zag: dezelfde melding onder elk antwoord. Eén keer per dag vaststellen
+   is genoeg; morgen proberen we vanzelf weer. */
+function aiSearchSpent(){
+    try{
+        const o=JSON.parse(localStorage.getItem(AI_LS.searchspent)||'{}');
+        return o.date===new Date().toISOString().slice(0,10);
+    }catch{ return false; }
+}
+function aiMarkSearchSpent(){
+    localStorage.setItem(AI_LS.searchspent,JSON.stringify({date:new Date().toISOString().slice(0,10)}));
 }
 
 function aiNoSearchModels(){
@@ -5000,7 +5042,10 @@ function aiRenderChrome(){
     document.getElementById('ai-foot').style.display='block';
     document.getElementById('ai-search-btn').classList.toggle('on',AI.search);
     const mode=document.getElementById('ai-mode-lbl');
-    if(mode) mode.textContent=`${AI.model}${AI.search?' · webzoeken aan':''}${AI.amounts?' · bedragen aan':''}`;
+    // "webzoeken aan" terwijl het quotum op is, is misleidend — zeg wat er echt gebeurt.
+    const zoek=!AI.search?'':(aiSearchSpent()||aiNoSearchModels().includes(AI.model)
+        ? ' · webzoeken uit (quotum)' : ' · webzoeken aan');
+    if(mode) mode.textContent=`${AI.model}${zoek}${AI.amounts?' · bedragen aan':''}`;
     const cost=document.getElementById('ai-cost-lbl');
     const n=aiUsage().n;
     if(cost) cost.textContent=`${n} ${n===1?'aanroep':'aanroepen'} vandaag`;
@@ -5079,6 +5124,7 @@ async function aiAsk(question){
         // generateContent maar weigeren het bij de aanroep.
         let usedSearch=AI.search;
         if(usedSearch&&aiNoSearchModels().includes(AI.model)) usedSearch=false;   // eerder al vastgesteld
+        if(usedSearch&&aiSearchSpent()) usedSearch=false;                         // zoekquotum vandaag al op
         let j, degraded=false, switched=[], models=null, swaps=0, quotaSwaps=0, searchErr='';
         let searchQuota=false, paid=[];
         for(;;){
@@ -5171,8 +5217,12 @@ async function aiAsk(question){
             aiLog(html,'bot');
             if(finish==='MAX_TOKENS') aiLog('Antwoord afgekapt op de lengtelimiet.','note');
         }
-        if(searchQuota) aiLog('Zoekquotum voor vandaag op — deze vraag zonder webzoeken beantwoord. '+
-            'Antwoorden komen nu alleen uit je dashboard, niet van het web.','note');
+        // Alleen als het wegláten van zoeken de vraag redde op hetzelfde model,
+        // lag het aan het zoekquotum. Kwam het antwoord pas van een ánder model,
+        // dan was dat model het probleem en blijft webzoeken gewoon aan.
+        if(searchQuota&&!switched.length) aiMarkSearchSpent(); else searchQuota=false;
+        if(searchQuota) aiLog('Zoekquotum voor vandaag op — vanaf nu zonder webzoeken. '+
+            'Antwoorden komen uit je dashboard, niet van het web. Morgen weer.','note');
         if(degraded) aiLog(`Webzoeken werkt niet met ${aiEsc(AI.model)} — voortaan overgeslagen voor dit model.`+
             (searchErr?` (${aiEsc(searchErr.slice(0,140))})`:''),'note');
     }catch(err){
@@ -5319,7 +5369,8 @@ function aiSaveSettings(){
 }
 
 function aiForget(){
-    ['key','model','amounts','search','bad','shape','nosearch','spent','nofree'].forEach(k=>localStorage.removeItem(AI_LS[k]));
+    ['key','model','amounts','search','bad','shape','nosearch','spent','nofree','searchspent']
+        .forEach(k=>localStorage.removeItem(AI_LS[k]));
     AI.key=''; AI.turns=[];
     aiOpenSettings();
 }
