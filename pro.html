@@ -4752,10 +4752,31 @@ function aiCandidateTerms(q){
     return out.slice(0,3);
 }
 
+/* Tickers die het dashboard zelf al kent, met hun naam. Scheelt per vraag een
+   complete Yahoo-zoekopdracht via een CORS-proxy — de traagste stap die er is. */
+function aiKnownTicker(term){
+    const u=String(term||'').toUpperCase();
+    const x=[...(B?.active_trades||[]),...(B?.watchlist||[]),...(B?.top_candidates||[])]
+        .find(y=>String(y.ticker||'').toUpperCase()===u);
+    return x?{symbol:x.ticker,name:x.name||term}:null;
+}
+
 async function aiResolveTicker(term){
-    const j=await aiProxyJson(`https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(term)}&quotesCount=1&newsCount=0`);
-    const q=j?.quotes?.find(x=>x.symbol);
-    return q?{symbol:q.symbol,name:q.shortname||q.longname||term}:null;
+    const j=await aiProxyJson(`https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(term)}&quotesCount=6&newsCount=0`);
+    const qs=(j?.quotes||[]).filter(x=>x.symbol);
+    if(!qs.length) return null;
+    /* Yahoo zet lokale notering soms bovenaan: op "TSMC" kwam een Braziliaanse
+       notering in BRL terug, en die koers belandde vervolgens in het antwoord.
+       Kies daarom de hoofdnotering: aandeel/ETF, liefst zonder beurssuffix. */
+    const score=x=>{
+        let s=0;
+        if(/^(EQUITY|ETF)$/i.test(x.quoteType||'')) s+=10;
+        if(!String(x.symbol).includes('.'))         s+=5;   // .SA, .AS, .DE = lokale notering
+        if(/^(NMS|NYQ|NGM|ASE|PCX)$/i.test(x.exchange||'')) s+=4;
+        return s;
+    };
+    const q=qs.slice().sort((a,b)=>score(b)-score(a))[0];
+    return {symbol:q.symbol,name:q.shortname||q.longname||term};
 }
 
 async function aiTickerBrief(sym,name){
@@ -4816,19 +4837,68 @@ function aiDeepDive(sym){
     return c?`\n## VOLLEDIGE BOT-ANALYSE: ${c.ticker}\n${c.tier2.analysis}`:'';
 }
 
+const AI_BRIEF_CACHE=new Map();   // per sessie; dezelfde ticker twee keer opvragen is zonde
+
+/* Wat het dashboard zelf al weet over een ticker. Kost niets en is er meteen,
+   dus dit gaat altijd mee — Yahoo is daarmee een bonus in plaats van een
+   blokkade. Wel de datum erbij, zodat het model niet doet alsof het live is. */
+function aiLocalBrief(sym){
+    const x=aiKnownTicker(sym); if(!x) return '';
+    const w=[...(B?.watchlist||[]),...(B?.top_candidates||[])]
+        .find(y=>String(y.ticker||'').toUpperCase()===String(sym).toUpperCase());
+    if(!w) return '';
+    const L=[`\n## DASHBOARDDATA: ${w.ticker} (${w.name||''}) — stand van ${(w.lookup_at||B?.ticker_updated_at||'').slice(0,10)}`];
+    const b=[];
+    if(w.price!=null)          b.push(`koers ${aiN(w.price,2)} ${w.currency||''}`);
+    if(w.return_52w!=null)     b.push(`52 weken ${aiPct(w.return_52w)}`);
+    if(w.from_52w_high!=null)  b.push(`vanaf top ${aiPct(w.from_52w_high)}`);
+    if(w.sma50!=null)          b.push(`MA50 ${aiN(w.sma50,2)}${w.above_ma50===false?' (koers eronder)':''}`);
+    if(w.sma200!=null)         b.push(`MA200 ${aiN(w.sma200,2)}${w.above_ma200===false?' (koers eronder)':''}`);
+    if(w.pe_ratio!=null)       b.push(`P/E ${aiN(w.pe_ratio)}`);
+    if(w.analyst_upside!=null) b.push(`analisten ${aiPct(w.analyst_upside)}`);
+    if(b.length) L.push('- '+b.join(' · '));
+    if(w.verdict?.verdict) L.push(`- Oordeel bot: ${w.verdict.verdict}${w.verdict.score!=null?` (${aiN(w.verdict.score)}/10)`:''}`+
+        `${w.verdict.one_liner?` — ${w.verdict.one_liner}`:''}`);
+    if(w.news) L.push(`- Nieuws uit het dashboard:\n${String(w.news).split('\n').slice(0,5).join('\n')}`);
+    return L.join('\n');
+}
+
 async function aiEnrich(question){
     const terms=aiCandidateTerms(question);
     if(!terms.length) return '';
-    const seen=new Set(), blocks=[];
-    for(const t of terms){
-        if(blocks.length>=2) break;
-        const hit=await aiResolveTicker(t);
-        if(!hit||seen.has(hit.symbol)) continue;
-        seen.add(hit.symbol);
-        blocks.push(await aiTickerBrief(hit.symbol,hit.name));
-        const deep=aiDeepDive(hit.symbol)||aiDeepDive(t);
+    const blocks=[];
+
+    /* Parallel in plaats van na elkaar, en met een harde deadline. Dit draait
+       vóór de Gemini-aanroep, dus elke seconde hier is een seconde waarin het
+       scherm stilstaat. Liever een antwoord zonder verse koers dan tien
+       seconden wachten op een trage proxy. */
+    const werk=terms.slice(0,2).map(async t=>{
+        const hit=aiKnownTicker(t)||await aiResolveTicker(t);
+        if(!hit) return null;
+        if(!AI_BRIEF_CACHE.has(hit.symbol))
+            AI_BRIEF_CACHE.set(hit.symbol,await aiTickerBrief(hit.symbol,hit.name));
+        return {sym:hit.symbol,term:t,brief:AI_BRIEF_CACHE.get(hit.symbol)};
+    });
+    const uit=await Promise.race([
+        Promise.all(werk.map(p=>p.catch(()=>null))),
+        new Promise(r=>setTimeout(()=>r(null),4500)),
+    ]);
+    const seen=new Set();
+    (uit||[]).forEach(x=>{
+        if(!x||seen.has(x.sym)) return;
+        seen.add(x.sym);
+        blocks.push(x.brief);
+        const deep=aiDeepDive(x.sym)||aiDeepDive(x.term);
         if(deep) blocks.push(deep);
-    }
+    });
+    // Yahoo te traag of plat? Dan alsnog wat het dashboard zelf weet.
+    terms.slice(0,2).forEach(t=>{
+        const k=aiKnownTicker(t); if(!k||seen.has(k.symbol)) return;
+        const lok=aiLocalBrief(k.symbol); if(!lok) return;
+        seen.add(k.symbol);
+        blocks.push(lok);
+        const deep=aiDeepDive(k.symbol); if(deep) blocks.push(deep);
+    });
     // Ook zonder Yahoo-treffer: noemt de vraag een kandidaat met analyse, stuur die mee
     if(!blocks.length){
         for(const t of terms){
@@ -5002,27 +5072,64 @@ function aiSearchShapeCount(){
 }
 
 /* ══ Gemini-aanroep ══ */
-async function aiCallGemini(useSearch){
+/* Streamen in plaats van wachten op het hele antwoord. Dezelfde totale tijd,
+   maar de eerste regel staat er na een seconde in plaats van na tien — en dat
+   is het verschil dat je voelt. De opbouw van het resultaat blijft gelijk aan
+   generateContent, zodat aiExtract en de foutafhandeling onveranderd werken. */
+async function aiCallGemini(useSearch,onChunk){
     const body={
         systemInstruction:{parts:[{text:aiSystemPrompt()}]},
         contents:AI.turns,
-        generationConfig:{temperature:0.3,maxOutputTokens:1600},
+        generationConfig:{temperature:0.3,maxOutputTokens:2600},
     };
     if(useSearch) body.tools=[AI_SEARCH_TOOLS[AI.searchShape]||AI_SEARCH_TOOLS[0]];
 
-    const r=await fetch(`${AI_BASE}/models/${encodeURIComponent(AI.model)}:generateContent?key=${encodeURIComponent(AI.key)}`,{
+    const r=await fetch(`${AI_BASE}/models/${encodeURIComponent(AI.model)}:streamGenerateContent?alt=sse&key=${encodeURIComponent(AI.key)}`,{
         method:'POST',
         headers:{'content-type':'application/json'},
         body:JSON.stringify(body),
     });
     aiBumpUsage();   // ook mislukte calls tellen mee voor je quotum
-    const j=await r.json().catch(()=>null);
     if(!r.ok){
+        const j=await r.json().catch(()=>null);
         const msg=j?.error?.message||`HTTP ${r.status}`;
         const err=new Error(msg); err.status=r.status; err.raw=j;
         throw err;
     }
-    return j;
+
+    let tekst='', finish='', chunks=[];
+    const verwerk=o=>{
+        const c=o?.candidates?.[0];
+        const t=(c?.content?.parts||[]).map(p=>p.text).filter(Boolean).join('');
+        if(t){ tekst+=t; if(onChunk) onChunk(tekst); }
+        if(c?.finishReason) finish=c.finishReason;
+        (c?.groundingMetadata?.groundingChunks||[]).forEach(g=>chunks.push(g));
+    };
+
+    const reader=r.body?.getReader();
+    if(reader){
+        const dec=new TextDecoder();
+        let buf='';
+        for(;;){
+            const {value,done}=await reader.read();
+            if(done) break;
+            buf+=dec.decode(value,{stream:true});
+            // SSE: gebeurtenissen gescheiden door een lege regel
+            let i;
+            while((i=buf.indexOf('\n\n'))>=0){
+                const blok=buf.slice(0,i); buf=buf.slice(i+2);
+                blok.split('\n').forEach(regel=>{
+                    if(!regel.startsWith('data:')) return;
+                    const d=regel.slice(5).trim();
+                    if(!d||d==='[DONE]') return;
+                    try{ verwerk(JSON.parse(d)); }catch{}
+                });
+            }
+        }
+    }
+    return {candidates:[{content:{parts:[{text:tekst}],role:'model'},
+                         finishReason:finish,
+                         groundingMetadata:{groundingChunks:chunks}}]};
 }
 
 function aiExtract(j){
@@ -5110,6 +5217,7 @@ async function aiAsk(question){
     aiLog(aiEsc(question),'user');
 
     const thinking=aiLog('<div class="ai-think"><div class="spin"></div><span>Denkt na…</span></div>');
+    let live=null;   // bubbel die tijdens het streamen meegroeit
 
     try{
         // Nog geen model gekozen? Vraag de sleutel wat er beschikbaar is.
@@ -5134,9 +5242,18 @@ async function aiAsk(question){
         if(usedSearch&&aiSearchSpent()) usedSearch=false;                         // zoekquotum vandaag al op
         let j, degraded=false, switched=[], models=null, swaps=0, quotaSwaps=0, searchErr='';
         let searchQuota=false, paid=[];
+        // Tekst laten meegroeien tijdens het streamen. Pas bij het eerste
+        // stukje tekst wisselen we de spinner om, zodat een mislukte poging
+        // die nog een ander model probeert geen half antwoord achterlaat.
+        const toon=t=>{
+            if(!live){ thinking.remove(); live=aiLog('','bot'); }
+            live.innerHTML=mdToHtml(t);
+            const log=document.getElementById('ai-log');
+            if(log) log.scrollTop=log.scrollHeight;
+        };
         for(;;){
             try{
-                j=await aiCallGemini(usedSearch);
+                j=await aiCallGemini(usedSearch,toon);
                 if(usedSearch) localStorage.setItem(AI_LS.shape,String(AI.searchShape));
                 break;
             }catch(err){
@@ -5209,6 +5326,7 @@ async function aiAsk(question){
         const {text,sources,finish}=aiExtract(j);
         AI.turns.push({role:'model',parts:[{text:text||'(leeg antwoord)'}]});
         thinking.remove();
+        if(!text&&live){ live.remove(); live=null; }
 
         if(!text){
             aiLog(finish==='SAFETY'
@@ -5221,7 +5339,8 @@ async function aiAsk(question){
                     .map(s=>`<div class="ai-source">↗ <a href="${aiEsc(s.uri)}" target="_blank" rel="noopener">${aiEsc(s.title)}</a></div>`)
                     .join('')+'</div>';
             }
-            aiLog(html,'bot');
+            // Al gestreamd? Dan alleen bijwerken, niet nóg een bubbel maken.
+            if(live) live.innerHTML=html; else aiLog(html,'bot');
             if(finish==='MAX_TOKENS') aiLog('Antwoord afgekapt op de lengtelimiet.','note');
         }
         // Alleen als het wegláten van zoeken de vraag redde op hetzelfde model,
@@ -5234,6 +5353,7 @@ async function aiAsk(question){
             (searchErr?` (${aiEsc(searchErr.slice(0,140))})`:''),'note');
     }catch(err){
         thinking.remove();
+        if(live) live.remove();   // half gestreamd antwoord opruimen
         AI.turns.pop();   // mislukte beurt niet in de historie laten staan
         aiLog(aiErrorText(err),'err');
     }finally{
