@@ -4469,7 +4469,7 @@ function renderCompoundInterestCalculator(){
 ══════════════════════════════════════════════════════ */
 const AI_BASE  = 'https://generativelanguage.googleapis.com/v1beta';
 const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-search',
-                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape', nosearch:'nexus-ai-no-search', spent:'nexus-ai-spent', nofree:'nexus-ai-no-free', searchspent:'nexus-ai-search-spent'};
+                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models', shape:'nexus-ai-search-shape', nosearch:'nexus-ai-no-search', spent:'nexus-ai-spent', nofree:'nexus-ai-no-free', searchspent:'nexus-ai-search-spent', nothink:'nexus-ai-no-thinkcfg'};
 const AI = {
     key:     localStorage.getItem(AI_LS.key)     || '',
     model:   localStorage.getItem(AI_LS.model)   || '',   // leeg = automatisch kiezen
@@ -5076,55 +5076,100 @@ function aiSearchShapeCount(){
    maar de eerste regel staat er na een seconde in plaats van na tien — en dat
    is het verschil dat je voelt. De opbouw van het resultaat blijft gelijk aan
    generateContent, zodat aiExtract en de foutafhandeling onveranderd werken. */
-async function aiCallGemini(useSearch,onChunk){
-    const body={
-        systemInstruction:{parts:[{text:aiSystemPrompt()}]},
-        contents:AI.turns,
-        generationConfig:{temperature:0.3,maxOutputTokens:2600},
-    };
-    if(useSearch) body.tools=[AI_SEARCH_TOOLS[AI.searchShape]||AI_SEARCH_TOOLS[0]];
+/* Modellen die thinkingConfig weigeren. Denkstappen kosten tijd én tokens;
+   uitzetten scheelt seconden, maar niet elk model accepteert het veld. */
+function aiNoThinkCfg(){
+    try{ return JSON.parse(localStorage.getItem(AI_LS.nothink)||'[]'); }catch{ return []; }
+}
+function aiMarkNoThinkCfg(m){
+    const l=aiNoThinkCfg();
+    if(m&&!l.includes(m)){ l.push(m); localStorage.setItem(AI_LS.nothink,JSON.stringify(l)); }
+}
 
-    const r=await fetch(`${AI_BASE}/models/${encodeURIComponent(AI.model)}:streamGenerateContent?alt=sse&key=${encodeURIComponent(AI.key)}`,{
-        method:'POST',
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify(body),
-    });
-    aiBumpUsage();   // ook mislukte calls tellen mee voor je quotum
-    if(!r.ok){
-        const j=await r.json().catch(()=>null);
-        const msg=j?.error?.message||`HTTP ${r.status}`;
-        const err=new Error(msg); err.status=r.status; err.raw=j;
-        throw err;
+async function aiCallGemini(useSearch,onChunk){
+    const maakBody=denken=>{
+        const b={
+            systemInstruction:{parts:[{text:aiSystemPrompt()}]},
+            contents:AI.turns,
+            generationConfig:{temperature:0.3,maxOutputTokens:2600},
+        };
+        // Geen denkstappen: dit is een vraag over data die al in de prompt zit,
+        // geen puzzel. Scheelt wachttijd en voorkomt dat het denkbudget de
+        // hele tokenlimiet opsoupeert — dan komt er een leeg antwoord terug.
+        if(!denken) b.generationConfig.thinkingConfig={thinkingBudget:0};
+        if(useSearch) b.tools=[AI_SEARCH_TOOLS[AI.searchShape]||AI_SEARCH_TOOLS[0]];
+        return b;
+    };
+
+    const doe=async denken=>{
+        const r=await fetch(`${AI_BASE}/models/${encodeURIComponent(AI.model)}:streamGenerateContent?alt=sse&key=${encodeURIComponent(AI.key)}`,{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify(maakBody(denken)),
+        });
+        aiBumpUsage();   // ook mislukte calls tellen mee voor je quotum
+        if(!r.ok){
+            const j=await r.json().catch(()=>null);
+            const msg=j?.error?.message||`HTTP ${r.status}`;
+            const err=new Error(msg); err.status=r.status; err.raw=j;
+            throw err;
+        }
+        return r;
+    };
+
+    let r;
+    const magDenkenUit=!aiNoThinkCfg().includes(AI.model);
+    try{ r=await doe(!magDenkenUit); }
+    catch(err){
+        // Model kent thinkingConfig niet? Eén keer vaststellen, dan onthouden.
+        if(magDenkenUit&&err.status===400&&/thinking|thought/i.test(err.message||'')){
+            aiMarkNoThinkCfg(AI.model);
+            r=await doe(true);
+        }else throw err;
     }
 
     let tekst='', finish='', chunks=[];
     const verwerk=o=>{
         const c=o?.candidates?.[0];
-        const t=(c?.content?.parts||[]).map(p=>p.text).filter(Boolean).join('');
+        // Denkstappen komen mee als parts met thought:true — die horen niet
+        // in het antwoord thuis.
+        const t=(c?.content?.parts||[]).filter(p=>!p.thought).map(p=>p.text)
+                 .filter(Boolean).join('');
         if(t){ tekst+=t; if(onChunk) onChunk(tekst); }
         if(c?.finishReason) finish=c.finishReason;
         (c?.groundingMetadata?.groundingChunks||[]).forEach(g=>chunks.push(g));
     };
+    const leesBlok=blok=>blok.split('\n').forEach(regel=>{
+        if(!/^data:/.test(regel)) return;
+        const d=regel.slice(5).trim();
+        if(!d||d==='[DONE]') return;
+        try{ verwerk(JSON.parse(d)); }catch{}
+    });
 
     const reader=r.body?.getReader();
     if(reader){
         const dec=new TextDecoder();
-        let buf='';
+        let buf='', ruw='';
         for(;;){
             const {value,done}=await reader.read();
             if(done) break;
-            buf+=dec.decode(value,{stream:true});
-            // SSE: gebeurtenissen gescheiden door een lege regel
+            // Google scheidt gebeurtenissen met CRLF; normaliseren, anders
+            // vindt de splitsing op een lege regel nooit iets en blijft het
+            // antwoord leeg.
+            const stuk=dec.decode(value,{stream:true}).replace(/\r\n/g,'\n');
+            ruw+=stuk; buf+=stuk;
             let i;
             while((i=buf.indexOf('\n\n'))>=0){
-                const blok=buf.slice(0,i); buf=buf.slice(i+2);
-                blok.split('\n').forEach(regel=>{
-                    if(!regel.startsWith('data:')) return;
-                    const d=regel.slice(5).trim();
-                    if(!d||d==='[DONE]') return;
-                    try{ verwerk(JSON.parse(d)); }catch{}
-                });
+                leesBlok(buf.slice(0,i));
+                buf=buf.slice(i+2);
             }
+        }
+        if(buf.trim()) leesBlok(buf);   // laatste gebeurtenis zonder afsluitende lege regel
+        // Geen SSE gekregen (proxy, of een API die gewoon JSON teruggeeft)?
+        // Dan alsnog als geheel proberen in plaats van niets tonen.
+        if(!tekst&&ruw.trim()){
+            try{ verwerk(JSON.parse(ruw)); }
+            catch{ try{ JSON.parse(ruw).forEach(verwerk); }catch{} }
         }
     }
     return {candidates:[{content:{parts:[{text:tekst}],role:'model'},
@@ -5241,7 +5286,7 @@ async function aiAsk(question){
         if(usedSearch&&aiNoSearchModels().includes(AI.model)) usedSearch=false;   // eerder al vastgesteld
         if(usedSearch&&aiSearchSpent()) usedSearch=false;                         // zoekquotum vandaag al op
         let j, degraded=false, switched=[], models=null, swaps=0, quotaSwaps=0, searchErr='';
-        let searchQuota=false, paid=[];
+        let searchQuota=false, paid=[], leegSwaps=0;
         // Tekst laten meegroeien tijdens het streamen. Pas bij het eerste
         // stukje tekst wisselen we de spinner om, zodat een mislukte poging
         // die nog een ander model probeert geen half antwoord achterlaat.
@@ -5254,6 +5299,19 @@ async function aiAsk(question){
         for(;;){
             try{
                 j=await aiCallGemini(usedSearch,toon);
+                // Leeg antwoord is geen antwoord. Eén keer een ander model
+                // proberen voordat we jou met een lege bubbel opzadelen.
+                if(!aiExtract(j).text&&leegSwaps++<1){
+                    models=models||await aiFetchModels(AI.key);
+                    const next=aiPickBest(models,[AI.model]);
+                    if(next){
+                        thinking.querySelector('span').textContent='Leeg antwoord, ander model proberen…';
+                        switched.push(`${AI.model} → ${next}`);
+                        AI.model=next; localStorage.setItem(AI_LS.model,next);
+                        if(aiNoSearchModels().includes(next)) usedSearch=false;
+                        continue;
+                    }
+                }
                 if(usedSearch) localStorage.setItem(AI_LS.shape,String(AI.searchShape));
                 break;
             }catch(err){
@@ -5496,7 +5554,7 @@ function aiSaveSettings(){
 }
 
 function aiForget(){
-    ['key','model','amounts','search','bad','shape','nosearch','spent','nofree','searchspent']
+    ['key','model','amounts','search','bad','shape','nosearch','spent','nofree','searchspent','nothink']
         .forEach(k=>localStorage.removeItem(AI_LS[k]));
     AI.key=''; AI.turns=[];
     aiOpenSettings();
