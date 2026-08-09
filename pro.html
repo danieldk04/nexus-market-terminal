@@ -4459,7 +4459,7 @@ function renderCompoundInterestCalculator(){
 ══════════════════════════════════════════════════════ */
 const AI_BASE  = 'https://generativelanguage.googleapis.com/v1beta';
 const AI_LS    = {key:'nexus-ai-key', model:'nexus-ai-model', search:'nexus-ai-search',
-                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage'};
+                  amounts:'nexus-ai-amounts', usage:'nexus-ai-usage', bad:'nexus-ai-bad-models'};
 const AI = {
     key:     localStorage.getItem(AI_LS.key)     || '',
     model:   localStorage.getItem(AI_LS.model)   || '',   // leeg = automatisch kiezen
@@ -4801,27 +4801,61 @@ async function aiFetchModels(key){
     return (j.models||[])
         .filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
         .map(m=>m.name.replace(/^models\//,''))
-        .filter(n=>!/embedding|aqa|imagen|veo|tts|image-generation/i.test(n))
+        .filter(aiIsChatModel)
         .sort();
+}
+
+/* Alleen gewone gemini-chatmodellen. De lijst van Google bevat ook
+   speciaalmodellen die generateContent claimen maar het niet doen
+   (deep-research werkt bijvoorbeeld alleen via de Interactions API), plus
+   audio-, beeld- en robotica-varianten die hier niets te zoeken hebben. */
+const AI_NOT_CHAT=/embedding|aqa|imagen|veo|tts|image|audio|live|realtime|robot|computer-use|deep-research|guard|learnlm|gemma/i;
+function aiIsChatModel(n){
+    return /^gemini-/i.test(n) && !AI_NOT_CHAT.test(n);
+}
+
+function aiBadModels(){
+    try{ return JSON.parse(localStorage.getItem(AI_LS.bad)||'[]'); }catch{ return []; }
+}
+function aiMarkBad(m){
+    const b=aiBadModels();
+    if(m&&!b.includes(m)){ b.push(m); localStorage.setItem(AI_LS.bad,JSON.stringify(b)); }
 }
 
 /* Voorkeur: gewone flash — zit in de gratis tier en is sterk genoeg voor
    analyse. Lite heeft ruimer dagquotum maar levert zwakkere antwoorden; 250
    vragen per dag is voor één gebruiker ruim voldoende, dus lite is terugval.
    Preview- en experimentele builds vermijden: die verdwijnen zonder waarschuwing. */
-function aiPickBest(list){
-    if(!list?.length) return '';
-    const score=n=>{
-        let s=0;
-        if(/flash/i.test(n))                s+=100;
-        if(/lite/i.test(n))                 s-=20;
-        if(/preview|exp\b|experimental/i.test(n)) s-=50;
-        if(/thinking/i.test(n))             s-=10;
-        const v=n.match(/(\d+)(?:[.-](\d+))?/);
-        if(v) s+=Number(v[1])*3+Number(v[2]||0);
-        return s;
-    };
-    return list.slice().sort((a,b)=>score(b)-score(a)||a.length-b.length)[0];
+function aiModelScore(n){
+    let s=0;
+    if(/flash/i.test(n))                      s+=100;   // gratis tier
+    if(/lite/i.test(n))                       s-=20;    // zwakker, wel ruimer quotum
+    if(/preview|experimental|-exp\b/i.test(n)) s-=200;   // verdwijnen zonder waarschuwing
+    if(/thinking/i.test(n))                   s-=10;
+    // Versie ALLEEN direct achter "gemini-", anders leest een datum in de
+    // naam (deep-research-pro-preview-12-2025) als versie 12.2025.
+    const v=n.match(/^gemini-(\d{1,2})(?:[.-](\d{1,2}))?(?![\d])/i);
+    // Major moet minor domineren, anders wint 2.5 van 3.
+    if(v) s+=Math.min(Number(v[1]),20)*10+Math.min(Number(v[2]||0),9);
+    return s;
+}
+
+function aiPickBest(list,exclude=[]){
+    const bad=new Set([...aiBadModels(),...exclude]);
+    const pool=(list||[]).filter(n=>aiIsChatModel(n)&&!bad.has(n));
+    if(!pool.length) return '';
+    return pool.slice().sort((a,b)=>aiModelScore(b)-aiModelScore(a)||a.length-b.length)[0];
+}
+
+/* Fouten die betekenen: dit model kan geen gewone chat. Andere kiezen.
+   Let op: een klacht over grounding/zoeken is GEEN modelfout — dan werkt het
+   model prima en moet alleen de zoektool eruit. Anders zwartlijsten we een
+   werkend model omdat websearch niet ondersteund wordt. */
+function aiModelUnusable(err){
+    const m=String(err?.message||'');
+    if(/search|grounding|google_search|tool/i.test(m)) return false;
+    if(err?.status===404) return true;
+    return err?.status===400 && /only supports|not supported|does not support|unsupported/i.test(m);
 }
 
 async function aiEnsureModel(){
@@ -4953,29 +4987,38 @@ async function aiAsk(question){
 
         AI.turns.push({role:'user',parts:[{text:enrichment?`${question}\n${enrichment}`:question}]});
 
-        let j, usedSearch=AI.search, degraded=false, switched='';
-        try{
-            j=await aiCallGemini(usedSearch);
-        }catch(err){
-            if(err.status===404){
-                // Model bestaat niet (meer) voor deze sleutel: zoek een werkend
-                // model op en probeer het nog één keer, in plaats van de
-                // gebruiker naar de instellingen te sturen.
-                const bad=AI.model;
-                thinking.querySelector('span').textContent='Model niet beschikbaar, ander model zoeken…';
-                const list=await aiFetchModels(AI.key);
-                const next=aiPickBest(list.filter(n=>n!==bad));
-                if(!next) throw new Error(`Geen bruikbaar model voor deze sleutel. Beschikbaar: ${list.join(', ')||'niets'}`);
-                AI.model=next; localStorage.setItem(AI_LS.model,next);
-                switched=`${bad} → ${next}`;
+        // Blijf modellen proberen zolang het model zelf het probleem is.
+        // Google's modellenlijst is niet betrouwbaar: sommige modellen claimen
+        // generateContent maar weigeren het bij de aanroep.
+        let j, usedSearch=AI.search, degraded=false, switched=[], models=null, swaps=0;
+        for(;;){
+            try{
                 j=await aiCallGemini(usedSearch);
-            }else if(usedSearch&&(err.status===400||err.status===403)){
-                // Ondersteunt dit model/deze sleutel geen grounding? Opnieuw zonder.
-                usedSearch=false; degraded=true;
-                j=await aiCallGemini(false);
-            }else throw err;
+                break;
+            }catch(err){
+                if(usedSearch&&(err.status===400||err.status===403)){
+                    // Ondersteunt dit model/deze sleutel geen grounding? Eerst
+                    // zonder proberen — pas als het dán nog faalt is het model fout.
+                    usedSearch=false; degraded=true;
+                    continue;
+                }
+                if(aiModelUnusable(err)&&swaps++<3){
+                    const bad=AI.model;
+                    aiMarkBad(bad);
+                    thinking.querySelector('span').textContent='Model werkt niet, ander model proberen…';
+                    models=models||await aiFetchModels(AI.key);
+                    const next=aiPickBest(models);
+                    if(!next) throw new Error(
+                        `Geen bruikbaar chatmodel voor deze sleutel. Geprobeerd: ${[...switched.map(x=>x.split(' → ')[0]),bad].join(', ')}`);
+                    AI.model=next; localStorage.setItem(AI_LS.model,next);
+                    switched.push(`${bad} → ${next}`);
+                    continue;
+                }
+                throw err;
+            }
         }
-        if(switched) aiLog(`Model gewisseld: ${aiEsc(switched)}`,'note');
+        if(switched.length) aiLog(`Model gewisseld: ${aiEsc(switched[switched.length-1].split(' → ')[1])}`+
+            (switched.length>1?` (na ${switched.length} pogingen)`:''),'note');
 
         const {text,sources,finish}=aiExtract(j);
         AI.turns.push({role:'model',parts:[{text:text||'(leeg antwoord)'}]});
