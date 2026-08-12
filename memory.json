@@ -360,6 +360,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-08-12",
+      "degiro": 16908.09,
+      "tr": 11902.37,
+      "nexus": 5770.55,
+      "bux": 1792.49
+    },
+    {
       "date": "2026-08-11",
       "degiro": 16907.38,
       "tr": 11868.13,
@@ -936,26 +943,26 @@
   "last_news": [
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
-    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen",
-    "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "SpaceX is nu 1.000 miljard dollar minder waard op de beurs; aandeel terug bij af",
+    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
+    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen",
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
-    "Op de beurs zijn koopjes te doen met \u2018saaie\u2019 aandelen",
-    "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses"
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019"
   ],
   "tr_summary": {
-    "total": 11868.13,
-    "total_pl_pct": -1.29,
+    "total": 11902.37,
+    "total_pl_pct": -1.01,
     "total_invested": 12023.54,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 6027.23,
-        "price": 54854.8594,
-        "pl_pct": -7.16,
-        "pl_eur": -464.8,
-        "weight": 50.8
+        "value": 6061.47,
+        "price": 55166.4883,
+        "pl_pct": -6.63,
+        "pl_eur": -430.56,
+        "weight": 50.9
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -971,7 +978,7 @@
         "price": 168.48,
         "pl_pct": 6.65,
         "pl_eur": 115.19,
-        "weight": 15.6
+        "weight": 15.5
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -979,7 +986,7 @@
         "price": 133.7439,
         "pl_pct": 7.25,
         "pl_eur": 115.94,
-        "weight": 14.5
+        "weight": 14.4
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -991,11 +998,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-11T19:01:17.371333+00:00",
+  "dashboard_updated": "2026-08-12T07:01:10.967213+00:00",
   "degiro_summary": {
-    "total": 16907.38,
+    "total": 16908.09,
     "total_pl_pct": 37.82,
-    "total_invested": 12267.83,
+    "total_invested": 12267.95,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1032,9 +1039,9 @@
       },
       {
         "name": "V",
-        "value": 628.06,
-        "pl_pct": 79.52,
-        "pl_eur": 278.2,
+        "value": 628.77,
+        "pl_pct": 79.66,
+        "pl_eur": 278.79,
         "div_yield": 0.0074,
         "annual_div_eur": 4.65,
         "first_buy_date": null,
@@ -1045,35 +1052,35 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO & technologiestijging",
-      "summary": "SpaceX gaat naar de beurs voor $135 per aandeel met een waarde van $1 miljard. Dit is een belangrijk moment voor Elon Musk en de techasector, maar de koers onder introductieprijs en eerste dag volatiliteit wijzen op beleggerszwakte in high-growth tech."
+      "theme": "SpaceX beursgang en Musk-effect",
+      "summary": "SpaceX debuteert op de beurs tegen 135 dollar per aandeel en haalt 75 miljard dollar op, wat Elon Musk de eerste biljonair maakt. Dit technologieaandeel onderperformt echter ondanks sterke opbrengsten, wat wijst op toenemende voorzichtigheid van beleggers ten aanzien van high-growth tech-aandelen."
     },
     {
-      "theme": "Techsector onder druk",
-      "summary": "ASML en ander chipbedrijven zien beleggers terugtrekken, met name uit semiconductors. Dit raakt directe posities in technologie-ETFs en Mag7-aandelen, wat wijst op rotatie naar defensievere waarden."
+      "theme": "Tech-sector onder druk op beurs",
+      "summary": "Amerikaanse tech-aandelen, inclusief chipaandelen en ASML, dalen terwijl beleggers massaal hun posities afbouwen. Dit drukt de rendementen van growth-geori\u00ebnteerde portefeuilles en S&P 500-indexfondsen, wat duidt op een bredere rotatie weg van tech-bedrijven."
     },
     {
-      "theme": "Rotatie naar defensieve aandelen",
-      "summary": "Beleggers switches naar 'saaie' aandelen en hardwareleverancier Dell presteert sterk, terwijl mediaaandelen (Taylor Swifts label) zwak zijn. Dit duidt op risicomijding en voorkeur voor stabiliteit in onzekere markt."
+      "theme": "Marktvolatiliteit en geopolitieke risico's",
+      "summary": "Beurs vertoont onrustige bewegingen door spanningen met Iran en andere oorlogsgebeurtenissen, terwijl Aziatische aandelen harder dalen dan Amerikaanse. Beleggers ervaren code-oranje-situaties die impact hebben op gediversificeerde wereldportefeuilles en vraag om defensieve posities."
     },
     {
-      "theme": "Macro-onzekerheid resteert",
-      "summary": "Fed's nieuwe beleidkoers cre\u00ebert onzekerheid ondanks oorlogsgeledingen, terwijl AEX 1% stijgt en volgt S&P500. Globale markten balanceren tussen zorgen en optimisme, wat volatiliteit in breedgebaseerde ETF-holdings kan veroorzaken."
+      "theme": "Selectieve kansen en sectorrotatie",
+      "summary": "Sommige sectoren bieden koopjes, waaronder 'saaie' defensive aandelen die stabiliteit bieden, terwijl entertainment-gerelateerde fondsen (platenlabel Taylor Swift) onderperformen. Dit cre\u00ebert kansen voor herbewegingen in diversificatie-strategie\u00ebn voor ETF-beleggers."
     }
   ],
   "bux_summary": {
-    "total": 1787.11,
-    "total_pl_pct": -33.49,
+    "total": 1792.49,
+    "total_pl_pct": -33.29,
     "total_invested": 2687.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1507.96,
-        "price": 287.61,
-        "pl_pct": -30.61,
-        "pl_eur": -665.11,
+        "value": 1511.98,
+        "price": 288.38,
+        "pl_pct": -30.42,
+        "pl_eur": -661.09,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1083,12 +1090,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 238.86,
-        "price": 119.43,
-        "pl_pct": -27.87,
-        "pl_eur": -92.28,
+        "value": 239.86,
+        "price": 119.93,
+        "pl_pct": -27.56,
+        "pl_eur": -91.28,
         "div_yield": 0.043,
-        "annual_div_eur": 10.27,
+        "annual_div_eur": 10.31,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 13.4
@@ -1096,10 +1103,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 36.29,
-        "price": 36.29,
-        "pl_pct": -79.79,
-        "pl_eur": -143.28,
+        "value": 36.65,
+        "price": 36.65,
+        "pl_pct": -79.59,
+        "pl_eur": -142.92,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2381,7 +2388,7 @@
     },
     {
       "date": "2026-08",
-      "value": 30562.62
+      "value": 30602.95
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2416,9 +2423,9 @@
     "AFL": "2026-08-10"
   },
   "benchmark_history": {
-    "sp500_ytd": 12.62,
+    "sp500_ytd": 12.68,
     "aex_ytd": 15.42,
-    "msci_ytd": 15.6
+    "msci_ytd": 15.64
   },
   "sector_rotation": {
     "Tech & AI": 2.6,
