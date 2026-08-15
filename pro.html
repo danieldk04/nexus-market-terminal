@@ -5581,6 +5581,36 @@ function wlEsc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 function ghToken(){return localStorage.getItem('nx_gh_token')||'';}
 function ghRepo(){return localStorage.getItem('nx_gh_repo')||WL_DEFAULT_REPO;}
 
+/* ── Koppel-link: de sleutel staat per apparaat opgeslagen. Met een link in de
+   vorm  …/pro.html#key=<sleutel>  neemt een tweede apparaat (telefoon) hem over. ── */
+function ghAdoptKeyFromURL(){
+    try{
+        const m=(location.hash||'').match(/[#&]key=([^&]+)/);
+        if(!m) return;
+        const tok=decodeURIComponent(m[1]).trim();
+        /* hash altijd meteen opruimen, ook als hij leeg blijkt */
+        history.replaceState(null,'',location.pathname+location.search);
+        if(!tok) return;
+        localStorage.setItem('nx_gh_token',tok);
+        nxBanner('Dit apparaat is gekoppeld — je kunt nu zelf analyses starten.');
+    }catch(e){console.warn('koppel-link mislukt',e);}
+}
+
+function nxBanner(text){
+    try{
+        const d=document.createElement('div');
+        d.textContent=text;
+        d.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:9999;'
+            +'background:var(--green,#16a34a);color:#fff;padding:11px 18px;border-radius:10px;'
+            +'font-size:.8rem;font-weight:600;max-width:90vw;text-align:center;'
+            +'box-shadow:0 8px 24px rgba(15,23,42,.25)';
+        document.body.appendChild(d);
+        setTimeout(()=>d.remove(),6000);
+    }catch{}
+}
+
+ghAdoptKeyFromURL();
+
 /* pending = aandelen waarvoor de analyse nog draait, blijft staan na herladen */
 function wlPending(){try{return JSON.parse(localStorage.getItem('nx_wl_pending')||'{}');}catch{return{};}}
 function wlSetPending(p){localStorage.setItem('nx_wl_pending',JSON.stringify(p));}
