@@ -5711,7 +5711,7 @@ async function wlRun(ticker,action){
     }catch(e){
         const m=String(e.message||e);
         if(m==='NO_TOKEN'){
-            wlFeedback('Er is nog geen koppeling met GitHub. Ga naar <b>Instellingen</b> en plak daar je persoonlijke toegangssleutel — daarna vult de app alles vanzelf in.','err');
+            wlFeedback('Dit apparaat is nog niet gekoppeld met GitHub. Open het menu (☰) → <b>Instellingen</b> en plak daar je toegangssleutel. Staat de sleutel al op je computer? Kopieer daar bij Instellingen de <b>koppel-link</b> en open die hier één keer.','err');
         }else if(m.startsWith('AUTH')){
             wlFeedback('De toegangssleutel werkt niet of heeft te weinig rechten. Controleer bij Instellingen of hij <b>Actions: Read and write</b> heeft op deze repository.','err');
         }else if(m.startsWith('NOTFOUND')){
