@@ -1545,6 +1545,26 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         </div>
     </div>
 
+    <div class="panel" id="set-transfer-panel" style="display:none">
+        <div class="ph"><span class="pt">Ook op je telefoon gebruiken</span></div>
+        <div style="padding:16px">
+            <div style="font-size:.78rem;color:var(--text);line-height:1.6;margin-bottom:14px">
+                De sleutel staat alleen op dít apparaat — daarom vraagt je telefoon er apart om.
+                Kopieer hieronder de koppel-link, stuur hem naar jezelf en open hem één keer op je telefoon.
+                Daarna onthoudt de app hem daar ook.
+            </div>
+            <div class="wl-add" style="padding:0;border:none">
+                <button class="wl-btn" onclick="setCopyLink()">Kopieer koppel-link</button>
+                <button class="wl-btn wl-btn-ghost" onclick="setShowKey()">Toon sleutel</button>
+            </div>
+            <div id="set-key-plain" style="display:none;margin-top:12px;font-family:var(--mono);font-size:.72rem;word-break:break-all;background:var(--bg);border:1px solid var(--border2);border-radius:var(--r-sm);padding:10px;-webkit-user-select:all;user-select:all"></div>
+            <div style="font-size:.7rem;color:var(--muted);margin-top:10px">
+                Deel deze link met niemand anders: wie hem heeft, kan analyses starten in jouw repository.
+                Zet de app op je telefoon op het beginscherm — dan blijft de sleutel daar het langst bewaard.
+            </div>
+        </div>
+    </div>
+
     <div class="panel">
         <div class="ph"><span class="pt">Repository</span></div>
         <div style="padding:16px">
