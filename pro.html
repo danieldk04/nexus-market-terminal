@@ -6129,6 +6129,35 @@ function renderSettingsTab(){
         tag.textContent=t?'gekoppeld':'niet gekoppeld';
         tag.style.color=t?'var(--green)':'var(--yellow)';
     }
+    const tp=document.getElementById('set-transfer-panel');
+    if(tp) tp.style.display=t?'':'none';
+}
+
+function setKeyLink(){
+    const t=ghToken();
+    return t?location.origin+location.pathname+'#key='+encodeURIComponent(t):'';
+}
+
+async function setCopyLink(){
+    const url=setKeyLink();
+    if(!url){setMsg('Er staat nog geen sleutel op dit apparaat.','err');return;}
+    const box=document.getElementById('set-key-plain');
+    try{
+        await navigator.clipboard.writeText(url);
+        setMsg('Koppel-link gekopieerd. Stuur hem naar je telefoon en open hem daar één keer.','ok');
+    }catch{
+        if(box){box.textContent=url;box.style.display='block';}
+        setMsg('Kopiëren lukte niet automatisch. Selecteer de link hieronder en kopieer hem zelf.','info');
+    }
+}
+
+function setShowKey(){
+    const box=document.getElementById('set-key-plain');
+    if(!box) return;
+    if(box.style.display==='block'){box.style.display='none';box.textContent='';return;}
+    const t=ghToken();
+    if(!t){setMsg('Er staat nog geen sleutel op dit apparaat.','err');return;}
+    box.textContent=t;box.style.display='block';
 }
 
 function setMsg(msg,kind){
