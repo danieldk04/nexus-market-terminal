@@ -360,6 +360,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-08-16",
+      "degiro": 16939.94,
+      "tr": 11841.18,
+      "nexus": 5770.55,
+      "bux": 1833.01
+    },
+    {
       "date": "2026-08-15",
       "degiro": 16939.94,
       "tr": 11840.92,
@@ -967,22 +974,22 @@
     "Likken ze op de beurs niet meer aan een Magnum?",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
     "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
-    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen",
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?",
-    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
+    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
+    "Platenlabel van Taylor Swift keldert op beurs: populariteit van dreamteam Beyonc\u00e9 en Drake valt tegen"
   ],
   "tr_summary": {
-    "total": 11840.92,
+    "total": 11841.18,
     "total_pl_pct": -1.52,
     "total_invested": 12023.54,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 5987.13,
-        "price": 54489.9102,
-        "pl_pct": -7.78,
-        "pl_eur": -504.9,
+        "value": 5987.39,
+        "price": 54492.2695,
+        "pl_pct": -7.77,
+        "pl_eur": -504.64,
         "weight": 50.6
       },
       {
@@ -1019,7 +1026,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-15T19:01:05.759776+00:00",
+  "dashboard_updated": "2026-08-16T07:01:05.285718+00:00",
   "degiro_summary": {
     "total": 16939.94,
     "total_pl_pct": 38.09,
@@ -1073,20 +1080,20 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO en Musk-effect",
-      "summary": "SpaceX gaat naar de beurs tegen 135 dollar per aandeel, wat Musk de eerste biljonair maakt en 75 miljard dollar opbrengt. Dit be\u00efnvloedt techbeleggers direct omdat grote S&P500-posities in Musk-bedrijven kunnen verschuiven en het sentimentin de techasector be\u00efnvloedt waar veel ETFs in belegd zijn."
+      "theme": "SpaceX beursgang en Musk",
+      "summary": "SpaceX is met 135 dollar per aandeel naar de beurs gegaan en haalde 75 miljard dollar op. De aandelen presteerden sterk op de eerste handelsdag, wat aangeeft dat beleggers vertrouwen hebben in Musks visie, hoewel sommige bronnen melden dat de koers onder de introductieprijs uitkwam."
     },
     {
-      "theme": "Technologie-sector onder druk",
-      "summary": "Chipbedrijven zoals ASML kelderen door Chinese concurrentie en lagere vraag, wat zorgt voor dalende koersen in de techaandelen. Dit raakt ETF-beleggers in World en S&P500-fondsen omdat tech een zwaar gewicht heeft in deze indices."
+      "theme": "Volatiliteit en marktdalen VS",
+      "summary": "Technologiebedrijven hebben het lastig en chipbedrijven zoals ASML zien hun koersen dalen door aanhoudende beleggersbezorgdheid. Deze daling in de Amerikaanse en Europese markten be\u00efnvloedt direct S&P500 en AEX-posities van beleggers."
     },
     {
-      "theme": "Geopolitieke onrust en oorlogsrisico's",
-      "summary": "Conflicten zoals de oorlog met Iran en andere geopolitieke spanningen zetten druk op markten, vooral in Azi\u00eb, terwijl beleggers desondanks relatief kalm blijven. Dit onderstreept de noodzaak van diversificatie in ETFs om geopolitieke schokken op te vangen."
+      "theme": "Geopolitieke onrust beurs",
+      "summary": "De oorlog tussen Iran en andere conflicten veroorzaken marktdaling in Azi\u00eb en beschadigden verder het consumentenvertrouwen. Dit geopolitieke risico drukt op brede marktindices en vraagt om voorzichtigheid van portefeuillebeheerders."
     },
     {
-      "theme": "Marktvolatiliteit en koopkansen",
-      "summary": "De AEX en Europese aandelen vertonen sterke volatiliteit met zowel dalingen als herstel, terwijl sommige 'saaie' fundamentele aandelen aantrekkelijke koopjes bieden. Dit cre\u00ebert opportunities en risico's voor ETF- en aandelenbeleggers om tactisch in- en uit te stappen."
+      "theme": "Herstellingssignalen en koopkansen",
+      "summary": "Europese aandelen tonen herstel en sterke bedrijfscijfers cre\u00ebren nieuwe beleggingskansen ondanks de eerdere marktdaling. Dit suggereert dat beleggers selectief waarde zien terugkeren, wat relevant is voor positieaanpassingen in gediversificeerde portefeuilles."
     }
   ],
   "bux_summary": {
@@ -2409,7 +2416,7 @@
     },
     {
       "date": "2026-08",
-      "value": 30613.87
+      "value": 30614.13
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2446,7 +2453,7 @@
   "benchmark_history": {
     "sp500_ytd": 13.52,
     "aex_ytd": 15.53,
-    "msci_ytd": null
+    "msci_ytd": 15.72
   },
   "sector_rotation": {
     "Tech & AI": 3.3,
