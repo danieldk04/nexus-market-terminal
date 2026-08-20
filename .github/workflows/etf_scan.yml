@@ -1,8 +1,8 @@
-name: ETF SCAN — kwaliteit boven momentum
+name: NEXUS ETF ENGINE
 
 on:
   schedule:
-    - cron: "0 7 * * 0"   # elke zondag 07:00 UTC
+    - cron: "0 16 * * 6"   # zaterdag 16:00 UTC — markt dicht, rustig moment
   workflow_dispatch:
 
 permissions:
@@ -11,11 +11,13 @@ permissions:
 jobs:
   etf_scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Python 3.11 setup
         uses: actions/setup-python@v5
@@ -32,6 +34,19 @@ jobs:
           SILENT_RUN: "true"
         run: python src/etf_engine.py
 
+      - name: Backtest (momentum zuiver + kwaliteitsfilter)
+        env:
+          PYTHONPATH: src
+          SILENT_RUN: "true"
+        run: python src/etf_backtest.py || echo "Backtest overgeslagen — doorgaan"
+
+      - name: Telegram-signaal bij gewijzigde oordelen
+        env:
+          PYTHONPATH: src
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python src/etf_watch.py || echo "ETF-wacht overgeslagen — doorgaan"
+
       - name: Commit & Push
         run: |
           set -e
@@ -39,10 +54,11 @@ jobs:
           git config user.email "nexus@bot.local"
           for attempt in 1 2 3; do
             git fetch origin || true
-            git add etf_data.json data/etf_fundamentals.json
-            git diff --cached --quiet || git commit -m "ETF-scan $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git add etf_data.json data/etf_state.json data/etf_fundamentals.json
+            git diff --cached --quiet || \
+              git commit -m "ETF-scan: $(date -u +'%Y-%m-%d %H:%M UTC')"
             git merge origin/main -X ours --no-edit || true
-            if git push; then echo "Push geslaagd."; break; fi
+            if git push; then echo "Push geslaagd (poging $attempt)."; break; fi
             echo "Push race verloren — opnieuw ($attempt)."
             sleep 5
           done

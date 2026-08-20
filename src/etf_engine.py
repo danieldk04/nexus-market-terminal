@@ -40,6 +40,7 @@ logging.basicConfig(
 log = logging.getLogger("etf_engine")
 
 OUT_PATH = "etf_data.json"
+STATE_PATH = os.path.join("data", "etf_state.json")
 QUALITY_WEIGHT = 0.60
 MOMENTUM_WEIGHT = 0.40
 TOP_HOLDINGS = 10
@@ -231,6 +232,55 @@ def _fill_missing_quality(etfs: list[dict]) -> None:
                 e["kwaliteit"] * QUALITY_WEIGHT + e["momentum"] * MOMENTUM_WEIGHT, 2)
 
 
+
+# ── Historie: wat is er veranderd sinds de vorige scan? ───────────────────────
+
+def track_changes(etfs: list[dict]) -> list[dict]:
+    """Vergelijkt met de vorige scan en geeft de wijzigingen terug.
+
+    Zonder geheugen is elk oordeel een momentopname. Door het vorige oordeel en
+    de vorige kwaliteitsscore te bewaren zie je bewéging: een fonds dat na
+    kwartaalcijfers omhoog kruipt is interessanter dan een fonds dat al hoog
+    stond. De wijzigingen voeden ook het Telegram-signaal (src/etf_watch.py).
+    """
+    try:
+        with open(STATE_PATH, encoding="utf-8") as fh:
+            prev = json.load(fh)
+    except (OSError, ValueError):
+        prev = {}
+
+    wijzigingen = []
+    state = {}
+    for e in etfs:
+        old = prev.get(e["ticker"], {})
+        oq, oo = old.get("kwaliteit"), old.get("oordeel")
+
+        e["kwaliteit_vorige"] = oq
+        e["kwaliteit_delta"] = (round(e["kwaliteit"] - oq, 2)
+                                if (oq is not None and e["kwaliteit"] is not None)
+                                else None)
+        e["oordeel_vorige"] = oo
+
+        if oo and e["oordeel"] and oo != e["oordeel"]:
+            wijzigingen.append({
+                "ticker": e["ticker"], "naam": e["naam"], "thema": e["thema"],
+                "van": oo, "naar": e["oordeel"],
+                "kwaliteit": e["kwaliteit"], "delta": e["kwaliteit_delta"],
+                "r12m": e.get("r12m"), "tr": e.get("tr"),
+            })
+
+        state[e["ticker"]] = {"kwaliteit": e["kwaliteit"], "oordeel": e["oordeel"],
+                              "datum": datetime.now(timezone.utc).date().isoformat()}
+
+    os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
+    with open(STATE_PATH, "w", encoding="utf-8") as fh:
+        json.dump(state, fh, indent=1)
+
+    rang = {"KOPEN": 0, "KANS": 1, "STERK, MAAR DUUR": 2, "VERMIJDEN": 3}
+    wijzigingen.sort(key=lambda w: rang.get(w["naar"], 9))
+    return wijzigingen
+
+
 # ── Hoofdroutine ──────────────────────────────────────────────────────────────
 
 def build() -> dict:
@@ -314,6 +364,7 @@ def build() -> dict:
 
     _fill_missing_quality(etfs)
     assign_verdicts(etfs)
+    wijzigingen = track_changes(etfs)
     etfs.sort(key=lambda e: -(e["totaal"] or 0))
 
     # Thema-aggregatie: gemiddeld rendement en kwaliteit per thema
@@ -342,6 +393,7 @@ def build() -> dict:
             "momentum_gewicht": MOMENTUM_WEIGHT,
             "bron": "Langeveld-criteria doorkijk op holdings + thema-CAGR",
         },
+        "wijzigingen": wijzigingen,
         "etfs": etfs,
         "themas": themes_out,
     }

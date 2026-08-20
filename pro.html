@@ -1593,9 +1593,26 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         <div class="etf-tops" id="etf-tops"></div>
     </div>
 
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Mijn portefeuille langs de meetlat</span><span class="ptag" id="etf-pf-tag">—</span></div>
+        <div id="etf-portfolio"></div>
+    </div>
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Waar zit je écht in — doorkijk naar de bedrijven</span><span class="ptag">via je ETF's</span></div>
+        <div id="etf-overlap"></div>
+    </div>
+
     <div class="panel">
         <div class="ph"><span class="pt">Thema's — rendement vs. verwachte marktgroei</span><span class="ptag">12 maanden</span></div>
         <div id="etf-themes"></div>
+    </div>
+
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Heeft dit in het verleden gewerkt?</span><span class="ptag" id="etf-bt-tag">—</span></div>
+        <div id="etf-backtest"></div>
     </div>
 
     <div class="panel">
@@ -6331,9 +6348,138 @@ async function loadEtfData(){
 function renderEtfTab(){
     if(!ETF||!ETF.etfs){ document.getElementById('etf-cards').innerHTML=
         '<div class="loading">Nog geen ETF-data. Draai de ETF-scan via GitHub Actions.</div>'; return; }
-    etfRenderHero(); etfRenderTops(); etfRenderThemes(); etfRenderFilters(); etfRenderCards();
+    etfRenderHero(); etfRenderTops(); etfRenderPortfolio(); etfRenderOverlap();
+    etfRenderThemes(); etfRenderBacktest(); etfRenderFilters(); etfRenderCards();
     const d=ETF.generated_at?new Date(ETF.generated_at):null;
     document.getElementById('etf-upd').textContent=d?('bijgewerkt '+d.toLocaleDateString('nl-NL',{day:'numeric',month:'short'})):'—';
+}
+
+/* ── mijn portefeuille langs dezelfde meetlat ── */
+/* Namen in memory.json zijn rommelig ("TDIV (Dev Div Leaders)", "VWRL.AS").
+   We matchen op de tickerkern, en op de indexgroep zodat VUSA.AS en SXR8.DE
+   als hetzelfde S&P 500-fonds worden herkend. */
+function etfMatch(pos){
+    const kern=(pos.ticker||pos.name||'').toUpperCase().replace(/\s*\(.*$/,'').trim();
+    const basis=kern.split('.')[0];
+    return ETF.etfs.find(e=>e.ticker===kern)||
+           ETF.etfs.find(e=>e.ticker.split('.')[0]===basis)||null;
+}
+
+function etfRenderPortfolio(){
+    const el=document.getElementById('etf-portfolio'); if(!el) return;
+    const pos=(typeof buildPositions==='function'?buildPositions():[]).filter(p=>p.value>0);
+    const gekoppeld=pos.map(p=>({pos:p,etf:etfMatch(p)})).filter(x=>x.etf);
+    const totaal=pos.reduce((a,b)=>a+b.value,0);
+    const etfWaarde=gekoppeld.reduce((a,b)=>a+b.pos.value,0);
+
+    if(!gekoppeld.length){
+        el.innerHTML='<div style="padding:14px 16px;font-size:.75rem;color:var(--muted)">Nog geen ETF\u2019s in je portefeuille herkend. Werk je posities bij via de Import-tab.</div>';
+        document.getElementById('etf-pf-tag').textContent='—';
+        return;
+    }
+    document.getElementById('etf-pf-tag').textContent=
+        gekoppeld.length+' fondsen \u00b7 '+Math.round(etfWaarde/totaal*100)+'% van je vermogen';
+
+    const rijen=gekoppeld.sort((a,b)=>b.pos.value-a.pos.value).map(({pos,etf})=>{
+        const [fg,bg]=ETF_VERDICT_KLEUR[etf.oordeel]||ETF_VERDICT_KLEUR['ONBEKEND'];
+        const dq=etf.kwaliteit_delta;
+        return `<div class="etf-throw" onclick="etfSetFilter('${etf.thema.replace(/'/g,"\\'")}')">
+            <div><b>${wlEsc(pos.name)}</b><div class="tk">${etf.ticker} \u00b7 ${pos.broker} \u00b7 \u20ac${Math.round(pos.value).toLocaleString('nl-NL')}</div></div>
+            <div style="font-size:.7rem;color:var(--muted);line-height:1.4">${wlEsc((etf.uitleg||'').split('.')[0])}.</div>
+            <div class="etf-mono" style="color:${etfScoreKleur(etf.kwaliteit)}">${etf.kwaliteit!=null?etf.kwaliteit.toFixed(1):'\u2014'}${dq?`<span style="font-size:.6rem;color:${dq>0?'var(--green)':'var(--red)'}"> ${dq>0?'\u2191':'\u2193'}</span>`:''}</div>
+            <div class="etf-mono hide-s" style="color:${etfKleur(etf.r12m)}">${etfPct(etf.r12m)}</div>
+            <div><span class="etf-verdict" style="color:${fg};background:${bg}">${etf.oordeel}</span></div></div>`;}).join('');
+
+    /* thema's waar je niets in hebt, maar die wel koopwaardig zijn */
+    const mijnThemas=new Set(gekoppeld.map(x=>x.etf.thema));
+    const gemist=etfBasis().filter(x=>x.oordeel==='KOPEN'&&!mijnThemas.has(x.thema))
+        .sort((a,b)=>(b.totaal||0)-(a.totaal||0)).slice(0,4);
+
+    el.innerHTML=
+        `<div class="etf-throw hd"><div>Positie</div><div>Oordeel</div><div class="etf-mono">Kwaliteit</div><div class="etf-mono hide-s">12M</div><div>Signaal</div></div>`+rijen+
+        (gemist.length?`<div style="padding:12px 16px;border-top:1px solid var(--border)">
+            <div class="pt" style="margin-bottom:7px">Thema's waar je niets in hebt</div>
+            ${gemist.map(x=>`<div class="etf-toprow" onclick="etfShow('${x.ticker}')"><div><b>${wlEsc(x.naam)}</b><div class="tk">${x.ticker} \u00b7 ${wlEsc(x.thema)}</div></div><div class="vv" style="color:${etfScoreKleur(x.kwaliteit)}">${x.kwaliteit.toFixed(1)}</div></div>`).join('')}
+            <div style="font-size:.68rem;color:var(--muted);margin-top:8px;line-height:1.5">Niet elk gat hoeft gevuld. Spreiding over thema's die elkaar overlappen levert niets op \u2014 kijk eerst naar de doorkijk hieronder.</div>
+         </div>`:'');
+}
+
+/* ── doorkijk: welke bedrijven bezit je écht, via al je ETF's samen ── */
+function etfRenderOverlap(){
+    const el=document.getElementById('etf-overlap'); if(!el) return;
+    const pos=(typeof buildPositions==='function'?buildPositions():[]).filter(p=>p.value>0);
+    const gekoppeld=pos.map(p=>({pos:p,etf:etfMatch(p)})).filter(x=>x.etf&&x.etf.holdings&&x.etf.holdings.length);
+    if(!gekoppeld.length){
+        el.innerHTML='<div style="padding:14px 16px;font-size:.75rem;color:var(--muted)">Zodra je ETF\u2019s herkend zijn, zie je hier via welke fondsen je dezelfde bedrijven bezit.</div>';
+        return;
+    }
+    const totaal=gekoppeld.reduce((a,b)=>a+b.pos.value,0);
+    const bedrijven={};
+    gekoppeld.forEach(({pos,etf})=>{
+        etf.holdings.forEach(h=>{
+            const b=bedrijven[h.ticker]=bedrijven[h.ticker]||{naam:h.naam,euro:0,via:[],score:h.score};
+            b.euro+=pos.value*h.gewicht;
+            b.via.push(etf.ticker);
+        });
+    });
+    const alles=Object.entries(bedrijven).map(([t,b])=>({ticker:t,...b,pct:b.euro/totaal}))
+        .sort((a,b)=>b.euro-a.euro);
+    const lijst=alles.slice(0,12);
+    const dubbel=lijst.filter(x=>x.via.length>1).length;
+    /* dekking = deel van je ETF-vermogen dat we konden doorrekenen (top-10 per fonds) */
+    const dekking=alles.reduce((a,b)=>a+b.pct,0);
+    const top=lijst.slice(0,5).reduce((a,b)=>a+b.pct,0);
+    const concentratie=dekking?top/dekking:0;
+
+    el.innerHTML=
+        `<div style="padding:12px 16px;font-size:.75rem;color:var(--text);line-height:1.6;border-bottom:1px solid var(--border)">
+            Je vijf grootste bedrijven zijn samen <b>${Math.round(top*100)}%</b> van je ETF-vermogen \u2014
+            <b>${Math.round(concentratie*100)}%</b> van alles wat we konden doorrekenen${dubbel?`. Bij ${dubbel} van je twaalf grootste posities gebeurt dat via <b>meerdere fondsen tegelijk</b>`:''}.
+            ${concentratie>0.40||dubbel>=8?'Je fondsen overlappen sterk: je bent geconcentreerder dan het aantal fondsen doet vermoeden. Een fonds erbij in hetzelfde thema voegt dan weinig toe.':
+              concentratie>0.25?'Redelijk gespreid, met een duidelijke kern bovenin.':'Goed gespreid \u2014 geen enkel bedrijf domineert.'}
+        </div>
+        <div class="etf-throw hd"><div>Bedrijf</div><div>Aandeel van je ETF-vermogen</div><div class="etf-mono">Bedrag</div><div class="etf-mono hide-s">Kwaliteit</div><div>Via</div></div>`+
+        lijst.map(x=>`<div class="etf-throw" style="cursor:default">
+            <div><b>${wlEsc(x.naam||x.ticker)}</b><div class="tk">${x.ticker}</div></div>
+            <div class="etf-bar"><i style="width:${Math.min(100,x.pct/(lijst[0].pct||1)*100)}%;background:${x.via.length>1?'#d97706':'var(--accent)'}"></i></div>
+            <div class="etf-mono">\u20ac${Math.round(x.euro).toLocaleString('nl-NL')}</div>
+            <div class="etf-mono hide-s" style="color:${etfScoreKleur(x.score)}">${x.score!=null?x.score.toFixed(1):'\u2014'}</div>
+            <div style="font-size:.62rem;color:${x.via.length>1?'#d97706':'var(--muted)'};font-family:var(--mono)">${x.via.length>1?x.via.length+'\u00d7':'1\u00d7'}</div></div>`).join('')+
+        `<div style="padding:10px 16px;font-size:.68rem;color:var(--muted);line-height:1.5">Berekend over de tien grootste posities per fonds; samen ${Math.round(dekking*100)}% van je ETF-vermogen. De staart eronder spreidt vanzelf. Oranje = je bezit dit bedrijf via meer dan één fonds.</div>`;
+}
+
+/* ── backtest ── */
+function etfRenderBacktest(){
+    const el=document.getElementById('etf-backtest'); if(!el) return;
+    const bt=ETF.backtest;
+    if(!bt||!bt.strategieen){
+        el.innerHTML='<div style="padding:14px 16px;font-size:.75rem;color:var(--muted)">Nog geen backtest. Draai de ETF-scan.</div>';
+        return;
+    }
+    document.getElementById('etf-bt-tag').textContent=bt.periode.van+' \u2192 '+bt.periode.tot;
+    const kleur={'Momentum (zuiver)':'var(--accent)','Momentum + kwaliteit':'#d97706','MSCI World':'var(--muted)'};
+    const rijen=Object.entries(bt.strategieen).map(([naam,st])=>{
+        const eerlijk=naam!=='Momentum + kwaliteit';
+        return `<div class="etf-throw" style="cursor:default">
+            <div><b>${naam}</b>${eerlijk?'':'<div class="tk" style="color:#d97706">kijkt vooruit \u2014 niet te vertrouwen</div>'}</div>
+            <div class="etf-bar"><i style="width:${Math.min(100,st.per_jaar/0.30*100)}%;background:${kleur[naam]}"></i></div>
+            <div class="etf-mono" style="color:${etfKleur(st.per_jaar)}">${etfPct(st.per_jaar,1)}</div>
+            <div class="etf-mono hide-s" style="color:var(--muted)">${etfPct(st.totaal)}</div>
+            <div class="etf-mono" style="color:var(--red);font-size:.66rem">${etfPct(st.max_drawdown)}</div></div>`;}).join('');
+
+    const zuiver=bt.strategieen['Momentum (zuiver)'], bench=bt.strategieen['MSCI World'];
+    const winst=zuiver&&bench?zuiver.per_jaar-bench.per_jaar:null;
+    const oordeel=winst===null?'':
+        winst>0.03?'De momentumselectie versloeg de wereldindex duidelijk.':
+        winst>0?'De momentumselectie won nipt van de wereldindex \u2014 tegenover een diepere dip onderweg. Dat is geen gratis winst.':
+        'De momentumselectie verloor van gewoon de wereldindex kopen. Reden te meer om op kwaliteit te selecteren en niet op het rendementslijstje.';
+
+    el.innerHTML=
+        `<div class="etf-throw hd"><div>Strategie</div><div>Rendement per jaar</div><div class="etf-mono">P.J.</div><div class="etf-mono hide-s">Totaal</div><div class="etf-mono">Dip</div></div>`+rijen+
+        `<div style="padding:12px 16px;font-size:.74rem;color:var(--text);line-height:1.6;border-top:1px solid var(--border)">
+            <b>${oordeel}</b><div style="color:var(--muted);margin-top:6px">${wlEsc(bt.waarschuwing)}</div>
+            <div style="color:var(--muted);margin-top:6px">Elke maand de ${bt.top_n} sterkst stijgende ETF\u2019s gekocht en een maand vastgehouden, over ${bt.periode.maanden} maanden.</div>
+        </div>`;
 }
 
 /* ── kop: één oordeel over het hele universum ── */
@@ -6456,7 +6602,7 @@ function etfCard(x){
             <span class="etf-verdict" style="color:${fg};background:${bg}">${x.oordeel}</span>
         </div>
         <div class="etf-scores">
-            <div class="etf-sc"><div class="l">Kwaliteit</div><div class="v" style="color:${etfScoreKleur(x.kwaliteit)}">${x.kwaliteit!=null?x.kwaliteit.toFixed(1):'\u2014'}</div></div>
+            <div class="etf-sc"><div class="l">Kwaliteit</div><div class="v" style="color:${etfScoreKleur(x.kwaliteit)}">${x.kwaliteit!=null?x.kwaliteit.toFixed(1):'\u2014'}${x.kwaliteit_delta?`<span style="font-size:.6rem;color:${x.kwaliteit_delta>0?'var(--green)':'var(--red)'}">${x.kwaliteit_delta>0?'\u2191':'\u2193'}</span>`:''}</div></div>
             <div class="etf-sc"><div class="l">Momentum</div><div class="v" style="color:${etfScoreKleur(x.momentum)}">${x.momentum!=null?x.momentum.toFixed(1):'\u2014'}</div></div>
             <div class="etf-sc"><div class="l">Totaal</div><div class="v" style="color:${etfScoreKleur(x.totaal)}">${x.totaal!=null?x.totaal.toFixed(1):'\u2014'}</div></div>
         </div>

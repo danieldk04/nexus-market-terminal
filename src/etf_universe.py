@@ -57,6 +57,7 @@ _add("XDWL.DE", "Xtrackers MSCI World 1D", "Kern & Wereldwijd", 0.19)
 _add("SPPW.DE", "SPDR MSCI World", "Kern & Wereldwijd", 0.12)
 _add("VWCE.DE", "Vanguard FTSE All-World (Acc)", "Kern & Wereldwijd", 0.22)
 _add("VGWL.DE", "Vanguard FTSE All-World (Dist)", "Kern & Wereldwijd", 0.22)
+_add("VWRL.AS", "Vanguard FTSE All-World (AMS)", "Kern & Wereldwijd", 0.22)
 _add("IUSQ.DE", "iShares MSCI ACWI", "Kern & Wereldwijd", 0.20)
 _add("SPYY.DE", "SPDR MSCI ACWI", "Kern & Wereldwijd", 0.12)
 _add("SPYI.DE", "SPDR MSCI ACWI IMI", "Kern & Wereldwijd", 0.17)
@@ -278,7 +279,7 @@ INDEX_GROUPS: dict[str, str] = {}
 for _key, _tickers in {
     "S&P 500": "SXR8.DE IUSA.DE VUSA.AS VUAA.DE LYPS.DE D5BM.DE ESE.PA",
     "MSCI World": "EUNL.DE IWDA.AS XDWD.DE XDWL.DE SPPW.DE CW8.PA XDWY.DE TSWE.DE",
-    "FTSE All-World": "VWCE.DE VGWL.DE",
+    "FTSE All-World": "VWCE.DE VGWL.DE VWRL.AS",
     "MSCI ACWI": "IUSQ.DE SPYY.DE SPYI.DE",
     "Nasdaq 100": "SXRV.DE CNDX.AS XNAS.DE LYMS.DE EXXT.DE",
     "MSCI World SRI/ESG": "XZW0.DE 2B7K.DE CBUY.DE UIMM.DE",

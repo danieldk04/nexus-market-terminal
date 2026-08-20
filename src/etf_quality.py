@@ -32,7 +32,7 @@ import yfinance as yf
 log = logging.getLogger("etf_quality")
 
 CACHE_PATH = os.path.join("data", "etf_fundamentals.json")
-CACHE_TTL_DAYS = 30
+CACHE_TTL_DAYS = 7   # kwartaalcijfers werken zo binnen een week door
 GDP_GROWTH = 0.03  # nominale wereldgroei; "2x BBP" = 6% omzetgroei
 
 # Gewichten per criterium (som = 100). Management en balans wegen zwaar:
