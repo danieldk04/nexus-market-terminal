@@ -243,3 +243,60 @@ if __name__ == "__main__":
     print(f"{len(UNIVERSE)} ETF's in {len(by_theme())} thema's")
     for th, ts in sorted(by_theme().items()):
         print(f"  {th:26s} {len(ts):3d}")
+
+
+# ── Aanbieder → beschikbaarheid bij Trade Republic ────────────────────────────
+# Trade Republic publiceert geen open lijst per ISIN. Dit is een inschatting op
+# basis van de aanbieders die TR zelf noemt (iShares, Vanguard, Xtrackers,
+# Amundi, Invesco, SPDR, VanEck) plus de kleinere huizen die daar los van staan.
+#   "zeker"        — grote aanbieder, standaard in het TR-aanbod
+#   "waarschijnlijk" — kleiner huis, meestal wel verhandelbaar
+#   "onzeker"      — nichefonds, controleer in de app voor je koopt
+TR_PROVIDERS = {
+    "ishares": "zeker", "stoxx europe": "zeker", "xtrackers": "zeker",
+    "vanguard": "zeker", "amundi": "zeker", "spdr": "zeker",
+    "invesco": "zeker", "vaneck": "zeker", "wisdomtree": "waarschijnlijk",
+    "l&g": "waarschijnlijk", "fidelity": "waarschijnlijk",
+    "first trust": "onzeker", "sprott": "onzeker", "franklin": "onzeker",
+    "global x": "onzeker", "ubs": "waarschijnlijk", "jpm": "waarschijnlijk",
+    "ossiam": "onzeker", "bnp": "waarschijnlijk", "xetra-gold": "waarschijnlijk",
+}
+
+
+def tr_status(name: str) -> str:
+    low = name.lower()
+    for key, status in TR_PROVIDERS.items():
+        if key in low:
+            return status
+    return "onzeker"
+
+
+# ── Dubbelen: fondsen die dezelfde index volgen ───────────────────────────────
+# Tien S&P 500-trackers naast elkaar is geen keuze maar ruis. Fondsen met
+# dezelfde sleutel worden in het dashboard samengevouwen tot de goedkoopste.
+INDEX_GROUPS: dict[str, str] = {}
+for _key, _tickers in {
+    "S&P 500": "SXR8.DE IUSA.DE VUSA.AS VUAA.DE LYPS.DE D5BM.DE ESE.PA",
+    "MSCI World": "EUNL.DE IWDA.AS XDWD.DE XDWL.DE SPPW.DE CW8.PA XDWY.DE TSWE.DE",
+    "FTSE All-World": "VWCE.DE VGWL.DE",
+    "MSCI ACWI": "IUSQ.DE SPYY.DE SPYI.DE",
+    "Nasdaq 100": "SXRV.DE CNDX.AS XNAS.DE LYMS.DE EXXT.DE",
+    "MSCI World SRI/ESG": "XZW0.DE 2B7K.DE CBUY.DE UIMM.DE",
+    "MSCI EM": "IS3N.DE XMME.DE VFEM.DE AYEM.DE XZEM.DE PAEEM.PA",
+    "Europa breed": "VEUR.AS VERX.DE MEUD.PA",
+    "MSCI USA": "XD9U.DE",
+    "S&P 500 Info Tech": "QDVE.DE IITU.L",
+    "S&P 500 Health Care": "QDVG.DE IHCU.L",
+    "S&P 500 Financials": "QDVH.DE IUFS.L",
+    "World Info Tech": "XDWT.DE WELL.DE",
+    "World Small Cap": "IUSN.DE ZPRS.DE WSML.AS CBUG.DE",
+    "Semiconductors": "SMH.DE VVSM.DE",
+    "Cybersecurity L&G": "ISPY.AS USPY.DE",
+    "Global Aggregate Bond": "EUNA.DE VAGF.DE",
+}.items():
+    for _t in _tickers.split():
+        INDEX_GROUPS[_t] = _key
+
+for _t, _meta in UNIVERSE.items():
+    _meta["tr"] = tr_status(_meta["name"])
+    _meta["groep"] = INDEX_GROUPS.get(_t)

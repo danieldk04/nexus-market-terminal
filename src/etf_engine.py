@@ -131,30 +131,67 @@ def get_holdings(ticker: str) -> tuple[list[dict], dict]:
 
 # ── Oordeel ───────────────────────────────────────────────────────────────────
 
-def verdict(quality: float | None, mom: float | None,
-            gap: float | None, ter: float) -> tuple[str, str]:
-    """Geeft (label, uitleg in gewone taal)."""
+def verdict(pq: float, quality: float | None, mom: float | None,
+            gap: float | None) -> tuple[str, str]:
+    """Oordeel op basis van de RANG binnen het universum, niet op losse cijfers.
+
+    Een absolute drempel ("kwaliteit boven 6.5") levert tientallen koopsignalen
+    op zodra de hele markt goed scoort. Door te kijken waar een fonds staat
+    t.o.v. de rest blijft "kopen" schaars: alleen de bovenste 30% op kwaliteit,
+    en dan nog alleen als de trend meeloopt en de verwachting niet al betaald is.
+    """
     if quality is None:
         return "ONBEKEND", "Te weinig doorkijkdata om over de kwaliteit te oordelen."
-    if quality < 4.5:
-        return "VERMIJDEN", ("De bedrijven in dit fonds voldoen niet aan de "
-                             "kwaliteitseisen. Rendement uit het verleden weegt "
+    m = mom or 0.0
+
+    if quality < 4.5 or pq < 0.20:
+        return "VERMIJDEN", ("De bedrijven in dit fonds horen bij de zwakste van "
+                             "het universum. Rendement uit het verleden weegt "
                              "daar niet tegenop.")
-    if quality >= 6.5 and (mom or 0) >= 6.0:
+    if pq < 0.35 and m >= 7.0:
+        return "MOMENTUM-VAL", ("Hard gelopen, maar de onderliggende kwaliteit "
+                                "blijft achter. Dit is speculatie, geen belegging.")
+    if pq >= 0.70:
         if gap is not None and gap > 0.35:
             return "STERK, MAAR DUUR", ("Sterke bedrijven, maar de koers is veel "
                                         "harder gelopen dan de markt zelf groeit. "
                                         "Gespreid instappen.")
-        return "KOPEN", "Sterke bedrijven én de trend staat mee."
-    if quality >= 6.5 and (mom or 0) < 4.0:
-        return "KANS", ("Sterke bedrijven, maar de koers ligt achter. Vaak het "
-                        "moment waarop je het meest verdient — mits je geduld hebt.")
-    if quality >= 5.5:
-        return "HOUDEN", "Redelijke kwaliteit, geen reden tot haast."
-    if (mom or 0) >= 7:
-        return "MOMENTUM-VAL", ("Hard gelopen, maar de onderliggende kwaliteit is "
-                               "matig. Dit is speculatie, geen belegging.")
-    return "AFWACHTEN", "Niet sterk genoeg op kwaliteit én niet in trend."
+        if m < 4.5:
+            return "KANS", ("Bij de beste bedrijven van het universum, maar de "
+                            "koers ligt achter. Vaak het moment waarop je het "
+                            "meest verdient \u2014 mits je geduld hebt.")
+        if m >= 6.0:
+            return "KOPEN", "Bij de beste bedrijven \u00e9n de trend staat mee."
+        return "HOUDEN", "Sterke bedrijven, maar de trend is nog niet overtuigend."
+    if pq >= 0.45:
+        return "HOUDEN", "Middenmoot op kwaliteit. Geen reden tot haast."
+    return "AFWACHTEN", "Niet sterk genoeg op kwaliteit \u00e9n niet in trend."
+
+
+def assign_verdicts(etfs: list[dict]) -> None:
+    """Kent oordelen toe zodra alle kwaliteitsscores bekend zijn."""
+    aandelen = [e for e in etfs
+                if e.get("kwaliteit") is not None
+                and e.get("kwaliteit_bron") != "obligatie"]
+    ranked = sorted(aandelen, key=lambda e: e["kwaliteit"])
+    n = len(ranked)
+    for i, e in enumerate(ranked):
+        e["kwaliteit_percentiel"] = round((i + 1) / n, 3) if n else None
+
+    for e in etfs:
+        if e.get("kwaliteit_bron") == "obligatie":
+            continue
+        pq = e.get("kwaliteit_percentiel")
+        if pq is None:
+            e["oordeel"] = "ONBEKEND"
+            e["uitleg"] = "Te weinig doorkijkdata om over de kwaliteit te oordelen."
+            continue
+        e["oordeel"], e["uitleg"] = verdict(
+            pq, e["kwaliteit"], e["momentum"], e["verwachting_gap"])
+        if e.get("kwaliteit_bron") == "thema-schatting":
+            e["uitleg"] += (" Let op: het fonds geeft zijn posities niet door, "
+                            "de kwaliteit is geschat op basis van vergelijkbare "
+                            "fondsen in dit thema.")
 
 
 def _fill_missing_quality(etfs: list[dict]) -> None:
@@ -188,11 +225,6 @@ def _fill_missing_quality(etfs: list[dict]) -> None:
             avg = sum(peers) / len(peers)
             e["kwaliteit"] = round(avg * 0.85 + e["kosten_score"] * 0.15, 2)
             e["kwaliteit_bron"] = "thema-schatting"
-            e["oordeel"], e["uitleg"] = verdict(
-                e["kwaliteit"], e["momentum"], e["verwachting_gap"], e["ter"])
-            e["uitleg"] += (" Let op: het fonds geeft zijn posities niet door, "
-                            "de kwaliteit is geschat op basis van vergelijkbare "
-                            "fondsen in dit thema.")
 
         if e["momentum"] is not None and e["kwaliteit"] is not None:
             e["totaal"] = round(
@@ -263,8 +295,6 @@ def build() -> dict:
         else:
             totaal = quality if quality is not None else mom
 
-        label, uitleg = verdict(quality, mom, gap, meta["ter"])
-
         etfs.append({
             "ticker": t, "naam": meta["name"], "thema": theme, "ter": meta["ter"],
             **m,
@@ -276,12 +306,14 @@ def build() -> dict:
             "dekking": round(dekking, 2),
             "verwachte_groei": cagr,
             "verwachting_gap": gap,
-            "oordeel": label, "uitleg": uitleg,
+            "oordeel": None, "uitleg": None,
+            "tr": meta.get("tr"), "groep": meta.get("groep"),
             "holdings": sorted(rows, key=lambda r: -r["gewicht"])[:TOP_HOLDINGS],
             "sectoren": sectors_map.get(t, {}),
         })
 
     _fill_missing_quality(etfs)
+    assign_verdicts(etfs)
     etfs.sort(key=lambda e: -(e["totaal"] or 0))
 
     # Thema-aggregatie: gemiddeld rendement en kwaliteit per thema

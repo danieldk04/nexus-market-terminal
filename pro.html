@@ -6297,6 +6297,10 @@ function setSaveRepo(){
    Databron: etf_data.json via src/etf_engine.py
 ══════════════════════════════════════════════════════ */
 let ETF=null, etfFilter='ALLES', etfOpen=null;
+/* Standaard: alleen wat je bij Trade Republic kunt kopen, en één fonds per index
+   (tien S&P 500-trackers naast elkaar is geen keuze maar ruis). */
+let etfOnlyTR=localStorage.getItem('nx_etf_tr')!=='0';
+let etfDedupe=localStorage.getItem('nx_etf_dedupe')!=='0';
 
 const ETF_VERDICT_KLEUR={
     'KOPEN':            ['#059669','rgba(5,150,105,.12)'],
@@ -6334,7 +6338,7 @@ function renderEtfTab(){
 
 /* ── kop: één oordeel over het hele universum ── */
 function etfRenderHero(){
-    const e=ETF.etfs, n=e.length;
+    const e=etfBasis(), n=e.length;
     const koop=e.filter(x=>x.oordeel==='KOPEN').length;
     const mijd=e.filter(x=>x.oordeel==='VERMIJDEN'||x.oordeel==='MOMENTUM-VAL').length;
     /* obligatiefondsen tellen niet mee: hun score meet kosten en rust, geen bedrijfskwaliteit */
@@ -6362,7 +6366,7 @@ function etfRenderHero(){
 
 /* ── uitgelichte lijstjes ── */
 function etfRenderTops(){
-    const e=ETF.etfs;
+    const e=etfBasis();
     const lijst=(rows,val)=>rows.map(x=>
         `<div class="etf-toprow" onclick="etfShow('${x.ticker}')"><div><b>${wlEsc(x.naam)}</b><div class="tk">${x.ticker} \u00b7 ${wlEsc(x.thema)}</div></div><div class="vv" style="color:${val(x).c}">${val(x).t}</div></div>`).join('');
 
@@ -6403,22 +6407,42 @@ function etfRenderThemes(){
 
 /* ── filters ── */
 function etfRenderFilters(){
-    const themas=[...new Set(ETF.etfs.map(x=>x.thema))];
+    const themas=[...new Set(etfBasis().map(x=>x.thema))];
     const opts=['ALLES','KOPEN','KANS','VERMIJDEN',...themas];
-    document.getElementById('etf-filters').innerHTML=opts.map(o=>
+    document.getElementById('etf-filters').innerHTML=
+        `<button class="etf-fb${etfOnlyTR?' on':''}" onclick="etfToggleTR()">\u2713 Trade Republic</button>`+
+        `<button class="etf-fb${etfDedupe?' on':''}" onclick="etfToggleDedupe()">\u2713 Geen dubbelen</button>`+
+        `<span style="width:1px;background:var(--border);margin:0 4px"></span>`+
+        opts.map(o=>
         `<button class="etf-fb${etfFilter===o?' on':''}" onclick="etfSetFilter('${o.replace(/'/g,"\\'")}')">${wlEsc(o)}</button>`).join('');
+}
+function etfToggleTR(){ etfOnlyTR=!etfOnlyTR; localStorage.setItem('nx_etf_tr',etfOnlyTR?'1':'0'); renderEtfTab(); }
+function etfToggleDedupe(){ etfDedupe=!etfDedupe; localStorage.setItem('nx_etf_dedupe',etfDedupe?'1':'0'); renderEtfTab(); }
+
+/* Basisselectie: broker-filter + dubbelen samenvouwen tot het beste fonds per index. */
+function etfBasis(){
+    let rows=ETF.etfs;
+    if(etfOnlyTR) rows=rows.filter(x=>x.tr==='zeker'||x.tr==='waarschijnlijk');
+    if(!etfDedupe) return rows.map(x=>({...x,_dup:0}));
+    const groepen={};
+    rows.forEach(x=>{ const k=x.groep||('#'+x.ticker); (groepen[k]=groepen[k]||[]).push(x); });
+    return Object.values(groepen).map(g=>{
+        /* beste = hoogste totaalscore; bij gelijke score de goedkoopste */
+        const best=[...g].sort((a,b)=>((b.totaal||0)-(a.totaal||0))||(a.ter-b.ter))[0];
+        return {...best,_dup:g.length-1,_alt:g.filter(x=>x.ticker!==best.ticker).map(x=>x.ticker)};
+    });
 }
 function etfSetFilter(f){ etfFilter=(etfFilter===f?'ALLES':f); etfRenderFilters(); etfRenderCards();
     document.getElementById('etf-cards').scrollIntoView({behavior:'smooth',block:'start'}); }
 
 /* ── kaarten ── */
 function etfRenderCards(){
-    let rows=ETF.etfs;
+    let rows=etfBasis();
     if(etfFilter!=='ALLES'){
         rows=rows.filter(x=>x.thema===etfFilter||x.oordeel===etfFilter||
             (etfFilter==='VERMIJDEN'&&x.oordeel==='MOMENTUM-VAL'));
     }
-    document.getElementById('etf-count').textContent=rows.length+' van '+ETF.etfs.length;
+    document.getElementById('etf-count').textContent=rows.length+' getoond \u00b7 '+ETF.etfs.length+' in universum';
     document.getElementById('etf-cards').innerHTML=rows.map(etfCard).join('')||
         '<div class="loading">Geen ETF\u2019s in deze selectie.</div>';
 }
@@ -6442,6 +6466,8 @@ function etfCard(x){
             ${chip('3j p.j.',etfPct(x.cagr3j),etfKleur(x.cagr3j))}
             ${chip('Kosten',x.ter.toFixed(2)+'%')}
             ${x.max_drawdown!=null?chip('Grootste dip',etfPct(x.max_drawdown),'var(--red)'):''}
+            ${x._dup?chip('Zelfde index',x._dup+' alternatieven','var(--muted)'):''}
+            ${x.tr==='onzeker'?chip('Trade Republic','check in app','#d97706'):''}
         </div>
         ${etfOpen===x.ticker?etfDetail(x):''}
     </div>`;
@@ -6480,7 +6506,7 @@ function etfDetail(x){
             <div>Bedrijf</div><div class="etf-mono">Gewicht</div><div class="etf-mono">Score</div></div>
         ${hold||'<div style="font-size:.7rem;color:var(--muted);padding:6px 0">Niet beschikbaar.</div>'}
         <div style="font-size:.68rem;color:var(--muted);margin-top:10px;line-height:1.5">
-            Kosten ${x.ter.toFixed(2)}% per jaar \u00b7 beweeglijkheid ${x.vol!=null?etfPct(x.vol):'\u2014'} \u00b7
+            ${x._alt&&x._alt.length?'Zelfde index, andere aanbieder: '+x._alt.join(', ')+' \u00b7 ':''}Kosten ${x.ter.toFixed(2)}% per jaar \u00b7 beweeglijkheid ${x.vol!=null?etfPct(x.vol):'\u2014'} \u00b7
             datadekking ${Math.round((x.dekking||0)*100)}%</div>
     </div>`;
 }
