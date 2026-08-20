@@ -1,6 +1,9 @@
 """
-NEXUS Morning Briefing — Dagelijkse marktupdate (07:00 UTC)
+NEXUS Briefing — marktupdate op maandag en vrijdag (07:00 UTC)
 ─────────────────────────────────────────────────────────────
+Let op: de dataverzameling draait elke dag door (het dashboard en de
+portfolio-historie hebben dagelijkse snapshots nodig). Alleen het
+Telegram-bericht gaat op maandag en vrijdag de deur uit. Zie _briefing_dag().
 Marktdata   : yfinance — AEX, S&P 500, NASDAQ, BTC, goud
 Nieuws      : Google News RSS — actueel, Nederlandstalig, gratis
 Portfolio   : DEGIRO REST + Trade Republic via TR_HOLDINGS secret
@@ -25,6 +28,10 @@ from tr_portfolio import fetch_tr_portfolio
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger("morning_briefing")
+
+# Dagen waarop het Telegram-bericht verstuurd wordt (1 = maandag ... 7 = zondag).
+# Aan te passen via het BRIEFING_DAYS-secret, bijv. "1,3,5" voor drie keer per week.
+BRIEFING_DAYS = os.environ.get("BRIEFING_DAYS", "1,5")
 
 BASE_DIR     = Path(__file__).parent.parent
 DATA_PATH    = BASE_DIR / "data.json"
@@ -1676,6 +1683,23 @@ def _send_export_reminder(broker: str):
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
+def _briefing_dag() -> bool:
+    """Is vandaag een verzenddag?
+
+    De snapshots draaien elke ochtend door, maar een bericht elke dag lees je na
+    een maand niet meer. FORCE_BRIEFING=1 (handmatige run) stuurt altijd.
+    """
+    if os.environ.get("FORCE_BRIEFING") == "1":
+        return True
+    try:
+        dagen = {int(d) for d in BRIEFING_DAYS.split(",") if d.strip()}
+    except ValueError:
+        log.warning("BRIEFING_DAYS onleesbaar (%r) — val terug op maandag+vrijdag",
+                    BRIEFING_DAYS)
+        dagen = {1, 5}
+    return datetime.now(timezone.utc).isoweekday() in dagen
+
+
 def run_morning_briefing():
     log.info("=== NEXUS MORNING BRIEFING STARTING ===")
     api_key = os.environ.get("ANTHROPIC_API_KEY")
@@ -1763,6 +1787,12 @@ def run_morning_briefing():
                                  bux=bux, bux_perf=bux_perf,
                                  news_summary=news_summary,
                                  alerts=alert_lines)
+
+    if not _briefing_dag():
+        dag = datetime.now(timezone.utc).strftime("%A")
+        log.info("Geen verzenddag (%s) — snapshots opgeslagen, geen Telegram.", dag)
+        log.info("=== MORNING BRIEFING COMPLETE (stil) ===")
+        return
 
     log.info("Telegram verzenden...")
     ok = send(msg)

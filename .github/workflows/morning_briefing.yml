@@ -1,7 +1,9 @@
 name: NEXUS Morning Briefing
 
 on:
-  # Backup: GitHub Actions schedule (vertraagd maar gratis fallback)
+  # Backup: GitHub Actions schedule (vertraagd maar gratis fallback).
+  # Draait elke dag zodat de portfolio-snapshots doorlopen; het Telegram-bericht
+  # gaat alleen op maandag en vrijdag de deur uit (zie BRIEFING_DAYS).
   schedule:
     - cron: "15 7 * * *"   # 07:15 UTC fallback als cron-job.org faalt
   # Primair: getriggerd door cron-job.org via GitHub API om 07:00 UTC
@@ -11,6 +13,10 @@ on:
         description: 'Reden voor handmatige run (optioneel)'
         required: false
         default: 'handmatige test'
+      altijd_melden:
+        description: "Bericht sturen ook als vandaag geen maandag of vrijdag is"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -39,6 +45,8 @@ jobs:
       - name: Morning Briefing verzenden
         env:
           PYTHONPATH: src
+          BRIEFING_DAYS:             ${{ vars.BRIEFING_DAYS || '1,5' }}
+          FORCE_BRIEFING:            ${{ inputs.altijd_melden && '1' || '0' }}
           ANTHROPIC_API_KEY:         ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN:        ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:          ${{ secrets.TELEGRAM_CHAT_ID }}
