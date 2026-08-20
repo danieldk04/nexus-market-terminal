@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 16 * * 6"   # zaterdag 16:00 UTC — markt dicht, rustig moment
   workflow_dispatch:
+    inputs:
+      altijd_melden:
+        description: "Ook een bericht sturen als er niets veranderd is"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -45,6 +50,7 @@ jobs:
           PYTHONPATH: src
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ETF_ALWAYS_SEND: ${{ inputs.altijd_melden && '1' || '0' }}
         run: python src/etf_watch.py || echo "ETF-wacht overgeslagen — doorgaan"
 
       - name: Commit & Push

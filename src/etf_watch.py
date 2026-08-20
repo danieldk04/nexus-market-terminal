@@ -7,6 +7,10 @@ in gewone taal. Geen wijzigingen betekent geen bericht — stilte is informatie.
 
 Alleen fondsen die je bij Trade Republic kunt kopen halen het bericht, en per
 index maar één fonds: tien S&P 500-trackers die tegelijk omslaan is één signaal.
+
+Met ETF_ALWAYS_SEND=1 stuurt hij ook een bericht als er niets veranderde: dan
+krijg je de stand van zaken. Handig bij een handmatige run — je wilt kunnen zien
+dat het kanaal werkt, en niet hoeven raden of "geen bericht" goed of stuk is.
 """
 from __future__ import annotations
 
@@ -87,6 +91,50 @@ def bouw_bericht(wijzigingen: list[dict]) -> str | None:
     return "\n".join(regels)
 
 
+def bouw_overzicht(data: dict) -> str:
+    """Stand van zaken als er geen wijzigingen zijn: waar staan we nu."""
+    etfs = [e for e in data.get("etfs", [])
+            if UNIVERSE.get(e["ticker"], {}).get("tr") in ("zeker", "waarschijnlijk")]
+
+    gezien, uniek = set(), []
+    for e in sorted(etfs, key=lambda x: -(x.get("totaal") or 0)):
+        sleutel = UNIVERSE.get(e["ticker"], {}).get("groep") or e["ticker"]
+        if sleutel in gezien:
+            continue
+        gezien.add(sleutel)
+        uniek.append(e)
+
+    koop = [e for e in uniek if e["oordeel"] == "KOPEN"][:5]
+    kans = [e for e in uniek if e["oordeel"] == "KANS"][:3]
+    val = [e for e in uniek if e["oordeel"] == "MOMENTUM-VAL"][:3]
+
+    regels = ["*ETF-stand van zaken*", "",
+              f"Geen enkel oordeel is veranderd sinds de vorige scan. "
+              f"{len(uniek)} fondsen bekeken, {sum(1 for e in uniek if e['oordeel'] == 'KOPEN')} "
+              f"koopwaardig.", ""]
+
+    def blok(titel, rijen, toon_kwaliteit=True):
+        if not rijen:
+            return
+        regels.append(f"*{titel}*")
+        for e in rijen:
+            extra = f"kwaliteit {e['kwaliteit']:.1f}" if toon_kwaliteit and e.get("kwaliteit") else ""
+            regels.append(f"• {e['naam']} ({e['ticker']}) — {extra}, 12m {_pct(e.get('r12m'))}")
+        regels.append("")
+
+    blok("Sterkste koopsignalen", koop)
+    blok("Kwaliteit die achterblijft", kans)
+    blok("Hard gelopen zonder kwaliteit", val)
+
+    bt = (data.get("backtest") or {}).get("strategieen", {})
+    if bt.get("Momentum (zuiver)") and bt.get("MSCI World"):
+        a = bt["Momentum (zuiver)"]["per_jaar"]
+        b = bt["MSCI World"]["per_jaar"]
+        regels.append(f"_Backtest: momentumselectie {a * 100:.1f}% p.j. tegen "
+                      f"{b * 100:.1f}% voor MSCI World._")
+    return "\n".join(regels)
+
+
 def main() -> None:
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -102,8 +150,12 @@ def main() -> None:
 
     bericht = bouw_bericht(wijzigingen)
     if not bericht:
-        log.info("Niets belangrijks veranderd — geen bericht verstuurd.")
-        return
+        if os.environ.get("ETF_ALWAYS_SEND") == "1":
+            log.info("Geen wijzigingen — stuur stand van zaken.")
+            bericht = bouw_overzicht(data)
+        else:
+            log.info("Niets belangrijks veranderd — geen bericht verstuurd.")
+            return
 
     if os.environ.get("DRY_RUN") == "1":
         print(bericht)
