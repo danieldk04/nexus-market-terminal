@@ -2260,7 +2260,7 @@ function renderDcfStrip(data) {
 
     // Dividend (opgeslagen als basispunten bijv. 230 = 2.30%)
     if (div.yield) {
-        const yPct = div.yield > 30 ? (div.yield / 100).toFixed(2) : div.yield.toFixed(2);
+        const yPct = div.yield.toFixed(2);   /* engine levert al procenten */
         const c = div.sustainable ? 'chip-green' : 'chip-red';
         chips.push(chip('Div Yield', yPct + '%', null, c));
     }

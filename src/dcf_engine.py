@@ -149,7 +149,50 @@ def compute_roic(info: dict) -> float | None:
             return round((nopat / invested_cap) * 100, 2)
     except Exception:
         pass
+
+    # Yahoo levert operatingIncome/totalAssets/cash niet meer via .info, waardoor
+    # ROIC voor élk aandeel leeg bleef en de kapitaalefficiëntie-factor in de
+    # score altijd nul scoorde. Deze benadering gebruikt velden die er wél zijn:
+    #   NOPAT           ≈ operationele marge × omzet × (1 − belasting)
+    #   geïnvesteerd    ≈ schuld + eigen vermogen − kas
+    try:
+        marge   = info.get("operatingMargins")
+        omzet   = info.get("totalRevenue")
+        aandelen = info.get("sharesOutstanding") or 0
+        boek    = info.get("bookValue") or 0
+        schuld  = info.get("totalDebt") or 0
+        kas     = (info.get("totalCashPerShare") or 0) * aandelen
+        if marge and omzet and aandelen and boek:
+            nopat    = float(marge) * float(omzet) * (1 - 0.21)
+            invested = schuld + boek * aandelen - kas
+            if nopat > 0 and invested > 0:
+                roic = nopat / invested * 100
+                if 0 < roic < 200:
+                    return round(roic, 2)
+    except Exception:
+        pass
     return None
+
+
+def _normaliseer_yield(info: dict, div_rate: float) -> float | None:
+    """Dividendrendement in procenten, ongeacht wat yfinance teruggeeft.
+
+    yfinance wisselt van vorm: soms 0.0083 (fractie), soms 0.83 (procent). Blind
+    met 100 vermenigvuldigen leverde rendementen van 447% op in het dashboard.
+    De koers × dividendbedrag is de betrouwbaarste bron; de rest is terugval.
+    """
+    prijs = (info.get("currentPrice") or info.get("regularMarketPrice")
+             or info.get("previousClose") or 0)
+    if div_rate and prijs:
+        y = div_rate / prijs * 100
+        if 0 < y < 30:
+            return round(y, 2)
+
+    raw = info.get("dividendYield") or 0
+    if not raw:
+        return None
+    y = raw * 100 if raw < 0.30 else raw   # fractie → procent
+    return round(y, 2) if 0 < y < 30 else None
 
 
 def check_dividend_sustainability(info: dict) -> dict | None:
@@ -157,11 +200,11 @@ def check_dividend_sustainability(info: dict) -> dict | None:
     Controleert of dividend houdbaar is op basis van FCF Payout Ratio.
     Geeft None als geen dividend.
     """
-    div_yield = info.get("dividendYield", 0) or 0
-    if div_yield == 0:
+    div_rate  = info.get("dividendRate", 0) or 0
+    div_yield = _normaliseer_yield(info, div_rate)
+    if not div_yield:
         return None
 
-    div_rate  = info.get("dividendRate", 0) or 0
     fcf       = info.get("freeCashflow", 0) or 0
     eps       = info.get("trailingEps", 0) or 0
     shares    = info.get("sharesOutstanding", 0) or 1
@@ -180,7 +223,7 @@ def check_dividend_sustainability(info: dict) -> dict | None:
         risk_flag   = f"EPS payout {eps_payout}% — hoog t.o.v. winst"
 
     return {
-        "yield":       round(div_yield * 100, 2),
+        "yield":       div_yield,
         "eps_payout":  eps_payout,
         "fcf_payout":  fcf_payout,
         "sustainable": sustainable,

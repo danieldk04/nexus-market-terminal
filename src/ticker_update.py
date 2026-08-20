@@ -68,6 +68,21 @@ def run_ticker_update():
     data["active_trades"]      = updated
     data["ticker_updated_at"]  = datetime.now(timezone.utc).isoformat()
 
+    # Portefeuillewaarde meebijwerken. Zonder dit toont het dashboard posities van
+    # een paar minuten oud naast een totaalwaarde van vanochtend — een verschil dat
+    # oploopt met de dag en nergens te verklaren is.
+    pf = data.get("portfolio")
+    if pf:
+        open_value = round(sum(t.get("current_value") or 0 for t in updated), 2)
+        cash       = pf.get("cash", 0)
+        start      = pf.get("starting_capital") or 0
+        pf["open_value"]  = open_value
+        pf["total_value"] = round(cash + open_value, 2)
+        if start:
+            pf["return_pct"] = round((pf["total_value"] / start - 1) * 100, 2)
+        data["portfolio"] = pf
+        print(f"  portefeuille: €{pf['total_value']:.2f} ({pf.get('return_pct')}%)")
+
     save_json(DATA_PATH, data)
     print(f"Updated {len(updated)} posities.")
     print("--- TICKER UPDATE COMPLETE ---")
