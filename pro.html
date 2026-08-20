@@ -679,6 +679,60 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
             .wl-btn { flex: 1; }
             .wld-bb { grid-template-columns: 1fr; gap: 4px; }
         }
+
+/* ─── ETF-TAB ─── */
+.etf-hero{padding:22px 16px;text-align:center;border-bottom:1px solid var(--border)}
+.etf-hero h2{font-size:1.5rem;font-weight:700;margin-bottom:5px}
+.etf-hero p{font-size:.8rem;color:var(--muted);max-width:560px;margin:0 auto}
+.etf-gauges{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;padding:14px 16px}
+.etf-gauge{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px}
+.etf-gauge .g-l{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.etf-gauge .g-v{font-size:1.05rem;font-weight:700;margin-bottom:3px}
+.etf-gauge .g-s{font-size:.68rem;color:var(--muted);line-height:1.4}
+.etf-tops{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;padding:0 16px 16px}
+.etf-top{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px}
+.etf-top h4{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.etf-toprow{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);font-size:.74rem}
+.etf-toprow:last-child{border-bottom:none}
+.etf-toprow b{font-weight:600}
+.etf-toprow .tk{font-family:var(--mono);font-size:.62rem;color:var(--muted)}
+.etf-toprow .vv{font-family:var(--mono);font-weight:700;white-space:nowrap}
+.etf-throw{display:grid;grid-template-columns:180px 1fr 62px 62px 78px;gap:10px;align-items:center;padding:7px 16px;border-bottom:1px solid var(--border);font-size:.74rem;cursor:pointer}
+.etf-throw:hover{background:var(--bg)}
+.etf-throw.hd{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:default}
+.etf-throw.hd:hover{background:none}
+.etf-bar{position:relative;height:9px;background:var(--bg);border-radius:5px;overflow:hidden}
+.etf-bar i{position:absolute;left:0;top:0;height:100%;border-radius:5px;background:var(--accent);display:block}
+.etf-bar u{position:absolute;top:-3px;width:2px;height:15px;background:var(--muted2);border-radius:1px}
+.etf-mono{font-family:var(--mono);font-weight:700;text-align:right}
+.etf-filters{display:flex;flex-wrap:wrap;gap:6px;padding:11px 16px;border-bottom:1px solid var(--border)}
+.etf-fb{padding:5px 11px;border:1px solid var(--border2);border-radius:20px;background:var(--surface);color:var(--muted);font-size:.68rem;font-weight:600;cursor:pointer}
+.etf-fb.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.etf-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.etf-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.etf-card:hover{border-color:var(--accent);box-shadow:var(--sh-md)}
+.etf-ct{padding:11px 13px 8px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.etf-cn{font-size:.82rem;font-weight:700;line-height:1.25}
+.etf-ck{font-family:var(--mono);font-size:.6rem;color:var(--muted);margin-top:2px}
+.etf-verdict{font-size:.55rem;font-weight:800;letter-spacing:.06em;padding:3px 7px;border-radius:5px;white-space:nowrap;text-transform:uppercase}
+.etf-scores{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);margin:0 13px 10px;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.etf-sc{background:var(--surface);padding:7px 4px;text-align:center}
+.etf-sc .l{font-size:.53rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.etf-sc .v{font-family:var(--mono);font-size:.95rem;font-weight:700}
+.etf-cwhy{font-size:.7rem;color:var(--muted);line-height:1.5;padding:0 13px 11px}
+.etf-cfoot{display:flex;flex-wrap:wrap;gap:5px;padding:0 13px 12px}
+.etf-detail{padding:14px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.etf-crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:7px;margin:10px 0}
+.etf-critrow{display:flex;align-items:center;gap:7px;font-size:.68rem}
+.etf-critrow span{flex:1;color:var(--muted)}
+.etf-critbar{width:52px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.etf-critbar i{display:block;height:100%;border-radius:3px}
+.etf-hold{display:grid;grid-template-columns:1fr 54px 46px;gap:8px;font-size:.72rem;padding:5px 0;border-bottom:1px solid var(--border)}
+.etf-hold:last-child{border-bottom:none}
+@media(max-width:640px){
+    .etf-throw{grid-template-columns:110px 1fr 50px 62px;font-size:.68rem}
+    .etf-throw .hide-s{display:none}
+}
     </style>
 </head>
 <body>
@@ -750,6 +804,10 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
     </button>
 
     <div class="sb-grp">Markt</div>
+    <button class="tbtn" data-tab="etf">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l3.5-4 3 3L14 4"/><path d="M10 4h4v4"/></svg>
+        <span class="tbtn-lbl">ETF&#39;s</span>
+    </button>
     <button class="tbtn" data-tab="nieuws">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><path d="M4 6h8M4 9h6"/></svg>
         <span class="tbtn-lbl">Nieuws &amp; macro</span>
@@ -1513,6 +1571,37 @@ header{position:sticky;top:0;z-index:300;height:var(--hh);background:var(--surfa
         <div id="wl-grid" class="wl-cards">
             <div class="loading"><div class="spin"></div>Laden…</div>
         </div>
+    </div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════
+     TAB: ETF'S
+═══════════════════════════════════════ -->
+<div id="tab-etf" class="tc"><div class="pw">
+
+    <div class="panel">
+        <div class="etf-hero">
+            <h2 id="etf-verdict-title">ETF's laden…</h2>
+            <p id="etf-verdict-sub">Kwaliteit van de onderliggende bedrijven eerst, koersbeweging daarna.</p>
+        </div>
+        <div class="etf-gauges" id="etf-gauges"></div>
+    </div>
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Uitgelicht</span><span class="ptag" id="etf-upd">—</span></div>
+        <div class="etf-tops" id="etf-tops"></div>
+    </div>
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Thema's — rendement vs. verwachte marktgroei</span><span class="ptag">12 maanden</span></div>
+        <div id="etf-themes"></div>
+    </div>
+
+    <div class="panel">
+        <div class="ph"><span class="pt">Alle ETF's</span><span class="ptag" id="etf-count">—</span></div>
+        <div class="etf-filters" id="etf-filters"></div>
+        <div id="etf-cards" class="etf-cards"><div class="loading"><div class="spin"></div>Laden…</div></div>
     </div>
 
 </div></div>
@@ -4236,6 +4325,7 @@ function switchTab(name,skipRender=false){
     if(name==='nieuws'&&needRender.has('nieuws')){renderNieuwsTab();needRender.delete('nieuws');}
     if(name==='learn'&&needRender.has('learn')){renderLearnTab();needRender.delete('learn');}
     if(name==='cijfers'&&needRender.has('cijfers')){renderEarningsTab();needRender.delete('cijfers');}
+    if(name==='etf'){renderEtfTab();}
     if(name==='backtest'){renderBacktestTab();}
     if(name==='analyse'){renderChartsTab();}
     if(name==='watchlist'){renderWatchlistTab();}
@@ -6202,6 +6292,199 @@ function setSaveRepo(){
     setMsg('Repository opgeslagen: <b>'+wlEsc(v)+'</b>','ok');
 }
 
+/* ══════════════════════════════════════════════════════
+   ETF-TAB — kwaliteit boven momentum (60/40)
+   Databron: etf_data.json via src/etf_engine.py
+══════════════════════════════════════════════════════ */
+let ETF=null, etfFilter='ALLES', etfOpen=null;
+
+const ETF_VERDICT_KLEUR={
+    'KOPEN':            ['#059669','rgba(5,150,105,.12)'],
+    'STERK, MAAR DUUR': ['#d97706','rgba(217,119,6,.12)'],
+    'KANS':             ['#2563eb','rgba(37,99,235,.12)'],
+    'HOUDEN':           ['#64748b','rgba(100,116,139,.12)'],
+    'DEFENSIEF':        ['#0891b2','rgba(8,145,178,.12)'],
+    'AFWACHTEN':        ['#64748b','rgba(100,116,139,.12)'],
+    'MOMENTUM-VAL':     ['#dc2626','rgba(220,38,38,.12)'],
+    'VERMIJDEN':        ['#dc2626','rgba(220,38,38,.12)'],
+    'ONBEKEND':         ['#94a3b8','rgba(148,163,184,.12)']
+};
+const ETF_CRIT_LBL={moat:'Marktpositie',groeimarkt:'Groeimarkt',marktaandeel:'Marktaandeel',
+    hefboom:'Operationele hefboom',capex:'Vrije kasstroom',balans:'Balans',
+    aandeelhouder:'Uitkeringen',management:'Management',waardering:'Waardering'};
+
+function etfPct(v,d){ if(v===null||v===undefined) return '—';
+    const n=v*100; return (n>=0?'+':'')+n.toFixed(d===undefined?0:d)+'%'; }
+function etfKleur(v){ return v===null||v===undefined?'var(--muted)':(v>=0?'var(--green)':'var(--red)'); }
+function etfScoreKleur(s){ if(s===null||s===undefined) return 'var(--muted2)';
+    return s>=7?'var(--green)':s>=5.5?'#d97706':'var(--red)'; }
+
+async function loadEtfData(){
+    ETF=await fetchJSON('etf_data.json');
+    if(activeTab==='etf') renderEtfTab();
+}
+
+function renderEtfTab(){
+    if(!ETF||!ETF.etfs){ document.getElementById('etf-cards').innerHTML=
+        '<div class="loading">Nog geen ETF-data. Draai de ETF-scan via GitHub Actions.</div>'; return; }
+    etfRenderHero(); etfRenderTops(); etfRenderThemes(); etfRenderFilters(); etfRenderCards();
+    const d=ETF.generated_at?new Date(ETF.generated_at):null;
+    document.getElementById('etf-upd').textContent=d?('bijgewerkt '+d.toLocaleDateString('nl-NL',{day:'numeric',month:'short'})):'—';
+}
+
+/* ── kop: één oordeel over het hele universum ── */
+function etfRenderHero(){
+    const e=ETF.etfs, n=e.length;
+    const koop=e.filter(x=>x.oordeel==='KOPEN').length;
+    const mijd=e.filter(x=>x.oordeel==='VERMIJDEN'||x.oordeel==='MOMENTUM-VAL').length;
+    /* obligatiefondsen tellen niet mee: hun score meet kosten en rust, geen bedrijfskwaliteit */
+    const q=e.filter(x=>x.kwaliteit!=null&&x.kwaliteit_bron!=='obligatie'), gemQ=q.reduce((a,b)=>a+b.kwaliteit,0)/(q.length||1);
+    const r=e.filter(x=>x.r12m!=null), gemR=r.reduce((a,b)=>a+b.r12m,0)/(r.length||1);
+    const heet=e.filter(x=>x.verwachting_gap!=null&&x.verwachting_gap>0.35).length;
+
+    let titel,sub;
+    if(gemQ>=6.5&&gemR>0.10){titel='Sterk, blijf scherp';sub='De bedrijven achter deze ETF\u2019s zijn gemiddeld van goede kwaliteit en de koersen lopen mee. Wees selectief: '+mijd+' fondsen zakken op kwaliteit.';}
+    else if(gemQ>=6.5){titel='Goede bedrijven, rustige koersen';sub='Kwaliteit is er, momentum niet. Dat is historisch een goed instapmoment \u2014 mits je geduld hebt.';}
+    else if(gemR>0.20){titel='Hard gelopen, matige kwaliteit';sub='De koersen lopen ver voor op wat de onderliggende bedrijven verdienen. Wees terughoudend met bijkopen.';}
+    else {titel='Gemengd beeld';sub='Kies op kwaliteit, niet op het rendementslijstje.';}
+    document.getElementById('etf-verdict-title').textContent=titel;
+    document.getElementById('etf-verdict-sub').textContent=sub;
+
+    const g=[
+        {l:'Rendement',v:etfPct(gemR),c:etfKleur(gemR),s:'Gemiddeld over '+n+' ETF\u2019s, afgelopen 12 maanden.'},
+        {l:'Kwaliteit',v:gemQ.toFixed(1)+'/10',c:etfScoreKleur(gemQ),s:'Doorkijk naar de bedrijven in de fondsen \u2014 marge, balans, kasstroom, management.'},
+        {l:'Koopwaardig',v:koop+' van '+n,c:'var(--text)',s:'Sterke bedrijven \u00e9n de trend staat mee.'},
+        {l:'Oververhit',v:heet+' fondsen',c:heet>8?'var(--red)':'var(--text)',s:'Koers loopt meer dan 35% voor op de groei van de markt zelf.'}
+    ];
+    document.getElementById('etf-gauges').innerHTML=g.map(x=>
+        `<div class="etf-gauge"><div class="g-l">${x.l}</div><div class="g-v" style="color:${x.c}">${x.v}</div><div class="g-s">${x.s}</div></div>`).join('');
+}
+
+/* ── uitgelichte lijstjes ── */
+function etfRenderTops(){
+    const e=ETF.etfs;
+    const lijst=(rows,val)=>rows.map(x=>
+        `<div class="etf-toprow" onclick="etfShow('${x.ticker}')"><div><b>${wlEsc(x.naam)}</b><div class="tk">${x.ticker} \u00b7 ${wlEsc(x.thema)}</div></div><div class="vv" style="color:${val(x).c}">${val(x).t}</div></div>`).join('');
+
+    const aandelen=e.filter(x=>x.kwaliteit_bron!=='obligatie');
+    const beste=[...aandelen].filter(x=>x.kwaliteit!=null).sort((a,b)=>b.kwaliteit-a.kwaliteit).slice(0,4);
+    const kansen=[...aandelen].filter(x=>x.oordeel==='KANS'||(x.kwaliteit>=6.5&&(x.momentum||0)<5)).sort((a,b)=>b.kwaliteit-a.kwaliteit).slice(0,4);
+    const hard=[...e].filter(x=>x.r12m!=null).sort((a,b)=>b.r12m-a.r12m).slice(0,4);
+    const val=[...e].filter(x=>x.oordeel==='MOMENTUM-VAL'||x.oordeel==='VERMIJDEN').sort((a,b)=>(b.r12m||0)-(a.r12m||0)).slice(0,4);
+
+    const blok=(t,rows,f,leeg)=>`<div class="etf-top"><h4>${t}</h4>${rows.length?lijst(rows,f):'<div class="etf-toprow" style="color:var(--muted)">'+leeg+'</div>'}</div>`;
+    document.getElementById('etf-tops').innerHTML=
+        blok('Beste bedrijven eronder',beste,x=>({t:x.kwaliteit.toFixed(1),c:etfScoreKleur(x.kwaliteit)}),'—')+
+        blok('Kwaliteit die achterblijft \u2014 kansen',kansen,x=>({t:etfPct(x.r12m),c:etfKleur(x.r12m)}),'Geen: kwaliteit loopt nu mee met de koers.')+
+        blok('Hardst gelopen (12m)',hard,x=>({t:etfPct(x.r12m),c:etfKleur(x.r12m)}),'—')+
+        blok('Pas op \u2014 momentum zonder kwaliteit',val,x=>({t:etfPct(x.r12m),c:etfKleur(x.r12m)}),'Geen.');
+}
+
+/* ── thema's: rendement vs verwachte marktgroei ── */
+function etfRenderThemes(){
+    const t=ETF.themas.filter(x=>x.r12m!=null);
+    const max=Math.max(...t.map(x=>Math.abs(x.r12m)),0.3);
+    const rows=t.map(x=>{
+        const w=Math.min(100,Math.abs(x.r12m)/max*100);
+        const verw=x.verwachte_groei!=null?Math.min(100,x.verwachte_groei/max*100):null;
+        const boven=x.verwachte_groei!=null?(x.r12m>x.verwachte_groei):null;
+        const sig=boven===null?'<span style="color:var(--muted)">\u2014</span>':
+            boven?'<span style="color:var(--green)">\u2191 Boven</span>':'<span style="color:var(--red)">\u2193 Onder</span>';
+        return `<div class="etf-throw" onclick="etfSetFilter('${x.thema.replace(/'/g,"\\'")}')">
+            <div><b>${x.icon} ${wlEsc(x.thema)}</b> <span class="tk">(${x.aantal})</span></div>
+            <div class="etf-bar"><i style="width:${w}%;background:${x.r12m>=0?'var(--green)':'var(--red)'}"></i>${verw!==null?`<u style="left:${verw}%"></u>`:''}</div>
+            <div class="etf-mono" style="color:${etfKleur(x.r12m)}">${etfPct(x.r12m)}</div>
+            <div class="etf-mono hide-s" style="color:var(--muted)">${x.verwachte_groei!=null?etfPct(x.verwachte_groei):'\u2014'}</div>
+            <div class="etf-mono" style="font-size:.66rem">${sig}</div></div>`;}).join('');
+    document.getElementById('etf-themes').innerHTML=
+        `<div class="etf-throw hd"><div>Thema</div><div>Rendement vs. verwachting</div><div class="etf-mono">12M</div><div class="etf-mono hide-s">Verwacht</div><div class="etf-mono">Signaal</div></div>`+rows+
+        `<div style="padding:10px 16px;font-size:.68rem;color:var(--muted);line-height:1.5">Het streepje in de balk is de verwachte jaarlijkse groei van de markt zelf. Staat de koers ver daarboven, dan is het rendement al vooruitbetaald.</div>`;
+}
+
+/* ── filters ── */
+function etfRenderFilters(){
+    const themas=[...new Set(ETF.etfs.map(x=>x.thema))];
+    const opts=['ALLES','KOPEN','KANS','VERMIJDEN',...themas];
+    document.getElementById('etf-filters').innerHTML=opts.map(o=>
+        `<button class="etf-fb${etfFilter===o?' on':''}" onclick="etfSetFilter('${o.replace(/'/g,"\\'")}')">${wlEsc(o)}</button>`).join('');
+}
+function etfSetFilter(f){ etfFilter=(etfFilter===f?'ALLES':f); etfRenderFilters(); etfRenderCards();
+    document.getElementById('etf-cards').scrollIntoView({behavior:'smooth',block:'start'}); }
+
+/* ── kaarten ── */
+function etfRenderCards(){
+    let rows=ETF.etfs;
+    if(etfFilter!=='ALLES'){
+        rows=rows.filter(x=>x.thema===etfFilter||x.oordeel===etfFilter||
+            (etfFilter==='VERMIJDEN'&&x.oordeel==='MOMENTUM-VAL'));
+    }
+    document.getElementById('etf-count').textContent=rows.length+' van '+ETF.etfs.length;
+    document.getElementById('etf-cards').innerHTML=rows.map(etfCard).join('')||
+        '<div class="loading">Geen ETF\u2019s in deze selectie.</div>';
+}
+
+function etfCard(x){
+    const [fg,bg]=ETF_VERDICT_KLEUR[x.oordeel]||ETF_VERDICT_KLEUR['ONBEKEND'];
+    const chip=(l,v,c)=>`<span class="wlc-chip">${l} <b style="color:${c||'var(--text)'}">${v}</b></span>`;
+    return `<div class="etf-card" onclick="etfShow('${x.ticker}')">
+        <div class="etf-ct">
+            <div><div class="etf-cn">${wlEsc(x.naam)}</div><div class="etf-ck">${x.ticker} \u00b7 ${wlEsc(x.thema)}</div></div>
+            <span class="etf-verdict" style="color:${fg};background:${bg}">${x.oordeel}</span>
+        </div>
+        <div class="etf-scores">
+            <div class="etf-sc"><div class="l">Kwaliteit</div><div class="v" style="color:${etfScoreKleur(x.kwaliteit)}">${x.kwaliteit!=null?x.kwaliteit.toFixed(1):'\u2014'}</div></div>
+            <div class="etf-sc"><div class="l">Momentum</div><div class="v" style="color:${etfScoreKleur(x.momentum)}">${x.momentum!=null?x.momentum.toFixed(1):'\u2014'}</div></div>
+            <div class="etf-sc"><div class="l">Totaal</div><div class="v" style="color:${etfScoreKleur(x.totaal)}">${x.totaal!=null?x.totaal.toFixed(1):'\u2014'}</div></div>
+        </div>
+        <div class="etf-cwhy">${wlEsc(x.uitleg||'')}</div>
+        <div class="etf-cfoot">
+            ${chip('12m',etfPct(x.r12m),etfKleur(x.r12m))}
+            ${chip('3j p.j.',etfPct(x.cagr3j),etfKleur(x.cagr3j))}
+            ${chip('Kosten',x.ter.toFixed(2)+'%')}
+            ${x.max_drawdown!=null?chip('Grootste dip',etfPct(x.max_drawdown),'var(--red)'):''}
+        </div>
+        ${etfOpen===x.ticker?etfDetail(x):''}
+    </div>`;
+}
+
+function etfShow(t){ etfOpen=(etfOpen===t?null:t); etfRenderCards(); }
+
+function etfDetail(x){
+    /* gewogen criteria-gemiddelde over de holdings */
+    const acc={},w={};
+    (x.holdings||[]).forEach(h=>{ Object.entries(h.criteria||{}).forEach(([k,v])=>{
+        if(v==null)return; acc[k]=(acc[k]||0)+v*h.gewicht; w[k]=(w[k]||0)+h.gewicht; }); });
+    const crit=Object.keys(ETF_CRIT_LBL).filter(k=>w[k]).map(k=>{
+        const v=acc[k]/w[k];
+        return `<div class="etf-critrow"><span>${ETF_CRIT_LBL[k]}</span>
+            <div class="etf-critbar"><i style="width:${v*10}%;background:${etfScoreKleur(v)}"></i></div>
+            <b style="font-family:var(--mono);color:${etfScoreKleur(v)}">${v.toFixed(1)}</b></div>`;}).join('');
+
+    const hold=(x.holdings||[]).map(h=>
+        `<div class="etf-hold"><div>${wlEsc(h.naam||h.ticker)}</div>
+         <div class="etf-mono" style="color:var(--muted)">${(h.gewicht*100).toFixed(1)}%</div>
+         <div class="etf-mono" style="color:${etfScoreKleur(h.score)}">${h.score!=null?h.score.toFixed(1):'\u2014'}</div></div>`).join('');
+
+    const bron=x.kwaliteit_bron==='thema-schatting'?'geschat op vergelijkbare fondsen':
+               x.kwaliteit_bron==='obligatie'?'kosten en stabiliteit':'doorkijk naar de bedrijven';
+    const gap=x.verwachting_gap;
+    return `<div class="etf-detail" onclick="event.stopPropagation()">
+        <div class="pt" style="margin-bottom:4px">Kwaliteit van de bedrijven \u2014 ${bron}</div>
+        <div class="etf-crit">${crit||'<div style="font-size:.7rem;color:var(--muted)">Dit fonds publiceert zijn posities niet.</div>'}</div>
+        ${gap!=null?`<div style="font-size:.72rem;color:var(--muted);line-height:1.5;margin-bottom:10px">
+            De koers deed <b style="color:${etfKleur(x.r12m)}">${etfPct(x.r12m)}</b> terwijl de markt zelf naar verwachting
+            <b>${etfPct(x.verwachte_groei)}</b> per jaar groeit \u2014 een verschil van <b style="color:${gap>0.35?'var(--red)':'var(--text)'}">${etfPct(gap)}</b>.
+            ${gap>0.35?'De verwachting is grotendeels ingeprijsd.':gap<-0.05?'De koers loopt achter op de groei van de markt.':'Koers en groei liggen dicht bij elkaar.'}</div>`:''}
+        <div class="pt" style="margin:12px 0 6px">Grootste posities</div>
+        <div class="etf-hold" style="font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">
+            <div>Bedrijf</div><div class="etf-mono">Gewicht</div><div class="etf-mono">Score</div></div>
+        ${hold||'<div style="font-size:.7rem;color:var(--muted);padding:6px 0">Niet beschikbaar.</div>'}
+        <div style="font-size:.68rem;color:var(--muted);margin-top:10px;line-height:1.5">
+            Kosten ${x.ter.toFixed(2)}% per jaar \u00b7 beweeglijkheid ${x.vol!=null?etfPct(x.vol):'\u2014'} \u00b7
+            datadekking ${Math.round((x.dekking||0)*100)}%</div>
+    </div>`;
+}
+
 function renderAll(){
     allPos=buildPositions();
     try{renderDashboard();}catch(e){console.error('renderDashboard fout:',e);}
@@ -6228,6 +6511,7 @@ async function init(){
     if(!M){await new Promise(r=>setTimeout(r,3000));M=await fetchJSON('memory.json');}
     globalData=B;
     renderAll();
+    loadEtfData();
     /* watchlist: koersen ophalen en lopende analyses hervatten */
     wlLoadPrices();
     if(Object.keys(wlPending()).length) wlStartPolling();
