@@ -367,6 +367,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-08-23",
+      "degiro": 16706.27,
+      "tr": 12926.19,
+      "nexus": 5781.26,
+      "bux": 1968.98
+    },
+    {
       "date": "2026-08-22",
       "degiro": 16706.27,
       "tr": 13045.6,
@@ -1024,22 +1031,22 @@
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
     "Likken ze op de beurs niet meer aan een Magnum?",
     "Tussen recordcijfers en nieuwe dieptepunten op de beurs",
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
-    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
+    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
+    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019"
   ],
   "tr_summary": {
-    "total": 13045.6,
-    "total_pl_pct": 8.46,
+    "total": 12926.19,
+    "total_pl_pct": 7.46,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7247.77,
-        "price": 65963.1406,
-        "pl_pct": 11.64,
-        "pl_eur": 755.74,
-        "weight": 55.6
+        "value": 7128.36,
+        "price": 64876.3984,
+        "pl_pct": 9.8,
+        "pl_eur": 636.33,
+        "weight": 55.1
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1047,7 +1054,7 @@
         "price": 55.58,
         "pl_pct": 4.99,
         "pl_eur": 99.81,
-        "weight": 16.1
+        "weight": 16.2
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1055,7 +1062,7 @@
         "price": 166.3,
         "pl_pct": 5.26,
         "pl_eur": 91.28,
-        "weight": 14.0
+        "weight": 14.1
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1063,7 +1070,7 @@
         "price": 131.1946,
         "pl_pct": 5.2,
         "pl_eur": 83.23,
-        "weight": 12.9
+        "weight": 13.0
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1075,7 +1082,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-22T19:01:05.727010+00:00",
+  "dashboard_updated": "2026-08-23T07:01:10.892827+00:00",
   "degiro_summary": {
     "total": 16706.27,
     "total_pl_pct": 36.22,
@@ -1129,20 +1136,20 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO en Musk-impact",
-      "summary": "SpaceX is naar de beurs gegaan met een introductieprijs van $135 per aandeel, waarmee Elon Musk $75 miljard ophaalt en billonair status bereikt. Dit signaal over techaandelen en groeibedrijven be\u00efnvloedt beleggerssentiment in S&P500 en World ETF-portefeuilles."
+      "theme": "SpaceX beursintroductie voltooid",
+      "summary": "SpaceX is succesvol naar de beurs gegaan tegen 135 dollar per aandeel, waarmee Elon Musk 75 miljard dollar ophaalt en de eerste biljonair wordt. Dit event markeert een belangrijk moment voor tech-beleggers, maar de koers daalt al onder de introductieprijs, wat volatiliteit in de techasector aangeeft."
     },
     {
-      "theme": "Volatiliteit in chipsektor",
-      "summary": "Beleggers verkopen actief chipaandelen, waardoor ASML en Micron Technology onder druk staan als onderdeel van bredere tech-onzekerheid. Dit raakt rechtstreeks AEX-beleggers en diversificatie in technologie-gewogen ETFs."
+      "theme": "Techasector onder druk, chipbedrijven zwak",
+      "summary": "Techbedrijven hebben het lastig op de Amerikaanse beurs; beleggers verkopen massaal chipaandelen waardoor ASML-koers daalt. Deze sector-rotatie be\u00efnvloedt S&P500 en World ETF-beleggers direct, aangezien tech een groot gewicht heeft in deze indices."
     },
     {
-      "theme": "Geopolitieke spanningen belasten markten",
-      "summary": "Oorlogsperikelen (Iran) en bitcoin-daling veroorzaken onrust ('code oranje') waardoor vooral Aziatische aandelen dalen en Europese herstellen. Dit cre\u00ebert volatiliteit voor wereldwijd gediversifieerde portefeuilles ondanks tegenstrijdige macrosignalen."
+      "theme": "Marktvolatiliteit en geopolitieke risico's",
+      "summary": "Bitcoin daalt fors, Aziatische aandelen dalen vanwege escalatie Iran-oorlog, en er heerst 'code oranje' onrust op de beurs. Deze combinatie van geopolitieke spanningen en cryptovaluta-pressie schept instabiliteit die ETF-portefeuilles kunnen be\u00efnvloeden."
     },
     {
-      "theme": "Beursonzekerheid en beleggersgedrag",
-      "summary": "De effectenbeurs vertoont extreme schommelingen tussen recordcijfers en diepe dalen ('gooi- en smijtdagen'), terwijl particuliere beleggers voorzichtig blijven en doorgaan met sparen. Dit wijst op onderliggende marktonzekerheid ondanks bereikt recordniveaus op indexniveau."
+      "theme": "Gemengde signalen: records en dieptepunten",
+      "summary": "Terwijl Europese aandelen herstellen, oscilleert de markt tussen recordcijfers en diepe verliezen met grote intraday-volatiliteit. Voor gemiddelde beleggers blijft het lastig om in dit onzekere sentiment posities te handelen of vast te houden."
     }
   ],
   "bux_summary": {
@@ -2465,7 +2472,7 @@
     },
     {
       "date": "2026-08",
-      "value": 31720.85
+      "value": 31601.44
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2503,7 +2510,7 @@
   "benchmark_history": {
     "sp500_ytd": 11.9,
     "aex_ytd": 14.3,
-    "msci_ytd": null
+    "msci_ytd": 13.63
   },
   "sector_rotation": {
     "Tech & AI": 1.4,
