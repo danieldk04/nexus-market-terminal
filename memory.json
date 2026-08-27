@@ -381,6 +381,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-08-27",
+      "degiro": 16766.93,
+      "tr": 13235.48,
+      "nexus": 5806.22,
+      "bux": 1890.54
+    },
+    {
       "date": "2026-08-26",
       "degiro": 16768.59,
       "tr": 13213.24,
@@ -1070,18 +1077,18 @@
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
   ],
   "tr_summary": {
-    "total": 13213.24,
-    "total_pl_pct": 9.85,
+    "total": 13235.48,
+    "total_pl_pct": 10.04,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7403.62,
-        "price": 67381.6328,
-        "pl_pct": 14.04,
-        "pl_eur": 911.59,
-        "weight": 56.0
+        "value": 7425.86,
+        "price": 67584.0234,
+        "pl_pct": 14.38,
+        "pl_eur": 933.83,
+        "weight": 56.1
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1097,7 +1104,7 @@
         "price": 166.54,
         "pl_pct": 5.41,
         "pl_eur": 93.92,
-        "weight": 13.9
+        "weight": 13.8
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1117,11 +1124,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-26T19:01:19.035930+00:00",
+  "dashboard_updated": "2026-08-27T07:01:21.441962+00:00",
   "degiro_summary": {
-    "total": 16768.59,
-    "total_pl_pct": 36.72,
-    "total_invested": 12264.52,
+    "total": 16766.93,
+    "total_pl_pct": 36.71,
+    "total_invested": 12264.4,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1158,11 +1165,11 @@
       },
       {
         "name": "V",
-        "value": 660.2,
-        "pl_pct": 90.51,
-        "pl_eur": 313.65,
+        "value": 658.54,
+        "pl_pct": 90.1,
+        "pl_eur": 312.11,
         "div_yield": 0.007,
-        "annual_div_eur": 4.62,
+        "annual_div_eur": 4.61,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.9
@@ -1171,50 +1178,50 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX beursgang en techsector",
-      "summary": "SpaceX is naar de beurs gegaan tegen 135 dollar per aandeel, wat Elon Musk de eerste biljonair maakt. Dit illustreert zowel het sterke vertrouwen in groeistocks als de volatiliteit in de techsector, wat direct impact heeft op S&P500- en World-indexposities."
+      "theme": "Tech-sector volatiliteit en chip-rotatie",
+      "summary": "ASML en andere chipbedrijven ervaren verkoopdruk terwijl beleggers hun posities herschikken. Dit raakt direct AEX-beleggers en S&P500-holders met techgewicht, omdat de sector momenteel gepolariseerd is tussen AI-enthousiasme en winstneming."
     },
     {
-      "theme": "Chipsektor onder druk",
-      "summary": "Beleggers verkopen chipaandelen massaal, waardoor ASML en soortgelijke aandelen dalen. Deze correctie weerspiegelt voorzichtigheid in de hightech-supply chain, wat belangrijk is voor diversificatie in bredere indexfondsen."
+      "theme": "SpaceX IPO en luxe-aandelen onder druk",
+      "summary": "SpaceX noteert onder introductieprijs ondanks Musks miljardairsatus, terwijl consumentengerelateerde aandelen (zoals Magnum-comment suggereert) het moeilijk hebben. Dit duidt op bredere marktrotatie van groei naar waarde."
     },
     {
-      "theme": "Geopolitieke onrust en marktvolatiliteit",
-      "summary": "Oorlogen en internationale spanningen (Iran) veroorzaken divergentie: Europese aandelen herstellen maar Aziatische blijven dalen. Dit geopolitieke risico leidt tot volatiliteit in World- en internationaal gespreide ETFs, terwijl beleggers voorzichtiger worden."
+      "theme": "Geopolitieke risico's en marktonrust",
+      "summary": "Oorlogen (inclusief Iran-conflict) cre\u00ebren volatiliteit met code-oranje signalen, dalende Aziatische aandelen en bitcoin-dalingen. World- en S&P500-beleggers moeten rekening houden met geopolitieke risicopremies in hun posities."
     },
     {
-      "theme": "AEX vlak, tweedeling en onzekerheid",
-      "summary": "De AEX blijft vlak ondanks recordcijfers, met duidelijke tweedeling tussen AI-gerelateerde aandelen en traditionele bedrijven. Beleggers ervaren onrust met gemengde signalen, wat wijst op de noodzaak van defensieve posities in onzekere markten."
+      "theme": "AEX herstelt ondanks tweedeling en onzekerheid",
+      "summary": "AEX bereikt 1000+ punten op AI-optimisme en bankensterktes, maar beleggers tonen voorzichtigheid met record-spaarquotes. Deze voorzichtigheid weerspiegelt AI-angsten en twijfel over duurzaamheid van de rally, relevant voor langetermijnbeleggers."
     }
   ],
   "bux_summary": {
-    "total": 1894.93,
-    "total_pl_pct": -30.77,
+    "total": 1890.54,
+    "total_pl_pct": -30.93,
     "total_invested": 2737.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1614.38,
-        "price": 297.49,
-        "pl_pct": -27.38,
-        "pl_eur": -608.69,
+        "value": 1609.58,
+        "price": 296.61,
+        "pl_pct": -27.6,
+        "pl_eur": -613.49,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
         "sector": null,
-        "weight": 85.2
+        "weight": 85.1
       },
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 244.31,
-        "price": 122.15,
-        "pl_pct": -26.22,
-        "pl_eur": -86.83,
+        "value": 243.91,
+        "price": 121.96,
+        "pl_pct": -26.34,
+        "pl_eur": -87.23,
         "div_yield": 0.0416,
-        "annual_div_eur": 10.16,
+        "annual_div_eur": 10.15,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 12.9
@@ -1222,10 +1229,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 32.14,
-        "price": 32.14,
-        "pl_pct": -82.1,
-        "pl_eur": -147.43,
+        "value": 32.95,
+        "price": 32.95,
+        "pl_pct": -81.65,
+        "pl_eur": -146.62,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2507,7 +2514,7 @@
     },
     {
       "date": "2026-08",
-      "value": 31876.76
+      "value": 31892.95
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2544,9 +2551,9 @@
     "AIZ": "2026-08-26"
   },
   "benchmark_history": {
-    "sp500_ytd": 12.08,
+    "sp500_ytd": 11.92,
     "aex_ytd": 14.49,
-    "msci_ytd": 13.77
+    "msci_ytd": 13.65
   },
   "sector_rotation": {
     "Tech & AI": 5.0,
