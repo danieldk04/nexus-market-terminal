@@ -381,6 +381,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-08-28",
+      "degiro": 16795.72,
+      "tr": 13338.69,
+      "nexus": 5806.22,
+      "bux": 1929.96
+    },
+    {
       "date": "2026-08-27",
       "degiro": 16796.83,
       "tr": 13363.97,
@@ -1069,26 +1076,26 @@
   "last_news": [
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "Tussen recordcijfers en nieuwe dieptepunten op de beurs",
+    "AEX koers daalt, ASML en chippers onderuit door rentevrees",
+    "Likken ze op de beurs niet meer aan een Magnum?",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Dalende koersen en bitcoin onderuit, er is onrust op de beurs: \u2018Het is code oranje\u2019",
-    "Tweedeling op de beurs door AI-vrees: 'Beleggers kunnen nu eenmaal overdrijven'",
-    "Realtime koersen, beursnieuws en analyse",
-    "AEX-Index - koersen en laatste nieuws",
-    "Prosus haalt Just Eat Takeaway van de beurs en de koers vaart er wel bij"
+    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers",
+    "Tien Belgische koopjes: aandelen die \u2018value for money\u2019 geven"
   ],
   "tr_summary": {
-    "total": 13363.97,
-    "total_pl_pct": 11.1,
+    "total": 13338.69,
+    "total_pl_pct": 10.89,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7562.77,
-        "price": 68830.0703,
-        "pl_pct": 16.49,
-        "pl_eur": 1070.74,
-        "weight": 56.6
+        "value": 7537.49,
+        "price": 68600.0078,
+        "pl_pct": 16.1,
+        "pl_eur": 1045.46,
+        "weight": 56.5
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1104,7 +1111,7 @@
         "price": 167.14,
         "pl_pct": 5.79,
         "pl_eur": 100.51,
-        "weight": 13.7
+        "weight": 13.8
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1124,11 +1131,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-27T19:01:11.762955+00:00",
+  "dashboard_updated": "2026-08-28T07:01:12.678033+00:00",
   "degiro_summary": {
-    "total": 16796.83,
-    "total_pl_pct": 36.95,
-    "total_invested": 12264.56,
+    "total": 16795.72,
+    "total_pl_pct": 36.94,
+    "total_invested": 12264.6,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1165,11 +1172,11 @@
       },
       {
         "name": "V",
-        "value": 652.76,
-        "pl_pct": 88.34,
-        "pl_eur": 306.17,
+        "value": 651.65,
+        "pl_pct": 88.0,
+        "pl_eur": 305.02,
         "div_yield": 0.007,
-        "annual_div_eur": 4.57,
+        "annual_div_eur": 4.56,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.9
@@ -1178,35 +1185,35 @@
   },
   "news_summary": [
     {
-      "theme": "Tech-aandelen volatiliteit en AI-onrust",
-      "summary": "Technologiebedrijven ervaren sterke koersschommelingen door AI-gerelateerde onzekerheid, waarbij beleggers overweldig reageren op marktsignalen. Dit raakt rechtstreeks ETF-portefeuilles met significante tech-weging en vergt aandacht voor risicomanagement in groeiposities."
+      "theme": "SpaceX beursgang: volatiliteit en verwachtingen",
+      "summary": "SpaceX is naar de beurs gegaan met gemengde signalen: sterke eerste dag maar daarna forse koersdalingen, wat wijst op hoge verwachtingen die lastig in te lossen zijn. Voor beleggers relevant omdat tech-IPO's de bredere tech-sector sentiment be\u00efnvloeden en SpaceX deel uitmaakt van de innovatie-narrative in S&P500-indexen."
     },
     {
-      "theme": "Europese beurs (AEX) in opmars",
-      "summary": "De AEX bereikt recordstanden met tech-aandelen als grote drijver, wat wijst op sterke optimisme in Europa ondanks globale onzekerheden. Dit begunstigt beleggers met Nederlandse en Europese blootstelling in hun diversifieerde portefeuilles."
+      "theme": "Chipsektor onder druk door rentevrees",
+      "summary": "ASML en chipstokaandelen dalen fors doordat beleggers bang zijn voor hogere rentes, wat investeringen in dure groeisectoren ontmoedigt. Dit treft direct ASML-posities en be\u00efnvloedt de technologie-weging in AEX en wereldwijde indexen."
     },
     {
-      "theme": "Amerikaanse markten onder druk",
-      "summary": "De VS-beurs kampt met dalende technologiekoersen en bitcoin-instabiliteit, wat wijst op bredere risicoaversie onder investeerders. Dit be\u00efnvloedt S&P 500 en Nasdaq-posities significant en vraagt om monitoring van hefboomeffecten."
+      "theme": "Value en dividend-aandelen als buffer",
+      "summary": "Beleggers zoeken naar 'saaie' aandelen met goede waarde en dividenden (Dell, Victoria's Secret, Belgische value-stocks) als veilige haven tegen marktvolatiliteit. Dit is relevant voor portefeuille-balancering: defensieve waarde-aandelen dempen schommelingen in groei-ETFs."
     },
     {
-      "theme": "Bedrijfsspecifieke ontwikkelingen",
-      "summary": "SpaceX-introductie en Prosus' overname van Just Eat Takeaway genereren individuele aandeel-dynamieken die los staan van brede markttrends. Deze microeconomische gebeurtenissen kunnen kansen of risico's bieden buiten standaard ETF-samenstelling."
+      "theme": "Gegenstelstellingen op beurs: winnaars en verliezers",
+      "summary": "De markt vertoont tegenstrijdige bewegingen met recordposities naast forse dalingen, oorlogsonrust heeft minder impact dan verwacht, en sommige sectoren en individuele aandelen exploderen terwijl tech struikelt. Dit onderstreept het belang van diversificatie en activiteitenkiezen in plaats van brede marktbets."
     }
   ],
   "bux_summary": {
-    "total": 1931.54,
-    "total_pl_pct": -29.43,
+    "total": 1929.96,
+    "total_pl_pct": -29.49,
     "total_invested": 2737.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1653.4,
-        "price": 304.69,
-        "pl_pct": -25.63,
-        "pl_eur": -569.67,
+        "value": 1652.38,
+        "price": 304.5,
+        "pl_pct": -25.67,
+        "pl_eur": -570.69,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1216,23 +1223,23 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 241.04,
-        "price": 120.52,
-        "pl_pct": -27.21,
-        "pl_eur": -90.1,
+        "value": 239.82,
+        "price": 119.91,
+        "pl_pct": -27.58,
+        "pl_eur": -91.32,
         "div_yield": 0.0416,
-        "annual_div_eur": 10.03,
+        "annual_div_eur": 9.98,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
-        "weight": 12.5
+        "weight": 12.4
       },
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 33.01,
-        "price": 33.01,
-        "pl_pct": -81.62,
-        "pl_eur": -146.56,
+        "value": 33.68,
+        "price": 33.68,
+        "pl_pct": -81.24,
+        "pl_eur": -145.89,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1242,10 +1249,10 @@
       {
         "name": "KPN.AS",
         "ticker": "KPN.AS",
-        "value": 4.09,
-        "price": 4.09,
+        "value": 4.08,
+        "price": 4.08,
         "pl_pct": 24.54,
-        "pl_eur": 0.81,
+        "pl_eur": 0.8,
         "div_yield": 0.0461,
         "annual_div_eur": 0.19,
         "first_buy_date": null,
@@ -2514,7 +2521,7 @@
     },
     {
       "date": "2026-08",
-      "value": 32092.34
+      "value": 32064.37
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2551,9 +2558,9 @@
     "AIZ": "2026-08-26"
   },
   "benchmark_history": {
-    "sp500_ytd": 12.52,
+    "sp500_ytd": 12.72,
     "aex_ytd": 14.03,
-    "msci_ytd": 14.2
+    "msci_ytd": 13.77
   },
   "sector_rotation": {
     "Tech & AI": 8.0,
