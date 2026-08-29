@@ -388,6 +388,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-08-29",
+      "degiro": 16926.63,
+      "tr": 13200.45,
+      "nexus": 5828.1,
+      "bux": 1912.98
+    },
+    {
       "date": "2026-08-28",
       "degiro": 16927.25,
       "tr": 13224.48,
@@ -1091,18 +1098,18 @@
     "Het zijn gooi- en smijtdagen op de effectenbeurs, wat is er aan de hand?"
   ],
   "tr_summary": {
-    "total": 13224.48,
-    "total_pl_pct": 9.94,
+    "total": 13200.45,
+    "total_pl_pct": 9.74,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7373.78,
-        "price": 67109.9922,
-        "pl_pct": 13.58,
-        "pl_eur": 881.75,
-        "weight": 55.8
+        "value": 7349.75,
+        "price": 66891.3281,
+        "pl_pct": 13.21,
+        "pl_eur": 857.72,
+        "weight": 55.7
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1126,7 +1133,7 @@
         "price": 133.3961,
         "pl_pct": 6.97,
         "pl_eur": 111.48,
-        "weight": 12.9
+        "weight": 13.0
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1138,11 +1145,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-08-28T19:26:18.654187+00:00",
+  "dashboard_updated": "2026-08-29T07:01:11.431013+00:00",
   "degiro_summary": {
-    "total": 16927.25,
-    "total_pl_pct": 38.0,
-    "total_invested": 12266.5,
+    "total": 16926.63,
+    "total_pl_pct": 37.99,
+    "total_invested": 12266.54,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1179,9 +1186,9 @@
       },
       {
         "name": "V",
-        "value": 659.26,
-        "pl_pct": 89.16,
-        "pl_eur": 310.73,
+        "value": 658.64,
+        "pl_pct": 88.96,
+        "pl_eur": 310.07,
         "div_yield": 0.0071,
         "annual_div_eur": 4.68,
         "first_buy_date": null,
@@ -1192,35 +1199,35 @@
   },
   "news_summary": [
     {
-      "theme": "SpaceX IPO en techaandelen",
-      "summary": "SpaceX debuteert op de beurs met gemengde signalen: prijsvorming onder introductieprijs wekt voorzichtigheid, maar aandeel herstelt met Musk als eerste biljonair. Tech-sector blijft volatiel en be\u00efnvloedt brede indices zoals S&P500 en AEX significant."
+      "theme": "Technologie-aandelen onder druk",
+      "summary": "Chipaandelen en tech-fondsen zoals ASML kampen met verkoopdruk door beleggers die hun posities afbouwen. Dit be\u00efnvloedt direct de samenstelling van brede indices als de AEX en S&P500, waar tech een groot gewicht heeft."
     },
     {
-      "theme": "Chipsektor onder druk",
-      "summary": "Beleggers dumpen chipaandelen waardoor stelselmatig ASML en soortgelijke spelers dalen. Dit raakt direct portefeuilles met technologie-exposure en signaleert voorzichtigheid in een cruciaal segment van AEX en mondiale indices."
+      "theme": "Marktvolatiliteit en geopolitieke onrust",
+      "summary": "Oorlogsrisico's (Iran-conflict) en wisselende marktsentiment veroorzaken forse schommelingen waarbij Aziatische aandelen dalen terwijl Europa herstelt. Dit zorgt voor onzekerheid in gediversificeerde mondiale portefeuilles en verhoogd beleggingsrisico."
     },
     {
-      "theme": "Geopolitieke onrust en volatiliteit",
-      "summary": "Oorlogsspanningen (Iran) en algemene marktinstabiliteit veroorzaken slingerende koersen in Europese en Aziatische markten. Beleggers erleven 'code oranje'-signalen en sterke dagelijkse schommelingen die ETF-bezitters rechtstreeks raken."
+      "theme": "IPO-activiteit en groeiwaarden",
+      "summary": "SpaceX maakt zijn beursdebuut met gemengde resultaten, wat aangeeft dat beleggers selectiever worden bij speculatieve groeibedrijven. Dit weerspiegelt bredere voorzichtigheid in high-growth sectoren na sterke stijgingen."
     },
     {
-      "theme": "AEX herstelt, AI-boom blijft tweedeling",
-      "summary": "AEX doorbreekt 1000 punten dankzij tech-aanjagers, maar markt vertoont duidelijke tweedeling: AI-gerelateerde aandelen stijgen terwijl andere sectoren onderpresteren. Dit schept selectieve kansen en risico's voor gediversificeerde portefeuilles."
+      "theme": "Bredere beursindices onder druk",
+      "summary": "Ondanks AEX-milestones zitten markten in een fase van consolidatie tussen recordcijfers en dalingen, met beleggers die voorzichtiger worden. Dit duidt op potenti\u00eble correcties na langere rallies, relevant voor risk-management in alle indices."
     }
   ],
   "bux_summary": {
-    "total": 1905.87,
-    "total_pl_pct": -30.37,
+    "total": 1912.98,
+    "total_pl_pct": -30.11,
     "total_invested": 2737.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1626.83,
-        "price": 299.79,
-        "pl_pct": -26.82,
-        "pl_eur": -596.24,
+        "value": 1633.24,
+        "price": 300.97,
+        "pl_pct": -26.53,
+        "pl_eur": -589.83,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1230,12 +1237,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 242.78,
-        "price": 121.39,
-        "pl_pct": -26.68,
-        "pl_eur": -88.36,
+        "value": 243.49,
+        "price": 121.74,
+        "pl_pct": -26.47,
+        "pl_eur": -87.65,
         "div_yield": 0.0424,
-        "annual_div_eur": 10.29,
+        "annual_div_eur": 10.32,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 12.7
@@ -1243,10 +1250,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 32.16,
-        "price": 32.16,
-        "pl_pct": -82.09,
-        "pl_eur": -147.41,
+        "value": 32.15,
+        "price": 32.15,
+        "pl_pct": -82.1,
+        "pl_eur": -147.42,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2528,7 +2535,7 @@
     },
     {
       "date": "2026-08",
-      "value": 32057.6
+      "value": 32040.06
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2566,9 +2573,9 @@
     "IVZ": "2026-08-28"
   },
   "benchmark_history": {
-    "sp500_ytd": 12.45,
-    "aex_ytd": 14.95,
-    "msci_ytd": 15.17
+    "sp500_ytd": null,
+    "aex_ytd": 14.03,
+    "msci_ytd": null
   },
   "sector_rotation": {
     "Tech & AI": 8.9,
