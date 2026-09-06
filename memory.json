@@ -402,6 +402,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-09-06",
+      "degiro": 16868.61,
+      "tr": 13387.25,
+      "nexus": 5834.6,
+      "bux": 1925.66
+    },
+    {
       "date": "2026-09-05",
       "degiro": 16868.61,
       "tr": 13407.0,
@@ -1151,7 +1158,7 @@
     }
   ],
   "last_news": [
-    "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
+    "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "Huishoudens doen het erg goed op de beurs, ook SpaceX populair als investering",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
@@ -1161,18 +1168,18 @@
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
   ],
   "tr_summary": {
-    "total": 13407.0,
-    "total_pl_pct": 11.46,
+    "total": 13387.25,
+    "total_pl_pct": 11.3,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7570.59,
-        "price": 68901.1797,
-        "pl_pct": 16.61,
-        "pl_eur": 1078.56,
-        "weight": 56.5
+        "value": 7550.84,
+        "price": 68721.4609,
+        "pl_pct": 16.31,
+        "pl_eur": 1058.81,
+        "weight": 56.4
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1208,7 +1215,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-09-05T19:01:06.777836+00:00",
+  "dashboard_updated": "2026-09-06T07:01:00.795485+00:00",
   "degiro_summary": {
     "total": 16868.61,
     "total_pl_pct": 37.53,
@@ -1262,20 +1269,20 @@
   },
   "news_summary": [
     {
-      "theme": "Technologie onder druk",
-      "summary": "Techbedrijven zoals ASML en chipaandelen erleven verkoopdruck, terwijl SpaceX's beursgang onder verwachtingen uitkomt. Dit raakt direct S&P500 en World-indexen waar tech zwaar gewogen is en kan volatiliteit in je portefeuille veroorzaken."
+      "theme": "Technische sector onder druk",
+      "summary": "Techaandelen verliezen massaal aan waarde, met name chipbedrijven zoals ASML die te kampen hebben met teruggekeerde verkoopdruk. Dit raakt rechtstreeks S&P500 en World ETF-posities, aangezien tech ongeveer 30% van deze indices uitmaakt."
     },
     {
-      "theme": "Geopolitieke onrust domineert",
-      "summary": "Oorlogen en spanningen met Iran zorgen voor onrust op beurzen, met name in Azi\u00eb, terwijl beleggers voorzichtiger worden ondanks recordcijfers. Dit be\u00efnvloedt je internationale posities en kan voor schommelingen in dividend en koersen zorgen."
+      "theme": "SpaceX beursdebuut volatiel",
+      "summary": "SpaceX gaat naar de beurs met gemengde signalen: enkele bronnen melden sterke openingsdag en recordbiljonair Musk, terwijl andere berichten dalende koersen onder introductieprijs noemen. De onzekerheid rond Musk-bedrijven cre\u00ebert speculatierisico voor beleggers."
     },
     {
-      "theme": "Volatiliteit en marktsentiment",
-      "summary": "De markt vertoont 'code oranje'-signalen met dalende koersen, bitcoin-verlies en wild handelsgedrag beschreven als 'gooi- en smijtdagen'. Dit duidt op ongezonde marktdynamieken die risico's inhouden voor alle ETF-eigenaren."
+      "theme": "Marktbrede onrust en volatiliteit",
+      "summary": "De beurs vertoont 'gooi- en smijtdagen' met recordcijfers afgewisseld door dieptepunten en bitcoin-dalingen; analisten spreken van 'code oranje'. Dit duidt op fundamentele onzekerheid die AEX, S&P500 en World ETF's be\u00efnvloedt en hogere risico's veroorzaakt."
     },
     {
-      "theme": "AI-splitsing en keuzes",
-      "summary": "Beleggers zijn verdeeld over AI-aandelen wegens extremisme in prijzen, wat leidt tot sterke verschillen in sector-performance. Voor gediversifieerde ETF's betekent dit dat groepering van aandelen ongelijk uitpakt en selectiviteit nodig is."
+      "theme": "AI-angst versus fundamentele sterkte",
+      "summary": "Beleggers vertonen tweedeling door AI-vrees, terwijl huishoudens en consumentenvoorraden juist goed presteren en krijtlijnen blijven stijgen ondanks geopolitieke spanningen. Dit leidt tot selectieve waardeverplaatsing tussen sectoren binnen brede indices."
     }
   ],
   "bux_summary": {
@@ -1304,8 +1311,8 @@
         "price": 118.43,
         "pl_pct": -28.47,
         "pl_eur": -94.28,
-        "div_yield": 0.0423,
-        "annual_div_eur": 10.02,
+        "div_yield": 0.043,
+        "annual_div_eur": 10.18,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 12.3
@@ -1330,7 +1337,7 @@
         "price": 4.1,
         "pl_pct": 24.94,
         "pl_eur": 0.82,
-        "div_yield": 0.0461,
+        "div_yield": 0.0466,
         "annual_div_eur": 0.19,
         "first_buy_date": null,
         "sector": "Communication Services",
@@ -2602,7 +2609,7 @@
     },
     {
       "date": "2026-09",
-      "value": 32201.27
+      "value": 32181.52
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2644,7 +2651,7 @@
   "benchmark_history": {
     "sp500_ytd": 12.54,
     "aex_ytd": 15.08,
-    "msci_ytd": null
+    "msci_ytd": 14.47
   },
   "sector_rotation": {
     "Tech & AI": 4.8,
