@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-09-07T20:23:32.645137+00:00",
+    "generated_at": "2026-09-08T10:26:39.941447+00:00",
     "top_candidates": [
         {
             "ticker": "MSCI",
@@ -75,11 +75,11 @@
             "insider_score": 7,
             "earnings_days": 42,
             "earnings_beat_pct": 75,
-            "momentum_score": 23,
+            "momentum_score": 26,
             "from_52w_high": -11.1,
             "above_ma50": false,
             "above_ma200": false,
-            "return_52w": -0.3,
+            "return_52w": 0.7,
             "range_pos_52w": 50,
             "atr14": 11.52,
             "atr_ratio_pct": 2.01,
@@ -190,7 +190,7 @@
             "from_52w_high": -5.0,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 12.2,
+            "return_52w": 11.8,
             "range_pos_52w": 80,
             "atr14": 7.15,
             "atr_ratio_pct": 1.88,
@@ -301,7 +301,7 @@
             "from_52w_high": -5.3,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 5.9,
+            "return_52w": 5.8,
             "range_pos_52w": 70,
             "atr14": 2.28,
             "atr_ratio_pct": 1.65,
@@ -446,6 +446,228 @@
             }
         },
         {
+            "ticker": "AIZ",
+            "name": "Assurant, Inc.",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "region": "US",
+            "market_cap": 14093772800,
+            "market_cap_cat": "large",
+            "price": 285.74,
+            "roe": 18.34,
+            "pe_ratio": 13.68,
+            "debt_to_equity": 0.36,
+            "revenue_growth": 9.4,
+            "gross_margin": 13.3,
+            "profit_margin": 7.9,
+            "fcf_positive": true,
+            "beta": 0.54,
+            "roic": 19.91,
+            "roce": null,
+            "pfcf": 6.6,
+            "rev_cagr_5yr": 7.9,
+            "ni_cagr_5yr": 46.7,
+            "analyst_target": 330.0,
+            "analyst_upside": 15.5,
+            "analyst_count": 6,
+            "dcf": {
+                "dcf_per_share": 650.65,
+                "dcf_upside": 127.7,
+                "mos_price": 487.99,
+                "wacc": 7.5,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 6924.4,
+                "pv_terminal_m": 27376.2
+            },
+            "dividend": {
+                "yield": 1.23,
+                "eps_payout": 16.9,
+                "fcf_payout": 8.1,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "s_growth": 3.12,
+            "A_factor": 0.0,
+            "E_factor": 1.0,
+            "L_factor": 0.0,
+            "U_factor": 0.623,
+            "dol": 0.0,
+            "pe_z_score": 0.14,
+            "peg_ratio": 2.16,
+            "fcf_margin_pct": 16.0,
+            "rev_accel": false,
+            "eps_accel": false,
+            "rev_q1_yoy": null,
+            "rev_q2_yoy": null,
+            "rev_q3_yoy": null,
+            "eps_q1_yoy": null,
+            "eps_q2_yoy": null,
+            "eps_q3_yoy": null,
+            "s_momentum": 6.2,
+            "convergence_score": 4.66,
+            "convergence_trigger": false,
+            "stage2": true,
+            "vcp_active": true,
+            "rvol": 1.15,
+            "vol_buzz_pct": 15.0,
+            "rsi14": 58.0,
+            "macd_bullish": false,
+            "stop_loss_atr": 278.18,
+            "score": 5.0,
+            "penalty_applied": true,
+            "insider_score": 2,
+            "earnings_days": -35,
+            "earnings_beat_pct": 100,
+            "momentum_score": 75,
+            "from_52w_high": -6.0,
+            "above_ma50": true,
+            "above_ma200": true,
+            "return_52w": 35.4,
+            "range_pos_52w": 82,
+            "atr14": 5.04,
+            "atr_ratio_pct": 1.76,
+            "m_factor": 1.0,
+            "c_factor": 0.726,
+            "v_factor": 0.15,
+            "o_factor": 0.0,
+            "sma50": 279.89,
+            "sma200": 244.24,
+            "tier2": {
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nAssurant opereert in twee nichesegmenten: beschermingsproducten voor verbonden apparaten (Global Housing & Global Lifestyle) met structureel hoge switching costs. Verzekeraars die zijn ingebed in telecom- en retailpartnerkanalen zijn bijzonder moeilijk te vervangen \u2014 contractcycli lopen 3-7 jaar en integratie met OEM/retailsystemen cre\u00ebert echte kleverigheid. ROIC van 19.91% en ROE van 18.34% zijn indrukwekkend voor een verzekeraar en wijzen op echte pricing power, niet boekhoudkundige magie. De winstmarge van slechts 7.9% ziet er zwak uit op papier, maar is structureel voor gespecialiseerde verzekeraars met hoge premiedoorstroming. De 5-jaar winst-CAGR van 46.7% is uitzonderlijk \u2014 al verdient dit extra scepticisme over de duurzaamheid.\n\n---\n\n## DCF & WAARDERING\n\nP/E van 13.68 en P/FCF van 6.6 zijn ronduit goedkoop voor een bedrijf met dit ROIC-profiel. De DCF-waarde van $650.65 impliceert een upside van 127% \u2014 dat getal moet echter kritisch worden gewogen. Een fase-1 groeivoet van 15% is aan de optimistische kant; zelfs bij een conservatievere 8-10% groei zou de intrinsieke waarde substantieel boven de huidige prijs liggen. Analistenconsensus van $330 (15.5% upside, slechts 6 analisten) is waarschijnlijk te conservatief. Geen value trap signalen: FCF is positief, D/E van 0.36 is gezond, dividend is houdbaar op 8.1% payout ratio.\n\n---\n\n## CROWD SENTIMENT CHECK\n\nStockTwits toont slechts 30 berichten met 100% bullish tagging \u2014 dit is te dun om betekenisvol te zijn. Institutionele instroom en sterke Q2-cijfers (+30% EPS YoY) domineren het narratief. Geen retail-euforische overwaardering; eerder institutionele herkenning van een ondergewaardeerde compounder. Licht bevestigend voor de bull case.\n\n---\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Structurele onderwaardering**: P/FCF van 6.6 is absurd laag voor een ROIC >19% bedrijf met groeiende recurring revenue streams\n2. **Moatverdieping via telecom/OEM-partnerships**: Stijgende penetratie van connected devices versterkt het Lifestyle-segment seculier\n3. **Kapitaaldiscipline**: Lage payout ratio geeft ruimte voor buybacks + acquisities zonder balansrisico\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Catastroferisico Housing-segment**: Klimaatgerelateerde verliezen kunnen rendementen acuut schaden \u2014 niet in DCF verdisconteerd\n2. **Concentratierisico partners**: Verlies van \u00e9\u00e9n grote telecompartner (Verizon, T-Mobile) raakt significant omzet\n3. **Winstmarge fragiel**: 7.9% laat weinig ruimte voor tegenwind; hogere claimsratio's kunnen EPS snel halveren\n\n---\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $340 (+19%)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 waardering biedt voldoende margin of safety bij huidige prijs",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-09-07T20:25:48.140017+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true,
+                "stocktwits_bullish_ratio": 1.0,
+                "bluesky_bullish_ratio": null,
+                "combined_bull_ratio": 1.0,
+                "reddit_mentions": 0,
+                "news_count": 10
+            },
+            "confidence": {
+                "pct": 0.459,
+                "beat_rate": 0.524,
+                "n": 225,
+                "horizon": 63,
+                "avg_return": 0.0602,
+                "basis": "technisch+regime (rijke laag rijpt nog)"
+            }
+        },
+        {
+            "ticker": "CINF",
+            "name": "Cincinnati Financial Corporatio",
+            "sector": "Financial Services",
+            "industry_group": "Financials",
+            "region": "US",
+            "market_cap": 26260094976,
+            "market_cap_cat": "large",
+            "price": 171.1,
+            "roe": 21.48,
+            "pe_ratio": 8.08,
+            "debt_to_equity": 0.05,
+            "revenue_growth": 31.6,
+            "gross_margin": 31.1,
+            "profit_margin": 23.8,
+            "fcf_positive": true,
+            "beta": 0.55,
+            "roic": 26.18,
+            "roce": null,
+            "pfcf": 8.8,
+            "rev_cagr_5yr": 24.4,
+            "ni_cagr_5yr": null,
+            "analyst_target": 191.66667,
+            "analyst_upside": 12.0,
+            "analyst_count": 6,
+            "dcf": {
+                "dcf_per_share": 521.37,
+                "dcf_upside": 204.7,
+                "mos_price": 391.02,
+                "wacc": 7.5,
+                "growth_phase1": 15.0,
+                "terminal_growth": 2.5,
+                "pv_fcf": 16330.4,
+                "pv_terminal_m": 64563.7
+            },
+            "dividend": {
+                "yield": 2.2,
+                "eps_payout": 17.8,
+                "fcf_payout": 19.3,
+                "sustainable": true,
+                "risk_flag": null
+            },
+            "s_growth": 3.06,
+            "A_factor": 0.0,
+            "E_factor": 1.0,
+            "L_factor": 0.0,
+            "U_factor": 0.655,
+            "dol": 0.0,
+            "pe_z_score": -0.98,
+            "peg_ratio": 2.19,
+            "fcf_margin_pct": 21.4,
+            "rev_accel": false,
+            "eps_accel": false,
+            "rev_q1_yoy": null,
+            "rev_q2_yoy": null,
+            "rev_q3_yoy": null,
+            "eps_q1_yoy": null,
+            "eps_q2_yoy": null,
+            "eps_q3_yoy": null,
+            "s_momentum": 5.96,
+            "convergence_score": 4.51,
+            "convergence_trigger": false,
+            "stage2": false,
+            "vcp_active": true,
+            "rvol": 0.83,
+            "vol_buzz_pct": -17.2,
+            "rsi14": 50.1,
+            "macd_bullish": true,
+            "stop_loss_atr": 167.05,
+            "score": 4.8,
+            "penalty_applied": true,
+            "insider_score": 5,
+            "earnings_days": -43,
+            "earnings_beat_pct": 75,
+            "momentum_score": 31,
+            "from_52w_high": -12.2,
+            "above_ma50": false,
+            "above_ma200": true,
+            "return_52w": 11.3,
+            "range_pos_52w": 47,
+            "atr14": 2.7,
+            "atr_ratio_pct": 1.58,
+            "m_factor": 0.7,
+            "c_factor": 0.715,
+            "v_factor": 0.0,
+            "o_factor": 1.0,
+            "sma50": 177.32,
+            "sma200": 166.14,
+            "tier2": {
+                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nCincinnati Financial is een klassieke Buffett-achtige verzekeraar: conservatief, gedisciplineerd en winstgevend door decennia heen. De ROIC van 26,18% en ROE van 21,48% zijn niet toevallig \u2014 ze reflecteren een echte competitieve gracht via onafhankelijke agentschappen, langdurige klantrelaties en superieure underwriting-discipline. Als Dividend King met >60 jaar dividendgroei is de kapitaalallocatie bewezen. De combined ratio blijft structureel onder sectorgemiddelde. Dit is een echte compounding-machine, geen gelukstreffer.\n\n## DCF & WAARDERING\n\nHier wordt het interessant \u00e9n verdacht. De DCF gooit een intrinsieke waarde van $521 op tafel \u2014 204% upside bij 15% fase-1 groei en WACC 7,5%. Voor een verzekeraar is 15% structurele groei aggressief; veel van de 31,6% omzetgroei reflecteert premieverhogingen en beleggingsinkomsten in een gunstig renteklimaat, niet duurzame volumegroei. Een conservatiever scenario met 7-8% langetermijngroei geeft een intrinsieke waarde van circa $220-250 \u2014 nog steeds 25-45% upside. P/E van 8,08 en P/FCF van 8,8 zijn genuanceerd goedkoop voor deze kwaliteit. Geen value trap: FCF is sterk, schuld is minimaal (D/E 0,05), payout ratio slechts 19,3%. De marge of safety is re\u00ebel, maar niet zo dramatisch als de DCF suggereert.\n\n## CROWD SENTIMENT CHECK\n\nStockTwits is spaarzaam (30 berichten, 100% bullish) \u2014 dit is institutioneel terrein, geen retailspeeltuin. De lage retail-aandacht is juist een bull-signaal: geen hype, geen overbought momentum-crowd. Director-aankopen en institutioneel bezit van HSBC versterken de fundamentele these zonder retail-euforie te signaleren.\n\n## \ud83d\udfe2 BULL CASE\n1. **Waardering absurd laag** voor de kwaliteit: P/E 8x bij 26% ROIC is mispriced \u2014 markt onderschat de earnings power van het beleggingsportefeuille-vliegwiel.\n2. **Dividend King-status** met 19% FCF-payout biedt enorme ruimte voor toekomstige verhogingen en buybacks \u2014 cashflow compoundt veilig.\n3. **Lage beta (0,55) + minimale schuld** = defensieve groei in elke macro-omgeving; ideaal bij volatiele markten.\n\n## \ud83d\udd34 BEAR CASE\n1. **Klimaatrisico**: toenemende catastrofeschades (tornados, hagel in Midwest) kunnen de combined ratio structureel opduwen.\n2. **Rentegevoeligheid**: beleggingsinkomsten drijven resultaten sterk \u2014 bij dalende rente krimpt dit vliegwiel.\n3. **Groeiverwachtingen te optimistisch**: 31% omzetgroei is niet herhaalbaar; normalisatie zal P/E-optiek minder aantrekkelijk maken.\n\n## VERDICT\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $210 (+23% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 bij dip naar $160 verhoog overtuiging naar 9/10",
+                "sentiment_score": "BULLISH",
+                "last_run": "2026-09-07T20:26:36.077908+00:00",
+                "model": "claude-sonnet-4-6",
+                "news_used": true,
+                "filing_used": true,
+                "dcf_used": true,
+                "stocktwits_bullish_ratio": 1.0,
+                "bluesky_bullish_ratio": null,
+                "combined_bull_ratio": 1.0,
+                "reddit_mentions": 0,
+                "news_count": 10
+            },
+            "confidence": {
+                "pct": 0.492,
+                "beat_rate": 0.546,
+                "n": 324,
+                "horizon": 63,
+                "avg_return": 0.0551,
+                "basis": "technisch+regime (rijke laag rijpt nog)"
+            }
+        },
+        {
             "ticker": "EBAY",
             "name": "eBay Inc.",
             "sector": "Consumer Cyclical",
@@ -523,7 +745,7 @@
             "from_52w_high": -13.3,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 11.2,
+            "return_52w": 11.8,
             "range_pos_52w": 61,
             "atr14": 3.09,
             "atr_ratio_pct": 2.98,
@@ -634,7 +856,7 @@
             "from_52w_high": -13.1,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": -4.1,
+            "return_52w": -1.0,
             "range_pos_52w": 57,
             "atr14": 1.8,
             "atr_ratio_pct": 2.48,
@@ -745,7 +967,7 @@
             "from_52w_high": -12.5,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 26.6,
+            "return_52w": 27.5,
             "range_pos_52w": 64,
             "atr14": 24.07,
             "atr_ratio_pct": 2.5,
@@ -775,117 +997,6 @@
                 "n": 147,
                 "horizon": 63,
                 "avg_return": 0.0754,
-                "basis": "technisch+regime (rijke laag rijpt nog)"
-            }
-        },
-        {
-            "ticker": "AIZ",
-            "name": "Assurant, Inc.",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "region": "US",
-            "market_cap": 14093772800,
-            "market_cap_cat": "large",
-            "price": 285.74,
-            "roe": 18.34,
-            "pe_ratio": 13.68,
-            "debt_to_equity": 0.36,
-            "revenue_growth": 9.4,
-            "gross_margin": 13.3,
-            "profit_margin": 7.9,
-            "fcf_positive": true,
-            "beta": 0.54,
-            "roic": 19.91,
-            "roce": null,
-            "pfcf": 6.6,
-            "rev_cagr_5yr": 7.9,
-            "ni_cagr_5yr": 46.7,
-            "analyst_target": 330.0,
-            "analyst_upside": 15.5,
-            "analyst_count": 6,
-            "dcf": {
-                "dcf_per_share": 650.65,
-                "dcf_upside": 127.7,
-                "mos_price": 487.99,
-                "wacc": 7.5,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 6924.4,
-                "pv_terminal_m": 27376.2
-            },
-            "dividend": {
-                "yield": 1.23,
-                "eps_payout": 16.9,
-                "fcf_payout": 8.1,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "s_growth": 3.12,
-            "A_factor": 0.0,
-            "E_factor": 1.0,
-            "L_factor": 0.0,
-            "U_factor": 0.623,
-            "dol": 0.0,
-            "pe_z_score": 0.14,
-            "peg_ratio": 2.16,
-            "fcf_margin_pct": 16.0,
-            "rev_accel": false,
-            "eps_accel": false,
-            "rev_q1_yoy": null,
-            "rev_q2_yoy": null,
-            "rev_q3_yoy": null,
-            "eps_q1_yoy": null,
-            "eps_q2_yoy": null,
-            "eps_q3_yoy": null,
-            "s_momentum": 6.2,
-            "convergence_score": 4.66,
-            "convergence_trigger": false,
-            "stage2": true,
-            "vcp_active": true,
-            "rvol": 1.15,
-            "vol_buzz_pct": 15.0,
-            "rsi14": 58.0,
-            "macd_bullish": false,
-            "stop_loss_atr": 278.18,
-            "score": 4.66,
-            "penalty_applied": true,
-            "insider_score": 2,
-            "earnings_days": -35,
-            "earnings_beat_pct": 100,
-            "momentum_score": 75,
-            "from_52w_high": -6.0,
-            "above_ma50": true,
-            "above_ma200": true,
-            "return_52w": 34.9,
-            "range_pos_52w": 82,
-            "atr14": 5.04,
-            "atr_ratio_pct": 1.76,
-            "m_factor": 1.0,
-            "c_factor": 0.726,
-            "v_factor": 0.15,
-            "o_factor": 0.0,
-            "sma50": 279.89,
-            "sma200": 244.24,
-            "tier2": {
-                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nAssurant opereert in twee nichesegmenten: beschermingsproducten voor verbonden apparaten (Global Housing & Global Lifestyle) met structureel hoge switching costs. Verzekeraars die zijn ingebed in telecom- en retailpartnerkanalen zijn bijzonder moeilijk te vervangen \u2014 contractcycli lopen 3-7 jaar en integratie met OEM/retailsystemen cre\u00ebert echte kleverigheid. ROIC van 19.91% en ROE van 18.34% zijn indrukwekkend voor een verzekeraar en wijzen op echte pricing power, niet boekhoudkundige magie. De winstmarge van slechts 7.9% ziet er zwak uit op papier, maar is structureel voor gespecialiseerde verzekeraars met hoge premiedoorstroming. De 5-jaar winst-CAGR van 46.7% is uitzonderlijk \u2014 al verdient dit extra scepticisme over de duurzaamheid.\n\n---\n\n## DCF & WAARDERING\n\nP/E van 13.68 en P/FCF van 6.6 zijn ronduit goedkoop voor een bedrijf met dit ROIC-profiel. De DCF-waarde van $650.65 impliceert een upside van 127% \u2014 dat getal moet echter kritisch worden gewogen. Een fase-1 groeivoet van 15% is aan de optimistische kant; zelfs bij een conservatievere 8-10% groei zou de intrinsieke waarde substantieel boven de huidige prijs liggen. Analistenconsensus van $330 (15.5% upside, slechts 6 analisten) is waarschijnlijk te conservatief. Geen value trap signalen: FCF is positief, D/E van 0.36 is gezond, dividend is houdbaar op 8.1% payout ratio.\n\n---\n\n## CROWD SENTIMENT CHECK\n\nStockTwits toont slechts 30 berichten met 100% bullish tagging \u2014 dit is te dun om betekenisvol te zijn. Institutionele instroom en sterke Q2-cijfers (+30% EPS YoY) domineren het narratief. Geen retail-euforische overwaardering; eerder institutionele herkenning van een ondergewaardeerde compounder. Licht bevestigend voor de bull case.\n\n---\n\n## \ud83d\udfe2 BULL CASE\n\n1. **Structurele onderwaardering**: P/FCF van 6.6 is absurd laag voor een ROIC >19% bedrijf met groeiende recurring revenue streams\n2. **Moatverdieping via telecom/OEM-partnerships**: Stijgende penetratie van connected devices versterkt het Lifestyle-segment seculier\n3. **Kapitaaldiscipline**: Lage payout ratio geeft ruimte voor buybacks + acquisities zonder balansrisico\n\n## \ud83d\udd34 BEAR CASE\n\n1. **Catastroferisico Housing-segment**: Klimaatgerelateerde verliezen kunnen rendementen acuut schaden \u2014 niet in DCF verdisconteerd\n2. **Concentratierisico partners**: Verlies van \u00e9\u00e9n grote telecompartner (Verizon, T-Mobile) raakt significant omzet\n3. **Winstmarge fragiel**: 7.9% laat weinig ruimte voor tegenwind; hogere claimsratio's kunnen EPS snel halveren\n\n---\n\n## VERDICT\n\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $340 (+19%)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 waardering biedt voldoende margin of safety bij huidige prijs",
-                "sentiment_score": "BULLISH",
-                "last_run": "2026-09-07T20:25:48.140017+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true,
-                "stocktwits_bullish_ratio": 1.0,
-                "bluesky_bullish_ratio": null,
-                "combined_bull_ratio": 1.0,
-                "reddit_mentions": 0,
-                "news_count": 10
-            },
-            "confidence": {
-                "pct": 0.459,
-                "beat_rate": 0.524,
-                "n": 225,
-                "horizon": 63,
-                "avg_return": 0.0602,
                 "basis": "technisch+regime (rijke laag rijpt nog)"
             }
         },
@@ -967,7 +1078,7 @@
             "from_52w_high": -10.6,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": -8.7,
+            "return_52w": -8.0,
             "range_pos_52w": 57,
             "atr14": 3.8,
             "atr_ratio_pct": 2.05,
@@ -997,117 +1108,6 @@
                 "n": 96,
                 "horizon": 63,
                 "avg_return": 0.0985,
-                "basis": "technisch+regime (rijke laag rijpt nog)"
-            }
-        },
-        {
-            "ticker": "CINF",
-            "name": "Cincinnati Financial Corporatio",
-            "sector": "Financial Services",
-            "industry_group": "Financials",
-            "region": "US",
-            "market_cap": 26260094976,
-            "market_cap_cat": "large",
-            "price": 171.1,
-            "roe": 21.48,
-            "pe_ratio": 8.08,
-            "debt_to_equity": 0.05,
-            "revenue_growth": 31.6,
-            "gross_margin": 31.1,
-            "profit_margin": 23.8,
-            "fcf_positive": true,
-            "beta": 0.55,
-            "roic": 26.18,
-            "roce": null,
-            "pfcf": 8.8,
-            "rev_cagr_5yr": 24.4,
-            "ni_cagr_5yr": null,
-            "analyst_target": 191.66667,
-            "analyst_upside": 12.0,
-            "analyst_count": 6,
-            "dcf": {
-                "dcf_per_share": 521.37,
-                "dcf_upside": 204.7,
-                "mos_price": 391.02,
-                "wacc": 7.5,
-                "growth_phase1": 15.0,
-                "terminal_growth": 2.5,
-                "pv_fcf": 16330.4,
-                "pv_terminal_m": 64563.7
-            },
-            "dividend": {
-                "yield": 2.2,
-                "eps_payout": 17.8,
-                "fcf_payout": 19.3,
-                "sustainable": true,
-                "risk_flag": null
-            },
-            "s_growth": 3.06,
-            "A_factor": 0.0,
-            "E_factor": 1.0,
-            "L_factor": 0.0,
-            "U_factor": 0.655,
-            "dol": 0.0,
-            "pe_z_score": -0.98,
-            "peg_ratio": 2.19,
-            "fcf_margin_pct": 21.4,
-            "rev_accel": false,
-            "eps_accel": false,
-            "rev_q1_yoy": null,
-            "rev_q2_yoy": null,
-            "rev_q3_yoy": null,
-            "eps_q1_yoy": null,
-            "eps_q2_yoy": null,
-            "eps_q3_yoy": null,
-            "s_momentum": 5.96,
-            "convergence_score": 4.51,
-            "convergence_trigger": false,
-            "stage2": false,
-            "vcp_active": true,
-            "rvol": 0.83,
-            "vol_buzz_pct": -17.2,
-            "rsi14": 50.1,
-            "macd_bullish": true,
-            "stop_loss_atr": 167.05,
-            "score": 4.51,
-            "penalty_applied": true,
-            "insider_score": 5,
-            "earnings_days": -43,
-            "earnings_beat_pct": 75,
-            "momentum_score": 31,
-            "from_52w_high": -12.2,
-            "above_ma50": false,
-            "above_ma200": true,
-            "return_52w": 11.5,
-            "range_pos_52w": 47,
-            "atr14": 2.7,
-            "atr_ratio_pct": 1.58,
-            "m_factor": 0.7,
-            "c_factor": 0.715,
-            "v_factor": 0.0,
-            "o_factor": 1.0,
-            "sma50": 177.32,
-            "sma200": 166.14,
-            "tier2": {
-                "analysis": "## MOAT & BUSINESS KWALITEIT\n\nCincinnati Financial is een klassieke Buffett-achtige verzekeraar: conservatief, gedisciplineerd en winstgevend door decennia heen. De ROIC van 26,18% en ROE van 21,48% zijn niet toevallig \u2014 ze reflecteren een echte competitieve gracht via onafhankelijke agentschappen, langdurige klantrelaties en superieure underwriting-discipline. Als Dividend King met >60 jaar dividendgroei is de kapitaalallocatie bewezen. De combined ratio blijft structureel onder sectorgemiddelde. Dit is een echte compounding-machine, geen gelukstreffer.\n\n## DCF & WAARDERING\n\nHier wordt het interessant \u00e9n verdacht. De DCF gooit een intrinsieke waarde van $521 op tafel \u2014 204% upside bij 15% fase-1 groei en WACC 7,5%. Voor een verzekeraar is 15% structurele groei aggressief; veel van de 31,6% omzetgroei reflecteert premieverhogingen en beleggingsinkomsten in een gunstig renteklimaat, niet duurzame volumegroei. Een conservatiever scenario met 7-8% langetermijngroei geeft een intrinsieke waarde van circa $220-250 \u2014 nog steeds 25-45% upside. P/E van 8,08 en P/FCF van 8,8 zijn genuanceerd goedkoop voor deze kwaliteit. Geen value trap: FCF is sterk, schuld is minimaal (D/E 0,05), payout ratio slechts 19,3%. De marge of safety is re\u00ebel, maar niet zo dramatisch als de DCF suggereert.\n\n## CROWD SENTIMENT CHECK\n\nStockTwits is spaarzaam (30 berichten, 100% bullish) \u2014 dit is institutioneel terrein, geen retailspeeltuin. De lage retail-aandacht is juist een bull-signaal: geen hype, geen overbought momentum-crowd. Director-aankopen en institutioneel bezit van HSBC versterken de fundamentele these zonder retail-euforie te signaleren.\n\n## \ud83d\udfe2 BULL CASE\n1. **Waardering absurd laag** voor de kwaliteit: P/E 8x bij 26% ROIC is mispriced \u2014 markt onderschat de earnings power van het beleggingsportefeuille-vliegwiel.\n2. **Dividend King-status** met 19% FCF-payout biedt enorme ruimte voor toekomstige verhogingen en buybacks \u2014 cashflow compoundt veilig.\n3. **Lage beta (0,55) + minimale schuld** = defensieve groei in elke macro-omgeving; ideaal bij volatiele markten.\n\n## \ud83d\udd34 BEAR CASE\n1. **Klimaatrisico**: toenemende catastrofeschades (tornados, hagel in Midwest) kunnen de combined ratio structureel opduwen.\n2. **Rentegevoeligheid**: beleggingsinkomsten drijven resultaten sterk \u2014 bij dalende rente krimpt dit vliegwiel.\n3. **Groeiverwachtingen te optimistisch**: 31% omzetgroei is niet herhaalbaar; normalisatie zal P/E-optiek minder aantrekkelijk maken.\n\n## VERDICT\n**ACTIE:** KOOP\n**CONVICTION:** 7/10\n**KOERSDOEL 18mnd:** $210 (+23% van huidig)\n**SENTIMENT SCORE:** BULLISH\n**INSTAPMOMENT:** Nu \u2014 bij dip naar $160 verhoog overtuiging naar 9/10",
-                "sentiment_score": "BULLISH",
-                "last_run": "2026-09-07T20:26:36.077908+00:00",
-                "model": "claude-sonnet-4-6",
-                "news_used": true,
-                "filing_used": true,
-                "dcf_used": true,
-                "stocktwits_bullish_ratio": 1.0,
-                "bluesky_bullish_ratio": null,
-                "combined_bull_ratio": 1.0,
-                "reddit_mentions": 0,
-                "news_count": 10
-            },
-            "confidence": {
-                "pct": 0.492,
-                "beat_rate": 0.546,
-                "n": 324,
-                "horizon": 63,
-                "avg_return": 0.0551,
                 "basis": "technisch+regime (rijke laag rijpt nog)"
             }
         },
@@ -1179,11 +1179,11 @@
             "insider_score": 2,
             "earnings_days": -42,
             "earnings_beat_pct": 100,
-            "momentum_score": 37,
+            "momentum_score": 43,
             "from_52w_high": -8.4,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 7.9,
+            "return_52w": 9.5,
             "range_pos_52w": 64,
             "atr14": 1.78,
             "atr_ratio_pct": 1.82,
@@ -1291,10 +1291,10 @@
             "earnings_days": 22,
             "earnings_beat_pct": 75,
             "momentum_score": 42,
-            "from_52w_high": -19.9,
+            "from_52w_high": -19.6,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": -19.6,
+            "return_52w": -19.0,
             "range_pos_52w": 61,
             "atr14": 11.44,
             "atr_ratio_pct": 3.79,
@@ -1507,8 +1507,8 @@
             "from_52w_high": -7.2,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 13.0,
-            "range_pos_52w": 61,
+            "return_52w": 11.2,
+            "range_pos_52w": 60,
             "atr14": 1.21,
             "atr_ratio_pct": 1.7,
             "m_factor": 0.7,
@@ -1701,7 +1701,7 @@
             "from_52w_high": -14.2,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": -9.2,
+            "return_52w": -7.6,
             "range_pos_52w": 55,
             "atr14": 3.86,
             "atr_ratio_pct": 2.46,
@@ -1812,7 +1812,7 @@
             "from_52w_high": -8.0,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 1.6,
+            "return_52w": 1.5,
             "range_pos_52w": 68,
             "atr14": 22.03,
             "atr_ratio_pct": 1.96,
@@ -1905,11 +1905,11 @@
             "insider_score": 9,
             "earnings_days": -33,
             "earnings_beat_pct": 75,
-            "momentum_score": 45,
+            "momentum_score": 42,
             "from_52w_high": -6.9,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 1.7,
+            "return_52w": -0.7,
             "range_pos_52w": 77,
             "atr14": 0.32,
             "atr_ratio_pct": 1.72,
@@ -2020,7 +2020,7 @@
             "from_52w_high": -12.3,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 4.0,
+            "return_52w": 4.9,
             "range_pos_52w": 48,
             "atr14": 4.68,
             "atr_ratio_pct": 2.68,
@@ -2228,7 +2228,7 @@
             "from_52w_high": -26.0,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": -25.1,
+            "return_52w": -23.6,
             "range_pos_52w": 41,
             "atr14": 1.8,
             "atr_ratio_pct": 2.53,
@@ -2325,7 +2325,7 @@
             "from_52w_high": -16.2,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 29.8,
+            "return_52w": 32.1,
             "range_pos_52w": 62,
             "atr14": 2.24,
             "atr_ratio_pct": 2.79,
@@ -2422,7 +2422,7 @@
             "from_52w_high": -9.0,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 24.2,
+            "return_52w": 24.1,
             "range_pos_52w": 73,
             "atr14": 3.59,
             "atr_ratio_pct": 2.06,
@@ -2519,7 +2519,7 @@
             "from_52w_high": -7.7,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 35.2,
+            "return_52w": 36.4,
             "range_pos_52w": 77,
             "atr14": 3.41,
             "atr_ratio_pct": 2.35,
@@ -2630,7 +2630,7 @@
             "from_52w_high": -6.3,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 2.9,
+            "return_52w": 3.5,
             "range_pos_52w": 76,
             "atr14": 1.04,
             "atr_ratio_pct": 2.1,
@@ -2741,7 +2741,7 @@
             "from_52w_high": -8.5,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": -1.1,
+            "return_52w": -0.8,
             "range_pos_52w": 68,
             "atr14": 3.32,
             "atr_ratio_pct": 1.66,
@@ -2852,7 +2852,7 @@
             "from_52w_high": -10.4,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 26.9,
+            "return_52w": 27.9,
             "range_pos_52w": 69,
             "atr14": 2.7,
             "atr_ratio_pct": 2.16,
@@ -2943,7 +2943,7 @@
             "from_52w_high": -13.7,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": -6.8,
+            "return_52w": -6.3,
             "range_pos_52w": 60,
             "atr14": 1.18,
             "atr_ratio_pct": 3.2,
@@ -3040,7 +3040,7 @@
             "from_52w_high": -4.8,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 2.0,
+            "return_52w": 2.1,
             "range_pos_52w": 81,
             "atr14": 2.03,
             "atr_ratio_pct": 2.09,
@@ -3137,7 +3137,7 @@
             "from_52w_high": -9.0,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 26.0,
+            "return_52w": 26.8,
             "range_pos_52w": 71,
             "atr14": 5.17,
             "atr_ratio_pct": 2.18,
@@ -3234,7 +3234,7 @@
             "from_52w_high": -11.4,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 9.9,
+            "return_52w": 10.3,
             "range_pos_52w": 61,
             "atr14": 1.02,
             "atr_ratio_pct": 2.25,
@@ -3331,7 +3331,7 @@
             "from_52w_high": -9.7,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 1.4,
+            "return_52w": 3.2,
             "range_pos_52w": 55,
             "atr14": 5.81,
             "atr_ratio_pct": 2.08,
@@ -3428,7 +3428,7 @@
             "from_52w_high": -8.2,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 36.3,
+            "return_52w": 38.1,
             "range_pos_52w": 77,
             "atr14": 5.1,
             "atr_ratio_pct": 2.28,
@@ -3539,7 +3539,7 @@
             "from_52w_high": -13.3,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 22.1,
+            "return_52w": 22.0,
             "range_pos_52w": 57,
             "atr14": 8.71,
             "atr_ratio_pct": 2.58,
@@ -3636,7 +3636,7 @@
             "from_52w_high": -10.2,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 11.4,
+            "return_52w": 11.8,
             "range_pos_52w": 56,
             "atr14": 6.97,
             "atr_ratio_pct": 1.94,
@@ -3758,7 +3758,7 @@
             "sector": "Consumer Cyclical",
             "industry_group": "Consumer Cyclical",
             "region": "US",
-            "market_cap": 19025946624,
+            "market_cap": 18932117504,
             "market_cap_cat": "large",
             "price": 90.27,
             "roe": 43.13,
@@ -3769,18 +3769,18 @@
             "profit_margin": 3.0,
             "fcf_positive": true,
             "beta": 1.3,
-            "roic": 26.47,
+            "roic": 26.49,
             "roce": null,
-            "pfcf": 13.6,
+            "pfcf": 13.5,
             "rev_cagr_5yr": -3.4,
             "ni_cagr_5yr": -9.0,
             "analyst_target": 86.7,
             "analyst_upside": -4.0,
             "analyst_count": 20,
             "dcf": {
-                "dcf_per_share": 102.11,
-                "dcf_upside": 13.1,
-                "mos_price": 76.58,
+                "dcf_per_share": 102.62,
+                "dcf_upside": 13.7,
+                "mos_price": 76.96,
                 "wacc": 9.87,
                 "growth_phase1": 15.0,
                 "terminal_growth": 2.5,
@@ -3790,7 +3790,7 @@
             "dividend": {
                 "yield": 4.25,
                 "eps_payout": 63.9,
-                "fcf_payout": 57.7,
+                "fcf_payout": 57.4,
                 "sustainable": true,
                 "risk_flag": null
             },
@@ -3830,7 +3830,7 @@
             "from_52w_high": -1.1,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 16.3,
+            "return_52w": 17.2,
             "range_pos_52w": 97,
             "atr14": 3.82,
             "atr_ratio_pct": 4.23,
@@ -3927,7 +3927,7 @@
             "from_52w_high": -6.1,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 40.8,
+            "return_52w": 43.3,
             "range_pos_52w": 83,
             "atr14": 8.3,
             "atr_ratio_pct": 2.61,
@@ -4038,7 +4038,7 @@
             "from_52w_high": -1.8,
             "above_ma50": true,
             "above_ma200": true,
-            "return_52w": 55.1,
+            "return_52w": 56.1,
             "range_pos_52w": 96,
             "atr14": 3.33,
             "atr_ratio_pct": 1.76,
@@ -4149,7 +4149,7 @@
             "from_52w_high": -7.8,
             "above_ma50": false,
             "above_ma200": true,
-            "return_52w": 52.4,
+            "return_52w": 53.4,
             "range_pos_52w": 81,
             "atr14": 1.04,
             "atr_ratio_pct": 2.11,
@@ -4439,10 +4439,6 @@
     ],
     "equity_history": [
         {
-            "date": "07-24 18:20",
-            "value": 10244.38
-        },
-        {
             "date": "07-27 09:40",
             "value": 10220.67
         },
@@ -4677,6 +4673,10 @@
         {
             "date": "09-07 20:26",
             "value": 10473.0
+        },
+        {
+            "date": "09-08 10:28",
+            "value": 10473.0
         }
     ],
     "memory": {
@@ -4788,19 +4788,19 @@
             }
         ],
         "positive_sectors": [
+            "Consumer Defensive",
+            "Consumer Cyclical",
             "Financials",
             "Tech & AI",
-            "Healthcare",
-            "Consumer Defensive",
-            "Consumer Cyclical"
+            "Healthcare"
         ],
-        "last_update": "2026-09-07T20:26:39.334507+00:00",
+        "last_update": "2026-09-08T10:28:24.368040+00:00",
         "version": "nexus-v3-kelly",
-        "vix_threshold": 4.51,
+        "vix_threshold": 4.54,
         "sp500_above_ma200": true
     },
     "macro": {
-        "vix": 15.3,
+        "vix": 15.57,
         "treasury_10y": 4.78
     },
     "portfolio": {
@@ -7259,7 +7259,7 @@
                 }
             ],
             "cik": "0001408198",
-            "retrieved_at": "2026-09-07T20:23:34.241217+00:00"
+            "retrieved_at": "2026-09-08T10:26:41.564005+00:00"
         },
         "EG": {
             "filings": [
@@ -7285,7 +7285,7 @@
                 }
             ],
             "cik": "0001095073",
-            "retrieved_at": "2026-09-07T20:23:35.475521+00:00"
+            "retrieved_at": "2026-09-08T10:26:42.822845+00:00"
         },
         "HIG": {
             "filings": [
@@ -7298,84 +7298,7 @@
                 }
             ],
             "cik": "0000874766",
-            "retrieved_at": "2026-09-07T20:23:36.364680+00:00"
-        },
-        "FDX": {
-            "filings": [
-                {
-                    "form": "8-K",
-                    "date": "2026-07-24",
-                    "accession": "0001104659-26-086643",
-                    "description": "FORM 8-K",
-                    "excerpt": "false 0001048911 0001048911 2026-07-20 2026-07-20 0001048911 us-gaap:CommonStockMember 2026-07-20 2026-07-20 0001048911 fdx:Notes1.625PercentDue2027Member 2026-07-20 2026-07-20 0001048911 fdx:Notes0.450PercentDue2029OneMember 2026-07-20 2026-07-20 0001048911 fdx:Notes0.450PercentDue2029TwoMember 2026-07-20 2026-07-20 0001048911 fdx:Notes1.300PercentDue2031TwoMember 2026-07-20 2026-07-20 0001048911 fdx:Notes3.500PercentDue2032Member 2026-07-20 2026-07-20 0001048911 fdx:Notes0.950PercentDue2033OneMember 2026-07-20 2026-07-20 0001048911 fdx:Notes0.950PercentDue2033TwoMember 2026-07-20 2026-07-20 0001048911 fdx:Notes4.125PercentDue2037Member 2026-07-20 2026-07-20 iso4217:USD xbrli:shares iso4217:USD xbrli:shares &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549 &#160;&#160; FORM&#160; 8-K &#160;&#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 &#160; Date of Report (Date of earliest event reported): July 20, 2026 &#160;&#160; FedEx Corporation (Exact name of registrant as specified in its charter) &#160;&#160; Commission File Number 1-15829 &#160; Delaware (State or other jurisdiction of incorporation) &#160; 62-1721435 (IRS Employer Identification No.) &#160; 942 South Shady Grove Road , &#160; Memphis , Tennessee (Address of principal executive offices) &#160; 38120 (ZIP Code) &#160; Registrant&#8217;s telephone number, including area code: ( 901 ) 818-7500 &#160;&#160; Check the appropriate box"
-                }
-            ],
-            "cik": "0001048911",
-            "retrieved_at": "2026-09-07T20:23:37.264274+00:00"
-        },
-        "EBAY": {
-            "filings": [
-                {
-                    "form": "10-Q",
-                    "date": "2026-08-06",
-                    "accession": "0001065088-26-000177",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-08-05",
-                    "accession": "0001065088-26-000174",
-                    "description": "8-K",
-                    "excerpt": "ebay-20260805 0001065088 False 0001065088 2026-08-05 2026-08-05 &#160;&#160;&#160;&#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington,&#160;D.C. 20549 FORM&#160; 8-K CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): August 5, 2026 eBay Inc. (Exact name of registrant as specified in its charter) Delaware 001-37713 77-0430924 (State or other jurisdiction (Commission File Number) (I.R.S. Employer of incorporation) Identification No.) 2025 Hamilton Avenue San&#160;Jose , California 95125 (Address of principal executive offices) (408) &#160; 376-9659 (Registrant's telephone number, including area code) Not Applicable. (Former name or former address, if changed since last report.) Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160;Written communications pursuant to Rule&#160;425 under the Securities Act (17&#160;CFR 230.425) &#9744; &#160;&#160;&#160;&#160;Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17&#160;CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule&#160;14d-2(b) under the Exchange Act (17&#160;CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule&#160;13e-4(c) under the Exchange Act (17&#160;CFR "
-                }
-            ],
-            "cik": "0001065088",
-            "retrieved_at": "2026-09-07T20:23:38.145994+00:00"
-        },
-        "MAS": {
-            "filings": [
-                {
-                    "form": "10-Q",
-                    "date": "2026-07-29",
-                    "accession": "0000062996-26-000027",
-                    "description": "10-Q"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-07-29",
-                    "accession": "0000062996-26-000026",
-                    "description": "8-K",
-                    "excerpt": "mas-20260729 0000062996 false 0000062996 2026-07-29 2026-07-29 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, DC&#160; 20549 FORM&#160; 8-K &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of report (Date of earliest event reported): July 29, 2026 Masco Corporation (Exact name of Registrant as Specified in Charter) Delaware 1-5794 38-1794485 (State or Other Jurisdiction of Incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 17450 College Parkway, Livonia, Michigan 48152 (Address of Principal Executive Offices) (Zip Code) ( 313 ) 274-7400 (Registrant&#8217;s telephone number, including area code) &#160; &#160;&#160;&#160;&#160;Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#9744; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#9744; Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#9744; Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#9744; Pre-commencement communications pursuant to Rule&#160;13e-4(c)&#160;under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of each class Trading Symbol Name of each exchang"
-                }
-            ],
-            "cik": "0000062996",
-            "retrieved_at": "2026-09-07T20:23:39.074142+00:00"
-        },
-        "PH": {
-            "filings": [
-                {
-                    "form": "10-K",
-                    "date": "2026-08-21",
-                    "accession": "0000076334-26-000105",
-                    "description": "10-K"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-08-13",
-                    "accession": "0001193125-26-349148",
-                    "description": "8-K",
-                    "excerpt": "8-K Parker-Hannifin Corp false 0000076334 0000076334 2026-08-13 2026-08-13 &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 &#160; &#160; FORM 8-K &#160; &#160; CURRENT REPORT PURSUANT TO SECTION 13 OR 15(d) of the Securities Exchange Act of 1934 Date of report (Date of earliest event reported): August 13, 2026 &#160; &#160; PARKER-HANNIFIN CORPORATION (Exact Name of Registrant as Specified in Charter) &#160; &#160; &#160; Ohio &#160; 1-4982 &#160; 34-0451060 (State or other jurisdiction of Incorporation or Organization) &#160; (Commission File Number) &#160; (I.R.S. Employer Identification No.) &#160; 6035 Parkland Boulevard , Cleveland , Ohio &#160; 44124-4141 (Address of Principal Executive Offices) &#160; (Zip Code) Registrant&#8217;s telephone number, including area code: (216) 896-3000 Not Applicable (Former name or former address, if changed since last report.) &#160; &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#160; &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) un"
-                },
-                {
-                    "form": "8-K",
-                    "date": "2026-08-06",
-                    "accession": "0000076334-26-000082",
-                    "description": "8-K",
-                    "excerpt": "ph-20260806 0000076334 false 0000076334 2026-08-06 2026-08-06 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 FORM 8-K CURRENT REPORT PURSUANT TO SECTION 13 OR 15(d) of the Securities Exchange Act of 1934 Date of report (Date of earliest event reported): August&#160;6, 2026 PARKER-HANNIFIN CORPORATION (Exact Name of Registrant as Specified in Charter) Ohio 1-4982 34-0451060 (State or other jurisdiction of Incorporation or Organization) (Commission File Number) (I.R.S. Employer Identification No.) 6035 Parkland Boulevard , Cleveland , Ohio 44124-4141 (Address of Principal Executive Offices) (Zip Code) Registrant's telephone number, including area code: ( 216 ) 896-3000 Not Applicable (Former name or former address, if changed since last report.) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of Each Class Trading S"
-                }
-            ],
-            "cik": "0000076334",
-            "retrieved_at": "2026-09-07T20:23:40.308684+00:00"
+            "retrieved_at": "2026-09-08T10:26:43.798066+00:00"
         },
         "AIZ": {
             "filings": [
@@ -7394,7 +7317,7 @@
                 }
             ],
             "cik": "0001267238",
-            "retrieved_at": "2026-09-07T20:23:41.215073+00:00"
+            "retrieved_at": "2026-09-08T10:26:44.789612+00:00"
         },
         "CINF": {
             "filings": [
@@ -7427,7 +7350,71 @@
                 }
             ],
             "cik": "0000020286",
-            "retrieved_at": "2026-09-07T20:23:42.872139+00:00"
+            "retrieved_at": "2026-09-08T10:26:46.386220+00:00"
+        },
+        "EBAY": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-08-06",
+                    "accession": "0001065088-26-000177",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-08-05",
+                    "accession": "0001065088-26-000174",
+                    "description": "8-K",
+                    "excerpt": "ebay-20260805 0001065088 False 0001065088 2026-08-05 2026-08-05 &#160;&#160;&#160;&#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington,&#160;D.C. 20549 FORM&#160; 8-K CURRENT REPORT Pursuant to Section&#160;13 or 15(d) of the Securities Exchange Act of 1934 Date of Report (Date of earliest event reported): August 5, 2026 eBay Inc. (Exact name of registrant as specified in its charter) Delaware 001-37713 77-0430924 (State or other jurisdiction (Commission File Number) (I.R.S. Employer of incorporation) Identification No.) 2025 Hamilton Avenue San&#160;Jose , California 95125 (Address of principal executive offices) (408) &#160; 376-9659 (Registrant's telephone number, including area code) Not Applicable. (Former name or former address, if changed since last report.) Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; &#160;&#160;&#160;&#160;Written communications pursuant to Rule&#160;425 under the Securities Act (17&#160;CFR 230.425) &#9744; &#160;&#160;&#160;&#160;Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17&#160;CFR 240.14a-12) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule&#160;14d-2(b) under the Exchange Act (17&#160;CFR 240.14d-2(b)) &#9744; &#160;&#160;&#160;&#160;Pre-commencement communications pursuant to Rule&#160;13e-4(c) under the Exchange Act (17&#160;CFR "
+                }
+            ],
+            "cik": "0001065088",
+            "retrieved_at": "2026-09-08T10:26:47.306302+00:00"
+        },
+        "MAS": {
+            "filings": [
+                {
+                    "form": "10-Q",
+                    "date": "2026-07-29",
+                    "accession": "0000062996-26-000027",
+                    "description": "10-Q"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-07-29",
+                    "accession": "0000062996-26-000026",
+                    "description": "8-K",
+                    "excerpt": "mas-20260729 0000062996 false 0000062996 2026-07-29 2026-07-29 UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, DC&#160; 20549 FORM&#160; 8-K &#160; CURRENT REPORT Pursuant to Section&#160;13 or 15(d)&#160;of the Securities Exchange Act of 1934 &#160; Date of report (Date of earliest event reported): July 29, 2026 Masco Corporation (Exact name of Registrant as Specified in Charter) Delaware 1-5794 38-1794485 (State or Other Jurisdiction of Incorporation) (Commission File Number) (I.R.S. Employer Identification No.) 17450 College Parkway, Livonia, Michigan 48152 (Address of Principal Executive Offices) (Zip Code) ( 313 ) 274-7400 (Registrant&#8217;s telephone number, including area code) &#160; &#160;&#160;&#160;&#160;Check the appropriate box below if the Form&#160;8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#9744; Written communications pursuant to Rule&#160;425 under the Securities Act (17 CFR 230.425) &#160; &#9744; Soliciting material pursuant to Rule&#160;14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#9744; Pre-commencement communications pursuant to Rule&#160;14d-2(b)&#160;under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#9744; Pre-commencement communications pursuant to Rule&#160;13e-4(c)&#160;under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of each class Trading Symbol Name of each exchang"
+                }
+            ],
+            "cik": "0000062996",
+            "retrieved_at": "2026-09-08T10:26:48.370997+00:00"
+        },
+        "PH": {
+            "filings": [
+                {
+                    "form": "10-K",
+                    "date": "2026-08-21",
+                    "accession": "0000076334-26-000105",
+                    "description": "10-K"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-08-13",
+                    "accession": "0001193125-26-349148",
+                    "description": "8-K",
+                    "excerpt": "8-K Parker-Hannifin Corp false 0000076334 0000076334 2026-08-13 2026-08-13 &#160; &#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 &#160; &#160; FORM 8-K &#160; &#160; CURRENT REPORT PURSUANT TO SECTION 13 OR 15(d) of the Securities Exchange Act of 1934 Date of report (Date of earliest event reported): August 13, 2026 &#160; &#160; PARKER-HANNIFIN CORPORATION (Exact Name of Registrant as Specified in Charter) &#160; &#160; &#160; Ohio &#160; 1-4982 &#160; 34-0451060 (State or other jurisdiction of Incorporation or Organization) &#160; (Commission File Number) &#160; (I.R.S. Employer Identification No.) &#160; 6035 Parkland Boulevard , Cleveland , Ohio &#160; 44124-4141 (Address of Principal Executive Offices) &#160; (Zip Code) Registrant&#8217;s telephone number, including area code: (216) 896-3000 Not Applicable (Former name or former address, if changed since last report.) &#160; &#160; Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#160; &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#160; &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#160; &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#160; &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) un"
+                },
+                {
+                    "form": "8-K",
+                    "date": "2026-08-06",
+                    "accession": "0000076334-26-000082",
+                    "description": "8-K",
+                    "excerpt": "ph-20260806 0000076334 false 0000076334 2026-08-06 2026-08-06 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; UNITED STATES SECURITIES AND EXCHANGE COMMISSION WASHINGTON, D.C. 20549 FORM 8-K CURRENT REPORT PURSUANT TO SECTION 13 OR 15(d) of the Securities Exchange Act of 1934 Date of report (Date of earliest event reported): August&#160;6, 2026 PARKER-HANNIFIN CORPORATION (Exact Name of Registrant as Specified in Charter) Ohio 1-4982 34-0451060 (State or other jurisdiction of Incorporation or Organization) (Commission File Number) (I.R.S. Employer Identification No.) 6035 Parkland Boulevard , Cleveland , Ohio 44124-4141 (Address of Principal Executive Offices) (Zip Code) Registrant's telephone number, including area code: ( 216 ) 896-3000 Not Applicable (Former name or former address, if changed since last report.) Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions: &#9744; Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425) &#9744; Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12) &#9744; Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b)) &#9744; Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4(c)) Securities registered pursuant to Section 12(b) of the Act: Title of Each Class Trading S"
+                }
+            ],
+            "cik": "0000076334",
+            "retrieved_at": "2026-09-08T10:26:49.644773+00:00"
         },
         "ACGL": {
             "filings": [
@@ -7446,7 +7433,7 @@
                 }
             ],
             "cik": "0000947484",
-            "retrieved_at": "2026-09-07T20:23:43.814555+00:00"
+            "retrieved_at": "2026-09-08T10:26:50.615950+00:00"
         },
         "FDS": {
             "filings": [
@@ -7459,22 +7446,22 @@
                 }
             ],
             "cik": "0001013237",
-            "retrieved_at": "2026-09-07T20:23:44.745409+00:00"
+            "retrieved_at": "2026-09-08T10:26:51.517706+00:00"
         }
     },
-    "filings_at": "2026-09-07T20:23:45.245579+00:00",
+    "filings_at": "2026-09-08T10:26:52.017928+00:00",
     "earnings": {
-        "generated_at": "2026-09-08T10:01:18.974579+00:00",
+        "generated_at": "2026-09-08T10:28:06.655232+00:00",
         "horizon_days": 75,
         "stats": {
             "tracked": 70,
             "upcoming_7d": 2,
             "upcoming_30d": 5,
-            "reported": 45,
-            "beats": 36,
+            "reported": 44,
+            "beats": 35,
             "misses": 6,
             "inline": 3,
-            "avg_surprise": 14.6
+            "avg_surprise": 14.8
         },
         "calendar": [
             {
@@ -7667,8 +7654,8 @@
                 "price": 915.74,
                 "currency": "USD",
                 "market_cap": 406111289344.0,
-                "beat_rate": 88,
-                "avg_surprise": 42.8,
+                "beat_rate": 75,
+                "avg_surprise": 46.6,
                 "next_date": "2026-09-24",
                 "days_until": 16,
                 "date_estimate": false,
@@ -7677,23 +7664,23 @@
                 "last": {
                     "date": "2026-05-28",
                     "eps_actual": 4.93,
-                    "eps_estimate": 4.92,
-                    "surprise_pct": 14.0,
+                    "eps_estimate": 4.97,
+                    "surprise_pct": -85.0,
                     "is_report_date": true,
                     "days_ago": 103,
                     "eps_yoy": 15.2,
                     "revenue": null,
                     "revenue_yoy": null,
                     "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +14.0% boven verwachting"
+                    "verdict": "MISS",
+                    "summary": "Eps -85.0% onder verwachting"
                 },
                 "history": [
                     {
                         "date": "2024-09-26",
-                        "eps_actual": 5.29,
-                        "eps_estimate": 5.06,
-                        "surprise_pct": 4.5,
+                        "eps_actual": 5.15,
+                        "eps_estimate": 5.08,
+                        "surprise_pct": 141.0,
                         "is_report_date": true
                     },
                     {
@@ -7727,22 +7714,22 @@
                     {
                         "date": "2025-12-11",
                         "eps_actual": 4.5,
-                        "eps_estimate": 4.28,
-                        "surprise_pct": 5.3,
+                        "eps_estimate": 4.27,
+                        "surprise_pct": 5.5,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-03-05",
                         "eps_actual": 4.58,
-                        "eps_estimate": 4.54,
-                        "surprise_pct": 78.0,
+                        "eps_estimate": 4.55,
+                        "surprise_pct": 71.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-05-28",
                         "eps_actual": 4.93,
-                        "eps_estimate": 4.92,
-                        "surprise_pct": 14.0,
+                        "eps_estimate": 4.97,
+                        "surprise_pct": -85.0,
                         "is_report_date": true
                     }
                 ]
@@ -8359,8 +8346,8 @@
                     {
                         "date": "2026-01-14",
                         "eps_actual": 0.98,
-                        "eps_estimate": 0.95,
-                        "surprise_pct": 2.7,
+                        "eps_estimate": 0.96,
+                        "surprise_pct": 2.2,
                         "is_report_date": true
                     },
                     {
@@ -8750,7 +8737,7 @@
                 "currency": "USD",
                 "market_cap": 325828280320.0,
                 "beat_rate": 75,
-                "avg_surprise": 37.2,
+                "avg_surprise": 36.3,
                 "next_date": "2026-10-20",
                 "days_until": 42,
                 "date_estimate": false,
@@ -8775,28 +8762,28 @@
                         "date": "2024-10-17",
                         "eps_actual": 0.54,
                         "eps_estimate": 0.51,
-                        "surprise_pct": 5.6,
+                        "surprise_pct": 5.3,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-01-21",
                         "eps_actual": 0.43,
                         "eps_estimate": 0.42,
-                        "surprise_pct": 141.0,
+                        "surprise_pct": 1.8,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-04-17",
                         "eps_actual": 0.66,
                         "eps_estimate": 0.57,
-                        "surprise_pct": 16.8,
+                        "surprise_pct": 16.4,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-07-17",
                         "eps_actual": 0.72,
-                        "eps_estimate": 0.7,
-                        "surprise_pct": 2.2,
+                        "eps_estimate": 0.71,
+                        "surprise_pct": 1.9,
                         "is_report_date": true
                     },
                     {
@@ -8816,8 +8803,8 @@
                     {
                         "date": "2026-04-16",
                         "eps_actual": 1.23,
-                        "eps_estimate": 1.25,
-                        "surprise_pct": -140.0,
+                        "eps_estimate": 1.32,
+                        "surprise_pct": -6.9,
                         "is_report_date": true
                     },
                     {
@@ -9201,7 +9188,7 @@
                 "currency": "USD",
                 "market_cap": 33474576384.0,
                 "beat_rate": 100,
-                "avg_surprise": 33.8,
+                "avg_surprise": 33.4,
                 "next_date": "2026-10-26",
                 "days_until": 48,
                 "date_estimate": false,
@@ -9224,9 +9211,9 @@
                 "history": [
                     {
                         "date": "2024-10-30",
-                        "eps_actual": 1.99,
-                        "eps_estimate": 1.95,
-                        "surprise_pct": 1.8,
+                        "eps_actual": 2.56,
+                        "eps_estimate": 2.1,
+                        "surprise_pct": 22.2,
                         "is_report_date": true
                     },
                     {
@@ -9252,9 +9239,9 @@
                     },
                     {
                         "date": "2025-10-27",
-                        "eps_actual": 3.56,
-                        "eps_estimate": 2.43,
-                        "surprise_pct": 46.6,
+                        "eps_actual": 2.77,
+                        "eps_estimate": 2.25,
+                        "surprise_pct": 22.9,
                         "is_report_date": true
                     },
                     {
@@ -9652,7 +9639,7 @@
                 "currency": "USD",
                 "market_cap": 4139343675392.0,
                 "beat_rate": 100,
-                "avg_surprise": 64.8,
+                "avg_surprise": 65.1,
                 "next_date": "2026-10-28",
                 "days_until": 50,
                 "date_estimate": false,
@@ -9691,7 +9678,7 @@
                         "date": "2025-04-24",
                         "eps_actual": 2.81,
                         "eps_estimate": 2.01,
-                        "surprise_pct": 40.1,
+                        "surprise_pct": 39.8,
                         "is_report_date": true
                     },
                     {
@@ -9718,8 +9705,8 @@
                     {
                         "date": "2026-04-29",
                         "eps_actual": 5.11,
-                        "eps_estimate": 2.67,
-                        "surprise_pct": 91.6,
+                        "eps_estimate": 2.63,
+                        "surprise_pct": 94.3,
                         "is_report_date": true
                     },
                     {
@@ -9831,8 +9818,8 @@
                 "price": 616.77,
                 "currency": "USD",
                 "market_cap": 1571225468928.0,
-                "beat_rate": 75,
-                "avg_surprise": 5.4,
+                "beat_rate": 88,
+                "avg_surprise": 11.0,
                 "next_date": "2026-10-28",
                 "days_until": 50,
                 "date_estimate": true,
@@ -9856,36 +9843,36 @@
                     {
                         "date": "2024-10-30",
                         "eps_actual": 6.03,
-                        "eps_estimate": 5.29,
+                        "eps_estimate": 5.3,
                         "surprise_pct": 13.9,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-01-29",
                         "eps_actual": 8.02,
-                        "eps_estimate": 6.76,
-                        "surprise_pct": 18.7,
+                        "eps_estimate": 6.74,
+                        "surprise_pct": 19.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-04-30",
                         "eps_actual": 6.43,
-                        "eps_estimate": 5.22,
-                        "surprise_pct": 23.1,
+                        "eps_estimate": 5.21,
+                        "surprise_pct": 23.5,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-07-30",
                         "eps_actual": 7.14,
-                        "eps_estimate": 5.9,
-                        "surprise_pct": 21.0,
+                        "eps_estimate": 5.86,
+                        "surprise_pct": 21.8,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-10-29",
-                        "eps_actual": 1.05,
-                        "eps_estimate": 6.71,
-                        "surprise_pct": -84.3,
+                        "eps_actual": 7.25,
+                        "eps_estimate": 6.67,
+                        "surprise_pct": 8.7,
                         "is_report_date": true
                     },
                     {
@@ -9897,9 +9884,9 @@
                     },
                     {
                         "date": "2026-04-29",
-                        "eps_actual": 10.44,
-                        "eps_estimate": 6.66,
-                        "surprise_pct": 56.8,
+                        "eps_actual": 7.31,
+                        "eps_estimate": 6.82,
+                        "surprise_pct": 7.2,
                         "is_report_date": true
                     },
                     {
@@ -10188,9 +10175,9 @@
                 "tags": [
                     "portfolio"
                 ],
-                "price": 4.12,
+                "price": 4.13,
                 "currency": "EUR",
-                "market_cap": 15522279424.0,
+                "market_cap": 15563773952.0,
                 "beat_rate": 12,
                 "avg_surprise": 6.7,
                 "next_date": "2026-10-28",
@@ -10283,7 +10270,7 @@
                 "currency": "USD",
                 "market_cap": 14603597824.0,
                 "beat_rate": 50,
-                "avg_surprise": -1.9,
+                "avg_surprise": -3.1,
                 "next_date": "2026-10-28",
                 "days_until": 50,
                 "date_estimate": true,
@@ -10334,9 +10321,9 @@
                     },
                     {
                         "date": "2025-10-27",
-                        "eps_actual": 7.54,
-                        "eps_estimate": 14.52,
-                        "surprise_pct": -48.1,
+                        "eps_actual": 6.09,
+                        "eps_estimate": 14.25,
+                        "surprise_pct": -57.3,
                         "is_report_date": true
                     },
                     {
@@ -10374,7 +10361,7 @@
                 "currency": "USD",
                 "market_cap": 4669700046848.0,
                 "beat_rate": 100,
-                "avg_surprise": 4.7,
+                "avg_surprise": 4.6,
                 "next_date": "2026-10-29",
                 "days_until": 51,
                 "date_estimate": false,
@@ -10405,8 +10392,8 @@
                     {
                         "date": "2025-01-30",
                         "eps_actual": 2.4,
-                        "eps_estimate": 2.34,
-                        "surprise_pct": 2.5,
+                        "eps_estimate": 2.35,
+                        "surprise_pct": 2.3,
                         "is_report_date": true
                     },
                     {
@@ -10420,7 +10407,7 @@
                         "date": "2025-07-31",
                         "eps_actual": 1.57,
                         "eps_estimate": 1.43,
-                        "surprise_pct": 10.1,
+                        "surprise_pct": 9.5,
                         "is_report_date": true
                     },
                     {
@@ -10434,7 +10421,7 @@
                         "date": "2026-01-29",
                         "eps_actual": 2.84,
                         "eps_estimate": 2.67,
-                        "surprise_pct": 6.3,
+                        "surprise_pct": 6.2,
                         "is_report_date": true
                     },
                     {
@@ -10464,7 +10451,7 @@
                 "currency": "USD",
                 "market_cap": 2788369891328.0,
                 "beat_rate": 100,
-                "avg_surprise": 53.0,
+                "avg_surprise": 53.2,
                 "next_date": "2026-10-29",
                 "days_until": 51,
                 "date_estimate": true,
@@ -10496,21 +10483,21 @@
                         "date": "2025-02-06",
                         "eps_actual": 1.86,
                         "eps_estimate": 1.48,
-                        "surprise_pct": 25.4,
+                        "surprise_pct": 25.3,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-05-01",
                         "eps_actual": 1.59,
                         "eps_estimate": 1.36,
-                        "surprise_pct": 17.1,
+                        "surprise_pct": 16.8,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-07-31",
                         "eps_actual": 1.68,
-                        "eps_estimate": 1.33,
-                        "surprise_pct": 26.1,
+                        "eps_estimate": 1.32,
+                        "surprise_pct": 27.2,
                         "is_report_date": true
                     },
                     {
@@ -10530,8 +10517,8 @@
                     {
                         "date": "2026-04-29",
                         "eps_actual": 2.78,
-                        "eps_estimate": 1.65,
-                        "surprise_pct": 68.2,
+                        "eps_estimate": 1.64,
+                        "surprise_pct": 69.0,
                         "is_report_date": true
                     },
                     {
@@ -11094,7 +11081,7 @@
                 "currency": "USD",
                 "market_cap": 37480558592.0,
                 "beat_rate": 75,
-                "avg_surprise": -7.4,
+                "avg_surprise": 8.9,
                 "next_date": "2026-10-29",
                 "days_until": 51,
                 "date_estimate": false,
@@ -11117,9 +11104,9 @@
                 "history": [
                     {
                         "date": "2024-10-24",
-                        "eps_actual": 2.56,
-                        "eps_estimate": 2.6,
-                        "surprise_pct": -137.0,
+                        "eps_actual": 2.53,
+                        "eps_estimate": 2.53,
+                        "surprise_pct": -3.0,
                         "is_report_date": true
                     },
                     {
@@ -11145,9 +11132,9 @@
                     },
                     {
                         "date": "2025-10-27",
-                        "eps_actual": 3.78,
-                        "eps_estimate": 3.21,
-                        "surprise_pct": 17.6,
+                        "eps_actual": 3.77,
+                        "eps_estimate": 3.31,
+                        "surprise_pct": 13.8,
                         "is_report_date": true
                     },
                     {
@@ -11184,7 +11171,7 @@
                 "currency": "USD",
                 "market_cap": 29717567488.0,
                 "beat_rate": 100,
-                "avg_surprise": 199.2,
+                "avg_surprise": 135.6,
                 "next_date": "2026-10-29",
                 "days_until": 51,
                 "date_estimate": false,
@@ -11197,7 +11184,7 @@
                     "surprise_pct": 29.6,
                     "is_report_date": true,
                     "days_ago": 40,
-                    "eps_yoy": 177.8,
+                    "eps_yoy": 35.9,
                     "revenue": 804905000.0,
                     "revenue_yoy": 61.1,
                     "reaction_pct": -21.0,
@@ -11207,9 +11194,9 @@
                 "history": [
                     {
                         "date": "2024-10-29",
-                        "eps_actual": 0.16,
-                        "eps_estimate": -0.07,
-                        "surprise_pct": 344.1,
+                        "eps_actual": 0.59,
+                        "eps_estimate": 0.41,
+                        "surprise_pct": 42.9,
                         "is_report_date": true
                     },
                     {
@@ -11228,30 +11215,30 @@
                     },
                     {
                         "date": "2025-07-31",
-                        "eps_actual": 0.45,
+                        "eps_actual": 0.92,
                         "eps_estimate": 0.19,
-                        "surprise_pct": 138.4,
+                        "surprise_pct": 34.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-10-30",
-                        "eps_actual": 0.8,
-                        "eps_estimate": 0.52,
-                        "surprise_pct": 53.8,
+                        "eps_actual": 1.26,
+                        "eps_estimate": 1.05,
+                        "surprise_pct": 20.7,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-02-05",
-                        "eps_actual": 1.24,
-                        "eps_estimate": 0.93,
-                        "surprise_pct": 33.1,
+                        "eps_actual": 1.68,
+                        "eps_estimate": 1.45,
+                        "surprise_pct": 16.4,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-04-30",
-                        "eps_actual": 1.01,
-                        "eps_estimate": 0.56,
-                        "surprise_pct": 79.1,
+                        "eps_actual": 1.4,
+                        "eps_estimate": 1.11,
+                        "surprise_pct": 26.1,
                         "is_report_date": true
                     },
                     {
@@ -11905,8 +11892,8 @@
                 "price": 122.11,
                 "currency": "USD",
                 "market_cap": 109786939392.0,
-                "beat_rate": 75,
-                "avg_surprise": 25.4,
+                "beat_rate": 100,
+                "avg_surprise": 33.0,
                 "next_date": "2026-11-04",
                 "days_until": 57,
                 "date_estimate": true,
@@ -11929,9 +11916,9 @@
                 "history": [
                     {
                         "date": "2024-10-30",
-                        "eps_actual": 0.17,
-                        "eps_estimate": 0.18,
-                        "surprise_pct": -3.4,
+                        "eps_actual": 0.26,
+                        "eps_estimate": 0.26,
+                        "surprise_pct": 38.0,
                         "is_report_date": true
                     },
                     {
@@ -11943,9 +11930,9 @@
                     },
                     {
                         "date": "2025-04-30",
-                        "eps_actual": 0.37,
-                        "eps_estimate": 0.33,
-                        "surprise_pct": 13.5,
+                        "eps_actual": 0.44,
+                        "eps_estimate": 0.37,
+                        "surprise_pct": 19.8,
                         "is_report_date": true
                     },
                     {
@@ -11964,16 +11951,16 @@
                     },
                     {
                         "date": "2026-02-10",
-                        "eps_actual": 0.66,
-                        "eps_estimate": 0.64,
-                        "surprise_pct": 3.8,
+                        "eps_actual": 0.73,
+                        "eps_estimate": 0.68,
+                        "surprise_pct": 6.3,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-04-28",
-                        "eps_actual": 0.38,
-                        "eps_estimate": 0.39,
-                        "surprise_pct": -2.0,
+                        "eps_actual": 0.47,
+                        "eps_estimate": 0.43,
+                        "surprise_pct": 8.6,
                         "is_report_date": true
                     },
                     {
@@ -11996,7 +11983,7 @@
                 "currency": "USD",
                 "market_cap": 107688771584.0,
                 "beat_rate": 100,
-                "avg_surprise": 18.6,
+                "avg_surprise": 22.4,
                 "next_date": "2026-11-04",
                 "days_until": 57,
                 "date_estimate": false,
@@ -12019,23 +12006,23 @@
                 "history": [
                     {
                         "date": "2024-11-06",
-                        "eps_actual": 1.25,
-                        "eps_estimate": 0.93,
-                        "surprise_pct": 34.8,
+                        "eps_actual": 1.47,
+                        "eps_estimate": 1.23,
+                        "surprise_pct": 19.6,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-02-12",
-                        "eps_actual": 1.73,
-                        "eps_estimate": 1.26,
-                        "surprise_pct": 37.5,
+                        "eps_actual": 2.07,
+                        "eps_estimate": 1.83,
+                        "surprise_pct": 13.3,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-05-07",
-                        "eps_actual": 1.67,
-                        "eps_estimate": 1.44,
-                        "surprise_pct": 15.8,
+                        "eps_actual": 2.38,
+                        "eps_estimate": 1.96,
+                        "surprise_pct": 21.8,
                         "is_report_date": true
                     },
                     {
@@ -12047,23 +12034,23 @@
                     },
                     {
                         "date": "2025-11-05",
-                        "eps_actual": 2.45,
-                        "eps_estimate": 2.39,
-                        "surprise_pct": 2.6,
+                        "eps_actual": 2.55,
+                        "eps_estimate": 2.53,
+                        "surprise_pct": 64.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-02-11",
-                        "eps_actual": 3.24,
-                        "eps_estimate": 2.94,
-                        "surprise_pct": 10.1,
+                        "eps_actual": 3.48,
+                        "eps_estimate": 3.11,
+                        "surprise_pct": 11.9,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-05-06",
-                        "eps_actual": 3.56,
-                        "eps_estimate": 3.44,
-                        "surprise_pct": 3.4,
+                        "eps_actual": 3.76,
+                        "eps_estimate": 3.64,
+                        "surprise_pct": 3.5,
                         "is_report_date": true
                     },
                     {
@@ -12085,8 +12072,8 @@
                 "price": 1978.36,
                 "currency": "USD",
                 "market_cap": 100296523776.0,
-                "beat_rate": 50,
-                "avg_surprise": 9.4,
+                "beat_rate": 38,
+                "avg_surprise": 5.2,
                 "next_date": "2026-11-04",
                 "days_until": 57,
                 "date_estimate": false,
@@ -12124,36 +12111,36 @@
                     {
                         "date": "2025-05-07",
                         "eps_actual": 9.74,
-                        "eps_estimate": 8.27,
-                        "surprise_pct": 17.8,
+                        "eps_estimate": 7.99,
+                        "surprise_pct": 21.9,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-08-04",
                         "eps_actual": 10.31,
-                        "eps_estimate": 11.89,
-                        "surprise_pct": -13.3,
+                        "eps_estimate": 11.75,
+                        "surprise_pct": -12.2,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-10-28",
                         "eps_actual": 8.32,
-                        "eps_estimate": 9.3,
-                        "surprise_pct": -10.5,
+                        "eps_estimate": 9.37,
+                        "surprise_pct": -11.2,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-02-24",
                         "eps_actual": 11.03,
-                        "eps_estimate": 11.44,
-                        "surprise_pct": -3.6,
+                        "eps_estimate": 11.43,
+                        "surprise_pct": -3.5,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-05-07",
                         "eps_actual": 8.23,
-                        "eps_estimate": 8.2,
-                        "surprise_pct": 35.0,
+                        "eps_estimate": 8.47,
+                        "surprise_pct": -2.9,
                         "is_report_date": true
                     },
                     {
@@ -12806,8 +12793,8 @@
                 "price": 181.94,
                 "currency": "USD",
                 "market_cap": 108943065088.0,
-                "beat_rate": 50,
-                "avg_surprise": -9.6,
+                "beat_rate": 38,
+                "avg_surprise": -1.7,
                 "next_date": "2026-11-05",
                 "days_until": 58,
                 "date_estimate": true,
@@ -12831,22 +12818,22 @@
                     {
                         "date": "2024-11-07",
                         "eps_actual": 2.13,
-                        "eps_estimate": 2.15,
-                        "surprise_pct": -89.0,
+                        "eps_estimate": 2.13,
+                        "surprise_pct": -23.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-02-13",
                         "eps_actual": 0.73,
                         "eps_estimate": 0.58,
-                        "surprise_pct": 25.5,
+                        "surprise_pct": 25.1,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-05-01",
                         "eps_actual": 0.24,
                         "eps_estimate": 0.24,
-                        "surprise_pct": 2.0,
+                        "surprise_pct": 0.0,
                         "is_report_date": true
                     },
                     {
@@ -13159,13 +13146,13 @@
             {
                 "ticker": "III.L",
                 "name": "3I GROUP PLC ORD 73 19/22P",
-                "sector": null,
+                "sector": "Financial Services",
                 "tags": [
                     "watchlist"
                 ],
-                "price": 2766.0,
+                "price": 2776.0,
                 "currency": "GBp",
-                "market_cap": 28149012480.0,
+                "market_cap": 28250781696.0,
                 "beat_rate": null,
                 "avg_surprise": null,
                 "next_date": "2026-11-12",
@@ -13359,96 +13346,6 @@
             }
         ],
         "reported": [
-            {
-                "ticker": "AVGO",
-                "name": "Broadcom Inc.",
-                "sector": "Technology",
-                "tags": [
-                    "mega-cap"
-                ],
-                "price": 357.89,
-                "currency": "USD",
-                "market_cap": 1702714146816.0,
-                "beat_rate": 100,
-                "avg_surprise": 26.2,
-                "next_date": "2026-09-02",
-                "days_until": -6,
-                "date_estimate": false,
-                "eps_estimate": 3.827,
-                "rev_estimate": 34881623400.0,
-                "last": {
-                    "date": "2026-09-02",
-                    "eps_actual": 3.32,
-                    "eps_estimate": 3.24,
-                    "surprise_pct": 2.5,
-                    "is_report_date": true,
-                    "days_ago": 6,
-                    "eps_yoy": 96.4,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": -2.7,
-                    "verdict": "BEAT",
-                    "summary": "Eps +2.5% boven verwachting, markt afgestraft (-2.7% dag erna)"
-                },
-                "history": [
-                    {
-                        "date": "2024-12-12",
-                        "eps_actual": 1.42,
-                        "eps_estimate": 1.39,
-                        "surprise_pct": 2.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-03-06",
-                        "eps_actual": 1.6,
-                        "eps_estimate": 1.51,
-                        "surprise_pct": 6.1,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-06-05",
-                        "eps_actual": 1.58,
-                        "eps_estimate": 1.57,
-                        "surprise_pct": 59.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-09-04",
-                        "eps_actual": 1.69,
-                        "eps_estimate": 1.66,
-                        "surprise_pct": 1.6,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-12-11",
-                        "eps_actual": 1.95,
-                        "eps_estimate": 1.87,
-                        "surprise_pct": 4.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-03-04",
-                        "eps_actual": 2.05,
-                        "eps_estimate": 2.02,
-                        "surprise_pct": 132.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-06-03",
-                        "eps_actual": 2.44,
-                        "eps_estimate": 2.4,
-                        "surprise_pct": 1.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-09-02",
-                        "eps_actual": 3.32,
-                        "eps_estimate": 3.24,
-                        "surprise_pct": 2.5,
-                        "is_report_date": true
-                    }
-                ]
-            },
             {
                 "ticker": "NVDA",
                 "name": "NVIDIA Corporation",
@@ -14000,8 +13897,8 @@
                 "price": 181.94,
                 "currency": "USD",
                 "market_cap": 108943065088.0,
-                "beat_rate": 50,
-                "avg_surprise": -9.6,
+                "beat_rate": 38,
+                "avg_surprise": -1.7,
                 "next_date": "2026-11-05",
                 "days_until": 58,
                 "date_estimate": true,
@@ -14025,22 +13922,22 @@
                     {
                         "date": "2024-11-07",
                         "eps_actual": 2.13,
-                        "eps_estimate": 2.15,
-                        "surprise_pct": -89.0,
+                        "eps_estimate": 2.13,
+                        "surprise_pct": -23.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-02-13",
                         "eps_actual": 0.73,
                         "eps_estimate": 0.58,
-                        "surprise_pct": 25.5,
+                        "surprise_pct": 25.1,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-05-01",
                         "eps_actual": 0.24,
                         "eps_estimate": 0.24,
-                        "surprise_pct": 2.0,
+                        "surprise_pct": 0.0,
                         "is_report_date": true
                     },
                     {
@@ -14451,7 +14348,7 @@
                 "currency": "USD",
                 "market_cap": 107688771584.0,
                 "beat_rate": 100,
-                "avg_surprise": 18.6,
+                "avg_surprise": 22.4,
                 "next_date": "2026-11-04",
                 "days_until": 57,
                 "date_estimate": false,
@@ -14474,23 +14371,23 @@
                 "history": [
                     {
                         "date": "2024-11-06",
-                        "eps_actual": 1.25,
-                        "eps_estimate": 0.93,
-                        "surprise_pct": 34.8,
+                        "eps_actual": 1.47,
+                        "eps_estimate": 1.23,
+                        "surprise_pct": 19.6,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-02-12",
-                        "eps_actual": 1.73,
-                        "eps_estimate": 1.26,
-                        "surprise_pct": 37.5,
+                        "eps_actual": 2.07,
+                        "eps_estimate": 1.83,
+                        "surprise_pct": 13.3,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-05-07",
-                        "eps_actual": 1.67,
-                        "eps_estimate": 1.44,
-                        "surprise_pct": 15.8,
+                        "eps_actual": 2.38,
+                        "eps_estimate": 1.96,
+                        "surprise_pct": 21.8,
                         "is_report_date": true
                     },
                     {
@@ -14502,23 +14399,23 @@
                     },
                     {
                         "date": "2025-11-05",
-                        "eps_actual": 2.45,
-                        "eps_estimate": 2.39,
-                        "surprise_pct": 2.6,
+                        "eps_actual": 2.55,
+                        "eps_estimate": 2.53,
+                        "surprise_pct": 64.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-02-11",
-                        "eps_actual": 3.24,
-                        "eps_estimate": 2.94,
-                        "surprise_pct": 10.1,
+                        "eps_actual": 3.48,
+                        "eps_estimate": 3.11,
+                        "surprise_pct": 11.9,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-05-06",
-                        "eps_actual": 3.56,
-                        "eps_estimate": 3.44,
-                        "surprise_pct": 3.4,
+                        "eps_actual": 3.76,
+                        "eps_estimate": 3.64,
+                        "surprise_pct": 3.5,
                         "is_report_date": true
                     },
                     {
@@ -14540,8 +14437,8 @@
                 "price": 1978.36,
                 "currency": "USD",
                 "market_cap": 100296523776.0,
-                "beat_rate": 50,
-                "avg_surprise": 9.4,
+                "beat_rate": 38,
+                "avg_surprise": 5.2,
                 "next_date": "2026-11-04",
                 "days_until": 57,
                 "date_estimate": false,
@@ -14579,36 +14476,36 @@
                     {
                         "date": "2025-05-07",
                         "eps_actual": 9.74,
-                        "eps_estimate": 8.27,
-                        "surprise_pct": 17.8,
+                        "eps_estimate": 7.99,
+                        "surprise_pct": 21.9,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-08-04",
                         "eps_actual": 10.31,
-                        "eps_estimate": 11.89,
-                        "surprise_pct": -13.3,
+                        "eps_estimate": 11.75,
+                        "surprise_pct": -12.2,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-10-28",
                         "eps_actual": 8.32,
-                        "eps_estimate": 9.3,
-                        "surprise_pct": -10.5,
+                        "eps_estimate": 9.37,
+                        "surprise_pct": -11.2,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-02-24",
                         "eps_actual": 11.03,
-                        "eps_estimate": 11.44,
-                        "surprise_pct": -3.6,
+                        "eps_estimate": 11.43,
+                        "surprise_pct": -3.5,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-05-07",
                         "eps_actual": 8.23,
-                        "eps_estimate": 8.2,
-                        "surprise_pct": 35.0,
+                        "eps_estimate": 8.47,
+                        "surprise_pct": -2.9,
                         "is_report_date": true
                     },
                     {
@@ -15894,7 +15791,7 @@
                 "currency": "USD",
                 "market_cap": 29717567488.0,
                 "beat_rate": 100,
-                "avg_surprise": 199.2,
+                "avg_surprise": 135.6,
                 "next_date": "2026-10-29",
                 "days_until": 51,
                 "date_estimate": false,
@@ -15907,7 +15804,7 @@
                     "surprise_pct": 29.6,
                     "is_report_date": true,
                     "days_ago": 40,
-                    "eps_yoy": 177.8,
+                    "eps_yoy": 35.9,
                     "revenue": 804905000.0,
                     "revenue_yoy": 61.1,
                     "reaction_pct": -21.0,
@@ -15917,9 +15814,9 @@
                 "history": [
                     {
                         "date": "2024-10-29",
-                        "eps_actual": 0.16,
-                        "eps_estimate": -0.07,
-                        "surprise_pct": 344.1,
+                        "eps_actual": 0.59,
+                        "eps_estimate": 0.41,
+                        "surprise_pct": 42.9,
                         "is_report_date": true
                     },
                     {
@@ -15938,30 +15835,30 @@
                     },
                     {
                         "date": "2025-07-31",
-                        "eps_actual": 0.45,
+                        "eps_actual": 0.92,
                         "eps_estimate": 0.19,
-                        "surprise_pct": 138.4,
+                        "surprise_pct": 34.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-10-30",
-                        "eps_actual": 0.8,
-                        "eps_estimate": 0.52,
-                        "surprise_pct": 53.8,
+                        "eps_actual": 1.26,
+                        "eps_estimate": 1.05,
+                        "surprise_pct": 20.7,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-02-05",
-                        "eps_actual": 1.24,
-                        "eps_estimate": 0.93,
-                        "surprise_pct": 33.1,
+                        "eps_actual": 1.68,
+                        "eps_estimate": 1.45,
+                        "surprise_pct": 16.4,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-04-30",
-                        "eps_actual": 1.01,
-                        "eps_estimate": 0.56,
-                        "surprise_pct": 79.1,
+                        "eps_actual": 1.4,
+                        "eps_estimate": 1.11,
+                        "surprise_pct": 26.1,
                         "is_report_date": true
                     },
                     {
@@ -15985,7 +15882,7 @@
                 "currency": "USD",
                 "market_cap": 4669700046848.0,
                 "beat_rate": 100,
-                "avg_surprise": 4.7,
+                "avg_surprise": 4.6,
                 "next_date": "2026-10-29",
                 "days_until": 51,
                 "date_estimate": false,
@@ -16016,8 +15913,8 @@
                     {
                         "date": "2025-01-30",
                         "eps_actual": 2.4,
-                        "eps_estimate": 2.34,
-                        "surprise_pct": 2.5,
+                        "eps_estimate": 2.35,
+                        "surprise_pct": 2.3,
                         "is_report_date": true
                     },
                     {
@@ -16031,7 +15928,7 @@
                         "date": "2025-07-31",
                         "eps_actual": 1.57,
                         "eps_estimate": 1.43,
-                        "surprise_pct": 10.1,
+                        "surprise_pct": 9.5,
                         "is_report_date": true
                     },
                     {
@@ -16045,7 +15942,7 @@
                         "date": "2026-01-29",
                         "eps_actual": 2.84,
                         "eps_estimate": 2.67,
-                        "surprise_pct": 6.3,
+                        "surprise_pct": 6.2,
                         "is_report_date": true
                     },
                     {
@@ -16075,7 +15972,7 @@
                 "currency": "USD",
                 "market_cap": 2788369891328.0,
                 "beat_rate": 100,
-                "avg_surprise": 53.0,
+                "avg_surprise": 53.2,
                 "next_date": "2026-10-29",
                 "days_until": 51,
                 "date_estimate": true,
@@ -16107,21 +16004,21 @@
                         "date": "2025-02-06",
                         "eps_actual": 1.86,
                         "eps_estimate": 1.48,
-                        "surprise_pct": 25.4,
+                        "surprise_pct": 25.3,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-05-01",
                         "eps_actual": 1.59,
                         "eps_estimate": 1.36,
-                        "surprise_pct": 17.1,
+                        "surprise_pct": 16.8,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-07-31",
                         "eps_actual": 1.68,
-                        "eps_estimate": 1.33,
-                        "surprise_pct": 26.1,
+                        "eps_estimate": 1.32,
+                        "surprise_pct": 27.2,
                         "is_report_date": true
                     },
                     {
@@ -16141,8 +16038,8 @@
                     {
                         "date": "2026-04-29",
                         "eps_actual": 2.78,
-                        "eps_estimate": 1.65,
-                        "surprise_pct": 68.2,
+                        "eps_estimate": 1.64,
+                        "surprise_pct": 69.0,
                         "is_report_date": true
                     },
                     {
@@ -16436,7 +16333,7 @@
                 "currency": "USD",
                 "market_cap": 14603597824.0,
                 "beat_rate": 50,
-                "avg_surprise": -1.9,
+                "avg_surprise": -3.1,
                 "next_date": "2026-10-28",
                 "days_until": 50,
                 "date_estimate": true,
@@ -16487,9 +16384,9 @@
                     },
                     {
                         "date": "2025-10-27",
-                        "eps_actual": 7.54,
-                        "eps_estimate": 14.52,
-                        "surprise_pct": -48.1,
+                        "eps_actual": 6.09,
+                        "eps_estimate": 14.25,
+                        "surprise_pct": -57.3,
                         "is_report_date": true
                     },
                     {
@@ -16615,8 +16512,8 @@
                 "price": 122.11,
                 "currency": "USD",
                 "market_cap": 109786939392.0,
-                "beat_rate": 75,
-                "avg_surprise": 25.4,
+                "beat_rate": 100,
+                "avg_surprise": 33.0,
                 "next_date": "2026-11-04",
                 "days_until": 57,
                 "date_estimate": true,
@@ -16639,9 +16536,9 @@
                 "history": [
                     {
                         "date": "2024-10-30",
-                        "eps_actual": 0.17,
-                        "eps_estimate": 0.18,
-                        "surprise_pct": -3.4,
+                        "eps_actual": 0.26,
+                        "eps_estimate": 0.26,
+                        "surprise_pct": 38.0,
                         "is_report_date": true
                     },
                     {
@@ -16653,9 +16550,9 @@
                     },
                     {
                         "date": "2025-04-30",
-                        "eps_actual": 0.37,
-                        "eps_estimate": 0.33,
-                        "surprise_pct": 13.5,
+                        "eps_actual": 0.44,
+                        "eps_estimate": 0.37,
+                        "surprise_pct": 19.8,
                         "is_report_date": true
                     },
                     {
@@ -16674,16 +16571,16 @@
                     },
                     {
                         "date": "2026-02-10",
-                        "eps_actual": 0.66,
-                        "eps_estimate": 0.64,
-                        "surprise_pct": 3.8,
+                        "eps_actual": 0.73,
+                        "eps_estimate": 0.68,
+                        "surprise_pct": 6.3,
                         "is_report_date": true
                     },
                     {
                         "date": "2026-04-28",
-                        "eps_actual": 0.38,
-                        "eps_estimate": 0.39,
-                        "surprise_pct": -2.0,
+                        "eps_actual": 0.47,
+                        "eps_estimate": 0.43,
+                        "surprise_pct": 8.6,
                         "is_report_date": true
                     },
                     {
@@ -16795,8 +16692,8 @@
                 "price": 616.77,
                 "currency": "USD",
                 "market_cap": 1571225468928.0,
-                "beat_rate": 75,
-                "avg_surprise": 5.4,
+                "beat_rate": 88,
+                "avg_surprise": 11.0,
                 "next_date": "2026-10-28",
                 "days_until": 50,
                 "date_estimate": true,
@@ -16820,36 +16717,36 @@
                     {
                         "date": "2024-10-30",
                         "eps_actual": 6.03,
-                        "eps_estimate": 5.29,
+                        "eps_estimate": 5.3,
                         "surprise_pct": 13.9,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-01-29",
                         "eps_actual": 8.02,
-                        "eps_estimate": 6.76,
-                        "surprise_pct": 18.7,
+                        "eps_estimate": 6.74,
+                        "surprise_pct": 19.0,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-04-30",
                         "eps_actual": 6.43,
-                        "eps_estimate": 5.22,
-                        "surprise_pct": 23.1,
+                        "eps_estimate": 5.21,
+                        "surprise_pct": 23.5,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-07-30",
                         "eps_actual": 7.14,
-                        "eps_estimate": 5.9,
-                        "surprise_pct": 21.0,
+                        "eps_estimate": 5.86,
+                        "surprise_pct": 21.8,
                         "is_report_date": true
                     },
                     {
                         "date": "2025-10-29",
-                        "eps_actual": 1.05,
-                        "eps_estimate": 6.71,
-                        "surprise_pct": -84.3,
+                        "eps_actual": 7.25,
+                        "eps_estimate": 6.67,
+                        "surprise_pct": 8.7,
                         "is_report_date": true
                     },
                     {
@@ -16861,9 +16758,9 @@
                     },
                     {
                         "date": "2026-04-29",
-                        "eps_actual": 10.44,
-                        "eps_estimate": 6.66,
-                        "surprise_pct": 56.8,
+                        "eps_actual": 7.31,
+                        "eps_estimate": 6.82,
+                        "surprise_pct": 7.2,
                         "is_report_date": true
                     },
                     {
@@ -17158,7 +17055,7 @@
                 "currency": "USD",
                 "market_cap": 33474576384.0,
                 "beat_rate": 100,
-                "avg_surprise": 33.8,
+                "avg_surprise": 33.4,
                 "next_date": "2026-10-26",
                 "days_until": 48,
                 "date_estimate": false,
@@ -17181,9 +17078,9 @@
                 "history": [
                     {
                         "date": "2024-10-30",
-                        "eps_actual": 1.99,
-                        "eps_estimate": 1.95,
-                        "surprise_pct": 1.8,
+                        "eps_actual": 2.56,
+                        "eps_estimate": 2.1,
+                        "surprise_pct": 22.2,
                         "is_report_date": true
                     },
                     {
@@ -17209,9 +17106,9 @@
                     },
                     {
                         "date": "2025-10-27",
-                        "eps_actual": 3.56,
-                        "eps_estimate": 2.43,
-                        "surprise_pct": 46.6,
+                        "eps_actual": 2.77,
+                        "eps_estimate": 2.25,
+                        "surprise_pct": 22.9,
                         "is_report_date": true
                     },
                     {
@@ -17419,11 +17316,10 @@
             }
         ],
         "ai_summary": {
-            "text": "## Wat opviel\n\n- **CRM en ABNB** waren de uitschieters: CRM versloeg de winstverwachting met 80% en beloond met +22,6%; ABNB +17,4% na een solide beat. Beide laten zien dat de markt hongerig is naar groei bij tech en platforms.\n- **NVDA** bevestigt opnieuw zijn status: omzet verdubbeld op jaarbasis, koers +8,7% \u2014 de AI-investeringscyclus trekt nog steeds aan zonder tekenen van vertraging.\n- **KVUE** was de enige misser, maar de markt trok zich er nauwelijks iets van aan (+0,3%). PH en EBAY beattan ruim maar werden feitelijk genegeerd \u2014 klassiek teken van ingeprijsde hoge verwachtingen.\n\n## Om op te letten\n\n- **ADBE (10 sept.)** heeft een beat-rate van 100% en de markt verwacht groei door AI-integratie in zijn creatieve suite \u2014 elke teleurstelling over guidance wordt hard afgestraft.\n- **ORCL (10 sept.)** heeft een matige beat-rate van 62%; met cloudgroei als kernverhaal is de toon van de outlook belangrijker dan het gerapporteerde EPS.\n- **ASML (14 okt.)** is als halgeleiderapparatuurleverancier de bel voor de gehele chipsector \u2014 guidance over orderboek en exportrestricties bepaalt de sentiment voor TSM en NVDA tegelijk.",
+            "text": "## Wat opviel\n\n- **CRM en ABNB** waren de echte uitschieters: CRM sloeg EPS-verwachting met 80% en steeg 22,6%; ABNB met 9,5% surprise en 17,4% koerswinst \u2014 markt beloont groeiversnelling en winstmomentum royaal dit kwartaal.\n- **APP** is de anomalie: 43% EPS-surprise, omzet +52,8% YoY, en t\u00f3ch -19,7% koersreactie. De lat lag kennelijk nog hoger dan de consensus suggereerde \u2014 of er speelt iets fundamenteels in de guidance.\n- **KVUE** miste licht en werd nagenoeg genegeerd (+0,3%); **TECH** sloeg net de verwachting maar verloor terrein \u2014 beide bevestigen dat langzame groeiers weinig credit krijgen, ook bij beats.\n\n## Om op te letten\n\n- **ADBE (10 sept)** heeft een beat-rate van 100% maar opereert in het oog van de AI-creatieve storm. Guidance over AI-canvassen en adoptie wordt nauwlettender bekeken dan het EPS-getal zelf.\n- **TSM (15 okt)** is h\u00e9t barometer voor NVDA-gerelateerde vraag in Q3; met 100% beat-rate en $4,45 EPS-verwachting is de drempel hoog maar realistisch gegeven NVDA's eigen bloeiende omzetcijfers.\n- **GS en JPM (13 okt)** rapporteren gelijktijdig \u2014 hun dealflow en kredietkwaliteit geven richting aan het bredere marktsentiment voor Q4.",
             "model": "claude-sonnet-4-6",
-            "generated_at": "2026-09-08T10:01:31.355845+00:00"
+            "generated_at": "2026-09-08T10:28:20.332133+00:00"
         }
     },
-    "earnings_at": "2026-09-08T10:01:18.974579+00:00",
-    "ticker_updated_at": "2026-09-08T09:36:51.685803+00:00"
+    "earnings_at": "2026-09-08T10:28:06.655232+00:00"
 }
