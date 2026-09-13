@@ -443,6 +443,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-09-13",
+      "degiro": 16763.98,
+      "tr": 13109.12,
+      "nexus": 6552.69,
+      "bux": 1979.85
+    },
+    {
       "date": "2026-09-12",
       "degiro": 16763.98,
       "tr": 13111.48,
@@ -1251,17 +1258,17 @@
     "Tussen recordcijfers en nieuwe dieptepunten op de beurs"
   ],
   "tr_summary": {
-    "total": 13111.48,
-    "total_pl_pct": 9.01,
+    "total": 13109.12,
+    "total_pl_pct": 8.99,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7312.72,
-        "price": 66554.3281,
-        "pl_pct": 12.64,
-        "pl_eur": 820.69,
+        "value": 7310.36,
+        "price": 66532.8281,
+        "pl_pct": 12.61,
+        "pl_eur": 818.33,
         "weight": 55.8
       },
       {
@@ -1298,7 +1305,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-09-12T19:01:17.417263+00:00",
+  "dashboard_updated": "2026-09-13T07:01:09.638394+00:00",
   "degiro_summary": {
     "total": 16763.98,
     "total_pl_pct": 36.67,
@@ -1352,20 +1359,20 @@
   },
   "news_summary": [
     {
-      "theme": "Technologie onder druk",
-      "summary": "Techaandelen verliezen massief aan waarde, met name chipaandelen zoals ASML die door beleggers worden afgestoten. Dit raakt S&P500 en World ETF-beleggers rechtstreeks, gezien het grote gewicht van tech in deze indices."
+      "theme": "Technologie volatiliteit en chipsektor",
+      "summary": "Techbedrijven en chipaandelen (ASML, Micron) ondervinden forse verkoopdruk met verliezen in de honderden miljarden. Dit raakt direct je S&P500 en World ETF-positie, aangezien tech een groot gewicht heeft in deze indices."
     },
     {
-      "theme": "SpaceX beursgang volatiel",
-      "summary": "SpaceX debuteerde op de beurs maar handelt onder de introductieprijs, wat wijst op tegenvallende marktsentiment. Dit geeft inzicht in het brede vertrouwen van beleggers in groewaarden en innovatiebedrijven."
+      "theme": "SpaceX beursintroductie en Musk",
+      "summary": "SpaceX gaat naar de beurs met gemengde signalen: koersdaling onder introductieprijs maar positieve eerste dag, terwijl Musk miljardair-status bereikt. Dit be\u00efnvloedt beleggersstemming en groewaardeerders die in private-equity of tech-groeiers willen participeren."
     },
     {
-      "theme": "AEX stabiel, selectieve winnaars",
-      "summary": "De AEX steigt met Heineken als grote winnaar, terwijl huishoudens positief betrokken blijven. Dit toont dat sommige sectoren (consumptie, defensief) beter presteren dan tech-geori\u00ebnteerde indexen."
+      "theme": "Marktvolatiliteit en beleggerssentiment",
+      "summary": "De beurs vertoont onrust met recordcijfers naast dieptepunten, crypto (bitcoin) onderuit en code-oranje waarschuwingen. Dit duidt op risico-off sentiment dat all-in beleggers met diversifieerde portefeuilles raak kan treffen."
     },
     {
-      "theme": "Marktvolatiliteit en onrust nemen toe",
-      "summary": "Beleggers ervaren gooi- en smijtdagen met wisselende stemming, crypto onderuit en code-oranje-signalen. Deze turbulentie be\u00efnvloedt alle portefeuilles en vraagt om risicoherori\u00ebntatie bij ETF-beleggers."
+      "theme": "Defensieve posities en winnende sectoren",
+      "summary": "Heineken en consumentenbedrijven presteren beter terwijl huishoudens zelf goed presteren op de beurs. Voor AEX-portefeuille bezitters relevant: defensieve waarden bieden stabiliteit in volatile markten."
     }
   ],
   "bux_summary": {
@@ -2692,7 +2699,7 @@
     },
     {
       "date": "2026-09",
-      "value": 31855.31
+      "value": 31852.95
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2738,7 +2745,7 @@
   "benchmark_history": {
     "sp500_ytd": 11.64,
     "aex_ytd": 13.56,
-    "msci_ytd": null
+    "msci_ytd": 13.75
   },
   "sector_rotation": {
     "Tech & AI": 1.0,
