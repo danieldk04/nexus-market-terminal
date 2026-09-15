@@ -396,7 +396,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Tight stop-loss triggering**: 6 van 6 recente verliezen vallen door ATR-stops op <1% afstand van entry. Indicatie van onvoldoende volatiliteitsbuffer of suboptimale entry-timing.\n\n## 2. ROOT CAUSE\n- **Win rate 23.2% is kritiek** (breakeven ~55% bij gelijke risk/reward)\n- ATR-stops werken tegen: te nauw ingesteld voor gegeven marktvolatiliteit\n- Scorelogica faalt in voorselectie; Tech & AI met 9 verliezen vs. 2 wins wijst op overexposure aan gecorreleerde drawdowns\n- Herhaalde verliezers (ADBE, GILD) suggereren onvoldoende mean-reversion-validatie\n\n## 3. AANBEVELINGEN\n1. **Stop-loss uitstellen naar 2x ATR** (niet 1x) \u2192 minder ruis-triggering, meer trend-ruimte\n2. **Sector-cap implementeren**: Max 2 posities per sector; ban Tech & AI tot win rate >35%\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI (9:2 loss-ratio), Consumer Defensive (5:0)\n- **Zwaarder wegen**: Financials (6:5, neutral), maar alleen na ATR-filter aanpassing\n\n**Urgentie**: Huidige parameters zijn onrendabel. Voorstel: live-backtest aanpassing voor 50 trades voordat schaal.",
+        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BOT PERFORMANCE\n\n## 1. PATROON\n**Kritiek patroon**: 86.0% van verliezen zijn ATR-gebaseerde stop-loss triggers, niet fundamentele deterioratie. De bot sluit posities premature af op volatiliteit-oscillaties in plaats van trend-reversals. Drie recente wins gebruikten trailing-stops (13-17% returns), terwijl verliezen gemiddeld <1% drift voorafgaand aan exit tonen.\n\n## 2. ROOT CAUSE\n**Systematisch timing-falen**: ATR-stops zijn te strak ingesteld (volatiliteit-gebaseerd zonder momentum-filter). Scorelogica (BEN: 4.29 \u2192 EG: 5.3) selecteert valide posities, maar exit-discipline vernietigt winkanskansen. Tech & AI paradox: 9 verliezen vs. 2 wins suggereert sector-selectie juist, maar exit-timing fout.\n\n## 3. CONCRETE AANBEVELINGEN\n1. **ATR-stop uitbreiding**: Verhoog multiplier naar 2.2x (nu ~1.5x) OF voeg momentum-bevestiging toe (RSI >40 voordat ATR-exit triggert). Verwacht: 15-20% verbetering win rate.\n2. **Trailing-stop preferentie**: Verschuif 40% van ATR-exits naar dynamische trailing-stops (3-5% buffer). Recente data toont 15%+ upside-capture.\n\n## 4. SECTOR BIAS\n**Mijden**: Consumer Defensive (5 verliezen, 0 wins) \u2014 systematisch volatiel zonder opside.\n**Zwaarder wegen**: Financials paradox \u2014 6 wins maar nu 2 recente verliezen. Verhoog selectiecriteria (score >5.0 minimum).\n\n**Aanbeveling**: 30-daagse quarantaine Consumer Defensive; Tech & AI handhaven (verhouding normaliseerbaar",
         "win_rate": 23.2,
         "worst_sectors": [
             [
@@ -446,7 +446,7 @@
             "Financials": -0.6000000000000001,
             "Consumer Cyclical": 0.6
         },
-        "run_at": "2026-09-14T20:53:21.581085+00:00"
+        "run_at": "2026-09-15T10:52:29.110736+00:00"
     },
     "portfolio_history": [
         {
@@ -1546,85 +1546,6 @@
     "first_investment_date": "2022-03-29",
     "predictions": [
         {
-            "date": "2026-08-21",
-            "macro_snapshot": {
-                "vix": 15.31,
-                "treasury_10y": 4.73
-            },
-            "candidates": [
-                {
-                    "ticker": "FDX",
-                    "price": 326.99,
-                    "score": 5.22,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MCO",
-                    "price": 504.12,
-                    "score": 5.06,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MDLZ",
-                    "price": 64.42,
-                    "score": 4.82,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "FDS",
-                    "price": 298.38,
-                    "score": 4.76,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "KVUE",
-                    "price": 19.1,
-                    "score": 4.6,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "DHI",
-                    "price": 149.59,
-                    "score": 4.57,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GD",
-                    "price": 382.74,
-                    "score": 4.54,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "ALLE",
-                    "price": 163.09,
-                    "score": 4.42,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MAS",
-                    "price": 73.62,
-                    "score": 4.39,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "EG",
-                    "price": 370.19,
-                    "score": 4.39,
-                    "recommended_action": "watch",
-                    "conviction": null
-                }
-            ]
-        },
-        {
             "date": "2026-08-24",
             "macro_snapshot": {
                 "vix": 15.65,
@@ -2492,6 +2413,85 @@
                     "conviction": null
                 }
             ]
+        },
+        {
+            "date": "2026-09-15",
+            "macro_snapshot": {
+                "vix": 17.38,
+                "treasury_10y": 4.96
+            },
+            "candidates": [
+                {
+                    "ticker": "GEV",
+                    "price": 874.76,
+                    "score": 4.8,
+                    "recommended_action": "buy",
+                    "conviction": null
+                },
+                {
+                    "ticker": "EBAY",
+                    "price": 108.99,
+                    "score": 4.7,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "FDX",
+                    "price": 312.57,
+                    "score": 4.65,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "JCI",
+                    "price": 137.76,
+                    "score": 4.62,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "VRTX",
+                    "price": 519.51,
+                    "score": 4.58,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "ALLE",
+                    "price": 155.39,
+                    "score": 4.54,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "BBY",
+                    "price": 94.83,
+                    "score": 4.52,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "CRL",
+                    "price": 273.11,
+                    "score": 4.5,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "JNJ",
+                    "price": 266.32,
+                    "score": 4.48,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "AMCR",
+                    "price": 42.25,
+                    "score": 4.47,
+                    "recommended_action": "watch",
+                    "conviction": null
+                }
+            ]
         }
     ],
     "portfolio_value_history": [
@@ -2778,7 +2778,7 @@
         "Industrials": -0.3,
         "Utilities": -0.3
     },
-    "sector_rotation_date": "2026-09-14T20:53:15.486983+00:00",
+    "sector_rotation_date": "2026-09-15T10:52:21.661834+00:00",
     "watch_list": [
         "MELI"
     ],
