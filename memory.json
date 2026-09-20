@@ -457,6 +457,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-09-20",
+      "degiro": 16736.11,
+      "tr": 13483.81,
+      "nexus": 6484.57,
+      "bux": 2031.91
+    },
+    {
       "date": "2026-09-19",
       "degiro": 16736.18,
       "tr": 13564.42,
@@ -1304,28 +1311,28 @@
     }
   ],
   "last_news": [
+    "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "Webwinkel Shein naar de beurs, aandeel daalt op eerste dag flink",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-    "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Likken ze op de beurs niet meer aan een Magnum?",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "AEX koers omhoog, Heineken grote winnaar op de beurs",
     "Tussen recordcijfers en nieuwe dieptepunten op de beurs",
+    "AEX koers omhoog, Heineken grote winnaar op de beurs",
     "Kledingreus Shein naar de beurs, al is de waarde keihard ingestort"
   ],
   "tr_summary": {
-    "total": 13564.42,
-    "total_pl_pct": 12.77,
+    "total": 13483.81,
+    "total_pl_pct": 12.1,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7768.23,
-        "price": 70700.0,
-        "pl_pct": 19.66,
-        "pl_eur": 1276.2,
-        "weight": 57.3
+        "value": 7687.62,
+        "price": 69966.2812,
+        "pl_pct": 18.42,
+        "pl_eur": 1195.59,
+        "weight": 57.0
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1333,7 +1340,7 @@
         "price": 54.82,
         "pl_pct": 3.55,
         "pl_eur": 71.1,
-        "weight": 15.3
+        "weight": 15.4
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1341,7 +1348,7 @@
         "price": 167.14,
         "pl_pct": 5.79,
         "pl_eur": 100.51,
-        "weight": 13.5
+        "weight": 13.6
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1361,11 +1368,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-09-19T11:55:43.636337+00:00",
+  "dashboard_updated": "2026-09-20T12:21:27.898098+00:00",
   "degiro_summary": {
-    "total": 16736.18,
+    "total": 16736.11,
     "total_pl_pct": 36.4,
-    "total_invested": 12269.52,
+    "total_invested": 12269.48,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1402,9 +1409,9 @@
       },
       {
         "name": "V",
-        "value": 641.12,
+        "value": 641.05,
         "pl_pct": 82.37,
-        "pl_eur": 289.57,
+        "pl_eur": 289.54,
         "div_yield": 0.0073,
         "annual_div_eur": 4.68,
         "first_buy_date": null,
@@ -1432,7 +1439,7 @@
     }
   ],
   "bux_summary": {
-    "total": 2032.14,
+    "total": 2031.91,
     "total_pl_pct": -27.09,
     "total_invested": 2787.06,
     "interest_total": 0,
@@ -1440,10 +1447,10 @@
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1772.12,
-        "price": 317.06,
-        "pl_pct": -22.04,
-        "pl_eur": -500.95,
+        "value": 1771.92,
+        "price": 317.02,
+        "pl_pct": -22.05,
+        "pl_eur": -501.15,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1453,10 +1460,10 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 225.87,
-        "price": 112.93,
-        "pl_pct": -31.79,
-        "pl_eur": -105.27,
+        "value": 225.84,
+        "price": 112.92,
+        "pl_pct": -31.8,
+        "pl_eur": -105.3,
         "div_yield": 0.0456,
         "annual_div_eur": 10.3,
         "first_buy_date": null,
@@ -2748,7 +2755,7 @@
     },
     {
       "date": "2026-09",
-      "value": 32332.74
+      "value": 32251.83
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2796,7 +2803,7 @@
   "benchmark_history": {
     "sp500_ytd": 11.55,
     "aex_ytd": 13.18,
-    "msci_ytd": null
+    "msci_ytd": 14.12
   },
   "sector_rotation": {
     "Tech & AI": 1.3,
