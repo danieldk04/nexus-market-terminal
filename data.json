@@ -4178,8 +4178,8 @@
             "ticker": "EMR",
             "name": "Emerson Electric Company",
             "buy_price": 144.02,
-            "current_price": 154.26,
-            "current_value": 250.61,
+            "current_price": 154.19,
+            "current_value": 250.5,
             "buy_date": "2026-07-23",
             "industry_group": "Industrials",
             "sector": "Industrials",
@@ -4193,14 +4193,14 @@
             "atr_stop_price": 138.005,
             "confidence_at_entry": null,
             "shares": 1.6246,
-            "pl_percent": 7.11
+            "pl_percent": 7.06
         },
         {
             "ticker": "JCI",
             "name": "Johnson Controls International ",
             "buy_price": 143.37,
-            "current_price": 146.55,
-            "current_value": 261.03,
+            "current_price": 146.44,
+            "current_value": 260.84,
             "buy_date": "2026-07-27",
             "industry_group": "Industrials",
             "sector": "Industrials",
@@ -4214,7 +4214,7 @@
             "atr_stop_price": 137.085,
             "confidence_at_entry": null,
             "shares": 1.7812,
-            "pl_percent": 2.22
+            "pl_percent": 2.14
         },
         {
             "ticker": "NDSN",
@@ -4241,8 +4241,8 @@
             "ticker": "EG",
             "name": "Everest Group, Ltd.",
             "buy_price": 377.61,
-            "current_price": 371.18,
-            "current_value": 302.44,
+            "current_price": 370.96,
+            "current_value": 302.26,
             "buy_date": "2026-08-31",
             "industry_group": "Financials",
             "sector": "Financial Services",
@@ -4256,14 +4256,14 @@
             "atr_stop_price": 367.32,
             "confidence_at_entry": null,
             "shares": 0.8148,
-            "pl_percent": -1.7
+            "pl_percent": -1.76
         },
         {
             "ticker": "MO",
             "name": "Altria Group, Inc.",
             "buy_price": 69.78,
-            "current_price": 68.65,
-            "current_value": 302.11,
+            "current_price": 68.64,
+            "current_value": 302.06,
             "buy_date": "2026-09-01",
             "industry_group": "Consumer Defensive",
             "sector": "Consumer Defensive",
@@ -4277,7 +4277,7 @@
             "atr_stop_price": 67.515,
             "confidence_at_entry": null,
             "shares": 4.4007,
-            "pl_percent": -1.62
+            "pl_percent": -1.63
         },
         {
             "ticker": "EBAY",
@@ -4325,8 +4325,8 @@
             "ticker": "CRL",
             "name": "Charles River Laboratories Inte",
             "buy_price": 273.11,
-            "current_price": 285.14,
-            "current_value": 357.11,
+            "current_price": 285.11,
+            "current_value": 357.07,
             "buy_date": "2026-09-14",
             "industry_group": "Healthcare",
             "sector": "Healthcare",
@@ -4340,14 +4340,14 @@
             "atr_stop_price": 260.78,
             "confidence_at_entry": null,
             "shares": 1.2524,
-            "pl_percent": 4.4
+            "pl_percent": 4.39
         },
         {
             "ticker": "AVY",
             "name": "Avery Dennison Corporation",
             "buy_price": 171.26,
-            "current_price": 172.12,
-            "current_value": 343.0,
+            "current_price": 172.09,
+            "current_value": 342.94,
             "buy_date": "2026-09-15",
             "industry_group": "Consumer Cyclical",
             "sector": "Consumer Cyclical",
@@ -4361,14 +4361,14 @@
             "atr_stop_price": 165.08,
             "confidence_at_entry": null,
             "shares": 1.9928,
-            "pl_percent": 0.5
+            "pl_percent": 0.48
         },
         {
             "ticker": "JNJ",
             "name": "Johnson & Johnson",
             "buy_price": 269.99,
-            "current_price": 269.32,
-            "current_value": 338.89,
+            "current_price": 269.19,
+            "current_value": 338.72,
             "buy_date": "2026-09-21",
             "industry_group": "Healthcare",
             "sector": "Healthcare",
@@ -4382,7 +4382,7 @@
             "atr_stop_price": 262.04,
             "confidence_at_entry": null,
             "shares": 1.2583,
-            "pl_percent": -0.25
+            "pl_percent": -0.3
         },
         {
             "ticker": "MAR",
@@ -4775,9 +4775,9 @@
     "portfolio": {
         "cash": 6816.72,
         "starting_capital": 10000.0,
-        "open_value": 3536.05,
-        "total_value": 10352.77,
-        "return_pct": 3.53
+        "open_value": 3535.25,
+        "total_value": 10351.97,
+        "return_pct": 3.52
     },
     "watchlist": [
         {
@@ -13962,5 +13962,6 @@
             }
         ]
     },
-    "earnings_at": "2026-09-22T20:05:53.595937+00:00"
+    "earnings_at": "2026-09-22T20:05:53.595937+00:00",
+    "ticker_updated_at": "2026-09-22T22:03:09.438708+00:00"
 }
