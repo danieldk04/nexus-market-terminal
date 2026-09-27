@@ -478,6 +478,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-09-27",
+      "degiro": 16939.29,
+      "tr": 14021.88,
+      "nexus": 6816.72,
+      "bux": 2082.31
+    },
+    {
       "date": "2026-09-26",
       "degiro": 16939.36,
       "tr": 13966.73,
@@ -1377,25 +1384,25 @@
     "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "Webwinkel Shein naar de beurs, aandeel daalt op eerste dag flink",
     "AEX koers omhoog, Heineken grote winnaar op de beurs",
+    "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-    "Tussen recordcijfers en nieuwe dieptepunten op de beurs",
     "Likken ze op de beurs niet meer aan een Magnum?",
-    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?"
+    "Tussen recordcijfers en nieuwe dieptepunten op de beurs"
   ],
   "tr_summary": {
-    "total": 13966.73,
-    "total_pl_pct": 16.12,
+    "total": 14021.88,
+    "total_pl_pct": 16.57,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8117.98,
-        "price": 73883.0781,
-        "pl_pct": 25.05,
-        "pl_eur": 1625.95,
-        "weight": 58.1
+        "value": 8173.13,
+        "price": 74385.0,
+        "pl_pct": 25.89,
+        "pl_eur": 1681.1,
+        "weight": 58.3
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1403,7 +1410,7 @@
         "price": 54.63,
         "pl_pct": 3.2,
         "pl_eur": 63.92,
-        "weight": 14.8
+        "weight": 14.7
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1411,7 +1418,7 @@
         "price": 169.74,
         "pl_pct": 7.43,
         "pl_eur": 129.09,
-        "weight": 13.4
+        "weight": 13.3
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1431,11 +1438,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-09-26T12:14:03.568341+00:00",
+  "dashboard_updated": "2026-09-27T13:01:21.500352+00:00",
   "degiro_summary": {
-    "total": 16939.36,
+    "total": 16939.29,
     "total_pl_pct": 38.03,
-    "total_invested": 12272.27,
+    "total_invested": 12272.23,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1472,11 +1479,11 @@
       },
       {
         "name": "V",
-        "value": 644.53,
+        "value": 644.46,
         "pl_pct": 81.92,
-        "pl_eur": 290.23,
+        "pl_eur": 290.2,
         "div_yield": 0.0073,
-        "annual_div_eur": 4.71,
+        "annual_div_eur": 4.7,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.8
@@ -1485,35 +1492,35 @@
   },
   "news_summary": [
     {
-      "theme": "Technologie onder druk",
-      "summary": "Techaandelen verliezen massaal waarde terwijl beleggers hun posities afbouwen, met name chipmakers zoals ASML. Dit raakt direct S&P500 en World ETF-beleggers die zwaar in tech zijn gepositioneerd."
+      "theme": "Tech-sector onder druk",
+      "summary": "Techaandelen verliezen massaal aan waarde, met name chipaandelen zoals ASML die door beleggers worden afgestoten. Dit raakt S&P500 en World ETF-beleggers direct, daar tech een groot gewicht heeft in deze indices."
     },
     {
-      "theme": "IPO-golf en ruimtevaart",
-      "summary": "SpaceX en Shein gaan naar de beurs met gemengde ontvangst - SpaceX presteert goed maar daalt onder introductieprijs terwijl Shein significant daalt. Dit signaleert voorzichtigheid van beleggers ondanks initi\u00eble enthousiasme."
+      "theme": "SpaceX IPO volatiel verlopend",
+      "summary": "SpaceX debuteert op de beurs maar kent een chaotisch verloop: eerst sterke opening, daarna daling onder introductieprijs. Voor speculatieve beleggers interessant, maar toont risico's van hype-gedreven noteringen."
     },
     {
-      "theme": "AEX en aandelen gemengd",
-      "summary": "Terwijl de AEX stijgt met Heineken als sterke performer, worstelen individuele bedrijven met volatiliteit na halfjaarcijfers (CSG). Dit toont divergentie tussen index en componentwaarden."
+      "theme": "AEX positief, Heineken leidt",
+      "summary": "De Nederlandse beurs sluit hoger uit met Heineken als grote winnaar, wat wijst op selectieve sterkte in defensieve aandelen. Relevant voor AEX ETF-houders die profiteren van deze outperformance."
     },
     {
-      "theme": "Marktsentiment en defensie",
-      "summary": "Ondanks geopolitieke onrust en recordschommelingen blijft de markt veerkrachtig, met huishoudens actief investeren en defensieve aandelen gezocht als bescherming. Dit suggereert gemengd vertrouwen in economische stabiliteit."
+      "theme": "Nieuwe IPO's en marktstemming",
+      "summary": "Shein en andere newcomers zorgen voor gemengde signalen: zwakke debuutdagen ondanks beleggersinteresse. Dit illustreert voorzichtige marktsentiment en risico op overgewaardeerde IPO's in onzekere tijden."
     }
   ],
   "bux_summary": {
-    "total": 2082.55,
-    "total_pl_pct": -25.28,
+    "total": 2082.31,
+    "total_pl_pct": -25.29,
     "total_invested": 2787.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1824.4,
-        "price": 326.41,
-        "pl_pct": -19.74,
-        "pl_eur": -448.67,
+        "value": 1824.19,
+        "price": 326.38,
+        "pl_pct": -19.75,
+        "pl_eur": -448.88,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1523,10 +1530,10 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 225.67,
-        "price": 112.83,
-        "pl_pct": -31.85,
-        "pl_eur": -105.47,
+        "value": 225.64,
+        "price": 112.82,
+        "pl_pct": -31.86,
+        "pl_eur": -105.5,
         "div_yield": 0.046,
         "annual_div_eur": 10.38,
         "first_buy_date": null,
@@ -2818,7 +2825,7 @@
     },
     {
       "date": "2026-09",
-      "value": 32988.64
+      "value": 33043.48
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2867,7 +2874,7 @@
   "benchmark_history": {
     "sp500_ytd": 12.9,
     "aex_ytd": 14.93,
-    "msci_ytd": null
+    "msci_ytd": 15.79
   },
   "sector_rotation": {
     "Tech & AI": 7.5,
