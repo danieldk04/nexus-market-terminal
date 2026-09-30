@@ -431,7 +431,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT - AUTONOME BOT\n\n## 1. PATROON\nMassale verliesconcentratie in Tech & AI (9 verliezen) en Energy (8x) tegen slechts 2 wins in Tech. **Win rate van 23% is onhoudbaar.** Recent verliesreeks (6 stops in 18 dagen) suggereert systematische underperformance, niet toeval.\n\n## 2. ROOT CAUSE\n**ATR-stop mechanisme faalt.** Alle recente verliezen triggeren op technische stops\u2014dit duidt op slechte entry-timing, niet exit-management. Margin of error is te klein ($0.05-$16 tussen entry en stop). Herhaalde verliezers (ADBE, GILD, APA) wijzen op scorelogica die structureel falsepositive signalen genereert.\n\n## 3. AANBEVELINGEN\n- **Drempel verhogen:** Minimum entry-score van 4.5 naar 5.5+ (zie TECH rotatie naar GEV met score 5.9). Dit snijdt ~40% lagere kwaliteit entries weg.\n- **ATR-stop verruimen:** Van huidige ~0.7-2% naar 3-4% buffer. Huidige stops raken noise; grotere ATR vermijdt whipsaws.\n\n## 4. SECTOR BIAS\n**VERMIJDEN:** Tech & AI (9L vs 2W), Energy (8L nullen). \n**ZWAARDER WEGEN:** Financials paradox\u20147 verliezen maar ook 6 wins. Selectiviteit per ticker essentieel; sector-blanket trading ongeschikt.\n\n**Aanbeveling:** Bot pauzeren tot kalibratie compleet.",
+        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Tight stop-losses triggeren valse uitbreuken.** Alle recente verliezen werden gestopt op ATR-niveaus binnen 0.6-2.1% van inzet. Gelijktijds genereerde ABNB (+13.9%) en BR (+17.3%) winst via trailing stops, wat suggereert dat de bot te snel uit winnende posities stapt en te rigide verdedigt bij daling.\n\n## 2. ROOT CAUSE\n**Timing-falen, niet scorelogica.** Win rate 23% (14/61) is kritiek. De ATR-stops zijn te restrictief: 6 verliezen in 13 dagen (sept 10-28) wijzen op uitgeblust momentum of verkeerde entry-timing. TECH & AI paradox: meeste verliezen (9x) maar ook winnaar BR \u2013 inconsistent weighting.\n\n## 3. AANBEVELINGEN\n1. **ATR-stop verruimen van 1.0x \u2192 1.5x ATR** om ruis uit te filteren; pilot op laag-volatile sectoren.\n2. **Hergewichte sector-scoring:** Financials negatief beoordelen (-20%), Tech & AI pauzeren tot selectiviteit verbetert. Focus op Consumer Cyclical (ABNB model).\n\n## 4. SECTOR BIAS\n- **Mijden:** Tech & AI (9 verlies vs 2 winst), Energy (0 winst)\n- **Zwaarder wegen:** Consumer Cyclical en selectieve Financials na filtering\n\n**Actie:** Draai 3 wk pilot; eisen min. +35% win rate voor verdere schaling.",
         "win_rate": 23.0,
         "worst_sectors": [
             [
@@ -481,7 +481,7 @@
             "Healthcare": -1.5,
             "Consumer Cyclical": 0.6
         },
-        "run_at": "2026-09-29T21:18:39.656947+00:00"
+        "run_at": "2026-09-30T11:47:56.630767+00:00"
     },
     "portfolio_history": [
         {
@@ -2917,7 +2917,7 @@
         "Real Estate": -0.3,
         "Materials": -0.3
     },
-    "sector_rotation_date": "2026-09-29T21:18:33.002638+00:00",
+    "sector_rotation_date": "2026-09-30T11:47:49.998230+00:00",
     "watch_list": [
         "MELI"
     ],
