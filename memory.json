@@ -523,6 +523,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-10-04",
+      "degiro": 17032.92,
+      "tr": 14158.66,
+      "nexus": 7666.61,
+      "bux": 2097.27
+    },
+    {
       "date": "2026-10-03",
       "degiro": 17032.92,
       "tr": 14135.39,
@@ -1468,27 +1475,27 @@
     }
   ],
   "last_news": [
-    "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
+    "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
+    "X-Fab ontploft op beurs door hype op X, handel meermaals stilgelegd",
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Likken ze op de beurs niet meer aan een Magnum?",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Tussen recordcijfers en nieuwe dieptepunten op de beurs",
-    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
+    "Tussen recordcijfers en nieuwe dieptepunten op de beurs"
   ],
   "tr_summary": {
-    "total": 14135.39,
-    "total_pl_pct": 17.52,
+    "total": 14158.66,
+    "total_pl_pct": 17.71,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8292.15,
-        "price": 75468.2812,
-        "pl_pct": 27.73,
-        "pl_eur": 1800.12,
+        "value": 8315.42,
+        "price": 75680.0625,
+        "pl_pct": 28.09,
+        "pl_eur": 1823.39,
         "weight": 58.7
       },
       {
@@ -1525,7 +1532,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-10-03T12:33:04.121063+00:00",
+  "dashboard_updated": "2026-10-04T13:11:42.964494+00:00",
   "degiro_summary": {
     "total": 17032.92,
     "total_pl_pct": 38.74,
@@ -1579,20 +1586,20 @@
   },
   "news_summary": [
     {
-      "theme": "Tech-sector onder druk",
-      "summary": "Techaandelen verliezen massaal waarde en beleggers verkopen chipstocks, wat direct impact heeft op grote indexgewichten zoals ASML. Dit drukt vooral de S&P500 en World-ETFs, waar tech zwaar vertegenwoordigd is."
+      "theme": "Tech-sector volatiliteit en correctie",
+      "summary": "Techaandelen verliezen massaal waarde met honderden miljarden dollars aan marktwaarde verdampt. Dit raakt direct S&P500- en World-ETF posities aangezien tech een groot gewicht heeft in deze indices."
     },
     {
-      "theme": "IPO-volatiliteit en nieuwkomers",
-      "summary": "SpaceX en Shein maken hun beursdebuut met gemengde resultaten: SpaceX start sterk maar Shein daalt flink op dag \u00e9\u00e9n. Deze volatiliteit toont onzekerheid onder beleggers over nieuwe aandelen ondanks huishoudens die graag investeren."
+      "theme": "SpaceX beursgang: Musk-euforie",
+      "summary": "SpaceX debuteert op de beurs met gemengde resultaten - aanvankelijk onder introductieprijs maar herstelt zich daarna. Dit signaal voor de beleggersappetijt voor groeiaandelen ondanks volatiliteit."
     },
     {
-      "theme": "Nederlandse aandelen gemengd",
-      "summary": "AEX stijgt met Heineken als grote winnaar, terwijl ASML daalt door chipverkopen en CSG wild schommelt na resultaten. Dit geeft beleggers in Nederlandse ETF's en aandelen een ongelijk speelveld."
+      "theme": "Chip- en halfgeleidersector onder druk",
+      "summary": "ASML en chipfondsen verliezen terrein doordat beleggers massaal uit deze sector stappen. Relevant voor gespecialiseerde posities aangezien chips cruciaal zijn voor tech- en AI-industrie."
     },
     {
-      "theme": "Marktonzekerheid ondanks records",
-      "summary": "De beurs vertoont grote schommelingen (records \u00e9n dieptepunten) en beleggers twijfelen, ondanks wereldwijde onrust niet volledig weg te slaan. Deze volatiliteit suggereert voorzichtigheid voor al je ETF- en aandelenpositie."
+      "theme": "AEX winst, defensieve aandelen sterk",
+      "summary": "Ondanks globale tech-onrust stijgt de AEX met Heineken als sterke performer, wat wijst op verschuiving naar defensieve waarden. Dit suggereert risicominimalisatie onder beleggers midden onzekerheid."
     }
   ],
   "bux_summary": {
@@ -2916,7 +2923,7 @@
     },
     {
       "date": "2026-10",
-      "value": 33265.58
+      "value": 33288.85
     }
   ],
   "first_buy_dates_by_isin": {
@@ -2968,7 +2975,7 @@
   "benchmark_history": {
     "sp500_ytd": 12.6,
     "aex_ytd": 15.41,
-    "msci_ytd": null
+    "msci_ytd": 16.81
   },
   "sector_rotation": {
     "Tech & AI": 7.6,
