@@ -523,6 +523,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-10-05",
+      "degiro": 17036.6,
+      "tr": 14303.69,
+      "nexus": 7666.61,
+      "bux": 2109.29
+    },
+    {
       "date": "2026-10-04",
       "degiro": 17032.92,
       "tr": 14158.66,
@@ -1485,18 +1492,18 @@
     "Tussen recordcijfers en nieuwe dieptepunten op de beurs"
   ],
   "tr_summary": {
-    "total": 14158.66,
-    "total_pl_pct": 17.71,
+    "total": 14303.69,
+    "total_pl_pct": 18.92,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8315.42,
-        "price": 75680.0625,
-        "pl_pct": 28.09,
-        "pl_eur": 1823.39,
-        "weight": 58.7
+        "value": 8460.45,
+        "price": 77000.0,
+        "pl_pct": 30.32,
+        "pl_eur": 1968.42,
+        "weight": 59.1
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1504,7 +1511,7 @@
         "price": 53.53,
         "pl_pct": 1.12,
         "pl_eur": 22.36,
-        "weight": 14.3
+        "weight": 14.1
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1512,7 +1519,7 @@
         "price": 171.14,
         "pl_pct": 8.32,
         "pl_eur": 144.47,
-        "weight": 13.3
+        "weight": 13.1
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1520,7 +1527,7 @@
         "price": 136.8038,
         "pl_pct": 9.7,
         "pl_eur": 155.2,
-        "weight": 12.4
+        "weight": 12.3
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1532,11 +1539,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-10-04T13:11:42.964494+00:00",
+  "dashboard_updated": "2026-10-05T07:01:08.145704+00:00",
   "degiro_summary": {
-    "total": 17032.92,
-    "total_pl_pct": 38.74,
-    "total_invested": 12276.75,
+    "total": 17036.6,
+    "total_pl_pct": 38.75,
+    "total_invested": 12278.81,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1547,7 +1554,7 @@
         "annual_div_eur": 82.85,
         "first_buy_date": null,
         "sector": null,
-        "weight": 37.9
+        "weight": 37.8
       },
       {
         "name": "VUSA.AS",
@@ -1573,11 +1580,11 @@
       },
       {
         "name": "V",
-        "value": 640.75,
+        "value": 644.43,
         "pl_pct": 78.59,
-        "pl_eur": 281.97,
+        "pl_eur": 283.59,
         "div_yield": 0.0074,
-        "annual_div_eur": 4.74,
+        "annual_div_eur": 4.77,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 3.8
@@ -1587,34 +1594,34 @@
   "news_summary": [
     {
       "theme": "Tech-sector volatiliteit en correctie",
-      "summary": "Techaandelen verliezen massaal waarde met honderden miljarden dollars aan marktwaarde verdampt. Dit raakt direct S&P500- en World-ETF posities aangezien tech een groot gewicht heeft in deze indices."
+      "summary": "Techaandelen verliezen massaal waarde met honderden miljarden aan marktkapitalisatie verdwenen. Dit raakt direct S&P500 en World-ETF beleggers die zwaar in tech gepositioneerd zijn, vooral omdat chips (ASML) en softwarebedrijven (Microsoft) onder druk staan."
     },
     {
-      "theme": "SpaceX beursgang: Musk-euforie",
-      "summary": "SpaceX debuteert op de beurs met gemengde resultaten - aanvankelijk onder introductieprijs maar herstelt zich daarna. Dit signaal voor de beleggersappetijt voor groeiaandelen ondanks volatiliteit."
+      "theme": "SpaceX beursgang: hype versus realiteit",
+      "summary": "SpaceX debuteerde op de beurs met gemengde signalen: eerste dag goed, maar koers zakt onder introductieprijs met terugstellende momentum. Voor Musk-believers en tech-ETF eigenaren relevant vanwege volatiliteit en het bredere tech-sentiment."
     },
     {
-      "theme": "Chip- en halfgeleidersector onder druk",
-      "summary": "ASML en chipfondsen verliezen terrein doordat beleggers massaal uit deze sector stappen. Relevant voor gespecialiseerde posities aangezien chips cruciaal zijn voor tech- en AI-industrie."
+      "theme": "AEX stabiliteit en defensieve waarden",
+      "summary": "Terwijl US-tech wankelt, beweegt de AEX omhoog met Heineken als grote winnaar, wat duidt op beleggersvlucht naar defensieve, stabiele waarden. Dit biedt stabiliteit voor AEX-ETF beleggers maar signaleert voorzichtigheid in het marktsentiment."
     },
     {
-      "theme": "AEX winst, defensieve aandelen sterk",
-      "summary": "Ondanks globale tech-onrust stijgt de AEX met Heineken als sterke performer, wat wijst op verschuiving naar defensieve waarden. Dit suggereert risicominimalisatie onder beleggers midden onzekerheid."
+      "theme": "Marktvolatiliteit en onzekerheid ondanks macro",
+      "summary": "Ondanks aanhoudende recordcijfers en geopolitieke spanningen ervaren beleggers extreme schommelingen (gooi- en smijtdagen), wat duidt op onderliggende onrust. Dit benadrukt het belang van gediversificeerde posities in diverse regio's en sectoren."
     }
   ],
   "bux_summary": {
-    "total": 2097.27,
-    "total_pl_pct": -24.75,
+    "total": 2109.29,
+    "total_pl_pct": -24.32,
     "total_invested": 2787.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1839.94,
-        "price": 329.2,
-        "pl_pct": -19.05,
-        "pl_eur": -433.13,
+        "value": 1850.51,
+        "price": 331.09,
+        "pl_pct": -18.59,
+        "pl_eur": -422.56,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1624,12 +1631,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 223.66,
-        "price": 111.83,
-        "pl_pct": -32.46,
-        "pl_eur": -107.48,
+        "value": 224.94,
+        "price": 112.47,
+        "pl_pct": -32.07,
+        "pl_eur": -106.2,
         "div_yield": 0.047,
-        "annual_div_eur": 10.51,
+        "annual_div_eur": 10.57,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 10.7
@@ -1637,10 +1644,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 29.73,
-        "price": 29.73,
-        "pl_pct": -83.44,
-        "pl_eur": -149.84,
+        "value": 29.9,
+        "price": 29.9,
+        "pl_pct": -83.35,
+        "pl_eur": -149.67,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2923,7 +2930,7 @@
     },
     {
       "date": "2026-10",
-      "value": 33288.85
+      "value": 33449.58
     }
   ],
   "first_buy_dates_by_isin": {
