@@ -466,7 +466,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BOT V2.1\n\n## 1. PATROON\n**Dominante verliesmechanisme:** ATR-stop liquidaties op micro-bewegingen (0,2-0,5% onder entry). 66 transacties met slechts 21% winrate duidt op slecht gekalibreerde entry-signalen, niet slechte stop-loss-plaatsing. Healthcare en Tech/AI genereren 34/66 verliezen (52%) ondanks technisch gezien \"goed werkende\" stop-losses.\n\n## 2. ROOT CAUSE\n**Timing-falen primair.** Herhaalde verliezers (ADBE, GILD, NEM) suggereren dat het scoringmodel systematisch vals-positief genereert in volatiele sectoren. Win rate van 21% is onder toeval (50%), niet stop-loss-gerelateerd.\n\n## 3. CONCRETE AANBEVELINGEN\n- **A)** Verhoog entry-drempel: Score \u22655.0 (van impliciete ~4.5), selecteer alleen signalen met 3+ dag confirmatieperiode\n- **B)** Sector-weighting: Reduceer Tech & AI allocation van huidige ~25% naar max 10%; verhoog Consumer Cyclical van 5% naar 15% (2/2 wins ratio)\n\n## 4. SECTOR BIAS\n**Mijden:** Healthcare (16 verliezen, 0 netto wins) en Tech & AI (9 verliezen vs 2 wins)  \n**Benadrukken:** Consumer Cyclical (100% winrate op sample)\n\n**Aanbeveling:** Pauzeer Healthcare entries tot scoremodel herkalibrerend.",
+        "analysis": "# POST-MORTEM RAPPORT AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**ATR-stop dominantie (100% recente verliezen).** Alle 6 recente verliezen werden getriggerd door ATR-gebaseerde stops op zeer nauwe marges (<0.5% afstand). Dit suggereert structureel overshooting van volatiliteitsmodellen, niet trading-logic-falen.\n\n## 2. ROOT CAUSE\n**Twee-laags systematisch falen:**\n- **Timing:** Healthcare & Financials (elk 3/6 recente verliezen) tonen volatiliteitsconcentratie; ATR-stops te strak voor deze sectoren.\n- **Selectie:** Win rate 21.2% + herhaalde verliezers (KVUE, MO, GILD) duiden op zwakke ingangsscreens, niet alleen exits.\n\n## 3. AANBEVELINGEN\n1. **Sector-adaptive ATR-stops:** Stel ATR-multiplier dynamisch in per sector (Healthcare: 2.5x vs. basis 2.0x); verhoog bodem-afstand naar \u22651.5%.\n2. **Herhalingsfilter:** Blokkeer tickers die >2x verlies hebben genomen in trailing 90 dagen. Reduc herhaalde verliezers van 10 naar max 3.\n\n## 4. SECTOR BIAS\n- **Mijden:** Healthcare (7 verliezen, 0 wins in recente batch) \u2192 HOLD totdat volatiliteit daalt.\n- **Ondergewogen:** Financials (16 in totaal, slechts 6 wins) \u2192 zwakke signal-to-noise.\n- **Zwaarder wegen:** Consumer Cyclical (2 wins, laag verlies-aandeel).\n\n**Verwachte impact:** +3-5% win rate na implementatie.",
         "win_rate": 21.2,
         "worst_sectors": [
             [
@@ -519,7 +519,7 @@
             "Healthcare": -1.5,
             "Consumer Cyclical": 0.6
         },
-        "run_at": "2026-10-06T21:33:58.366534+00:00"
+        "run_at": "2026-10-07T12:32:17.755813+00:00"
     },
     "portfolio_history": [
         {
@@ -3008,7 +3008,7 @@
         "Financials": -0.3,
         "Real Estate": -0.3
     },
-    "sector_rotation_date": "2026-10-06T21:33:51.949124+00:00",
+    "sector_rotation_date": "2026-10-07T12:32:10.822374+00:00",
     "watch_list": [
         "MELI"
     ],
