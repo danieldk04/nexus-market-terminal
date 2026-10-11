@@ -523,6 +523,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-10-11",
+      "degiro": 17282.32,
+      "tr": 14042.72,
+      "nexus": 6573.16,
+      "bux": 2218.22
+    },
+    {
       "date": "2026-10-10",
       "degiro": 17282.32,
       "tr": 14019.08,
@@ -1518,27 +1525,27 @@
   ],
   "last_news": [
     "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?",
-    "Koers CSG vliegt op en neer na publicatie halfjaarcijfers",
     "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
+    "Koers CSG vliegt op en neer na publicatie halfjaarcijfers",
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "Likken ze op de beurs niet meer aan een Magnum?",
     "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
+    "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses"
   ],
   "tr_summary": {
-    "total": 14019.08,
-    "total_pl_pct": 16.55,
+    "total": 14042.72,
+    "total_pl_pct": 16.75,
     "total_invested": 12028.3,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8123.42,
-        "price": 73932.6562,
-        "pl_pct": 25.13,
-        "pl_eur": 1631.39,
-        "weight": 57.9
+        "value": 8147.07,
+        "price": 74147.8438,
+        "pl_pct": 25.49,
+        "pl_eur": 1655.04,
+        "weight": 58.0
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1546,7 +1553,7 @@
         "price": 53.62,
         "pl_pct": 1.29,
         "pl_eur": 25.76,
-        "weight": 14.5
+        "weight": 14.4
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1554,7 +1561,7 @@
         "price": 172.86,
         "pl_pct": 9.41,
         "pl_eur": 163.37,
-        "weight": 13.6
+        "weight": 13.5
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1574,7 +1581,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-10-10T13:40:24.415543+00:00",
+  "dashboard_updated": "2026-10-11T14:02:37.526525+00:00",
   "degiro_summary": {
     "total": 17282.32,
     "total_pl_pct": 40.75,
@@ -1628,20 +1635,20 @@
   },
   "news_summary": [
     {
-      "theme": "Nederlandse beurs sterke performer",
-      "summary": "De AEX doorbreekt de 1000-puntgrens en presteert dit jaar beter dan andere Europese indices, met tech-aandelen als grote motor. Dit be\u00efnvloedt rechtstreeks AEX-ETF-posities positief en signaleert relatieve sterkte van Nederlandse fundamentals."
+      "theme": "Nederlandse beurs outperformance",
+      "summary": "De AEX presteert dit jaar beter dan andere Europese indices, wat positief uitpakt voor ETF-beleggers in Nederlandse aandelen. Dit momentum hangt samen met sterke bedrijfsresultaten en relatieve stabiliteit op de heimarkt."
     },
     {
-      "theme": "Tech-sector in turbulentie",
-      "summary": "Beleggers verkopen massaal chipaandelen (ASML-koers daalt) terwijl AI-angsten en onzekerheid zorgen voor tweedeling tussen winnaars en verliezers in de technologiesector. Dit raakt S&P500 en World-ETF's significant, aangezien tech-exposure groot is."
+      "theme": "Tech-sector volatiliteit en tweedelingen",
+      "summary": "Tech-aandelen vertonen grote koerssprongen door AI-speculatie en winstnemingen, waarbij chipbedrijven onder druk staan (ASML daalt) terwijl grootheden als Microsoft standvastig blijven. Voor S&P500 en World ETF-beleggers betekent dit verhoogde volatiliteit in het tech-segment."
     },
     {
-      "theme": "SpaceX IPO: momentum en risico",
-      "summary": "SpaceX gaat naar de beurs met gemengde signalen: goede openingsdag ondanks koers onder introductieprijs, en Musk wordt eerste biljonair, maar beleggers moeten voorzichtig zijn met Amerikaanse tech-volatiliteit. Dit weerspiegelt bredere onzekerheid in VS-markten."
+      "theme": "SpaceX IPO en Musk-effect",
+      "summary": "SpaceX debuteert op de beurs met gemengde resultaten: sterke eerste dag maar introductieprijs onder druk, waarbij retail-beleggers massaal instappen op het Musk-sentiment. Dit illustreert hoe hype volatile prijsbewegingen kan veroorzaken in growth-aandelen."
     },
     {
-      "theme": "Marktvolatiliteit ondanks geopolitiek",
-      "summary": "Ondanks oorlogen en politieke onrust blijft de beurs paradoxaal goed presteren, maar 'gooi- en smijtdagen' duiden op onderliggende spanning en beleggersvoorzichtigheid. Huishoudens doen het goed, maar selectiviteit (6 aandelen als medicijn) wordt cruciaal voor stabiliteit."
+      "theme": "Marktsentiment ondanks geopolitieke onrust",
+      "summary": "Ondanks oorlogen en onzekerheid stijgen beurzen door positieve huishoudensecijfers en beleggingsappetijt, maar beurzen vertonen gooi- en smijtgedrag met record-dalingen afgewisseld door recordcijfers. Dit vraagt om gediversifieerde posities als buffer tegen volatiliteit."
     }
   ],
   "bux_summary": {
@@ -1670,8 +1677,8 @@
         "price": 112.42,
         "pl_pct": -32.1,
         "pl_eur": -106.31,
-        "div_yield": 0.0478,
-        "annual_div_eur": 10.75,
+        "div_yield": 0.0461,
+        "annual_div_eur": 10.36,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 10.1
@@ -2965,7 +2972,7 @@
     },
     {
       "date": "2026-10",
-      "value": 33519.62
+      "value": 33543.26
     }
   ],
   "first_buy_dates_by_isin": {
@@ -3017,7 +3024,7 @@
   "benchmark_history": {
     "sp500_ytd": 13.9,
     "aex_ytd": 16.88,
-    "msci_ytd": null
+    "msci_ytd": 18.26
   },
   "sector_rotation": {
     "Tech & AI": 5.4,
