@@ -466,7 +466,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT: Autonome Beleggingsbot\n\n## 1. PATROON\n**Extreme sectorspreiding**: Tech & AI (9 verlies / 2 winst, -7 netto), Healthcare (7 verlies / 0 winst) en Financials (8 verlies / 6 winst, -2 netto) genereren 25 van 52 verliezen (48%). Win rate in deze sectoren: ~15%. De bot heeft geen selectiviteit; het trapt in dezelfde sectorfallen.\n\n## 2. ROOT CAUSE\n**Timing-falen, niet scorelogica**: Recente data toont stops op micro-niveaus (REGN -2%, EG -0.6%, MO -0.3%), wat wijst op premature entry. Het ATR-stop-model is te strak ingesteld. Tegelijk: weinig winsten \u2192 insufficient positiegrote voordat volatiliteit toeslaat. **Diagnose**: Entry-signaal is zwak; stop-loss reageert correct.\n\n## 3. AANBEVELINGEN\n- **A**: Sector-overlay implementeren. Tech & AI / Healthcare minimaal tot 25% gewicht (vs. huidig ~50%). Verhoog Consumer Cyclical gewicht (winrate 50%+).\n- **B**: ATR-multiplier verhogen van huidig niveau naar 2.2x (in plaats van ~1.5x). Dit reduceert whipsaws op REGN/EG-niveau.\n\n**Verwachte impact**: +5-8% winrate.\n\n## 4. SECTOR BIAS\n- **MIJDEN**: Healthcare (13% winrate), Tech & AI (18%)\n- **BENADRUKKEN**: Consumer Cyclical, Utilities\n- **MONITORING**: Financials (break-even; verder analyse nodig)",
+        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BOT Q4 2026\n\n## 1. PATROON\n**Massale stop-loss triggering**: 6 van 6 recente verliezen via ATR-stops met minimale slippage (<$2-3). Dit suggereert niet falende picks, maar **volatility whipsaws** rond support-levels. Win rate 21.2% is kritiek laag.\n\n## 2. ROOT CAUSE\n- **ATR-stop mechanica faalt**: Stops liggen te dicht bij intraday noise (2-4% margins)\n- **Sector concentration**: Tech/AI & Healthcare genereren 17/66 verliezen (26%); overlap in correlatie\n- **Timing bias**: Recente wins (ABNB +13.9%, BR +17.3%) keren zich snel om na booking\n\n## 3. AANBEVELINGEN\n1. **ATR-stop verruimen**: Van 1.0\u00d7 naar 1.5-2.0\u00d7 ATR; accepteer hogere verlies-per-trade om whipsaws te elimineren\n2. **Sector caps implementeren**: Max 2 posities per sector; herhaalde verliezers (ADBE, GILD, NEM, MO, KVUE) volledig op blacklist\n\n## 4. SECTOR BIAS\n- **Mijden**: Healthcare (7 verliezen), Tech/AI (9 verliezen) \u2013 gecorreleerde drawdowns\n- **Verhogen**: Consumer Cyclical (enkel 2 verlies vs. wins); Financials herbalanceren\n\n**Conclusie**: Technisch probleem, geen strategisch. Fix stops; reduceer volatility exposure.",
         "win_rate": 21.2,
         "worst_sectors": [
             [
@@ -519,7 +519,7 @@
             "Healthcare": -1.5,
             "Consumer Cyclical": 0.6
         },
-        "run_at": "2026-10-19T21:27:23.606841+00:00"
+        "run_at": "2026-10-20T10:52:30.201260+00:00"
     },
     "portfolio_history": [
         {
@@ -3105,7 +3105,7 @@
         "Energy": 0.3,
         "Consumer Defensive": 0.3
     },
-    "sector_rotation_date": "2026-10-19T21:27:16.778707+00:00",
+    "sector_rotation_date": "2026-10-20T10:52:24.218200+00:00",
     "watch_list": [
         "MELI"
     ],
