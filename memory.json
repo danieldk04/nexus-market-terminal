@@ -525,7 +525,7 @@
     {
       "date": "2026-10-24",
       "degiro": 17158.43,
-      "tr": 16310.14,
+      "tr": 16291.88,
       "nexus": 6244.5,
       "bux": 2181.42
     },
@@ -1625,17 +1625,17 @@
     "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
   ],
   "tr_summary": {
-    "total": 16310.14,
-    "total_pl_pct": 12.14,
+    "total": 16291.88,
+    "total_pl_pct": 12.01,
     "total_invested": 14544.93,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8992.64,
-        "price": 72073.75,
-        "pl_pct": 18.54,
-        "pl_eur": 1406.47,
+        "value": 8974.38,
+        "price": 71927.4219,
+        "pl_pct": 18.3,
+        "pl_eur": 1388.21,
         "weight": 55.1
       },
       {
@@ -1644,7 +1644,7 @@
         "price": 55.4,
         "pl_pct": 3.92,
         "pl_eur": 98.59,
-        "weight": 16.0
+        "weight": 16.1
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1672,7 +1672,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-10-24T07:01:20.391602+00:00",
+  "dashboard_updated": "2026-10-24T12:00:03.420413+00:00",
   "degiro_summary": {
     "total": 17158.43,
     "total_pl_pct": 39.74,
@@ -1726,20 +1726,20 @@
   },
   "news_summary": [
     {
-      "theme": "Technologie-sector onder druk",
-      "summary": "Techaandelen verliezen flink terrein met name chipbedrijven zoals ASML, wat wijst op verminderd beleggersenthousiasme voor de sector. Dit raakt direct S&P500 en World-ETF beleggers die zwaar in tech zitten, en kan bredere marktvolatiliteit veroorzaken."
+      "theme": "Tech-sector volatiliteit en chipbedrijven",
+      "summary": "Techaandelen verliezen massief waarde door beleggersvrees, met name chipbedrijven zoals ASML die fors dalen. Dit raakt direct S&P500 en World ETF-posities aangezien tech een groot deel van deze indices uitmaakt."
     },
     {
-      "theme": "Sterke Nederlandse beurs positie",
-      "summary": "De Nederlandse beurs prestatie dit jaar beter dan Europa-gemiddeld, aangestuurd door sterke huishoudvermogen en belegger activiteit. Dit voordeel is relevant voor AEX-index volgers maar kan voorbijgaan als internationale tech-zorgen toenemen."
+      "theme": "IPO's: SpaceX en Shein gaan naar beurs",
+      "summary": "Grote ondernemingen als SpaceX en Shein debuteren op de beurs met gemengde resultaten en sterke aandacht van beleggers. Dit biedt zowel risico's als kansen voor portefeuilles die naar groeiwaarden kijken."
     },
     {
-      "theme": "IPO-golf met gemengde resultaten",
-      "summary": "Grote tech-IPOs als Shein en SpaceX beleven teleurstellende beursdebuuten ondanks aanvankelijke hype, wat wijst op correctie van onrealistische verwachtingen. Dit be\u00efnvloedt sentimentele waardering van groeiaandelen in alle indices."
+      "theme": "Nederlandse beurs outperformed in Europa",
+      "summary": "De AEX doet dit jaar beter dan Europese peers, wat duidt op sterke fondsen in Nederland. Voor AEX-beleggers is dit een positief signaal, hoewel wereldwijde volatiliteit blijft doorwerken."
     },
     {
-      "theme": "Marktvolatiliteit en AI-sentiment",
-      "summary": "Sterke schommelingen tussen recordcijfers en dalingen duiden op AI-onzekerheid en beleggers die geneigd zijn tot overdrijving, resulterend in 'gooi- en smijtdagen'. Voor diversifi\u00eberde ETF-beleggers betekent dit hogere turbulentie ondanks onderliggende fundamentals."
+      "theme": "Marktvolatiliteit en tweedeling beleggers",
+      "summary": "Beurzen vertonen grillig gedrag met grote schommelingen tussen winsten en verliezen, gedeeltelijk veroorzaakt door AI-gerelateerde vrees. Dit vraagt om gedisciplineerde positiemanagement in diversifieerde portefeuilles."
     }
   ],
   "bux_summary": {
@@ -3070,7 +3070,7 @@
     },
     {
       "date": "2026-10",
-      "value": 35649.99
+      "value": 35631.73
     }
   ],
   "first_buy_dates_by_isin": {
@@ -3122,7 +3122,7 @@
   "benchmark_history": {
     "sp500_ytd": 11.16,
     "aex_ytd": 16.95,
-    "msci_ytd": null
+    "msci_ytd": 16.67
   },
   "sector_rotation": {
     "Tech & AI": -5.9,
