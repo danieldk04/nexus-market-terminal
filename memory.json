@@ -523,6 +523,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-10-25",
+      "degiro": 17158.43,
+      "tr": 16257.62,
+      "nexus": 6244.5,
+      "bux": 2181.42
+    },
+    {
       "date": "2026-10-24",
       "degiro": 17158.43,
       "tr": 16291.88,
@@ -1615,28 +1622,28 @@
     }
   ],
   "last_news": [
+    "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?",
-    "Webwinkel Shein naar de beurs, aandeel daalt op eerste dag flink",
+    "Huishoudens doen het erg goed op de beurs, ook SpaceX populair als investering",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Likken ze op de beurs niet meer aan een Magnum?",
     "Tussen recordcijfers en nieuwe dieptepunten op de beurs",
-    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?",
-    "Beleggers verkopen chipaandelen alweer en daardoor daalt ASML-koers"
+    "SpaceX naar de beurs: geloven beleggers in de dromen van Elon Musk?"
   ],
   "tr_summary": {
-    "total": 16291.88,
-    "total_pl_pct": 12.01,
+    "total": 16257.62,
+    "total_pl_pct": 11.78,
     "total_invested": 14544.93,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8974.38,
-        "price": 71927.4219,
-        "pl_pct": 18.3,
-        "pl_eur": 1388.21,
-        "weight": 55.1
+        "value": 8940.12,
+        "price": 71652.8203,
+        "pl_pct": 17.85,
+        "pl_eur": 1353.95,
+        "weight": 55.0
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1672,7 +1679,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-10-24T12:00:03.420413+00:00",
+  "dashboard_updated": "2026-10-25T12:34:11.187581+00:00",
   "degiro_summary": {
     "total": 17158.43,
     "total_pl_pct": 39.74,
@@ -1726,20 +1733,20 @@
   },
   "news_summary": [
     {
-      "theme": "Tech-sector volatiliteit en chipbedrijven",
-      "summary": "Techaandelen verliezen massief waarde door beleggersvrees, met name chipbedrijven zoals ASML die fors dalen. Dit raakt direct S&P500 en World ETF-posities aangezien tech een groot deel van deze indices uitmaakt."
+      "theme": "Volatiliteit en marktsentiment",
+      "summary": "De beurs vertoont sterke schommelingen met techaandelen die honderden miljarden verliezen, terwijl andere sectoren stijgen. Dit duidt op een tweedeling in de markt waarbij beleggers nerveus reageren op AI-vrees en macro-onzekerheden, wat direct impact heeft op uw diversificatie in AEX en S&P500."
     },
     {
-      "theme": "IPO's: SpaceX en Shein gaan naar beurs",
-      "summary": "Grote ondernemingen als SpaceX en Shein debuteren op de beurs met gemengde resultaten en sterke aandacht van beleggers. Dit biedt zowel risico's als kansen voor portefeuilles die naar groeiwaarden kijken."
+      "theme": "Tech-sector onder druk",
+      "summary": "Chipaandelen zoals ASML dalen flink nadat beleggers massaal uit deze posities stappen. Dit segment vormt een significant gewicht in technologie-heavy indices, dus deze verkopen kunnen uw World en S&P500 portefeuille aanzienlijk be\u00efnvloeden."
     },
     {
-      "theme": "Nederlandse beurs outperformed in Europa",
-      "summary": "De AEX doet dit jaar beter dan Europese peers, wat duidt op sterke fondsen in Nederland. Voor AEX-beleggers is dit een positief signaal, hoewel wereldwijde volatiliteit blijft doorwerken."
+      "theme": "IPO-markten turbulent",
+      "summary": "Veel verwachte noteringen (SpaceX, Shein) vertonen wisselende prestaties met dalingen op eerste handelsdag of onder introductieprijs. Dit geeft inzicht in beleggersvorsichtigheid en risicoadversie die ook doorwerkt in bestaande aandelen."
     },
     {
-      "theme": "Marktvolatiliteit en tweedeling beleggers",
-      "summary": "Beurzen vertonen grillig gedrag met grote schommelingen tussen winsten en verliezen, gedeeltelijk veroorzaakt door AI-gerelateerde vrees. Dit vraagt om gedisciplineerde positiemanagement in diversifieerde portefeuilles."
+      "theme": "Nederlandse markt outperform",
+      "summary": "De Nederlandse beurs doet dit jaar tot nu toe het beste in Europa dankzij huishoudens en retail-beleggers die actief investeren. Dit biedt opportuniteiten voor AEX-posities, maar vraagt voorzichtigheid omdat retail-inflows ook kunnen draaien bij marktomslag."
     }
   ],
   "bux_summary": {
@@ -3070,7 +3077,7 @@
     },
     {
       "date": "2026-10",
-      "value": 35631.73
+      "value": 35597.47
     }
   ],
   "first_buy_dates_by_isin": {
