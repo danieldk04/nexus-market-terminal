@@ -473,7 +473,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Systematische stop-loss traps in lage-volatiliteit sectoren.** Healthcare en Consumer Defensive triggeren stop-losses op minimale prix-bewegingen (\u20ac0,30\u2013\u20ac3,87). Dit duidt op ATR-parameters die niet sector-gecalibreerd zijn. Win rate 22,4% is onhoudbaar.\n\n## 2. ROOT CAUSE\n- **ATR-stop miscalibration:** Defensieve sectoren hebben lagere volatiliteit; dezelfde ATR-multiplier veroorzaakt premature exits\n- **Herhaalde verliezers (KVUE, MO, GILD, ADBE):** Bot laat zich niet leren; re-entry fout\n- **Timing fout:** Geen correlatie tussen scorelogica (TECH: score 4,5\u21925,9) en actuele marktregime\n\n## 3. AANBEVELINGEN\n1. **Sector-specifieke ATR:** Healthcare/Consumer: 1,5\u00d7 ATR | Tech/Energy: 2,5\u00d7 ATR. Test op backtest.\n2. **Blacklist-mechanisme:** Geen re-entry op >2 loses in 90d voor dezelfde ticker (KVUE, MO, ADBE).\n\n## 4. SECTOR BIAS\n- **Mijden:** Tech & AI (9 loses vs 2 wins) + Healthcare (7 loses, maar inconsistent)\n- **Zwaarder wegen:** Selectief defensief bij score \u22655,5+ (CRL +30,8% succes)\n\n**Verdict:** Stop huidige run. Recalibratie nodig voordat risico toeneemt.",
+        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**Defensieve sectoren vallen tegen systematisch.** Healthcare en Consumer Defensive genereren 13 verliezen tegenover slechts 9 wins (59% verliesratio). ATR-stops worden consistent geraakt op lage volatiliteit \u2013 suggereert te strakke stops of sectorale downturn waar technische signalen falen.\n\n## 2. ROOT CAUSE\n- **Timing-falen:** Win rate 22.4% is kritiek laag. Scorelogica (bijv. GEV-rotatie met 4.5\u21925.9) voorspelt exits beter dan entries.\n- **Stop-plaatsing:** Vier Healthcare-stops in twee dagen (REGN, MDT, JNJ) duidt op sector-wide drawdown die vooraf niet werd gefilterd.\n\n## 3. AANBEVELINGEN\n1. **Sector-weighting aanpassen:** Reduceer Healthcare/Consumer Defensive allocatie van ~40% naar 15%. Tech & AI heeft 17.9% win rate maar geeft uitschieter BR (+17.3%) \u2013 concentreer hier.\n2. **Dynamische stop-logica:** Implementeer sector-volatiliteitsfilter. Verhoog ATR-multiplicator voor lage-vol sectoren (Healthcare: 2.5x ATR i.p.v. 1.5x) of skip entry als sektor-beta < 0.8.\n\n## 4. SECTOR BIAS\n- **Te mijden:** Healthcare/Consumer Defensive (teveel herhaling: REGN, MDT, JNJ, KVUE, MO)\n- **Zwaarder wegen:** Tech & AI (verdwijning 'herhaalde verliezen' ADBE, EXE leidt tot BR-succes)\n\n**Actie:** Stop alle nieuwe Healthcare-entries tot win rate > 35%.",
         "win_rate": 22.4,
         "worst_sectors": [
             [
@@ -525,7 +525,7 @@
             "Financials": -0.6000000000000001,
             "Healthcare": -0.6000000000000001
         },
-        "run_at": "2026-10-27T21:11:22.841596+00:00"
+        "run_at": "2026-10-28T12:02:35.588827+00:00"
     },
     "portfolio_history": [
         {
@@ -1926,85 +1926,6 @@
     "first_investment_date": "2022-03-29",
     "predictions": [
         {
-            "date": "2026-10-12",
-            "macro_snapshot": {
-                "vix": 15.21,
-                "treasury_10y": 5.24
-            },
-            "candidates": [
-                {
-                    "ticker": "EBAY",
-                    "price": 114.65,
-                    "score": 5.4,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "BF-B",
-                    "price": 26.81,
-                    "score": 5.38,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "GEV",
-                    "price": 996.8,
-                    "score": 5.3,
-                    "recommended_action": "buy",
-                    "conviction": null
-                },
-                {
-                    "ticker": "IEX",
-                    "price": 235.77,
-                    "score": 5.1,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "FAST",
-                    "price": 51.49,
-                    "score": 5.1,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "KO",
-                    "price": 89.79,
-                    "score": 5.04,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "NDSN",
-                    "price": 330.44,
-                    "score": 4.96,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "EMR",
-                    "price": 162.46,
-                    "score": 4.88,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "JCI",
-                    "price": 155.41,
-                    "score": 4.8,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "KVUE",
-                    "price": 17.83,
-                    "score": 4.74,
-                    "recommended_action": "watch",
-                    "conviction": null
-                }
-            ]
-        },
-        {
             "date": "2026-10-13",
             "macro_snapshot": {
                 "vix": 15.27,
@@ -2872,6 +2793,85 @@
                     "conviction": null
                 }
             ]
+        },
+        {
+            "date": "2026-10-28",
+            "macro_snapshot": {
+                "vix": 17.45,
+                "treasury_10y": 4.99
+            },
+            "candidates": [
+                {
+                    "ticker": "CTAS",
+                    "price": 214.8,
+                    "score": 5.23,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "FDX",
+                    "price": 307.1,
+                    "score": 5.22,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "PYPL",
+                    "price": 56.09,
+                    "score": 5.12,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "MAS",
+                    "price": 75.17,
+                    "score": 4.99,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "CF",
+                    "price": 120.54,
+                    "score": 4.68,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "EMR",
+                    "price": 166.27,
+                    "score": 4.6,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "ALLE",
+                    "price": 180.55,
+                    "score": 4.42,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "FAST",
+                    "price": 51.55,
+                    "score": 4.4,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "IEX",
+                    "price": 233.21,
+                    "score": 4.4,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "JCI",
+                    "price": 155.88,
+                    "score": 4.3,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                }
+            ]
         }
     ],
     "portfolio_value_history": [
@@ -3170,7 +3170,7 @@
         "Consumer Defensive": 0.3,
         "Utilities": 0.3
     },
-    "sector_rotation_date": "2026-10-27T21:11:16.231017+00:00",
+    "sector_rotation_date": "2026-10-28T12:02:28.512173+00:00",
     "watch_list": [
         "MELI"
     ],
