@@ -7735,1101 +7735,19 @@
     },
     "filings_at": "2026-10-29T21:34:55.370760+00:00",
     "earnings": {
-        "generated_at": "2026-10-29T21:36:13.294349+00:00",
+        "generated_at": "2026-10-30T11:33:46.335097+00:00",
         "horizon_days": 75,
         "stats": {
             "tracked": 70,
-            "upcoming_7d": 14,
-            "upcoming_30d": 19,
-            "reported": 32,
-            "beats": 21,
-            "misses": 9,
+            "upcoming_7d": 9,
+            "upcoming_30d": 14,
+            "reported": 44,
+            "beats": 31,
+            "misses": 11,
             "inline": 2,
-            "avg_surprise": 2.6
+            "avg_surprise": 5.9
         },
         "calendar": [
-            {
-                "ticker": "AMZN",
-                "name": "Amazon.com, Inc.",
-                "sector": "Consumer Cyclical",
-                "tags": [
-                    "mega-cap"
-                ],
-                "price": 243.79,
-                "currency": "USD",
-                "market_cap": 2629595299840.0,
-                "beat_rate": 100,
-                "avg_surprise": 53.1,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 1.992,
-                "rev_estimate": 202264872830.0,
-                "last": {
-                    "date": "2026-07-30",
-                    "eps_actual": 5.75,
-                    "eps_estimate": 1.82,
-                    "surprise_pct": 215.1,
-                    "is_report_date": true,
-                    "days_ago": 91,
-                    "eps_yoy": 242.3,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +215.1% boven verwachting"
-                },
-                "history": [
-                    {
-                        "date": "2024-10-31",
-                        "eps_actual": 1.43,
-                        "eps_estimate": 1.14,
-                        "surprise_pct": 25.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-02-06",
-                        "eps_actual": 1.86,
-                        "eps_estimate": 1.48,
-                        "surprise_pct": 25.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-05-01",
-                        "eps_actual": 1.59,
-                        "eps_estimate": 1.36,
-                        "surprise_pct": 16.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-31",
-                        "eps_actual": 1.68,
-                        "eps_estimate": 1.32,
-                        "surprise_pct": 27.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-30",
-                        "eps_actual": 1.95,
-                        "eps_estimate": 1.56,
-                        "surprise_pct": 25.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-05",
-                        "eps_actual": 1.95,
-                        "eps_estimate": 1.95,
-                        "surprise_pct": 22.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-29",
-                        "eps_actual": 2.78,
-                        "eps_estimate": 1.65,
-                        "surprise_pct": 68.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-30",
-                        "eps_actual": 5.75,
-                        "eps_estimate": 1.82,
-                        "surprise_pct": 215.1,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "LLY",
-                "name": "Eli Lilly and Company",
-                "sector": "Healthcare",
-                "tags": [
-                    "mega-cap"
-                ],
-                "price": 1373.7,
-                "currency": "USD",
-                "market_cap": 1224985149440.0,
-                "beat_rate": 88,
-                "avg_surprise": 14.2,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 10.211,
-                "rev_estimate": 23570178880.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 7.48,
-                    "eps_estimate": 6.35,
-                    "surprise_pct": 17.9,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": 6.6,
-                    "revenue": 22974000000.0,
-                    "revenue_yoy": 47.7,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +17.9% boven verwachting, omzetgroei +47.7% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-02-06",
-                        "eps_actual": 5.32,
-                        "eps_estimate": 5.07,
-                        "surprise_pct": 5.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-05-01",
-                        "eps_actual": 3.34,
-                        "eps_estimate": 3.46,
-                        "surprise_pct": -3.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-08-07",
-                        "eps_actual": 6.31,
-                        "eps_estimate": 5.59,
-                        "surprise_pct": 12.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-30",
-                        "eps_actual": 7.02,
-                        "eps_estimate": 5.89,
-                        "surprise_pct": 19.1,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-04",
-                        "eps_actual": 7.54,
-                        "eps_estimate": 6.91,
-                        "surprise_pct": 9.1,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": 8.55,
-                        "eps_estimate": 6.79,
-                        "surprise_pct": 25.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-08-05",
-                        "eps_actual": 8.38,
-                        "eps_estimate": 6.58,
-                        "surprise_pct": 27.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 7.48,
-                        "eps_estimate": 6.35,
-                        "surprise_pct": 17.9,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "MA",
-                "name": "Mastercard Incorporated",
-                "sector": "Financial Services",
-                "tags": [
-                    "mega-cap"
-                ],
-                "price": 635.7,
-                "currency": "USD",
-                "market_cap": 556879511552.0,
-                "beat_rate": 100,
-                "avg_surprise": 4.7,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 5.177,
-                "rev_estimate": 9966760790.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 5.31,
-                    "eps_estimate": 5.17,
-                    "surprise_pct": 2.7,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": 21.2,
-                    "revenue": 9277000000.0,
-                    "revenue_yoy": 14.1,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +2.7% boven verwachting, omzetgroei +14.1% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-01-30",
-                        "eps_actual": 3.82,
-                        "eps_estimate": 3.69,
-                        "surprise_pct": 3.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-05-01",
-                        "eps_actual": 3.73,
-                        "eps_estimate": 3.56,
-                        "surprise_pct": 4.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-31",
-                        "eps_actual": 4.15,
-                        "eps_estimate": 4.02,
-                        "surprise_pct": 3.1,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-30",
-                        "eps_actual": 4.38,
-                        "eps_estimate": 4.31,
-                        "surprise_pct": 1.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-01-29",
-                        "eps_actual": 4.76,
-                        "eps_estimate": 4.24,
-                        "surprise_pct": 12.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": 4.6,
-                        "eps_estimate": 4.41,
-                        "surprise_pct": 4.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-30",
-                        "eps_actual": 5.04,
-                        "eps_estimate": 4.78,
-                        "surprise_pct": 5.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 5.31,
-                        "eps_estimate": 5.17,
-                        "surprise_pct": 2.7,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "INTC",
-                "name": "Intel Corporation",
-                "sector": "Technology",
-                "tags": [
-                    "watchlist"
-                ],
-                "price": 92.07,
-                "currency": "USD",
-                "market_cap": 486691700736.0,
-                "beat_rate": 75,
-                "avg_surprise": 690.3,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 0.437,
-                "rev_estimate": 17079371760.0,
-                "last": {
-                    "date": "2026-07-23",
-                    "eps_actual": 0.42,
-                    "eps_estimate": 0.22,
-                    "surprise_pct": 94.6,
-                    "is_report_date": true,
-                    "days_ago": 98,
-                    "eps_yoy": null,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +94.6% boven verwachting"
-                },
-                "history": [
-                    {
-                        "date": "2024-10-31",
-                        "eps_actual": -0.46,
-                        "eps_estimate": -0.03,
-                        "surprise_pct": -1533.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-01-30",
-                        "eps_actual": 0.13,
-                        "eps_estimate": 0.12,
-                        "surprise_pct": 8.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-24",
-                        "eps_actual": 0.13,
-                        "eps_estimate": null,
-                        "surprise_pct": 2769.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-24",
-                        "eps_actual": -0.1,
-                        "eps_estimate": 0.01,
-                        "surprise_pct": -1169.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-23",
-                        "eps_actual": 0.23,
-                        "eps_estimate": 0.01,
-                        "surprise_pct": 3162.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-01-22",
-                        "eps_actual": 0.15,
-                        "eps_estimate": 0.08,
-                        "surprise_pct": 81.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-23",
-                        "eps_actual": 0.29,
-                        "eps_estimate": 0.01,
-                        "surprise_pct": 2108.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-23",
-                        "eps_actual": 0.42,
-                        "eps_estimate": 0.22,
-                        "surprise_pct": 94.6,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "MRK",
-                "name": "Merck & Company, Inc.",
-                "sector": "Healthcare",
-                "tags": [
-                    "mega-cap"
-                ],
-                "price": 146.33,
-                "currency": "USD",
-                "market_cap": 361021210624.0,
-                "beat_rate": 100,
-                "avg_surprise": 31.4,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 1.949,
-                "rev_estimate": 16787175879.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 2.49,
-                    "eps_estimate": 2.09,
-                    "surprise_pct": 19.3,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": -3.5,
-                    "revenue": 16607000000.0,
-                    "revenue_yoy": 5.1,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +19.3% boven verwachting, omzetgroei +5.1% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-02-04",
-                        "eps_actual": 1.72,
-                        "eps_estimate": 1.67,
-                        "surprise_pct": 3.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-24",
-                        "eps_actual": 2.22,
-                        "eps_estimate": 2.14,
-                        "surprise_pct": 4.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-29",
-                        "eps_actual": 2.13,
-                        "eps_estimate": 2.03,
-                        "surprise_pct": 5.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-30",
-                        "eps_actual": 2.58,
-                        "eps_estimate": 2.35,
-                        "surprise_pct": 9.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-03",
-                        "eps_actual": 2.04,
-                        "eps_estimate": 2.01,
-                        "surprise_pct": 147.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": -1.28,
-                        "eps_estimate": -1.47,
-                        "surprise_pct": 13.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-08-04",
-                        "eps_actual": -0.13,
-                        "eps_estimate": -0.26,
-                        "surprise_pct": 49.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 2.49,
-                        "eps_estimate": 2.09,
-                        "surprise_pct": 19.3,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "CAT",
-                "name": "Caterpillar, Inc.",
-                "sector": "Industrials",
-                "tags": [
-                    "mega-cap"
-                ],
-                "price": 647.39,
-                "currency": "USD",
-                "market_cap": 297588916224.0,
-                "beat_rate": 75,
-                "avg_surprise": 8.6,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 6.987,
-                "rev_estimate": 21422239170.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 7.2,
-                    "eps_estimate": 7.03,
-                    "surprise_pct": 2.4,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": 45.5,
-                    "revenue": 20543000000.0,
-                    "revenue_yoy": 24.0,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +2.4% boven verwachting, omzetgroei +24.0% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-01-30",
-                        "eps_actual": 5.14,
-                        "eps_estimate": 5.03,
-                        "surprise_pct": 2.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-30",
-                        "eps_actual": 4.25,
-                        "eps_estimate": 4.34,
-                        "surprise_pct": -2.2,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-08-05",
-                        "eps_actual": 4.72,
-                        "eps_estimate": 4.9,
-                        "surprise_pct": -3.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-29",
-                        "eps_actual": 4.95,
-                        "eps_estimate": 4.52,
-                        "surprise_pct": 9.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-01-29",
-                        "eps_actual": 5.16,
-                        "eps_estimate": 4.71,
-                        "surprise_pct": 9.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": 5.54,
-                        "eps_estimate": 4.64,
-                        "surprise_pct": 19.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-08-04",
-                        "eps_actual": 8.17,
-                        "eps_estimate": 6.2,
-                        "surprise_pct": 31.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 7.2,
-                        "eps_estimate": 7.03,
-                        "surprise_pct": 2.4,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "LIN",
-                "name": "Linde plc",
-                "sector": "Basic Materials",
-                "tags": [
-                    "kandidaat"
-                ],
-                "price": 503.15,
-                "currency": "USD",
-                "market_cap": 231942160384.0,
-                "beat_rate": 88,
-                "avg_surprise": 76.1,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 4.527,
-                "rev_estimate": 9167006100.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 3.66,
-                    "eps_estimate": 4.17,
-                    "surprise_pct": -12.3,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": -13.1,
-                    "revenue": 9289000000.0,
-                    "revenue_yoy": 9.3,
-                    "reaction_pct": null,
-                    "verdict": "MISS",
-                    "summary": "Eps -12.3% onder verwachting, omzetgroei +9.3% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-02-06",
-                        "eps_actual": 3.97,
-                        "eps_estimate": 3.92,
-                        "surprise_pct": 118.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-05-01",
-                        "eps_actual": 3.95,
-                        "eps_estimate": 3.92,
-                        "surprise_pct": 67.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-08-01",
-                        "eps_actual": 4.09,
-                        "eps_estimate": 4.04,
-                        "surprise_pct": 136.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-31",
-                        "eps_actual": 4.21,
-                        "eps_estimate": 4.18,
-                        "surprise_pct": 75.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-05",
-                        "eps_actual": 4.2,
-                        "eps_estimate": 4.18,
-                        "surprise_pct": 54.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-05-01",
-                        "eps_actual": 4.33,
-                        "eps_estimate": 4.27,
-                        "surprise_pct": 140.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-31",
-                        "eps_actual": 4.5,
-                        "eps_estimate": 4.49,
-                        "surprise_pct": 31.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 3.66,
-                        "eps_estimate": 4.17,
-                        "surprise_pct": -12.3,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "MO",
-                "name": "Altria Group, Inc.",
-                "sector": "Consumer Defensive",
-                "tags": [
-                    "bot",
-                    "kandidaat"
-                ],
-                "price": 76.75,
-                "currency": "USD",
-                "market_cap": 128152838144.0,
-                "beat_rate": 75,
-                "avg_surprise": -5.9,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 1.372,
-                "rev_estimate": 5101106380.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 1.52,
-                    "eps_estimate": 1.51,
-                    "surprise_pct": 91.0,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": 4.8,
-                    "revenue": 5356000000.0,
-                    "revenue_yoy": 1.2,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +91.0% boven verwachting, omzetgroei +1.2% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-01-30",
-                        "eps_actual": 1.29,
-                        "eps_estimate": 1.28,
-                        "surprise_pct": 85.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-29",
-                        "eps_actual": 1.23,
-                        "eps_estimate": 1.19,
-                        "surprise_pct": 3.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-30",
-                        "eps_actual": 1.44,
-                        "eps_estimate": 1.38,
-                        "surprise_pct": 4.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-30",
-                        "eps_actual": 1.45,
-                        "eps_estimate": 1.45,
-                        "surprise_pct": 13.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-01-29",
-                        "eps_actual": 1.3,
-                        "eps_estimate": 1.32,
-                        "surprise_pct": -133.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": 1.32,
-                        "eps_estimate": 1.25,
-                        "surprise_pct": 5.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-30",
-                        "eps_actual": 1.48,
-                        "eps_estimate": 1.5,
-                        "surprise_pct": -117.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 1.52,
-                        "eps_estimate": 1.51,
-                        "surprise_pct": 91.0,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "RDDT",
-                "name": "Reddit, Inc.",
-                "sector": "Communication Services",
-                "tags": [
-                    "watchlist"
-                ],
-                "price": 129.6,
-                "currency": "USD",
-                "market_cap": 24934588416.0,
-                "beat_rate": 100,
-                "avg_surprise": 135.6,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 1.947,
-                "rev_estimate": 874914700.0,
-                "last": {
-                    "date": "2026-07-30",
-                    "eps_actual": 1.25,
-                    "eps_estimate": 0.96,
-                    "surprise_pct": 29.6,
-                    "is_report_date": true,
-                    "days_ago": 91,
-                    "eps_yoy": 35.9,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +29.6% boven verwachting"
-                },
-                "history": [
-                    {
-                        "date": "2024-10-29",
-                        "eps_actual": 0.59,
-                        "eps_estimate": 0.41,
-                        "surprise_pct": 42.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-02-12",
-                        "eps_actual": 0.36,
-                        "eps_estimate": 0.25,
-                        "surprise_pct": 44.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-05-01",
-                        "eps_actual": 0.13,
-                        "eps_estimate": 0.01,
-                        "surprise_pct": 870.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-31",
-                        "eps_actual": 0.92,
-                        "eps_estimate": 0.19,
-                        "surprise_pct": 34.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-30",
-                        "eps_actual": 1.26,
-                        "eps_estimate": 1.05,
-                        "surprise_pct": 20.7,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-05",
-                        "eps_actual": 1.68,
-                        "eps_estimate": 1.45,
-                        "surprise_pct": 16.4,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": 1.4,
-                        "eps_estimate": 1.11,
-                        "surprise_pct": 26.1,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-30",
-                        "eps_actual": 1.25,
-                        "eps_estimate": 0.96,
-                        "surprise_pct": 29.6,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "FSLR",
-                "name": "First Solar, Inc.",
-                "sector": "Technology",
-                "tags": [
-                    "watchlist"
-                ],
-                "price": 176.89,
-                "currency": "USD",
-                "market_cap": 19010330624.0,
-                "beat_rate": 38,
-                "avg_surprise": -13.5,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 5.637,
-                "rev_estimate": 1623788500.0,
-                "last": {
-                    "date": "2026-07-30",
-                    "eps_actual": 3.92,
-                    "eps_estimate": 2.88,
-                    "surprise_pct": 36.1,
-                    "is_report_date": true,
-                    "days_ago": 91,
-                    "eps_yoy": 23.3,
-                    "revenue": null,
-                    "revenue_yoy": null,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +36.1% boven verwachting"
-                },
-                "history": [
-                    {
-                        "date": "2024-10-29",
-                        "eps_actual": 2.91,
-                        "eps_estimate": 3.15,
-                        "surprise_pct": -7.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-02-25",
-                        "eps_actual": 3.65,
-                        "eps_estimate": 4.73,
-                        "surprise_pct": -22.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-29",
-                        "eps_actual": 1.95,
-                        "eps_estimate": 2.47,
-                        "surprise_pct": -21.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-31",
-                        "eps_actual": 3.18,
-                        "eps_estimate": 2.68,
-                        "surprise_pct": 18.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-30",
-                        "eps_actual": 4.24,
-                        "eps_estimate": 4.29,
-                        "surprise_pct": -113.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-24",
-                        "eps_actual": 4.84,
-                        "eps_estimate": 5.24,
-                        "surprise_pct": -7.6,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": 3.22,
-                        "eps_estimate": 2.96,
-                        "surprise_pct": 8.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-30",
-                        "eps_actual": 3.92,
-                        "eps_estimate": 2.88,
-                        "surprise_pct": 36.1,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "AVY",
-                "name": "Avery Dennison Corporation",
-                "sector": "Consumer Cyclical",
-                "tags": [
-                    "bot",
-                    "kandidaat"
-                ],
-                "price": 182.06,
-                "currency": "USD",
-                "market_cap": 13797989376.0,
-                "beat_rate": 75,
-                "avg_surprise": -8.1,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 2.489,
-                "rev_estimate": 2319599160.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 2.42,
-                    "eps_estimate": 2.32,
-                    "surprise_pct": 4.1,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": 2.1,
-                    "revenue": 2462900000.0,
-                    "revenue_yoy": 10.9,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +4.1% boven verwachting, omzetgroei +10.9% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-01-30",
-                        "eps_actual": 2.38,
-                        "eps_estimate": 2.41,
-                        "surprise_pct": -133.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-23",
-                        "eps_actual": 2.3,
-                        "eps_estimate": 2.32,
-                        "surprise_pct": -66.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-22",
-                        "eps_actual": 2.42,
-                        "eps_estimate": 2.39,
-                        "surprise_pct": 107.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-22",
-                        "eps_actual": 2.37,
-                        "eps_estimate": 2.33,
-                        "surprise_pct": 1.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-02-04",
-                        "eps_actual": 2.45,
-                        "eps_estimate": 2.39,
-                        "surprise_pct": 2.6,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-28",
-                        "eps_actual": 2.47,
-                        "eps_estimate": 2.43,
-                        "surprise_pct": 1.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-30",
-                        "eps_actual": 2.89,
-                        "eps_estimate": 2.47,
-                        "surprise_pct": 17.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 2.42,
-                        "eps_estimate": 2.32,
-                        "surprise_pct": 4.1,
-                        "is_report_date": true
-                    }
-                ]
-            },
-            {
-                "ticker": "AOS",
-                "name": "A.O. Smith Corporation",
-                "sector": "Industrials",
-                "tags": [
-                    "kandidaat"
-                ],
-                "price": 63.49,
-                "currency": "USD",
-                "market_cap": 8628835328.0,
-                "beat_rate": 75,
-                "avg_surprise": 2.9,
-                "next_date": "2026-10-29",
-                "days_until": 0,
-                "date_estimate": false,
-                "eps_estimate": 0.943,
-                "rev_estimate": 974225260.0,
-                "last": {
-                    "date": "2026-10-29",
-                    "eps_actual": 0.93,
-                    "eps_estimate": 0.89,
-                    "surprise_pct": 3.9,
-                    "is_report_date": true,
-                    "days_ago": 0,
-                    "eps_yoy": -1.1,
-                    "revenue": 1004300000.0,
-                    "revenue_yoy": -0.7,
-                    "reaction_pct": null,
-                    "verdict": "BEAT",
-                    "summary": "Eps +3.9% boven verwachting, omzetkrimp -0.7% j-o-j"
-                },
-                "history": [
-                    {
-                        "date": "2025-01-30",
-                        "eps_actual": 0.85,
-                        "eps_estimate": 0.89,
-                        "surprise_pct": -4.8,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-04-29",
-                        "eps_actual": 0.95,
-                        "eps_estimate": 0.91,
-                        "surprise_pct": 4.3,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-07-24",
-                        "eps_actual": 1.07,
-                        "eps_estimate": 0.99,
-                        "surprise_pct": 7.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2025-10-28",
-                        "eps_actual": 0.94,
-                        "eps_estimate": 0.91,
-                        "surprise_pct": 3.6,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-01-29",
-                        "eps_actual": 0.9,
-                        "eps_estimate": 0.84,
-                        "surprise_pct": 7.0,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-04-30",
-                        "eps_actual": 0.85,
-                        "eps_estimate": 0.94,
-                        "surprise_pct": -9.9,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-07-30",
-                        "eps_actual": 1.03,
-                        "eps_estimate": 0.92,
-                        "surprise_pct": 11.5,
-                        "is_report_date": true
-                    },
-                    {
-                        "date": "2026-10-29",
-                        "eps_actual": 0.93,
-                        "eps_estimate": 0.89,
-                        "surprise_pct": 3.9,
-                        "is_report_date": true
-                    }
-                ]
-            },
             {
                 "ticker": "XOM",
                 "name": "ExxonMobil Holdings Corporation",
@@ -8843,7 +7761,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 43.9,
                 "next_date": "2026-10-30",
-                "days_until": 1,
+                "days_until": 0,
                 "date_estimate": false,
                 "eps_estimate": 4.036,
                 "rev_estimate": 105238436400.0,
@@ -8853,7 +7771,7 @@
                     "eps_estimate": 3.63,
                     "surprise_pct": -3.0,
                     "is_report_date": true,
-                    "days_ago": 90,
+                    "days_ago": 91,
                     "eps_yoy": 114.6,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -8933,17 +7851,17 @@
                 "beat_rate": 88,
                 "avg_surprise": 6.7,
                 "next_date": "2026-10-30",
-                "days_until": 1,
+                "days_until": 0,
                 "date_estimate": false,
                 "eps_estimate": 3.77,
-                "rev_estimate": 17346681870.0,
+                "rev_estimate": 17339967590.0,
                 "last": {
                     "date": "2026-07-31",
                     "eps_actual": 3.65,
                     "eps_estimate": 3.61,
                     "surprise_pct": 115.0,
                     "is_report_date": true,
-                    "days_ago": 90,
+                    "days_ago": 91,
                     "eps_yoy": 22.9,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9023,17 +7941,17 @@
                 "beat_rate": 88,
                 "avg_surprise": 25.3,
                 "next_date": "2026-10-30",
-                "days_until": 1,
+                "days_until": 0,
                 "date_estimate": false,
-                "eps_estimate": 4.833,
-                "rev_estimate": 62203925160.0,
+                "eps_estimate": 4.868,
+                "rev_estimate": 62011250170.0,
                 "last": {
                     "date": "2026-07-31",
                     "eps_actual": 6.06,
                     "eps_estimate": 5.57,
                     "surprise_pct": 8.8,
                     "is_report_date": true,
-                    "days_ago": 90,
+                    "days_ago": 91,
                     "eps_yoy": 242.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9113,7 +8031,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 19.8,
                 "next_date": "2026-10-30",
-                "days_until": 1,
+                "days_until": 0,
                 "date_estimate": false,
                 "eps_estimate": 4.125,
                 "rev_estimate": 13726312260.0,
@@ -9123,7 +8041,7 @@
                     "eps_estimate": 3.97,
                     "surprise_pct": 6.9,
                     "is_report_date": true,
-                    "days_ago": 92,
+                    "days_ago": 93,
                     "eps_yoy": 13.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9203,7 +8121,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 25.8,
                 "next_date": "2026-10-30",
-                "days_until": 1,
+                "days_until": 0,
                 "date_estimate": false,
                 "eps_estimate": 0.294,
                 "rev_estimate": 3862879220.0,
@@ -9213,7 +8131,7 @@
                     "eps_estimate": 0.32,
                     "surprise_pct": -2.8,
                     "is_report_date": true,
-                    "days_ago": 84,
+                    "days_ago": 85,
                     "eps_yoy": 6.9,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9294,7 +8212,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 4.6,
                 "next_date": "2026-11-02",
-                "days_until": 4,
+                "days_until": 3,
                 "date_estimate": false,
                 "eps_estimate": 1.983,
                 "rev_estimate": 113322287400.0,
@@ -9304,7 +8222,7 @@
                     "eps_estimate": 1.89,
                     "surprise_pct": 6.7,
                     "is_report_date": true,
-                    "days_ago": 91,
+                    "days_ago": 92,
                     "eps_yoy": 28.7,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9385,17 +8303,17 @@
                 "beat_rate": 100,
                 "avg_surprise": 28.9,
                 "next_date": "2026-11-02",
-                "days_until": 4,
+                "days_until": 3,
                 "date_estimate": false,
                 "eps_estimate": 0.407,
-                "rev_estimate": 2180834970.0,
+                "rev_estimate": 2180441570.0,
                 "last": {
                     "date": "2026-08-03",
                     "eps_actual": 0.41,
                     "eps_estimate": 0.35,
                     "surprise_pct": 18.5,
                     "is_report_date": true,
-                    "days_ago": 87,
+                    "days_ago": 88,
                     "eps_yoy": 156.2,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9475,7 +8393,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 15.2,
                 "next_date": "2026-11-02",
-                "days_until": 4,
+                "days_until": 3,
                 "date_estimate": false,
                 "eps_estimate": 2.85,
                 "rev_estimate": 6921534890.0,
@@ -9485,7 +8403,7 @@
                     "eps_estimate": 3.08,
                     "surprise_pct": 3.6,
                     "is_report_date": true,
-                    "days_ago": 87,
+                    "days_ago": 88,
                     "eps_yoy": 20.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9566,7 +8484,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 13.7,
                 "next_date": "2026-11-03",
-                "days_until": 5,
+                "days_until": 4,
                 "date_estimate": false,
                 "eps_estimate": 1.937,
                 "rev_estimate": 13083021310.0,
@@ -9576,7 +8494,7 @@
                     "eps_estimate": 1.61,
                     "surprise_pct": 3.2,
                     "is_report_date": true,
-                    "days_ago": 86,
+                    "days_ago": 87,
                     "eps_yoy": 245.8,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9656,7 +8574,7 @@
                 "beat_rate": 62,
                 "avg_surprise": 16.5,
                 "next_date": "2026-11-04",
-                "days_until": 6,
+                "days_until": 5,
                 "date_estimate": false,
                 "eps_estimate": 3.383,
                 "rev_estimate": 7285066270.0,
@@ -9666,7 +8584,7 @@
                     "eps_estimate": 3.32,
                     "surprise_pct": 1.8,
                     "is_report_date": true,
-                    "days_ago": 86,
+                    "days_ago": 87,
                     "eps_yoy": 6.0,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9747,7 +8665,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 28.5,
                 "next_date": "2026-11-04",
-                "days_until": 6,
+                "days_until": 5,
                 "date_estimate": false,
                 "eps_estimate": 1.852,
                 "rev_estimate": 5117957300.0,
@@ -9757,7 +8675,7 @@
                     "eps_estimate": 1.68,
                     "surprise_pct": 2.0,
                     "is_report_date": true,
-                    "days_ago": 86,
+                    "days_ago": 87,
                     "eps_yoy": 12.5,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9837,7 +8755,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 22.4,
                 "next_date": "2026-11-04",
-                "days_until": 6,
+                "days_until": 5,
                 "date_estimate": false,
                 "eps_estimate": 4.339,
                 "rev_estimate": 2073809650.0,
@@ -9847,7 +8765,7 @@
                     "eps_estimate": 3.74,
                     "surprise_pct": 43.0,
                     "is_report_date": true,
-                    "days_ago": 85,
+                    "days_ago": 86,
                     "eps_yoy": 59.3,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -9927,7 +8845,7 @@
                 "beat_rate": 38,
                 "avg_surprise": 5.2,
                 "next_date": "2026-11-04",
-                "days_until": 6,
+                "days_until": 5,
                 "date_estimate": false,
                 "eps_estimate": 9.181,
                 "rev_estimate": 10714696610.0,
@@ -9937,7 +8855,7 @@
                     "eps_estimate": 8.89,
                     "surprise_pct": 3.4,
                     "is_report_date": true,
-                    "days_ago": 85,
+                    "days_ago": 86,
                     "eps_yoy": -10.9,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10017,7 +8935,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 13.0,
                 "next_date": "2026-11-04",
-                "days_until": 6,
+                "days_until": 5,
                 "date_estimate": false,
                 "eps_estimate": 2.984,
                 "rev_estimate": 1783172460.0,
@@ -10027,7 +8945,7 @@
                     "eps_estimate": 5.57,
                     "surprise_pct": -15.1,
                     "is_report_date": true,
-                    "days_ago": 85,
+                    "days_ago": 86,
                     "eps_yoy": 97.9,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10107,7 +9025,7 @@
                 "beat_rate": 62,
                 "avg_surprise": 8.6,
                 "next_date": "2026-11-07",
-                "days_until": 9,
+                "days_until": 8,
                 "date_estimate": true,
                 "eps_estimate": 6.135,
                 "rev_estimate": null,
@@ -10117,7 +9035,7 @@
                     "eps_estimate": 5.13,
                     "surprise_pct": 17.4,
                     "is_report_date": true,
-                    "days_ago": 82,
+                    "days_ago": 83,
                     "eps_yoy": 16.6,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10191,13 +9109,13 @@
                 "tags": [
                     "watchlist"
                 ],
-                "price": 2432.0,
+                "price": 2471.0,
                 "currency": "GBp",
-                "market_cap": 24669437952.0,
+                "market_cap": 25065041920.0,
                 "beat_rate": null,
                 "avg_surprise": null,
                 "next_date": "2026-11-12",
-                "days_until": 14,
+                "days_until": 13,
                 "date_estimate": false,
                 "eps_estimate": 6.097,
                 "rev_estimate": null,
@@ -10218,7 +9136,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 5.8,
                 "next_date": "2026-11-17",
-                "days_until": 19,
+                "days_until": 18,
                 "date_estimate": false,
                 "eps_estimate": 2.473,
                 "rev_estimate": 108976833310.0,
@@ -10228,7 +9146,7 @@
                     "eps_estimate": 2.09,
                     "surprise_pct": 6.2,
                     "is_report_date": true,
-                    "days_ago": 64,
+                    "days_ago": 65,
                     "eps_yoy": 111.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10308,7 +9226,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 5.2,
                 "next_date": "2026-11-19",
-                "days_until": 21,
+                "days_until": 20,
                 "date_estimate": false,
                 "eps_estimate": 0.636,
                 "rev_estimate": 187190411600.0,
@@ -10318,7 +9236,7 @@
                     "eps_estimate": 0.74,
                     "surprise_pct": 9.3,
                     "is_report_date": true,
-                    "days_ago": 70,
+                    "days_ago": 71,
                     "eps_yoy": 19.1,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10398,7 +9316,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 9.4,
                 "next_date": "2026-11-25",
-                "days_until": 27,
+                "days_until": 26,
                 "date_estimate": false,
                 "eps_estimate": 4.01,
                 "rev_estimate": 10354114330.0,
@@ -10408,7 +9326,7 @@
                     "eps_estimate": 4.71,
                     "surprise_pct": 8.3,
                     "is_report_date": true,
-                    "days_ago": 70,
+                    "days_ago": 71,
                     "eps_yoy": 7.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10488,7 +9406,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 17.3,
                 "next_date": "2026-12-02",
-                "days_until": 34,
+                "days_until": 33,
                 "date_estimate": true,
                 "eps_estimate": 3.446,
                 "rev_estimate": 11462302380.0,
@@ -10498,7 +9416,7 @@
                     "eps_estimate": 3.27,
                     "surprise_pct": 80.4,
                     "is_report_date": true,
-                    "days_ago": 64,
+                    "days_ago": 65,
                     "eps_yoy": 102.7,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10578,7 +9496,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 26.2,
                 "next_date": "2026-12-09",
-                "days_until": 41,
+                "days_until": 40,
                 "date_estimate": false,
                 "eps_estimate": 3.838,
                 "rev_estimate": 34906205760.0,
@@ -10588,7 +9506,7 @@
                     "eps_estimate": 2.4,
                     "surprise_pct": 1.7,
                     "is_report_date": true,
-                    "days_ago": 148,
+                    "days_ago": 149,
                     "eps_yoy": 54.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10668,7 +9586,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 11.0,
                 "next_date": "2026-12-09",
-                "days_until": 41,
+                "days_until": 40,
                 "date_estimate": false,
                 "eps_estimate": 6.33,
                 "rev_estimate": 6830578620.0,
@@ -10678,7 +9596,7 @@
                     "eps_estimate": 6.09,
                     "surprise_pct": 71.0,
                     "is_report_date": true,
-                    "days_ago": 49,
+                    "days_ago": 50,
                     "eps_yoy": 15.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10758,7 +9676,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 29.4,
                 "next_date": "2026-12-10",
-                "days_until": 42,
+                "days_until": 41,
                 "date_estimate": false,
                 "eps_estimate": 4.944,
                 "rev_estimate": 74242569950.0,
@@ -10768,7 +9686,7 @@
                     "eps_estimate": 6.53,
                     "surprise_pct": 3.4,
                     "is_report_date": true,
-                    "days_ago": 35,
+                    "days_ago": 36,
                     "eps_yoy": 15.0,
                     "revenue": 95723000000.0,
                     "revenue_yoy": 11.1,
@@ -10848,17 +9766,17 @@
                 "beat_rate": 62,
                 "avg_surprise": -26.1,
                 "next_date": "2026-12-14",
-                "days_until": 46,
+                "days_until": 45,
                 "date_estimate": false,
-                "eps_estimate": 1.892,
-                "rev_estimate": 21326804220.0,
+                "eps_estimate": 1.891,
+                "rev_estimate": 21325007560.0,
                 "last": {
                     "date": "2026-09-10",
                     "eps_actual": 1.92,
                     "eps_estimate": 1.74,
                     "surprise_pct": 10.4,
                     "is_report_date": true,
-                    "days_ago": 49,
+                    "days_ago": 50,
                     "eps_yoy": 30.6,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -10938,7 +9856,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 31.5,
                 "next_date": "2026-12-17",
-                "days_until": 49,
+                "days_until": 48,
                 "date_estimate": true,
                 "eps_estimate": 1.363,
                 "rev_estimate": 3028590620.0,
@@ -10948,7 +9866,7 @@
                     "eps_estimate": 1.36,
                     "surprise_pct": 23.0,
                     "is_report_date": true,
-                    "days_ago": 36,
+                    "days_ago": 37,
                     "eps_yoy": 13.3,
                     "revenue": 3013981000.0,
                     "revenue_yoy": 10.9,
@@ -11028,7 +9946,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 5.9,
                 "next_date": "2027-01-12",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": false,
                 "eps_estimate": 2.263,
                 "rev_estimate": 112467323970.0,
@@ -11038,7 +9956,7 @@
                     "eps_estimate": 4.14,
                     "surprise_pct": 13.3,
                     "is_report_date": true,
-                    "days_ago": 16,
+                    "days_ago": 17,
                     "eps_yoy": 60.6,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -11108,6 +10026,1088 @@
         ],
         "reported": [
             {
+                "ticker": "AVY",
+                "name": "Avery Dennison Corporation",
+                "sector": "Consumer Cyclical",
+                "tags": [
+                    "bot",
+                    "kandidaat"
+                ],
+                "price": 182.06,
+                "currency": "USD",
+                "market_cap": 13797989376.0,
+                "beat_rate": 75,
+                "avg_surprise": -8.1,
+                "next_date": "2026-10-29",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 2.427,
+                "rev_estimate": 2288762500.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 2.42,
+                    "eps_estimate": 2.32,
+                    "surprise_pct": 4.1,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 2.1,
+                    "revenue": 2462900000.0,
+                    "revenue_yoy": 10.9,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +4.1% boven verwachting, omzetgroei +10.9% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-01-30",
+                        "eps_actual": 2.38,
+                        "eps_estimate": 2.41,
+                        "surprise_pct": -133.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-23",
+                        "eps_actual": 2.3,
+                        "eps_estimate": 2.32,
+                        "surprise_pct": -66.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-22",
+                        "eps_actual": 2.42,
+                        "eps_estimate": 2.39,
+                        "surprise_pct": 107.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-22",
+                        "eps_actual": 2.37,
+                        "eps_estimate": 2.33,
+                        "surprise_pct": 1.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-04",
+                        "eps_actual": 2.45,
+                        "eps_estimate": 2.39,
+                        "surprise_pct": 2.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-28",
+                        "eps_actual": 2.47,
+                        "eps_estimate": 2.43,
+                        "surprise_pct": 1.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-30",
+                        "eps_actual": 2.89,
+                        "eps_estimate": 2.47,
+                        "surprise_pct": 17.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 2.42,
+                        "eps_estimate": 2.32,
+                        "surprise_pct": 4.1,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "MO",
+                "name": "Altria Group, Inc.",
+                "sector": "Consumer Defensive",
+                "tags": [
+                    "bot",
+                    "kandidaat"
+                ],
+                "price": 76.75,
+                "currency": "USD",
+                "market_cap": 128152838144.0,
+                "beat_rate": 75,
+                "avg_surprise": -5.9,
+                "next_date": "2027-01-28",
+                "days_until": 90,
+                "date_estimate": true,
+                "eps_estimate": 1.372,
+                "rev_estimate": 5101106380.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 1.52,
+                    "eps_estimate": 1.51,
+                    "surprise_pct": 91.0,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 4.8,
+                    "revenue": 5356000000.0,
+                    "revenue_yoy": 1.2,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +91.0% boven verwachting, omzetgroei +1.2% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-01-30",
+                        "eps_actual": 1.29,
+                        "eps_estimate": 1.28,
+                        "surprise_pct": 85.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-29",
+                        "eps_actual": 1.23,
+                        "eps_estimate": 1.19,
+                        "surprise_pct": 3.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-30",
+                        "eps_actual": 1.44,
+                        "eps_estimate": 1.38,
+                        "surprise_pct": 4.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 1.45,
+                        "eps_estimate": 1.45,
+                        "surprise_pct": 13.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-01-29",
+                        "eps_actual": 1.3,
+                        "eps_estimate": 1.32,
+                        "surprise_pct": -133.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 1.32,
+                        "eps_estimate": 1.25,
+                        "surprise_pct": 5.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-30",
+                        "eps_actual": 1.48,
+                        "eps_estimate": 1.5,
+                        "surprise_pct": -117.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 1.52,
+                        "eps_estimate": 1.51,
+                        "surprise_pct": 91.0,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "AOS",
+                "name": "A.O. Smith Corporation",
+                "sector": "Industrials",
+                "tags": [
+                    "kandidaat"
+                ],
+                "price": 63.49,
+                "currency": "USD",
+                "market_cap": 8628835328.0,
+                "beat_rate": 75,
+                "avg_surprise": 2.9,
+                "next_date": "2027-01-28",
+                "days_until": 90,
+                "date_estimate": true,
+                "eps_estimate": 0.943,
+                "rev_estimate": 974225260.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 0.93,
+                    "eps_estimate": 0.89,
+                    "surprise_pct": 3.9,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": -1.1,
+                    "revenue": 1004300000.0,
+                    "revenue_yoy": -0.7,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +3.9% boven verwachting, omzetkrimp -0.7% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-01-30",
+                        "eps_actual": 0.85,
+                        "eps_estimate": 0.89,
+                        "surprise_pct": -4.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-29",
+                        "eps_actual": 0.95,
+                        "eps_estimate": 0.91,
+                        "surprise_pct": 4.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-24",
+                        "eps_actual": 1.07,
+                        "eps_estimate": 0.99,
+                        "surprise_pct": 7.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-28",
+                        "eps_actual": 0.94,
+                        "eps_estimate": 0.91,
+                        "surprise_pct": 3.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-01-29",
+                        "eps_actual": 0.9,
+                        "eps_estimate": 0.84,
+                        "surprise_pct": 7.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 0.85,
+                        "eps_estimate": 0.94,
+                        "surprise_pct": -9.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-30",
+                        "eps_actual": 1.03,
+                        "eps_estimate": 0.92,
+                        "surprise_pct": 11.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 0.93,
+                        "eps_estimate": 0.89,
+                        "surprise_pct": 3.9,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "LIN",
+                "name": "Linde plc",
+                "sector": "Basic Materials",
+                "tags": [
+                    "kandidaat"
+                ],
+                "price": 503.15,
+                "currency": "USD",
+                "market_cap": 231942160384.0,
+                "beat_rate": 88,
+                "avg_surprise": 76.1,
+                "next_date": "2026-10-29",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 4.51,
+                "rev_estimate": 9173515050.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 3.66,
+                    "eps_estimate": 4.17,
+                    "surprise_pct": -12.3,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": -13.1,
+                    "revenue": 9289000000.0,
+                    "revenue_yoy": 9.3,
+                    "reaction_pct": null,
+                    "verdict": "MISS",
+                    "summary": "Eps -12.3% onder verwachting, omzetgroei +9.3% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-02-06",
+                        "eps_actual": 3.97,
+                        "eps_estimate": 3.92,
+                        "surprise_pct": 118.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "eps_actual": 3.95,
+                        "eps_estimate": 3.92,
+                        "surprise_pct": 67.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-01",
+                        "eps_actual": 4.09,
+                        "eps_estimate": 4.04,
+                        "surprise_pct": 136.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-31",
+                        "eps_actual": 4.21,
+                        "eps_estimate": 4.18,
+                        "surprise_pct": 75.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-05",
+                        "eps_actual": 4.2,
+                        "eps_estimate": 4.18,
+                        "surprise_pct": 54.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-05-01",
+                        "eps_actual": 4.33,
+                        "eps_estimate": 4.27,
+                        "surprise_pct": 140.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-31",
+                        "eps_actual": 4.5,
+                        "eps_estimate": 4.49,
+                        "surprise_pct": 31.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 3.66,
+                        "eps_estimate": 4.17,
+                        "surprise_pct": -12.3,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "FSLR",
+                "name": "First Solar, Inc.",
+                "sector": "Technology",
+                "tags": [
+                    "watchlist"
+                ],
+                "price": 176.89,
+                "currency": "USD",
+                "market_cap": 19010330624.0,
+                "beat_rate": 50,
+                "avg_surprise": -10.8,
+                "next_date": "2026-10-29",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 5.637,
+                "rev_estimate": 1623788500.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 5.3,
+                    "eps_estimate": 4.64,
+                    "surprise_pct": 14.3,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 25.0,
+                    "revenue": 1056193000.0,
+                    "revenue_yoy": -3.7,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +14.3% boven verwachting, omzetkrimp -3.7% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-02-25",
+                        "eps_actual": 3.65,
+                        "eps_estimate": 4.73,
+                        "surprise_pct": -22.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-29",
+                        "eps_actual": 1.95,
+                        "eps_estimate": 2.47,
+                        "surprise_pct": -21.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-31",
+                        "eps_actual": 3.18,
+                        "eps_estimate": 2.68,
+                        "surprise_pct": 18.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 4.24,
+                        "eps_estimate": 4.29,
+                        "surprise_pct": -113.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-24",
+                        "eps_actual": 4.84,
+                        "eps_estimate": 5.24,
+                        "surprise_pct": -7.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 3.22,
+                        "eps_estimate": 2.96,
+                        "surprise_pct": 8.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-30",
+                        "eps_actual": 3.92,
+                        "eps_estimate": 2.88,
+                        "surprise_pct": 36.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 5.3,
+                        "eps_estimate": 4.64,
+                        "surprise_pct": 14.3,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "INTC",
+                "name": "Intel Corporation",
+                "sector": "Technology",
+                "tags": [
+                    "watchlist"
+                ],
+                "price": 92.07,
+                "currency": "USD",
+                "market_cap": 486691700736.0,
+                "beat_rate": 88,
+                "avg_surprise": 885.8,
+                "next_date": "2027-01-28",
+                "days_until": 90,
+                "date_estimate": true,
+                "eps_estimate": 0.447,
+                "rev_estimate": 16902965280.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 0.52,
+                    "eps_estimate": 0.4,
+                    "surprise_pct": 30.5,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 126.1,
+                    "revenue": 16128000000.0,
+                    "revenue_yoy": 25.4,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +30.5% boven verwachting, omzetgroei +25.4% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-01-30",
+                        "eps_actual": 0.13,
+                        "eps_estimate": 0.12,
+                        "surprise_pct": 8.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-24",
+                        "eps_actual": 0.13,
+                        "eps_estimate": null,
+                        "surprise_pct": 2769.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-24",
+                        "eps_actual": -0.1,
+                        "eps_estimate": 0.01,
+                        "surprise_pct": -1169.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-23",
+                        "eps_actual": 0.23,
+                        "eps_estimate": 0.01,
+                        "surprise_pct": 3162.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-01-22",
+                        "eps_actual": 0.15,
+                        "eps_estimate": 0.08,
+                        "surprise_pct": 81.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-23",
+                        "eps_actual": 0.29,
+                        "eps_estimate": 0.01,
+                        "surprise_pct": 2108.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-23",
+                        "eps_actual": 0.42,
+                        "eps_estimate": 0.22,
+                        "surprise_pct": 94.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 0.52,
+                        "eps_estimate": 0.4,
+                        "surprise_pct": 30.5,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "RDDT",
+                "name": "Reddit, Inc.",
+                "sector": "Communication Services",
+                "tags": [
+                    "watchlist"
+                ],
+                "price": 129.6,
+                "currency": "USD",
+                "market_cap": 24934588416.0,
+                "beat_rate": 100,
+                "avg_surprise": 130.9,
+                "next_date": "2026-10-29",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 2.422,
+                "rev_estimate": 1045313590.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 1.4,
+                    "eps_estimate": 1.33,
+                    "surprise_pct": 5.6,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 11.1,
+                    "revenue": 804905000.0,
+                    "revenue_yoy": 61.1,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +5.6% boven verwachting, omzetgroei +61.1% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-02-12",
+                        "eps_actual": 0.36,
+                        "eps_estimate": 0.25,
+                        "surprise_pct": 44.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "eps_actual": 0.13,
+                        "eps_estimate": 0.01,
+                        "surprise_pct": 870.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-31",
+                        "eps_actual": 0.92,
+                        "eps_estimate": 0.19,
+                        "surprise_pct": 34.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 1.26,
+                        "eps_estimate": 1.05,
+                        "surprise_pct": 20.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-05",
+                        "eps_actual": 1.68,
+                        "eps_estimate": 1.45,
+                        "surprise_pct": 16.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 1.4,
+                        "eps_estimate": 1.11,
+                        "surprise_pct": 26.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-30",
+                        "eps_actual": 1.25,
+                        "eps_estimate": 0.96,
+                        "surprise_pct": 29.6,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 1.4,
+                        "eps_estimate": 1.33,
+                        "surprise_pct": 5.6,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "AMZN",
+                "name": "Amazon.com, Inc.",
+                "sector": "Consumer Cyclical",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 243.79,
+                "currency": "USD",
+                "market_cap": 2629595299840.0,
+                "beat_rate": 88,
+                "avg_surprise": 49.5,
+                "next_date": "2026-10-29",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 2.434,
+                "rev_estimate": 244309143060.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 1.89,
+                    "eps_estimate": 1.96,
+                    "surprise_pct": -3.5,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": -3.1,
+                    "revenue": null,
+                    "revenue_yoy": null,
+                    "reaction_pct": null,
+                    "verdict": "MISS",
+                    "summary": "Eps -3.5% onder verwachting"
+                },
+                "history": [
+                    {
+                        "date": "2025-02-06",
+                        "eps_actual": 1.86,
+                        "eps_estimate": 1.48,
+                        "surprise_pct": 25.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "eps_actual": 1.59,
+                        "eps_estimate": 1.36,
+                        "surprise_pct": 16.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-31",
+                        "eps_actual": 1.68,
+                        "eps_estimate": 1.32,
+                        "surprise_pct": 27.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 1.95,
+                        "eps_estimate": 1.56,
+                        "surprise_pct": 25.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-05",
+                        "eps_actual": 1.95,
+                        "eps_estimate": 1.95,
+                        "surprise_pct": 22.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-29",
+                        "eps_actual": 2.78,
+                        "eps_estimate": 1.65,
+                        "surprise_pct": 68.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-30",
+                        "eps_actual": 5.75,
+                        "eps_estimate": 1.82,
+                        "surprise_pct": 215.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 1.89,
+                        "eps_estimate": 1.96,
+                        "surprise_pct": -3.5,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "MA",
+                "name": "Mastercard Incorporated",
+                "sector": "Financial Services",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 635.7,
+                "currency": "USD",
+                "market_cap": 556879511552.0,
+                "beat_rate": 100,
+                "avg_surprise": 4.7,
+                "next_date": "2027-01-28",
+                "days_until": 90,
+                "date_estimate": true,
+                "eps_estimate": 5.123,
+                "rev_estimate": 9914637920.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 5.31,
+                    "eps_estimate": 5.16,
+                    "surprise_pct": 2.8,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 21.2,
+                    "revenue": 9277000000.0,
+                    "revenue_yoy": 14.1,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +2.8% boven verwachting, omzetgroei +14.1% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-01-30",
+                        "eps_actual": 3.82,
+                        "eps_estimate": 3.69,
+                        "surprise_pct": 3.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "eps_actual": 3.73,
+                        "eps_estimate": 3.56,
+                        "surprise_pct": 4.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-31",
+                        "eps_actual": 4.15,
+                        "eps_estimate": 4.02,
+                        "surprise_pct": 3.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 4.38,
+                        "eps_estimate": 4.31,
+                        "surprise_pct": 1.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-01-29",
+                        "eps_actual": 4.76,
+                        "eps_estimate": 4.24,
+                        "surprise_pct": 12.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 4.6,
+                        "eps_estimate": 4.41,
+                        "surprise_pct": 4.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-07-30",
+                        "eps_actual": 5.04,
+                        "eps_estimate": 4.78,
+                        "surprise_pct": 5.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 5.31,
+                        "eps_estimate": 5.16,
+                        "surprise_pct": 2.8,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "LLY",
+                "name": "Eli Lilly and Company",
+                "sector": "Healthcare",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 1373.7,
+                "currency": "USD",
+                "market_cap": 1224985149440.0,
+                "beat_rate": 88,
+                "avg_surprise": 14.2,
+                "next_date": "2026-10-29",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 11.116,
+                "rev_estimate": 24500330360.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 7.48,
+                    "eps_estimate": 6.35,
+                    "surprise_pct": 17.9,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 6.6,
+                    "revenue": 22974000000.0,
+                    "revenue_yoy": 47.7,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +17.9% boven verwachting, omzetgroei +47.7% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-02-06",
+                        "eps_actual": 5.32,
+                        "eps_estimate": 5.07,
+                        "surprise_pct": 5.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "eps_actual": 3.34,
+                        "eps_estimate": 3.46,
+                        "surprise_pct": -3.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-07",
+                        "eps_actual": 6.31,
+                        "eps_estimate": 5.59,
+                        "surprise_pct": 12.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 7.02,
+                        "eps_estimate": 5.89,
+                        "surprise_pct": 19.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-04",
+                        "eps_actual": 7.54,
+                        "eps_estimate": 6.91,
+                        "surprise_pct": 9.1,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 8.55,
+                        "eps_estimate": 6.79,
+                        "surprise_pct": 25.9,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-05",
+                        "eps_actual": 8.38,
+                        "eps_estimate": 6.58,
+                        "surprise_pct": 27.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 7.48,
+                        "eps_estimate": 6.35,
+                        "surprise_pct": 17.9,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "MRK",
+                "name": "Merck & Company, Inc.",
+                "sector": "Healthcare",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 146.33,
+                "currency": "USD",
+                "market_cap": 361021210624.0,
+                "beat_rate": 100,
+                "avg_surprise": 31.4,
+                "next_date": "2026-10-29",
+                "days_until": -1,
+                "date_estimate": false,
+                "eps_estimate": 1.864,
+                "rev_estimate": 16566412820.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 2.49,
+                    "eps_estimate": 2.09,
+                    "surprise_pct": 19.3,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": -3.5,
+                    "revenue": 16607000000.0,
+                    "revenue_yoy": 5.1,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +19.3% boven verwachting, omzetgroei +5.1% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-02-04",
+                        "eps_actual": 1.72,
+                        "eps_estimate": 1.67,
+                        "surprise_pct": 3.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-24",
+                        "eps_actual": 2.22,
+                        "eps_estimate": 2.14,
+                        "surprise_pct": 4.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-07-29",
+                        "eps_actual": 2.13,
+                        "eps_estimate": 2.03,
+                        "surprise_pct": 5.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-30",
+                        "eps_actual": 2.58,
+                        "eps_estimate": 2.35,
+                        "surprise_pct": 9.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-02-03",
+                        "eps_actual": 2.04,
+                        "eps_estimate": 2.01,
+                        "surprise_pct": 147.0,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": -1.28,
+                        "eps_estimate": -1.47,
+                        "surprise_pct": 13.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-04",
+                        "eps_actual": -0.13,
+                        "eps_estimate": -0.26,
+                        "surprise_pct": 49.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 2.49,
+                        "eps_estimate": 2.09,
+                        "surprise_pct": 19.3,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
+                "ticker": "CAT",
+                "name": "Caterpillar, Inc.",
+                "sector": "Industrials",
+                "tags": [
+                    "mega-cap"
+                ],
+                "price": 647.39,
+                "currency": "USD",
+                "market_cap": 297588916224.0,
+                "beat_rate": 75,
+                "avg_surprise": 8.6,
+                "next_date": "2027-01-28",
+                "days_until": 90,
+                "date_estimate": true,
+                "eps_estimate": 6.987,
+                "rev_estimate": 21422239170.0,
+                "last": {
+                    "date": "2026-10-29",
+                    "eps_actual": 7.2,
+                    "eps_estimate": 7.03,
+                    "surprise_pct": 2.4,
+                    "is_report_date": true,
+                    "days_ago": 1,
+                    "eps_yoy": 45.5,
+                    "revenue": 20543000000.0,
+                    "revenue_yoy": 24.0,
+                    "reaction_pct": null,
+                    "verdict": "BEAT",
+                    "summary": "Eps +2.4% boven verwachting, omzetgroei +24.0% j-o-j"
+                },
+                "history": [
+                    {
+                        "date": "2025-01-30",
+                        "eps_actual": 5.14,
+                        "eps_estimate": 5.03,
+                        "surprise_pct": 2.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-04-30",
+                        "eps_actual": 4.25,
+                        "eps_estimate": 4.34,
+                        "surprise_pct": -2.2,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-08-05",
+                        "eps_actual": 4.72,
+                        "eps_estimate": 4.9,
+                        "surprise_pct": -3.7,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2025-10-29",
+                        "eps_actual": 4.95,
+                        "eps_estimate": 4.52,
+                        "surprise_pct": 9.4,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-01-29",
+                        "eps_actual": 5.16,
+                        "eps_estimate": 4.71,
+                        "surprise_pct": 9.5,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-04-30",
+                        "eps_actual": 5.54,
+                        "eps_estimate": 4.64,
+                        "surprise_pct": 19.3,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-08-04",
+                        "eps_actual": 8.17,
+                        "eps_estimate": 6.2,
+                        "surprise_pct": 31.8,
+                        "is_report_date": true
+                    },
+                    {
+                        "date": "2026-10-29",
+                        "eps_actual": 7.2,
+                        "eps_estimate": 7.03,
+                        "surprise_pct": 2.4,
+                        "is_report_date": true
+                    }
+                ]
+            },
+            {
                 "ticker": "EBAY",
                 "name": "eBay Inc.",
                 "sector": "Consumer Cyclical",
@@ -11120,17 +11120,17 @@
                 "beat_rate": 100,
                 "avg_surprise": 4.6,
                 "next_date": "2026-10-28",
-                "days_until": -1,
+                "days_until": -2,
                 "date_estimate": false,
-                "eps_estimate": 1.51,
-                "rev_estimate": 3228853170.0,
+                "eps_estimate": 1.512,
+                "rev_estimate": 3225781690.0,
                 "last": {
                     "date": "2026-10-28",
                     "eps_actual": 1.51,
                     "eps_estimate": 1.42,
                     "surprise_pct": 6.6,
                     "is_report_date": true,
-                    "days_ago": 1,
+                    "days_ago": 2,
                     "eps_yoy": 11.0,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -11210,17 +11210,17 @@
                 "beat_rate": 100,
                 "avg_surprise": 12.3,
                 "next_date": "2026-10-28",
-                "days_until": -1,
+                "days_until": -2,
                 "date_estimate": false,
-                "eps_estimate": 2.307,
-                "rev_estimate": 963129000.0,
+                "eps_estimate": 2.304,
+                "rev_estimate": 963335780.0,
                 "last": {
                     "date": "2026-10-28",
                     "eps_actual": 2.33,
                     "eps_estimate": 2.24,
                     "surprise_pct": 4.0,
                     "is_report_date": true,
-                    "days_ago": 1,
+                    "days_ago": 2,
                     "eps_yoy": 14.8,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -11300,17 +11300,17 @@
                 "beat_rate": 75,
                 "avg_surprise": 2.5,
                 "next_date": "2026-10-28",
-                "days_until": -1,
+                "days_until": -2,
                 "date_estimate": false,
                 "eps_estimate": 6.335,
-                "rev_estimate": 25630117630.0,
+                "rev_estimate": 25630444850.0,
                 "last": {
                     "date": "2026-10-28",
                     "eps_actual": 3.74,
                     "eps_estimate": 3.38,
                     "surprise_pct": 10.5,
                     "is_report_date": true,
-                    "days_ago": 1,
+                    "days_ago": 2,
                     "eps_yoy": -38.4,
                     "revenue": 22855000000.0,
                     "revenue_yoy": -2.6,
@@ -11390,17 +11390,17 @@
                 "beat_rate": 75,
                 "avg_surprise": 9.4,
                 "next_date": "2026-10-28",
-                "days_until": -1,
+                "days_until": -2,
                 "date_estimate": false,
-                "eps_estimate": 0.852,
-                "rev_estimate": 1832285500.0,
+                "eps_estimate": 0.85,
+                "rev_estimate": 1833807970.0,
                 "last": {
                     "date": "2026-10-28",
                     "eps_actual": 1.19,
                     "eps_estimate": 1.03,
                     "surprise_pct": 16.1,
                     "is_report_date": true,
-                    "days_ago": 1,
+                    "days_ago": 2,
                     "eps_yoy": 22.7,
                     "revenue": 1966000000.0,
                     "revenue_yoy": 2.6,
@@ -11480,17 +11480,17 @@
                 "beat_rate": 88,
                 "avg_surprise": 12.0,
                 "next_date": "2027-01-27",
-                "days_until": 90,
+                "days_until": 89,
                 "date_estimate": true,
-                "eps_estimate": 1.069,
-                "rev_estimate": 4369238100.0,
+                "eps_estimate": 1.076,
+                "rev_estimate": 4370695440.0,
                 "last": {
                     "date": "2026-10-28",
                     "eps_actual": 1.0,
                     "eps_estimate": 1.02,
                     "surprise_pct": -2.3,
                     "is_report_date": true,
-                    "days_ago": 1,
+                    "days_ago": 2,
                     "eps_yoy": 4.2,
                     "revenue": 4106000000.0,
                     "revenue_yoy": 20.5,
@@ -11570,17 +11570,17 @@
                 "beat_rate": 100,
                 "avg_surprise": 7.2,
                 "next_date": "2027-01-27",
-                "days_until": 90,
+                "days_until": 89,
                 "date_estimate": true,
-                "eps_estimate": 4.817,
-                "rev_estimate": 95646497200.0,
+                "eps_estimate": 4.86,
+                "rev_estimate": 96627860740.0,
                 "last": {
                     "date": "2026-10-28",
                     "eps_actual": 4.89,
                     "eps_estimate": 4.72,
                     "surprise_pct": 3.6,
                     "is_report_date": true,
-                    "days_ago": 1,
+                    "days_ago": 2,
                     "eps_yoy": 18.4,
                     "revenue": 90007000000.0,
                     "revenue_yoy": 17.7,
@@ -11660,17 +11660,17 @@
                 "beat_rate": 88,
                 "avg_surprise": 59.2,
                 "next_date": "2026-10-28",
-                "days_until": -1,
+                "days_until": -2,
                 "date_estimate": false,
-                "eps_estimate": 3.341,
-                "rev_estimate": 141536876300.0,
+                "eps_estimate": 3.258,
+                "rev_estimate": 142242942850.0,
                 "last": {
                     "date": "2026-10-28",
                     "eps_actual": 2.12,
                     "eps_estimate": 3.01,
                     "surprise_pct": -29.5,
                     "is_report_date": true,
-                    "days_ago": 1,
+                    "days_ago": 2,
                     "eps_yoy": -26.1,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -11751,17 +11751,17 @@
                 "beat_rate": 100,
                 "avg_surprise": 31.3,
                 "next_date": "2027-01-26",
-                "days_until": 89,
+                "days_until": 88,
                 "date_estimate": true,
                 "eps_estimate": 3.629,
-                "rev_estimate": 12198357890.0,
+                "rev_estimate": 12198747810.0,
                 "last": {
                     "date": "2026-10-27",
                     "eps_actual": 3.48,
                     "eps_estimate": 3.44,
                     "surprise_pct": 114.0,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 16.8,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -11841,17 +11841,17 @@
                 "beat_rate": 62,
                 "avg_surprise": -0.1,
                 "next_date": "2026-10-27",
-                "days_until": -2,
+                "days_until": -3,
                 "date_estimate": false,
-                "eps_estimate": 0.263,
-                "rev_estimate": 239248440.0,
+                "eps_estimate": 0.266,
+                "rev_estimate": 239093030.0,
                 "last": {
                     "date": "2026-10-27",
                     "eps_actual": 0.41,
                     "eps_estimate": 0.5,
                     "surprise_pct": -18.7,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": -54.4,
                     "revenue": 293329000.0,
                     "revenue_yoy": -28.5,
@@ -11925,23 +11925,23 @@
                 "tags": [
                     "portfolio"
                 ],
-                "price": 4.26,
+                "price": 4.32,
                 "currency": "EUR",
-                "market_cap": 16088097792.0,
+                "market_cap": 16310652928.0,
                 "beat_rate": 0,
                 "avg_surprise": -18.7,
                 "next_date": "2027-01-28",
-                "days_until": 91,
+                "days_until": 90,
                 "date_estimate": false,
                 "eps_estimate": 0.269,
-                "rev_estimate": 1524158650.0,
+                "rev_estimate": 1513434480.0,
                 "last": {
                     "date": "2026-10-27",
                     "eps_actual": 0.06,
                     "eps_estimate": 0.06,
                     "surprise_pct": -60.0,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 20.0,
                     "revenue": 1463000000.0,
                     "revenue_yoy": 0.5,
@@ -12022,7 +12022,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 5.6,
                 "next_date": "2026-10-27",
-                "days_until": -2,
+                "days_until": -3,
                 "date_estimate": false,
                 "eps_estimate": 1.193,
                 "rev_estimate": 6514224530.0,
@@ -12032,7 +12032,7 @@
                     "eps_estimate": 1.59,
                     "surprise_pct": 4.6,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 31.7,
                     "revenue": 6614000000.0,
                     "revenue_yoy": 9.3,
@@ -12113,17 +12113,17 @@
                 "beat_rate": 100,
                 "avg_surprise": 4.2,
                 "next_date": "2026-10-27",
-                "days_until": -2,
+                "days_until": -3,
                 "date_estimate": false,
                 "eps_estimate": 0.601,
-                "rev_estimate": 11284289210.0,
+                "rev_estimate": 11300289210.0,
                 "last": {
                     "date": "2026-10-27",
                     "eps_actual": 0.91,
                     "eps_estimate": 0.88,
                     "surprise_pct": 3.3,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 11.0,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -12203,7 +12203,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 24.1,
                 "next_date": "2026-10-27",
-                "days_until": -2,
+                "days_until": -3,
                 "date_estimate": false,
                 "eps_estimate": 2.191,
                 "rev_estimate": 4756157460.0,
@@ -12213,7 +12213,7 @@
                     "eps_estimate": 2.17,
                     "surprise_pct": 30.0,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 5.3,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -12294,7 +12294,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 7.4,
                 "next_date": "2026-10-27",
-                "days_until": -2,
+                "days_until": -3,
                 "date_estimate": false,
                 "eps_estimate": 1.434,
                 "rev_estimate": 8930386200.0,
@@ -12304,7 +12304,7 @@
                     "eps_estimate": 1.31,
                     "surprise_pct": 10.7,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": 8.2,
                     "revenue": 8584000000.0,
                     "revenue_yoy": 2.0,
@@ -12384,9 +12384,9 @@
                 "beat_rate": 88,
                 "avg_surprise": 27.2,
                 "next_date": "2026-10-27",
-                "days_until": -2,
+                "days_until": -3,
                 "date_estimate": false,
-                "eps_estimate": 0.638,
+                "eps_estimate": 0.66,
                 "rev_estimate": 1515896600.0,
                 "last": {
                     "date": "2026-10-27",
@@ -12394,7 +12394,7 @@
                     "eps_estimate": 0.55,
                     "surprise_pct": -8.1,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": -16.4,
                     "revenue": 1424000000.0,
                     "revenue_yoy": 11.8,
@@ -12474,7 +12474,7 @@
                 "beat_rate": 50,
                 "avg_surprise": 272.4,
                 "next_date": "2027-01-26",
-                "days_until": 89,
+                "days_until": 88,
                 "date_estimate": true,
                 "eps_estimate": -0.727,
                 "rev_estimate": 25675841510.0,
@@ -12484,7 +12484,7 @@
                     "eps_estimate": -0.2,
                     "surprise_pct": -69.2,
                     "is_report_date": true,
-                    "days_ago": 2,
+                    "days_ago": 3,
                     "eps_yoy": null,
                     "revenue": 24188000000.0,
                     "revenue_yoy": 3.9,
@@ -12564,7 +12564,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 3.4,
                 "next_date": "2026-10-22",
-                "days_until": -7,
+                "days_until": -8,
                 "date_estimate": false,
                 "eps_estimate": 2.315,
                 "rev_estimate": 1123824880.0,
@@ -12574,7 +12574,7 @@
                     "eps_estimate": 2.51,
                     "surprise_pct": 3.7,
                     "is_report_date": true,
-                    "days_ago": 7,
+                    "days_ago": 8,
                     "eps_yoy": 13.0,
                     "revenue": 1172600000.0,
                     "revenue_yoy": 9.6,
@@ -12654,7 +12654,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 43.3,
                 "next_date": "2027-01-21",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": true,
                 "eps_estimate": 1.815,
                 "rev_estimate": 22851690120.0,
@@ -12664,7 +12664,7 @@
                     "eps_estimate": 1.89,
                     "surprise_pct": 5.7,
                     "is_report_date": true,
-                    "days_ago": 7,
+                    "days_ago": 8,
                     "eps_yoy": 0.5,
                     "revenue": 23276000000.0,
                     "revenue_yoy": 4.0,
@@ -12744,17 +12744,17 @@
                 "beat_rate": 75,
                 "avg_surprise": 5.5,
                 "next_date": "2026-10-21",
-                "days_until": -8,
+                "days_until": -9,
                 "date_estimate": false,
                 "eps_estimate": 8.719,
-                "rev_estimate": 75120697740.0,
+                "rev_estimate": 75155372690.0,
                 "last": {
                     "date": "2026-10-21",
                     "eps_actual": 3.83,
                     "eps_estimate": 5.48,
                     "surprise_pct": -30.1,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": -47.2,
                     "revenue": 64601000000.0,
                     "revenue_yoy": 26.1,
@@ -12834,7 +12834,7 @@
                 "beat_rate": 38,
                 "avg_surprise": -20.8,
                 "next_date": "2026-10-21",
-                "days_until": -8,
+                "days_until": -9,
                 "date_estimate": false,
                 "eps_estimate": 0.503,
                 "rev_estimate": 29322961330.0,
@@ -12844,7 +12844,7 @@
                     "eps_estimate": 0.45,
                     "surprise_pct": 6.4,
                     "is_report_date": true,
-                    "days_ago": 8,
+                    "days_ago": 9,
                     "eps_yoy": -4.0,
                     "revenue": 28046000000.0,
                     "revenue_yoy": -0.2,
@@ -12924,7 +12924,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 36.4,
                 "next_date": "2027-01-19",
-                "days_until": 82,
+                "days_until": 81,
                 "date_estimate": true,
                 "eps_estimate": 0.676,
                 "rev_estimate": 13446130180.0,
@@ -12934,7 +12934,7 @@
                     "eps_estimate": 0.82,
                     "surprise_pct": 5.8,
                     "is_report_date": true,
-                    "days_ago": 9,
+                    "days_ago": 10,
                     "eps_yoy": 47.5,
                     "revenue": 12874176000.0,
                     "revenue_yoy": 11.8,
@@ -13014,7 +13014,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 14.9,
                 "next_date": "2027-01-21",
-                "days_until": 84,
+                "days_until": 83,
                 "date_estimate": false,
                 "eps_estimate": 2.036,
                 "rev_estimate": 13298054320.0,
@@ -13024,7 +13024,7 @@
                     "eps_estimate": 2.02,
                     "surprise_pct": 11.4,
                     "is_report_date": true,
-                    "days_ago": 9,
+                    "days_ago": 10,
                     "eps_yoy": 35.5,
                     "revenue": 14118000000.0,
                     "revenue_yoy": 15.9,
@@ -13104,7 +13104,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 14.0,
                 "next_date": "2027-01-14",
-                "days_until": 77,
+                "days_until": 76,
                 "date_estimate": true,
                 "eps_estimate": 5.164,
                 "rev_estimate": 1705011253270.0,
@@ -13114,7 +13114,7 @@
                     "eps_estimate": 4.52,
                     "surprise_pct": 1.7,
                     "is_report_date": true,
-                    "days_ago": 14,
+                    "days_ago": 15,
                     "eps_yoy": 57.5,
                     "revenue": 1494243000000.0,
                     "revenue_yoy": 50.9,
@@ -13194,7 +13194,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 5.5,
                 "next_date": "2026-10-14",
-                "days_until": -15,
+                "days_until": -16,
                 "date_estimate": false,
                 "eps_estimate": 15.388,
                 "rev_estimate": 14816055140.0,
@@ -13204,7 +13204,7 @@
                     "eps_estimate": 10.76,
                     "surprise_pct": 9.9,
                     "is_report_date": true,
-                    "days_ago": 15,
+                    "days_ago": 16,
                     "eps_yoy": 115.3,
                     "revenue": 11662000000.0,
                     "revenue_yoy": 55.2,
@@ -13284,7 +13284,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 4.2,
                 "next_date": "2027-01-15",
-                "days_until": 78,
+                "days_until": 77,
                 "date_estimate": false,
                 "eps_estimate": 1.127,
                 "rev_estimate": 30463984560.0,
@@ -13294,7 +13294,7 @@
                     "eps_estimate": 1.11,
                     "surprise_pct": -17.8,
                     "is_report_date": true,
-                    "days_ago": 15,
+                    "days_ago": 16,
                     "eps_yoy": -14.2,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -13374,17 +13374,17 @@
                 "beat_rate": 75,
                 "avg_surprise": 6.2,
                 "next_date": "2027-01-14",
-                "days_until": 77,
+                "days_until": 76,
                 "date_estimate": false,
                 "eps_estimate": 5.903,
-                "rev_estimate": 51142683070.0,
+                "rev_estimate": 51125757980.0,
                 "last": {
                     "date": "2026-10-13",
                     "eps_actual": 5.75,
                     "eps_estimate": 5.94,
                     "surprise_pct": -3.2,
                     "is_report_date": true,
-                    "days_ago": 16,
+                    "days_ago": 17,
                     "eps_yoy": 13.4,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -13464,7 +13464,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 21.6,
                 "next_date": "2027-01-19",
-                "days_until": 82,
+                "days_until": 81,
                 "date_estimate": false,
                 "eps_estimate": 16.05,
                 "rev_estimate": 17665418190.0,
@@ -13474,7 +13474,7 @@
                     "eps_estimate": 13.09,
                     "surprise_pct": 30.0,
                     "is_report_date": true,
-                    "days_ago": 16,
+                    "days_ago": 17,
                     "eps_yoy": 38.9,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -13554,7 +13554,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 5.9,
                 "next_date": "2027-01-12",
-                "days_until": 75,
+                "days_until": 74,
                 "date_estimate": false,
                 "eps_estimate": 2.263,
                 "rev_estimate": 112467323970.0,
@@ -13564,7 +13564,7 @@
                     "eps_estimate": 4.14,
                     "surprise_pct": 13.3,
                     "is_report_date": true,
-                    "days_ago": 16,
+                    "days_ago": 17,
                     "eps_yoy": 60.6,
                     "revenue": null,
                     "revenue_yoy": null,
@@ -13644,7 +13644,7 @@
                 "beat_rate": 88,
                 "avg_surprise": 47.0,
                 "next_date": "2026-10-13",
-                "days_until": -16,
+                "days_until": -17,
                 "date_estimate": false,
                 "eps_estimate": 2.915,
                 "rev_estimate": 26419759280.0,
@@ -13654,7 +13654,7 @@
                     "eps_estimate": 2.52,
                     "surprise_pct": 2.7,
                     "is_report_date": true,
-                    "days_ago": 16,
+                    "days_ago": 17,
                     "eps_yoy": -7.5,
                     "revenue": 25399000000.0,
                     "revenue_yoy": 5.9,
@@ -13735,7 +13735,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 27.7,
                 "next_date": "2026-10-08",
-                "days_until": -21,
+                "days_until": -22,
                 "date_estimate": false,
                 "eps_estimate": 2.238,
                 "rev_estimate": 30430699710.0,
@@ -13745,7 +13745,7 @@
                     "eps_estimate": 2.3,
                     "surprise_pct": 1.9,
                     "is_report_date": true,
-                    "days_ago": 21,
+                    "days_ago": 22,
                     "eps_yoy": 2.2,
                     "revenue": 25274000000.0,
                     "revenue_yoy": 5.6,
@@ -13825,7 +13825,7 @@
                 "beat_rate": 75,
                 "avg_surprise": 29.4,
                 "next_date": "2026-12-10",
-                "days_until": 42,
+                "days_until": 41,
                 "date_estimate": false,
                 "eps_estimate": 4.944,
                 "rev_estimate": 74242569950.0,
@@ -13835,7 +13835,7 @@
                     "eps_estimate": 6.53,
                     "surprise_pct": 3.4,
                     "is_report_date": true,
-                    "days_ago": 35,
+                    "days_ago": 36,
                     "eps_yoy": 15.0,
                     "revenue": 95723000000.0,
                     "revenue_yoy": 11.1,
@@ -13915,7 +13915,7 @@
                 "beat_rate": 100,
                 "avg_surprise": 31.5,
                 "next_date": "2026-12-17",
-                "days_until": 49,
+                "days_until": 48,
                 "date_estimate": true,
                 "eps_estimate": 1.363,
                 "rev_estimate": 3028590620.0,
@@ -13925,7 +13925,7 @@
                     "eps_estimate": 1.36,
                     "surprise_pct": 23.0,
                     "is_report_date": true,
-                    "days_ago": 36,
+                    "days_ago": 37,
                     "eps_yoy": 13.3,
                     "revenue": 3013981000.0,
                     "revenue_yoy": 10.9,
@@ -13994,11 +13994,11 @@
             }
         ],
         "ai_summary": {
-            "text": "## Wat opviel\n\n- **GOOGL en NOW zijn de uitschieters naar beneden**: GOOGL miste met -29,5% op EPS en verloor 12,6%, NOW verloor zelfs 26,9% ondanks een bescheiden miss van -2,3% \u2014 de markt straft groei-teleurstellingen dit kwartaal buitenproportioneel af.\n- **MAS en FDX verrasten sterk** (respectievelijk +16,1% en +10,5% EPS-surprise), maar de koersreacties waren beperkt \u2014 cyclische beats worden lauw ontvangen, wat wijst op voorzichtigheid over de macro-outlook.\n- **ENPH blijft structureel zwak**: omzet -28,5% YoY, EPS-miss van -18,7% en een beat-rate van 62% \u2014 geen herstel in zicht voor zonne-energie.\n\n## Om op te letten\n\n- **AMZN en MA** rapporteren vandaag met een historische beat-rate van 100% \u2014 elke teleurstelling zal, gezien de NOW/GOOGL-reacties, hard worden afgestraft. Focus op cloud-guidance bij AMZN.\n- **LLY** is cruciaal: de GLP-1-vraag bepaalt of de farmasector overeind blijft; bij een miss volgt besmettingsgevaar voor het hele segment.\n- **INTC** heeft de laagste beat-rate (75%) en is structureel kwetsbaar \u2014 verwacht volatiliteit bij elk zwak forward-guidance signaal.",
+            "text": "## Wat opviel\n\n- **LLY en INTC** zijn de uitschieters: Lilly verslaat met +17,9% op EPS bij 48% omzetgroei (GLP-1 momentum onverminderd sterk), Intel overtreft met +30,5% bij 25% omzetgroei \u2014 opmerkelijk voor een bedrijf dat jarenlang struikelde. Beide verdienen follow-up op guidance.\n- **LIN is de enige echte misser**: -12,3% op EPS terwijl de omzet gewoon 9,3% groeide. Dat suggereert margedruk of eenmalige kosten \u2014 relevant als je dit als defensieve positie houdt.\n- **MO's surprise van 91%** ziet er spectaculair uit maar is een getal-artefact (verwachting 1,51 vs. 1,52): inhoudelijk marginaal, niet structureel interessant.\n\n## Om op te letten\n\n- **AAPL (2-11)** heeft een beat-rate van 100% maar de vraag is guidance voor de feestdagenkwartaal \u2014 dat bepaalt de koersreactie meer dan de cijfers zelf.\n- **PLTR (2-11)** combineert 100% beat-rate met AI-defensie-exposure; elke omzetverrassing kan hier buitenproportioneel bewegen.\n- **AMD (3-11)** rapporteert direct na INTC's sterke cijfers \u2014 de lat voor datacenter-GPU-omzet ligt nu hoger; een tegenvaller trekt de hele chip-sector mee omlaag.",
             "model": "claude-sonnet-4-6",
-            "generated_at": "2026-10-29T21:36:25.568498+00:00"
+            "generated_at": "2026-10-30T11:33:59.876342+00:00"
         }
     },
-    "earnings_at": "2026-10-29T21:36:13.294349+00:00",
+    "earnings_at": "2026-10-30T11:33:46.335097+00:00",
     "ticker_updated_at": "2026-10-30T06:04:22.503609+00:00"
 }
