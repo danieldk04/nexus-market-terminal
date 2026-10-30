@@ -473,7 +473,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT | Autonome Beleggingsbot\n\n## 1. PATROON\n**ATR-stop dominantie:** 5 van 6 recente verliezen via ATR-stop met ultra-tight margins (<$2\u2013$0.19). Win rate 22.4% onhoudbaar. Healthcare vertoont bipolaire gedrag: 7 verliezen vs. 3 wins.\n\n## 2. ROOT CAUSE\n- **Timing falen:** ATR-stop-logica te gevoelig; marktvolatiliteit triggert stops op normale bewegingen\n- **Scorelogica:** Herhaalde verliezers (ADBE, GILD, NEM, DXCUM, KVUE) duiden op persistente selectiebias\n- **Sectorblindheid:** Tech & AI en Healthcare gecombineerd 24/67 verliezen (36%) \u2013 geen contraventilatie\n\n## 3. AANBEVELINGEN\n1. **ATR-stop threshold verhogen** van 1.5\u00d7 naar 2.2\u00d7 ATR; momentum-confirmation toevoegen (RSI > 30 voor shorts) om whipsaws te voorkomen\n2. **Scorelogica audit:** Herhaalde verliezers uit universe uitsluiten tot score \u2265 7.0; max. 2 posities per sector per kwartaal\n\n## 4. SECTOR BIAS\n- **Mijden:** Tech & AI (9 verliezen, 2 wins). Healthcare temporair onder toezicht (7/10 ratio ongunstig)\n- **Zwaarder wegen:** Financials (6 wins, 8 verliezen) \u2013 selectiviteit nodig; Consumer Defensive depreciated\n\n**Actie:** Reset universe, backtest 2.2\u00d7 ATR op 12 maanden historisch data.",
+        "analysis": "# POST-MORTEM RAPPORT \u2013 Autonome Beleggingsbot\n\n## 1. PATROON\n**ATR-stop clustering in Healthcare & Financials**: 5 van 6 recente verliezen triggeren op ATR-gebaseerde stop-losses binnen 3 dagen (28 sep\u20131 okt). Symptoom: te strakke stops in volatiele periodes. Win rate 22.4% suggereert systematische timing/entry-fout.\n\n## 2. ROOT CAUSE\n- **Scorelogica:** Sector-selectie werkt inconsistent (Tech & AI: 9 verlies vs 2 win; Financials: 8 verlies vs 6 win)\n- **ATR-stop-dynamiek:** Stops geactiveerd op noise, niet trend-breaks\n- **Positie-sizing:** Waarschijnlijk gelijk gewicht ongeacht volatiliteit\n\n## 3. TWEE AANBEVELINGEN\n1. **ATR-multiplicator verhogen** van huidige setting naar 2.5x\u20133.0x ATR (nu: ~1.5x implied). Reduces whipsaws in Tech/Energy.\n2. **Sector-filters implementeren:** Financials/Tech/Energy UITSTELLEN tot score \u22656.5 (CRL-standaard). Blokkeer Tech & AI volledig tot win rate >35%.\n\n## 4. SECTOR BIAS\n- **Mijden:** Tech & AI (81.8% verliesratio), Energy\n- **Zwaarder wegen:** Healthcare exclusief (CRL-model +30.8% werkt; vermijd MDT/JNJ volatiliteit)\n\n**Verwachte impact:** Win rate \u2192 28\u201332% (target: 35%).",
         "win_rate": 22.4,
         "worst_sectors": [
             [
@@ -525,7 +525,7 @@
             "Financials": -0.6000000000000001,
             "Healthcare": -0.6000000000000001
         },
-        "run_at": "2026-10-29T21:38:40.998511+00:00"
+        "run_at": "2026-10-30T12:02:13.528119+00:00"
     },
     "portfolio_history": [
         {
@@ -1940,85 +1940,6 @@
     "first_investment_date": "2022-03-29",
     "predictions": [
         {
-            "date": "2026-10-14",
-            "macro_snapshot": {
-                "vix": 16.83,
-                "treasury_10y": 5.19
-            },
-            "candidates": [
-                {
-                    "ticker": "KVUE",
-                    "price": 18.01,
-                    "score": 5.65,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "FAST",
-                    "price": 52.0,
-                    "score": 5.6,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "MAS",
-                    "price": 69.44,
-                    "score": 5.46,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "AVY",
-                    "price": 171.84,
-                    "score": 5.32,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "PH",
-                    "price": 956.32,
-                    "score": 5.18,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "JCI",
-                    "price": 152.44,
-                    "score": 5.0,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "NDSN",
-                    "price": 328.73,
-                    "score": 4.97,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "KO",
-                    "price": 91.78,
-                    "score": 4.94,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "EMR",
-                    "price": 161.08,
-                    "score": 4.83,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CSX",
-                    "price": 48.28,
-                    "score": 4.8,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                }
-            ]
-        },
-        {
             "date": "2026-10-15",
             "macro_snapshot": {
                 "vix": 16.38,
@@ -2886,6 +2807,85 @@
                     "conviction": null
                 }
             ]
+        },
+        {
+            "date": "2026-10-30",
+            "macro_snapshot": {
+                "vix": 18.57,
+                "treasury_10y": 4.99
+            },
+            "candidates": [
+                {
+                    "ticker": "IEX",
+                    "price": 239.33,
+                    "score": 5.3,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "AVY",
+                    "price": 182.06,
+                    "score": 4.96,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "AOS",
+                    "price": 63.49,
+                    "score": 4.88,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "DE",
+                    "price": 660.0,
+                    "score": 4.8,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "GD",
+                    "price": 370.82,
+                    "score": 4.73,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "CTAS",
+                    "price": 218.07,
+                    "score": 4.72,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "MAS",
+                    "price": 80.18,
+                    "score": 4.59,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "PYPL",
+                    "price": 56.95,
+                    "score": 4.58,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "FAST",
+                    "price": 52.55,
+                    "score": 4.5,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "ALLE",
+                    "price": 187.06,
+                    "score": 4.47,
+                    "recommended_action": "watch",
+                    "conviction": null
+                }
+            ]
         }
     ],
     "portfolio_value_history": [
@@ -3188,7 +3188,7 @@
         "Real Estate": 0.3,
         "Materials": 0.3
     },
-    "sector_rotation_date": "2026-10-29T21:38:34.009541+00:00",
+    "sector_rotation_date": "2026-10-30T12:02:07.054054+00:00",
     "watch_list": [
         "MELI"
     ],
