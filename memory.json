@@ -529,6 +529,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-11-01",
+      "degiro": 17181.6,
+      "tr": 16041.34,
+      "nexus": 6357.34,
+      "bux": 2324.97
+    },
+    {
       "date": "2026-10-31",
       "degiro": 17181.6,
       "tr": 15983.38,
@@ -1670,28 +1677,28 @@
     }
   ],
   "last_news": [
-    "Koers SHELL PLC | Advies, nieuws, dividend en koersdoelen",
-    "Aandeel Microsoft: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
     "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?",
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
-    "ASML, ASMI \u00f3f BESI: Welk Chipaandeel Houdt Nu Stand? | Beurs Update",
+    "'Hoge rente is een gevaar voor smallcap-aandelen'",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
-    "AEX koers onder druk: ASML, ASMI en BESI kelderen na schok uit VS"
+    "AEX koers onder druk: ASML, ASMI en BESI kelderen na schok uit VS",
+    "Huishoudens doen het erg goed op de beurs, ook SpaceX populair als investering",
+    "IEX Liveblog 7 oktober 2026"
   ],
   "tr_summary": {
-    "total": 15983.38,
-    "total_pl_pct": 9.89,
+    "total": 16041.34,
+    "total_pl_pct": 10.29,
     "total_invested": 14544.93,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8652.49,
-        "price": 69347.5078,
-        "pl_pct": 14.06,
-        "pl_eur": 1066.32,
-        "weight": 54.1
+        "value": 8710.45,
+        "price": 69812.0234,
+        "pl_pct": 14.82,
+        "pl_eur": 1124.28,
+        "weight": 54.3
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1715,7 +1722,7 @@
         "price": 135.9047,
         "pl_pct": 6.86,
         "pl_eur": 139.37,
-        "weight": 13.6
+        "weight": 13.5
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1727,7 +1734,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-10-31T13:38:46.592961+00:00",
+  "dashboard_updated": "2026-11-01T14:16:09.380783+00:00",
   "degiro_summary": {
     "total": 17181.6,
     "total_pl_pct": 39.92,
@@ -1781,20 +1788,20 @@
   },
   "news_summary": [
     {
-      "theme": "Technologie-aandelen onder druk",
-      "summary": "Chipaandelen zoals ASML, ASMI en BESI kelderen na tegenvallend nieuws uit de VS, waarbij beleggers massaal uit techaandelen stappen. Dit raakt direct AEX-genoteerde chipbedrijven en tech-heavy ETFs, wat potentieel impact heeft op rendement en portefeuillevolatiliteit."
+      "theme": "Technologie onder druk VS",
+      "summary": "Tech-aandelen in de VS verliezen massaal waarde, met SpaceX onder introductieprijs en de Nasdaq onder druk. Dit raakt S&P500 en World ETF-beleggers direct, omdat technologie een groot gewicht in deze indices heeft."
     },
     {
-      "theme": "IPO-golf met gemengde resultaten",
-      "summary": "SpaceX, Shein en Anthropic gaan naar de beurs met wisselend succes - SpaceX daalt onder introductieprijs en Shein daalt flink op dag \u00e9\u00e9n. Voor beleggers zijn IPO's risicovol; ze tonen hoe groei-verwachtingen niet altijd uitkomen en wanneer sentiment omslaat."
+      "theme": "Nederlandse beurs relatief sterk",
+      "summary": "De AEX presteert tot nu toe het best in Europa, hoewel chipbedrijven ASML, ASMI en BESI kelderen na Amerikaanse tegenwind. AEX-beleggers zien gemengde signalen tussen sterke marktpositie en sectorgevoeligheid."
     },
     {
-      "theme": "AEX outperformt ondanks onzekerheid",
-      "summary": "De Nederlandse beurs doet het dit jaar relatief het beste in Europa en huishoudens presteren goed, ondanks oorlogen en economische turbulentie. Dit suggereert sterke defensieve waardes en dividendgroeiers in de AEX, hoewel deze outperformance kwetsbaar is."
+      "theme": "Marktomslag en risicowerneming",
+      "summary": "Beleggersstelling slaat om met stijgende onrust ('code oranje'), dalende bitcoin en waarschuwingen dat hoge rente smallcaps bedreigt. Dit signaleert afnemende risicoapetijt die gevolgen heeft voor groei- en smallcap-posities."
     },
     {
-      "theme": "Rente en smallcap risico's toenemen",
-      "summary": "Hoge rentes vormen een specifiek gevaar voor smallcap-aandelen die minder schuldruimte hebben, terwijl recordcijfers en dieptepunten elkaar afwisselen. Beleggers in breed gespreid ETFs moeten alert zijn op dit bifurcatie-effect in marktbreedtes."
+      "theme": "Corporate actions beursnotaties",
+      "summary": "Prosus haalt Just Eat Takeaway van de beurs en koers stijgt, terwijl Shein's beursdebuut teleurstelt. Deze transacties be\u00efnvloeden portefeuilles met exposure in deze bedrijven en reflecteren selectieve marktsentiment."
     }
   ],
   "bux_summary": {
@@ -2917,7 +2924,7 @@
     },
     {
       "date": "2022-06",
-      "value": 1694.33
+      "value": 1694.32
     },
     {
       "date": "2022-07",
@@ -3126,6 +3133,10 @@
     {
       "date": "2026-10",
       "value": 35489.95
+    },
+    {
+      "date": "2026-11",
+      "value": 35547.91
     }
   ],
   "first_buy_dates_by_isin": {
