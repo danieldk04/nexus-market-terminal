@@ -529,6 +529,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-11-02",
+      "degiro": 17180.33,
+      "tr": 16018.66,
+      "nexus": 6357.34,
+      "bux": 2321.0
+    },
+    {
       "date": "2026-11-01",
       "degiro": 17181.6,
       "tr": 16041.34,
@@ -1677,28 +1684,28 @@
     }
   ],
   "last_news": [
+    "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
+    "Koers SHELL PLC | Advies, nieuws, dividend en koersdoelen",
+    "Turkse beurs verliest een kwart van haar waarde. Wat gaat hier mis?",
+    "X-Fab ontploft op beurs door hype op X, handel meermaals stilgelegd",
     "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?",
-    "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS",
-    "'Hoge rente is een gevaar voor smallcap-aandelen'",
-    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-    "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
-    "AEX koers onder druk: ASML, ASMI en BESI kelderen na schok uit VS",
     "Huishoudens doen het erg goed op de beurs, ook SpaceX populair als investering",
-    "IEX Liveblog 7 oktober 2026"
+    "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?"
   ],
   "tr_summary": {
-    "total": 16041.34,
-    "total_pl_pct": 10.29,
+    "total": 16018.66,
+    "total_pl_pct": 10.13,
     "total_invested": 14544.93,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8710.45,
-        "price": 69812.0234,
-        "pl_pct": 14.82,
-        "pl_eur": 1124.28,
-        "weight": 54.3
+        "value": 8687.77,
+        "price": 69630.25,
+        "pl_pct": 14.52,
+        "pl_eur": 1101.6,
+        "weight": 54.2
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1734,11 +1741,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-11-01T14:16:09.380783+00:00",
+  "dashboard_updated": "2026-11-02T08:01:12.798932+00:00",
   "degiro_summary": {
-    "total": 17181.6,
+    "total": 17180.33,
     "total_pl_pct": 39.92,
-    "total_invested": 12279.15,
+    "total_invested": 12278.53,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1775,11 +1782,11 @@
       },
       {
         "name": "V",
-        "value": 739.69,
+        "value": 738.42,
         "pl_pct": 104.8,
-        "pl_eur": 378.51,
+        "pl_eur": 377.86,
         "div_yield": 0.0065,
-        "annual_div_eur": 4.81,
+        "annual_div_eur": 4.8,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 4.3
@@ -1788,35 +1795,35 @@
   },
   "news_summary": [
     {
-      "theme": "Technologie onder druk VS",
-      "summary": "Tech-aandelen in de VS verliezen massaal waarde, met SpaceX onder introductieprijs en de Nasdaq onder druk. Dit raakt S&P500 en World ETF-beleggers direct, omdat technologie een groot gewicht in deze indices heeft."
+      "theme": "Chipsektor onder druk",
+      "summary": "Chipbedrijven zoals ASML, ASMI en BESI worstelen met marktvolatiliteit, terwijl SK Hynix juist stijgt. Dit geeft volatiliteit in de tech-zware AEX en S&P500, waarbij beleggers voorzichtig moeten zijn met chipposities."
     },
     {
-      "theme": "Nederlandse beurs relatief sterk",
-      "summary": "De AEX presteert tot nu toe het best in Europa, hoewel chipbedrijven ASML, ASMI en BESI kelderen na Amerikaanse tegenwind. AEX-beleggers zien gemengde signalen tussen sterke marktpositie en sectorgevoeligheid."
+      "theme": "Tech-correctie op beurzen",
+      "summary": "Techaandelen verliezen honderden miljarden aan waarde, met Microsoft en SpaceX onder druk, evenals IPO Shein die flink daalt. Dit raakt direct S&P500-beleggers en grote tech-gewtagen in brede World-ETFs."
     },
     {
-      "theme": "Marktomslag en risicowerneming",
-      "summary": "Beleggersstelling slaat om met stijgende onrust ('code oranje'), dalende bitcoin en waarschuwingen dat hoge rente smallcaps bedreigt. Dit signaleert afnemende risicoapetijt die gevolgen heeft voor groei- en smallcap-posities."
+      "theme": "Nederlands beursprestaties zwakker",
+      "summary": "De Nederlandse beurs, die dit jaar sterker was dan Europese peers, verliest momentum terwijl smallcaps risico's ondervinden van hoge rentetarief. Dit be\u00efnvloedt AEX-posities en obligatiebeleggers negatief."
     },
     {
-      "theme": "Corporate actions beursnotaties",
-      "summary": "Prosus haalt Just Eat Takeaway van de beurs en koers stijgt, terwijl Shein's beursdebuut teleurstelt. Deze transacties be\u00efnvloeden portefeuilles met exposure in deze bedrijven en reflecteren selectieve marktsentiment."
+      "theme": "Opkomende markten volatiel",
+      "summary": "Turkse beurs verliest een kwart van haar waarde en SK Hynix stijgt fors, terwijl Amerikaanse huishoudens juist meer groeiaandelen kopen. Dit duidt op grote volatiliteit in emerging markets en verschuivende beleggersstrategie."
     }
   ],
   "bux_summary": {
-    "total": 2324.97,
-    "total_pl_pct": -18.05,
+    "total": 2321.0,
+    "total_pl_pct": -18.19,
     "total_invested": 2837.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 2052.07,
-        "price": 357.52,
-        "pl_pct": -11.67,
-        "pl_eur": -271.0,
+        "value": 2048.56,
+        "price": 356.91,
+        "pl_pct": -11.82,
+        "pl_eur": -274.51,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -1826,12 +1833,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 245.63,
-        "price": 122.81,
-        "pl_pct": -25.82,
-        "pl_eur": -85.51,
+        "value": 245.21,
+        "price": 122.6,
+        "pl_pct": -25.95,
+        "pl_eur": -85.93,
         "div_yield": 0.0431,
-        "annual_div_eur": 10.59,
+        "annual_div_eur": 10.57,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 10.6
@@ -1839,10 +1846,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 22.94,
-        "price": 22.94,
-        "pl_pct": -87.23,
-        "pl_eur": -156.63,
+        "value": 22.9,
+        "price": 22.9,
+        "pl_pct": -87.25,
+        "pl_eur": -156.67,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -3136,7 +3143,7 @@
     },
     {
       "date": "2026-11",
-      "value": 35547.91
+      "value": 35519.99
     }
   ],
   "first_buy_dates_by_isin": {
