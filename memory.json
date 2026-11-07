@@ -546,7 +546,7 @@
     {
       "date": "2026-11-07",
       "degiro": 16917.76,
-      "tr": 16430.01,
+      "tr": 16410.81,
       "nexus": 6227.91,
       "bux": 2112.68
     },
@@ -1738,23 +1738,23 @@
     "Jonge beleggers krijgen eerste beursklap: kunnen ze iets leren uit de terugval?",
     "Beurs beleeft grootste klap sinds 2020: geen aandeel blijft gespaard",
     "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?",
-    "'Hoge rente is een gevaar voor smallcap-aandelen'",
     "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
+    "'Hoge rente is een gevaar voor smallcap-aandelen'",
     "Huishoudens doen het erg goed op de beurs, ook SpaceX populair als investering",
     "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?"
   ],
   "tr_summary": {
-    "total": 16430.01,
-    "total_pl_pct": 8.0,
+    "total": 16410.81,
+    "total_pl_pct": 7.87,
     "total_invested": 15213.26,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8810.46,
-        "price": 68236.7578,
-        "pl_pct": 11.81,
-        "pl_eur": 930.4,
+        "value": 8791.26,
+        "price": 68088.0703,
+        "pl_pct": 11.56,
+        "pl_eur": 911.2,
         "weight": 53.6
       },
       {
@@ -1763,7 +1763,7 @@
         "price": 56.04,
         "pl_pct": 4.91,
         "pl_eur": 129.49,
-        "weight": 16.8
+        "weight": 16.9
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1779,7 +1779,7 @@
         "price": 133.0446,
         "pl_pct": 4.36,
         "pl_eur": 93.67,
-        "weight": 13.6
+        "weight": 13.7
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1791,7 +1791,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-11-07T08:01:08.935779+00:00",
+  "dashboard_updated": "2026-11-07T14:00:19.932314+00:00",
   "degiro_summary": {
     "total": 16917.76,
     "total_pl_pct": 37.79,
@@ -1845,20 +1845,20 @@
   },
   "news_summary": [
     {
-      "theme": "Techaandelen onder druk VS",
-      "summary": "Amerikaanse techaandelen zien flinke verliezen met Nasdaq zo'n 5% omlaag en honderden miljarden verlies. Dit raakt direct beleggers met S&P500 en World ETF posities, vooral in techzware indices."
+      "theme": "Techaandelen onder druk in VS",
+      "summary": "De Amerikaanse Nasdaq daalt circa 5% met techbedrijven die honderden miljarden verliezen, inclusief SpaceX dat onder introductieprijs noteert. Dit raakt direct beleggers in S&P500 en World-ETFs die een aanzienlijk tech-gewicht hebben."
     },
     {
-      "theme": "Brede beursklap sinds 2020",
-      "summary": "De beurs beleeft de grootste terugval sinds 2020 met onrust op meerdere markten en dalende koersen. Voor AEX, S&P500 en World ETF beleggers betekent dit portfolioverliezen zonder uitzondering."
+      "theme": "Marktbrede correctie sinds 2020",
+      "summary": "De beurs ervaart de grootste klap sinds 2020 waarbij geen enkele sector gespaard blijft, wat duidt op systeemische marktdruk. Dit be\u00efnvloedt alle aandelenbezitters ongeacht hun fondskeuze."
     },
     {
-      "theme": "AEX outperform maar wankel",
-      "summary": "Nederlandse beurs doet dit jaar het beste in Europa, maar commissarissen BAM verkopen massaal posities na de piek. Dit suggereert dat de AEX-outperformance fragiel is en insiders voorzichtig worden."
+      "theme": "AEX outperform maar onder vuur",
+      "summary": "Nederland presteert dit jaar beter in Europa, maar hogere rentes vormen een risico voor smallcap-aandelen en BAM-commissarissen verkopen massaal hun posities na piekstand. Dit signaleert voorzichtigheid onder Nederlandse beleggersleiding."
     },
     {
-      "theme": "IPO's en smallcaps worstelen",
-      "summary": "Webwinkels als Shein dalen op beursgang terwijl smallcap-aandelen onder druk staan door hogere rentetarieven. Dit beperkt diversificatiemogelijkheden en maakt groeiinvesteringen riskanter voor beleggers."
+      "theme": "IPO-teleurstelling en introductiedruk",
+      "summary": "Webwinkel Shein zakt flink op eerste beurs\u00addag, wat aansluit bij de moeilijke marktomstandigheden voor tech. Dit weerspiegelt verminderd belegger-app\u00e9tijt voor nieuw aanbod in deze volatiele periode."
     }
   ],
   "bux_summary": {
@@ -3193,7 +3193,7 @@
     },
     {
       "date": "2026-11",
-      "value": 35460.45
+      "value": 35441.25
     }
   ],
   "first_buy_dates_by_isin": {
@@ -3247,7 +3247,7 @@
   "benchmark_history": {
     "sp500_ytd": 7.56,
     "aex_ytd": 15.81,
-    "msci_ytd": null
+    "msci_ytd": 14.37
   },
   "sector_rotation": {
     "Tech & AI": -18.2,
