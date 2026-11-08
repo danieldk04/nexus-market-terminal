@@ -544,6 +544,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-11-08",
+      "degiro": 16917.76,
+      "tr": 16415.44,
+      "nexus": 6227.91,
+      "bux": 2112.68
+    },
+    {
       "date": "2026-11-07",
       "degiro": 16917.76,
       "tr": 16410.81,
@@ -1736,25 +1743,25 @@
   "last_news": [
     "Techaandelen krijgen flinke klappen, Amerikaanse Nasdaq zo'n 5 procent omlaag",
     "Jonge beleggers krijgen eerste beursklap: kunnen ze iets leren uit de terugval?",
-    "Beurs beleeft grootste klap sinds 2020: geen aandeel blijft gespaard",
     "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?",
-    "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "'Hoge rente is een gevaar voor smallcap-aandelen'",
+    "De stemming slaat om op de beurs: techaandelen verliezen honderden miljarden",
     "Huishoudens doen het erg goed op de beurs, ook SpaceX populair als investering",
-    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?"
+    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
+    "IEX Liveblog 7 oktober 2026"
   ],
   "tr_summary": {
-    "total": 16410.81,
-    "total_pl_pct": 7.87,
+    "total": 16415.44,
+    "total_pl_pct": 7.9,
     "total_invested": 15213.26,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 8791.26,
-        "price": 68088.0703,
-        "pl_pct": 11.56,
-        "pl_eur": 911.2,
+        "value": 8795.89,
+        "price": 68123.9609,
+        "pl_pct": 11.62,
+        "pl_eur": 915.83,
         "weight": 53.6
       },
       {
@@ -1791,7 +1798,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-11-07T14:00:19.932314+00:00",
+  "dashboard_updated": "2026-11-08T14:17:17.239946+00:00",
   "degiro_summary": {
     "total": 16917.76,
     "total_pl_pct": 37.79,
@@ -1845,20 +1852,20 @@
   },
   "news_summary": [
     {
-      "theme": "Techaandelen onder druk in VS",
-      "summary": "De Amerikaanse Nasdaq daalt circa 5% met techbedrijven die honderden miljarden verliezen, inclusief SpaceX dat onder introductieprijs noteert. Dit raakt direct beleggers in S&P500 en World-ETFs die een aanzienlijk tech-gewicht hebben."
+      "theme": "Technologie-sector onder druk",
+      "summary": "Tech-aandelen op Nasdaq zakken circa 5% en verliezen honderden miljarden aan waarde, inclusief nieuwkomers zoals Shein en SpaceX die onder introductieprijs noteren. Dit raakt beleggers met S&P500 en World ETF-posities direct, omdat tech een groot deel van deze indices uitmaakt."
     },
     {
-      "theme": "Marktbrede correctie sinds 2020",
-      "summary": "De beurs ervaart de grootste klap sinds 2020 waarbij geen enkele sector gespaard blijft, wat duidt op systeemische marktdruk. Dit be\u00efnvloedt alle aandelenbezitters ongeacht hun fondskeuze."
+      "theme": "Nederlands marktsentiment positief",
+      "summary": "De Nederlandse beurs doet dit jaar het best in Europa en huishoudens beleggen actief, wat gunstig is voor AEX-posities. Dit contrasteert met de internationale malaise en suggereert dat lokale exposure beter presteert dan mondiale indices."
     },
     {
-      "theme": "AEX outperform maar onder vuur",
-      "summary": "Nederland presteert dit jaar beter in Europa, maar hogere rentes vormen een risico voor smallcap-aandelen en BAM-commissarissen verkopen massaal hun posities na piekstand. Dit signaleert voorzichtigheid onder Nederlandse beleggersleiding."
+      "theme": "Renteverhoging bedreigt smallcaps",
+      "summary": "Hoge rentes vormen een risico voor smallcap-aandelen, wat vooral beleggers met gediversificeerde portefeuilles treft. Dit duidt op bredere marktspanningen rond waarderingen en groeivooruitzichten."
     },
     {
-      "theme": "IPO-teleurstelling en introductiedruk",
-      "summary": "Webwinkel Shein zakt flink op eerste beurs\u00addag, wat aansluit bij de moeilijke marktomstandigheden voor tech. Dit weerspiegelt verminderd belegger-app\u00e9tijt voor nieuw aanbod in deze volatiele periode."
+      "theme": "Marktvolatiliteit en risicosignalen",
+      "summary": "Commissarissen BAM verkopen massaal aandelen na piek, crypto's dalen, en analist spreekt van 'code oranje' vanwege onrust. Deze signalen duiden op voorzichtigheid onder insiders en gewijzigd marktsentiment dat ETF-beleggers in de gaten moeten houden."
     }
   ],
   "bux_summary": {
@@ -3193,7 +3200,7 @@
     },
     {
       "date": "2026-11",
-      "value": 35441.25
+      "value": 35445.88
     }
   ],
   "first_buy_dates_by_isin": {
