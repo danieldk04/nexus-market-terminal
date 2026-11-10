@@ -487,7 +487,7 @@
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**ATR-stop triggers domineren verliezen (6/6 recente)**: Systematische exit op technische niveaus, niet fundamenteel gefaald. Win rate 21.7% suggereert oversized posities of slecht gekalibreerde volatiliteitsdrempels.\n\n## 2. ROOT CAUSE\n- **Scoring-timing mismatch**: Tech/AI & Energy zijn slechtste sectoren (9x en 8x verlies), maar bot blijft deze inzetten.\n- **Herhaalde verliezers** (ADBE, CF, NEM): Geen leereffect in screening; dezelfde aandelen opnieuw gekozen.\n- **ATR-calibratie t\u00e9 strak**: Normale volatiliteit triggert exits v\u00f3\u00f3r herstel.\n\n## 3. AANBEVELINGEN\n1. **Sector-filter implementeren**: Tech/AI & Energy uitsluiten; focus op Financials/Healthcare waar proven track record bestaat (6 wins Finance, 3+ Healthcare).\n2. **Blacklist-regel**: Herhaalde verliezers (ADBE, CF, EXE, NEM) minimum 90 dagen uitsluiten. Combineer met ATR-verruiming (huidige \u00b10.1-0.3% t\u00e9 eng).\n\n## 4. SECTOR BIAS\n- **Mijden**: Tech & AI (67% verliesratio), Energy (100% verlies).\n- **Zwaarder wegen**: Financials (40% winstquote), Healthcare als volatiliteit < mediaan.\n\n**Impact verwacht**: +7-10% win rate door filtering.",
+        "analysis": "# POST-MORTEM RAPPORT: AUTONOME BOT - Q3/Q4 2026\n\n## 1. PATROON\n**Massaal ATR-stop trigger** \u2013 6 van 6 recente verliezen via mechanische stop-loss, niet fundamenteel. Verliesbreedte klein (0,2\u20134,3%), maar cumulatief significant. Win rate 21,7% is kritiek laag.\n\n## 2. ROOT CAUSE\n**Timing-fout, niet scoring.** ATR-volatiliteit-triggers raken goeie posities in normale marktfluctaties. Herhaalde verliezers (ADBE, KVUE, MO, CF) suggereren dat entry-logica fundamenteel zwak is \u2013 niet dat stops falen.\n\n## 3. AANPASSINGEN\n\n**a) ATR-stop verruimen naar 2,5\u00d7 ATR** (niet 1\u00d7)  \n\u2192 Verwacht: 30\u201340% minder whipsaws, behoud downside-bescherming\n\n**b) Sector-blacklist Tech & AI (9 verliezen vs 2 wins) en Energy (8 verliezen)**  \n\u2192 Focus op Financials/Healthcare waar ratio beter (6/7 wins vs ~15 verliezen)\n\n## 4. SECTOR BIAS\n- **MIJDEN:** Tech & AI, Energy (negatieve ratio)\n- **ZWAARDER:** Financials, Healthcare \u2013 maar alleen picks met score \u22655.5 (CRL model)\n\n**Conclusie:** Stop-logica is gezond; entry-selectie is bottleneck. Herstructureer scoringmodel voordat bot schaal krijgt.",
         "win_rate": 21.7,
         "worst_sectors": [
             [
@@ -540,7 +540,7 @@
             "Financials": -0.6000000000000001,
             "Healthcare": -0.6000000000000001
         },
-        "run_at": "2026-11-10T00:38:06.618030+00:00"
+        "run_at": "2026-11-10T14:10:42.078800+00:00"
     },
     "portfolio_history": [
         {
@@ -2903,22 +2903,15 @@
         {
             "date": "2026-11-10",
             "macro_snapshot": {
-                "vix": 19.92,
-                "treasury_10y": 4.86
+                "vix": 21.06,
+                "treasury_10y": 4.94
             },
             "candidates": [
                 {
                     "ticker": "MDLZ",
                     "price": 66.44,
-                    "score": 4.33,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "KMB",
-                    "price": 111.93,
                     "score": 4.32,
-                    "recommended_action": "avoid",
+                    "recommended_action": "watch",
                     "conviction": null
                 },
                 {
@@ -2975,6 +2968,13 @@
                     "price": 223.16,
                     "score": 4.11,
                     "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "REGN",
+                    "price": 919.96,
+                    "score": 4.11,
+                    "recommended_action": "avoid",
                     "conviction": null
                 }
             ]
@@ -3286,7 +3286,7 @@
         "Real Estate": 0.3,
         "Materials": 0.3
     },
-    "sector_rotation_date": "2026-11-10T00:38:00.294186+00:00",
+    "sector_rotation_date": "2026-11-10T14:10:35.898886+00:00",
     "watch_list": [
         "MELI"
     ],
