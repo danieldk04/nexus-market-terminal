@@ -546,7 +546,7 @@
     {
       "date": "2026-11-14",
       "degiro": 17335.26,
-      "tr": 15689.63,
+      "tr": 15603.2,
       "nexus": 6227.91,
       "bux": 2318.15
     },
@@ -1793,18 +1793,18 @@
     "Koers van SpaceX onder de introductieprijs, tech heeft het lastig op beurs in VS"
   ],
   "tr_summary": {
-    "total": 15689.63,
-    "total_pl_pct": 3.13,
+    "total": 15603.2,
+    "total_pl_pct": 2.56,
     "total_invested": 15213.26,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7880.77,
-        "price": 61036.3789,
-        "pl_pct": 0.01,
-        "pl_eur": 0.71,
-        "weight": 50.2
+        "value": 7794.34,
+        "price": 60366.9492,
+        "pl_pct": -1.09,
+        "pl_eur": -85.72,
+        "weight": 50.0
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1812,7 +1812,7 @@
         "price": 57.47,
         "pl_pct": 7.59,
         "pl_eur": 200.12,
-        "weight": 18.1
+        "weight": 18.2
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1820,7 +1820,7 @@
         "price": 169.86,
         "pl_pct": 5.62,
         "pl_eur": 131.98,
-        "weight": 15.8
+        "weight": 15.9
       },
       {
         "name": "CSP1 (S&P 500 EUR)",
@@ -1828,7 +1828,7 @@
         "price": 136.3154,
         "pl_pct": 6.93,
         "pl_eur": 148.78,
-        "weight": 14.6
+        "weight": 14.7
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1840,7 +1840,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-11-14T08:01:18.111068+00:00",
+  "dashboard_updated": "2026-11-14T14:08:06.995134+00:00",
   "degiro_summary": {
     "total": 17335.26,
     "total_pl_pct": 41.13,
@@ -1894,20 +1894,20 @@
   },
   "news_summary": [
     {
-      "theme": "Tech-sector onder druk",
-      "summary": "Grote techbedrijven zoals Nvidia en SpaceX verliezen fors aan waarde door scandalen en marktomstandigheden. Dit raakt direct S&P500- en World-ETF-bezitters, aangezien tech een groot gewicht in deze indices heeft."
+      "theme": "Tech-sector turbulentie",
+      "summary": "Nvidia en andere techbedrijven verliezen fors waarde, waarbij SpaceX onder de introductieprijs uitkomt. Dit raakt direct portefeuilles met S&P500 en World-posities, aangezien tech een groot gewicht in deze indices heeft en beleggers massaal uit deze sector stappen."
+    },
+    {
+      "theme": "Defensie & oorlogsaandelen",
+      "summary": "Duitse defensiebedrijven verliezen substantieel ondanks geopolitieke spanning, terwijl beleggers twijfelen of oorlogsrisico's werkelijk aandelen stutten. Dit vraagt voorzichtigheid bij reallocatie naar zogenaamde 'veilige haven'-aandelen in defensie."
     },
     {
       "theme": "Nederlandse beurs outperformance",
-      "summary": "De AEX doet dit jaar beter dan andere Europese beurzen, met name door ASML en defensieaandelen. Voor AEX-ETF-beleggers een positief signaal, maar vraag is of dit voorthoudt."
+      "summary": "De AEX presteert dit jaar beter dan Europese peers, mede dankzij stevige aandelen als ASML. Dit ondersteunt AEX-posities, maar roept vragen op over duurzaamheid gegeven de mondiale technische correctie."
     },
     {
-      "theme": "Defensie en geopolitieke kansen",
-      "summary": "Oorlogsaandelen in defensie groeien ondanks of dankzij geopolitieke spanningen, terwijl \u00e9\u00e9n grote Duitse speler hard kelderden raakt. Dit be\u00efnvloedt portfolio-allocaties naar defensieve sectoren."
-    },
-    {
-      "theme": "Marktbrede volatiliteit en risico",
-      "summary": "Onrust op de beurs met dalende koersen, bitcoin onder druk, en smallcaps gevaar door hoge rentes signaleren meer turbulentie. Dit vraagt voorzichtigheid bij posities in alle groottes en assetklassen."
+      "theme": "Marktbrede onrust & rente",
+      "summary": "Brede koersdaling, bitcoin onder druk, en waarschuwingen voor smallcaps onder hogere rentes duiden op toenemend marktrisico. Dit be\u00efnvloedt alle portefeuilles en vraagt scherpe monitoring van renteontwikkelingen en valuations."
     }
   ],
   "bux_summary": {
@@ -3242,7 +3242,7 @@
     },
     {
       "date": "2026-11",
-      "value": 35343.04
+      "value": 35256.61
     }
   ],
   "first_buy_dates_by_isin": {
@@ -3296,7 +3296,7 @@
   "benchmark_history": {
     "sp500_ytd": 10.25,
     "aex_ytd": 17.92,
-    "msci_ytd": null
+    "msci_ytd": 17.2
   },
   "sector_rotation": {
     "Tech & AI": -10.6,
