@@ -496,24 +496,31 @@
             "sector": "Consumer Defensive",
             "insight": "Trailing-stop MO: prijs $73.55 \u2264 bodem $74.99 (+8.3% geboekt).",
             "type": "POSITIVE_LEARNING"
+        },
+        {
+            "date": "2026-11-20",
+            "ticker": "PYPL",
+            "sector": "Financials",
+            "insight": "Stop-loss PYPL (ATR-stop ($54.71 \u2264 $54.73)). Sector Financials voorzichtig.",
+            "type": "NEGATIVE_LEARNING"
         }
     ],
     "initialized_at": "2026-04-04T00:00:00+00:00",
     "version": "nexus-v2",
     "post_mortem": {
-        "analysis": "# POST-MORTEM RAPPORT \u2013 BOT PERFORMANCE Q4 2026\n\n## 1. PATROON\n**23.9% win rate is kritiek onvoldoende.** Dominante observaties:\n- 71 trades (17W/54L) = systematisch onderperformance\n- Stop-loss triggers (ATR) activeren op **marginale breaks** (0.2\u20134.3% onder entry)\n- Herhaalde verliezers (ADBE, CF, MO, KVUE) = geen sectorrotatie-mechanisme\n\n## 2. ROOT CAUSE\n**Dubbel falen:**\n- **Entry-logica:** Score selecteert volatiele aandelen zonder momentum-filter\n- **Timing:** ATR-stops liggen te strak; normaal ruiswerk triggert exits voordat trend opbouwt\n\n## 3. AANBEVELINGEN\n1. **ATR-multiplier verhogen** (1.5x \u2192 2.0x) om whipsaws in tight-range perioden te reduceren\n2. **Momentum-filter inbouwen:** Alleen entries na 5+ dagen positieve RSI >55; filtert 40% zwakke signalen\n\n## 4. SECTOR BIAS\n- **Mijden:** Tech/AI (9L, geen wins) \u2013 structureel slechte voorspelbaarheid\n- **Favori\u00ebren:** Industrials/Materials (meer EMR-achtige winners)\n- **Herzien:** Healthcare paradox (3W/7L) \u2013 selectiviteit nodig, niet meiden\n\n**Actie:** Reset bot tot win rate >35% voor septembre 2026 voor live deployment.",
-        "win_rate": 23.9,
+        "analysis": "# POST-MORTEM RAPPORT \u2013 AUTONOME BELEGGINGSBOT\n\n## 1. PATROON\n**ATR-stop triggering in vluchtige markten.** 72% van recente verliezen (5/7) raakt stop-loss via ATR-mechanisme, vaak met minimale doorbraak (0,3-4,4% onder entry). Winsten daarentegen bereiken doelstellingen (+8-30%). De bot speelt verdedigend ipv. offensief.\n\n## 2. ROOT CAUSE\n**Timing-falen, niet selectie.** Win rate 23.6% is kritiek laag; echter, **wins zijn 2-3x groter dan verliezen** (risico/rendement asymmetrisch positief). Het probleem: te strakke ATR-stops in normale volatiliteit. CFO-signalen zijn valide, maar exit-discipline is premature.\n\n## 3. AANBEVELINGEN\n1. **ATR-stop verruimen naar 1.5x ATR** (van huidig niveau). Laat posities 'ademen' in intraday volatiliteit.\n2. **Sector-veto implementeren:** Geen entry in Tech & AI of herhaalde verliezers (ADBE, CF, NEM, GILD, APA) voordat fundamentals stabiliseren.\n\n## 4. SECTOR BIAS\n- **Mijden:** Tech & AI (9 verliezen), Financials (netto -3)\n- **Zwaarder wegen:** Healthcare (netto +2 vs. -7, maar selectief: CRL werkt; MDT/JNJ niet)\n- **Groene vlag:** Consumer Defensive, Industrials (wanneer stop-loss niet premature)\n\n**Advies:** Pas exit-logica aan v\u00f3\u00f3r volume-uitbreiding.",
+        "win_rate": 23.6,
         "worst_sectors": [
             [
                 "Tech & AI",
                 9
             ],
             [
-                "Energy",
-                8
+                "Financials",
+                9
             ],
             [
-                "Financials",
+                "Energy",
                 8
             ],
             [
@@ -550,12 +557,12 @@
         ],
         "sector_adjustments": {
             "Tech & AI": -1.5,
-            "Energy": -1.5,
             "Financials": -0.6000000000000001,
+            "Energy": -1.5,
             "Healthcare": -0.6000000000000001,
             "Consumer Defensive": 0.8999999999999999
         },
-        "run_at": "2026-11-19T23:31:10.527144+00:00"
+        "run_at": "2026-11-20T14:50:21.368412+00:00"
     },
     "portfolio_history": [
         {
@@ -2117,85 +2124,6 @@
     "first_investment_date": "2022-03-29",
     "predictions": [
         {
-            "date": "2026-11-04",
-            "macro_snapshot": {
-                "vix": 16.61,
-                "treasury_10y": 4.89
-            },
-            "candidates": [
-                {
-                    "ticker": "FAST",
-                    "price": 53.21,
-                    "score": 5.2,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "DAL",
-                    "price": 89.24,
-                    "score": 5.19,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "BF-B",
-                    "price": 30.68,
-                    "score": 5.03,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "EMR",
-                    "price": 170.44,
-                    "score": 4.8,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "PYPL",
-                    "price": 60.2,
-                    "score": 4.72,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "CTAS",
-                    "price": 229.03,
-                    "score": 4.71,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "NDSN",
-                    "price": 330.7,
-                    "score": 4.7,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                },
-                {
-                    "ticker": "ADSK",
-                    "price": 270.09,
-                    "score": 4.61,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "LMT",
-                    "price": 595.04,
-                    "score": 4.56,
-                    "recommended_action": "watch",
-                    "conviction": null
-                },
-                {
-                    "ticker": "AMCR",
-                    "price": 48.5,
-                    "score": 4.53,
-                    "recommended_action": "avoid",
-                    "conviction": null
-                }
-            ]
-        },
-        {
             "date": "2026-11-05",
             "macro_snapshot": {
                 "vix": 28.18,
@@ -3063,6 +2991,85 @@
                     "conviction": null
                 }
             ]
+        },
+        {
+            "date": "2026-11-20",
+            "macro_snapshot": {
+                "vix": 29.5,
+                "treasury_10y": 4.99
+            },
+            "candidates": [
+                {
+                    "ticker": "ALLE",
+                    "price": 189.17,
+                    "score": 4.62,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "MAS",
+                    "price": 84.51,
+                    "score": 4.4,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "BF-B",
+                    "price": 30.59,
+                    "score": 4.19,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "MO",
+                    "price": 75.89,
+                    "score": 4.12,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "COST",
+                    "price": 1104.85,
+                    "score": 4.05,
+                    "recommended_action": "avoid",
+                    "conviction": null
+                },
+                {
+                    "ticker": "CHD",
+                    "price": 111.36,
+                    "score": 4.04,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "AVY",
+                    "price": 185.35,
+                    "score": 4.01,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "AOS",
+                    "price": 65.02,
+                    "score": 3.91,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "ORLY",
+                    "price": 94.47,
+                    "score": 3.9,
+                    "recommended_action": "watch",
+                    "conviction": null
+                },
+                {
+                    "ticker": "EFX",
+                    "price": 183.35,
+                    "score": 3.84,
+                    "recommended_action": "watch",
+                    "conviction": null
+                }
+            ]
         }
     ],
     "portfolio_value_history": [
@@ -3342,7 +3349,8 @@
         "JNJ": "2026-10-01",
         "CRL": "2026-10-26",
         "JCI": "2026-11-05",
-        "EMR": "2026-11-17"
+        "EMR": "2026-11-17",
+        "PYPL": "2026-11-20"
     },
     "benchmark_history": {
         "sp500_ytd": 6.55,
@@ -3350,22 +3358,22 @@
         "msci_ytd": 13.77
     },
     "sector_rotation": {
-        "Tech & AI": -13.3,
-        "Financials": -0.3,
-        "Healthcare": -1.3,
+        "Tech & AI": -15.3,
+        "Financials": -0.0,
+        "Healthcare": -0.2,
         "Energy": -10.4,
-        "Industrials": -3.3,
-        "Consumer Cyclical": 0.3,
-        "Consumer Defensive": 2.4,
-        "Utilities": 2.7,
-        "Real Estate": 1.2,
-        "Materials": -3.5
+        "Industrials": -3.2,
+        "Consumer Cyclical": 0.5,
+        "Consumer Defensive": 4.1,
+        "Utilities": 3.2,
+        "Real Estate": 1.8,
+        "Materials": -3.0
     },
     "sector_rotation_adj": {
         "Tech & AI": -0.3,
         "Energy": -0.3
     },
-    "sector_rotation_date": "2026-11-19T23:31:04.359779+00:00",
+    "sector_rotation_date": "2026-11-20T14:50:14.310883+00:00",
     "watch_list": [
         "MELI"
     ],
