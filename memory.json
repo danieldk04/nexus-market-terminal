@@ -588,6 +588,13 @@
   },
   "portfolio_history": [
     {
+      "date": "2026-11-23",
+      "degiro": 16344.28,
+      "tr": 14609.05,
+      "nexus": 7534.91,
+      "bux": 2126.52
+    },
+    {
       "date": "2026-11-22",
       "degiro": 16346.29,
       "tr": 14560.74,
@@ -1886,25 +1893,25 @@
     "AI-bedrijf Anthropic daalt hard op dag na historische beursgang",
     "Koers AI-bedrijf Anthropic meteen door het dak: aandeel opent 34 procent hoger",
     "Dit is waarom de beurs opeens daalt en AMD intraday ruim 13% onder zijn dagtop zakt",
+    "Braziliaanse markten in vrije val: sommige aandelen halveren in waarde",
     "Recordbeursgang voor AI-bedrijf Anthropic, koers stijgt meteen met een derde",
     "Grootste beursgang ooit en het aandeel knalt meteen 34 procent hoger: waarom Anthropic onverwacht een groot succes werd",
-    "Anthropic beursgang: prijs, cijfers en risico\u2019s van de IPO",
-    "Waarom hebben beleggers geen last van de oorlogen en stijgt de beurs gewoon?",
-    "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?"
+    "Koers SHELL PLC | Advies, nieuws, dividend en koersdoelen",
+    "Anthropic beursgang: prijs, cijfers en risico\u2019s van de IPO"
   ],
   "tr_summary": {
-    "total": 14560.74,
-    "total_pl_pct": -4.34,
+    "total": 14609.05,
+    "total_pl_pct": -4.02,
     "total_invested": 15221.38,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7163.3,
-        "price": 55479.5312,
-        "pl_pct": -9.1,
-        "pl_eur": -716.76,
-        "weight": 49.2
+        "value": 7211.6,
+        "price": 55853.6484,
+        "pl_pct": -8.48,
+        "pl_eur": -668.46,
+        "weight": 49.4
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1912,7 +1919,7 @@
         "price": 54.99,
         "pl_pct": 2.94,
         "pl_eur": 77.63,
-        "weight": 18.7
+        "weight": 18.6
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1928,7 +1935,7 @@
         "price": 128.4011,
         "pl_pct": 0.72,
         "pl_eur": 15.44,
-        "weight": 14.9
+        "weight": 14.8
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1940,11 +1947,11 @@
       }
     ]
   },
-  "dashboard_updated": "2026-11-22T15:16:41.235022+00:00",
+  "dashboard_updated": "2026-11-23T08:01:06.882150+00:00",
   "degiro_summary": {
-    "total": 16346.29,
-    "total_pl_pct": 33.05,
-    "total_invested": 12286.17,
+    "total": 16344.28,
+    "total_pl_pct": 33.04,
+    "total_invested": 12285.16,
     "positions": [
       {
         "name": "VWRL.AS",
@@ -1981,11 +1988,11 @@
       },
       {
         "name": "V",
-        "value": 732.69,
+        "value": 730.68,
         "pl_pct": 98.99,
-        "pl_eur": 364.49,
+        "pl_eur": 363.49,
         "div_yield": 0.0078,
-        "annual_div_eur": 5.71,
+        "annual_div_eur": 5.7,
         "first_buy_date": null,
         "sector": "Financial Services",
         "weight": 4.5
@@ -2011,18 +2018,18 @@
     }
   ],
   "bux_summary": {
-    "total": 2132.34,
-    "total_pl_pct": -26.14,
+    "total": 2126.52,
+    "total_pl_pct": -26.34,
     "total_invested": 2887.06,
     "interest_total": 0,
     "positions": [
       {
         "name": "TSLA.DE",
         "ticker": "TSLA.DE",
-        "value": 1853.88,
-        "price": 315.25,
-        "pl_pct": -21.88,
-        "pl_eur": -519.19,
+        "value": 1848.8,
+        "price": 314.38,
+        "pl_pct": -22.09,
+        "pl_eur": -524.27,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -2032,12 +2039,12 @@
       {
         "name": "PEP",
         "ticker": "PEP",
-        "value": 256.23,
-        "price": 128.12,
-        "pl_pct": -22.62,
-        "pl_eur": -74.91,
+        "value": 255.53,
+        "price": 127.76,
+        "pl_pct": -22.83,
+        "pl_eur": -75.61,
         "div_yield": 0.0421,
-        "annual_div_eur": 10.79,
+        "annual_div_eur": 10.76,
         "first_buy_date": null,
         "sector": "Consumer Defensive",
         "weight": 12.0
@@ -2045,10 +2052,10 @@
       {
         "name": "ENPH",
         "ticker": "ENPH",
-        "value": 17.89,
-        "price": 17.89,
-        "pl_pct": -90.03,
-        "pl_eur": -161.68,
+        "value": 17.85,
+        "price": 17.85,
+        "pl_pct": -90.06,
+        "pl_eur": -161.72,
         "div_yield": null,
         "annual_div_eur": null,
         "first_buy_date": null,
@@ -3342,7 +3349,7 @@
     },
     {
       "date": "2026-11",
-      "value": 33039.37
+      "value": 33079.85
     }
   ],
   "first_buy_dates_by_isin": {
