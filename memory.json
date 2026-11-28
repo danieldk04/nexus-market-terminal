@@ -590,7 +590,7 @@
     {
       "date": "2026-11-28",
       "degiro": 16958.81,
-      "tr": 14704.9,
+      "tr": 14666.36,
       "nexus": 7158.16,
       "bux": 2431.6
     },
@@ -1927,26 +1927,26 @@
   "last_news": [
     "AI-bedrijf Anthropic daalt verder op beurs, nu onder introductieprijs",
     "Aandeel Take-Two: Laatste nieuws, koers & grafieken | | Analyses & prognoses",
-    "Aandelen zwaar onderuit op Amerikaanse beurs; 3,2 biljoen dollar aan waarde in rook opgegaan",
     "Koers AI-bedrijf Anthropic meteen door het dak: aandeel opent 34 procent hoger",
+    "Aandelen zwaar onderuit op Amerikaanse beurs; 3,2 biljoen dollar aan waarde in rook opgegaan",
     "Alles wat je voor de beursgang van Anthropic moet weten",
     "IEX Liveblog 2 november 2026",
     "Recordbeursgang voor AI-bedrijf Anthropic, koers stijgt meteen met een derde",
     "De Nederlandse beurs doet het dit jaar tot nu toe het beste in Europa. Blijft dat zo?"
   ],
   "tr_summary": {
-    "total": 14704.9,
-    "total_pl_pct": -3.39,
+    "total": 14666.36,
+    "total_pl_pct": -3.65,
     "total_invested": 15221.38,
     "interest_total": 0.0,
     "positions": [
       {
         "name": "Bitcoin",
-        "value": 7063.95,
-        "price": 54710.1289,
-        "pl_pct": -10.36,
-        "pl_eur": -816.11,
-        "weight": 48.0
+        "value": 7025.41,
+        "price": 54411.6484,
+        "pl_pct": -10.85,
+        "pl_eur": -854.65,
+        "weight": 47.9
       },
       {
         "name": "TDIV (Dev Div Leaders)",
@@ -1954,7 +1954,7 @@
         "price": 56.4,
         "pl_pct": 5.58,
         "pl_eur": 147.27,
-        "weight": 18.9
+        "weight": 19.0
       },
       {
         "name": "VWCE (All-World Acc)",
@@ -1970,7 +1970,7 @@
         "price": 133.0483,
         "pl_pct": 4.36,
         "pl_eur": 93.74,
-        "weight": 15.2
+        "weight": 15.3
       },
       {
         "name": "VHYL (High Div Yield)",
@@ -1982,7 +1982,7 @@
       }
     ]
   },
-  "dashboard_updated": "2026-11-28T08:01:13.581685+00:00",
+  "dashboard_updated": "2026-11-28T16:09:51.402299+00:00",
   "degiro_summary": {
     "total": 16958.81,
     "total_pl_pct": 38.03,
@@ -2036,20 +2036,20 @@
   },
   "news_summary": [
     {
-      "theme": "AI-sector volatiliteit: Anthropic IPO",
-      "summary": "Anthropic's beursgang vertoont extreme koersschommelingen: opening +34% gevolgd door daling onder introductieprijs. Dit reflecteert onzekerheid rond AI-waarderingen en kan invloed hebben op tech-heavy ETFs en aandelen in de AI-sector."
+      "theme": "Anthropic IPO: Volatiliteit & Risico",
+      "summary": "Het AI-bedrijf Anthropic ging vandaag naar de beurs met een recordbeursgang (+34%), maar zakt nu al onder de introductieprijs. Dit toont de extreme volatiliteit in techaandelen en waarschuwt beleggers voor overbought-posities in hyped AI-aandelen die in ETFs kunnen zitten."
     },
     {
-      "theme": "Tech-sector onder druk vandaag",
-      "summary": "Nvidia daalt flink na een spionnen-affaire rond de CEO, terwijl de Nasdaq zo'n 5% omlaag gaat en techaandelen massaal klappen krijgen. Dit be\u00efnvloedt S&P500 en World-ETFs aanzienlijk, gegeven het gewicht van tech in deze indices."
+      "theme": "Tech-sector onder zware druk",
+      "summary": "Nvidia daalt flink na een spionnen-affaire rond de CEO, terwijl de hele tech-sector klappen krijgt met de Nasdaq circa 5% omlaag. Dit direct impact heeft op technologie-gewogen ETFs (S&P500, World) en individuele tech-aandelen in portefeuilles."
     },
     {
-      "theme": "Amerikaanse beurs in correctie",
-      "summary": "De Amerikaanse beurs verliest 3,2 biljoen dollar aan waarde met brede koersdalingen, wat direct impact heeft op S&P500-blootstellingen en internationale gediversifieerde portefeuilles. Dit signaleert een grotere marktcorrectie in aantocht."
+      "theme": "Brede markt verliest miljarden",
+      "summary": "De Amerikaanse beurs zag vandaag 3,2 biljoen dollar aan marktwaarde verdampen, terwijl de Nederlandse AEX-index dit jaar beter presteert dan andere Europese bourzen. Dit vereist herbalancering in portefeuilles die blootgesteld zijn aan Amerikaanse versus Europese markten."
     },
     {
-      "theme": "Nederlandse beurs en M&A interest",
-      "summary": "De Nederlandse beurs presteert relatief sterk in Europa, terwijl SpaceX-interesse onder huishoudens groeit en rentestijgingen risico's voor smallcaps opleveren. Dit be\u00efnvloedt AEX-posities en de balans tussen growth en value beleggingen."
+      "theme": "Private Markets & Vernieuwing",
+      "summary": "SpaceX en andere private bedrijven genereren groeiende interesse bij beleggers die op beursgang speculeren, terwijl smallcap-aandelen onder druk staan door hogere rentetarieven. Dit benadrukt het belang van diversificatie en voorzichtigheid met kleinere aandelen in dit renteclimataat."
     }
   ],
   "bux_summary": {
@@ -3384,7 +3384,7 @@
     },
     {
       "date": "2026-11",
-      "value": 34095.31
+      "value": 34056.77
     }
   ],
   "first_buy_dates_by_isin": {
@@ -3442,7 +3442,7 @@
   "benchmark_history": {
     "sp500_ytd": 6.4,
     "aex_ytd": 13.34,
-    "msci_ytd": null
+    "msci_ytd": 14.28
   },
   "sector_rotation": {
     "Tech & AI": -16.2,
